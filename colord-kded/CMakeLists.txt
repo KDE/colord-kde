@@ -6,6 +6,7 @@ kde4_add_plugin(kded_colord ${colord_kded_SRCS})
 target_link_libraries(kded_colord
     ${KDE4_KDEUI_LIBS}
     ${X11_Xrandr_LIB}
+    ${X11_X11_LIB}
 )
 
 install(TARGETS kded_colord DESTINATION ${PLUGIN_INSTALL_DIR})

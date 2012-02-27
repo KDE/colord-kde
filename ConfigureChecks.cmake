@@ -39,6 +39,7 @@ macro_bool_to_01(X11_Xdamage_FOUND HAVE_XDAMAGE) # kwin
 macro_bool_to_01(X11_Xfixes_FOUND HAVE_XFIXES) # klipper, kicker, kwin
 macro_bool_to_01(X11_Xinerama_FOUND HAVE_XINERAMA)
 macro_bool_to_01(X11_Xrandr_FOUND HAVE_XRANDR) # kwin
+macro_bool_to_01(X11_X11_FOUND HAVE_XLIB) # kwin
 macro_bool_to_01(X11_Xrender_FOUND HAVE_XRENDER) # kcontrol/style, kicker
 macro_bool_to_01(X11_xf86misc_FOUND HAVE_XF86MISC) # kdesktop and kcontrol/lock
 macro_bool_to_01(X11_dpms_FOUND HAVE_DPMS) # kdesktop
@@ -51,7 +52,7 @@ check_function_exists(getpeereid  HAVE_GETPEEREID) # kdesu
 check_function_exists(setpriority  HAVE_SETPRIORITY) # kscreenlocker 
 
 set(CMAKE_REQUIRED_INCLUDES ${X11_Xrandr_INCLUDE_PATH}/Xrandr.h)
-set(CMAKE_REQUIRED_LIBRARIES ${X11_Xrandr_LIB})
+set(CMAKE_REQUIRED_LIBRARIES ${X11_Xrandr_LIB} ${X11_X11_LIB})
 
 check_function_exists(XRRGetScreenResourcesCurrent XRANDR_1_3_FOUND)
 macro_bool_to_01(XRANDR_1_3_FOUND HAS_RANDR_1_3)

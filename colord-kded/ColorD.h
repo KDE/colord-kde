@@ -25,6 +25,7 @@
 #include <QVariantList>
 
 #include <X11/Xlib.h>
+#include <X11/Xatom.h>
 #include <fixx11h.h>
 
 
@@ -49,7 +50,7 @@ public:
 
 
 private:
-    quint8* readEdidData(RROutput output, gsize *len);
+    quint8* readEdidData(RROutput output, size_t *len);
     void ScanHomeDirectory();
     void ConnectToDisplay();
     void ConnectToColorD();

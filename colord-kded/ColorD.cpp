@@ -54,10 +54,10 @@ ColorD::~ColorD()
 }
 
 /* This is what gnome-desktop does */
-quint8* ColorD::getProperty(Display *dpy,
-                            RROutput output,
-                            Atom atom,
-                            gsize *len)
+static quint8* getProperty(Display *dpy,
+                           RROutput output,
+                           Atom atom,
+                           size_t *len)
 {
     unsigned char *prop;
     int actual_format;
@@ -71,7 +71,10 @@ quint8* ColorD::getProperty(Display *dpy,
                           &actual_type, &actual_format,
                           &nitems, &bytes_after, &prop);
     if (actual_type == XA_INTEGER && actual_format == 8) {
-        result = g_memdup (prop, nitems);
+        result = new quint8[nitems];
+        memcpy(result, prop, nitems);
+//        g_memdup (prop, nitems);
+//        quint8
         if (len)
             *len = nitems;
     } else {
@@ -82,16 +85,16 @@ quint8* ColorD::getProperty(Display *dpy,
     return result;
 }
 
-quint8* ColorD::readEdidData(RROutput output, gsize *len)
+quint8* ColorD::readEdidData(RROutput output, size_t *len)
 {
     Atom edid_atom;
     quint8 *result;
 
     edid_atom = XInternAtom(m_dpy, RR_PROPERTY_RANDR_EDID, FALSE);
-    result = get_property(m_dpy, output, edid_atom, len);
+    result = getProperty(m_dpy, output, edid_atom, len);
     if (result == NULL) {
         edid_atom = XInternAtom(m_dpy, "EDID_DATA", FALSE);
-        result = get_property (m_dpy, output, edid_atom, len);
+        result = getProperty (m_dpy, output, edid_atom, len);
     }
 
     if (result) {
