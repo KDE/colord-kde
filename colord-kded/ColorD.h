@@ -50,16 +50,20 @@ public:
 
 private:
     Display *m_dpy;
-    int     m_numScreens;
-    int     m_currentScreenIndex;
-    ScreenList m_screens;
+    XRRScreenResources *m_resources;
+    Window m_root;
     
     bool m_valid;
     QString m_errorCode;
     QString m_version;
-    
+
     int     m_eventBase;
     int m_errorBase;
+    void ScanHomeDirectory(void);
+    void ConnectToDisplay(void);
+    void ConnectToColorD(void);
+    void AddOutput(RROutput output);
+    void RemoveOutput(RROutput output);
 };
 
 #endif // COLORD_H
