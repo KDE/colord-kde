@@ -73,8 +73,6 @@ static quint8* getProperty(Display *dpy,
     if (actual_type == XA_INTEGER && actual_format == 8) {
         result = new quint8[nitems];
         memcpy(result, prop, nitems);
-//        g_memdup (prop, nitems);
-//        quint8
         if (len)
             *len = nitems;
     } else {
@@ -108,16 +106,39 @@ quint8* ColorD::readEdidData(RROutput output, size_t *len)
     return NULL;
 }
 
+void ColorD::AddProfile(QString filename)
+{
+    QHash<QString, QVariant> properties;
+
+    /* open filename */
+
+    /* get the MD5 hash of the contents */
+    //TODO
+
+    /* construct a profile-id from device-and-profile-naming-spec.txt */
+    //TODO
+
+    //TODO: how to save these private to the class?
+    QDBusConnection m_systemBus = QDBusConnection::systemBus();
+    QDBusInterface m_colordInterface("org.freedesktop.ColorManager",
+                                     "/org/freedesktop/ColorManager",
+                                     "org.freedesktop.ColorManager",
+                                     m_systemBus);
+
+    properties["XRANDR_name"] = "lvds1";
+    QDBusReply<QString> reply = m_colordInterface.call("CreateProfile",
+                                                   "hello-dave",
+                                                   "temp",
+                                                   properties);
+    kDebug() << "created profile" << reply;
+}
+
 void ColorD::ScanHomeDirectory()
 {
     /* Get a list of files in ~/.local/share/icc/ */
     //TODO
 
-    /* For each file, get the MD5 hash and construct a profile-id
-     * according to the device-and-profile-naming-spec.txt */
-    //TODO
-
-    /* Call CreateProfile() for each file */
+    /* Call AddProfile() for each file */
     //TODO
 }
 
@@ -144,9 +165,20 @@ void ColorD::AddOutput(RROutput output)
 
     /* call CreateDevice() with a device_id constructed using the naming
      * spec: https://gitorious.org/colord/master/blobs/master/doc/device-and-profile-naming-spec.txt */
+    //TODO: how to save these private to the class?
+    QDBusConnection m_systemBus = QDBusConnection::systemBus();
+    QDBusInterface m_colordInterface("org.freedesktop.ColorManager",
+                                     "/org/freedesktop/ColorManager",
+                                     "org.freedesktop.ColorManager",
+                                     m_systemBus);
 
-    /* set the "XRANDR_name" option to the correct xrandr name */
-    //TODO: use info->name
+    QHash<QString, QVariant> properties;
+    properties["XRANDR_name"] = info->name;
+    QDBusReply<QString> reply = m_colordInterface.call("CreateDevice",
+                                                       "hello-dave",
+                                                       "temp",
+                                                       properties);
+    kDebug() << "created device" << reply;
 
     XRRFreeOutputInfo(info);
 }
@@ -223,36 +255,68 @@ void ColorD::ConnectToDisplay(void)
     //TODO
 }
 
+void ColorD::profileAdded(QString *object_path)
+{
+    /* check if the EDID_md5 Profile.Metadata matches any connected
+     * XRandR devices (e.g. lvds1), otherwise ignore */
+    //TODO
+
+    /* call Device.AddProfile() with the device and profile object paths */
+    //TODO
+    kDebug() << "Profile added" << object_path;
+}
+
+void ColorD::deviceAdded(QString *object_path)
+{
+    /* show a notification that the user should calibrate the device */
+    //TODO
+}
+
+void ColorD::deviceChanged(QString *object_path)
+{
+    /* check Device.Kind is "display" */
+    //TODO
+
+    /* read the default profile (the first path in the Device.Profiles
+     * property) */
+    //TODO
+
+    /* open the physical file */
+    //TODO
+
+    /* read the VCGT data using lcms2 */
+    //TODO
+
+    /* push the data to the Xrandr gamma ramps for the display */
+    //TODO
+
+    /* export the file data as an x atom on the *screen* (not output) */
+    //TODO: named _ICC_PROFILE
+}
+
 void ColorD::ConnectToColorD()
 {
-    /*
-     * Listen to colord for the DBus ::ProfileAdded signal
-     *
-     *  -  Check if the EDID_md5 Profile.Metadata matches any connected
-     * XRandR devices (e.g. lvds1) . If it does, then it needs to call
-     * Device.AddProfile() with the device object path that matches and the
-     * profile object path. This makes sure that the profile is attached to
-     * the right device if you've switched from GNOME to KDE or vice-versa.
-     */
+    //TODO: how to save these private to the class?
+    QDBusConnection m_systemBus = QDBusConnection::systemBus();
+    QDBusInterface m_colordInterface("org.freedesktop.ColorManager",
+                                     "/org/freedesktop/ColorManager",
+                                     "org.freedesktop.ColorManager",
+                                     m_systemBus);
 
-    /*
-     * Listen to the DBus ::DeviceAdded signal
-     *
-     * If it is, show a notification that the user should calibrate the
-     * device. In GNOME we disable this by default, as it's only really
-     * useful in color critical environments like in the animation studios.
-     */
-
-    /* Listen to the DBus ::DeviceChanged signal
-     *
-     *  - If the device is a Xrandr device (i.e. Device.Kind is "display")
-     * then read the default profile (the first path in the Device.Profiles
-     * property) and open the physical file. From that, read the VCGT data
-     * (just copy the code in GCM for this, it uses lcms2) and push the data
-     * to the Xrandr gamma ramps for the display. I can show you this code in
-     * gnome-desktop if you need to copy, although there's probably a more
-     * Solid way of doing this.
-     *    - Also load in the entire icc file, and export it as an x atom on
-     * the *screen* (not output) called _ICC_PROFILE
-     */
+    /* listen to colord for events */
+    m_systemBus.connect("org.freedesktop.ColorManager",
+                      "/org/freedesktop/ColorManager",
+                      "org.freedesktop.ColorManager",
+                      "ProfileAdded",
+                      this, SLOT(profileAdded(QString)));
+    m_systemBus.connect("org.freedesktop.ColorManager",
+                      "/org/freedesktop/ColorManager",
+                      "org.freedesktop.ColorManager",
+                      "DeviceAdded",
+                      this, SLOT(deviceAdded(QString)));
+    m_systemBus.connect("org.freedesktop.ColorManager",
+                      "/org/freedesktop/ColorManager",
+                      "org.freedesktop.ColorManager",
+                      "DeviceChanged",
+                      this, SLOT(deviceChanged(QString)));
 }

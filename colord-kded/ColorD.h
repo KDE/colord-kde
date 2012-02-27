@@ -23,6 +23,9 @@
 
 #include <KDEDModule>
 #include <QVariantList>
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusReply>
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -56,6 +59,10 @@ private:
     void ConnectToColorD();
     void AddOutput(RROutput output);
     void RemoveOutput(RROutput output);
+    void AddProfile(QString filename);
+    void profileAdded(QString *object_path);
+    void deviceAdded(QString *object_path);
+    void deviceChanged(QString *object_path);
 
     Display *m_dpy;
     XRRScreenResources *m_resources;
