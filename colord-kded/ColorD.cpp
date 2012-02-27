@@ -33,20 +33,37 @@ K_EXPORT_PLUGIN(ColorDFactory("colord"))
 bool has_1_2 = false;
 bool has_1_3 = false;
 
-#if 0
-/* This is what gnome-desktop does */
+ColorD::ColorD(QObject *parent, const QVariantList &args) :
+    KDEDModule(parent)
+{
+    // There's not much use for args in a KCM
+    Q_UNUSED(args)
 
-static guint8 *
-get_property (Display *dpy,
-              RROutput output,
-              Atom atom,
-              gsize *len)
+    /* connect to colord using DBus */
+    ConnectToColorD();
+
+    /* Connect to the display */
+    ConnectToDisplay();
+
+    /* Scan all the *.icc files */
+    ScanHomeDirectory();
+}
+
+ColorD::~ColorD()
+{
+}
+
+/* This is what gnome-desktop does */
+quint8* ColorD::getProperty(Display *dpy,
+                            RROutput output,
+                            Atom atom,
+                            gsize *len)
 {
     unsigned char *prop;
     int actual_format;
     unsigned long nitems, bytes_after;
     Atom actual_type;
-    guint8 *result;
+    quint8 *result;
 
     XRRGetOutputProperty (dpy, output, atom,
                           0, 100, False, False,
@@ -65,32 +82,30 @@ get_property (Display *dpy,
     return result;
 }
 
-static guint8 *
-read_edid_data (RROutput output, gsize *len)
+quint8* ColorD::readEdidData(RROutput output, gsize *len)
 {
     Atom edid_atom;
-    guint8 *result;
+    quint8 *result;
 
-    edid_atom = XInternAtom (m_dpy, "EDID", FALSE);
-    result = get_property (m_dpy, output, edid_atom, len);
+    edid_atom = XInternAtom(m_dpy, RR_PROPERTY_RANDR_EDID, FALSE);
+    result = get_property(m_dpy, output, edid_atom, len);
     if (result == NULL) {
-        edid_atom = XInternAtom (m_dpy, "EDID_DATA", FALSE);
+        edid_atom = XInternAtom(m_dpy, "EDID_DATA", FALSE);
         result = get_property (m_dpy, output, edid_atom, len);
     }
 
     if (result) {
-        if (*len % 128 == 0)
+        if (*len % 128 == 0) {
             return result;
-        else
+        } else {
             delete result;
+        }
     }
 
     return NULL;
 }
-#endif
 
-void
-ColorD::ScanHomeDirectory(void)
+void ColorD::ScanHomeDirectory()
 {
     /* Get a list of files in ~/.local/share/icc/ */
     //TODO
@@ -103,16 +118,17 @@ ColorD::ScanHomeDirectory(void)
     //TODO
 }
 
-void
-ColorD::AddOutput(RROutput output)
+void ColorD::AddOutput(RROutput output)
 {
     /* ensure the RROutput is connected */
     XRROutputInfo *info;
     info = XRRGetOutputInfo(m_dpy, m_resources, output);
-    if (info == NULL)
-            return;
-    if (info->connection != RR_Connected)
-            return;
+    if (info == NULL) {
+        return;
+    }
+    if (info->connection != RR_Connected) {
+        return;
+    }
 
     /* get the EDID */
     //read_edid_data(m_resources->outputs[i])
@@ -133,8 +149,7 @@ ColorD::AddOutput(RROutput output)
 }
 
 
-void
-ColorD::RemoveOutput(RROutput output)
+void ColorD::RemoveOutput(RROutput output)
 {
   /* find the device in colord using FindDeviceByProperty(info->name) */
   //TODO
@@ -143,13 +158,12 @@ ColorD::RemoveOutput(RROutput output)
   //TODO
 }
 
-void
-ColorD::ConnectToDisplay(void)
+void ColorD::ConnectToDisplay(void)
 {
     m_dpy = QX11Info::display();
 
     // Check extension
-    if(XRRQueryExtension(m_dpy, &m_eventBase, &m_errorBase) == False) {
+    if (XRRQueryExtension(m_dpy, &m_eventBase, &m_errorBase) == False) {
         m_valid = false;
         return;
     }
@@ -164,11 +178,13 @@ ColorD::ConnectToDisplay(void)
     has_1_2 = (major_version > 1 || (major_version == 1 && minor_version >= 2));
     has_1_3 = (major_version > 1 || (major_version == 1 && minor_version >= 3));
 
-    if(has_1_3)
+    if (has_1_3) {
         kDebug() << "Using XRANDR extension 1.3 or greater.";
-    else if(has_1_2)
+    } else if (has_1_2) {
         kDebug() << "Using XRANDR extension 1.2.";
-    else kDebug() << "Using legacy XRANDR extension (1.1 or earlier).";
+    } else {
+        kDebug() << "Using legacy XRANDR extension (1.1 or earlier).";
+    }
 
     kDebug() << "XRANDR error base: " << m_errorBase;
 
@@ -204,8 +220,7 @@ ColorD::ConnectToDisplay(void)
     //TODO
 }
 
-void
-ColorD::ConnectToColorD(void)
+void ColorD::ConnectToColorD()
 {
     /*
      * Listen to colord for the DBus ::ProfileAdded signal
@@ -237,24 +252,4 @@ ColorD::ConnectToColorD(void)
      *    - Also load in the entire icc file, and export it as an x atom on
      * the *screen* (not output) called _ICC_PROFILE
      */
-}
-
-ColorD::ColorD(QObject *parent, const QVariantList &args) :
-    KDEDModule(parent)
-{
-    // There's not much use for args in a KCM
-    Q_UNUSED(args)
-
-    /* connect to colord using DBus */
-    ConnectToColorD();
-
-    /* Connect to the display */
-    ConnectToDisplay();
-
-    /* Scan all the *.icc files */
-    ScanHomeDirectory();
-}
-
-ColorD::~ColorD()
-{
 }

@@ -49,6 +49,13 @@ public:
 
 
 private:
+    quint8* readEdidData(RROutput output, gsize *len);
+    void ScanHomeDirectory();
+    void ConnectToDisplay();
+    void ConnectToColorD();
+    void AddOutput(RROutput output);
+    void RemoveOutput(RROutput output);
+
     Display *m_dpy;
     XRRScreenResources *m_resources;
     Window m_root;
@@ -59,11 +66,6 @@ private:
 
     int     m_eventBase;
     int m_errorBase;
-    void ScanHomeDirectory(void);
-    void ConnectToDisplay(void);
-    void ConnectToColorD(void);
-    void AddOutput(RROutput output);
-    void RemoveOutput(RROutput output);
 };
 
 #endif // COLORD_H
