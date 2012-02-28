@@ -113,6 +113,8 @@ quint8* ColorD::readEdidData(RROutput output, size_t *len)
 
 void ColorD::addProfile(const QString &filename)
 {
+    const char *profile_id = "icc-unknown-hughsie";
+
     // open filename
     QFile profile(filename);
     if (!profile.open(QIODevice::ReadOnly)) {
@@ -126,6 +128,10 @@ void ColorD::addProfile(const QString &filename)
 
     // construct a profile-id from device-and-profile-naming-spec.txt
     //TODO
+    //if (embedded_profile_id != NULL)
+    //    profile_id = "icc-" + embedded_profile_id + username
+    //else
+    //    profile_id = "icc-" + hash + username
 
     //TODO: how to save these private to the class?
     QDBusMessage message;
@@ -134,8 +140,9 @@ void ColorD::addProfile(const QString &filename)
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("CreateProfile"));
     StringStringMap properties;
-    properties["XRANDR_name"] = "lvds1";
-    message << qVariantFromValue(QString("hello-dave"));
+    properties["Filename"] = filename;
+    properties["FILE_checksum"] = hash;
+    message << qVariantFromValue(QString(profile_id));
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
 
@@ -155,6 +162,11 @@ void ColorD::scanHomeDirectory()
 
 void ColorD::addOutput(RROutput output)
 {
+    const char *edid_vendor = "unknown";
+    const char *edid_model = "unknown";
+    const char *edid_serial = "unknown";
+    const char *device_id = "xrandr-unknown";
+
     XRROutputInfo *info;
     info = XRRGetOutputInfo(m_dpy, m_resources, output);
     // ensure the RROutput is connected
@@ -169,22 +181,34 @@ void ColorD::addOutput(RROutput output)
     //TODO
 
     /* parse the edid and save in a hash table [m_hash_edid_md5?]*/
-    //TODO
+    //TODO, and maybe c++ize http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/color/gcm-edid.c
 
-    /* call CreateDevice() with a device_id constructed using the naming
-     * spec: https://gitorious.org/colord/master/blobs/master/doc/device-and-profile-naming-spec.txt */
+    /* create a device_id  */
+    //TODO:
+    //if (edid_is_valid)
+    //    device_id = xrandr[-{%edid_vendor}][-{%edid_model][-{%edid_serial}]
+    //else
+    //    device_id = "xrandr-" + info->name;
+
     //TODO: how to save these private to the class?
     StringStringMap properties;
+    properties["Kind"] = "display";
+    properties["Mode"] = "physical";
+    properties["Colorspace"] = "rgb";
+    properties["Vendor"] = edid_vendor;
+    properties["Model"] = edid_model;
+    properties["Serial"] = edid_serial;
     properties["XRANDR_name"] = info->name;
 
+    /* call CreateDevice() with a device_id  */
     QDBusMessage message;
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("/org/freedesktop/ColorManager"),
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("CreateDevice"));
     // Use our own cached tid to avoid crashes
-    message << qVariantFromValue(QString("hello-dave"));
-    message << qVariantFromValue(QString("tmp"));
+    message << qVariantFromValue(QString(device_id));
+    message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
 
