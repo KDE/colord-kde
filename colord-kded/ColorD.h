@@ -43,6 +43,7 @@ extern "C"
     #include <X11/extensions/Xrandr.h>
 }
 typedef QList<int> ScreenList;
+typedef QMap<QString, QString>  StringStringMap;
 
 class ColorD : public KDEDModule
 {
@@ -51,18 +52,19 @@ public:
     ColorD(QObject *parent, const QVariantList &args);
     ~ColorD();
 
+private slots:
+    void profileAdded(const QDBusObjectPath &objectPath);
+    void deviceAdded(const QDBusObjectPath &objectPath);
+    void deviceChanged(const QDBusObjectPath &objectPath);
 
 private:
     quint8* readEdidData(RROutput output, size_t *len);
-    void ScanHomeDirectory();
-    void ConnectToDisplay();
-    void ConnectToColorD();
-    void AddOutput(RROutput output);
-    void RemoveOutput(RROutput output);
-    void AddProfile(QString filename);
-    void profileAdded(QString *object_path);
-    void deviceAdded(QString *object_path);
-    void deviceChanged(QString *object_path);
+    void scanHomeDirectory();
+    void connectToDisplay();
+    void connectToColorD();
+    void addOutput(RROutput output);
+    void removeOutput(RROutput output);
+    void addProfile(const QString &filename);
 
     Display *m_dpy;
     XRRScreenResources *m_resources;
@@ -75,5 +77,7 @@ private:
     int     m_eventBase;
     int m_errorBase;
 };
+
+Q_DECLARE_METATYPE(StringStringMap)
 
 #endif // COLORD_H

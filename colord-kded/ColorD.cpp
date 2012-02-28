@@ -27,6 +27,9 @@
 
 #include <QX11Info>
 
+#include <QFile>
+#include <QCryptographicHash>
+
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))
 
@@ -40,13 +43,15 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     Q_UNUSED(args)
 
     /* connect to colord using DBus */
-    ConnectToColorD();
+    connectToColorD();
 
     /* Connect to the display */
-    ConnectToDisplay();
+    connectToDisplay();
 
     /* Scan all the *.icc files */
-    ScanHomeDirectory();
+    scanHomeDirectory();
+
+    qRegisterMetaType<StringStringMap>("StringStringMap");
 }
 
 ColorD::~ColorD()
@@ -106,34 +111,40 @@ quint8* ColorD::readEdidData(RROutput output, size_t *len)
     return NULL;
 }
 
-void ColorD::AddProfile(QString filename)
+void ColorD::addProfile(const QString &filename)
 {
-    QHash<QString, QVariant> properties;
+    // open filename
+    QFile profile(filename);
+    if (!profile.open(QIODevice::ReadOnly)) {
+        kWarning() << "Failed to open profile file:" << filename;
+        return;
+    }
 
-    /* open filename */
+    // get the MD5 hash of the contents
+    QByteArray hash;
+    hash = QCryptographicHash::hash(profile.readAll(), QCryptographicHash::Md5);
 
-    /* get the MD5 hash of the contents */
-    //TODO
-
-    /* construct a profile-id from device-and-profile-naming-spec.txt */
+    // construct a profile-id from device-and-profile-naming-spec.txt
     //TODO
 
     //TODO: how to save these private to the class?
-    QDBusConnection m_systemBus = QDBusConnection::systemBus();
-    QDBusInterface m_colordInterface("org.freedesktop.ColorManager",
-                                     "/org/freedesktop/ColorManager",
-                                     "org.freedesktop.ColorManager",
-                                     m_systemBus);
-
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("/org/freedesktop/ColorManager"),
+                                             QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("CreateProfile"));
+    StringStringMap properties;
     properties["XRANDR_name"] = "lvds1";
-    QDBusReply<QString> reply = m_colordInterface.call("CreateProfile",
-                                                   "hello-dave",
-                                                   "temp",
-                                                   properties);
-    kDebug() << "created profile" << reply;
+    message << qVariantFromValue(QString("hello-dave"));
+    message << qVariantFromValue(QString("temp"));
+    message << qVariantFromValue(properties);
+
+    QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+
+    kDebug() << "created profile" << reply.value().path();
 }
 
-void ColorD::ScanHomeDirectory()
+void ColorD::scanHomeDirectory()
 {
     /* Get a list of files in ~/.local/share/icc/ */
     //TODO
@@ -142,15 +153,12 @@ void ColorD::ScanHomeDirectory()
     //TODO
 }
 
-void ColorD::AddOutput(RROutput output)
+void ColorD::addOutput(RROutput output)
 {
-    /* ensure the RROutput is connected */
     XRROutputInfo *info;
     info = XRRGetOutputInfo(m_dpy, m_resources, output);
-    if (info == NULL) {
-        return;
-    }
-    if (info->connection != RR_Connected) {
+    // ensure the RROutput is connected
+    if (info == NULL || info->connection != RR_Connected) {
         return;
     }
 
@@ -166,39 +174,42 @@ void ColorD::AddOutput(RROutput output)
     /* call CreateDevice() with a device_id constructed using the naming
      * spec: https://gitorious.org/colord/master/blobs/master/doc/device-and-profile-naming-spec.txt */
     //TODO: how to save these private to the class?
-    QDBusConnection m_systemBus = QDBusConnection::systemBus();
-    QDBusInterface m_colordInterface("org.freedesktop.ColorManager",
-                                     "/org/freedesktop/ColorManager",
-                                     "org.freedesktop.ColorManager",
-                                     m_systemBus);
-
-    QHash<QString, QVariant> properties;
+    StringStringMap properties;
     properties["XRANDR_name"] = info->name;
-    QDBusReply<QString> reply = m_colordInterface.call("CreateDevice",
-                                                       "hello-dave",
-                                                       "temp",
-                                                       properties);
-    kDebug() << "created device" << reply;
+
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("/org/freedesktop/ColorManager"),
+                                             QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("CreateDevice"));
+    // Use our own cached tid to avoid crashes
+    message << qVariantFromValue(QString("hello-dave"));
+    message << qVariantFromValue(QString("tmp"));
+    message << qVariantFromValue(properties);
+    QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+
+    kDebug() << "created device" << reply.value().path();
 
     XRRFreeOutputInfo(info);
 }
 
 
-void ColorD::RemoveOutput(RROutput output)
+void ColorD::removeOutput(RROutput output)
 {
-  /* find the device in colord using FindDeviceByProperty(info->name) */
-  //TODO
+    Q_UNUSED(output)
+    /* find the device in colord using FindDeviceByProperty(info->name) */
+    //TODO
 
-  /* call DBus DeleteDevice() on the result */
-  //TODO
+    /* call DBus DeleteDevice() on the result */
+    //TODO
 }
 
-void ColorD::ConnectToDisplay(void)
+void ColorD::connectToDisplay()
 {
     m_dpy = QX11Info::display();
 
     // Check extension
-    if (XRRQueryExtension(m_dpy, &m_eventBase, &m_errorBase) == False) {
+    if (XRRQueryExtension(m_dpy, &m_eventBase, &m_errorBase) == false) {
         m_valid = false;
         return;
     }
@@ -229,20 +240,19 @@ void ColorD::ConnectToDisplay(void)
      */
     m_root = RootWindow(m_dpy, 0);
 
-    if (has_1_3)
+    if (has_1_3) {
         m_resources = XRRGetScreenResourcesCurrent(m_dpy, m_root);
-    else
+    } else {
         m_resources = XRRGetScreenResources(m_dpy, m_root);
+    }
 
     for (int i = 0; i < m_resources->noutput; ++i) {
         kDebug() << "Adding" << m_resources->outputs[i];
-        AddOutput(m_resources->outputs[i]);
+        addOutput(m_resources->outputs[i]);
     }
 
     /* register for root window changes */
-    XRRSelectInput (m_dpy,
-                    m_root,
-                    RRScreenChangeNotifyMask);
+    XRRSelectInput(m_dpy, m_root, RRScreenChangeNotifyMask);
 //    gdk_x11_register_standard_event_type (m_dpy,
 //                              m_eventBase,
 //                              RRNotify + 1);
@@ -255,7 +265,7 @@ void ColorD::ConnectToDisplay(void)
     //TODO
 }
 
-void ColorD::profileAdded(QString *object_path)
+void ColorD::profileAdded(const QDBusObjectPath &objectPath)
 {
     /* check if the EDID_md5 Profile.Metadata matches any connected
      * XRandR devices (e.g. lvds1), otherwise ignore */
@@ -263,17 +273,21 @@ void ColorD::profileAdded(QString *object_path)
 
     /* call Device.AddProfile() with the device and profile object paths */
     //TODO
-    kDebug() << "Profile added" << object_path;
+    kDebug() << "Profile added" << objectPath.path();
 }
 
-void ColorD::deviceAdded(QString *object_path)
+void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 {
+    kDebug() << "Device added" << objectPath.path();
+
     /* show a notification that the user should calibrate the device */
     //TODO
 }
 
-void ColorD::deviceChanged(QString *object_path)
+void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 {
+    kDebug() << "Device changed" << objectPath.path();
+
     /* check Device.Kind is "display" */
     //TODO
 
@@ -294,29 +308,22 @@ void ColorD::deviceChanged(QString *object_path)
     //TODO: named _ICC_PROFILE
 }
 
-void ColorD::ConnectToColorD()
+void ColorD::connectToColorD()
 {
-    //TODO: how to save these private to the class?
-    QDBusConnection m_systemBus = QDBusConnection::systemBus();
-    QDBusInterface m_colordInterface("org.freedesktop.ColorManager",
-                                     "/org/freedesktop/ColorManager",
-                                     "org.freedesktop.ColorManager",
-                                     m_systemBus);
+    // Creates a ColorD interface, it must be created with new
+    // otherwise the object will be deleted when this block ends
+    QDBusInterface *interface;
+    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   QLatin1String("/org/freedesktop/ColorManager"),
+                                   QLatin1String("org.freedesktop.ColorManager"),
+                                   QDBusConnection::systemBus(),
+                                   this);
 
-    /* listen to colord for events */
-    m_systemBus.connect("org.freedesktop.ColorManager",
-                      "/org/freedesktop/ColorManager",
-                      "org.freedesktop.ColorManager",
-                      "ProfileAdded",
-                      this, SLOT(profileAdded(QString)));
-    m_systemBus.connect("org.freedesktop.ColorManager",
-                      "/org/freedesktop/ColorManager",
-                      "org.freedesktop.ColorManager",
-                      "DeviceAdded",
-                      this, SLOT(deviceAdded(QString)));
-    m_systemBus.connect("org.freedesktop.ColorManager",
-                      "/org/freedesktop/ColorManager",
-                      "org.freedesktop.ColorManager",
-                      "DeviceChanged",
-                      this, SLOT(deviceChanged(QString)));
+    // listen to colord for events
+    connect(interface, SIGNAL(ProfileAdded(QDBusObjectPath)),
+            this, SLOT(profileAdded(QDBusObjectPath)));
+    connect(interface, SIGNAL(DeviceAdded(QDBusObjectPath)),
+            this, SLOT(deviceAdded(QDBusObjectPath)));
+    connect(interface, SIGNAL(DeviceChanged(QDBusObjectPath)),
+            this, SLOT(deviceChanged(QDBusObjectPath)));
 }
