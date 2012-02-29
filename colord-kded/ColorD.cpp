@@ -97,7 +97,7 @@ quint8* ColorD::readEdidData(RROutput output, size_t *len)
     result = getProperty(m_dpy, output, edid_atom, len);
     if (result == NULL) {
         edid_atom = XInternAtom(m_dpy, "EDID_DATA", FALSE);
-        result = getProperty (m_dpy, output, edid_atom, len);
+        result = getProperty(m_dpy, output, edid_atom, len);
     }
 
     if (result) {
@@ -206,7 +206,6 @@ void ColorD::addOutput(RROutput output)
                                              QLatin1String("/org/freedesktop/ColorManager"),
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("CreateDevice"));
-    // Use our own cached tid to avoid crashes
     message << qVariantFromValue(QString(device_id));
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);

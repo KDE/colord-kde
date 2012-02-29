@@ -1,4 +1,5 @@
 set(colord_kded_SRCS
+    Edid.cpp
     ColorD.cpp
 )
 
