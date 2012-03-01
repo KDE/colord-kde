@@ -91,6 +91,7 @@ bool Edid::parse(const quint8 *data, size_t length)
     /* get the size */
     m_width = data[GCM_EDID_OFFSET_SIZE + 0];
     m_height = data[GCM_EDID_OFFSET_SIZE + 1];
+    kDebug() << "width" << m_width << "height" << m_height;
 
     /* we don't care about aspect */
     if (m_width == 0 || m_height == 0) {
@@ -104,22 +105,27 @@ bool Edid::parse(const quint8 *data, size_t length)
     } else {
         m_gamma = (static_cast<float>(data[GCM_EDID_OFFSET_GAMMA] / 100) + 1);
     }
+    kDebug() << "Gama" << m_gamma;
 
     /* get color red */
     m_red.setX(edidDecodeFraction(data[0x1b], edidGetBits(data[0x19], 6, 7)));
     m_red.setY(edidDecodeFraction(data[0x1c], edidGetBits(data[0x19], 5, 4)));
+    kDebug() << "red" << m_red;
 
     /* get color green */
     m_green.setX(edidDecodeFraction(data[0x1d], edidGetBits(data[0x19], 2, 3)));
     m_green.setY(edidDecodeFraction(data[0x1e], edidGetBits(data[0x19], 0, 1)));
+    kDebug() << "m_green" << m_green;
 
     /* get color blue */
     m_blue.setX(edidDecodeFraction(data[0x1f], edidGetBits(data[0x1a], 6, 7)));
     m_blue.setY(edidDecodeFraction(data[0x20], edidGetBits(data[0x1a], 4, 5)));
+    kDebug() << "m_blue" << m_blue;
 
     /* get color white */
     m_white.setX(edidDecodeFraction(data[0x21], edidGetBits(data[0x1a], 2, 3)));
     m_white.setY(edidDecodeFraction(data[0x22], edidGetBits(data[0x1a], 0, 1)));
+    kDebug() << "m_white" << m_white;
 
     /* parse EDID data */
     for (i = GCM_EDID_OFFSET_DATA_BLOCKS;
@@ -136,12 +142,14 @@ bool Edid::parse(const quint8 *data, size_t length)
         /* any useful blocks? */
         if (data[i+3] == GCM_DESCRIPTOR_DISPLAY_PRODUCT_NAME) {
             m_monitor_name = edidParseString(&data[i+5]);
+            kDebug() << "m_monitor_name" << m_monitor_name;
 //            if (tmp != NULL) {
 //                g_free (priv->monitor_name);
 //                priv->monitor_name = tmp;
 //            }
         } else if (data[i+3] == GCM_DESCRIPTOR_DISPLAY_PRODUCT_SERIAL_NUMBER) {
             m_serial_number = edidParseString(&data[i+5]);
+            kDebug() << "m_monitor_name" << m_monitor_name;
 //            if (tmp != NULL) {
 //                g_free (priv->serial_number);
 //                priv->serial_number = tmp;
@@ -150,6 +158,7 @@ bool Edid::parse(const quint8 *data, size_t length)
             kWarning() << "failing to parse color management data";
         } else if (data[i+3] == GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING) {
             m_eisa_id = edidParseString(&data[i+5]);
+            kDebug() << "m_eisa_id" << m_eisa_id;
 //            if (tmp != NULL) {
 //                g_free (priv->eisa_id);
 //                priv->eisa_id = tmp;
@@ -159,11 +168,13 @@ bool Edid::parse(const quint8 *data, size_t length)
                 /* extended EDID block(1) which contains
                                      * a better gamma value */
                 m_gamma = ((float) data[i+3+9] / 100) + 1;
+                kDebug() << "m_gamma2" << m_gamma;
             }
             if (data[i+3+14] != 0xff) {
                 /* extended EDID block(2) which contains
                                      * a better gamma value */
                 m_gamma = ((float) data[i+3+9] / 100) + 1;
+                kDebug() << "m_gamma3" << m_gamma;
             }
         }
     }
@@ -206,9 +217,12 @@ QString Edid::edidParseString(const quint8 *data) const
 
         /* this is always 12 bytes, but we can't guarantee it's null
          * terminated or not junk. */
+        text = QString::fromLocal8Bit((const char*) data, 12);
+        kDebug() << "text" << text;
 //        text = g_strndup ((const gchar *) data, 12);
 
         /* remove insane newline chars */
+        text = text.simplified();
 //        g_strdelimit (text, "\n\r", '\0');
 
         /* remove spaces */
@@ -235,6 +249,7 @@ QString Edid::edidParseString(const quint8 *data) const
 //                text = NULL;
 //                goto out;
 //        }
+        kDebug() << "text" << text;
 //out:
         return text;
 }

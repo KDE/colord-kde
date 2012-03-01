@@ -20,6 +20,8 @@
 
 #include "ColorD.h"
 
+#include "Edid.h"
+
 #include <KLocale>
 #include <KGenericFactory>
 #include <KNotification>
@@ -62,7 +64,7 @@ ColorD::~ColorD()
 static quint8* getProperty(Display *dpy,
                            RROutput output,
                            Atom atom,
-                           size_t *len)
+                           size_t &len)
 {
     unsigned char *prop;
     int actual_format;
@@ -78,8 +80,9 @@ static quint8* getProperty(Display *dpy,
     if (actual_type == XA_INTEGER && actual_format == 8) {
         result = new quint8[nitems];
         memcpy(result, prop, nitems);
-        if (len)
-            *len = nitems;
+        if (len) {
+            len = nitems;
+        }
     } else {
         result = NULL;
     }
@@ -88,7 +91,7 @@ static quint8* getProperty(Display *dpy,
     return result;
 }
 
-quint8* ColorD::readEdidData(RROutput output, size_t *len)
+quint8* ColorD::readEdidData(RROutput output, size_t &len)
 {
     Atom edid_atom;
     quint8 *result;
@@ -101,7 +104,7 @@ quint8* ColorD::readEdidData(RROutput output, size_t *len)
     }
 
     if (result) {
-        if (*len % 128 == 0) {
+        if (len % 128 == 0) {
             return result;
         } else {
             delete result;
@@ -175,6 +178,21 @@ void ColorD::addOutput(RROutput output)
     }
 
     /* get the EDID */
+    size_t size;
+    const quint8 *data;
+    data = readEdidData(output, size);
+    if (data == NULL || size == 0) {
+        kWarning() << "unable to get EDID for output";
+        return;
+    }
+    Edid *edid = new Edid;
+    bool ret;
+    ret = edid->parse(data, size);
+    if (!ret) {
+        delete edid;
+        return;
+    }
+
     //read_edid_data(m_resources->outputs[i])
 
     /* get the md5 of the EDID blob */

@@ -58,7 +58,7 @@ private slots:
     void deviceChanged(const QDBusObjectPath &objectPath);
 
 private:
-    quint8* readEdidData(RROutput output, size_t *len);
+    quint8* readEdidData(RROutput output, size_t &len);
     void scanHomeDirectory();
     void connectToDisplay();
     void connectToColorD();
