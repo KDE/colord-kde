@@ -38,13 +38,23 @@
 #define GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING         0xfe
 #define GCM_DESCRIPTOR_COLOR_POINT                      0xfb
 
-Edid::Edid()
+Edid::Edid() :
+    m_valid(false)
 {
+}
+
+Edid::Edid(const quint8 *data, size_t length)
+{
+    parse(data, length);
+}
+
+bool Edid::isValid() const
+{
+    return m_valid;
 }
 
 bool Edid::parse(const quint8 *data, size_t length)
 {
-    bool ret = true;
     uint i;
 //    GcmEdidPrivate *priv = edid->priv;
     quint32 serial;
@@ -57,7 +67,8 @@ bool Edid::parse(const quint8 *data, size_t length)
 //                             GCM_EDID_ERROR,
 //                             GCM_EDID_ERROR_FAILED_TO_PARSE,
 //                             "EDID length is too small");
-        return false;
+        m_valid = false;
+        return m_valid;
     }
     if (data[0] != 0x00 || data[1] != 0xff) {
         kWarning() << "Failed to parse EDID header";
@@ -65,7 +76,8 @@ bool Edid::parse(const quint8 *data, size_t length)
 //                             GCM_EDID_ERROR,
 //                             GCM_EDID_ERROR_FAILED_TO_PARSE,
 //                             "Failed to parse EDID header");
-        return false;
+        m_valid = false;
+        return m_valid;
     }
 
     /* free old data */
@@ -182,7 +194,8 @@ bool Edid::parse(const quint8 *data, size_t length)
     /* calculate checksum */
 //    m_checksum = g_compute_checksum_for_data (G_CHECKSUM_MD5, data, 0x6c);
 //out:
-    return ret;
+    m_valid = true;
+    return m_valid;
 }
 
 int Edid::edidGetBit(int in, int bit) const

@@ -31,6 +31,7 @@
 
 #include <QFile>
 #include <QCryptographicHash>
+#include <QDBusMetaType>
 
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))
@@ -53,7 +54,8 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     /* Scan all the *.icc files */
     scanHomeDirectory();
 
-    qRegisterMetaType<StringStringMap>("StringStringMap");
+    qRegisterMetaType<StringStringMap>();
+    qDBusRegisterMetaType<StringStringMap>();
 }
 
 ColorD::~ColorD()
@@ -185,10 +187,8 @@ void ColorD::addOutput(RROutput output)
         kWarning() << "unable to get EDID for output";
         return;
     }
-    Edid *edid = new Edid;
-    bool ret;
-    ret = edid->parse(data, size);
-    if (!ret) {
+    Edid *edid = new Edid(data, size);
+    if (!edid->isValid()) {
         delete edid;
         return;
     }

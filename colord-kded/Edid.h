@@ -28,7 +28,9 @@ class Edid
 {
 public:
     Edid();
+    Edid(const quint8 *data, size_t length);
     bool parse(const quint8 *data, size_t length);
+    bool isValid() const;
 
 private:
     int edidGetBit(int in, int bit) const;
@@ -36,6 +38,7 @@ private:
     double edidDecodeFraction(int high, int low) const;
     QString edidParseString(const quint8 *data) const;
 
+    bool m_valid;
     QString                        m_monitor_name;
     QString                        m_vendor_name;
     QString                        m_serial_number;
