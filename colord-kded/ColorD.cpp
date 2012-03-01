@@ -34,6 +34,7 @@
 #include <QDir>
 #include <QCryptographicHash>
 #include <QDBusMetaType>
+#include <QDBusUnixFileDescriptor>
 
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))
@@ -50,6 +51,7 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     // Register this first or the first time will fail
     qRegisterMetaType<StringStringMap>();
     qDBusRegisterMetaType<StringStringMap>();
+    qDBusRegisterMetaType<QDBusUnixFileDescriptor>();
 
     /* connect to colord using DBus */
     connectToColorD();
@@ -153,6 +155,14 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     StringStringMap properties;
     properties["Filename"] = fileInfo.absoluteFilePath();
     properties["FILE_checksum"] = hash;
+//    kDebug() << "can pass FD" << ((QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing) == true);
+//    QList<QDBusUnixFileDescriptor> fds;
+//    fds << QDBusUnixFileDescriptor(profile.handle());
+//    QDBusArgument arg;
+//    arg << fds;
+//    message << qVariantFromValue(arg);
+//    message << qVariantFromValue(QDBusUnixFileDescriptor(profile.handle()));
+
     message << qVariantFromValue(profileId);
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
