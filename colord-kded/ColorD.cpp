@@ -187,11 +187,10 @@ void ColorD::addOutput(RROutput output)
         kWarning() << "unable to get EDID for output";
         return;
     }
+
+    // Created the Edid class which parses our info
     Edid *edid = new Edid(data, size);
-    if (!edid->isValid()) {
-        delete edid;
-        return;
-    } else {
+    if (edid->isValid()) {
         kDebug() << "Edid Valid" << edid->deviceId(info->name);
         kDebug() << "Edid vendor" << edid->vendor();
         kDebug() << "Edid serial" << edid->serial();
@@ -199,23 +198,17 @@ void ColorD::addOutput(RROutput output)
         edidVendor = edid->vendor();
         edidModel = edid->name();
         edidSerial = edid->serial();
-        deviceId = edid->deviceId(info->name);
     }
 
-    //read_edid_data(m_resources->outputs[i])
+    // grabing the device even if edid is not valid
+    // if handles the fallback name if it's not valid
+    deviceId = edid->deviceId(info->name);
 
     /* get the md5 of the EDID blob */
     //TODO
 
     /* parse the edid and save in a hash table [m_hash_edid_md5?]*/
     //TODO, and maybe c++ize http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/color/gcm-edid.c
-
-    /* create a device_id  */
-    //TODO:
-    //if (edid_is_valid)
-    //    device_id = xrandr[-{%edid_vendor}][-{%edid_model][-{%edid_serial}]
-    //else
-    //    device_id = "xrandr-" + info->name;
 
     //TODO: how to save these private to the class?
     StringStringMap properties;

@@ -66,13 +66,18 @@ QString Edid::deviceId(const QString &fallbackName) const
         if (!serial().isEmpty()) {
             id.append(QLatin1Char('-') + serial());
         }
-    } else {
-        if (fallbackName.isEmpty()) {
-            id.append(QLatin1String("-unknown"));
-        } else {
+    }
+
+    // if no info was added check if the fallbacName is provided
+    if (id == QLatin1String("xrandr")) {
+        if (!fallbackName.isEmpty()) {
             id.append(QLatin1Char('-') + fallbackName);
+        } else {
+            // all info we have are empty strings
+            id.append(QLatin1String("-unknown"));
         }
     }
+
     return id;
 }
 
