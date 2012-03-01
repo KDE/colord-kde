@@ -32,6 +32,20 @@ public:
     bool parse(const quint8 *data, size_t length);
     bool isValid() const;
 
+    QString deviceId(const QString &fallbackName = QString()) const;
+    QString name() const;
+    QString vendor() const;
+    QString serial() const;
+    QString eisaId() const;
+    uint width() const;
+    uint height() const;
+    float gamma() const;
+    QQuaternion red() const;
+    QQuaternion green() const;
+    QQuaternion blue() const;
+    QQuaternion white() const;
+
+
 private:
     int edidGetBit(int in, int bit) const;
     int edidGetBits(int in, int begin, int end) const;
@@ -39,10 +53,10 @@ private:
     QString edidParseString(const quint8 *data) const;
 
     bool m_valid;
-    QString                        m_monitor_name;
-    QString                        m_vendor_name;
-    QString                        m_serial_number;
-    QString                        m_eisa_id;
+    QString                        m_monitorName;
+    QString                        m_vendorName;
+    QString                        m_serialNumber;
+    QString                        m_eisaId;
     char                           *m_checksum;
     char                           *m_pnp_id;
     uint                            m_width;

@@ -53,6 +53,96 @@ bool Edid::isValid() const
     return m_valid;
 }
 
+QString Edid::deviceId(const QString &fallbackName) const
+{
+    QString id = QLatin1String("xrandr");
+    if (m_valid) {
+        if (!vendor().isEmpty()) {
+            id.append(QLatin1Char('-') + vendor());
+        }
+        if (!name().isEmpty()) {
+            id.append(QLatin1Char('-') + name());
+        }
+        if (!serial().isEmpty()) {
+            id.append(QLatin1Char('-') + serial());
+        }
+    } else {
+        if (fallbackName.isEmpty()) {
+            id.append(QLatin1String("-unknown"));
+        } else {
+            id.append(QLatin1Char('-') + fallbackName);
+        }
+    }
+    return id;
+}
+
+QString Edid::name() const
+{
+    if (m_valid) {
+        return m_monitorName;
+    }
+    return QString();
+}
+
+QString Edid::vendor() const
+{
+    if (m_valid) {
+        return m_vendorName;
+    }
+    return QString();
+}
+
+QString Edid::serial() const
+{
+    if (m_valid) {
+        return m_serialNumber;
+    }
+    return QString();
+}
+
+QString Edid::eisaId() const
+{
+    if (m_valid) {
+        return m_eisaId;
+    }
+    return QString();
+}
+
+uint Edid::width() const
+{
+    return m_width;
+}
+
+uint Edid::height() const
+{
+    return m_height;
+}
+
+float Edid::gamma() const
+{
+    return m_gamma;
+}
+
+QQuaternion Edid::red() const
+{
+    return m_red;
+}
+
+QQuaternion Edid::green() const
+{
+    return m_green;
+}
+
+QQuaternion Edid::blue() const
+{
+    return m_blue;
+}
+
+QQuaternion Edid::white() const
+{
+    return m_white;
+}
+
 bool Edid::parse(const quint8 *data, size_t length)
 {
     uint i;
@@ -153,15 +243,15 @@ bool Edid::parse(const quint8 *data, size_t length)
 
         /* any useful blocks? */
         if (data[i+3] == GCM_DESCRIPTOR_DISPLAY_PRODUCT_NAME) {
-            m_monitor_name = edidParseString(&data[i+5]);
-            kDebug() << "m_monitor_name" << m_monitor_name;
+            m_monitorName = edidParseString(&data[i+5]);
+            kDebug() << "m_monitorName" << m_monitorName;
 //            if (tmp != NULL) {
 //                g_free (priv->monitor_name);
 //                priv->monitor_name = tmp;
 //            }
         } else if (data[i+3] == GCM_DESCRIPTOR_DISPLAY_PRODUCT_SERIAL_NUMBER) {
-            m_serial_number = edidParseString(&data[i+5]);
-            kDebug() << "m_monitor_name" << m_monitor_name;
+            m_serialNumber = edidParseString(&data[i+5]);
+            kDebug() << "m_serialNumber" << m_serialNumber;
 //            if (tmp != NULL) {
 //                g_free (priv->serial_number);
 //                priv->serial_number = tmp;
@@ -169,8 +259,8 @@ bool Edid::parse(const quint8 *data, size_t length)
         } else if (data[i+3] == GCM_DESCRIPTOR_COLOR_MANAGEMENT_DATA) {
             kWarning() << "failing to parse color management data";
         } else if (data[i+3] == GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING) {
-            m_eisa_id = edidParseString(&data[i+5]);
-            kDebug() << "m_eisa_id" << m_eisa_id;
+            m_eisaId = edidParseString(&data[i+5]);
+            kDebug() << "m_eisaId" << m_eisaId;
 //            if (tmp != NULL) {
 //                g_free (priv->eisa_id);
 //                priv->eisa_id = tmp;

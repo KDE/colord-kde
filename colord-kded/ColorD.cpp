@@ -167,10 +167,10 @@ void ColorD::scanHomeDirectory()
 
 void ColorD::addOutput(RROutput output)
 {
-    const char *edid_vendor = "unknown";
-    const char *edid_model = "unknown";
-    const char *edid_serial = "unknown";
-    const char *device_id = "xrandr-unknown";
+    QString edidVendor = QLatin1String("unknown");
+    QString edidModel = QLatin1String("unknown");
+    QString edidSerial = QLatin1String("unknown");
+    QString deviceId = QLatin1String("xrandr-unknown");
 
     XRROutputInfo *info;
     info = XRRGetOutputInfo(m_dpy, m_resources, output);
@@ -191,6 +191,15 @@ void ColorD::addOutput(RROutput output)
     if (!edid->isValid()) {
         delete edid;
         return;
+    } else {
+        kDebug() << "Edid Valid" << edid->deviceId(info->name);
+        kDebug() << "Edid vendor" << edid->vendor();
+        kDebug() << "Edid serial" << edid->serial();
+        kDebug() << "Edid name" << edid->name();
+        edidVendor = edid->vendor();
+        edidModel = edid->name();
+        edidSerial = edid->serial();
+        deviceId = edid->deviceId(info->name);
     }
 
     //read_edid_data(m_resources->outputs[i])
@@ -213,9 +222,9 @@ void ColorD::addOutput(RROutput output)
     properties["Kind"] = "display";
     properties["Mode"] = "physical";
     properties["Colorspace"] = "rgb";
-    properties["Vendor"] = edid_vendor;
-    properties["Model"] = edid_model;
-    properties["Serial"] = edid_serial;
+    properties["Vendor"] = edidVendor;
+    properties["Model"] = edidModel;
+    properties["Serial"] = edidSerial;
     properties["XRANDR_name"] = info->name;
 
     /* call CreateDevice() with a device_id  */
@@ -224,7 +233,7 @@ void ColorD::addOutput(RROutput output)
                                              QLatin1String("/org/freedesktop/ColorManager"),
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("CreateDevice"));
-    message << qVariantFromValue(QString(device_id));
+    message << qVariantFromValue(deviceId);
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
