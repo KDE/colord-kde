@@ -30,6 +30,7 @@
 #include <QX11Info>
 
 #include <QFile>
+#include <QDir>
 #include <QCryptographicHash>
 #include <QDBusMetaType>
 
@@ -158,11 +159,22 @@ void ColorD::addProfile(const QString &filename)
 
 void ColorD::scanHomeDirectory()
 {
-    /* Get a list of files in ~/.local/share/icc/ */
-    //TODO
+    // Get a list of files in ~/.local/share/icc/
+    QDir profilesDir = QDir(QLatin1String("~/.local/share/icc/"));
+    if (!profilesDir.exists()) {
+        if (!profilesDir.mkpath(QLatin1String("~/.local/share/icc/"))) {
+            kWarning() << "Failed to create icc path '~/.local/share/icc/'";
+        }
+        return; // There can't be any profiles if the path didn't exist
+    }
 
     /* Call AddProfile() for each file */
-    //TODO
+    QStringList filters;
+    filters << "*.icc";
+    filters << "*.icm";
+    foreach (const QString &filename, profilesDir.entryList(QDir::Files)) {
+        addProfile(filename);
+    }
 }
 
 void ColorD::addOutput(RROutput output)
