@@ -22,7 +22,9 @@
 #define COLORD_H
 
 #include <KDEDModule>
+
 #include <QVariantList>
+#include <QFileInfo>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
@@ -64,7 +66,7 @@ private:
     void connectToColorD();
     void addOutput(RROutput output);
     void removeOutput(RROutput output);
-    void addProfile(const QString &filename);
+    void addProfile(const QFileInfo &fileInfo);
 
     Display *m_dpy;
     XRRScreenResources *m_resources;

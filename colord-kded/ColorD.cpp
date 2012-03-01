@@ -47,6 +47,10 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     // There's not much use for args in a KCM
     Q_UNUSED(args)
 
+    // Register this first or the first time will fail
+    qRegisterMetaType<StringStringMap>();
+    qDBusRegisterMetaType<StringStringMap>();
+
     /* connect to colord using DBus */
     connectToColorD();
 
@@ -55,9 +59,6 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
 
     /* Scan all the *.icc files */
     scanHomeDirectory();
-
-    qRegisterMetaType<StringStringMap>();
-    qDBusRegisterMetaType<StringStringMap>();
 }
 
 ColorD::~ColorD()
@@ -118,14 +119,14 @@ quint8* ColorD::readEdidData(RROutput output, size_t &len)
     return NULL;
 }
 
-void ColorD::addProfile(const QString &filename)
+void ColorD::addProfile(const QFileInfo &fileInfo)
 {
     QString profileId = QLatin1String("icc-unknown-hughsie");
 
     // open filename
-    QFile profile(filename);
+    QFile profile(fileInfo.absoluteFilePath());
     if (!profile.open(QIODevice::ReadOnly)) {
-        kWarning() << "Failed to open profile file:" << filename;
+        kWarning() << "Failed to open profile file:" << fileInfo.absoluteFilePath();
         return;
     }
 
@@ -140,7 +141,8 @@ void ColorD::addProfile(const QString &filename)
     //else
     //    profile_id = "icc-" + hash + username
     KUser user;
-    profileId = QLatin1String("icc-") + hash.toHex() + user.loginName();
+    profileId = QLatin1String("icc-") + hash.toHex() + QLatin1Char('-') + user.loginName();
+    kDebug() << "profileId" << profileId;
 
     //TODO: how to save these private to the class?
     QDBusMessage message;
@@ -149,7 +151,7 @@ void ColorD::addProfile(const QString &filename)
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("CreateProfile"));
     StringStringMap properties;
-    properties["Filename"] = filename;
+    properties["Filename"] = fileInfo.absoluteFilePath();
     properties["FILE_checksum"] = hash;
     message << qVariantFromValue(profileId);
     message << qVariantFromValue(QString("temp"));
@@ -162,12 +164,15 @@ void ColorD::addProfile(const QString &filename)
 
 void ColorD::scanHomeDirectory()
 {
+    KUser user;
     // Get a list of files in ~/.local/share/icc/
-    QDir profilesDir = QDir(QLatin1String("~/.local/share/icc/"));
+    QDir profilesDir(user.homeDir() + QLatin1String("/.local/share/icc"));
     if (!profilesDir.exists()) {
-        if (!profilesDir.mkpath(QLatin1String("~/.local/share/icc/"))) {
-            kWarning() << "Failed to create icc path '~/.local/share/icc/'";
+        kWarning() << "Icc path" << profilesDir.path() << "does not exist";
+        if (!profilesDir.mkpath(user.homeDir() + QLatin1String("/.local/share/icc"))) {
+            kWarning() << "Failed to create icc path '~/.local/share/icc'";
         }
+
         return; // There can't be any profiles if the path didn't exist
     }
 
@@ -177,8 +182,9 @@ void ColorD::scanHomeDirectory()
     filters << "*.icm";
     // TODO filter by MimeType
     profilesDir.setNameFilters(filters);
-    foreach (const QString &filename, profilesDir.entryList(QDir::Files)) {
-        addProfile(filename);
+    foreach (const QFileInfo &fileInfo, profilesDir.entryInfoList(QDir::Files)) {
+        kDebug() << fileInfo.absoluteFilePath();
+        addProfile(fileInfo);
     }
 }
 
