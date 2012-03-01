@@ -26,6 +26,7 @@
 #include <KGenericFactory>
 #include <KNotification>
 #include <KIcon>
+#include <KUser>
 
 #include <QX11Info>
 
@@ -119,7 +120,7 @@ quint8* ColorD::readEdidData(RROutput output, size_t &len)
 
 void ColorD::addProfile(const QString &filename)
 {
-    const char *profile_id = "icc-unknown-hughsie";
+    QString profileId = QLatin1String("icc-unknown-hughsie");
 
     // open filename
     QFile profile(filename);
@@ -138,6 +139,8 @@ void ColorD::addProfile(const QString &filename)
     //    profile_id = "icc-" + embedded_profile_id + username
     //else
     //    profile_id = "icc-" + hash + username
+    KUser user;
+    profileId = QLatin1String("icc-") + hash.toHex() + user.loginName();
 
     //TODO: how to save these private to the class?
     QDBusMessage message;
@@ -148,7 +151,7 @@ void ColorD::addProfile(const QString &filename)
     StringStringMap properties;
     properties["Filename"] = filename;
     properties["FILE_checksum"] = hash;
-    message << qVariantFromValue(QString(profile_id));
+    message << qVariantFromValue(profileId);
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
 
@@ -168,10 +171,12 @@ void ColorD::scanHomeDirectory()
         return; // There can't be any profiles if the path didn't exist
     }
 
-    /* Call AddProfile() for each file */
+    // Call AddProfile() for each file
     QStringList filters;
     filters << "*.icc";
     filters << "*.icm";
+    // TODO filter by MimeType
+    profilesDir.setNameFilters(filters);
     foreach (const QString &filename, profilesDir.entryList(QDir::Files)) {
         addProfile(filename);
     }
@@ -239,6 +244,7 @@ void ColorD::addOutput(RROutput output)
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("CreateDevice"));
     message << qVariantFromValue(deviceId);
+    // TODO wheter to use: normal, temp or disk ?
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
