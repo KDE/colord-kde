@@ -146,12 +146,16 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     profileId = QLatin1String("icc-") + hash.toHex() + QLatin1Char('-') + user.loginName();
     kDebug() << "profileId" << profileId;
 
+    bool fdPass;
+    fdPass = (QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing);
+
     //TODO: how to save these private to the class?
     QDBusMessage message;
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("/org/freedesktop/ColorManager"),
                                              QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("CreateProfile"));
+                                             fdPass ? QLatin1String("CreateProfileWithFD") :
+                                                      QLatin1String("CreateProfile"));
     StringStringMap properties;
     properties["Filename"] = fileInfo.absoluteFilePath();
     properties["FILE_checksum"] = hash;
@@ -165,6 +169,9 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
 
     message << qVariantFromValue(profileId);
     message << qVariantFromValue(QString("temp"));
+    if (fdPass) {
+        message << qVariantFromValue(QDBusUnixFileDescriptor(profile.handle()));
+    }
     message << qVariantFromValue(properties);
 
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);

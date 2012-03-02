@@ -286,7 +286,7 @@ bool Edid::parse(const quint8 *data, size_t length)
 
     // calculate checksum
     QCryptographicHash hash(QCryptographicHash::Md5);
-    hash.addData(reinterpret_cast<const char *>(data), 0x6c);
+    hash.addData(reinterpret_cast<const char *>(data), length);
     m_checksum = hash.result().toHex();
 
     m_valid = true;
