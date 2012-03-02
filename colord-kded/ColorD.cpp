@@ -124,8 +124,6 @@ quint8* ColorD::readEdidData(RROutput output, size_t &len)
 
 void ColorD::addProfile(const QFileInfo &fileInfo)
 {
-    QString profileId = QLatin1String("icc-unknown-hughsie");
-
     // open filename
     QFile profile(fileInfo.absoluteFilePath());
     if (!profile.open(QIODevice::ReadOnly)) {
@@ -146,7 +144,7 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     //else
     //    profile_id = "icc-" + hash + username
     KUser user;
-    profileId = QLatin1String("icc-") + hash.toHex() + QLatin1Char('-') + user.loginName();
+    QString profileId = QLatin1String("icc-") + hash.toHex() + QLatin1Char('-') + user.loginName();
     kDebug() << "profileId" << profileId;
 
     bool fdPass;
