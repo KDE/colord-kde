@@ -154,18 +154,11 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("/org/freedesktop/ColorManager"),
                                              QLatin1String("org.freedesktop.ColorManager"),
-                                             fdPass ? QLatin1String("CreateProfileWithFD") :
+                                             fdPass ? QLatin1String("CreateProfileWithFd") :
                                                       QLatin1String("CreateProfile"));
     StringStringMap properties;
     properties["Filename"] = fileInfo.absoluteFilePath();
     properties["FILE_checksum"] = hash;
-//    kDebug() << "can pass FD" << ((QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing) == true);
-//    QList<QDBusUnixFileDescriptor> fds;
-//    fds << QDBusUnixFileDescriptor(profile.handle());
-//    QDBusArgument arg;
-//    arg << fds;
-//    message << qVariantFromValue(arg);
-//    message << qVariantFromValue(QDBusUnixFileDescriptor(profile.handle()));
 
     message << qVariantFromValue(profileId);
     message << qVariantFromValue(QString("temp"));
