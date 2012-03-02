@@ -389,12 +389,46 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 
     /* read the VCGT data using lcms2 */
     //TODO
+//const cmsToneCurve **vcgt;
+//cmsFloat32Number in;
+//cmsHPROFILE lcms_profile = NULL;
+//
+/* open file */
+//lcms_profile = cmsOpenProfileFromFile (filename, "r");
+//if (lcms_profile == NULL)
+//        Error();
+//
+///* get tone curves from profile */
+//vcgt = cmsReadTag (lcms_profile, cmsSigVcgtType);
+//if (vcgt == NULL || vcgt[0] == NULL) {
+//        g_debug ("profile does not have any VCGT data");
+//        Abort();
+//}
+//
+///* create array */
+//for (i = 0; i < vcgt_size; i++) {
+//        in = (gdouble) i / (gdouble) (size - 1);
+//        tmp = g_new0 (GnomeRROutputClutItem, 1);
+//        tmp->red = cmsEvalToneCurveFloat(vcgt[0], in) * (gdouble) 0xffff;
+//        tmp->green = cmsEvalToneCurveFloat(vcgt[1], in) * (gdouble) 0xffff;
+//        tmp->blue = cmsEvalToneCurveFloat(vcgt[2], in) * (gdouble) 0xffff;
+//}
+//cmsCloseProfile (lcms_profile);
 
     /* push the data to the Xrandr gamma ramps for the display */
     //TODO
+//XRRCrtcGamma *gamma;
+//gamma = XRRAllocGamma (crtc->gamma_size);
+//XRRSetCrtcGamma (DISPLAY (crtc), crtc->id, gamma);
+//XRRFreeGamma (gamma);
 
     /* export the file data as an x atom on the *screen* (not output) */
     //TODO: named _ICC_PROFILE
+//Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", True);
+//Atom type = XInternAtom(m_dpy, "CARDINAL", True);
+//int rc = XChangeProperty(m_dpy, m_root, prop, type, 8, PropModeReplace, (unsigned char *) data, dataSize);
+//if (rc != Success) Error
+
 }
 
 void ColorD::addProfile(const QString &filename)
