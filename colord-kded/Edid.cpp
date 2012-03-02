@@ -22,6 +22,8 @@
 
 #include <math.h>
 
+#include <QCryptographicHash>
+
 #include <KDebug>
 
 #define GCM_EDID_OFFSET_PNPID                           0x08
@@ -116,6 +118,14 @@ QString Edid::eisaId() const
     return QString();
 }
 
+QString Edid::hash() const
+{
+    if (m_valid) {
+        return m_checksum;
+    }
+    return QString();
+}
+
 uint Edid::width() const
 {
     return m_width;
@@ -153,33 +163,20 @@ QQuaternion Edid::white() const
 
 bool Edid::parse(const quint8 *data, size_t length)
 {
-    uint i;
 //    GcmEdidPrivate *priv = edid->priv;
     quint32 serial;
-//    char *tmp;
 
     /* check header */
     if (length < 128) {
         kWarning() << "EDID length is too small";
-//        g_set_error_literal (error,
-//                             GCM_EDID_ERROR,
-//                             GCM_EDID_ERROR_FAILED_TO_PARSE,
-//                             "EDID length is too small");
         m_valid = false;
         return m_valid;
     }
     if (data[0] != 0x00 || data[1] != 0xff) {
         kWarning() << "Failed to parse EDID header";
-//        g_set_error_literal (error,
-//                             GCM_EDID_ERROR,
-//                             GCM_EDID_ERROR_FAILED_TO_PARSE,
-//                             "Failed to parse EDID header");
         m_valid = false;
         return m_valid;
     }
-
-    /* free old data */
-//    gcm_edid_reset (edid);
 
     /* decode the PNP ID from three 5 bit words packed into 2 bytes
              * /--08--\/--09--\
@@ -195,8 +192,9 @@ bool Edid::parse(const quint8 *data, size_t length)
     serial += static_cast<quint32>(data[GCM_EDID_OFFSET_SERIAL + 1] * 0x100);
     serial += static_cast<quint32>(data[GCM_EDID_OFFSET_SERIAL + 2] * 0x10000);
     serial += static_cast<quint32>(data[GCM_EDID_OFFSET_SERIAL + 3] * 0x1000000);
-//    if (serial > 0)
-//        priv->serial_number = g_strdup_printf ("%" G_GUINT32_FORMAT, serial);
+    if (serial > 0) {
+        m_serialNumber = QString::number(serial);
+    }
 
     /* get the size */
     m_width = data[GCM_EDID_OFFSET_SIZE + 0];
@@ -238,7 +236,7 @@ bool Edid::parse(const quint8 *data, size_t length)
     kDebug() << "m_white" << m_white;
 
     /* parse EDID data */
-    for (i = GCM_EDID_OFFSET_DATA_BLOCKS;
+    for (uint i = GCM_EDID_OFFSET_DATA_BLOCKS;
          i <= GCM_EDID_OFFSET_LAST_BLOCK;
          i += 18) {
         /* ignore pixel clock data */
@@ -286,9 +284,11 @@ bool Edid::parse(const quint8 *data, size_t length)
         }
     }
 
-    /* calculate checksum */
-//    m_checksum = g_compute_checksum_for_data (G_CHECKSUM_MD5, data, 0x6c);
-//out:
+    // calculate checksum
+    QCryptographicHash hash(QCryptographicHash::Md5);
+    hash.addData(reinterpret_cast<const char *>(data), 0x6c);
+    m_checksum = hash.result().toHex();
+
     m_valid = true;
     return m_valid;
 }
@@ -326,7 +326,6 @@ QString Edid::edidParseString(const quint8 *data) const
         /* this is always 12 bytes, but we can't guarantee it's null
          * terminated or not junk. */
         text = QString::fromLocal8Bit((const char*) data, 12);
-        kDebug() << "text" << text;
 //        text = g_strndup ((const gchar *) data, 12);
 
         /* remove insane newline chars */

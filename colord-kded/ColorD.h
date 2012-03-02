@@ -47,6 +47,7 @@ extern "C"
 typedef QList<int> ScreenList;
 typedef QMap<QString, QString>  StringStringMap;
 
+class Edid;
 class ColorD : public KDEDModule
 {
     Q_OBJECT
@@ -68,6 +69,7 @@ private:
     void removeOutput(RROutput output);
     void addProfile(const QFileInfo &fileInfo);
 
+    QHash<QString, Edid> m_edids;
     Display *m_dpy;
     XRRScreenResources *m_resources;
     Window m_root;
@@ -76,7 +78,7 @@ private:
     QString m_errorCode;
     QString m_version;
 
-    int     m_eventBase;
+    int m_eventBase;
     int m_errorBase;
 };
 

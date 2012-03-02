@@ -222,26 +222,31 @@ void ColorD::addOutput(RROutput output)
     }
 
     // Created the Edid class which parses our info
-    Edid *edid = new Edid(data, size);
-    if (edid->isValid()) {
-        kDebug() << "Edid Valid" << edid->deviceId(info->name);
-        kDebug() << "Edid vendor" << edid->vendor();
-        kDebug() << "Edid serial" << edid->serial();
-        kDebug() << "Edid name" << edid->name();
-        edidVendor = edid->vendor();
-        edidModel = edid->name();
-        edidSerial = edid->serial();
+    Edid edid(data, size);
+    if (edid.isValid()) {
+        kDebug() << "Edid Valid" << edid.deviceId(info->name);
+        kDebug() << "Edid vendor" << edid.vendor();
+        kDebug() << "Edid serial" << edid.serial();
+        kDebug() << "Edid name" << edid.name();
+        // TODO check if this is a laptop
+        edidVendor = edid.vendor();
+        edidModel = edid.name();
+    }
+
+    if (!edid.serial().isEmpty()) {
+        edidSerial = edid.serial();
     }
 
     // grabing the device even if edid is not valid
     // if handles the fallback name if it's not valid
-    deviceId = edid->deviceId(info->name);
+    deviceId = edid.deviceId(info->name);
 
     /* get the md5 of the EDID blob */
     //TODO
 
     /* parse the edid and save in a hash table [m_hash_edid_md5?]*/
     //TODO, and maybe c++ize http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/color/gcm-edid.c
+    m_edids[edid.hash()] = edid;
 
     //TODO: how to save these private to the class?
     StringStringMap properties;

@@ -37,6 +37,7 @@ public:
     QString vendor() const;
     QString serial() const;
     QString eisaId() const;
+    QString hash() const;
     uint width() const;
     uint height() const;
     float gamma() const;
@@ -57,7 +58,7 @@ private:
     QString                        m_vendorName;
     QString                        m_serialNumber;
     QString                        m_eisaId;
-    char                           *m_checksum;
+    QString                        m_checksum;
     char                           *m_pnp_id;
     uint                            m_width;
     uint                            m_height;
