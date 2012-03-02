@@ -410,40 +410,36 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     kDebug() << "Default Profile Filename" << filename;
     deviceInterface->deleteLater();
 
-    /* open the physical file */
-    //TODO
+    // read the VCGT data using lcms2
+    const cmsToneCurve **vcgt;
+    cmsFloat32Number in;
+    cmsHPROFILE lcms_profile = NULL;
 
-    /* read the VCGT data using lcms2 */
-    //TODO
-const cmsToneCurve **vcgt;
-cmsFloat32Number in;
-cmsHPROFILE lcms_profile = NULL;
+    // open file
+    lcms_profile = cmsOpenProfileFromFile(filename.toUtf8(), "r");
+    if (lcms_profile == NULL) {
+        //        Error();
+        kWarning() << "Could not open profile with lcms" << filename;
+        return;
+    }
 
-/* open file */
-lcms_profile = cmsOpenProfileFromFile(filename.toUtf8(), "r");
-if (lcms_profile == NULL) {
-//        Error();
-    kWarning() << "Could not open profile with lcms" << filename;
-    return;
-}
-
-/* get tone curves from profile */
-vcgt = cmsReadTag(lcms_profile, cmsSigVcgtType);
-if (vcgt == NULL || vcgt[0] == NULL) {
+    // get tone curves from profile
+    vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
+    if (vcgt == NULL || vcgt[0] == NULL) {
         kWarning() << "profile does not have any VCGT data";
         return;
-//        Abort();
-}
+        //        Abort();
+    }
 
-/* create array */
-for (int i = 0; i < vcgt_size; ++i) {
+    // create array
+    for (int i = 0; i < vcgt_size; ++i) {
         in = (double) i / (double) (size - 1);
-//        tmp = g_new0 (GnomeRROutputClutItem, 1);
+        //        tmp = g_new0 (GnomeRROutputClutItem, 1);
         tmp->red = cmsEvalToneCurveFloat(vcgt[0], in) * static_cast<double>(0xffff);
         tmp->green = cmsEvalToneCurveFloat(vcgt[1], in) * static_cast<double>(0xffff);
         tmp->blue = cmsEvalToneCurveFloat(vcgt[2], in) * static_cast<double>(0xffff);
-}
-cmsCloseProfile (lcms_profile);
+    }
+    cmsCloseProfile (lcms_profile);
 
     /* push the data to the Xrandr gamma ramps for the display */
     //TODO
