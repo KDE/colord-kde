@@ -1,3 +1,5 @@
+pkg_check_modules(LCMS2 lcms2)
+
 set(colord_kded_SRCS
     Edid.cpp
     ColorD.cpp
@@ -8,6 +10,7 @@ target_link_libraries(kded_colord
     ${KDE4_KDEUI_LIBS}
     ${X11_Xrandr_LIB}
     ${X11_X11_LIB}
+    ${LCMS2_LIBS}
 )
 
 install(TARGETS kded_colord DESTINATION ${PLUGIN_INSTALL_DIR})

@@ -22,6 +22,8 @@
 
 #include "Edid.h"
 
+#include <lcms2.h>
+
 #include <KLocale>
 #include <KGenericFactory>
 #include <KNotification>
@@ -375,58 +377,73 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 {
     kDebug() << "Device changed" << objectPath.path();
 
-    QDBusInterface *interface;
-    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   objectPath.path(),
-                                   QLatin1String("org.freedesktop.ColorManager.Device"),
-                                   QDBusConnection::systemBus(),
-                                   this);
+    QDBusInterface *deviceInterface;
+    deviceInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                         objectPath.path(),
+                                         QLatin1String("org.freedesktop.ColorManager.Device"),
+                                         QDBusConnection::systemBus(),
+                                         this);
     // check Device.Kind is "display"
-    if (interface->property("Kind").toString() != QLatin1String("display")) {
+    if (deviceInterface->property("Kind").toString() != QLatin1String("display")) {
         // not a display device, ignoring
+        deviceInterface->deleteLater();
         return;
     }
 
-    QList<QDBusObjectPath> profiles = interface->property("Profiles").value<QList<QDBusObjectPath> >();
+    QList<QDBusObjectPath> profiles = deviceInterface->property("Profiles").value<QList<QDBusObjectPath> >();
     if (profiles.isEmpty()) {
         // There are no profiles ignoring
+        deviceInterface->deleteLater();
         return;
     }
 
     // read the default profile (the first path in the Device.Profiles property)
     QDBusObjectPath profileDefault = profiles.first();
     kDebug() << "profileDefault" << profileDefault.path();
+    QDBusInterface *profileInterface;
+    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                          profileDefault.path(),
+                                          QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                          QDBusConnection::systemBus(),
+                                          this);
+    QString filename = deviceInterface->property("Filename").toString();
+    kDebug() << "Default Profile Filename" << filename;
+    deviceInterface->deleteLater();
 
     /* open the physical file */
     //TODO
 
     /* read the VCGT data using lcms2 */
     //TODO
-//const cmsToneCurve **vcgt;
-//cmsFloat32Number in;
-//cmsHPROFILE lcms_profile = NULL;
-//
+const cmsToneCurve **vcgt;
+cmsFloat32Number in;
+cmsHPROFILE lcms_profile = NULL;
+
 /* open file */
-//lcms_profile = cmsOpenProfileFromFile (filename, "r");
-//if (lcms_profile == NULL)
+lcms_profile = cmsOpenProfileFromFile(filename.toUtf8(), "r");
+if (lcms_profile == NULL) {
 //        Error();
-//
-///* get tone curves from profile */
-//vcgt = cmsReadTag (lcms_profile, cmsSigVcgtType);
-//if (vcgt == NULL || vcgt[0] == NULL) {
-//        g_debug ("profile does not have any VCGT data");
+    kWarning() << "Could not open profile with lcms" << filename;
+    return;
+}
+
+/* get tone curves from profile */
+vcgt = cmsReadTag(lcms_profile, cmsSigVcgtType);
+if (vcgt == NULL || vcgt[0] == NULL) {
+        kWarning() << "profile does not have any VCGT data";
+        return;
 //        Abort();
-//}
-//
-///* create array */
-//for (i = 0; i < vcgt_size; i++) {
-//        in = (gdouble) i / (gdouble) (size - 1);
+}
+
+/* create array */
+for (int i = 0; i < vcgt_size; ++i) {
+        in = (double) i / (double) (size - 1);
 //        tmp = g_new0 (GnomeRROutputClutItem, 1);
-//        tmp->red = cmsEvalToneCurveFloat(vcgt[0], in) * (gdouble) 0xffff;
-//        tmp->green = cmsEvalToneCurveFloat(vcgt[1], in) * (gdouble) 0xffff;
-//        tmp->blue = cmsEvalToneCurveFloat(vcgt[2], in) * (gdouble) 0xffff;
-//}
-//cmsCloseProfile (lcms_profile);
+        tmp->red = cmsEvalToneCurveFloat(vcgt[0], in) * static_cast<double>(0xffff);
+        tmp->green = cmsEvalToneCurveFloat(vcgt[1], in) * static_cast<double>(0xffff);
+        tmp->blue = cmsEvalToneCurveFloat(vcgt[2], in) * static_cast<double>(0xffff);
+}
+cmsCloseProfile (lcms_profile);
 
     /* push the data to the Xrandr gamma ramps for the display */
     //TODO
