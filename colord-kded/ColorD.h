@@ -60,6 +60,9 @@ private slots:
     void deviceAdded(const QDBusObjectPath &objectPath);
     void deviceChanged(const QDBusObjectPath &objectPath);
 
+    void addProfile(const QString &filename);
+    void removeProfile(const QString &filename);
+
 private:
     quint8* readEdidData(RROutput output, size_t &len);
     void scanHomeDirectory();

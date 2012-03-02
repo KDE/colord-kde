@@ -27,6 +27,7 @@
 #include <KNotification>
 #include <KIcon>
 #include <KUser>
+#include <KDirWatch>
 
 #include <QX11Info>
 
@@ -135,6 +136,8 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     // get the MD5 hash of the contents
     QByteArray hash;
     hash = QCryptographicHash::hash(profile.readAll(), QCryptographicHash::Md5);
+    // seek(0) so that if we pass the FD to colord it is not at end
+    profile.seek(0);
 
     // construct a profile-id from device-and-profile-naming-spec.txt
     //TODO
@@ -182,8 +185,6 @@ void ColorD::scanHomeDirectory()
         if (!profilesDir.mkpath(user.homeDir() + QLatin1String("/.local/share/icc"))) {
             kWarning() << "Failed to create icc path '~/.local/share/icc'";
         }
-
-        return; // There can't be any profiles if the path didn't exist
     }
 
     // Call AddProfile() for each file
@@ -196,6 +197,14 @@ void ColorD::scanHomeDirectory()
         kDebug() << fileInfo.absoluteFilePath();
         addProfile(fileInfo);
     }
+
+    //check if any changes to the file occour
+    //this also prevents from reading when a checkUpdate happens
+    KDirWatch *confWatch = new KDirWatch(this);
+    confWatch->addDir(profilesDir.path(), KDirWatch::WatchFiles);
+    connect(confWatch, SIGNAL(created(QString)), this, SLOT(addProfile(QString)));
+    connect(confWatch, SIGNAL(deleted(QString)), this, SLOT(removeProfile(QString)));
+    confWatch->startScan();
 }
 
 void ColorD::addOutput(RROutput output)
@@ -388,6 +397,37 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 
     /* export the file data as an x atom on the *screen* (not output) */
     //TODO: named _ICC_PROFILE
+}
+
+void ColorD::addProfile(const QString &filename)
+{
+    kDebug() << filename;
+    QFileInfo fileInfo(filename);
+    addProfile(fileInfo);
+}
+
+void ColorD::removeProfile(const QString &filename)
+{
+    kDebug() << filename;
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("/org/freedesktop/ColorManager"),
+                                             QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("FindProfileByFilename"));
+    message << qVariantFromValue(filename);
+    QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+
+    if (!reply.isValid()) {
+        kWarning() << "Could not find the DBus object path for the given file name" << filename;
+        return;
+    }
+
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("/org/freedesktop/ColorManager"),
+                                             QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("DeleteProfile"));
+    message << qVariantFromValue(reply.value());
+    QDBusConnection::systemBus().send(message);
 }
 
 void ColorD::connectToColorD()
