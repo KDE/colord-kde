@@ -88,9 +88,7 @@ static quint8* getProperty(Display *dpy,
     if (actual_type == XA_INTEGER && actual_format == 8) {
         result = new quint8[nitems];
         memcpy(result, prop, nitems);
-        if (len) {
-            len = nitems;
-        }
+        len = nitems;
     } else {
         result = NULL;
     }
@@ -379,12 +377,27 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 {
     kDebug() << "Device changed" << objectPath.path();
 
-    /* check Device.Kind is "display" */
-    //TODO
+    QDBusInterface *interface;
+    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   objectPath.path(),
+                                   QLatin1String("org.freedesktop.ColorManager.Device"),
+                                   QDBusConnection::systemBus(),
+                                   this);
+    // check Device.Kind is "display"
+    if (interface->property("Kind").toString() != QLatin1String("display")) {
+        // not a display device, ignoring
+        return;
+    }
 
-    /* read the default profile (the first path in the Device.Profiles
-     * property) */
-    //TODO
+    QList<QDBusObjectPath> profiles = interface->property("Profiles").value<QList<QDBusObjectPath> >();
+    if (profiles.isEmpty()) {
+        // There are no profiles ignoring
+        return;
+    }
+
+    // read the default profile (the first path in the Device.Profiles property)
+    QDBusObjectPath profileDefault = profiles.first();
+    kDebug() << "profileDefault" << profileDefault.path();
 
     /* open the physical file */
     //TODO
