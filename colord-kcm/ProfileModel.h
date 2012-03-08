@@ -18,30 +18,30 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef DEVICE_MODEL_H
-#define DEVICE_MODEL_H
+#ifndef PROFILE_MODEL_H
+#define PROFILE_MODEL_H
 
 #include <QStandardItemModel>
 #include <QDBusObjectPath>
 
-class DeviceModel : public QStandardItemModel
+class ProfileModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
     typedef enum {
         ObjectPathRole = Qt::UserRole + 1,
         ParentObjectPathRole
-    } DeviceRoles;
-    explicit DeviceModel(QObject *parent = 0);
+    } ProfileRoles;
+    explicit ProfileModel(QObject *parent = 0);
 
     Qt::ItemFlags flags(const QModelIndex &index) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
 private slots:
-    void deviceChanged(const QDBusObjectPath &objectPath);
-    void deviceAdded(const QDBusObjectPath &objectPath);
-    void deviceRemoved(const QDBusObjectPath &objectPath);
+    void profileChanged(const QDBusObjectPath &objectPath);
+    void profileAdded(const QDBusObjectPath &objectPath);
+    void profileRemoved(const QDBusObjectPath &objectPath);
 
 private:
     QStandardItem* createProfileItem(const QDBusObjectPath &objectPath,
@@ -50,4 +50,4 @@ private:
     int findItem(const QDBusObjectPath &objectPath);
 };
 
-#endif // DEVICE_MODEL_H
+#endif // PROFILE_MODEL_H

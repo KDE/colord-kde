@@ -1,5 +1,6 @@
 set(kcm_colord_SRCS
     DeviceModel.cpp
+    ProfileModel.cpp
     ProfileDescription.cpp
     ColordKCM.cpp
 )
