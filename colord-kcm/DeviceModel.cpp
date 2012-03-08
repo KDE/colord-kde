@@ -83,6 +83,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath)
         return;
     }
 
+    QString deviceId = deviceInterface->property("DeviceId").toString();
     QString kind = deviceInterface->property("Kind").toString();
     QString model = deviceInterface->property("Model").toString();
     QString vendor = deviceInterface->property("Vendor").toString();
@@ -105,7 +106,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath)
     }
 
     if (model.isEmpty() && vendor.isEmpty()) {
-        item->setText(objectPath.path());
+        item->setText(deviceId);
     } else if (model.isEmpty()) {
         item->setText(vendor);
     } else if (vendor.isEmpty()) {
