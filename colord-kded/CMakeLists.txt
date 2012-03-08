@@ -10,7 +10,7 @@ target_link_libraries(kded_colord
     ${KDE4_KDEUI_LIBS}
     ${X11_Xrandr_LIB}
     ${X11_X11_LIB}
-    ${LCMS2_LIBS}
+    ${LCMS2_LIBRARIES}
 )
 
 install(TARGETS kded_colord DESTINATION ${PLUGIN_INSTALL_DIR})

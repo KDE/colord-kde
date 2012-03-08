@@ -236,8 +236,12 @@ void ColorD::addOutput(RROutput output)
         kDebug() << "Edid serial" << edid.serial();
         kDebug() << "Edid name" << edid.name();
         // TODO check if this is a laptop
-        edidVendor = edid.vendor();
-        edidModel = edid.name();
+        if (!edid.vendor().isEmpty()) {
+            edidVendor = edid.vendor();
+        }
+        if (!edid.name().isEmpty()) {
+            edidModel = edid.name();
+        }
     }
 
     if (!edid.serial().isEmpty()) {
@@ -432,13 +436,13 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     }
 
     // create array
-    for (int i = 0; i < vcgt_size; ++i) {
-        in = (double) i / (double) (size - 1);
-        //        tmp = g_new0 (GnomeRROutputClutItem, 1);
-        tmp->red = cmsEvalToneCurveFloat(vcgt[0], in) * static_cast<double>(0xffff);
-        tmp->green = cmsEvalToneCurveFloat(vcgt[1], in) * static_cast<double>(0xffff);
-        tmp->blue = cmsEvalToneCurveFloat(vcgt[2], in) * static_cast<double>(0xffff);
-    }
+//    for (int i = 0; i < vcgt_size; ++i) {
+//        in = (double) i / (double) (size - 1);
+//        //        tmp = g_new0 (GnomeRROutputClutItem, 1);
+//        tmp->red = cmsEvalToneCurveFloat(vcgt[0], in) * static_cast<double>(0xffff);
+//        tmp->green = cmsEvalToneCurveFloat(vcgt[1], in) * static_cast<double>(0xffff);
+//        tmp->blue = cmsEvalToneCurveFloat(vcgt[2], in) * static_cast<double>(0xffff);
+//    }
     cmsCloseProfile (lcms_profile);
 
     /* push the data to the Xrandr gamma ramps for the display */

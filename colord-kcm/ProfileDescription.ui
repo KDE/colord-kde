@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ProfileDescription</class>
+ <widget class="QWidget" name="ProfileDescription">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>532</width>
+    <height>416</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout"/>
+  <action name="actionPrintTestPage">
+   <property name="text">
+    <string>Print Test Page</string>
+   </property>
+  </action>
+  <action name="actionCleanPrintHeads">
+   <property name="text">
+    <string>Clean Print Heads</string>
+   </property>
+  </action>
+  <action name="actionPrintSelfTestPage">
+   <property name="text">
+    <string>Print Self Test Page</string>
+   </property>
+   <property name="toolTip">
+    <string>Print Self-Test Page</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
