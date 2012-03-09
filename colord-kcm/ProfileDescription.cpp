@@ -23,8 +23,12 @@
 
 #include "Profile.h"
 
-#include <KDebug>
+#include <math.h>
 
+#include <QFileInfo>
+#include <QDBusInterface>
+
+#include <KDebug>
 
 ProfileDescription::ProfileDescription(QWidget *parent) :
     QWidget(parent),
@@ -38,13 +42,78 @@ ProfileDescription::~ProfileDescription()
     delete ui;
 }
 
-void ProfileDescription::setFilename(const QString &filename)
+void ProfileDescription::setProfile(const QDBusObjectPath &objectPath)
 {
+    QDBusInterface *profileInterface;
+    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                         objectPath.path(),
+                                         QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                         QDBusConnection::systemBus(),
+                                         this);
+    if (!profileInterface->isValid()) {
+        profileInterface->deleteLater();
+        return;
+    }
+
+    QString filename = profileInterface->property("Filename").toString();
+    bool hasVcgt = profileInterface->property("HasVcgt").toBool();
+    profileInterface->deleteLater();
+
     Profile profile(filename);
     if (profile.loaded()) {
+        // Set the profile type
+        ui->typeL->setText(profile.kindString());
+
+        // Set the colorspace
+        ui->colorspaceL->setText(profile.colorspace());
+
+        // Set the version
         ui->versionL->setText(profile.version());
+
+        // Set the created time
+        ui->createdL->setText(profile.datetime().toString());
+
+        // Set the license
+        ui->licenseL->setText(profile.copyright());
+        ui->licenseL->setVisible(!profile.copyright().isEmpty());
+        ui->licenseLabel->setVisible(!profile.copyright().isEmpty());
+
+        // Set the manufaturer
+        ui->deviceMakeL->setText(profile.manufacturer());
+        ui->deviceMakeL->setVisible(!profile.manufacturer().isEmpty());
+        ui->makeLabel->setVisible(!profile.manufacturer().isEmpty());
+
+        // Set the Model
+        ui->deviceModelL->setText(profile.model());
+        ui->deviceModelL->setVisible(!profile.model().isEmpty());
+        ui->modelLabel->setVisible(!profile.model().isEmpty());
+
+        // Set the Display Correction
+        ui->dpCorrectionL->setText(hasVcgt ? i18n("Yes") : i18n("None"));
+
+        // Set the file size
+        ui->filesizeL->setText(KGlobal::locale()->formatByteSize(profile.size()));
+
+        // Set the file name
+        QFileInfo fileinfo(profile.filename());
+        ui->filenameL->setText(fileinfo.fileName());
+
+        QString temp;
+        uint temperature = profile.temperature();
+        if (fabs(temperature - 5000) < 10) {
+            temp = QString::fromUtf8("%1ºK (D50)").arg(QString::number(temperature));
+        } else if (fabs(temperature - 6500) < 10) {
+            temp = QString::fromUtf8("%1ºK (D65)").arg(QString::number(temperature));
+        } else {
+            temp = QString::fromUtf8("%1ºK").arg(QString::number(temperature));
+        }
+        ui->whitepointL->setText(temp);
+
         kDebug() << profile.datetime();
         kDebug() << profile.description();
+        kDebug() << profile.model();
+        kDebug() << profile.manufacturer();
+        kDebug() << profile.copyright();
     }
     kDebug() << profile.filename();
 }

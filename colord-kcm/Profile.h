@@ -23,6 +23,7 @@
 
 #include <QString>
 #include <QDateTime>
+#include <QQuaternion>
 
 #include <lcms2.h>
 
@@ -45,6 +46,7 @@ public:
 
     bool loaded() const;
     ProfileKind kind() const;
+    QString kindString() const;
     QString colorspace() const;
     uint size() const;
     bool canDelete() const;
@@ -78,6 +80,7 @@ private:
     uint m_temperature;
 //    GHashTable		*dict;
 //    CdColorXYZ		*white;
+    QQuaternion m_white;
 //    CdColorXYZ		*red;
 //    CdColorXYZ		*green;
 //    CdColorXYZ		*blue;

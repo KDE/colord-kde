@@ -67,29 +67,41 @@ void Profile::parseProfile(const uint *data, size_t length)
 
     /* get white point */
     cmsCIEXYZ *cie_xyz;
+    bool ret;
     cie_xyz = static_cast<cmsCIEXYZ*>(cmsReadTag(m_lcmsProfile, cmsSigMediaWhitePointTag));
     if (cie_xyz != NULL) {
-//        cmsCIExyY xyY;
-//        double temp_float;
+        cmsCIExyY xyY;
+        double temp_float;
+        m_white.setX(cie_xyz->X);
+        m_white.setY(cie_xyz->Y);
+        m_white.setZ(cie_xyz->Z);
 //        cd_color_set_xyz (priv->white,
 //                          cie_xyz->X, cie_xyz->Y, cie_xyz->Z);
 
-//        /* convert to lcms xyY values */
-//        cmsXYZ2xyY (&xyY, cie_xyz);
+        /* convert to lcms xyY values */
+        cmsXYZ2xyY(&xyY, cie_xyz);
+        kDebug() << "whitepoint:" << xyY.x << xyY.y << xyY.Y;
 //        g_debug ("whitepoint = %f,%f [%f]", xyY.x, xyY.y, xyY.Y);
 
-//        /* get temperature */
-//        ret = cmsTempFromWhitePoint (&temp_float, &xyY);
-//        if (ret) {
-//            /* round to nearest 100K */
-//            priv->temperature = (((guint) temp_float) / 100) * 100;
+        /* get temperature */
+        ret = cmsTempFromWhitePoint(&temp_float, &xyY);
+        if (ret) {
+            /* round to nearest 100K */
+            m_temperature = (((uint) temp_float) / 100) * 100;
+            kDebug() << "color temperature:" << m_temperature;
 //            g_debug ("color temperature = %i", priv->temperature);
-//        } else {
+        } else {
+            m_temperature = 0;
+            kWarning() << "failed to get color temperature";
 //            priv->temperature = 0;
 //            g_warning ("failed to get color temperature");
-//        }
+        }
     } else {
         /* this is no big suprise, some profiles don't have these */
+        m_white.setX(0);
+        m_white.setY(0);
+        m_white.setZ(0);
+        kDebug() << "failed to get white point";
 //        cd_color_clear_xyz (priv->white);
 //        g_debug ("failed to get white point");
     }
@@ -124,42 +136,42 @@ void Profile::parseProfile(const uint *data, size_t length)
     }
 
     /* get colorspace */
-//    color_space = cmsGetColorSpace(m_lcmsProfile);
-//    switch (color_space) {
-//    case cmsSigXYZData:
-//        colorspace = CD_COLORSPACE_XYZ;
-//        break;
-//    case cmsSigLabData:
-//        colorspace = CD_COLORSPACE_LAB;
-//        break;
-//    case cmsSigLuvData:
-//        colorspace = CD_COLORSPACE_LUV;
-//        break;
-//    case cmsSigYCbCrData:
-//        colorspace = CD_COLORSPACE_YCBCR;
-//        break;
-//    case cmsSigYxyData:
-//        colorspace = CD_COLORSPACE_YXY;
-//        break;
-//    case cmsSigRgbData:
-//        colorspace = CD_COLORSPACE_RGB;
-//        break;
-//    case cmsSigGrayData:
-//        colorspace = CD_COLORSPACE_GRAY;
-//        break;
-//    case cmsSigHsvData:
-//        colorspace = CD_COLORSPACE_HSV;
-//        break;
-//    case cmsSigCmykData:
-//        colorspace = CD_COLORSPACE_CMYK;
-//        break;
-//    case cmsSigCmyData:
-//        colorspace = CD_COLORSPACE_CMY;
-//        break;
-//    default:
-//        colorspace = CD_COLORSPACE_UNKNOWN;
-//    }
-//    gcm_profile_set_colorspace (profile, colorspace);
+    cmsColorSpaceSignature color_space;
+    color_space = cmsGetColorSpace(m_lcmsProfile);
+    switch (color_space) {
+    case cmsSigXYZData:
+        m_colorspace = i18n("XYZ");
+        break;
+    case cmsSigLabData:
+        m_colorspace = i18n("LAB");
+        break;
+    case cmsSigLuvData:
+        m_colorspace = i18n("LUV");
+        break;
+    case cmsSigYCbCrData:
+        m_colorspace = i18n("YCbCr");
+        break;
+    case cmsSigYxyData:
+        m_colorspace = i18n("Yxy");
+        break;
+    case cmsSigRgbData:
+        m_colorspace = i18n("RGB");
+        break;
+    case cmsSigGrayData:
+        m_colorspace = i18n("Gray");
+        break;
+    case cmsSigHsvData:
+        m_colorspace = i18n("HSV");
+        break;
+    case cmsSigCmykData:
+        m_colorspace = i18n("CMYK");
+        break;
+    case cmsSigCmyData:
+        m_colorspace = i18n("CMY");
+        break;
+    default:
+        m_colorspace = i18n("Unknown");
+    }
 
     /* get the illuminants from the primaries */
 //    if (color_space == cmsSigRgbData) {
@@ -232,7 +244,6 @@ void Profile::parseProfile(const uint *data, size_t length)
 
     /* get the profile created time and date */
     struct tm created;
-    bool ret;
     ret = cmsGetHeaderCreationDateTime(m_lcmsProfile, &created);
     if (ret) {
         m_datetime = parseDateTime(created);
@@ -249,28 +260,32 @@ void Profile::parseProfile(const uint *data, size_t length)
     /* get description */
     ret = cmsGetProfileInfoASCII(m_lcmsProfile, cmsInfoDescription, "en", "US", text, 1024);
     if (ret) {
-        m_description = text;
+        m_description = QString::fromAscii(text).simplified();
         if (m_description.isEmpty()) {
             m_description = i18n("Missing description");
         }
     }
 
+    /* get copyright */
+    ret = cmsGetProfileInfoASCII(m_lcmsProfile, cmsInfoCopyright, "en", "US", text, 1024);
+    if (ret) {
+        m_copyright = QString::fromAscii(text).simplified();
+    }
+
+    /* get description */
+    ret = cmsGetProfileInfoASCII(m_lcmsProfile, cmsInfoManufacturer, "en", "US", text, 1024);
+    if (ret) {
+        m_manufacturer = QString::fromAscii(text).simplified();
+
+    }
+
+    /* get description */
+    ret = cmsGetProfileInfoASCII(m_lcmsProfile, cmsInfoModel, "en", "US", text, 1024);
+    if (ret) {
+        m_model = QString::fromAscii(text).simplified();
+    }
+
     delete [] text;
-
-//    /* get copyright */
-//    ret = cmsGetProfileInfoASCII (m_lcmsProfile, cmsInfoCopyright, "en", "US", text, 1024);
-//    if (ret)
-//        gcm_profile_set_copyright (profile, text);
-
-//    /* get description */
-//    ret = cmsGetProfileInfoASCII (m_lcmsProfile, cmsInfoManufacturer, "en", "US", text, 1024);
-//    if (ret)
-//        gcm_profile_set_manufacturer (profile, text);
-
-//    /* get description */
-//    ret = cmsGetProfileInfoASCII (m_lcmsProfile, cmsInfoModel, "en", "US", text, 1024);
-//    if (ret)
-//        gcm_profile_set_model (profile, text);
 
 //    /* success */
 //    ret = TRUE;
@@ -305,6 +320,28 @@ bool Profile::loaded() const
 Profile::ProfileKind Profile::kind() const
 {
     return m_kind;
+}
+
+QString Profile::kindString() const
+{
+    switch (kind()) {
+    case KindInputDevice:
+        return i18n("Input device");
+    case KindDisplayDevice:
+        return i18n("Display device");
+    case KindOutputDevice:
+        return i18n("Output device");
+    case KindDeviceLink:
+        return i18n("Devicelink");
+    case KindColorspaceConversion:
+        return i18n("Colorspace conversion");
+    case KindAbstract:
+        return i18n("Abstract");
+    case KindNamedColor:
+        return i18n("Named color");
+    default:
+        return i18n("Unknown");
+    }
 }
 
 QString Profile::colorspace() const

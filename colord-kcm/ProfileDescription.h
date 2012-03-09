@@ -22,6 +22,7 @@
 #define PROFILE_DESCRIPTION_H
 
 #include <QWidget>
+#include <QDBusObjectPath>
 
 namespace Ui {
     class ProfileDescription;
@@ -33,7 +34,7 @@ public:
     explicit ProfileDescription(QWidget *parent = 0);
     ~ProfileDescription();
 
-    void setFilename(const QString &filename);
+    void setProfile(const QDBusObjectPath &objectPath);
 
 private:
     Ui::ProfileDescription *ui;

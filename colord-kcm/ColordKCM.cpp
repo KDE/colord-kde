@@ -120,7 +120,7 @@ void ColordKCM::showProfile()
     }
 
     QModelIndex index = selection.indexes().first();
-    ui->profile->setFilename(index.data(ProfileModel::FilenameRole).toString());
+    ui->profile->setProfile(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
 }
 
 void ColordKCM::addProfile()
