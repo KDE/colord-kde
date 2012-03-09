@@ -30,7 +30,9 @@ class ProfileModel : public QStandardItemModel
 public:
     typedef enum {
         ObjectPathRole = Qt::UserRole + 1,
-        ParentObjectPathRole
+        ParentObjectPathRole,
+        SortRole,
+        FilenameRole
     } ProfileRoles;
     explicit ProfileModel(QObject *parent = 0);
 
@@ -48,6 +50,7 @@ private:
                                      const QDBusObjectPath &parentObjectPath,
                                      bool checked);
     int findItem(const QDBusObjectPath &objectPath);
+    QChar getSortChar(const QString &kind);
 };
 
 #endif // PROFILE_MODEL_H

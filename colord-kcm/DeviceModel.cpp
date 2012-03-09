@@ -62,7 +62,6 @@ DeviceModel::DeviceModel(QObject *parent) :
                                              QLatin1String("GetDevices"));
     QDBusReply<ObjectPathList> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
     foreach (const QDBusObjectPath &path, reply.value()) {
-        kDebug() << path.path();
         deviceAdded(path);
     }
 }
@@ -82,10 +81,12 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
                                          QDBusConnection::systemBus(),
                                          this);
     if (!deviceInterface->isValid()) {
+        deviceInterface->deleteLater();
         return;
     }
 
     ObjectPathList profiles = deviceInterface->property("Profiles").value<ObjectPathList>();
+    deviceInterface->deleteLater();
 
     // Normally just the profile list bound this device
     // is what changes including "Modified" property
@@ -129,6 +130,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath)
                                          QDBusConnection::systemBus(),
                                          this);
     if (!deviceInterface->isValid()) {
+        deviceInterface->deleteLater();
         return;
     }
 
@@ -138,9 +140,11 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath)
     QString vendor = deviceInterface->property("Vendor").toString();
     QString colorspace = deviceInterface->property("Colorspace").toString();
     ObjectPathList profiles = deviceInterface->property("Profiles").value<ObjectPathList>();
+    deviceInterface->deleteLater();
 
     QStandardItem *item = new QStandardItem;
     item->setData(qVariantFromValue(objectPath), ObjectPathRole);
+
     if (kind == QLatin1String("display")) {
         item->setIcon(KIcon(QLatin1String("video-display")));
     } else if (kind == QLatin1String("scanner")) {
@@ -164,6 +168,8 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath)
     } else {
         item->setText(vendor % QLatin1String(" - ") % model);
     }
+
+    item->setData(qVariantFromValue(kind + item->text()), SortRole);
 
     QList<QStandardItem*> profileItems;
     foreach (const QDBusObjectPath &profileObjectPath, profiles) {
@@ -190,7 +196,6 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
                                               const QDBusObjectPath &parentObjectPath,
                                               bool checked)
 {
-    kDebug() << objectPath.path() << checked;
     QDBusInterface *interface;
     interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
                                    objectPath.path(),
@@ -213,8 +218,11 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     stdItem->setText(title);
     stdItem->setData(qVariantFromValue(objectPath), ObjectPathRole);
     stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);
+    stdItem->setData(title, SortRole);
     stdItem->setCheckable(true);
     stdItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);
+
+    interface->deleteLater();
     return stdItem;
 }
 

@@ -26,6 +26,7 @@
 #include <QDBusConnection>
 #include <QDBusReply>
 #include <QStringBuilder>
+#include <QFileInfo>
 
 #include <KDebug>
 #include <KLocale>
@@ -82,10 +83,12 @@ void ProfileModel::profileChanged(const QDBusObjectPath &objectPath)
                                          QDBusConnection::systemBus(),
                                          this);
     if (!profileInterface->isValid()) {
+        profileInterface->deleteLater();
         return;
     }
 
     ObjectPathList profiles = profileInterface->property("Profiles").value<ObjectPathList>();
+    profileInterface->deleteLater();
 
     // Normally just the profile list bound this profile
     // is what changes including "Modified" property
@@ -129,16 +132,56 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath)
                                          QDBusConnection::systemBus(),
                                          this);
     if (!profileInterface->isValid()) {
+        profileInterface->deleteLater();
+        return;
+    }
+
+    // Verify if the profile has a filename
+    QString filename = profileInterface->property("Filename").toString();
+    if (filename.isEmpty()) {
+        profileInterface->deleteLater();
+        return;
+    }
+
+    // Check if we can read the profile
+    QFileInfo fileInfo(filename);
+    if (!fileInfo.isReadable()) {
+        profileInterface->deleteLater();
         return;
     }
 
     QString profileId = profileInterface->property("ProfileId").toString();
     QString title = profileInterface->property("Title").toString();
-//    QString colorspace = profileInterface->property("Colorspace").toString();
+    QString kind = profileInterface->property("Kind").toString();
+    profileInterface->deleteLater();
+
+    QString colorspace = profileInterface->property("Colorspace").toString();
 
     QStandardItem *item = new QStandardItem;
     item->setData(qVariantFromValue(objectPath), ObjectPathRole);
+    item->setData(qVariantFromValue(getSortChar(kind) + title), SortRole);
+    item->setData(filename, FilenameRole);
 
+    // Choose a nice icon
+    if (kind == QLatin1String("display-device")) {
+        item->setIcon(KIcon(QLatin1String("video-display")));
+    } else if (kind == QLatin1String("input-device")) {
+        item->setIcon(KIcon(QLatin1String("scanner")));
+    } else if (kind == QLatin1String("output-device")) {
+        if (colorspace == QLatin1String("gray")) {
+            item->setIcon(KIcon(QLatin1String("printer-laser")));
+        } else {
+            item->setIcon(KIcon(QLatin1String("printer")));
+        }
+    } else if (kind == QLatin1String("colorspace-conversion")) {
+        item->setIcon(KIcon(QLatin1String("view-refresh")));
+    } else if (kind == QLatin1String("abstract")) {
+        item->setIcon(KIcon(QLatin1String("insert-link")));
+    } else if (kind == QLatin1String("named-color")) {
+            item->setIcon(KIcon(QLatin1String("view-preview")));
+    } else {
+        item->setIcon(KIcon(QLatin1String("image-missing")));
+    }
 
     if (title.isEmpty()) {
         item->setText(profileId);
@@ -162,16 +205,16 @@ QStandardItem* ProfileModel::createProfileItem(const QDBusObjectPath &objectPath
                                               bool checked)
 {
     kDebug() << objectPath.path() << checked;
-    QDBusInterface *interface;
-    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   objectPath.path(),
-                                   QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                   QDBusConnection::systemBus(),
-                                   this);
+    QDBusInterface *profileInterface;
+    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                          objectPath.path(),
+                                          QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                          QDBusConnection::systemBus(),
+                                          this);
     QStandardItem *stdItem = new QStandardItem;
-    QString title = interface->property("Title").toString();
+    QString title = profileInterface->property("Title").toString();
     if (title.isEmpty()) {
-        QString colorspace = interface->property("Colorspace").toString();
+        QString colorspace = profileInterface->property("Colorspace").toString();
         if (colorspace == QLatin1String("rgb")) {
             title = i18n("Default RGB");
         } else if (colorspace == QLatin1String("cmyk")) {
@@ -186,6 +229,8 @@ QStandardItem* ProfileModel::createProfileItem(const QDBusObjectPath &objectPath
     stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);
     stdItem->setCheckable(true);
     stdItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);
+
+    profileInterface->deleteLater();
     return stdItem;
 }
 
@@ -197,6 +242,20 @@ int ProfileModel::findItem(const QDBusObjectPath &objectPath)
         }
     }
     return -1;
+}
+
+QChar ProfileModel::getSortChar(const QString &kind)
+{
+    if (kind == QLatin1String("display-device")) {
+        return QLatin1Char('1');
+    }
+    if (kind == QLatin1String("input-device")) {
+        return QLatin1Char('2');
+    }
+    if (kind == QLatin1String("output-device")) {
+        return QLatin1Char('3');
+    }
+    return QLatin1Char('4');
 }
 
 QVariant ProfileModel::headerData(int section, Qt::Orientation orientation, int role) const

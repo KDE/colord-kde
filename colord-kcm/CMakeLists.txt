@@ -1,6 +1,7 @@
 set(kcm_colord_SRCS
     DeviceModel.cpp
     ProfileModel.cpp
+    Profile.cpp
     ProfileDescription.cpp
     ColordKCM.cpp
 )
@@ -14,6 +15,7 @@ kde4_add_plugin(kcm_colord ${kcm_colord_SRCS})
 
 target_link_libraries(kcm_colord
     ${KDE4_KDEUI_LIBS}
+    ${LCMS2_LIBRARIES}
 )
 
 install(TARGETS kcm_colord DESTINATION ${PLUGIN_INSTALL_DIR})

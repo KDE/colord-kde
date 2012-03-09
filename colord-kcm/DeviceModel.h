@@ -30,7 +30,8 @@ class DeviceModel : public QStandardItemModel
 public:
     typedef enum {
         ObjectPathRole = Qt::UserRole + 1,
-        ParentObjectPathRole
+        ParentObjectPathRole,
+        SortRole
     } DeviceRoles;
     explicit DeviceModel(QObject *parent = 0);
 

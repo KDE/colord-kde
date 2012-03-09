@@ -18,25 +18,73 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILE_DESCRIPTION_H
-#define PROFILE_DESCRIPTION_H
+#ifndef PROFILE_H
+#define PROFILE_H
 
-#include <QWidget>
+#include <QString>
+#include <QDateTime>
 
-namespace Ui {
-    class ProfileDescription;
-}
-class ProfileDescription : public QWidget
+#include <lcms2.h>
+
+class Profile
 {
-    Q_OBJECT
 public:
-    explicit ProfileDescription(QWidget *parent = 0);
-    ~ProfileDescription();
+    typedef enum {
+        KindUnknown,
+        KindInputDevice,
+        KindDisplayDevice,
+        KindOutputDevice,
+        KindDeviceLink,
+        KindColorspaceConversion,
+        KindAbstract,
+        KindNamedColor
+    } ProfileKind;
+    Profile(const QString &filename = QString());
 
     void setFilename(const QString &filename);
 
+    bool loaded() const;
+    ProfileKind kind() const;
+    QString colorspace() const;
+    uint size() const;
+    bool canDelete() const;
+    QString description() const;
+    QString filename() const;
+    QString version() const;
+    QString copyright() const;
+    QString manufacturer() const;
+    QString model() const;
+    QDateTime datetime() const;
+    QString checksum() const;
+    uint temperature() const;
+
 private:
-    Ui::ProfileDescription *ui;
+    void parseProfile(const uint *data, size_t length);
+    QDateTime parseDateTime(const struct tm &created);
+
+    bool m_loaded;
+    ProfileKind m_kind;
+    QString m_colorspace;
+    uint m_size;
+    bool m_canDelete;
+    QString m_description;
+    QString m_filename;
+    QString m_version;
+    QString m_copyright;
+    QString m_manufacturer;
+    QString m_model;
+    QDateTime m_datetime;
+    QString m_checksum;
+    uint m_temperature;
+//    GHashTable		*dict;
+//    CdColorXYZ		*white;
+//    CdColorXYZ		*red;
+//    CdColorXYZ		*green;
+//    CdColorXYZ		*blue;
+//    GFile			*file;
+//    GFileMonitor		*monitor;
+//    gboolean		 has_mlut;
+    cmsHPROFILE m_lcmsProfile;
 };
 
-#endif // PROFILE_DESCRIPTION_H
+#endif // PROFILE_H

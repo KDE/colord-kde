@@ -40,6 +40,7 @@ public:
 
 private slots:
     void update();
+    void showProfile();
     void addProfile();
     void removeProfile();
 

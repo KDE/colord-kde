@@ -21,11 +21,10 @@
 #include "ProfileDescription.h"
 #include "ui_ProfileDescription.h"
 
+#include "Profile.h"
+
 #include <KDebug>
 
-#define PRINTER_ICON_SIZE 128
-
-Q_DECLARE_METATYPE(QList<int>)
 
 ProfileDescription::ProfileDescription(QWidget *parent) :
     QWidget(parent),
@@ -37,6 +36,17 @@ ProfileDescription::ProfileDescription(QWidget *parent) :
 ProfileDescription::~ProfileDescription()
 {
     delete ui;
+}
+
+void ProfileDescription::setFilename(const QString &filename)
+{
+    Profile profile(filename);
+    if (profile.loaded()) {
+        ui->versionL->setText(profile.version());
+        kDebug() << profile.datetime();
+        kDebug() << profile.description();
+    }
+    kDebug() << profile.filename();
 }
 
 #include "ProfileDescription.moc"

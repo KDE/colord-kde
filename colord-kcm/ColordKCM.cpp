@@ -67,6 +67,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     QSortFilterProxyModel *sortModel = new QSortFilterProxyModel(this);
     sortModel->setSourceModel(m_model);
     sortModel->setDynamicSortFilter(true);
+    sortModel->setSortRole(DeviceModel::SortRole);
     ui->devicesTV->setModel(sortModel);
     ui->devicesTV->sortByColumn(0, Qt::AscendingOrder);
     connect(ui->devicesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
@@ -79,12 +80,13 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     QSortFilterProxyModel *profileSortModel = new QSortFilterProxyModel(this);
     profileSortModel->setSourceModel(model);
     profileSortModel->setDynamicSortFilter(true);
+    profileSortModel->setSortRole(ProfileModel::SortRole);
     ui->profilesTV->setModel(profileSortModel);
     ui->profilesTV->sortByColumn(0, Qt::AscendingOrder);
     connect(ui->profilesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(update()));
+            this, SLOT(showProfile()));
     connect(profileSortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-            this, SLOT(update()));
+            this, SLOT(showProfile()));
 }
 
 ColordKCM::~ColordKCM()
@@ -95,6 +97,30 @@ ColordKCM::~ColordKCM()
 void ColordKCM::update()
 {
 
+}
+
+void ColordKCM::showProfile()
+{
+    if (m_model->rowCount() == 0) {
+        return;
+    }
+
+    if (ui->stackedWidget->currentWidget() != ui->profile) {
+        ui->stackedWidget->setCurrentWidget(ui->profile);
+    }
+
+    QItemSelection selection;
+    // we need to map the selection to source to get the real indexes
+    selection = ui->profilesTV->selectionModel()->selection();
+    // select the first printer if there are profiles
+    if (selection.indexes().isEmpty()) {
+        ui->profilesTV->selectionModel()->select(ui->profilesTV->model()->index(0, 0),
+                                               QItemSelectionModel::Select);
+        return;
+    }
+
+    QModelIndex index = selection.indexes().first();
+    ui->profile->setFilename(index.data(ProfileModel::FilenameRole).toString());
 }
 
 void ColordKCM::addProfile()
