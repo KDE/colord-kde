@@ -76,6 +76,7 @@ private:
     QString dmiGetVendor() const;
 
     QHash<QString, Edid> m_edids;
+    QHash<QString, QDBusObjectPath> m_devices;
     Display *m_dpy;
     XRRScreenResources *m_resources;
     Window m_root;

@@ -182,11 +182,11 @@ bool Edid::parse(const quint8 *data, size_t length)
         return m_valid;
     }
 
-    /* decode the PNP ID from three 5 bit words packed into 2 bytes
-             * /--08--\/--09--\
-             * 7654321076543210
-             * |\---/\---/\---/
-             * R  C1   C2   C3 */
+    // decode the PNP ID from three 5 bit words packed into 2 bytes
+    // /--08--\/--09--\
+    // 7654321076543210
+    // |\---/\---/\---/
+    // R  C1   C2   C3
     m_pnpId[0] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x7c) / 4) - 1;
     m_pnpId[1] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x3) * 8) + ((data[GCM_EDID_OFFSET_PNPID+1] & 0xe0) / 32) - 1;
     m_pnpId[2] = 'A' + (data[GCM_EDID_OFFSET_PNPID + 1] & 0x1f) - 1;

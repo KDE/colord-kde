@@ -196,7 +196,7 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
                                                       QLatin1String("CreateProfile"));
     StringStringMap properties;
     properties["Filename"] = fileInfo.absoluteFilePath();
-    properties["FILE_checksum"] = hash;
+    properties["FILE_checksum"] = hash.toHex();
 
     message << qVariantFromValue(profileId);
     message << qVariantFromValue(QString("temp"));
@@ -363,10 +363,6 @@ void ColorD::addOutput(RROutput output)
     /* get the md5 of the EDID blob */
     //TODO
 
-    /* parse the edid and save in a hash table [m_hash_edid_md5?]*/
-    //TODO, and maybe c++ize http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/color/gcm-edid.c
-    m_edids[edid.hash()] = edid;
-
     //TODO: how to save these private to the class?
     StringStringMap properties;
     properties["Kind"] = "display";
@@ -388,7 +384,12 @@ void ColorD::addOutput(RROutput output)
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
-
+    if (reply.isValid()) {
+        /* parse the edid and save in a hash table [m_hash_edid_md5?]*/
+        //TODO, and maybe c++ize http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/color/gcm-edid.c
+        m_edids[edid.hash()] = edid;
+        m_devices[edid.hash()] = reply.value();
+    }
     kDebug() << "created device" << reply.value().path();
 
     XRRFreeOutputInfo(info);
@@ -470,11 +471,33 @@ void ColorD::profileAdded(const QDBusObjectPath &objectPath)
 {
     /* check if the EDID_md5 Profile.Metadata matches any connected
      * XRandR devices (e.g. lvds1), otherwise ignore */
-    //TODO
+    QDBusInterface *profileInterface;
+    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                          objectPath.path(),
+                                          QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                          QDBusConnection::systemBus(),
+                                          this);
+    StringStringMap metadata = profileInterface->property("Metadata").value<StringStringMap>();
 
-    /* call Device.AddProfile() with the device and profile object paths */
-    //TODO
-    kDebug() << "Profile added" << objectPath.path();
+    StringStringMap::const_iterator i = metadata.constBegin();
+    while (i != metadata.constEnd()) {
+        kDebug() << i.key() << ": " << i.value() << endl;
+        if (i.key() == QLatin1String("EDID_md5") && m_devices.contains(i.value())) {
+            // Found an EDID that matches the md5
+            QDBusMessage message;
+            message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                                     m_devices[i.value()].path(),
+                                                     QLatin1String("org.freedesktop.ColorManager.Device"),
+                                                     QLatin1String("FindProfileByFilename"));
+            message << QString("soft"); // Relation
+            message << qVariantFromValue(objectPath); // Profile Path
+
+            /* call Device.AddProfile() with the device and profile object paths */
+            QDBusConnection::systemBus().send(message);
+            kDebug() << "Profile added" << m_devices[i.value()].path() << objectPath.path();
+        }
+        ++i;
+    }
 }
 
 void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
@@ -508,6 +531,7 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
         deviceInterface->deleteLater();
         return;
     }
+    deviceInterface->deleteLater();
 
     // read the default profile (the first path in the Device.Profiles property)
     QDBusObjectPath profileDefault = profiles.first();
@@ -518,13 +542,13 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
                                           QLatin1String("org.freedesktop.ColorManager.Profile"),
                                           QDBusConnection::systemBus(),
                                           this);
-    QString filename = deviceInterface->property("Filename").toString();
+    QString filename = profileInterface->property("Filename").toString();
     kDebug() << "Default Profile Filename" << filename;
-    deviceInterface->deleteLater();
+    profileInterface->deleteLater();
 
     // read the VCGT data using lcms2
     const cmsToneCurve **vcgt;
-    cmsFloat32Number in;
+//    cmsFloat32Number in;
     cmsHPROFILE lcms_profile = NULL;
 
     // open file
@@ -539,6 +563,7 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
     if (vcgt == NULL || vcgt[0] == NULL) {
         kWarning() << "profile does not have any VCGT data";
+        cmsCloseProfile(lcms_profile);
         return;
         //        Abort();
     }
@@ -551,7 +576,7 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 //        tmp->green = cmsEvalToneCurveFloat(vcgt[1], in) * static_cast<double>(0xffff);
 //        tmp->blue = cmsEvalToneCurveFloat(vcgt[2], in) * static_cast<double>(0xffff);
 //    }
-    cmsCloseProfile (lcms_profile);
+    cmsCloseProfile(lcms_profile);
 
     /* push the data to the Xrandr gamma ramps for the display */
     //TODO
