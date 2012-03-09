@@ -488,7 +488,7 @@ void ColorD::profileAdded(const QDBusObjectPath &objectPath)
             message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                                      m_devices[i.value()].path(),
                                                      QLatin1String("org.freedesktop.ColorManager.Device"),
-                                                     QLatin1String("FindProfileByFilename"));
+                                                     QLatin1String("AddProfile"));
             message << QString("soft"); // Relation
             message << qVariantFromValue(objectPath); // Profile Path
 
@@ -548,7 +548,6 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 
     // read the VCGT data using lcms2
     const cmsToneCurve **vcgt;
-//    cmsFloat32Number in;
     cmsHPROFILE lcms_profile = NULL;
 
     // open file
@@ -569,12 +568,15 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     }
 
     // create array
+//    QList<QColor> colos;
 //    for (int i = 0; i < vcgt_size; ++i) {
+//        cmsFloat32Number in;
 //        in = (double) i / (double) (size - 1);
-//        //        tmp = g_new0 (GnomeRROutputClutItem, 1);
-//        tmp->red = cmsEvalToneCurveFloat(vcgt[0], in) * static_cast<double>(0xffff);
-//        tmp->green = cmsEvalToneCurveFloat(vcgt[1], in) * static_cast<double>(0xffff);
-//        tmp->blue = cmsEvalToneCurveFloat(vcgt[2], in) * static_cast<double>(0xffff);
+//        QColor color;
+//        color.setRedF(cmsEvalToneCurveFloat(vcgt[0], in) * static_cast<double>(0xffff));
+//        color.setGreenF(cmsEvalToneCurveFloat(vcgt[1], in) * static_cast<double>(0xffff));
+//        color.setBlueF(cmsEvalToneCurveFloat(vcgt[2], in) * static_cast<double>(0xffff));
+//        colors << color;
 //    }
     cmsCloseProfile(lcms_profile);
 
