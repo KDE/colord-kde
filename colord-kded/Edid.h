@@ -46,7 +46,6 @@ public:
     QQuaternion blue() const;
     QQuaternion white() const;
 
-
 private:
     int edidGetBit(int in, int bit) const;
     int edidGetBits(int in, int begin, int end) const;
@@ -59,6 +58,7 @@ private:
     QString                        m_serialNumber;
     QString                        m_eisaId;
     QString                        m_checksum;
+    QString m_pnpId;
     char                           *m_pnp_id;
     uint                            m_width;
     uint                            m_height;

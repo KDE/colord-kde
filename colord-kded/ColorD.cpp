@@ -39,6 +39,8 @@
 #include <QDBusMetaType>
 #include <QDBusUnixFileDescriptor>
 
+#define RR_CONNECTOR_TYPE_PANEL "Panel"
+
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))
 
@@ -82,11 +84,11 @@ static quint8* getProperty(Display *dpy,
     Atom actual_type;
     quint8 *result;
 
-    XRRGetOutputProperty (dpy, output, atom,
-                          0, 100, False, False,
-                          AnyPropertyType,
-                          &actual_type, &actual_format,
-                          &nitems, &bytes_after, &prop);
+    XRRGetOutputProperty(dpy, output, atom,
+                         0, 100, False, False,
+                         AnyPropertyType,
+                         &actual_type, &actual_format,
+                         &nitems, &bytes_after, &prop);
     if (actual_type == XA_INTEGER && actual_format == 8) {
         result = new quint8[nitems];
         memcpy(result, prop, nitems);
@@ -96,6 +98,41 @@ static quint8* getProperty(Display *dpy,
     }
 
     XFree (prop);
+    return result;
+}
+
+/* This is what gnome-desktop does */
+static QString getConnectorTypeString(Display *dpy, RROutput output)
+{
+    unsigned char *prop;
+    int actual_format;
+    unsigned long nitems, bytes_after;
+    Atom actual_type;
+    Atom connector_type;
+    Atom connector_type_atom = XInternAtom(dpy, "ConnectorType", FALSE);
+    char *connector_type_str;
+    QString result;
+
+    XRRGetOutputProperty(dpy, output, connector_type_atom,
+                         0, 100, False, False,
+                         AnyPropertyType,
+                         &actual_type, &actual_format,
+                         &nitems, &bytes_after, &prop);
+    if (!(actual_type == XA_ATOM && actual_format == 32 && nitems == 1)) {
+        XFree(prop);
+        return result;
+    }
+
+    connector_type = *((Atom *) prop);
+
+    connector_type_str = XGetAtomName(dpy, connector_type);
+    if (connector_type_str) {
+        result = connector_type_str;
+        XFree(connector_type_str);
+    }
+
+    XFree (prop);
+
     return result;
 }
 
@@ -173,6 +210,71 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     kDebug() << "created profile" << reply.value().path();
 }
 
+bool ColorD::outputIsLaptop(RROutput output, const QString &outputName) const
+{
+    /* The ConnectorType property is present in RANDR 1.3 and greater */
+    QString connectorType = getConnectorTypeString(m_dpy, output);
+    kDebug() << connectorType;
+    if (connectorType == QLatin1String(RR_CONNECTOR_TYPE_PANEL)) {
+        return true;
+    }
+
+    // Older versions of RANDR - this is a best guess, as @#$% RANDR doesn't have standard output names,
+    // so drivers can use whatever they like.
+
+    // Most drivers use an "LVDS" prefix...
+    if (outputName.contains(QLatin1String("lvds"), Qt::CaseInsensitive) ||
+            // ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye.
+        outputName.contains(QLatin1String("LCD"), Qt::CaseInsensitive) ||
+            // eDP is for internal laptop panel connections
+        outputName.contains(QLatin1String("eDP"), Qt::CaseInsensitive)) {
+        return true;
+    }
+
+    return false;
+}
+
+QString ColorD::dmiGetName() const
+{
+    QString ret;
+    QStringList sysfsNames;
+    sysfsNames << "/sys/class/dmi/id/product_name";
+    sysfsNames << "/sys/class/dmi/id/board_name";
+    foreach (const QString &filename, sysfsNames) {
+        QFile file(filename);
+        if (file.open(QIODevice::ReadOnly)) {
+            QString tmp = file.readAll();
+            tmp = tmp.simplified();
+            if (!tmp.isEmpty()) {
+                ret = tmp;
+                break;
+            }
+        }
+    }
+    return ret;
+}
+
+QString ColorD::dmiGetVendor() const
+{
+    QString ret;
+    QStringList sysfsVendors;
+    sysfsVendors << "/sys/class/dmi/id/sys_vendor";
+    sysfsVendors << "/sys/class/dmi/id/chassis_vendor";
+    sysfsVendors << "/sys/class/dmi/id/board_vendor";
+    foreach (const QString &filename, sysfsVendors) {
+        QFile file(filename);
+        if (file.open(QIODevice::ReadOnly)) {
+            QString tmp = file.readAll();
+            tmp = tmp.simplified();
+            if (!tmp.isEmpty()) {
+                ret = tmp;
+                break;
+            }
+        }
+    }
+    return ret;
+}
+
 void ColorD::scanHomeDirectory()
 {
     KUser user;
@@ -242,6 +344,12 @@ void ColorD::addOutput(RROutput output)
         if (!edid.name().isEmpty()) {
             edidModel = edid.name();
         }
+    }
+
+    if (outputIsLaptop(output, info->name)) {
+        edidModel = dmiGetName();
+        edidVendor = dmiGetVendor();
+        kDebug() << "Output is laptop" << edidModel << edidVendor;
     }
 
     if (!edid.serial().isEmpty()) {

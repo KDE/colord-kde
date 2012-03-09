@@ -71,6 +71,9 @@ private:
     void addOutput(RROutput output);
     void removeOutput(RROutput output);
     void addProfile(const QFileInfo &fileInfo);
+    bool outputIsLaptop(RROutput output, const QString &outputName) const;
+    QString dmiGetName() const;
+    QString dmiGetVendor() const;
 
     QHash<QString, Edid> m_edids;
     Display *m_dpy;

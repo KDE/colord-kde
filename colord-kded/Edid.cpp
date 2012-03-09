@@ -23,6 +23,8 @@
 #include <math.h>
 
 #include <QCryptographicHash>
+#include <QFile>
+#include <QStringList>
 
 #include <KDebug>
 
@@ -39,6 +41,8 @@
 #define GCM_DESCRIPTOR_COLOR_MANAGEMENT_DATA            0xf9
 #define GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING         0xfe
 #define GCM_DESCRIPTOR_COLOR_POINT                      0xfb
+
+#define PNP_IDS "/usr/share/hwdata/pnp.ids"
 
 Edid::Edid() :
     m_valid(false)
@@ -183,9 +187,27 @@ bool Edid::parse(const quint8 *data, size_t length)
              * 7654321076543210
              * |\---/\---/\---/
              * R  C1   C2   C3 */
-//    priv->pnp_id[0] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x7c) / 4) - 1;
-//    priv->pnp_id[1] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x3) * 8) + ((data[GCM_EDID_OFFSET_PNPID+1] & 0xe0) / 32) - 1;
-//    priv->pnp_id[2] = 'A' + (data[GCM_EDID_OFFSET_PNPID + 1] & 0x1f) - 1;
+    m_pnpId[0] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x7c) / 4) - 1;
+    m_pnpId[1] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x3) * 8) + ((data[GCM_EDID_OFFSET_PNPID+1] & 0xe0) / 32) - 1;
+    m_pnpId[2] = 'A' + (data[GCM_EDID_OFFSET_PNPID + 1] & 0x1f) - 1;
+
+    // load the PNP_IDS file and load the vendor name
+    if (!m_pnpId.isEmpty()) {
+        QFile pnpIds(PNP_IDS);
+        if (pnpIds.open(QIODevice::ReadOnly)) {
+            while (!pnpIds.atEnd()) {
+                QString line = pnpIds.readLine();
+                if (line.startsWith(m_pnpId)) {
+                    QStringList parts = line.split(QLatin1Char('\t'));
+                    if (parts.size() == 2) {
+                        m_vendorName = line.split(QLatin1Char('\t')).at(1).simplified();
+                    }
+                    break;
+                }
+            }
+            kDebug() << "PNP ID" << m_pnpId << "Vendor Name" << m_vendorName;
+        }
+    }
 
     /* maybe there isn't a ASCII serial number descriptor, so use this instead */
     serial = static_cast<quint32>(data[GCM_EDID_OFFSET_SERIAL + 0]);
