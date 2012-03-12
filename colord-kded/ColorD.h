@@ -64,7 +64,7 @@ private slots:
     void removeProfile(const QString &filename);
 
 private:
-    void crtcSetGamma(RRCrtc crtc, int size, const QColor &rgb);
+    void crtcSetGamma(RRCrtc crtc, const QList<QColor> &colors);
     quint8* readEdidData(RROutput output, size_t &len);
     void scanHomeDirectory();
     void connectToDisplay();
@@ -76,8 +76,9 @@ private:
     QString dmiGetName() const;
     QString dmiGetVendor() const;
 
-    QHash<QString, RRCrtc> m_crts;
     QHash<QString, QDBusObjectPath> m_devices;
+    QHash<QDBusObjectPath, RRCrtc> m_crtcs;
+
     Display *m_dpy;
     XRRScreenResources *m_resources;
     Window m_root;

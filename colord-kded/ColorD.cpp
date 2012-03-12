@@ -387,8 +387,9 @@ void ColorD::addOutput(RROutput output)
     if (reply.isValid()) {
         /* parse the edid and save in a hash table [m_hash_edid_md5?]*/
         //TODO, and maybe c++ize http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/color/gcm-edid.c
-        m_crts[edid.hash()] = info->crtc;
         m_devices[edid.hash()] = reply.value();
+        m_crtcs[reply.value()] = info->crtc;
+        kDebug() << reply.value().path() << info->crtc;
     }
     kDebug() << "created device" << reply.value().path();
 
@@ -567,22 +568,39 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
         //        Abort();
     }
 
+    if (!m_crtcs.contains(objectPath)) {
+        kWarning() << "CRTC not found";
+        return;
+    }
+
+    RRCrtc crtc = m_crtcs[objectPath];
+    kDebug() << "Crtc" << crtc;
+    int gama_size = XRRGetCrtcGammaSize(m_dpy, crtc);
+
+    kDebug() << "Filling gamma CRTC" << gama_size;
     // create array
-    QList<QColor> colors;
-    for (int i = 0; i < vcgt_size; ++i) {
+    XRRCrtcGamma *gamma = XRRAllocGamma(gama_size);
+    for (int i = 0; i < gama_size; ++i) {
         cmsFloat32Number in;
-        in = (double) i / (double) (size - 1);
-        QColor color;
-        color.setRed(cmsEvalToneCurve16(vcgt[0], in));
-        color.setGreen(cmsEvalToneCurve16(vcgt[1], in));
-        color.setBlue(cmsEvalToneCurve16(vcgt[2], in));
-        colors << color;
+        in = (double) i / (double) (gama_size - 1);
+        gamma->red[i]   = cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
+        gamma->green[i] = cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
+        gamma->blue[i]  = cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
+        kDebug() << "red" << cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
+        kDebug() << "green" << cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
+        kDebug() << "blue" << cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
     }
     cmsCloseProfile(lcms_profile);
 
+    kDebug() << "Set gamma CRTC" << gama_size;
     /* push the data to the Xrandr gamma ramps for the display */
+    XRRSetCrtcGamma(m_dpy, crtc, gamma);
+    XRRFreeGamma(gamma);
+
     // should this get colors or color?
-    crtcSetGamma(m_crts["foo"], colors);
+//    crtcSetGamma(m_crtcs["foo"], colors);
+
+
     //TODO
 //XRRCrtcGamma *gamma;
 //gamma = XRRAllocGamma (crtc->gamma_size);
@@ -598,24 +616,25 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 
 }
 
-void ColorD::crtcSetGamma(RRCrtc crtc, int size, const QColor &rgb)
+void ColorD::crtcSetGamma(RRCrtc crtc, const QList<QColor> &colors)
 {
-    int copy_size;
+//    int copy_size;
     XRRCrtcGamma *gamma;
-    int gama_size = XRRGetCrtcGammaSize(m_dpy, crtc);
-
-    if (size != gama_size) {
-        return;
-    }
-
-    gamma = XRRAllocGamma(gama_size);
+    gamma = XRRAllocGamma(colors.size());
 
     // Should I copy a list of colors? or just this rgb?
-    copy_size = gama_size * sizeof(unsigned short);
-    memcpy(gamma->red, rgb.redF(), copy_size);
-    memcpy(gamma->green, rgb.greenF(), copy_size);
-    memcpy(gamma->blue, rgb.blueF(), copy_size);
+    for (int i = 0; i < colors.size(); ++i) {
+        QColor rgb = colors.at(i);
+        gamma->red[i]   = rgb.red();
+        gamma->green[i] = rgb.green();
+        gamma->blue[i]  = rgb.blue();
+    }
+//    copy_size = colors.size() * sizeof(unsigned short);
+//    memcpy(gamma->red, rgb.red(), copy_size);
+//    memcpy(gamma->green, rgb.green(), copy_size);
+//    memcpy(gamma->blue, rgb.blue(), copy_size);
 
+    /* push the data to the Xrandr gamma ramps for the display */
     XRRSetCrtcGamma(m_dpy, crtc, gamma);
     XRRFreeGamma(gamma);
 }
