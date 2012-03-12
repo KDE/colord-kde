@@ -387,7 +387,7 @@ void ColorD::addOutput(RROutput output)
     if (reply.isValid()) {
         /* parse the edid and save in a hash table [m_hash_edid_md5?]*/
         //TODO, and maybe c++ize http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/color/gcm-edid.c
-        m_edids[edid.hash()] = edid;
+        m_crts[edid.hash()] = info->crtc;
         m_devices[edid.hash()] = reply.value();
     }
     kDebug() << "created device" << reply.value().path();
@@ -481,7 +481,7 @@ void ColorD::profileAdded(const QDBusObjectPath &objectPath)
 
     StringStringMap::const_iterator i = metadata.constBegin();
     while (i != metadata.constEnd()) {
-        kDebug() << i.key() << ": " << i.value() << endl;
+        kDebug() << i.key() << ": " << i.value();
         if (i.key() == QLatin1String("EDID_md5") && m_devices.contains(i.value())) {
             // Found an EDID that matches the md5
             QDBusMessage message;
@@ -568,19 +568,21 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     }
 
     // create array
-//    QList<QColor> colos;
-//    for (int i = 0; i < vcgt_size; ++i) {
-//        cmsFloat32Number in;
-//        in = (double) i / (double) (size - 1);
-//        QColor color;
-//        color.setRedF(cmsEvalToneCurveFloat(vcgt[0], in) * static_cast<double>(0xffff));
-//        color.setGreenF(cmsEvalToneCurveFloat(vcgt[1], in) * static_cast<double>(0xffff));
-//        color.setBlueF(cmsEvalToneCurveFloat(vcgt[2], in) * static_cast<double>(0xffff));
-//        colors << color;
-//    }
+    QList<QColor> colors;
+    for (int i = 0; i < vcgt_size; ++i) {
+        cmsFloat32Number in;
+        in = (double) i / (double) (size - 1);
+        QColor color;
+        color.setRed(cmsEvalToneCurve16(vcgt[0], in));
+        color.setGreen(cmsEvalToneCurve16(vcgt[1], in));
+        color.setBlue(cmsEvalToneCurve16(vcgt[2], in));
+        colors << color;
+    }
     cmsCloseProfile(lcms_profile);
 
     /* push the data to the Xrandr gamma ramps for the display */
+    // should this get colors or color?
+    crtcSetGamma(m_crts["foo"], colors);
     //TODO
 //XRRCrtcGamma *gamma;
 //gamma = XRRAllocGamma (crtc->gamma_size);
@@ -594,6 +596,28 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 //int rc = XChangeProperty(m_dpy, m_root, prop, type, 8, PropModeReplace, (unsigned char *) data, dataSize);
 //if (rc != Success) Error
 
+}
+
+void ColorD::crtcSetGamma(RRCrtc crtc, int size, const QColor &rgb)
+{
+    int copy_size;
+    XRRCrtcGamma *gamma;
+    int gama_size = XRRGetCrtcGammaSize(m_dpy, crtc);
+
+    if (size != gama_size) {
+        return;
+    }
+
+    gamma = XRRAllocGamma(gama_size);
+
+    // Should I copy a list of colors? or just this rgb?
+    copy_size = gama_size * sizeof(unsigned short);
+    memcpy(gamma->red, rgb.redF(), copy_size);
+    memcpy(gamma->green, rgb.greenF(), copy_size);
+    memcpy(gamma->blue, rgb.blueF(), copy_size);
+
+    XRRSetCrtcGamma(m_dpy, crtc, gamma);
+    XRRFreeGamma(gamma);
 }
 
 void ColorD::addProfile(const QString &filename)
