@@ -54,7 +54,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     setButtons(NoAdditionalButton);
 
     ui->setupUi(this);
-
+    ui->infoWidget->setPixmap(KTitleWidget::InfoMessage);
     m_addAction = ui->toolBar->addAction(KIcon("list-add"),
                                          i18nc("@action:intoolbar", "Add Profile"),
                                          this, SLOT(addProfile()));
@@ -71,9 +71,9 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     ui->devicesTV->setModel(sortModel);
     ui->devicesTV->sortByColumn(0, Qt::AscendingOrder);
     connect(ui->devicesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(update()));
+            this, SLOT(showProfile()));
     connect(sortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-            this, SLOT(update()));
+            this, SLOT(showProfile()));
 
     // Profiles view setup
     ProfileModel *model = new ProfileModel(this);
@@ -101,26 +101,32 @@ void ColordKCM::update()
 
 void ColordKCM::showProfile()
 {
-    if (m_model->rowCount() == 0) {
-        return;
+    QTreeView *view;
+    if (ui->tabWidget->currentIndex() == 0) {
+        view = ui->devicesTV;
+    } else {
+        view = ui->profilesTV;
     }
 
-    if (ui->stackedWidget->currentWidget() != ui->profile) {
-        ui->stackedWidget->setCurrentWidget(ui->profile);
+    if (view->model()->rowCount() == 0) {
+        return;
     }
 
     QItemSelection selection;
     // we need to map the selection to source to get the real indexes
-    selection = ui->profilesTV->selectionModel()->selection();
+    selection = view->selectionModel()->selection();
     // select the first printer if there are profiles
     if (selection.indexes().isEmpty()) {
-        ui->profilesTV->selectionModel()->select(ui->profilesTV->model()->index(0, 0),
+        view->selectionModel()->select(view->model()->index(0, 0),
                                                QItemSelectionModel::Select);
         return;
     }
 
     QModelIndex index = selection.indexes().first();
     ui->profile->setProfile(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
+    if (ui->stackedWidget->currentWidget() != ui->profile) {
+        ui->stackedWidget->setCurrentWidget(ui->profile);
+    }
 }
 
 void ColordKCM::addProfile()

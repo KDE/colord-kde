@@ -586,9 +586,9 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
         gamma->red[i]   = cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
         gamma->green[i] = cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
         gamma->blue[i]  = cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
-        kDebug() << "red" << cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
-        kDebug() << "green" << cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
-        kDebug() << "blue" << cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
+//        kDebug() << "red" << cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
+//        kDebug() << "green" << cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
+//        kDebug() << "blue" << cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
     }
     cmsCloseProfile(lcms_profile);
 
