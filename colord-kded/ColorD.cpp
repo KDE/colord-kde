@@ -559,41 +559,46 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
         return;
     }
 
-    // get tone curves from profile
-    vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
-    if (vcgt == NULL || vcgt[0] == NULL) {
-        kWarning() << "profile does not have any VCGT data";
-        cmsCloseProfile(lcms_profile);
-        return;
-        //        Abort();
-    }
-
     if (!m_crtcs.contains(objectPath)) {
         kWarning() << "CRTC not found";
         return;
     }
 
+    // Get the Crtc of this output
     RRCrtc crtc = m_crtcs[objectPath];
-    kDebug() << "Crtc" << crtc;
-    int gama_size = XRRGetCrtcGammaSize(m_dpy, crtc);
+    int gamaSize = XRRGetCrtcGammaSize(m_dpy, crtc);
+    if (gamaSize == 0) {
+        kWarning() << "Gamma size is zero";
+        return;
+    }
 
-    kDebug() << "Filling gamma CRTC" << gama_size;
-    // create array
-    XRRCrtcGamma *gamma = XRRAllocGamma(gama_size);
-    for (int i = 0; i < gama_size; ++i) {
-        cmsFloat32Number in;
-        in = (double) i / (double) (gama_size - 1);
-        gamma->red[i]   = cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
-        gamma->green[i] = cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
-        gamma->blue[i]  = cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
-//        kDebug() << "red" << cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
-//        kDebug() << "green" << cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
-//        kDebug() << "blue" << cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
+    // Allocate the gamma
+    XRRCrtcGamma *gamma = XRRAllocGamma(gamaSize);
+
+    // get tone curves from profile
+    vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
+    if (vcgt == NULL || vcgt[0] == NULL) {
+        kDebug() << "Profile does not have any VCGT data, reseting";
+        // Reset the gamma table
+        for (int i = 0; i < gamaSize; ++i) {
+            uint value = (i * 0xffff) / (gamaSize - 1);
+            gamma->red[i]   = value;
+            gamma->green[i] = value;
+            gamma->blue[i]  = value;
+        }
+    } else {
+        // Fill the gamma table with the VCGT data
+        for (int i = 0; i < gamaSize; ++i) {
+            cmsFloat32Number in;
+            in = (double) i / (double) (gamaSize - 1);
+            gamma->red[i]   = cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
+            gamma->green[i] = cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
+            gamma->blue[i]  = cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
+        }
     }
     cmsCloseProfile(lcms_profile);
 
-    kDebug() << "Set gamma CRTC" << gama_size;
-    /* push the data to the Xrandr gamma ramps for the display */
+    // push the data to the Xrandr gamma ramps for the display
     XRRSetCrtcGamma(m_dpy, crtc, gamma);
     XRRFreeGamma(gamma);
 
