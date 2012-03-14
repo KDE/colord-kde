@@ -17,55 +17,29 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef EDID_H
-#define EDID_H
+#ifndef PROFILEUTILS_H
+#define PROFILEUTILS_H
 
-#include <QtGlobal>
-#include <QQuaternion>
+#include <lcms2.h>
 
-class Edid
+#include <QString>
+#include <QFile>
+
+class Edid;
+class ProfileUtils
 {
 public:
-    Edid();
-    Edid(const quint8 *data, size_t length);
-    bool parse(const quint8 *data, size_t length);
-    bool isValid() const;
-
-    QString deviceId(const QString &fallbackName = QString()) const;
-    QString name() const;
-    QString vendor() const;
-    QString serial() const;
-    QString eisaId() const;
-    QString hash() const;
-    QString pnpId() const;
-    uint width() const;
-    uint height() const;
-    qreal gamma() const;
-    QQuaternion red() const;
-    QQuaternion green() const;
-    QQuaternion blue() const;
-    QQuaternion white() const;
+    static QString profileHash(QFile &profile);
+    static bool createIccProfile(bool isLaptop, const Edid &edid, const QString &filename);
 
 private:
-    int edidGetBit(int in, int bit) const;
-    int edidGetBits(int in, int begin, int end) const;
-    double edidDecodeFraction(int high, int low) const;
-    QString edidParseString(const quint8 *data) const;
-
-    bool m_valid;
-    QString                        m_monitorName;
-    QString                        m_vendorName;
-    QString                        m_serialNumber;
-    QString                        m_eisaId;
-    QString                        m_checksum;
-    QString m_pnpId;
-    uint                            m_width;
-    uint                            m_height;
-    qreal                           m_gamma;
-    QQuaternion m_red;
-    QQuaternion m_green;
-    QQuaternion m_blue;
-    QQuaternion m_white;
+    static QString getPrecookedMd5(cmsHPROFILE lcms_profile);
+    static cmsBool cmsWriteTagTextAscii(cmsHPROFILE lcms_profile,
+                                 cmsTagSignature sig,
+                                 const QString &text);
+    static cmsBool cmsDictAddEntryAscii(cmsHANDLE dict,
+                                 const QString &tkey,
+                                 const QString &tvalue);
 };
 
-#endif // EDID_H
+#endif // PROFILEUTILS_H

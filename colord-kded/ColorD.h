@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti                                *
- *   dantti12@gmail.com                                                    *
+ *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -32,8 +31,6 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <fixx11h.h>
-
-#include <lcms2.h>
 
 extern "C"
 {
@@ -73,16 +70,7 @@ private:
     void removeOutput(RROutput output);
     void addProfile(const QFileInfo &fileInfo);
     bool outputIsLaptop(RROutput output, const QString &outputName) const;
-    QString dmiGetName() const;
-    QString dmiGetVendor() const;
     QString profilesPath() const;
-    bool createIccProfile(bool isLaptop, const Edid &edid, const QString &filename);
-    cmsBool cmsWriteTagTextAscii(cmsHPROFILE lcms_profile,
-                                 cmsTagSignature sig,
-                                 const QString &text);
-    cmsBool cmsDictAddEntryAscii(cmsHANDLE dict,
-                                 const QString &tkey,
-                                 const QString &tvalue);
 
     QHash<QString, QDBusObjectPath> m_devices;
     QHash<QDBusObjectPath, RRCrtc> m_crtcs;

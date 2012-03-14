@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti                                *
- *   dantti12@gmail.com                                                    *
+ *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -175,7 +174,6 @@ QQuaternion Edid::white() const
 
 bool Edid::parse(const quint8 *data, size_t length)
 {
-//    GcmEdidPrivate *priv = edid->priv;
     quint32 serial;
 
     /* check header */
