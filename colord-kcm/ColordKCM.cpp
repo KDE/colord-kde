@@ -31,6 +31,8 @@
 #include <KTitleWidget>
 #include <KIcon>
 
+#include <QDBusConnection>
+#include <QDBusMessage>
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QSortFilterProxyModel>
@@ -118,7 +120,7 @@ void ColordKCM::showProfile()
     // select the first printer if there are profiles
     if (selection.indexes().isEmpty()) {
         view->selectionModel()->select(view->model()->index(0, 0),
-                                               QItemSelectionModel::Select);
+                                       QItemSelectionModel::Select);
         return;
     }
 
@@ -131,9 +133,62 @@ void ColordKCM::showProfile()
 
 void ColordKCM::addProfile()
 {
+    KDialog *dialog = new KDialog(this);
+
+//    QDBusObjectPath parentObjPath = stdItem->data(ParentObjectPathRole).value<QDBusObjectPath>();
+//    QDBusObjectPath parentObjPath = stdItem->data(ParentObjectPathRole).value<QDBusObjectPath>();
+//    QDBusMessage message;
+//    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+//                                             deviceObject.path(),
+//                                             QLatin1String("org.freedesktop.ColorManager.Device"),
+//                                             QLatin1String("AddProfile"));
+//    message << QString("hard"); // Relation
+//    message << qVariantFromValue(profileObject); // Profile Path
+
+//    /* call Device.AddProfile() with the device and profile object paths */
+//    QDBusConnection::systemBus().send(message);
 }
 
 void ColordKCM::removeProfile()
 {
+    if (ui->tabWidget->currentIndex() == 0) {
+        QTreeView *view = ui->devicesTV;
+        if (view->model()->rowCount() == 0) {
+            return;
+        }
 
+        QItemSelection selection;
+        // we need to map the selection to source to get the real indexes
+        selection = view->selectionModel()->selection();
+        // select the first printer if there are profiles
+        if (selection.indexes().isEmpty()) {
+            view->selectionModel()->select(view->model()->index(0, 0),
+                                           QItemSelectionModel::Select);
+            return;
+        }
+
+        int ret = KMessageBox::questionYesNo(this,
+                                             i18n("Are you sure you want to remove this profile?"),
+                                             i18n("Remove Profile"));
+        if (ret == KMessageBox::No) {
+            return;
+        }
+
+        QModelIndex index = selection.indexes().first();
+        QDBusObjectPath deviceObject;
+        QDBusObjectPath profileObject;
+        deviceObject  = index.data(ProfileModel::ParentObjectPathRole).value<QDBusObjectPath>();
+        profileObject = index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>();
+        QDBusMessage message;
+        message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                                 deviceObject.path(),
+                                                 QLatin1String("org.freedesktop.ColorManager.Device"),
+                                                 QLatin1String("RemoveProfile"));
+        message << qVariantFromValue(profileObject); // Profile Path
+
+        /* call Device.RemoveProfile() with the device and profile object paths */
+        QDBusConnection::systemBus().send(message);
+    } else {
+        // We need to rm the file
+    }
 }

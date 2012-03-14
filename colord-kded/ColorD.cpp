@@ -464,7 +464,7 @@ void ColorD::profileAdded(const QDBusObjectPath &objectPath)
 
     StringStringMap::const_iterator i = metadata.constBegin();
     while (i != metadata.constEnd()) {
-        // kDebug() << i.key() << ": " << i.value();
+        kDebug() << i.key() << ": " << i.value();
         if (i.key() == QLatin1String("EDID_md5") && m_devices.contains(i.value())) {
             // Found an EDID that matches the md5
             QDBusMessage message;
@@ -477,6 +477,7 @@ void ColorD::profileAdded(const QDBusObjectPath &objectPath)
 
             /* call Device.AddProfile() with the device and profile object paths */
             QDBusConnection::systemBus().send(message);
+            kDebug() << "Profile added" << m_devices[i.value()].path() << objectPath.path();
         }
         ++i;
     }

@@ -121,7 +121,7 @@ void ProfileModel::profileChanged(const QDBusObjectPath &objectPath)
 void ProfileModel::profileAdded(const QDBusObjectPath &objectPath)
 {
     if (findItem(objectPath) != -1) {
-        kWarning() << "Device is already on the list" << objectPath.path();
+        kWarning() << "Profile is already on the list" << objectPath.path();
         return;
     }
 
