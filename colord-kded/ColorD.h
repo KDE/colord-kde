@@ -33,6 +33,7 @@
 #include <X11/Xatom.h>
 #include <fixx11h.h>
 
+#include <lcms2.h>
 
 extern "C"
 {
@@ -64,7 +65,6 @@ private slots:
     void removeProfile(const QString &filename);
 
 private:
-    void crtcSetGamma(RRCrtc crtc, const QList<QColor> &colors);
     quint8* readEdidData(RROutput output, size_t &len);
     void scanHomeDirectory();
     void connectToDisplay();
@@ -75,6 +75,14 @@ private:
     bool outputIsLaptop(RROutput output, const QString &outputName) const;
     QString dmiGetName() const;
     QString dmiGetVendor() const;
+    QString profilesPath() const;
+    bool createIccProfile(bool isLaptop, const Edid &edid, const QString &filename);
+    cmsBool cmsWriteTagTextAscii(cmsHPROFILE lcms_profile,
+                                 cmsTagSignature sig,
+                                 const QString &text);
+    cmsBool cmsDictAddEntryAscii(cmsHANDLE dict,
+                                 const QString &tkey,
+                                 const QString &tvalue);
 
     QHash<QString, QDBusObjectPath> m_devices;
     QHash<QDBusObjectPath, RRCrtc> m_crtcs;

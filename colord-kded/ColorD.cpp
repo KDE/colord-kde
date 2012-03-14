@@ -22,8 +22,6 @@
 
 #include "Edid.h"
 
-#include <lcms2.h>
-
 #include <KLocale>
 #include <KGenericFactory>
 #include <KNotification>
@@ -36,10 +34,31 @@
 #include <QFile>
 #include <QDir>
 #include <QCryptographicHash>
+#include <QStringBuilder>
 #include <QDBusMetaType>
 #include <QDBusUnixFileDescriptor>
 
 #define RR_CONNECTOR_TYPE_PANEL "Panel"
+
+#define PACKAGE_NAME "colord-kde"
+#define PACKAGE_VERSION "0.1.0"
+
+/* defined in metadata-spec.txt */
+#define CD_PROFILE_METADATA_STANDARD_SPACE	"STANDARD_space"
+#define CD_PROFILE_METADATA_EDID_MD5		"EDID_md5"
+#define CD_PROFILE_METADATA_EDID_MODEL		"EDID_model"
+#define CD_PROFILE_METADATA_EDID_SERIAL		"EDID_serial"
+#define CD_PROFILE_METADATA_EDID_MNFT		"EDID_mnft"
+#define CD_PROFILE_METADATA_EDID_VENDOR		"EDID_manufacturer"
+#define CD_PROFILE_METADATA_FILE_CHECKSUM	"FILE_checksum"
+#define CD_PROFILE_METADATA_CMF_PRODUCT		"CMF_product"
+#define CD_PROFILE_METADATA_CMF_BINARY		"CMF_binary"
+#define CD_PROFILE_METADATA_CMF_VERSION		"CMF_version"
+#define CD_PROFILE_METADATA_DATA_SOURCE		"DATA_source"
+#define CD_PROFILE_METADATA_DATA_SOURCE_EDID	"edid"
+#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB	"calib"
+#define CD_PROFILE_METADATA_MAPPING_FORMAT	"MAPPING_format"
+#define CD_PROFILE_METADATA_MAPPING_QUALIFIER	"MAPPING_qualifier"
 
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))
@@ -54,7 +73,6 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     Q_UNUSED(args)
 
     // Register this first or the first time will fail
-    qRegisterMetaType<StringStringMap>();
     qDBusRegisterMetaType<StringStringMap>();
     qDBusRegisterMetaType<QDBusUnixFileDescriptor>();
 
@@ -275,14 +293,248 @@ QString ColorD::dmiGetVendor() const
     return ret;
 }
 
-void ColorD::scanHomeDirectory()
+QString ColorD::profilesPath() const
 {
     KUser user;
+    // ~/.local/share/icc/
+    return user.homeDir() % QLatin1String("/.local/share/icc/");
+}
+
+bool ColorD::createIccProfile(bool isLaptop, const Edid &edid, const QString &filename)
+{
+    cmsCIExyYTRIPLE chroma;
+    cmsCIExyY white_point;
+    cmsHPROFILE lcms_profile = NULL;
+    cmsToneCurve *transfer_curve[3] = { NULL, NULL, NULL };
+    bool ret = false;
+    cmsHANDLE dict = NULL;
+
+    /* ensure the per-user directory exists */
+    // Create dir path if not available
+    // check if the file doesn't already exist
+    QFileInfo fileInfo(filename);
+    if (fileInfo.exists()) {
+        kWarning() << "File exists" << filename;
+        if (*transfer_curve != NULL)
+            cmsFreeToneCurve(*transfer_curve);
+        return false;
+    }
+
+    // copy color data from our structures
+    // Red
+    chroma.Red.x = edid.red().x();
+    chroma.Red.y = edid.red().y();
+    // Green
+    chroma.Green.x = edid.green().x();
+    chroma.Green.y = edid.green().y();
+    // Blue
+    chroma.Blue.x = edid.blue().x();
+    chroma.Blue.y = edid.blue().y();
+    // White
+    white_point.x = edid.white().x();
+    white_point.y = edid.white().y();
+    white_point.Y = 1.0;
+
+    // estimate the transfer function for the gamma
+    transfer_curve[0] = transfer_curve[1] = transfer_curve[2] = cmsBuildGamma(NULL, edid.gamma());
+
+    // create our generated profile
+    lcms_profile = cmsCreateRGBProfile(&white_point, &chroma, transfer_curve);
+    if (lcms_profile == NULL) {
+        kWarning() << "failed to create profile";
+        if (*transfer_curve != NULL)
+            cmsFreeToneCurve(*transfer_curve);
+        return false;
+    }
+
+    cmsSetColorSpace(lcms_profile, cmsSigRgbData);
+    cmsSetPCS(lcms_profile, cmsSigXYZData);
+    cmsSetHeaderRenderingIntent(lcms_profile, INTENT_RELATIVE_COLORIMETRIC);
+    cmsSetDeviceClass(lcms_profile, cmsSigDisplayClass);
+
+    // copyright
+    ret = cmsWriteTagTextAscii(lcms_profile,
+                               cmsSigCopyrightTag,
+                               "No copyright");
+    if (!ret) {
+        kWarning() << "failed to write copyright";
+        if (*transfer_curve != NULL)
+            cmsFreeToneCurve(*transfer_curve);
+        return false;
+    }
+
+    // set model
+    QString model;
+    if (isLaptop) {
+        model = dmiGetName();
+    } else {
+        model = edid.name();
+    }
+
+    if (model.isEmpty()) {
+        model = "Unknown monitor";
+    }
+    ret = cmsWriteTagTextAscii(lcms_profile,
+                               cmsSigDeviceModelDescTag,
+                               model);
+    if (!ret) {
+        kWarning() << "failed to write model";
+        if (*transfer_curve != NULL) {
+            cmsFreeToneCurve(*transfer_curve);
+        }
+        return false;
+    }
+
+    // write title
+    ret = cmsWriteTagTextAscii(lcms_profile,
+                               cmsSigProfileDescriptionTag,
+                               model);
+    if (!ret) {
+        kWarning() << "failed to write description";
+        if (*transfer_curve != NULL)
+            cmsFreeToneCurve(*transfer_curve);
+        return false;
+    }
+
+    // get manufacturer
+    QString vendor;
+    if (isLaptop) {
+        vendor = dmiGetVendor();
+    } else {
+        vendor = edid.vendor();
+    }
+
+    if (vendor.isEmpty()) {
+        vendor = "Unknown vendor";
+    }
+    ret = cmsWriteTagTextAscii(lcms_profile,
+                               cmsSigDeviceMfgDescTag,
+                               vendor);
+    if (!ret) {
+        kWarning() << "failed to write manufacturer";
+        if (*transfer_curve != NULL)
+            cmsFreeToneCurve(*transfer_curve);
+        return false;
+    }
+
+    // just create a new dict
+    dict = cmsDictAlloc(NULL);
+
+    // set the framework creator metadata
+    cmsDictAddEntryAscii(dict,
+                         CD_PROFILE_METADATA_CMF_PRODUCT,
+                         PACKAGE_NAME);
+    cmsDictAddEntryAscii(dict,
+                         CD_PROFILE_METADATA_CMF_BINARY,
+                         PACKAGE_NAME);
+    cmsDictAddEntryAscii(dict,
+                         CD_PROFILE_METADATA_CMF_VERSION,
+                         PACKAGE_VERSION);
+
+    /* set the data source so we don't ever prompt the user to
+         * recalibrate (as the EDID data won't have changed) */
+    cmsDictAddEntryAscii(dict,
+                         CD_PROFILE_METADATA_DATA_SOURCE,
+                         CD_PROFILE_METADATA_DATA_SOURCE_EDID);
+
+    // set 'ICC meta Tag for Monitor Profiles' data
+    cmsDictAddEntryAscii(dict, "EDID_md5", edid.hash());
+
+    if (!model.isEmpty())
+        cmsDictAddEntryAscii(dict, "EDID_model", model);
+
+    if (!edid.serial().isEmpty()) {
+        cmsDictAddEntryAscii(dict, "EDID_serial", edid.serial());
+    }
+
+    if (!edid.pnpId().isEmpty()) {
+        cmsDictAddEntryAscii(dict, "EDID_mnft", edid.pnpId());
+    }
+
+    if (!vendor.isEmpty()) {
+        cmsDictAddEntryAscii(dict, "EDID_manufacturer", vendor);
+    }
+
+    /* write new tag */
+    ret = cmsWriteTag(lcms_profile, cmsSigMetaTag, dict);
+    if (!ret) {
+        kWarning() << "failed to write profile metadata";
+        if (*transfer_curve != NULL)
+            cmsFreeToneCurve(*transfer_curve);
+        return false;
+    }
+
+    /* write profile id */
+    ret = cmsMD5computeID(lcms_profile);
+    if (!ret) {
+        kWarning() << "failed to write profile id";
+        if (dict != NULL)
+            cmsDictFree (dict);
+        if (*transfer_curve != NULL)
+            cmsFreeToneCurve(*transfer_curve);
+        return false;
+    }
+
+    /* save, TODO: get error */
+    ret = cmsSaveProfileToFile(lcms_profile, filename.toUtf8());
+
+    if (dict != NULL) {
+        cmsDictFree (dict);
+    }
+    if (*transfer_curve != NULL) {
+        cmsFreeToneCurve (*transfer_curve);
+    }
+
+    return ret;
+}
+
+cmsBool ColorD::cmsWriteTagTextAscii(cmsHPROFILE lcms_profile,
+                                   cmsTagSignature sig,
+                                   const QString &text)
+{
+    cmsBool ret;
+    cmsMLU *mlu = cmsMLUalloc(0, 1);
+    cmsMLUsetASCII(mlu, "EN", "us", text.toAscii());
+    ret = cmsWriteTag(lcms_profile, sig, mlu);
+    cmsMLUfree(mlu);
+    return ret;
+}
+
+cmsBool ColorD::cmsDictAddEntryAscii(cmsHANDLE dict,
+                                   const QString &key,
+                                   const QString &value)
+{
+    kDebug() << key << value;
+    cmsBool ret;
+
+    wchar_t *mb_key = new wchar_t[key.length() + 1];
+    if (key.toWCharArray(mb_key) != key.length()) {
+        delete [] mb_key;
+        return false;
+    }
+    mb_key[key.length()] = 0;
+
+    wchar_t *mb_value = new wchar_t[value.length() + 1];
+    if (value.toWCharArray(mb_value) != value.length()) {
+        delete [] mb_key;
+        delete [] mb_value;
+        return false;
+    }
+    mb_value[value.length()] = 0;
+
+    ret = cmsDictAddEntry(dict, mb_key, mb_value, NULL, NULL);
+    delete [] mb_key;
+    delete [] mb_value;
+    return ret;
+}
+
+void ColorD::scanHomeDirectory()
+{
     // Get a list of files in ~/.local/share/icc/
-    QDir profilesDir(user.homeDir() + QLatin1String("/.local/share/icc"));
+    QDir profilesDir(profilesPath());
     if (!profilesDir.exists()) {
         kWarning() << "Icc path" << profilesDir.path() << "does not exist";
-        if (!profilesDir.mkpath(user.homeDir() + QLatin1String("/.local/share/icc"))) {
+        if (!profilesDir.mkpath(profilesPath())) {
             kWarning() << "Failed to create icc path '~/.local/share/icc'";
         }
     }
@@ -346,7 +598,8 @@ void ColorD::addOutput(RROutput output)
         }
     }
 
-    if (outputIsLaptop(output, info->name)) {
+    bool isLaptop = outputIsLaptop(output, info->name);
+    if (isLaptop) {
         edidModel = dmiGetName();
         edidVendor = dmiGetVendor();
         kDebug() << "Output is laptop" << edidModel << edidVendor;
@@ -389,7 +642,22 @@ void ColorD::addOutput(RROutput output)
         //TODO, and maybe c++ize http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/color/gcm-edid.c
         m_devices[edid.hash()] = reply.value();
         m_crtcs[reply.value()] = info->crtc;
-        kDebug() << reply.value().path() << info->crtc;
+
+        QString autogenPath = profilesPath();
+        QDir profilesDir(autogenPath);
+        if (!profilesDir.exists()) {
+            kWarning() << "Icc path" << profilesDir.path() << "does not exist";
+            if (!profilesDir.mkpath(autogenPath)) {
+                kWarning() << "Failed to create icc path '~/.local/share/icc'";
+            }
+        }
+
+        autogenPath.append(QLatin1String("edid-") % edid.hash() % QLatin1String(".icc"));
+        bool ret;
+        ret = createIccProfile(isLaptop, edid, autogenPath);
+        if (ret == false) {
+            kWarning() << "Failed to create auto profile";
+        }
     }
     kDebug() << "created device" << reply.value().path();
 
@@ -472,13 +740,22 @@ void ColorD::profileAdded(const QDBusObjectPath &objectPath)
 {
     /* check if the EDID_md5 Profile.Metadata matches any connected
      * XRandR devices (e.g. lvds1), otherwise ignore */
-    QDBusInterface *profileInterface;
-    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                          objectPath.path(),
-                                          QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                          QDBusConnection::systemBus(),
-                                          this);
-    StringStringMap metadata = profileInterface->property("Metadata").value<StringStringMap>();
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             objectPath.path(),
+                                             QLatin1String("org.freedesktop.DBus.Properties"),
+                                             QLatin1String("Get"));
+    message << QString("org.freedesktop.ColorManager.Profile"); // Interface
+    message << QString("Metadata"); // Propertie Name
+    QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+    if (!reply.isValid()) {
+        kWarning() << "Failed to get Metadata from profile" << objectPath.path() << reply.error().message();
+        return;
+    }
+    QDBusArgument argument = reply.value().value<QDBusArgument>();
+    StringStringMap metadata = qdbus_cast<StringStringMap>(argument);
+    kDebug() << reply.value() << metadata;
+    kDebug() << metadata.size();
 
     StringStringMap::const_iterator i = metadata.constBegin();
     while (i != metadata.constEnd()) {
@@ -547,12 +824,21 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     kDebug() << "Default Profile Filename" << filename;
     profileInterface->deleteLater();
 
+    QFile file(filename);
+    QByteArray data;
+    if (file.open(QIODevice::ReadOnly)) {
+        data = file.readAll();
+    } else {
+        kWarning() << "Failed to open profile" << filename;
+        return;
+    }
+
     // read the VCGT data using lcms2
     const cmsToneCurve **vcgt;
     cmsHPROFILE lcms_profile = NULL;
 
     // open file
-    lcms_profile = cmsOpenProfileFromFile(filename.toUtf8(), "r");
+    lcms_profile = cmsOpenProfileFromMem((const uint*) data.data(), data.size());
     if (lcms_profile == NULL) {
         //        Error();
         kWarning() << "Could not open profile with lcms" << filename;
@@ -602,46 +888,13 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     XRRSetCrtcGamma(m_dpy, crtc, gamma);
     XRRFreeGamma(gamma);
 
-    // should this get colors or color?
-//    crtcSetGamma(m_crtcs["foo"], colors);
-
-
-    //TODO
-//XRRCrtcGamma *gamma;
-//gamma = XRRAllocGamma (crtc->gamma_size);
-//XRRSetCrtcGamma (DISPLAY (crtc), crtc->id, gamma);
-//XRRFreeGamma (gamma);
-
-    /* export the file data as an x atom on the *screen* (not output) */
-    //TODO: named _ICC_PROFILE
-//Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", True);
-//Atom type = XInternAtom(m_dpy, "CARDINAL", True);
-//int rc = XChangeProperty(m_dpy, m_root, prop, type, 8, PropModeReplace, (unsigned char *) data, dataSize);
-//if (rc != Success) Error
-
-}
-
-void ColorD::crtcSetGamma(RRCrtc crtc, const QList<QColor> &colors)
-{
-//    int copy_size;
-    XRRCrtcGamma *gamma;
-    gamma = XRRAllocGamma(colors.size());
-
-    // Should I copy a list of colors? or just this rgb?
-    for (int i = 0; i < colors.size(); ++i) {
-        QColor rgb = colors.at(i);
-        gamma->red[i]   = rgb.red();
-        gamma->green[i] = rgb.green();
-        gamma->blue[i]  = rgb.blue();
+    // export the file data as an x atom on the *screen* (not output)
+    Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", true);
+    Atom type = XInternAtom(m_dpy, "CARDINAL", true);
+    int rc = XChangeProperty(m_dpy, m_root, prop, type, 8, PropModeReplace, (unsigned char *) data.data(), data.size());
+    if (rc != Success) {
+        kWarning() << "Failed to set XProperty";
     }
-//    copy_size = colors.size() * sizeof(unsigned short);
-//    memcpy(gamma->red, rgb.red(), copy_size);
-//    memcpy(gamma->green, rgb.green(), copy_size);
-//    memcpy(gamma->blue, rgb.blue(), copy_size);
-
-    /* push the data to the Xrandr gamma ramps for the display */
-    XRRSetCrtcGamma(m_dpy, crtc, gamma);
-    XRRFreeGamma(gamma);
 }
 
 void ColorD::addProfile(const QString &filename)

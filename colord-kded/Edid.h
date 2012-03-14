@@ -38,9 +38,10 @@ public:
     QString serial() const;
     QString eisaId() const;
     QString hash() const;
+    QString pnpId() const;
     uint width() const;
     uint height() const;
-    float gamma() const;
+    qreal gamma() const;
     QQuaternion red() const;
     QQuaternion green() const;
     QQuaternion blue() const;
@@ -59,15 +60,13 @@ private:
     QString                        m_eisaId;
     QString                        m_checksum;
     QString m_pnpId;
-    char                           *m_pnp_id;
     uint                            m_width;
     uint                            m_height;
-    float                           m_gamma;
+    qreal                           m_gamma;
     QQuaternion m_red;
     QQuaternion m_green;
     QQuaternion m_blue;
     QQuaternion m_white;
-//    GnomePnpIds                     *pnp_ids;
 };
 
 #endif // EDID_H
