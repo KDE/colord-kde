@@ -1,6 +1,5 @@
 We miss some stuff
 
-* Filtering by KMimeType ColorD and ColordKCM
 * Detecting new displays, and remove them when removed
 * Fix the X atom
 * Graphs

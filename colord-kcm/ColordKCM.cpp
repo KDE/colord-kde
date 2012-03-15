@@ -30,6 +30,7 @@
 #include <KAboutData>
 #include <KTitleWidget>
 #include <KFileDialog>
+#include <KMimeType>
 #include <KIcon>
 #include <KUser>
 
@@ -180,8 +181,10 @@ void ColordKCM::addProfileFile()
     }
 
     QString fileName;
-    // TODO use mimetypes here and in ColorD
-    fileName = KFileDialog::getOpenFileName(KUrl(), "*.icc *.icm", this, i18n("Importing Color Profile"));
+    fileName = KFileDialog::getOpenFileName(KUrl(),
+                                            QLatin1String("application/vnd.iccprofile"),
+                                            this,
+                                            i18n("Importing Color Profile"));
     if (fileName.isEmpty()) {
         return;
     }

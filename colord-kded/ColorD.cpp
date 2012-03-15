@@ -29,6 +29,7 @@
 #include <KIcon>
 #include <KUser>
 #include <KDirWatch>
+#include <KMimeType>
 
 #include <QX11Info>
 
@@ -245,14 +246,12 @@ void ColorD::scanHomeDirectory()
     }
 
     // Call AddProfile() for each file
-    QStringList filters;
-    filters << "*.icc";
-    filters << "*.icm";
-    // TODO filter by MimeType
-    profilesDir.setNameFilters(filters);
     foreach (const QFileInfo &fileInfo, profilesDir.entryInfoList(QDir::Files)) {
-        kDebug() << fileInfo.absoluteFilePath();
-        addProfile(fileInfo);
+        KMimeType::Ptr mimeType;
+        mimeType = KMimeType::findByFileContent(fileInfo.absoluteFilePath());
+        if (mimeType->is(QLatin1String("application/vnd.iccprofile"))) {
+            addProfile(fileInfo);
+        }
     }
 
     //check if any changes to the file occour
