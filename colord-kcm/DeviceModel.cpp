@@ -170,7 +170,19 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath)
     }
 
     item->setData(qVariantFromValue(kind + item->text()), SortRole);
-    item->setData(kind, KindRole);
+
+    // Convert our Device Kind to Profile Kind
+    if (kind == QLatin1String("display")) {
+        kind = QLatin1String("display-device");
+    } else if (kind == QLatin1String("camera") ||
+               kind == QLatin1String("scanner")) {
+        kind = "input-device";
+    } else if (kind == QLatin1String("printer")) {
+        kind = "output-device";
+    } else {
+        kind = "unknown";
+    }
+    item->setData(kind, ProfileKindRole);
 
     QList<QStandardItem*> profileItems;
     foreach (const QDBusObjectPath &profileObjectPath, profiles) {
@@ -223,7 +235,7 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     stdItem->setData(qVariantFromValue(objectPath), ObjectPathRole);
     stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);
     stdItem->setData(filename, FilenameRole);
-    stdItem->setData(kind, KindRole);
+    stdItem->setData(kind, ProfileKindRole);
     stdItem->setData(title, SortRole);
     stdItem->setCheckable(true);
     stdItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);

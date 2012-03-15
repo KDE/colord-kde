@@ -19,12 +19,14 @@
  ***************************************************************************/
 
 #include "ProfileModel.h"
+#include "Profile.h"
 
 #include <QDBusInterface>
 #include <QDBusMetaType>
 #include <QDBusMessage>
 #include <QDBusConnection>
 #include <QDBusReply>
+#include <QDBusArgument>
 #include <QStringBuilder>
 #include <QFileInfo>
 
@@ -111,6 +113,29 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath)
         return;
     }
 
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             objectPath.path(),
+                                             QLatin1String("org.freedesktop.DBus.Properties"),
+                                             QLatin1String("Get"));
+    message << QString("org.freedesktop.ColorManager.Profile"); // Interface
+    message << QString("Metadata"); // Propertie Name
+    QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+    QString dataSource;
+    if (reply.isValid()) {
+        QDBusArgument argument = reply.value().value<QDBusArgument>();
+        StringStringMap metadata = qdbus_cast<StringStringMap>(argument);
+        StringStringMap::const_iterator i = metadata.constBegin();
+        while (i != metadata.constEnd()) {
+            if (i.key() == QLatin1String("DATA_source")) {
+                // Found DATA_source
+                dataSource = i.value();
+                break;
+            }
+            ++i;
+        }
+    }
+
     QString profileId = profileInterface->property("ProfileId").toString();
     QString title = profileInterface->property("Title").toString();
     QString kind = profileInterface->property("Kind").toString();
@@ -119,10 +144,6 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath)
     QString colorspace = profileInterface->property("Colorspace").toString();
 
     QStandardItem *item = new QStandardItem;
-    item->setData(qVariantFromValue(objectPath), ObjectPathRole);
-    item->setData(qVariantFromValue(getSortChar(kind) + title), SortRole);
-    item->setData(filename, FilenameRole);
-    item->setData(kind, KindRole);
 
     // Choose a nice icon
     if (kind == QLatin1String("display-device")) {
@@ -146,10 +167,15 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath)
     }
 
     if (title.isEmpty()) {
-        item->setText(profileId);
-    } else {
-        item->setText(title);
+        title = profileId;
     }
+    item->setText(title);
+
+    item->setData(qVariantFromValue(objectPath), ObjectPathRole);
+    item->setData(qVariantFromValue(getSortChar(kind) + title), SortRole);
+    item->setData(filename, FilenameRole);
+    item->setData(kind, ProfileKindRole);
+    item->setData(Profile::profileWithSource(dataSource, title), ProfileDisplayNameSourceRole);
 
     appendRow(item);
 }

@@ -106,7 +106,10 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     // Filter Proxy for the menu
     m_profilesFilter = new QSortFilterProxyModel(this);
     m_profilesFilter->setSourceModel(model);
-    m_profilesFilter->setFilterRole(ProfileModel::KindRole);
+    m_profilesFilter->setFilterRole(ProfileModel::ColorspaceRole);
+    m_profilesFilter->setSortRole(ProfileModel::ProfileDisplayNameSourceRole);
+    m_profilesFilter->setDynamicSortFilter(true);
+    m_profilesFilter->sort(0);
 
     // Sort Proxy for the View
     QSortFilterProxyModel *profileSortModel = new QSortFilterProxyModel(this);
@@ -191,7 +194,7 @@ void ColordKCM::addProfileFile()
     } else {
         QString kind;
         QDBusObjectPath devicePath;
-        kind = index.data(DeviceModel::KindRole).toString();
+        kind = index.data(DeviceModel::ProfileKindRole).toString();
         devicePath = index.data(DeviceModel::ObjectPathRole).value<QDBusObjectPath>();
         m_profileFiles[newFilename] = KindAndPath(kind, devicePath);
     }
@@ -256,16 +259,40 @@ void ColordKCM::fillMenu()
     if (index.parent().isValid()) {
         index = index.parent();
     }
-    // TODO what about unknown profiles should this be a RegExp?
-    QString kind = index.data(DeviceModel::KindRole).toString();
+
+    // Create a list of assigned profiles
+    QList<QDBusObjectPath> assignedProfiles;
+    int childCount = index.model()->rowCount(index);
+    for (int i = 0; i < childCount; ++i) {
+        assignedProfiles << index.child(i, 0).data(DeviceModel::ObjectPathRole).value<QDBusObjectPath>();
+    }
+
+    // Kind, colorspace must be matched
+    QString kind = index.data(DeviceModel::ProfileKindRole).toString();
+    QString colorspace = index.data(DeviceModel::ColorspaceRole).toString();
     QVariant devicePath = index.data(DeviceModel::ObjectPathRole);
-    m_profilesFilter->setFilterFixedString(kind);
+    m_profilesFilter->setFilterFixedString(colorspace);
     for (int i = 0; i < m_profilesFilter->rowCount(); ++i) {
-        // TODO exclude the filters which alread are in use
-        QModelIndex profile = m_profilesFilter->index(i, 0);
+        QModelIndex profileIndex = m_profilesFilter->index(i, 0);
+
+        // Check if the profile is of the same kind
+        if (kind != profileIndex.data(ProfileModel::ProfileKindRole).toString()) {
+            continue;
+        }
+
+        // Check if the profile isn't already assigned
+        QDBusObjectPath profilePath;
+        profilePath = profileIndex.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>();
+        if (assignedProfiles.contains(profilePath)) {
+            continue;
+        }
+
+        // Create the profile action
         QAction *action;
-        action = m_addAvailableMenu->addAction(profile.data(Qt::DisplayRole).toString());
-        action->setData(profile.data(ProfileModel::ObjectPathRole));
+        QString title;
+        title = profileIndex.data(ProfileModel::ProfileDisplayNameSourceRole).toString();
+        action = m_addAvailableMenu->addAction(title);
+        action->setData(profileIndex.data(ProfileModel::ObjectPathRole));
         action->setProperty(DEVICE_PATH, devicePath);
     }
     m_addAvailableMenu->setEnabled(m_profilesFilter->rowCount());
@@ -306,7 +333,6 @@ void ColordKCM::profileAdded(const QDBusObjectPath &objectPath)
             kDebug() << deviceKind << kind << filename;
             KMessageBox::sorry(this, i18n("Your profile did not match the device kind"), i18n("Importing Color Profile"));
         } else {
-                        kDebug() << objectPath.path() << m_profileFiles[filename].second.path() << filename;
             addProvileToDevice(objectPath, m_profileFiles[filename].second);
         }
         m_profileFiles.remove(filename);

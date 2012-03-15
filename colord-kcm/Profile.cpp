@@ -24,6 +24,11 @@
 #include <KFile>
 #include <KDebug>
 
+#define CD_PROFILE_METADATA_DATA_SOURCE_EDID	 "edid"
+#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB	 "calib"
+#define CD_PROFILE_METADATA_DATA_SOURCE_STANDARD "standard"
+#define CD_PROFILE_METADATA_DATA_SOURCE_TEST     "test"
+
 Profile::Profile(const QString &filename)
 {
     setFilename(filename);
@@ -402,4 +407,16 @@ QString Profile::checksum() const
 uint Profile::temperature() const
 {
     return m_temperature;
+}
+
+QString Profile::profileWithSource(const QString &dataSource, const QString &profilename)
+{
+    if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_EDID)) {
+        return i18n("Default: %1", profilename);
+    } else if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_STANDARD)) {
+        return i18n("Colorspace: %1", profilename);
+    } if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_TEST)) {
+        return i18n("Test profile: %1", profilename);
+    }
+    return profilename;
 }

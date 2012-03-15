@@ -24,6 +24,8 @@
 #include <QStandardItemModel>
 #include <QDBusObjectPath>
 
+typedef QMap<QString, QString>  StringStringMap;
+
 class DeviceModel : public QStandardItemModel
 {
     Q_OBJECT
@@ -33,7 +35,9 @@ public:
         ParentObjectPathRole,
         SortRole,
         FilenameRole,
-        KindRole
+        ColorspaceRole,
+        ProfileKindRole,
+        ProfileDisplayNameSourceRole
     } DeviceRoles;
     explicit DeviceModel(QObject *parent = 0);
 

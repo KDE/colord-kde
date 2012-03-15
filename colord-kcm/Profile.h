@@ -60,6 +60,8 @@ public:
     QString checksum() const;
     uint temperature() const;
 
+    static QString profileWithSource(const QString &dataSource, const QString &profilename);
+
 private:
     void parseProfile(const uint *data, size_t length);
     QDateTime parseDateTime(const struct tm &created);
