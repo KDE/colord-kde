@@ -1,7 +1,6 @@
 We miss some stuff
 
 * Detecting new displays, and remove them when removed
-* Fix the X atom
 * Graphs
 - toRGB
 - fromRGB

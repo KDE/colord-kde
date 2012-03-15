@@ -594,9 +594,17 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 
     // export the file data as an x atom on the *screen* (not output)
     Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", true);
-    Atom type = XInternAtom(m_dpy, "CARDINAL", true);
-    int rc = XChangeProperty(m_dpy, m_root, prop, type, 8, PropModeReplace, (unsigned char *) data.data(), data.size());
-    if (rc != Success) {
+    int rc = XChangeProperty(m_dpy,
+                             m_root,
+                             prop,
+                             XA_CARDINAL,
+                             8,
+                             PropModeReplace,
+                             (unsigned char *) data.data(),
+                             data.size());
+
+    // for some reason this fails with BadRequest, but actually sets the value
+    if (rc != BadRequest && rc != Success) {
         kWarning() << "Failed to set XProperty";
     }
 }
