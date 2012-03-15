@@ -1,0 +1,11 @@
+We miss some stuff
+
+* Filtering by KMimeType ColorD and ColordKCM
+* Detecting new displays, and remove them when removed
+* Fix the X atom
+* Graphs
+- toRGB
+- fromRGB
+...
+
+* Add calibration GUI (maybe we can start by calibrating simple things)
