@@ -29,13 +29,20 @@
 #include <KGenericFactory>
 #include <KAboutData>
 #include <KTitleWidget>
+#include <KFileDialog>
 #include <KIcon>
+#include <KUser>
 
+#include <QDBusInterface>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QTimer>
+#include <QToolButton>
+#include <QFileInfo>
 #include <QVBoxLayout>
-#include <QSortFilterProxyModel>
+#include <QStringBuilder>
+
+#define DEVICE_PATH "device-path"
 
 K_PLUGIN_FACTORY(ColordKCMFactory, registerPlugin<ColordKCM>();)
 K_EXPORT_PLUGIN(ColordKCMFactory("kcm_colord"))
@@ -57,12 +64,29 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
 
     ui->setupUi(this);
     ui->infoWidget->setPixmap(KTitleWidget::InfoMessage);
-    m_addAction = ui->toolBar->addAction(KIcon("list-add"),
-                                         i18nc("@action:intoolbar", "Add Profile"),
-                                         this, SLOT(addProfile()));
-    m_removeAction = ui->toolBar->addAction(KIcon("list-remove"),
-                                            i18nc("@action:intoolbar", "Remove Profile"),
-                                            this, SLOT(removeProfile()));
+    connect(ui->addProfileBt, SIGNAL(clicked()), this, SLOT(addProfileFile()));
+
+    m_addMenu = new QMenu(this);
+    m_addMenu->addAction(KIcon("document-new"),
+                         i18n("From File..."),
+                         this, SLOT(addProfileFile()));
+
+    m_addAvailableMenu = new QMenu(i18n("Available Profiles"), this);
+    connect(m_addAvailableMenu, SIGNAL(triggered(QAction*)),
+            this, SLOT(addProfileAction(QAction*)));
+    m_addMenu->addMenu(m_addAvailableMenu);
+    ui->addProfileBt->setMenu(m_addMenu);
+    ui->addProfileBt->setIcon(KIcon("list-add"));
+
+    connect(m_addMenu, SIGNAL(aboutToShow()),
+            this, SLOT(fillMenu()));
+
+    connect(ui->tabWidget, SIGNAL(currentChanged(int)),
+            this, SLOT(on_tabWidget_currentChanged(int)));
+
+    ui->removeProfileBt->setIcon(KIcon("list-remove"));
+    connect(ui->removeProfileBt, SIGNAL(clicked()),
+            this, SLOT(removeProfile()));
 
     // Devices view setup
     m_model = new DeviceModel(this);
@@ -79,6 +103,12 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
 
     // Profiles view setup
     ProfileModel *model = new ProfileModel(this);
+    // Filter Proxy for the menu
+    m_profilesFilter = new QSortFilterProxyModel(this);
+    m_profilesFilter->setSourceModel(model);
+    m_profilesFilter->setFilterRole(ProfileModel::KindRole);
+
+    // Sort Proxy for the View
     QSortFilterProxyModel *profileSortModel = new QSortFilterProxyModel(this);
     profileSortModel->setSourceModel(model);
     profileSortModel->setDynamicSortFilter(true);
@@ -89,6 +119,19 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
             this, SLOT(showProfile()));
     connect(profileSortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(showProfile()));
+
+    // Creates a ColorD interface, it must be created with new
+    // otherwise the object will be deleted when this block ends
+    QDBusInterface *interface;
+    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   QLatin1String("/org/freedesktop/ColorManager"),
+                                   QLatin1String("org.freedesktop.ColorManager"),
+                                   QDBusConnection::systemBus(),
+                                   this);
+
+    // listen to colord for events
+    connect(interface, SIGNAL(ProfileAdded(QDBusObjectPath)),
+            this, SLOT(profileAdded(QDBusObjectPath)));
 }
 
 ColordKCM::~ColordKCM()
@@ -96,89 +139,93 @@ ColordKCM::~ColordKCM()
     delete ui;
 }
 
-void ColordKCM::update()
-{
-
-}
-
 void ColordKCM::showProfile()
 {
-    QTreeView *view;
-    if (ui->tabWidget->currentIndex() == 0) {
-        view = ui->devicesTV;
-    } else {
-        view = ui->profilesTV;
-    }
-
-    if (view->model()->rowCount() == 0) {
+    QModelIndex index = currentIndex();
+    if (!index.isValid()) {
         return;
     }
 
-    QItemSelection selection;
-    // we need to map the selection to source to get the real indexes
-    selection = view->selectionModel()->selection();
-    // select the first printer if there are profiles
-    if (selection.indexes().isEmpty()) {
-        view->selectionModel()->select(view->model()->index(0, 0),
-                                       QItemSelectionModel::Select);
-        return;
-    }
-
-    QModelIndex index = selection.indexes().first();
     ui->profile->setProfile(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
     if (ui->stackedWidget->currentWidget() != ui->profile) {
         ui->stackedWidget->setCurrentWidget(ui->profile);
     }
+
+    // Check if we can remove the Profile
+    bool enable = false;
+    if (ui->tabWidget->currentIndex() == 1) {
+        QString filename = index.data(ProfileModel::FilenameRole).toString();
+        QFileInfo fileInfo(filename);
+        kDebug() << "---" << filename << fileInfo.isWritable();
+        if (!filename.isNull() && fileInfo.isWritable()) {
+            enable = true;
+        }
+    } else {
+        // It's ok to remove profiles from devices
+        if (index.parent().isValid()) {
+            enable = true;
+        }
+    }
+    ui->removeProfileBt->setEnabled(enable);
 }
 
-void ColordKCM::addProfile()
+void ColordKCM::addProfileFile()
 {
-    KDialog *dialog = new KDialog(this);
+    QModelIndex index = currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
 
-//    QDBusObjectPath parentObjPath = stdItem->data(ParentObjectPathRole).value<QDBusObjectPath>();
-//    QDBusObjectPath parentObjPath = stdItem->data(ParentObjectPathRole).value<QDBusObjectPath>();
-//    QDBusMessage message;
-//    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-//                                             deviceObject.path(),
-//                                             QLatin1String("org.freedesktop.ColorManager.Device"),
-//                                             QLatin1String("AddProfile"));
-//    message << QString("hard"); // Relation
-//    message << qVariantFromValue(profileObject); // Profile Path
+    QString fileName;
+    // TODO use mimetypes here and in ColorD
+    fileName = KFileDialog::getOpenFileName(KUrl(), "*.icc *.icm", this, i18n("Importing Color Profile"));
+    if (fileName.isEmpty()) {
+        return;
+    }
 
-//    /* call Device.AddProfile() with the device and profile object paths */
-//    QDBusConnection::systemBus().send(message);
+    QFileInfo fileInfo(fileName);
+    QString newFilename = profilesPath() % fileInfo.fileName();
+    kDebug() << fileName << newFilename;
+    if (!QFile::copy(fileName, newFilename)) {
+        KMessageBox::sorry(this, i18n("Failed to import color profile"), i18n("Importing Color Profile"));
+    } else {
+        QString kind;
+        QDBusObjectPath devicePath;
+        kind = index.data(DeviceModel::KindRole).toString();
+        devicePath = index.data(DeviceModel::ObjectPathRole).value<QDBusObjectPath>();
+        m_profileFiles[newFilename] = KindAndPath(kind, devicePath);
+    }
+}
+
+void ColordKCM::addProfileAction(QAction *action)
+{
+    QDBusObjectPath profileObject = action->data().value<QDBusObjectPath>();
+    QDBusObjectPath deviceObject  = action->property(DEVICE_PATH).value<QDBusObjectPath>();
+
+    addProvileToDevice(profileObject, deviceObject);
 }
 
 void ColordKCM::removeProfile()
 {
-    if (ui->tabWidget->currentIndex() == 0) {
-        QTreeView *view = ui->devicesTV;
-        if (view->model()->rowCount() == 0) {
-            return;
-        }
+    QModelIndex index = currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
 
-        QItemSelection selection;
-        // we need to map the selection to source to get the real indexes
-        selection = view->selectionModel()->selection();
-        // select the first printer if there are profiles
-        if (selection.indexes().isEmpty()) {
-            view->selectionModel()->select(view->model()->index(0, 0),
-                                           QItemSelectionModel::Select);
-            return;
-        }
+    int ret = KMessageBox::questionYesNo(this,
+                                         i18n("Are you sure you want to remove this profile?"),
+                                         i18n("Remove Profile"));
+    if (ret == KMessageBox::No) {
+        return;
+    }
 
-        int ret = KMessageBox::questionYesNo(this,
-                                             i18n("Are you sure you want to remove this profile?"),
-                                             i18n("Remove Profile"));
-        if (ret == KMessageBox::No) {
-            return;
-        }
-
-        QModelIndex index = selection.indexes().first();
+    if (index.parent().isValid()) {
+        // If the item has a parent we are on the devices view
         QDBusObjectPath deviceObject;
         QDBusObjectPath profileObject;
         deviceObject  = index.data(ProfileModel::ParentObjectPathRole).value<QDBusObjectPath>();
         profileObject = index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>();
+
         QDBusMessage message;
         message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                                  deviceObject.path(),
@@ -189,6 +236,126 @@ void ColordKCM::removeProfile()
         /* call Device.RemoveProfile() with the device and profile object paths */
         QDBusConnection::systemBus().send(message);
     } else {
-        // We need to rm the file
+        // We need to remove the file
+        QString filename = index.data(ProfileModel::FilenameRole).toString();
+        QFile file(filename);
+        file.remove();
     }
+}
+
+void ColordKCM::fillMenu()
+{
+    m_addAvailableMenu->clear();
+    QModelIndex index = currentIndex();
+    if (!index.isValid()) {
+        m_addAvailableMenu->setEnabled(false);
+        return;
+    }
+
+    // if the user was selecting a profile get the parent
+    if (index.parent().isValid()) {
+        index = index.parent();
+    }
+    // TODO what about unknown profiles should this be a RegExp?
+    QString kind = index.data(DeviceModel::KindRole).toString();
+    QVariant devicePath = index.data(DeviceModel::ObjectPathRole);
+    m_profilesFilter->setFilterFixedString(kind);
+    for (int i = 0; i < m_profilesFilter->rowCount(); ++i) {
+        // TODO exclude the filters which alread are in use
+        QModelIndex profile = m_profilesFilter->index(i, 0);
+        QAction *action;
+        action = m_addAvailableMenu->addAction(profile.data(Qt::DisplayRole).toString());
+        action->setData(profile.data(ProfileModel::ObjectPathRole));
+        action->setProperty(DEVICE_PATH, devicePath);
+    }
+    m_addAvailableMenu->setEnabled(m_profilesFilter->rowCount());
+}
+
+void ColordKCM::on_tabWidget_currentChanged(int index)
+{
+    kDebug() << index;
+    if (index == 0 && ui->addProfileBt->menu() == 0) {
+        ui->addProfileBt->setMenu(m_addMenu);
+        kDebug() << "add";
+    } else if (index) {
+        kDebug() << "remove";
+        ui->addProfileBt->setMenu(0);
+    }
+}
+
+void ColordKCM::profileAdded(const QDBusObjectPath &objectPath)
+{
+    QDBusInterface *interface;
+    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   objectPath.path(),
+                                   QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                   QDBusConnection::systemBus(),
+                                   this);
+    interface->deleteLater();
+    if (!interface->isValid()) {
+        return;
+    }
+
+    QString kind = interface->property("Kind").toString();
+    QString filename = interface->property("Filename").toString();
+
+    if (m_profileFiles.contains(filename)) {
+        QString deviceKind = m_profileFiles[filename].first % QLatin1String("-device");
+        if (deviceKind != kind) {
+            // The desired device did not match the profile kind
+            kDebug() << deviceKind << kind << filename;
+            KMessageBox::sorry(this, i18n("Your profile did not match the device kind"), i18n("Importing Color Profile"));
+        } else {
+                        kDebug() << objectPath.path() << m_profileFiles[filename].second.path() << filename;
+            addProvileToDevice(objectPath, m_profileFiles[filename].second);
+        }
+        m_profileFiles.remove(filename);
+    }
+}
+
+void ColordKCM::addProvileToDevice(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath) const
+{
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             devicePath.path(),
+                                             QLatin1String("org.freedesktop.ColorManager.Device"),
+                                             QLatin1String("AddProfile"));
+    message << QString("hard"); // Relation
+    message << qVariantFromValue(profilePath); // Profile Path
+
+    /* call Device.AddProfile() with the device and profile object paths */
+    QDBusConnection::systemBus().send(message);
+}
+
+QModelIndex ColordKCM::currentIndex() const
+{
+    QTreeView *view;
+    if (ui->tabWidget->currentIndex() == 0) {
+        view = ui->devicesTV;
+    } else {
+        view = ui->profilesTV;
+    }
+
+    if (view->model()->rowCount() == 0) {
+        return QModelIndex();
+    }
+
+    QItemSelection selection;
+    // we need to map the selection to source to get the real indexes
+    selection = view->selectionModel()->selection();
+    // select the first printer if there are profiles
+    if (selection.indexes().isEmpty()) {
+        view->selectionModel()->select(view->model()->index(0, 0),
+                                       QItemSelectionModel::Select);
+        return QModelIndex();
+    }
+
+    return selection.indexes().first();
+}
+
+QString ColordKCM::profilesPath() const
+{
+    KUser user;
+    // ~/.local/share/icc/
+    return user.homeDir() % QLatin1String("/.local/share/icc/");
 }

@@ -32,7 +32,8 @@ public:
         ObjectPathRole = Qt::UserRole + 1,
         ParentObjectPathRole,
         SortRole,
-        FilenameRole
+        FilenameRole,
+        KindRole
     } ProfileRoles;
     explicit ProfileModel(QObject *parent = 0);
 
@@ -46,9 +47,6 @@ private slots:
     void profileRemoved(const QDBusObjectPath &objectPath);
 
 private:
-    QStandardItem* createProfileItem(const QDBusObjectPath &objectPath,
-                                     const QDBusObjectPath &parentObjectPath,
-                                     bool checked);
     int findItem(const QDBusObjectPath &objectPath);
     QChar getSortChar(const QString &kind);
 };

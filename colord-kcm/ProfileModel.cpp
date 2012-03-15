@@ -76,46 +76,7 @@ void ProfileModel::profileChanged(const QDBusObjectPath &objectPath)
         return;
     }
 
-    QDBusInterface *profileInterface;
-    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                         objectPath.path(),
-                                         QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                         QDBusConnection::systemBus(),
-                                         this);
-    if (!profileInterface->isValid()) {
-        profileInterface->deleteLater();
-        return;
-    }
-
-    ObjectPathList profiles = profileInterface->property("Profiles").value<ObjectPathList>();
-    profileInterface->deleteLater();
-
-    // Normally just the profile list bound this profile
-    // is what changes including "Modified" property
-    QStandardItem *stdItem = item(row);
-    for (int i = 0; i < profiles.size(); ++i) {
-        QStandardItem *child;
-        child = stdItem->child(i);
-        if (child) {
-            // If the profile item is the same ignore since
-            // Profiles don't actually change
-            if (child->data(ObjectPathRole).value<QDBusObjectPath>() == profiles.at(i)) {
-                // Check if the state has changed
-                Qt::CheckState state = i ? Qt::Unchecked : Qt::Checked;
-                if (child->checkState() != state) {
-                    child->setCheckState(state);
-                }
-                continue;
-            }
-            // Removes the item since it's not the one we are looking for
-            stdItem->removeRow(i);
-        }
-        // Inserts the profile with the parent object Path
-        stdItem->insertRow(i, createProfileItem(profiles.at(i), objectPath, !i));
-    }
-
-    // Remove the extra items it might have
-    removeRows(profiles.size(), stdItem->rowCount() - profiles.size(), stdItem->index());
+    // TODO what should we do when the profile changes?
 }
 
 void ProfileModel::profileAdded(const QDBusObjectPath &objectPath)
@@ -161,6 +122,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath)
     item->setData(qVariantFromValue(objectPath), ObjectPathRole);
     item->setData(qVariantFromValue(getSortChar(kind) + title), SortRole);
     item->setData(filename, FilenameRole);
+    item->setData(kind, KindRole);
 
     // Choose a nice icon
     if (kind == QLatin1String("display-device")) {
@@ -198,40 +160,6 @@ void ProfileModel::profileRemoved(const QDBusObjectPath &objectPath)
     if (row != -1) {
         removeRow(row);
     }
-}
-
-QStandardItem* ProfileModel::createProfileItem(const QDBusObjectPath &objectPath,
-                                              const QDBusObjectPath &parentObjectPath,
-                                              bool checked)
-{
-    kDebug() << objectPath.path() << checked;
-    QDBusInterface *profileInterface;
-    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                          objectPath.path(),
-                                          QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                          QDBusConnection::systemBus(),
-                                          this);
-    QStandardItem *stdItem = new QStandardItem;
-    QString title = profileInterface->property("Title").toString();
-    if (title.isEmpty()) {
-        QString colorspace = profileInterface->property("Colorspace").toString();
-        if (colorspace == QLatin1String("rgb")) {
-            title = i18n("Default RGB");
-        } else if (colorspace == QLatin1String("cmyk")) {
-            title = i18n("Default CMYK");
-        } else if (colorspace == QLatin1String("gray")) {
-            title = i18n("Default Gray");
-        }
-    }
-
-    stdItem->setText(title);
-    stdItem->setData(qVariantFromValue(objectPath), ObjectPathRole);
-    stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);
-    stdItem->setCheckable(true);
-    stdItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);
-
-    profileInterface->deleteLater();
-    return stdItem;
 }
 
 int ProfileModel::findItem(const QDBusObjectPath &objectPath)

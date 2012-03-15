@@ -23,7 +23,13 @@
 
 #include <KCModule>
 #include <KTitleWidget>
+
+#include <QMenu>
 #include <QStackedLayout>
+#include <QSortFilterProxyModel>
+#include <QDBusObjectPath>
+
+typedef QPair<QString, QDBusObjectPath> KindAndPath;
 
 namespace Ui {
     class ColordKCM;
@@ -39,12 +45,19 @@ public:
     ~ColordKCM();
 
 private slots:
-    void update();
     void showProfile();
-    void addProfile();
+    void addProfileFile();
+    void addProfileAction(QAction *action);
     void removeProfile();
+    void fillMenu();
+    void on_tabWidget_currentChanged(int index);
+    void profileAdded(const QDBusObjectPath &objectPath);
 
 private:
+    void addProvileToDevice(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath) const;
+    QModelIndex currentIndex() const;
+    QString profilesPath() const;
+
     Ui::ColordKCM *ui;
     DeviceModel *m_model;
     QStackedLayout *m_stackedLayout;
@@ -53,6 +66,10 @@ private:
     QWidget *m_serverError;
     KTitleWidget *m_serverErrorW;
     int m_lastError;
+    QMenu *m_addMenu;
+    QMenu *m_addAvailableMenu;
+    QSortFilterProxyModel *m_profilesFilter;
+    QHash<QString, KindAndPath> m_profileFiles;
 
     QAction *m_addAction;
     QAction *m_removeAction;

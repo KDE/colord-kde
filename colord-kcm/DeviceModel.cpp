@@ -170,6 +170,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath)
     }
 
     item->setData(qVariantFromValue(kind + item->text()), SortRole);
+    item->setData(kind, KindRole);
 
     QList<QStandardItem*> profileItems;
     foreach (const QDBusObjectPath &profileObjectPath, profiles) {
@@ -203,7 +204,10 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
                                    QDBusConnection::systemBus(),
                                    this);
     QStandardItem *stdItem = new QStandardItem;
+    QString kind = interface->property("Kind").toString();
+    QString filename = interface->property("Filename").toString();
     QString title = interface->property("Title").toString();
+
     if (title.isEmpty()) {
         QString colorspace = interface->property("Colorspace").toString();
         if (colorspace == QLatin1String("rgb")) {
@@ -218,6 +222,8 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     stdItem->setText(title);
     stdItem->setData(qVariantFromValue(objectPath), ObjectPathRole);
     stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);
+    stdItem->setData(filename, FilenameRole);
+    stdItem->setData(kind, KindRole);
     stdItem->setData(title, SortRole);
     stdItem->setCheckable(true);
     stdItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);

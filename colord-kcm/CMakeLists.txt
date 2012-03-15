@@ -15,6 +15,7 @@ kde4_add_plugin(kcm_colord ${kcm_colord_SRCS})
 
 target_link_libraries(kcm_colord
     ${KDE4_KDEUI_LIBS}
+    ${KDE4_KIO_LIBS}
     ${LCMS2_LIBRARIES}
 )
 
