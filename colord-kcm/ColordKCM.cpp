@@ -42,6 +42,7 @@
 #include <QFileInfo>
 #include <QVBoxLayout>
 #include <QStringBuilder>
+#include <QSignalMapper>
 
 #define DEVICE_PATH "device-path"
 
@@ -117,8 +118,8 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     profileSortModel->setSourceModel(model);
     profileSortModel->setDynamicSortFilter(true);
     profileSortModel->setSortRole(ProfileModel::SortRole);
+    profileSortModel->sort(0, Qt::AscendingOrder);
     ui->profilesTV->setModel(profileSortModel);
-    ui->profilesTV->sortByColumn(0, Qt::AscendingOrder);
     connect(ui->profilesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this, SLOT(showProfile()));
     connect(profileSortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
@@ -136,6 +137,18 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     // listen to colord for events
     connect(interface, SIGNAL(ProfileAdded(QDBusObjectPath)),
             this, SLOT(profileAdded(QDBusObjectPath)));
+
+    ui->devicesTb->setIcon(KIcon("preferences-activities"));
+    ui->profilesTb->setIcon(KIcon("application-vnd.iccprofile"));
+
+    QSignalMapper *signalMapper = new QSignalMapper(this);
+    signalMapper->setMapping(ui->devicesTb, 0);
+    connect(ui->devicesTb, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    signalMapper->setMapping(ui->profilesTb, 1);
+    connect(ui->profilesTb, SIGNAL(clicked()), signalMapper, SLOT(map()));
+
+    connect(signalMapper, SIGNAL(mapped(int)),
+            ui->tabWidget, SLOT(setCurrentIndex(int)));
 }
 
 ColordKCM::~ColordKCM()
@@ -358,7 +371,7 @@ void ColordKCM::addProvileToDevice(const QDBusObjectPath &profilePath, const QDB
 
 QModelIndex ColordKCM::currentIndex() const
 {
-    QTreeView *view;
+    QAbstractItemView *view;
     if (ui->tabWidget->currentIndex() == 0) {
         view = ui->devicesTV;
     } else {

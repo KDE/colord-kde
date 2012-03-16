@@ -17,23 +17,13 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef COLORD_H
-#define COLORD_H
+#ifndef OUTPUT_H
+#define OUTPUT_H
 
-#include <KDEDModule>
+#include <QDBusObjectPath>
+#include <QTextStream>
 
-#include "Output.h"
-
-#include <QVariantList>
-#include <QFileInfo>
-#include <QTimer>
-#include <QtDBus/QDBusConnection>
-#include <QtDBus/QDBusInterface>
-#include <QtDBus/QDBusReply>
-
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-#include <fixx11h.h>
+#include "Edid.h"
 
 extern "C"
 {
@@ -46,52 +36,40 @@ extern "C"
     #include <X11/extensions/Xrandr.h>
 }
 
-typedef QList<int> ScreenList;
-typedef QMap<QString, QString>  StringStringMap;
-
-class Edid;
-class ColorD : public KDEDModule
+class Output
 {
-    Q_OBJECT
+    Q_GADGET
 public:
-    ColorD(QObject *parent, const QVariantList &args);
-    ~ColorD();
+    Output(RROutput output, XRRScreenResources *resources);
+    bool connected() const;
+    bool isLaptop() const;
+    QString name() const;
+    void setPath(const QDBusObjectPath &path);
+    QDBusObjectPath path() const;
+    RRCrtc crtc() const;
+    RROutput output() const;
+    int getGammaSize() const;
+    void setGamma(XRRCrtcGamma *gamma) const;
 
-private slots:
-    void checkOutputs();
+    Edid readEdidData();
+    QString edidHash() const;
 
-    void profileAdded(const QDBusObjectPath &objectPath);
-    void deviceAdded(const QDBusObjectPath &objectPath);
-    void deviceChanged(const QDBusObjectPath &objectPath);
-
-    void addProfile(const QString &filename);
-    void removeProfile(const QString &filename);
+    bool operator==(const Output &output) const;
 
 private:
-    quint8* readEdidData(RROutput output, size_t &len);
-    void scanHomeDirectory();
-    void connectToDisplay();
-    void connectToColorD();
-    void addOutput(Output &output);
-    void removeOutput(const Output &output);
-    void addProfile(const QFileInfo &fileInfo);
-    QString profilesPath() const;
+    /**
+      * Callers should delete the data if not 0
+      */
+    quint8* readEdidData(size_t &len);
 
-    QList<Output> m_connectedOutputs;
-    QTimer *m_checkOutputsTimer;
-
-    Display *m_dpy;
+    RROutput m_output;
     XRRScreenResources *m_resources;
-    Window m_root;
-    
-    bool m_valid;
-    QString m_errorCode;
-    QString m_version;
+    QString m_edidHash;
+    QDBusObjectPath m_path;
 
-    int m_eventBase;
-    int m_errorBase;
+    bool m_connected;
+    QString m_name;
+    RRCrtc m_crtc;
 };
 
-Q_DECLARE_METATYPE(StringStringMap)
-
-#endif // COLORD_H
+#endif // OUTPUT_H
