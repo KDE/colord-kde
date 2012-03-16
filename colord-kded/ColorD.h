@@ -50,6 +50,7 @@ typedef QList<int> ScreenList;
 typedef QMap<QString, QString>  StringStringMap;
 
 class Edid;
+class XEventHandler;
 class ColorD : public KDEDModule
 {
     Q_OBJECT
@@ -73,6 +74,7 @@ private:
     void connectToDisplay();
     void connectToColorD();
     void addOutput(Output &output);
+    void outputChanged(Output &output);
     void removeOutput(const Output &output);
     void addProfile(const QFileInfo &fileInfo);
     QString profilesPath() const;
@@ -81,6 +83,7 @@ private:
     QTimer *m_checkOutputsTimer;
 
     Display *m_dpy;
+    XEventHandler *m_eventHandler;
     XRRScreenResources *m_resources;
     Window m_root;
     

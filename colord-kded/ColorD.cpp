@@ -22,6 +22,7 @@
 #include "Edid.h"
 #include "DmiUtils.h"
 #include "ProfileUtils.h"
+#include "XEventHandler.h"
 
 #include <KLocale>
 #include <KGenericFactory>
@@ -30,6 +31,7 @@
 #include <KUser>
 #include <KDirWatch>
 #include <KMimeType>
+#include <KApplication>
 
 #include <QX11Info>
 
@@ -69,19 +71,19 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
 
     // This timer makes sure subsequent changes don't
     // keep checking our outputs
-    m_checkOutputsTimer = new QTimer(this);
-    m_checkOutputsTimer->setInterval(600);
-    connect(m_checkOutputsTimer, SIGNAL(timeout()),
-            this, SLOT(checkOutputs()));
+//    m_checkOutputsTimer = new QTimer(this);
+//    m_checkOutputsTimer->setInterval(600);
+//    connect(m_checkOutputsTimer, SIGNAL(timeout()),
+//            this, SLOT(checkOutputs()));
 
-    // The desktop widget infor us about outputs changes
-    QDesktopWidget *desktopWidget = QApplication::desktop();
-    connect(desktopWidget, SIGNAL(screenCountChanged(int)),
-            m_checkOutputsTimer, SLOT(start()));
-    connect(desktopWidget, SIGNAL(resized(int)),
-            m_checkOutputsTimer, SLOT(start()));
-    connect(desktopWidget, SIGNAL(workAreaResized(int)),
-            m_checkOutputsTimer, SLOT(start()));
+//    // The desktop widget infor us about outputs changes
+//    QDesktopWidget *desktopWidget = QApplication::desktop();
+//    connect(desktopWidget, SIGNAL(screenCountChanged(int)),
+//            m_checkOutputsTimer, SLOT(start()));
+//    connect(desktopWidget, SIGNAL(resized(int)),
+//            m_checkOutputsTimer, SLOT(start()));
+//    connect(desktopWidget, SIGNAL(workAreaResized(int)),
+//            m_checkOutputsTimer, SLOT(start()));
 }
 
 ColorD::~ColorD()
@@ -260,6 +262,121 @@ void ColorD::addOutput(Output &output)
     kDebug() << "created device" << reply.value().path();
 }
 
+void ColorD::outputChanged(Output &output)
+{
+    kDebug() << "Device changed" << output.path().path();
+
+    QDBusInterface *deviceInterface;
+    deviceInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                         output.path().path(),
+                                         QLatin1String("org.freedesktop.ColorManager.Device"),
+                                         QDBusConnection::systemBus(),
+                                         this);
+    // check Device.Kind is "display"
+    if (deviceInterface->property("Kind").toString() != QLatin1String("display")) {
+        // not a display device, ignoring
+        deviceInterface->deleteLater();
+        return;
+    }
+
+    QList<QDBusObjectPath> profiles = deviceInterface->property("Profiles").value<QList<QDBusObjectPath> >();
+    if (profiles.isEmpty()) {
+        // There are no profiles ignoring
+        deviceInterface->deleteLater();
+        return;
+    }
+    deviceInterface->deleteLater();
+
+    // read the default profile (the first path in the Device.Profiles property)
+    QDBusObjectPath profileDefault = profiles.first();
+    kDebug() << "profileDefault" << profileDefault.path();
+    QDBusInterface *profileInterface;
+    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                          profileDefault.path(),
+                                          QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                          QDBusConnection::systemBus(),
+                                          this);
+    QString filename = profileInterface->property("Filename").toString();
+    kDebug() << "Default Profile Filename" << filename;
+    profileInterface->deleteLater();
+
+    QFile file(filename);
+    QByteArray data;
+    if (file.open(QIODevice::ReadOnly)) {
+        data = file.readAll();
+    } else {
+        kWarning() << "Failed to open profile" << filename;
+        return;
+    }
+
+    // read the VCGT data using lcms2
+    const cmsToneCurve **vcgt;
+    cmsHPROFILE lcms_profile = NULL;
+
+    // open file
+    lcms_profile = cmsOpenProfileFromMem((const uint*) data.data(), data.size());
+    if (lcms_profile == NULL) {
+        kWarning() << "Could not open profile with lcms" << filename;
+        return;
+    }
+
+    // TODO we need to check when the output got disabled to avoid the X error
+//    output.update();
+
+    // The gama size of this output
+    int gamaSize = output.getGammaSize();
+    if (gamaSize == 0) {
+        kWarning() << "Gamma size is zero";
+        return;
+    }
+
+    // Allocate the gamma
+    XRRCrtcGamma *gamma = XRRAllocGamma(gamaSize);
+
+    // get tone curves from profile
+    vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
+    if (vcgt == NULL || vcgt[0] == NULL) {
+        kDebug() << "Profile does not have any VCGT data, reseting";
+        // Reset the gamma table
+        for (int i = 0; i < gamaSize; ++i) {
+            uint value = (i * 0xffff) / (gamaSize - 1);
+            gamma->red[i]   = value;
+            gamma->green[i] = value;
+            gamma->blue[i]  = value;
+        }
+    } else {
+        // Fill the gamma table with the VCGT data
+        for (int i = 0; i < gamaSize; ++i) {
+            cmsFloat32Number in;
+            in = (double) i / (double) (gamaSize - 1);
+            gamma->red[i]   = cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
+            gamma->green[i] = cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
+            gamma->blue[i]  = cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
+        }
+    }
+    cmsCloseProfile(lcms_profile);
+
+    // push the data to the Xrandr gamma ramps for the display
+    output.setGamma(gamma);
+
+    XRRFreeGamma(gamma);
+
+    // export the file data as an x atom on the *screen* (not output)
+    Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", true);
+    int rc = XChangeProperty(m_dpy,
+                             m_root,
+                             prop,
+                             XA_CARDINAL,
+                             8,
+                             PropModeReplace,
+                             (unsigned char *) data.data(),
+                             data.size());
+
+    // for some reason this fails with BadRequest, but actually sets the value
+    if (rc != BadRequest && rc != Success) {
+        kWarning() << "Failed to set XProperty";
+    }
+}
 
 void ColorD::removeOutput(const Output &output)
 {
@@ -287,6 +404,12 @@ void ColorD::connectToDisplay()
         m_valid = false;
         return;
     }
+
+    // Install our X event handler
+    m_eventHandler = new XEventHandler(m_eventBase);
+    connect(m_eventHandler, SIGNAL(outputChanged()),
+            this, SLOT(checkOutputs()));
+    kapp->installX11EventFilter(m_eventHandler);
 
     int major_version, minor_version;
     XRRQueryVersion(m_dpy, &major_version, &minor_version);
@@ -325,25 +448,12 @@ void ColorD::connectToDisplay()
         Output output(m_resources->outputs[i], m_resources);
         addOutput(output);
     }
-
-    /* register for root window changes */
-//    XRRSelectInput(m_dpy, m_root, RRScreenChangeNotifyMask);
-//    gdk_x11_register_standard_event_type (m_dpy,
-//                              m_eventBase,
-//                              RRNotify + 1);
-//    gdk_window_add_filter (priv->gdk_root, screen_on_event, self);
-
-    /* if monitors are added, call AddOutput() */
-    //TODO
-
-    /* if monitors are removed, call RemoveOutput() */
-    //TODO
 }
 
 void ColorD::checkOutputs()
 {
     kDebug();
-    m_checkOutputsTimer->stop();
+//    m_checkOutputsTimer->stop();
     // Check the output as something has changed
     for (int i = 0; i < m_resources->noutput; ++i) {
         Output currentOutput(m_resources->outputs[i], m_resources);
@@ -362,7 +472,6 @@ void ColorD::checkOutputs()
             }
         } else {
             // Output not found
-            kDebug() << "output not found";
             addOutput(currentOutput);
         }
     }
@@ -433,129 +542,21 @@ void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 {
     kDebug() << "Device changed" << objectPath.path();
-
-    QDBusInterface *deviceInterface;
-    deviceInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                         objectPath.path(),
-                                         QLatin1String("org.freedesktop.ColorManager.Device"),
-                                         QDBusConnection::systemBus(),
-                                         this);
-    // check Device.Kind is "display"
-    if (deviceInterface->property("Kind").toString() != QLatin1String("display")) {
-        // not a display device, ignoring
-        deviceInterface->deleteLater();
-        return;
-    }
-
-    QList<QDBusObjectPath> profiles = deviceInterface->property("Profiles").value<QList<QDBusObjectPath> >();
-    if (profiles.isEmpty()) {
-        // There are no profiles ignoring
-        deviceInterface->deleteLater();
-        return;
-    }
-    deviceInterface->deleteLater();
-
-    // read the default profile (the first path in the Device.Profiles property)
-    QDBusObjectPath profileDefault = profiles.first();
-    kDebug() << "profileDefault" << profileDefault.path();
-    QDBusInterface *profileInterface;
-    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                          profileDefault.path(),
-                                          QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                          QDBusConnection::systemBus(),
-                                          this);
-    QString filename = profileInterface->property("Filename").toString();
-    kDebug() << "Default Profile Filename" << filename;
-    profileInterface->deleteLater();
-
-    QFile file(filename);
-    QByteArray data;
-    if (file.open(QIODevice::ReadOnly)) {
-        data = file.readAll();
-    } else {
-        kWarning() << "Failed to open profile" << filename;
-        return;
-    }
-
-    // read the VCGT data using lcms2
-    const cmsToneCurve **vcgt;
-    cmsHPROFILE lcms_profile = NULL;
-
-    // open file
-    lcms_profile = cmsOpenProfileFromMem((const uint*) data.data(), data.size());
-    if (lcms_profile == NULL) {
-        //        Error();
-        kWarning() << "Could not open profile with lcms" << filename;
-        return;
-    }
-
-    const Output *output = 0;
+    Output *output = 0;
     // Get the Crtc of this output
     foreach (const Output &out, m_connectedOutputs) {
         if (out.path() == objectPath) {
-            output = &out;
+            output = const_cast<Output*>(&out);
             break;
         }
     }
 
     if (!output) {
-        kWarning() << "CRTC not found";
+        kWarning() << "Output not found";
         return;
     }
 
-    // The gama size of this output
-    int gamaSize = output->getGammaSize();
-    if (gamaSize == 0) {
-        kWarning() << "Gamma size is zero";
-        return;
-    }
-
-    // Allocate the gamma
-    XRRCrtcGamma *gamma = XRRAllocGamma(gamaSize);
-
-    // get tone curves from profile
-    vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
-    if (vcgt == NULL || vcgt[0] == NULL) {
-        kDebug() << "Profile does not have any VCGT data, reseting";
-        // Reset the gamma table
-        for (int i = 0; i < gamaSize; ++i) {
-            uint value = (i * 0xffff) / (gamaSize - 1);
-            gamma->red[i]   = value;
-            gamma->green[i] = value;
-            gamma->blue[i]  = value;
-        }
-    } else {
-        // Fill the gamma table with the VCGT data
-        for (int i = 0; i < gamaSize; ++i) {
-            cmsFloat32Number in;
-            in = (double) i / (double) (gamaSize - 1);
-            gamma->red[i]   = cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
-            gamma->green[i] = cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
-            gamma->blue[i]  = cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
-        }
-    }
-    cmsCloseProfile(lcms_profile);
-
-    // push the data to the Xrandr gamma ramps for the display
-    output->setGamma(gamma);
-
-    XRRFreeGamma(gamma);
-
-    // export the file data as an x atom on the *screen* (not output)
-    Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", true);
-    int rc = XChangeProperty(m_dpy,
-                             m_root,
-                             prop,
-                             XA_CARDINAL,
-                             8,
-                             PropModeReplace,
-                             (unsigned char *) data.data(),
-                             data.size());
-
-    // for some reason this fails with BadRequest, but actually sets the value
-    if (rc != BadRequest && rc != Success) {
-        kWarning() << "Failed to set XProperty";
-    }
+    outputChanged(*output);
 }
 
 void ColorD::addProfile(const QString &filename)

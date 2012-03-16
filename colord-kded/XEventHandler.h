@@ -17,61 +17,25 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef OUTPUT_H
-#define OUTPUT_H
+#ifndef XEVENTHANDLER_H
+#define XEVENTHANDLER_H
 
-#include <QDBusObjectPath>
-#include <QTextStream>
+#include <QWidget>
 
-#include "Edid.h"
-
-extern "C"
+class XEventHandler : public QWidget
 {
-    #include <X11/Xlib.h>
-    #define INT8 _X11INT8
-    #define INT32 _X11INT32
-    #include <X11/Xproto.h>
-    #undef INT8
-    #undef INT32
-    #include <X11/extensions/Xrandr.h>
-}
-
-class Output
-{
-    Q_GADGET
+    Q_OBJECT
 public:
-    Output(RROutput output, XRRScreenResources *resources);
-    void update();
+    XEventHandler(int randr_base);
 
-    bool connected() const;
-    bool isLaptop() const;
-    QString name() const;
-    void setPath(const QDBusObjectPath &path);
-    QDBusObjectPath path() const;
-    RRCrtc crtc() const;
-    RROutput output() const;
-    int getGammaSize();
-    void setGamma(XRRCrtcGamma *gamma);
+signals:
+    void outputChanged();
 
-    Edid readEdidData();
-    QString edidHash() const;
-
-    bool operator==(const Output &output) const;
+protected:
+    virtual bool x11Event(XEvent *event);
 
 private:
-    /**
-      * Callers should delete the data if not 0
-      */
-    quint8* readEdidData(size_t &len);
-
-    RROutput m_output;
-    XRRScreenResources *m_resources;
-    QString m_edidHash;
-    QDBusObjectPath m_path;
-
-    bool m_connected;
-    QString m_name;
-    RRCrtc m_crtc;
+    int m_randr_notify;
 };
 
-#endif // OUTPUT_H
+#endif // XEVENTHANDLER_H

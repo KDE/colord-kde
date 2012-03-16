@@ -29,11 +29,17 @@
 
 Output::Output(RROutput output, XRRScreenResources *resources) :
     m_output(output),
-    m_resources(resources),
-    m_connected(false)
+    m_resources(resources)
 {
+    update();
+}
+
+void Output::update()
+{
+    m_connected = false;
+
     XRROutputInfo *info;
-    info = XRRGetOutputInfo(QX11Info::display(), m_resources, output);
+    info = XRRGetOutputInfo(QX11Info::display(), m_resources, m_output);
     if (info == NULL) {
         XRRFreeOutputInfo(info);
         return;
@@ -139,13 +145,13 @@ RROutput Output::output() const
     return m_output;
 }
 
-int Output::getGammaSize() const
+int Output::getGammaSize()
 {
     // The gama size of this output
     return XRRGetCrtcGammaSize(QX11Info::display(), m_crtc);
 }
 
-void Output::setGamma(XRRCrtcGamma *gamma) const
+void Output::setGamma(XRRCrtcGamma *gamma)
 {
     XRRSetCrtcGamma(QX11Info::display(), m_crtc, gamma);
 }

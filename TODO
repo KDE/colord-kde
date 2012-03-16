@@ -1,6 +1,5 @@
 We miss some stuff
 
-* Detecting new displays, and remove them when removed
 * Graphs
 - toRGB
 - fromRGB
