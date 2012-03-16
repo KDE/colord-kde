@@ -17,27 +17,30 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILE_DESCRIPTION_H
-#define PROFILE_DESCRIPTION_H
+#ifndef PROFILENAMEDCOLORS_H
+#define PROFILENAMEDCOLORS_H
 
 #include <QWidget>
-#include <QDBusObjectPath>
+#include <QQuaternion>
+#include <QStandardItemModel>
 
 namespace Ui {
-    class ProfileDescription;
+    class ProfileNamedColors;
 }
-class ProfileDescription : public QWidget
+
+class ProfileNamedColors : public QWidget
 {
     Q_OBJECT
-public:
-    explicit ProfileDescription(QWidget *parent = 0);
-    ~ProfileDescription();
 
-    int innerHeight() const;
-    void setProfile(const QDBusObjectPath &objectPath);
+public:
+    explicit ProfileNamedColors(QWidget *parent = 0);
+    ~ProfileNamedColors();
+
+    void setNamedColors(const QMap<QString, QQuaternion> &namedColors);
 
 private:
-    Ui::ProfileDescription *ui;
+    Ui::ProfileNamedColors *ui;
+    QStandardItemModel *m_model;
 };
 
-#endif // PROFILE_DESCRIPTION_H
+#endif // PROFILENAMEDCOLORS_H

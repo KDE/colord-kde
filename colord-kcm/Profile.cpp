@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti                                *
- *   dantti12@gmail.com                                                    *
+ *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -407,6 +406,142 @@ QString Profile::checksum() const
 uint Profile::temperature() const
 {
     return m_temperature;
+}
+
+QMap<QString, QQuaternion> Profile::getNamedColors()
+{
+    QMap<QString, QQuaternion> array;
+    cmsCIELab lab;
+    cmsCIEXYZ xyz;
+    cmsHPROFILE profile_lab = NULL;
+    cmsHPROFILE profile_xyz = NULL;
+    cmsHTRANSFORM xform = NULL;
+    cmsNAMEDCOLORLIST *nc2 = NULL;
+    cmsUInt16Number pcs[3];
+    cmsUInt32Number count;
+    bool ret;
+    char name[cmsMAX_PATH];
+    char prefix[33];
+    char suffix[33];
+//    GcmNamedColor *nc;
+//    GcmProfilePrivate *priv = profile->priv;
+//    GPtrArray *array = NULL;
+//    GString *string;
+//    unsigned char tmp;
+//    uint i, j;
+
+    /* setup a dummy transform so we can get all the named colors */
+    profile_lab = cmsCreateLab2Profile(NULL);
+    profile_xyz = cmsCreateXYZProfile();
+    xform = cmsCreateTransform(profile_lab, TYPE_Lab_DBL,
+                               profile_xyz, TYPE_XYZ_DBL,
+                               INTENT_ABSOLUTE_COLORIMETRIC, 0);
+    if (xform == NULL) {
+        kWarning() << "no transform";
+//        g_set_error_literal (error, 1, 0, "no transform");
+        goto out;
+    }
+
+    /* retrieve named color list from transform */
+    nc2 = static_cast<cmsNAMEDCOLORLIST*>(cmsReadTag(m_lcmsProfile, cmsSigNamedColor2Tag));
+    if (nc2 == NULL) {
+        kWarning() << "no named color list";
+//        g_set_error_literal (error, 1, 0, "no named color list");
+        goto out;
+    }
+
+    /* get the number of NCs */
+    count = cmsNamedColorCount(nc2);
+    if (count == 0) {
+        kWarning() << "no named colors";
+//        g_set_error_literal (error, 1, 0, "no named colors");
+        goto out;
+    }
+
+    for (uint i = 0; i < count; ++i) {
+
+        /* parse title */
+        QString string;
+//        string = g_string_new("");
+        ret = cmsNamedColorInfo(nc2, i,
+                                name,
+                                prefix,
+                                suffix,
+                                (cmsUInt16Number *)&pcs,
+                                NULL);
+        if (!ret) {
+            kWarning() << "failed to get NC #" << i;
+            goto out;
+        }
+        if (prefix[0] != '\0') {
+            string.append(prefix);
+//            g_string_append_printf (string, "%s ", prefix);
+        }
+        string.append(name);
+//        g_string_append (string, name);
+        if (suffix[0] != '\0') {
+            string.append(suffix);
+//            g_string_append_printf (string, " %s", suffix);
+        }
+
+        /* check is valid */
+//        ret = g_utf8_validate (string->str, string->len, NULL);
+//        if (!ret) {
+//            g_warning ("invalid 7 bit ASCII / UTF8, repairing");
+//            for (j=0; j<string->len; j++) {
+//                tmp = (guchar) string->str[j];
+
+//                /* (R) */
+//                if (tmp == 0xae) {
+//                    string->str[j] = 0xc2;
+//                    g_string_insert_c (string, j+1, tmp);
+//                    j+=1;
+//                }
+
+//                /* unknown */
+//                if (tmp == 0x86) {
+//                    g_string_erase (string, j, 1);
+//                }
+//            }
+//        }
+
+        /* check if we repaired it okay */
+//        ret = g_utf8_validate (string->str, string->len, NULL);
+//        if (!ret) {
+//            g_warning ("failed to fix: skipping entry");
+//            for (j=0; j<string->len; j++)
+//                g_print ("'%c' (%x)\n", string->str[j], (gchar)string->str[j]);
+//            continue;
+//        }
+
+        /* get color */
+        cmsLabEncoded2Float((cmsCIELab *) &lab, pcs);
+        cmsDoTransform(xform, &lab, &xyz, 1);
+
+        /* create new nc */
+        QQuaternion color;
+        color.setX(xyz.X);
+        color.setY(xyz.Y);
+        color.setZ(xyz.Z);
+        kDebug() << string << " - " << color;
+        array[string] = color;
+
+        /*
+        nc = gcm_named_color_new ();
+        gcm_named_color_set_title (nc, string->str);
+        gcm_named_color_set_value (nc, &xyz);
+        g_ptr_array_add (array, nc);*/
+
+//        g_string_free (string, TRUE);
+    }
+out:
+    if (profile_lab != NULL)
+        cmsCloseProfile(profile_lab);
+    if (profile_xyz != NULL)
+        cmsCloseProfile(profile_xyz);
+    if (xform != NULL)
+        cmsDeleteTransform(xform);
+    return array;
 }
 
 QString Profile::profileWithSource(const QString &dataSource, const QString &profilename)

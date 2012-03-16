@@ -213,6 +213,7 @@ void ColorD::addOutput(Output &output)
     // We use temp because if we crash or quit the device gets removedf
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
+    kWarning() << "Adding device id:" << deviceId;
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
     if (reply.isValid()) {
         kDebug() << "created colord device" << reply.value().path();
@@ -239,6 +240,8 @@ void ColorD::addOutput(Output &output)
         if (ret == false) {
             kWarning() << "Failed to create auto profile";
         }
+    } else {
+        kWarning() << "Failed to register device:" << reply.error().message();
     }
 }
 

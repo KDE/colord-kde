@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti                                *
- *   dantti12@gmail.com                                                    *
+ *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -59,6 +58,8 @@ public:
     QDateTime datetime() const;
     QString checksum() const;
     uint temperature() const;
+
+    QMap<QString, QQuaternion> getNamedColors();
 
     static QString profileWithSource(const QString &dataSource, const QString &profilename);
 

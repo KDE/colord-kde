@@ -149,6 +149,10 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
 
     connect(signalMapper, SIGNAL(mapped(int)),
             ui->tabWidget, SLOT(setCurrentIndex(int)));
+
+    // align the tabbar to the list view
+    int offset = ui->profile->innerHeight() - ui->devicesTV->sizeHint().height();
+    ui->offsetSpacer->changeSize(30, offset, QSizePolicy::Fixed, QSizePolicy::Fixed);
 }
 
 ColordKCM::~ColordKCM()

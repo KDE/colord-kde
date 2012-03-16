@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti                                *
- *   dantti12@gmail.com                                                    *
+ *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -40,6 +39,11 @@ ProfileDescription::ProfileDescription(QWidget *parent) :
 ProfileDescription::~ProfileDescription()
 {
     delete ui;
+}
+
+int ProfileDescription::innerHeight() const
+{
+    return ui->tabWidget->currentWidget()->sizeHint().height();
 }
 
 void ProfileDescription::setProfile(const QDBusObjectPath &objectPath)
@@ -114,6 +118,8 @@ void ProfileDescription::setProfile(const QDBusObjectPath &objectPath)
         kDebug() << profile.model();
         kDebug() << profile.manufacturer();
         kDebug() << profile.copyright();
+
+        profile.getNamedColors();
     }
     kDebug() << profile.filename();
 }

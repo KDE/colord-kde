@@ -17,27 +17,36 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILE_DESCRIPTION_H
-#define PROFILE_DESCRIPTION_H
+#include "ProfileNamedColors.h"
+#include "ui_ProfileNamedColors.h"
 
-#include <QWidget>
-#include <QDBusObjectPath>
+#include <QColor>
 
-namespace Ui {
-    class ProfileDescription;
-}
-class ProfileDescription : public QWidget
+#include <KDebug>
+
+ProfileNamedColors::ProfileNamedColors(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::ProfileNamedColors)
 {
-    Q_OBJECT
-public:
-    explicit ProfileDescription(QWidget *parent = 0);
-    ~ProfileDescription();
+    ui->setupUi(this);
 
-    int innerHeight() const;
-    void setProfile(const QDBusObjectPath &objectPath);
+    m_model = new QStandardItemModel(this);
+    ui->treeView->setModel(m_model);
+}
 
-private:
-    Ui::ProfileDescription *ui;
-};
+ProfileNamedColors::~ProfileNamedColors()
+{
+    delete ui;
+}
 
-#endif // PROFILE_DESCRIPTION_H
+void ProfileNamedColors::setNamedColors(const QMap<QString, QQuaternion> &namedColors)
+{
+    QMap<QString, QQuaternion>::const_iterator i = namedColors.constBegin();
+    while (i != namedColors.constEnd()) {
+        kDebug() << i.key() << ": " << i.value();
+//        QStandardItem *name = new QStandardItem(i.key());
+
+//        QStandardItem *color = new QStandardItem(i.key());
+        ++i;
+    }
+}
