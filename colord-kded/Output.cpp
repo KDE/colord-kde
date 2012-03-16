@@ -29,15 +29,9 @@
 
 Output::Output(RROutput output, XRRScreenResources *resources) :
     m_output(output),
-    m_resources(resources)
+    m_resources(resources),
+    m_connected(false)
 {
-    update();
-}
-
-void Output::update()
-{
-    m_connected = false;
-
     XRROutputInfo *info;
     info = XRRGetOutputInfo(QX11Info::display(), m_resources, m_output);
     if (info == NULL) {
@@ -117,6 +111,15 @@ bool Output::isLaptop() const
         return true;
     }
 
+    return false;
+}
+
+bool Output::isPrimary(bool hasXRandR13, Window root) const
+{
+    if (hasXRandR13) {
+        RROutput primary = XRRGetOutputPrimary(QX11Info::display(), root);
+        return primary == m_output;
+    }
     return false;
 }
 

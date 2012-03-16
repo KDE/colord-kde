@@ -26,7 +26,6 @@
 
 #include <QVariantList>
 #include <QFileInfo>
-#include <QTimer>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
@@ -68,9 +67,10 @@ private slots:
     void addProfile(const QString &filename);
     void removeProfile(const QString &filename);
 
+    void scanHomeDirectory();
+
 private:
     quint8* readEdidData(RROutput output, size_t &len);
-    void scanHomeDirectory();
     void connectToDisplay();
     void connectToColorD();
     void addOutput(Output &output);
@@ -80,7 +80,6 @@ private:
     QString profilesPath() const;
 
     QList<Output> m_connectedOutputs;
-    QTimer *m_checkOutputsTimer;
 
     Display *m_dpy;
     XEventHandler *m_eventHandler;
@@ -91,6 +90,7 @@ private:
     QString m_errorCode;
     QString m_version;
 
+    bool m_has_1_3;
     int m_eventBase;
     int m_errorBase;
 };

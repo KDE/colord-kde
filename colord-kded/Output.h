@@ -41,10 +41,10 @@ class Output
     Q_GADGET
 public:
     Output(RROutput output, XRRScreenResources *resources);
-    void update();
 
     bool connected() const;
     bool isLaptop() const;
+    bool isPrimary(bool hasXRandR13, Window root) const;
     QString name() const;
     void setPath(const QDBusObjectPath &path);
     QDBusObjectPath path() const;

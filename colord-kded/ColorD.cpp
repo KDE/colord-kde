@@ -37,6 +37,7 @@
 
 #include <QFile>
 #include <QDir>
+#include <QTimer>
 #include <QStringBuilder>
 #include <QDBusMetaType>
 #include <QDBusUnixFileDescriptor>
@@ -47,11 +48,9 @@
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))
 
-bool has_1_2 = false;
-bool has_1_3 = false;
-
 ColorD::ColorD(QObject *parent, const QVariantList &args) :
-    KDEDModule(parent)
+    KDEDModule(parent),
+    m_has_1_3(false)
 {
     // There's not much use for args in a KCM
     Q_UNUSED(args)
@@ -60,30 +59,14 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     qDBusRegisterMetaType<StringStringMap>();
     qDBusRegisterMetaType<QDBusUnixFileDescriptor>();
 
-    /* connect to colord using DBus */
+    // connect to colord using DBus
     connectToColorD();
 
-    /* Connect to the display */
+    // Connect to the display
     connectToDisplay();
 
-    /* Scan all the *.icc files */
-    scanHomeDirectory();
-
-    // This timer makes sure subsequent changes don't
-    // keep checking our outputs
-//    m_checkOutputsTimer = new QTimer(this);
-//    m_checkOutputsTimer->setInterval(600);
-//    connect(m_checkOutputsTimer, SIGNAL(timeout()),
-//            this, SLOT(checkOutputs()));
-
-//    // The desktop widget infor us about outputs changes
-//    QDesktopWidget *desktopWidget = QApplication::desktop();
-//    connect(desktopWidget, SIGNAL(screenCountChanged(int)),
-//            m_checkOutputsTimer, SLOT(start()));
-//    connect(desktopWidget, SIGNAL(resized(int)),
-//            m_checkOutputsTimer, SLOT(start()));
-//    connect(desktopWidget, SIGNAL(workAreaResized(int)),
-//            m_checkOutputsTimer, SLOT(start()));
+    // Scan all the *.icc files later on the event loop as this takes quite some time
+    QTimer::singleShot(0, this, SLOT(scanHomeDirectory()));
 }
 
 ColorD::~ColorD()
@@ -112,7 +95,6 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     bool fdPass;
     fdPass = (QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing);
 
-    //TODO: how to save these private to the class?
     QDBusMessage message;
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("/org/freedesktop/ColorManager"),
@@ -153,6 +135,14 @@ void ColorD::scanHomeDirectory()
         }
     }
 
+    //check if any changes to the file occour
+    //this also prevents from reading when a checkUpdate happens
+    KDirWatch *confWatch = new KDirWatch(this);
+    confWatch->addDir(profilesDir.path(), KDirWatch::WatchFiles);
+    connect(confWatch, SIGNAL(created(QString)), this, SLOT(addProfile(QString)));
+    connect(confWatch, SIGNAL(deleted(QString)), this, SLOT(removeProfile(QString)));
+    confWatch->startScan();
+
     // Call AddProfile() for each file
     foreach (const QFileInfo &fileInfo, profilesDir.entryInfoList(QDir::Files)) {
         KMimeType::Ptr mimeType;
@@ -161,14 +151,6 @@ void ColorD::scanHomeDirectory()
             addProfile(fileInfo);
         }
     }
-
-    //check if any changes to the file occour
-    //this also prevents from reading when a checkUpdate happens
-    KDirWatch *confWatch = new KDirWatch(this);
-    confWatch->addDir(profilesDir.path(), KDirWatch::WatchFiles);
-    connect(confWatch, SIGNAL(created(QString)), this, SLOT(addProfile(QString)));
-    connect(confWatch, SIGNAL(deleted(QString)), this, SLOT(removeProfile(QString)));
-    confWatch->startScan();
 }
 
 void ColorD::addOutput(Output &output)
@@ -183,29 +165,28 @@ void ColorD::addOutput(Output &output)
         return;
     }
 
+    // Check if the output is the laptop panel
+    bool isLaptop = output.isLaptop();
+
     Edid edid = output.readEdidData();
-    if (edid.isValid()) {
-        kDebug() << "Edid Valid" << edid.deviceId(output.name());
-        kDebug() << "Edid vendor" << edid.vendor();
-        kDebug() << "Edid serial" << edid.serial();
-        kDebug() << "Edid name" << edid.name();
-        // TODO check if this is a laptop
+    // If it's not the laptop panel and the edid is valid grab the edid info
+    if (!isLaptop && edid.isValid()) {
         if (!edid.vendor().isEmpty()) {
+            // Store the monitor vendor
             edidVendor = edid.vendor();
         }
         if (!edid.name().isEmpty()) {
+            // Store the monitor model
             edidModel = edid.name();
         }
-    }
-
-    bool isLaptop = output.isLaptop();
-    if (isLaptop) {
+    } else if (isLaptop) {
+        // Use the DMI info when on a laptop
         edidModel = DmiUtils::deviceModel();
         edidVendor = DmiUtils::deviceVendor();
-        kDebug() << "Output is laptop" << edidModel << edidVendor;
     }
 
     if (!edid.serial().isEmpty()) {
+        // Store the EDID serial number
         edidSerial = edid.serial();
     }
 
@@ -213,10 +194,6 @@ void ColorD::addOutput(Output &output)
     // if handles the fallback name if it's not valid
     deviceId = edid.deviceId(output.name());
 
-    /* get the md5 of the EDID blob */
-    //TODO
-
-    //TODO: how to save these private to the class?
     StringStringMap properties;
     properties["Kind"] = "display";
     properties["Mode"] = "physical";
@@ -233,16 +210,20 @@ void ColorD::addOutput(Output &output)
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("CreateDevice"));
     message << qVariantFromValue(deviceId);
-    // TODO wheter to use: normal, temp or disk ?
+    // We use temp because if we crash or quit the device gets removedf
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
     if (reply.isValid()) {
-        /* parse the edid and save in a hash table [m_hash_edid_md5?]*/
-        //TODO, and maybe c++ize http://git.gnome.org/browse/gnome-settings-daemon/tree/plugins/color/gcm-edid.c
+        kDebug() << "created colord device" << reply.value().path();
+
+        // Store the output path into our Output class
         output.setPath(reply.value());
+
+        // Store the connected output into the connected list
         m_connectedOutputs << output;
 
+        // Creates a path for out auto generated profile
         QString autogenPath = profilesPath();
         QDir profilesDir(autogenPath);
         if (!profilesDir.exists()) {
@@ -251,15 +232,14 @@ void ColorD::addOutput(Output &output)
                 kWarning() << "Failed to create icc path '~/.local/share/icc'";
             }
         }
-
         autogenPath.append(QLatin1String("edid-") % edid.hash() % QLatin1String(".icc"));
+
         bool ret;
         ret = ProfileUtils::createIccProfile(isLaptop, edid, autogenPath);
         if (ret == false) {
             kWarning() << "Failed to create auto profile";
         }
     }
-    kDebug() << "created device" << reply.value().path();
 }
 
 void ColorD::outputChanged(Output &output)
@@ -320,9 +300,6 @@ void ColorD::outputChanged(Output &output)
         return;
     }
 
-    // TODO we need to check when the output got disabled to avoid the X error
-//    output.update();
-
     // The gama size of this output
     int gamaSize = output.getGammaSize();
     if (gamaSize == 0) {
@@ -361,20 +338,51 @@ void ColorD::outputChanged(Output &output)
 
     XRRFreeGamma(gamma);
 
-    // export the file data as an x atom on the *screen* (not output)
-    Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", true);
-    int rc = XChangeProperty(m_dpy,
-                             m_root,
-                             prop,
-                             XA_CARDINAL,
-                             8,
-                             PropModeReplace,
-                             (unsigned char *) data.data(),
-                             data.size());
+    bool isPrimary = false;
+    if (output.isPrimary(m_has_1_3, m_root)) {
+        isPrimary = true;
+    } else {
+        // if we find another primary output we are sure
+        // this is not the primary one..
+        bool foundPrimary = false;
+        foreach (const Output &out, m_connectedOutputs) {
+            if (out.isPrimary(m_has_1_3, m_root)) {
+                foundPrimary = true;
+                break;
+            }
+        }
 
-    // for some reason this fails with BadRequest, but actually sets the value
-    if (rc != BadRequest && rc != Success) {
-        kWarning() << "Failed to set XProperty";
+        // We did not found the primary
+        if (!foundPrimary) {
+            if (output.isLaptop()) {
+                // there are no other primary outputs
+                // in a Laptop's case it's probably the one
+                isPrimary = true;
+            } else if (!m_connectedOutputs.isEmpty()) {
+                // Last resort just take the first connected
+                // output
+                isPrimary = m_connectedOutputs.first() == output;
+            }
+        }
+    }
+
+    if (isPrimary) {
+        kDebug() << "Setting X atom on output:"  << output.name();
+        // export the file data as an x atom on PRIMARY *screen* (not output)
+        Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", true);
+        int rc = XChangeProperty(m_dpy,
+                                 m_root,
+                                 prop,
+                                 XA_CARDINAL,
+                                 8,
+                                 PropModeReplace,
+                                 (unsigned char *) data.data(),
+                                 data.size());
+
+        // for some reason this fails with BadRequest, but actually sets the value
+        if (rc != BadRequest && rc != Success) {
+            kWarning() << "Failed to set XProperty";
+        }
     }
 }
 
@@ -418,10 +426,11 @@ void ColorD::connectToDisplay()
                      major_version,minor_version);
 
     // check if we have the new version of the XRandR extension
+    bool has_1_2;
     has_1_2 = (major_version > 1 || (major_version == 1 && minor_version >= 2));
-    has_1_3 = (major_version > 1 || (major_version == 1 && minor_version >= 3));
+    m_has_1_3 = (major_version > 1 || (major_version == 1 && minor_version >= 3));
 
-    if (has_1_3) {
+    if (m_has_1_3) {
         kDebug() << "Using XRANDR extension 1.3 or greater.";
     } else if (has_1_2) {
         kDebug() << "Using XRANDR extension 1.2.";
@@ -437,7 +446,7 @@ void ColorD::connectToDisplay()
      */
     m_root = RootWindow(m_dpy, 0);
 
-    if (has_1_3) {
+    if (m_has_1_3) {
         m_resources = XRRGetScreenResourcesCurrent(m_dpy, m_root);
     } else {
         m_resources = XRRGetScreenResources(m_dpy, m_root);
@@ -453,25 +462,18 @@ void ColorD::connectToDisplay()
 void ColorD::checkOutputs()
 {
     kDebug();
-//    m_checkOutputsTimer->stop();
     // Check the output as something has changed
     for (int i = 0; i < m_resources->noutput; ++i) {
         Output currentOutput(m_resources->outputs[i], m_resources);
-        int i = m_connectedOutputs.indexOf(currentOutput);
-        if (i != -1) {
-            if (currentOutput.connected()) {
-                // Maybe the resolution changed
-                // TODO should we store the resolution
-                // if so is the resolution enough?
-                kDebug() << "device changed";
-                deviceChanged(m_connectedOutputs.at(i).path());
-            } else {
-                // remove the device
-                kDebug() << "device removed";
-                removeOutput(m_connectedOutputs.at(i));
+        int index = m_connectedOutputs.indexOf(currentOutput);
+        if (index != -1) {
+            if (!currentOutput.connected()) {
+                // The device is not connected anymore
+                kDebug() << "remove device";
+                removeOutput(m_connectedOutputs.at(index));
             }
-        } else {
-            // Output not found
+        } else if (currentOutput.connected()) {
+            // Output is now connected
             addOutput(currentOutput);
         }
     }

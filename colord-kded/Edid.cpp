@@ -88,7 +88,6 @@ QString Edid::deviceId(const QString &fallbackName) const
 
 QString Edid::name() const
 {
-    kDebug() << m_monitorName;
     if (m_valid) {
         return m_monitorName;
     }
@@ -97,7 +96,6 @@ QString Edid::name() const
 
 QString Edid::vendor() const
 {
-    kDebug() << m_vendorName;
     if (m_valid) {
         return m_vendorName;
     }
@@ -106,7 +104,6 @@ QString Edid::vendor() const
 
 QString Edid::serial() const
 {
-    kDebug() << m_serialNumber;
     if (m_valid) {
         return m_serialNumber;
     }
@@ -348,43 +345,13 @@ double Edid::edidDecodeFraction(int high, int low) const
 QString Edid::edidParseString(const quint8 *data) const
 {
         QString text;
-//        uint i;
-//        uint replaced = 0;
 
         /* this is always 12 bytes, but we can't guarantee it's null
          * terminated or not junk. */
         text = QString::fromLocal8Bit((const char*) data, 12);
-//        text = g_strndup ((const gchar *) data, 12);
 
-        /* remove insane newline chars */
+        // Remove newlines, extra spaces and stuff
         text = text.simplified();
-//        g_strdelimit (text, "\n\r", '\0');
 
-        /* remove spaces */
-//        g_strchomp (text);
-
-        /* nothing left? */
-//        if (text[0] == '\0') {
-//                g_free (text);
-//                text = NULL;
-//                goto out;
-//        }
-
-        /* ensure string is printable */
-//        for (i = 0; text[i] != '\0'; i++) {
-//                if (!g_ascii_isprint (text[i])) {
-//                        text[i] = '-';
-//                        replaced++;
-//                }
-//        }
-
-        /* if the string is junk, ignore the string */
-//        if (replaced > 4) {
-//                g_free (text);
-//                text = NULL;
-//                goto out;
-//        }
-        kDebug() << "text" << text;
-//out:
         return text;
 }
