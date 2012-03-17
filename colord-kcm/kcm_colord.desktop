@@ -8,5 +8,16 @@ X-KDE-System-Settings-Parent-Category=hardware
 X-KDE-System-Settings-Parent-Category-V2=hardware
 
 Name=Color
+Name[nl]=Kleur
+Name[pt]=Cor
+Name[pt_BR]=Cor
+Name[sv]=Färg
+Name[uk]=Колір
+Name[x-test]=xxColorxx
 
 Comment=Manage color correction of devices
+Comment[nl]=Kleurcorrectie beheren van apparaten
+Comment[pt]=Gerir a correcção de cores dos dispositivos
+Comment[sv]=Hantera färgkorrektion för enheter
+Comment[uk]=Керування виправленням кольорів на пристроях
+Comment[x-test]=xxManage color correction of devicesxx
