@@ -66,7 +66,7 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     // Connect to the display
     connectToDisplay();
 
-    // Make sure we know is Sentinel is running
+    // Make sure we know is colord is running
     QDBusServiceWatcher *watcher;
     watcher = new QDBusServiceWatcher("org.freedesktop.ColorManager",
                                       QDBusConnection::systemBus(),
@@ -178,10 +178,14 @@ void ColorD::scanHomeDirectory()
 void ColorD::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
 {
     Q_UNUSED(serviceName)
-    kDebug() << serviceName << oldOwner << newOwner;
+    kDebug() << oldOwner << newOwner;
     if (newOwner.isEmpty()) {
         // colord has quit
         reset();
+    } else if (oldOwner != newOwner) {
+        // colord has a new owner
+        reset();
+        init();
     } else {
         // colord has started
         init();

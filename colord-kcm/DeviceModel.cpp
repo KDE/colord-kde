@@ -20,11 +20,12 @@
 
 #include "DeviceModel.h"
 
-#include <QDBusInterface>
-#include <QDBusMetaType>
-#include <QDBusMessage>
-#include <QDBusConnection>
-#include <QDBusReply>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusMetaType>
+#include <QtDBus/QDBusMessage>
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusReply>
+#include <QtDBus/QDBusServiceWatcher>
 #include <QStringBuilder>
 
 #include <KDebug>
@@ -44,7 +45,6 @@ DeviceModel::DeviceModel(QObject *parent) :
                                    QLatin1String("org.freedesktop.ColorManager"),
                                    QDBusConnection::systemBus(),
                                    this);
-
     // listen to colord for events
     connect(interface, SIGNAL(DeviceAdded(QDBusObjectPath)),
             this, SLOT(deviceAdded(QDBusObjectPath)));
@@ -53,6 +53,16 @@ DeviceModel::DeviceModel(QObject *parent) :
     connect(interface, SIGNAL(DeviceChanged(QDBusObjectPath)),
             this, SLOT(deviceChanged(QDBusObjectPath)));
 
+    // Make sure we know is colord is running
+    QDBusServiceWatcher *watcher;
+    watcher = new QDBusServiceWatcher("org.freedesktop.ColorManager",
+                                      QDBusConnection::systemBus(),
+                                      QDBusServiceWatcher::WatchForOwnerChange,
+                                      this);
+    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
+            this, SLOT(serviceOwnerChanged(QString,QString,QString)));
+
+    // Ask for devices
     QDBusMessage message;
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("/org/freedesktop/ColorManager"),
@@ -155,6 +165,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
 
     QStandardItem *item = new QStandardItem;
     item->setData(qVariantFromValue(objectPath), ObjectPathRole);
+    item->setData(true, IsDeviceRole);
 
     if (kind == QLatin1String("display")) {
         item->setIcon(KIcon(QLatin1String("video-display")));
@@ -201,7 +212,6 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
                                                        objectPath,
                                                        profileItems.isEmpty());
         profileItems << profileItem;
-        kDebug() << profileObjectPath.path();
     }
     item->appendRows(profileItems);
 
@@ -220,6 +230,16 @@ void DeviceModel::deviceRemoved(const QDBusObjectPath &objectPath)
     }
 
     emit changed();
+}
+
+void DeviceModel::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
+{
+    Q_UNUSED(serviceName)
+    if (newOwner.isEmpty() || oldOwner != newOwner) {
+        // colord has quit or restarted
+        removeRows(0, rowCount());
+        emit changed();
+    }
 }
 
 QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,

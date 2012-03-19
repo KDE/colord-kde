@@ -20,12 +20,13 @@
 #include "ProfileModel.h"
 #include "Profile.h"
 
-#include <QDBusInterface>
-#include <QDBusMetaType>
-#include <QDBusMessage>
-#include <QDBusConnection>
-#include <QDBusReply>
-#include <QDBusArgument>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusMetaType>
+#include <QtDBus/QDBusMessage>
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusReply>
+#include <QtDBus/QDBusArgument>
+#include <QtDBus/QDBusServiceWatcher>
 #include <QStringBuilder>
 #include <QFileInfo>
 
@@ -48,7 +49,6 @@ ProfileModel::ProfileModel(QObject *parent) :
                                    QLatin1String("org.freedesktop.ColorManager"),
                                    QDBusConnection::systemBus(),
                                    this);
-
     // listen to colord for events
     connect(interface, SIGNAL(ProfileAdded(QDBusObjectPath)),
             this, SLOT(profileAdded(QDBusObjectPath)));
@@ -57,6 +57,16 @@ ProfileModel::ProfileModel(QObject *parent) :
     connect(interface, SIGNAL(ProfileChanged(QDBusObjectPath)),
             this, SLOT(profileChanged(QDBusObjectPath)));
 
+    // Make sure we know is colord is running
+    QDBusServiceWatcher *watcher;
+    watcher = new QDBusServiceWatcher("org.freedesktop.ColorManager",
+                                      QDBusConnection::systemBus(),
+                                      QDBusServiceWatcher::WatchForOwnerChange,
+                                      this);
+    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
+            this, SLOT(serviceOwnerChanged(QString,QString,QString)));
+
+    // Ask for profiles
     QDBusMessage message;
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("/org/freedesktop/ColorManager"),
@@ -201,6 +211,16 @@ void ProfileModel::profileRemoved(const QDBusObjectPath &objectPath)
     }
 
     emit changed();
+}
+
+void ProfileModel::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
+{
+    Q_UNUSED(serviceName)
+    if (newOwner.isEmpty() || oldOwner != newOwner) {
+        // colord has quit or restarted
+        removeRows(0, rowCount());
+        emit changed();
+    }
 }
 
 int ProfileModel::findItem(const QDBusObjectPath &objectPath)

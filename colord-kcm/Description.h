@@ -17,34 +17,35 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILE_DESCRIPTION_H
-#define PROFILE_DESCRIPTION_H
+#ifndef DESCRIPTION_H
+#define DESCRIPTION_H
 
 #include <QWidget>
 #include <QDBusObjectPath>
 
 namespace Ui {
-    class ProfileDescription;
+    class Description;
 }
 class ProfileNamedColors;
 class ProfileMetaData;
-class ProfileDescription : public QWidget
+class Description : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ProfileDescription(QWidget *parent = 0);
-    ~ProfileDescription();
+    explicit Description(QWidget *parent = 0);
+    ~Description();
 
     int innerHeight() const;
     void setProfile(const QDBusObjectPath &objectPath);
+    void setDevice(const QDBusObjectPath &objectPath);
 
 private:
     void insertTab(int index, QWidget *widget, const QString &label);
     void removeTab(QWidget *widget);
 
-    Ui::ProfileDescription *ui;
+    Ui::Description *ui;
     ProfileNamedColors *m_namedColors;
     ProfileMetaData *m_metadata;
 };
 
-#endif // PROFILE_DESCRIPTION_H
+#endif // DESCRIPTION_H

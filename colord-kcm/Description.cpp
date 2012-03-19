@@ -17,8 +17,8 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#include "ProfileDescription.h"
-#include "ui_ProfileDescription.h"
+#include "Description.h"
+#include "ui_Description.h"
 
 #include "Profile.h"
 #include "ProfileNamedColors.h"
@@ -27,6 +27,7 @@
 #include <math.h>
 
 #include <QFileInfo>
+#include <QStringBuilder>
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
 
@@ -41,11 +42,12 @@
 #define TAB_NAMED_COLORS 7
 #define TAB_METADATA     8
 
+typedef QList<QDBusObjectPath> ObjectPathList;
 typedef QMap<QString, QString>  StringStringMap;
 
-ProfileDescription::ProfileDescription(QWidget *parent) :
+Description::Description(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ProfileDescription)
+    ui(new Ui::Description)
 {
     ui->setupUi(this);
 
@@ -53,7 +55,7 @@ ProfileDescription::ProfileDescription(QWidget *parent) :
     m_metadata = new ProfileMetaData;
 }
 
-ProfileDescription::~ProfileDescription()
+Description::~Description()
 {
     delete m_namedColors;
     delete m_metadata;
@@ -61,13 +63,14 @@ ProfileDescription::~ProfileDescription()
     delete ui;
 }
 
-int ProfileDescription::innerHeight() const
+int Description::innerHeight() const
 {
-    return ui->tabWidget->currentWidget()->sizeHint().height();
+    return ui->tabWidget->currentWidget()->height();
 }
 
-void ProfileDescription::setProfile(const QDBusObjectPath &objectPath)
+void Description::setProfile(const QDBusObjectPath &objectPath)
 {
+    ui->stackedWidget->setCurrentIndex(0);
     QDBusInterface *profileInterface;
     profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
                                          objectPath.path(),
@@ -174,7 +177,103 @@ void ProfileDescription::setProfile(const QDBusObjectPath &objectPath)
     kDebug() << profile.filename();
 }
 
-void ProfileDescription::insertTab(int index, QWidget *widget, const QString &label)
+void Description::setDevice(const QDBusObjectPath &objectPath)
+{
+    while (ui->tabWidget->count() > 1) {
+        ui->tabWidget->removeTab(1);
+    }
+
+    ui->stackedWidget->setCurrentIndex(1);
+
+    QDBusInterface *deviceInterface;
+    deviceInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                         objectPath.path(),
+                                         QLatin1String("org.freedesktop.ColorManager.Device"),
+                                         QDBusConnection::systemBus(),
+                                         this);
+    if (!deviceInterface->isValid()) {
+        deviceInterface->deleteLater();
+        return;
+    }
+
+    QString deviceTitle;
+    QString deviceId = deviceInterface->property("DeviceId").toString();
+    QString kind = deviceInterface->property("Kind").toString();
+    QString model = deviceInterface->property("Model").toString();
+    QString vendor = deviceInterface->property("Vendor").toString();
+    QString scope = deviceInterface->property("Scope").toString();
+    if (model.isEmpty() && vendor.isEmpty()) {
+        deviceTitle = deviceId;
+    } else if (model.isEmpty()) {
+        deviceTitle = vendor;
+    } else if (vendor.isEmpty()) {
+        deviceTitle = model;
+    } else {
+        deviceTitle = vendor % QLatin1String(" - ") % model;
+    }
+    ui->ktitlewidget->setText(deviceTitle);
+
+    if (kind == QLatin1String("printer")) {
+        kind = i18n("Printer");
+    } else if (kind == QLatin1String("display")) {
+        kind = i18n("Display");
+    } else if (kind == QLatin1String("webcam")) {
+        kind = i18n("Webcam");
+    } else if (kind == QLatin1String("scanner")) {
+        kind = i18n("Scanner");
+    } else {
+        kind = i18n("Unknown");
+    }
+    ui->ktitlewidget->setComment(kind);
+
+    ui->deviceIdL->setText(deviceId);
+
+    if (scope == QLatin1String("temp")) {
+        scope = i18n("User session");
+    } else if (scope == QLatin1String("disk")) {
+        scope = i18n("Auto restore");
+    } else if (scope == QLatin1String("normal")) {
+        scope = i18n("System wide");
+    } else {
+        scope = i18n("Unknown");
+    }
+    ui->deviceScopeL->setText(scope);
+
+    QString colorspace = deviceInterface->property("Colorspace").toString();
+    if (colorspace == QLatin1String("rgb")) {
+        colorspace = i18n("RGB");
+    } else if (colorspace == QLatin1String("cmyk")) {
+        colorspace = i18n("CMYK");
+    } else if (colorspace == QLatin1String("gray")) {
+        colorspace = i18n("Gray");
+    }
+    ui->modeL->setText(colorspace);
+
+    ObjectPathList profiles = deviceInterface->property("Profiles").value<ObjectPathList>();
+    deviceInterface->deleteLater();
+
+    QString profileTitle = i18n("This device has no profile assigned to it");
+    if (!profiles.isEmpty()) {
+        QDBusInterface *profileInterface;
+        profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                             profiles.first().path(),
+                                             QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                             QDBusConnection::systemBus(),
+                                             this);
+        if (!profileInterface->isValid()) {
+            profileInterface->deleteLater();
+            return;
+        }
+
+        profileTitle = profileInterface->property("Title").toString();
+        if (profileTitle.isEmpty()) {
+            profileTitle = profileInterface->property("ProfileId").toString();
+        }
+    }
+    ui->defaultProfileName->setText(profileTitle);
+}
+
+void Description::insertTab(int index, QWidget *widget, const QString &label)
 {
     int pos = ui->tabWidget->indexOf(widget);
     if (pos == -1) {
@@ -182,7 +281,7 @@ void ProfileDescription::insertTab(int index, QWidget *widget, const QString &la
     }
 }
 
-void ProfileDescription::removeTab(QWidget *widget)
+void Description::removeTab(QWidget *widget)
 {
     int pos = ui->tabWidget->indexOf(widget);
     if (pos != -1) {
@@ -190,4 +289,4 @@ void ProfileDescription::removeTab(QWidget *widget)
     }
 }
 
-#include "ProfileDescription.moc"
+#include "Description.moc"

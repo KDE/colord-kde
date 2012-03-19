@@ -209,9 +209,9 @@
      </widget>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="info_page">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
          <spacer name="verticalSpacer_2">
@@ -242,10 +242,10 @@
         <item row="1" column="0">
          <widget class="KTitleWidget" name="infoWidget">
           <property name="text">
-           <string>This device has no profiles asigned to it</string>
+           <string notr="true">You have no devices created</string>
           </property>
           <property name="comment">
-           <string>To add one click on &quot;Add Profile&quot; below the list</string>
+           <string notr="true">This is probably a problem</string>
           </property>
          </widget>
         </item>
@@ -260,7 +260,7 @@
          <number>0</number>
         </property>
         <item row="1" column="0">
-         <widget class="ProfileDescription" name="profile" native="true"/>
+         <widget class="Description" name="profile" native="true"/>
         </item>
         <item row="0" column="0">
          <spacer name="offsetSpacer">
@@ -296,9 +296,9 @@
    <header>ktitlewidget.h</header>
   </customwidget>
   <customwidget>
-   <class>ProfileDescription</class>
+   <class>Description</class>
    <extends>QWidget</extends>
-   <header location="global">ProfileDescription.h</header>
+   <header location="global">Description.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

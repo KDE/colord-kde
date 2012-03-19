@@ -45,6 +45,7 @@ public:
     ~ColordKCM();
 
 private slots:
+    void adjustTabWidgetSize();
     void showProfile();
     void addProfileFile();
     void addProfileAction(QAction *action);

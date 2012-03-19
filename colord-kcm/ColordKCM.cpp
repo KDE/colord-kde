@@ -23,7 +23,7 @@
 
 #include "DeviceModel.h"
 #include "ProfileModel.h"
-#include "ProfileDescription.h"
+#include "Description.h"
 
 #include <KMessageBox>
 #include <KGenericFactory>
@@ -159,10 +159,6 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     connect(signalMapper, SIGNAL(mapped(int)),
             this, SLOT(showProfile()));
 
-    // align the tabbar to the list view
-    int offset = ui->profile->innerHeight() - ui->devicesTV->sizeHint().height();
-    ui->offsetSpacer->changeSize(30, offset, QSizePolicy::Fixed, QSizePolicy::Fixed);
-
     QList<int> sizes;
     sizes << width() / 2;
     sizes << width() / 2;
@@ -170,6 +166,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
 
     // Make sure we have something selected
     QTimer::singleShot(0, this, SLOT(showProfile()));
+    QTimer::singleShot(0, this, SLOT(adjustTabWidgetSize()));
 }
 
 ColordKCM::~ColordKCM()
@@ -177,17 +174,31 @@ ColordKCM::~ColordKCM()
     delete ui;
 }
 
+void ColordKCM::adjustTabWidgetSize()
+{
+    kDebug() << ui->profile->innerHeight() << ui->devicesTV->height() << ui->devicesTV->viewport()->height();
+
+    // align the tabbar to the list view
+    int offset = ui->profile->innerHeight() - ui->devicesTV->viewport()->height();
+    ui->offsetSpacer->changeSize(30, offset, QSizePolicy::Fixed, QSizePolicy::Fixed);
+}
+
 void ColordKCM::showProfile()
 {
-    kDebug() << "============================";
     QModelIndex index = currentIndex();
     if (!index.isValid()) {
+
         return;
     }
 
-    ui->profile->setProfile(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
-    if (ui->stackedWidget->currentWidget() != ui->profile) {
-        ui->stackedWidget->setCurrentWidget(ui->profile);
+    if (index.data(DeviceModel::IsDeviceRole).toBool()) {
+        ui->profile->setDevice(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
+    } else {
+        ui->profile->setProfile(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
+    }
+
+    if (ui->stackedWidget->currentWidget() != ui->profile_page) {
+        ui->stackedWidget->setCurrentWidget(ui->profile_page);
     }
 
     // Check if we can remove the Profile
@@ -301,12 +312,6 @@ void ColordKCM::fillMenu()
     // Create a list of assigned profiles
     QList<QDBusObjectPath> assignedProfiles;
     int childCount = index.model()->rowCount(index);
-    if (childCount == 0) {
-        // There are no available profiles
-        m_addAvailableMenu->setEnabled(false);
-        return;
-    }
-
     for (int i = 0; i < childCount; ++i) {
         assignedProfiles << index.child(i, 0).data(DeviceModel::ObjectPathRole).value<QDBusObjectPath>();
     }
@@ -338,6 +343,12 @@ void ColordKCM::fillMenu()
         action = m_addAvailableMenu->addAction(title);
         action->setData(profileIndex.data(ProfileModel::ObjectPathRole));
         action->setProperty(DEVICE_PATH, devicePath);
+    }
+
+    if (childCount == 0) {
+        // There are no available profiles
+        m_addAvailableMenu->setEnabled(false);
+        return;
     }
     m_addAvailableMenu->setEnabled(m_profilesFilter->rowCount());
 }
@@ -371,10 +382,9 @@ void ColordKCM::profileAdded(const QDBusObjectPath &objectPath)
     QString filename = interface->property("Filename").toString();
 
     if (m_profileFiles.contains(filename)) {
-        QString deviceKind = m_profileFiles[filename].first % QLatin1String("-device");
-        if (deviceKind != kind) {
+        if (m_profileFiles[filename].first != kind) {
             // The desired device did not match the profile kind
-            kDebug() << deviceKind << kind << filename;
+            kDebug() << m_profileFiles[filename].first << kind << filename;
             KMessageBox::sorry(this, i18n("Your profile did not match the device kind"), i18n("Importing Color Profile"));
         } else {
             addProvileToDevice(objectPath, m_profileFiles[filename].second);
@@ -407,6 +417,11 @@ QModelIndex ColordKCM::currentIndex() const
     }
 
     if (view->model()->rowCount() == 0) {
+        if (ui->stackedWidget->currentWidget() != ui->info_page) {
+            ui->stackedWidget->setCurrentWidget(ui->info_page);
+        }
+//        ui->infoWidget->setPixmap(KTitleWidget::InfoMessage);
+
         return QModelIndex();
     }
 
