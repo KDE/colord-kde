@@ -91,20 +91,27 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
             this, SLOT(removeProfile()));
 
     // Devices view setup
-    m_model = new DeviceModel(this);
     QSortFilterProxyModel *sortModel = new QSortFilterProxyModel(this);
-    sortModel->setSourceModel(m_model);
-    sortModel->setDynamicSortFilter(true);
-    sortModel->setSortRole(DeviceModel::SortRole);
-    ui->devicesTV->setModel(sortModel);
-    ui->devicesTV->sortByColumn(0, Qt::AscendingOrder);
-    connect(ui->devicesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(showProfile()));
+    // Connect this slot prior to defining the model
+    // so we get a selection on the first item for free
     connect(sortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(showProfile()));
+    sortModel->setDynamicSortFilter(true);
+    sortModel->setSortRole(DeviceModel::SortRole);
+    sortModel->sort(0);
+    // Set the source model then connect to the selection model to get updates
+    ui->devicesTV->setModel(sortModel);
+    connect(ui->devicesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+            this, SLOT(showProfile()));
+
+    m_model = new DeviceModel(this);
+    connect(m_model, SIGNAL(changed()), this, SLOT(showProfile()));
+    sortModel->setSourceModel(m_model);
+
 
     // Profiles view setup
     ProfileModel *model = new ProfileModel(this);
+    connect(m_model, SIGNAL(changed()), this, SLOT(showProfile()));
     // Filter Proxy for the menu
     m_profilesFilter = new QSortFilterProxyModel(this);
     m_profilesFilter->setSourceModel(model);
@@ -118,7 +125,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     profileSortModel->setSourceModel(model);
     profileSortModel->setDynamicSortFilter(true);
     profileSortModel->setSortRole(ProfileModel::SortRole);
-    profileSortModel->sort(0, Qt::AscendingOrder);
+    profileSortModel->sort(0);
     ui->profilesTV->setModel(profileSortModel);
     connect(ui->profilesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this, SLOT(showProfile()));
@@ -149,6 +156,8 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
 
     connect(signalMapper, SIGNAL(mapped(int)),
             ui->tabWidget, SLOT(setCurrentIndex(int)));
+    connect(signalMapper, SIGNAL(mapped(int)),
+            this, SLOT(showProfile()));
 
     // align the tabbar to the list view
     int offset = ui->profile->innerHeight() - ui->devicesTV->sizeHint().height();
@@ -158,6 +167,9 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     sizes << width() / 2;
     sizes << width() / 2;
     ui->splitter->setSizes(sizes);
+
+    // Make sure we have something selected
+    QTimer::singleShot(0, this, SLOT(showProfile()));
 }
 
 ColordKCM::~ColordKCM()
@@ -167,6 +179,7 @@ ColordKCM::~ColordKCM()
 
 void ColordKCM::showProfile()
 {
+    kDebug() << "============================";
     QModelIndex index = currentIndex();
     if (!index.isValid()) {
         return;
@@ -288,6 +301,12 @@ void ColordKCM::fillMenu()
     // Create a list of assigned profiles
     QList<QDBusObjectPath> assignedProfiles;
     int childCount = index.model()->rowCount(index);
+    if (childCount == 0) {
+        // There are no available profiles
+        m_addAvailableMenu->setEnabled(false);
+        return;
+    }
+
     for (int i = 0; i < childCount; ++i) {
         assignedProfiles << index.child(i, 0).data(DeviceModel::ObjectPathRole).value<QDBusObjectPath>();
     }

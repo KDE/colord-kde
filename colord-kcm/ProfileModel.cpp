@@ -62,10 +62,20 @@ ProfileModel::ProfileModel(QObject *parent) :
                                              QLatin1String("/org/freedesktop/ColorManager"),
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("GetProfiles"));
-    QDBusReply<ObjectPathList> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
-    foreach (const QDBusObjectPath &path, reply.value()) {
-        kDebug() << path.path();
-        profileAdded(path);
+    QDBusConnection::systemBus().callWithCallback(message, this, SLOT(gotProfiles(QDBusMessage)));
+}
+
+void ProfileModel::gotProfiles(const QDBusMessage &message)
+{
+    if (message.type() == QDBusMessage::ReplyMessage && message.arguments().size() == 1) {
+        QDBusArgument argument = message.arguments().first().value<QDBusArgument>();
+        ObjectPathList paths = qdbus_cast<ObjectPathList>(argument);
+        foreach (const QDBusObjectPath &path, paths) {
+            profileAdded(path, false);
+        }
+        emit changed();
+    } else {
+        kWarning() << "Unexpected message" << message;
     }
 }
 
@@ -80,7 +90,7 @@ void ProfileModel::profileChanged(const QDBusObjectPath &objectPath)
     // TODO what should we do when the profile changes?
 }
 
-void ProfileModel::profileAdded(const QDBusObjectPath &objectPath)
+void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChanged)
 {
     if (findItem(objectPath) != -1) {
         kWarning() << "Profile is already on the list" << objectPath.path();
@@ -177,6 +187,10 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath)
     item->setData(Profile::profileWithSource(dataSource, title), ProfileDisplayNameSourceRole);
 
     appendRow(item);
+
+    if (emitChanged) {
+        emit changed();
+    }
 }
 
 void ProfileModel::profileRemoved(const QDBusObjectPath &objectPath)
@@ -185,6 +199,8 @@ void ProfileModel::profileRemoved(const QDBusObjectPath &objectPath)
     if (row != -1) {
         removeRow(row);
     }
+
+    emit changed();
 }
 
 int ProfileModel::findItem(const QDBusObjectPath &objectPath)

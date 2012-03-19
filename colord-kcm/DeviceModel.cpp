@@ -31,8 +31,6 @@
 #include <KLocale>
 #include <KMessageBox>
 
-typedef QList<QDBusObjectPath> ObjectPathList;
-
 DeviceModel::DeviceModel(QObject *parent) :
     QStandardItemModel(parent)
 {
@@ -60,9 +58,20 @@ DeviceModel::DeviceModel(QObject *parent) :
                                              QLatin1String("/org/freedesktop/ColorManager"),
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("GetDevices"));
-    QDBusReply<ObjectPathList> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
-    foreach (const QDBusObjectPath &path, reply.value()) {
-        deviceAdded(path);
+    QDBusConnection::systemBus().callWithCallback(message, this, SLOT(gotDevices(QDBusMessage)));
+}
+
+void DeviceModel::gotDevices(const QDBusMessage &message)
+{
+    if (message.type() == QDBusMessage::ReplyMessage && message.arguments().size() == 1) {
+        QDBusArgument argument = message.arguments().first().value<QDBusArgument>();
+        ObjectPathList paths = qdbus_cast<ObjectPathList>(argument);
+        foreach (const QDBusObjectPath &path, paths) {
+            deviceAdded(path, false);
+        }
+        emit changed();
+    } else {
+        kWarning() << "Unexpected message" << message;
     }
 }
 
@@ -114,9 +123,11 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
 
     // Remove the extra items it might have
     removeRows(profiles.size(), stdItem->rowCount() - profiles.size(), stdItem->index());
+
+    emit changed();
 }
 
-void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath)
+void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged)
 {
     if (findItem(objectPath) != -1) {
         kWarning() << "Device is already on the list" << objectPath.path();
@@ -195,6 +206,10 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath)
     item->appendRows(profileItems);
 
     appendRow(item);
+
+    if (emitChanged) {
+        emit changed();
+    }
 }
 
 void DeviceModel::deviceRemoved(const QDBusObjectPath &objectPath)
@@ -203,6 +218,8 @@ void DeviceModel::deviceRemoved(const QDBusObjectPath &objectPath)
     if (row != -1) {
         removeRow(row);
     }
+
+    emit changed();
 }
 
 QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,

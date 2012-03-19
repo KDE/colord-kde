@@ -22,9 +22,11 @@
 #define DEVICE_MODEL_H
 
 #include <QStandardItemModel>
-#include <QDBusObjectPath>
+#include <QtDBus/QDBusObjectPath>
+#include <QtDBus/QDBusMessage>
 
 typedef QMap<QString, QString>  StringStringMap;
+typedef QList<QDBusObjectPath> ObjectPathList;
 
 class DeviceModel : public QStandardItemModel
 {
@@ -45,9 +47,13 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
+signals:
+    void changed();
+
 private slots:
+    void gotDevices(const QDBusMessage &message);
     void deviceChanged(const QDBusObjectPath &objectPath);
-    void deviceAdded(const QDBusObjectPath &objectPath);
+    void deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);
     void deviceRemoved(const QDBusObjectPath &objectPath);
 
 private:

@@ -28,7 +28,8 @@
 #define CD_PROFILE_METADATA_DATA_SOURCE_STANDARD "standard"
 #define CD_PROFILE_METADATA_DATA_SOURCE_TEST     "test"
 
-Profile::Profile(const QString &filename)
+Profile::Profile(const QString &filename) :
+    m_lcmsProfile(NULL)
 {
     setFilename(filename);
 }
@@ -451,6 +452,10 @@ uint Profile::temperature() const
 QMap<QString, QColor> Profile::getNamedColors()
 {
     QMap<QString, QColor> array;
+    if (m_lcmsProfile == NULL) {
+        return array;
+    }
+
     cmsCIELab lab;
     cmsCIEXYZ xyz;
     cmsHPROFILE profile_lab = NULL;

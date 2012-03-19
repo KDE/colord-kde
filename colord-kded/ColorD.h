@@ -56,6 +56,8 @@ class ColorD : public KDEDModule
 public:
     ColorD(QObject *parent, const QVariantList &args);
     ~ColorD();
+    void init();
+    void reset();
 
 private slots:
     void checkOutputs();
@@ -68,6 +70,7 @@ private slots:
     void removeProfile(const QString &filename);
 
     void scanHomeDirectory();
+    void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
 private:
     quint8* readEdidData(RROutput output, size_t &len);

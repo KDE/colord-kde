@@ -39,8 +39,9 @@
 #include <QDir>
 #include <QTimer>
 #include <QStringBuilder>
-#include <QDBusMetaType>
-#include <QDBusUnixFileDescriptor>
+#include <QtDBus/QDBusMetaType>
+#include <QtDBus/QDBusUnixFileDescriptor>
+#include <QtDBus/QDBusServiceWatcher>
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QDesktopWidget>
@@ -65,12 +66,34 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     // Connect to the display
     connectToDisplay();
 
-    // Scan all the *.icc files later on the event loop as this takes quite some time
-    QTimer::singleShot(0, this, SLOT(scanHomeDirectory()));
+    // Make sure we know is Sentinel is running
+    QDBusServiceWatcher *watcher;
+    watcher = new QDBusServiceWatcher("org.freedesktop.ColorManager",
+                                      QDBusConnection::systemBus(),
+                                      QDBusServiceWatcher::WatchForOwnerChange,
+                                      this);
+    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
+            this, SLOT(serviceOwnerChanged(QString,QString,QString)));
+
+    init();
 }
 
 ColorD::~ColorD()
 {
+}
+
+void ColorD::init()
+{
+    // Check outputs add all connected outputs
+    checkOutputs();
+
+    // Scan all the *.icc files later on the event loop as this takes quite some time
+    QTimer::singleShot(0, this, SLOT(scanHomeDirectory()));
+}
+
+void ColorD::reset()
+{
+    m_connectedOutputs.clear();
 }
 
 void ColorD::addProfile(const QFileInfo &fileInfo)
@@ -88,8 +111,7 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     // seek(0) so that if we pass the FD to colord it is not at end
     profile.seek(0);
 
-    KUser user;
-    QString profileId = QLatin1String("icc-") + hash + QLatin1Char('-') + user.loginName();
+    QString profileId = QLatin1String("icc-") + hash;
     kDebug() << "profileId" << profileId;
 
     bool fdPass;
@@ -150,6 +172,19 @@ void ColorD::scanHomeDirectory()
         if (mimeType->is(QLatin1String("application/vnd.iccprofile"))) {
             addProfile(fileInfo);
         }
+    }
+}
+
+void ColorD::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
+{
+    Q_UNUSED(serviceName)
+    kDebug() << serviceName << oldOwner << newOwner;
+    if (newOwner.isEmpty()) {
+        // colord has quit
+        reset();
+    } else {
+        // colord has started
+        init();
     }
 }
 
@@ -453,12 +488,6 @@ void ColorD::connectToDisplay()
         m_resources = XRRGetScreenResourcesCurrent(m_dpy, m_root);
     } else {
         m_resources = XRRGetScreenResources(m_dpy, m_root);
-    }
-
-    for (int i = 0; i < m_resources->noutput; ++i) {
-        kDebug() << "Adding" << m_resources->outputs[i];
-        Output output(m_resources->outputs[i], m_resources);
-        addOutput(output);
     }
 }
 
