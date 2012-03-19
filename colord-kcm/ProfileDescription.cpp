@@ -21,23 +21,43 @@
 #include "ui_ProfileDescription.h"
 
 #include "Profile.h"
+#include "ProfileNamedColors.h"
+#include "ProfileMetaData.h"
 
 #include <math.h>
 
 #include <QFileInfo>
-#include <QDBusInterface>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusReply>
 
 #include <KDebug>
+
+#define TAB_INFORMATION  1
+#define TAB_CIE_1931     2
+#define TAB_TRC          3
+#define TAB_VCGT         4
+#define TAB_FROM_SRGB    5
+#define TAB_TO_SRGB      6
+#define TAB_NAMED_COLORS 7
+#define TAB_METADATA     8
+
+typedef QMap<QString, QString>  StringStringMap;
 
 ProfileDescription::ProfileDescription(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProfileDescription)
 {
     ui->setupUi(this);
+
+    m_namedColors = new ProfileNamedColors;
+    m_metadata = new ProfileMetaData;
 }
 
 ProfileDescription::~ProfileDescription()
 {
+    delete m_namedColors;
+    delete m_metadata;
+
     delete ui;
 }
 
@@ -119,9 +139,55 @@ void ProfileDescription::setProfile(const QDBusObjectPath &objectPath)
         kDebug() << profile.manufacturer();
         kDebug() << profile.copyright();
 
-        profile.getNamedColors();
+        // Get named colors
+        QMap<QString, QColor> namedColors = profile.getNamedColors();
+        if (namedColors.size()) {
+            m_namedColors->setNamedColors(namedColors);
+            insertTab(TAB_NAMED_COLORS, m_namedColors, i18n("Named Colors"));
+        } else {
+            removeTab(m_namedColors);
+        }
+
+        // Get profile metadata
+        QDBusMessage message;
+        message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                                 objectPath.path(),
+                                                 QLatin1String("org.freedesktop.DBus.Properties"),
+                                                 QLatin1String("Get"));
+        message << QString("org.freedesktop.ColorManager.Profile"); // Interface
+        message << QString("Metadata"); // Propertie Name
+        QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+
+        StringStringMap metadata;
+        if (reply.isValid()) {
+            QDBusArgument argument = reply.value().value<QDBusArgument>();
+            metadata = qdbus_cast<StringStringMap>(argument);
+        }
+
+        if (!metadata.isEmpty()) {
+            m_metadata->setMetadata(metadata);
+            insertTab(TAB_METADATA, m_metadata, i18n("Metadata"));
+        } else {
+            removeTab(m_metadata);
+        }
     }
     kDebug() << profile.filename();
+}
+
+void ProfileDescription::insertTab(int index, QWidget *widget, const QString &label)
+{
+    int pos = ui->tabWidget->indexOf(widget);
+    if (pos == -1) {
+        ui->tabWidget->insertTab(index, widget, label);
+    }
+}
+
+void ProfileDescription::removeTab(QWidget *widget)
+{
+    int pos = ui->tabWidget->indexOf(widget);
+    if (pos != -1) {
+        ui->tabWidget->removeTab(pos);
+    }
 }
 
 #include "ProfileDescription.moc"

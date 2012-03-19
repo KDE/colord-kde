@@ -26,6 +26,8 @@
 namespace Ui {
     class ProfileDescription;
 }
+class ProfileNamedColors;
+class ProfileMetaData;
 class ProfileDescription : public QWidget
 {
     Q_OBJECT
@@ -37,7 +39,12 @@ public:
     void setProfile(const QDBusObjectPath &objectPath);
 
 private:
+    void insertTab(int index, QWidget *widget, const QString &label);
+    void removeTab(QWidget *widget);
+
     Ui::ProfileDescription *ui;
+    ProfileNamedColors *m_namedColors;
+    ProfileMetaData *m_metadata;
 };
 
 #endif // PROFILE_DESCRIPTION_H

@@ -153,6 +153,11 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     // align the tabbar to the list view
     int offset = ui->profile->innerHeight() - ui->devicesTV->sizeHint().height();
     ui->offsetSpacer->changeSize(30, offset, QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    QList<int> sizes;
+    sizes << width() / 2;
+    sizes << width() / 2;
+    ui->splitter->setSizes(sizes);
 }
 
 ColordKCM::~ColordKCM()

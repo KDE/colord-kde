@@ -21,7 +21,6 @@
 #define PROFILENAMEDCOLORS_H
 
 #include <QWidget>
-#include <QQuaternion>
 #include <QStandardItemModel>
 
 namespace Ui {
@@ -36,7 +35,7 @@ public:
     explicit ProfileNamedColors(QWidget *parent = 0);
     ~ProfileNamedColors();
 
-    void setNamedColors(const QMap<QString, QQuaternion> &namedColors);
+    void setNamedColors(const QMap<QString, QColor> &namedColors);
 
 private:
     Ui::ProfileNamedColors *ui;

@@ -17,46 +17,31 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#include "ProfileNamedColors.h"
-#include "ui_ProfileNamedColors.h"
+#ifndef PROFILEMETADATA_H
+#define PROFILEMETADATA_H
 
-#include <QColor>
-#include <QHeaderView>
+#include <QWidget>
+#include <QStandardItemModel>
 
-#include <KDebug>
-
-ProfileNamedColors::ProfileNamedColors(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ProfileNamedColors)
-{
-    ui->setupUi(this);
-
-    m_model = new QStandardItemModel(this);
-    m_model->setColumnCount(2);
-    ui->treeView->setModel(m_model);
-    ui->treeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+namespace Ui {
+    class ProfileMetaData;
 }
 
-ProfileNamedColors::~ProfileNamedColors()
+class ProfileMetaData : public QWidget
 {
-    delete ui;
-}
+    Q_OBJECT
 
-void ProfileNamedColors::setNamedColors(const QMap<QString, QColor> &namedColors)
-{
-    m_model->removeRows(0, m_model->rowCount());
+public:
+    explicit ProfileMetaData(QWidget *parent = 0);
+    ~ProfileMetaData();
 
-    QMap<QString, QColor>::const_iterator i = namedColors.constBegin();
-    while (i != namedColors.constEnd()) {
-        QList<QStandardItem *> row;
-        QStandardItem *name = new QStandardItem(i.key());
+    void setMetadata(const QMap<QString, QString> &metadata);
 
-        QStandardItem *color = new QStandardItem;
-        color->setBackground(QBrush(i.value()));
+private:
+    QString metadataLabel(const QString &key);
 
-        row << name;
-        row << color;
-        m_model->appendRow(row);
-        ++i;
-    }
-}
+    Ui::ProfileMetaData *ui;
+    QStandardItemModel *m_model;
+};
+
+#endif // PROFILEMETADATA_H

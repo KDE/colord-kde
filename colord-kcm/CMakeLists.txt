@@ -3,12 +3,14 @@ set(kcm_colord_SRCS
     ProfileModel.cpp
     Profile.cpp
     ProfileNamedColors.cpp
+    ProfileMetaData.cpp
     ProfileDescription.cpp
     ColordKCM.cpp
 )
 
 kde4_add_ui_files(kcm_colord_SRCS
     ProfileNamedColors.ui
+    ProfileMetaData.ui
     ProfileDescription.ui
     ColordKCM.ui
 )

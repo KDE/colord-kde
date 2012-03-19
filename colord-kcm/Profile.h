@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QDateTime>
+#include <QColor>
 #include <QQuaternion>
 
 #include <lcms2.h>
@@ -59,11 +60,12 @@ public:
     QString checksum() const;
     uint temperature() const;
 
-    QMap<QString, QQuaternion> getNamedColors();
+    QMap<QString, QColor> getNamedColors();
 
     static QString profileWithSource(const QString &dataSource, const QString &profilename);
 
 private:
+    QColor convertXYZ(cmsCIEXYZ *cieXYZ);
     void parseProfile(const uint *data, size_t length);
     QDateTime parseDateTime(const struct tm &created);
 
