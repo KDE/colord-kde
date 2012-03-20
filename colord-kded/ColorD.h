@@ -24,6 +24,8 @@
 
 #include "Output.h"
 
+#include <KDirWatch>
+
 #include <QVariantList>
 #include <QFileInfo>
 #include <QtDBus/QDBusConnection>
@@ -82,6 +84,7 @@ private:
     void addProfile(const QFileInfo &fileInfo);
     QString profilesPath() const;
 
+    KDirWatch *m_dirWatch;
     QList<Output> m_connectedOutputs;
 
     Display *m_dpy;

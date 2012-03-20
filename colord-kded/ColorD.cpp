@@ -51,7 +51,8 @@ K_EXPORT_PLUGIN(ColorDFactory("colord"))
 
 ColorD::ColorD(QObject *parent, const QVariantList &args) :
     KDEDModule(parent),
-    m_has_1_3(false)
+    m_has_1_3(false),
+    m_dirWatch(0)
 {
     // There's not much use for args in a KCM
     Q_UNUSED(args)
@@ -159,11 +160,13 @@ void ColorD::scanHomeDirectory()
 
     //check if any changes to the file occour
     //this also prevents from reading when a checkUpdate happens
-    KDirWatch *confWatch = new KDirWatch(this);
-    confWatch->addDir(profilesDir.path(), KDirWatch::WatchFiles);
-    connect(confWatch, SIGNAL(created(QString)), this, SLOT(addProfile(QString)));
-    connect(confWatch, SIGNAL(deleted(QString)), this, SLOT(removeProfile(QString)));
-    confWatch->startScan();
+    if (!m_dirWatch) {
+        m_dirWatch = new KDirWatch(this);
+        m_dirWatch->addDir(profilesDir.path(), KDirWatch::WatchFiles);
+        connect(m_dirWatch, SIGNAL(created(QString)), this, SLOT(addProfile(QString)));
+        connect(m_dirWatch, SIGNAL(deleted(QString)), this, SLOT(removeProfile(QString)));
+        m_dirWatch->startScan();
+    }
 
     // Call AddProfile() for each file
     foreach (const QFileInfo &fileInfo, profilesDir.entryInfoList(QDir::Files)) {
