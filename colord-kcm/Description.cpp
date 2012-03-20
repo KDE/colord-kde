@@ -70,6 +70,8 @@ int Description::innerHeight() const
 
 void Description::setProfile(const QDBusObjectPath &objectPath)
 {
+    m_currentProfile = objectPath;
+
     ui->stackedWidget->setCurrentIndex(0);
     QDBusInterface *profileInterface;
     profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
@@ -84,8 +86,10 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
 
     QString filename = profileInterface->property("Filename").toString();
     bool hasVcgt = profileInterface->property("HasVcgt").toBool();
+    bool isSystemWide = profileInterface->property("IsSystemWide").toBool();
     profileInterface->deleteLater();
 
+    ui->installSystemWideBt->setEnabled(!isSystemWide);
     Profile profile(filename);
     if (profile.loaded()) {
         // Set the profile type
@@ -271,6 +275,16 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
         }
     }
     ui->defaultProfileName->setText(profileTitle);
+}
+
+void Description::on_installSystemWideBt_clicked()
+{
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             m_currentProfile.path(),
+                                             QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                             QLatin1String("InstallSystemWide"));
+    QDBusConnection::systemBus().send(message);
 }
 
 void Description::insertTab(int index, QWidget *widget, const QString &label)

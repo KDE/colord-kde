@@ -222,10 +222,6 @@ void ColordKCM::showProfile()
 void ColordKCM::addProfileFile()
 {
     QModelIndex index = currentIndex();
-    if (!index.isValid()) {
-        return;
-    }
-
     QString fileName;
     fileName = KFileDialog::getOpenFileName(KUrl(),
                                             QLatin1String("application/vnd.iccprofile"),
@@ -237,10 +233,12 @@ void ColordKCM::addProfileFile()
 
     QFileInfo fileInfo(fileName);
     QString newFilename = profilesPath() % fileInfo.fileName();
-    kDebug() << fileName << newFilename;
     if (!QFile::copy(fileName, newFilename)) {
         KMessageBox::sorry(this, i18n("Failed to import color profile"), i18n("Importing Color Profile"));
-    } else {
+    } else if (index.isValid()) {
+        // Store the device kind and device object path
+        // so that we assign the profile to the device when
+        // ProfileAdded is emited
         QString kind;
         QDBusObjectPath devicePath;
         kind = index.data(DeviceModel::ProfileKindRole).toString();
@@ -420,7 +418,16 @@ QModelIndex ColordKCM::currentIndex() const
         if (ui->stackedWidget->currentWidget() != ui->info_page) {
             ui->stackedWidget->setCurrentWidget(ui->info_page);
         }
-//        ui->infoWidget->setPixmap(KTitleWidget::InfoMessage);
+
+        if (ui->tabWidget->currentIndex() == 0) {
+            // Devices is empty
+            ui->infoWidget->setText(i18n("You don't have any devices registered"));
+            ui->infoWidget->setComment(i18n("Make sure colord module on kded is running"));
+        } else {
+            // Profiles is empty
+            ui->infoWidget->setText(i18n("You don't have any profiles registered"));
+            ui->infoWidget->setComment(i18n("Add one by clicking add profile buttom"));
+        }
 
         return QModelIndex();
     }

@@ -39,11 +39,15 @@ public:
     void setProfile(const QDBusObjectPath &objectPath);
     void setDevice(const QDBusObjectPath &objectPath);
 
+private slots:
+    void on_installSystemWideBt_clicked();
+
 private:
     void insertTab(int index, QWidget *widget, const QString &label);
     void removeTab(QWidget *widget);
 
     Ui::Description *ui;
+    QDBusObjectPath m_currentProfile;
     ProfileNamedColors *m_namedColors;
     ProfileMetaData *m_metadata;
 };
