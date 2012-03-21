@@ -73,21 +73,18 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
     m_currentProfile = objectPath;
 
     ui->stackedWidget->setCurrentIndex(0);
-    QDBusInterface *profileInterface;
-    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                         objectPath.path(),
-                                         QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                         QDBusConnection::systemBus(),
-                                         this);
-    if (!profileInterface->isValid()) {
-        profileInterface->deleteLater();
+    QDBusInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                    objectPath.path(),
+                                    QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                    QDBusConnection::systemBus(),
+                                    this);
+    if (!profileInterface.isValid()) {
         return;
     }
 
-    QString filename = profileInterface->property("Filename").toString();
-    bool hasVcgt = profileInterface->property("HasVcgt").toBool();
-    bool isSystemWide = profileInterface->property("IsSystemWide").toBool();
-    profileInterface->deleteLater();
+    QString filename = profileInterface.property("Filename").toString();
+    bool hasVcgt = profileInterface.property("HasVcgt").toBool();
+    bool isSystemWide = profileInterface.property("IsSystemWide").toBool();
 
     ui->installSystemWideBt->setEnabled(!isSystemWide);
     Profile profile(filename);
@@ -189,23 +186,21 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
 
     ui->stackedWidget->setCurrentIndex(1);
 
-    QDBusInterface *deviceInterface;
-    deviceInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                         objectPath.path(),
-                                         QLatin1String("org.freedesktop.ColorManager.Device"),
-                                         QDBusConnection::systemBus(),
-                                         this);
-    if (!deviceInterface->isValid()) {
-        deviceInterface->deleteLater();
+    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   objectPath.path(),
+                                   QLatin1String("org.freedesktop.ColorManager.Device"),
+                                   QDBusConnection::systemBus(),
+                                   this);
+    if (!deviceInterface.isValid()) {
         return;
     }
 
     QString deviceTitle;
-    QString deviceId = deviceInterface->property("DeviceId").toString();
-    QString kind = deviceInterface->property("Kind").toString();
-    QString model = deviceInterface->property("Model").toString();
-    QString vendor = deviceInterface->property("Vendor").toString();
-    QString scope = deviceInterface->property("Scope").toString();
+    QString deviceId = deviceInterface.property("DeviceId").toString();
+    QString kind = deviceInterface.property("Kind").toString();
+    QString model = deviceInterface.property("Model").toString();
+    QString vendor = deviceInterface.property("Vendor").toString();
+    QString scope = deviceInterface.property("Scope").toString();
     if (model.isEmpty() && vendor.isEmpty()) {
         deviceTitle = deviceId;
     } else if (model.isEmpty()) {
@@ -243,7 +238,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     }
     ui->deviceScopeL->setText(scope);
 
-    QString colorspace = deviceInterface->property("Colorspace").toString();
+    QString colorspace = deviceInterface.property("Colorspace").toString();
     if (colorspace == QLatin1String("rgb")) {
         colorspace = i18n("RGB");
     } else if (colorspace == QLatin1String("cmyk")) {
@@ -253,25 +248,22 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     }
     ui->modeL->setText(colorspace);
 
-    ObjectPathList profiles = deviceInterface->property("Profiles").value<ObjectPathList>();
-    deviceInterface->deleteLater();
+    ObjectPathList profiles = deviceInterface.property("Profiles").value<ObjectPathList>();
 
     QString profileTitle = i18n("This device has no profile assigned to it");
     if (!profiles.isEmpty()) {
-        QDBusInterface *profileInterface;
-        profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                             profiles.first().path(),
-                                             QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                             QDBusConnection::systemBus(),
-                                             this);
-        if (!profileInterface->isValid()) {
-            profileInterface->deleteLater();
+        QDBusInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                        profiles.first().path(),
+                                        QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                        QDBusConnection::systemBus(),
+                                        this);
+        if (!profileInterface.isValid()) {
             return;
         }
 
-        profileTitle = profileInterface->property("Title").toString();
+        profileTitle = profileInterface.property("Title").toString();
         if (profileTitle.isEmpty()) {
-            profileTitle = profileInterface->property("ProfileId").toString();
+            profileTitle = profileInterface.property("ProfileId").toString();
         }
     }
     ui->defaultProfileName->setText(profileTitle);

@@ -41,6 +41,7 @@ public:
         KindNamedColor
     } ProfileKind;
     Profile(const QString &filename = QString());
+    ~Profile();
 
     void setFilename(const QString &filename);
 

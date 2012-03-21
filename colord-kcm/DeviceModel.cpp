@@ -93,19 +93,16 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
         return;
     }
 
-    QDBusInterface *deviceInterface;
-    deviceInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                         objectPath.path(),
-                                         QLatin1String("org.freedesktop.ColorManager.Device"),
-                                         QDBusConnection::systemBus(),
-                                         this);
-    if (!deviceInterface->isValid()) {
-        deviceInterface->deleteLater();
+    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   objectPath.path(),
+                                   QLatin1String("org.freedesktop.ColorManager.Device"),
+                                   QDBusConnection::systemBus(),
+                                   this);
+    if (!deviceInterface.isValid()) {
         return;
     }
 
-    ObjectPathList profiles = deviceInterface->property("Profiles").value<ObjectPathList>();
-    deviceInterface->deleteLater();
+    ObjectPathList profiles = deviceInterface.property("Profiles").value<ObjectPathList>();
 
     // Normally just the profile list bound this device
     // is what changes including "Modified" property
@@ -128,7 +125,10 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
             stdItem->removeRow(i);
         }
         // Inserts the profile with the parent object Path
-        stdItem->insertRow(i, createProfileItem(profiles.at(i), objectPath, !i));
+        QStandardItem *profileItem = createProfileItem(profiles.at(i), objectPath, !i);
+        if (profileItem) {
+            stdItem->insertRow(i, profileItem);
+        }
     }
 
     // Remove the extra items it might have
@@ -144,24 +144,21 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         return;
     }
 
-    QDBusInterface *deviceInterface;
-    deviceInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                         objectPath.path(),
-                                         QLatin1String("org.freedesktop.ColorManager.Device"),
-                                         QDBusConnection::systemBus(),
-                                         this);
-    if (!deviceInterface->isValid()) {
-        deviceInterface->deleteLater();
+    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   objectPath.path(),
+                                   QLatin1String("org.freedesktop.ColorManager.Device"),
+                                   QDBusConnection::systemBus(),
+                                   this);
+    if (!deviceInterface.isValid()) {
         return;
     }
 
-    QString deviceId = deviceInterface->property("DeviceId").toString();
-    QString kind = deviceInterface->property("Kind").toString();
-    QString model = deviceInterface->property("Model").toString();
-    QString vendor = deviceInterface->property("Vendor").toString();
-    QString colorspace = deviceInterface->property("Colorspace").toString();
-    ObjectPathList profiles = deviceInterface->property("Profiles").value<ObjectPathList>();
-    deviceInterface->deleteLater();
+    QString deviceId = deviceInterface.property("DeviceId").toString();
+    QString kind = deviceInterface.property("Kind").toString();
+    QString model = deviceInterface.property("Model").toString();
+    QString vendor = deviceInterface.property("Vendor").toString();
+    QString colorspace = deviceInterface.property("Colorspace").toString();
+    ObjectPathList profiles = deviceInterface.property("Profiles").value<ObjectPathList>();
 
     QStandardItem *item = new QStandardItem;
     item->setData(qVariantFromValue(objectPath), ObjectPathRole);
@@ -211,7 +208,9 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         QStandardItem *profileItem = createProfileItem(profileObjectPath,
                                                        objectPath,
                                                        profileItems.isEmpty());
-        profileItems << profileItem;
+        if (profileItem) {
+            profileItems << profileItem;
+        }
     }
     item->appendRows(profileItems);
 
@@ -246,19 +245,22 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
                                               const QDBusObjectPath &parentObjectPath,
                                               bool checked)
 {
-    QDBusInterface *interface;
-    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   objectPath.path(),
-                                   QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                   QDBusConnection::systemBus(),
-                                   this);
+    QDBusInterface interface(QLatin1String("org.freedesktop.ColorManager"),
+                             objectPath.path(),
+                             QLatin1String("org.freedesktop.ColorManager.Profile"),
+                             QDBusConnection::systemBus(),
+                             this);
+    if (!interface.isValid()) {
+        return 0;
+    }
+
     QStandardItem *stdItem = new QStandardItem;
-    QString kind = interface->property("Kind").toString();
-    QString filename = interface->property("Filename").toString();
-    QString title = interface->property("Title").toString();
+    QString kind = interface.property("Kind").toString();
+    QString filename = interface.property("Filename").toString();
+    QString title = interface.property("Title").toString();
 
     if (title.isEmpty()) {
-        QString colorspace = interface->property("Colorspace").toString();
+        QString colorspace = interface.property("Colorspace").toString();
         if (colorspace == QLatin1String("rgb")) {
             title = i18n("Default RGB");
         } else if (colorspace == QLatin1String("cmyk")) {
@@ -277,7 +279,6 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     stdItem->setCheckable(true);
     stdItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);
 
-    interface->deleteLater();
     return stdItem;
 }
 

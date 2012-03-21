@@ -28,19 +28,16 @@
 #include <KMessageBox>
 #include <KGenericFactory>
 #include <KAboutData>
-#include <KTitleWidget>
 #include <KFileDialog>
 #include <KMimeType>
 #include <KIcon>
 #include <KUser>
 
-#include <QDBusInterface>
-#include <QDBusConnection>
-#include <QDBusMessage>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusMessage>
 #include <QTimer>
-#include <QToolButton>
 #include <QFileInfo>
-#include <QVBoxLayout>
 #include <QStringBuilder>
 #include <QSignalMapper>
 
@@ -165,8 +162,8 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     ui->splitter->setSizes(sizes);
 
     // Make sure we have something selected
-    QTimer::singleShot(0, this, SLOT(showProfile()));
     QTimer::singleShot(0, this, SLOT(adjustTabWidgetSize()));
+    QTimer::singleShot(0, this, SLOT(showProfile()));
 }
 
 ColordKCM::~ColordKCM()
@@ -176,7 +173,11 @@ ColordKCM::~ColordKCM()
 
 void ColordKCM::adjustTabWidgetSize()
 {
-    kDebug() << ui->profile->innerHeight() << ui->devicesTV->height() << ui->devicesTV->viewport()->height();
+    // Force the profile widget to get a proper height in case
+    // the stacked widget is showing the info page first
+    if (ui->stackedWidget->currentWidget() != ui->profile_page) {
+        ui->stackedWidget->setCurrentWidget(ui->profile_page);
+    }
 
     // align the tabbar to the list view
     int offset = ui->profile->innerHeight() - ui->devicesTV->viewport()->height();
@@ -187,7 +188,6 @@ void ColordKCM::showProfile()
 {
     QModelIndex index = currentIndex();
     if (!index.isValid()) {
-
         return;
     }
 
@@ -206,15 +206,12 @@ void ColordKCM::showProfile()
     if (ui->tabWidget->currentIndex() == 1) {
         QString filename = index.data(ProfileModel::FilenameRole).toString();
         QFileInfo fileInfo(filename);
-        kDebug() << "---" << filename << fileInfo.isWritable();
         if (!filename.isNull() && fileInfo.isWritable()) {
             enable = true;
         }
-    } else {
+    } else if (index.parent().isValid()) {
         // It's ok to remove profiles from devices
-        if (index.parent().isValid()) {
-            enable = true;
-        }
+        enable = true;
     }
     ui->removeProfileBt->setEnabled(enable);
 }
@@ -353,37 +350,37 @@ void ColordKCM::fillMenu()
 
 void ColordKCM::on_tabWidget_currentChanged(int index)
 {
-    kDebug() << index;
     if (index == 0 && ui->addProfileBt->menu() == 0) {
+        // adds the menu to the Add Profile button
         ui->addProfileBt->setMenu(m_addMenu);
-        kDebug() << "add";
     } else if (index) {
-        kDebug() << "remove";
+        // Remove the menu from the buttom since we can
+        // only add files anyway
         ui->addProfileBt->setMenu(0);
     }
 }
 
 void ColordKCM::profileAdded(const QDBusObjectPath &objectPath)
 {
-    QDBusInterface *interface;
-    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   objectPath.path(),
-                                   QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                   QDBusConnection::systemBus(),
-                                   this);
-    interface->deleteLater();
-    if (!interface->isValid()) {
+    QDBusInterface interface(QLatin1String("org.freedesktop.ColorManager"),
+                             objectPath.path(),
+                             QLatin1String("org.freedesktop.ColorManager.Profile"),
+                             QDBusConnection::systemBus(),
+                             this);
+
+    if (!interface.isValid()) {
         return;
     }
 
-    QString kind = interface->property("Kind").toString();
-    QString filename = interface->property("Filename").toString();
+    QString kind = interface.property("Kind").toString();
+    QString filename = interface.property("Filename").toString();
 
     if (m_profileFiles.contains(filename)) {
         if (m_profileFiles[filename].first != kind) {
             // The desired device did not match the profile kind
-            kDebug() << m_profileFiles[filename].first << kind << filename;
-            KMessageBox::sorry(this, i18n("Your profile did not match the device kind"), i18n("Importing Color Profile"));
+            KMessageBox::sorry(this,
+                               i18n("Your profile did not match the device kind"),
+                               i18n("Importing Color Profile"));
         } else {
             addProvileToDevice(objectPath, m_profileFiles[filename].second);
         }
@@ -407,6 +404,7 @@ void ColordKCM::addProvileToDevice(const QDBusObjectPath &profilePath, const QDB
 
 QModelIndex ColordKCM::currentIndex() const
 {
+    QModelIndex ret;
     QAbstractItemView *view;
     if (ui->tabWidget->currentIndex() == 0) {
         view = ui->devicesTV;
@@ -429,7 +427,7 @@ QModelIndex ColordKCM::currentIndex() const
             ui->infoWidget->setComment(i18n("Add one by clicking add profile buttom"));
         }
 
-        return QModelIndex();
+        return ret;
     }
 
     QItemSelection selection;
@@ -439,10 +437,12 @@ QModelIndex ColordKCM::currentIndex() const
     if (selection.indexes().isEmpty()) {
         view->selectionModel()->select(view->model()->index(0, 0),
                                        QItemSelectionModel::Select);
-        return QModelIndex();
+        return ret;
     }
 
-    return selection.indexes().first();
+    ret = selection.indexes().first();
+
+    return ret;
 }
 
 QString ColordKCM::profilesPath() const

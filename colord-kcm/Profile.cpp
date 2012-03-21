@@ -34,6 +34,13 @@ Profile::Profile(const QString &filename) :
     setFilename(filename);
 }
 
+Profile::~Profile()
+{
+    if (m_lcmsProfile != NULL) {
+        cmsCloseProfile(m_lcmsProfile);
+    }
+}
+
 void Profile::setFilename(const QString &filename)
 {
     if (!filename.isEmpty()) {
@@ -97,8 +104,6 @@ void Profile::parseProfile(const uint *data, size_t length)
     if (length < 0x84) {
         kWarning() << "profile was not valid (file size too small)";
         return;
-//        g_set_error (error, 1, 0, "profile was not valid (file size too small)");
-//        goto out;
     }
 
     /* load profile into lcms */
@@ -106,8 +111,6 @@ void Profile::parseProfile(const uint *data, size_t length)
     if (m_lcmsProfile == NULL) {
         kWarning() << "failed to load: not an ICC profile";
         return;
-//        g_set_error_literal (error, 1, 0, "failed to load: not an ICC profile");
-//        goto out;
     }
 
     /* get white point */
@@ -120,13 +123,10 @@ void Profile::parseProfile(const uint *data, size_t length)
         m_white.setX(cie_xyz->X);
         m_white.setY(cie_xyz->Y);
         m_white.setZ(cie_xyz->Z);
-//        cd_color_set_xyz (priv->white,
-//                          cie_xyz->X, cie_xyz->Y, cie_xyz->Z);
 
         /* convert to lcms xyY values */
         cmsXYZ2xyY(&xyY, cie_xyz);
         kDebug() << "whitepoint:" << xyY.x << xyY.y << xyY.Y;
-//        g_debug ("whitepoint = %f,%f [%f]", xyY.x, xyY.y, xyY.Y);
 
         /* get temperature */
         ret = cmsTempFromWhitePoint(&temp_float, &xyY);
@@ -134,12 +134,9 @@ void Profile::parseProfile(const uint *data, size_t length)
             /* round to nearest 100K */
             m_temperature = (((uint) temp_float) / 100) * 100;
             kDebug() << "color temperature:" << m_temperature;
-//            g_debug ("color temperature = %i", priv->temperature);
         } else {
             m_temperature = 0;
             kWarning() << "failed to get color temperature";
-//            priv->temperature = 0;
-//            g_warning ("failed to get color temperature");
         }
     } else {
         /* this is no big suprise, some profiles don't have these */
@@ -147,8 +144,6 @@ void Profile::parseProfile(const uint *data, size_t length)
         m_white.setY(0);
         m_white.setZ(0);
         kDebug() << "failed to get white point";
-//        cd_color_clear_xyz (priv->white);
-//        g_debug ("failed to get white point");
     }
 
     /* get the profile kind */

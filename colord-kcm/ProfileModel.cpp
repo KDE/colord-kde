@@ -107,28 +107,24 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         return;
     }
 
-    QDBusInterface *profileInterface;
-    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                         objectPath.path(),
-                                         QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                         QDBusConnection::systemBus(),
-                                         this);
-    if (!profileInterface->isValid()) {
-        profileInterface->deleteLater();
+    QDBusInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                    objectPath.path(),
+                                    QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                    QDBusConnection::systemBus(),
+                                    this);
+    if (!profileInterface.isValid()) {
         return;
     }
 
     // Verify if the profile has a filename
-    QString filename = profileInterface->property("Filename").toString();
+    QString filename = profileInterface.property("Filename").toString();
     if (filename.isEmpty()) {
-        profileInterface->deleteLater();
         return;
     }
 
     // Check if we can read the profile
     QFileInfo fileInfo(filename);
     if (!fileInfo.isReadable()) {
-        profileInterface->deleteLater();
         return;
     }
 
@@ -155,12 +151,11 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         }
     }
 
-    QString profileId = profileInterface->property("ProfileId").toString();
-    QString title = profileInterface->property("Title").toString();
-    QString kind = profileInterface->property("Kind").toString();
-    profileInterface->deleteLater();
+    QString profileId = profileInterface.property("ProfileId").toString();
+    QString title = profileInterface.property("Title").toString();
+    QString kind = profileInterface.property("Kind").toString();
 
-    QString colorspace = profileInterface->property("Colorspace").toString();
+    QString colorspace = profileInterface.property("Colorspace").toString();
 
     QStandardItem *item = new QStandardItem;
 

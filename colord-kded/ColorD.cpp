@@ -291,39 +291,40 @@ void ColorD::outputChanged(Output &output)
 {
     kDebug() << "Device changed" << output.path().path();
 
-    QDBusInterface *deviceInterface;
-    deviceInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                         output.path().path(),
-                                         QLatin1String("org.freedesktop.ColorManager.Device"),
-                                         QDBusConnection::systemBus(),
-                                         this);
-    // check Device.Kind is "display"
-    if (deviceInterface->property("Kind").toString() != QLatin1String("display")) {
-        // not a display device, ignoring
-        deviceInterface->deleteLater();
+    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   output.path().path(),
+                                   QLatin1String("org.freedesktop.ColorManager.Device"),
+                                   QDBusConnection::systemBus(),
+                                   this);
+    if (!deviceInterface.isValid()) {
         return;
     }
 
-    QList<QDBusObjectPath> profiles = deviceInterface->property("Profiles").value<QList<QDBusObjectPath> >();
-    if (profiles.isEmpty()) {
-        // There are no profiles ignoring
-        deviceInterface->deleteLater();
+    // check Device.Kind is "display"
+    if (deviceInterface.property("Kind").toString() != QLatin1String("display")) {
+        // not a display device, ignoring
         return;
     }
-    deviceInterface->deleteLater();
+
+    QList<QDBusObjectPath> profiles = deviceInterface.property("Profiles").value<QList<QDBusObjectPath> >();
+    if (profiles.isEmpty()) {
+        // There are no profiles ignoring
+        return;
+    }
 
     // read the default profile (the first path in the Device.Profiles property)
     QDBusObjectPath profileDefault = profiles.first();
     kDebug() << "profileDefault" << profileDefault.path();
-    QDBusInterface *profileInterface;
-    profileInterface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                          profileDefault.path(),
-                                          QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                          QDBusConnection::systemBus(),
-                                          this);
-    QString filename = profileInterface->property("Filename").toString();
+    QDBusInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                    profileDefault.path(),
+                                    QLatin1String("org.freedesktop.ColorManager.Profile"),
+                                    QDBusConnection::systemBus(),
+                                    this);
+    if (!profileInterface.isValid()) {
+        return;
+    }
+    QString filename = profileInterface.property("Filename").toString();
     kDebug() << "Default Profile Filename" << filename;
-    profileInterface->deleteLater();
 
     QFile file(filename);
     QByteArray data;
@@ -349,6 +350,7 @@ void ColorD::outputChanged(Output &output)
     int gamaSize = output.getGammaSize();
     if (gamaSize == 0) {
         kWarning() << "Gamma size is zero";
+        cmsCloseProfile(lcms_profile);
         return;
     }
 
