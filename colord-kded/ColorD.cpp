@@ -51,8 +51,8 @@ K_EXPORT_PLUGIN(ColorDFactory("colord"))
 
 ColorD::ColorD(QObject *parent, const QVariantList &args) :
     KDEDModule(parent),
-    m_has_1_3(false),
-    m_dirWatch(0)
+    m_dirWatch(0),
+    m_has_1_3(false)
 {
     // There's not much use for args in a KCM
     Q_UNUSED(args)
