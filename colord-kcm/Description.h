@@ -41,6 +41,7 @@ public:
 
 private slots:
     void on_installSystemWideBt_clicked();
+    void on_calibratePB_clicked();
 
 private:
     void insertTab(int index, QWidget *widget, const QString &label);
@@ -48,6 +49,7 @@ private:
 
     Ui::Description *ui;
     QDBusObjectPath m_currentProfile;
+    QString m_currentDeviceId;
     ProfileNamedColors *m_namedColors;
     ProfileMetaData *m_metadata;
 };

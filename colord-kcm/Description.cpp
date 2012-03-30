@@ -34,6 +34,7 @@
 #include <KGlobal>
 #include <KLocale>
 #include <KDateTime>
+#include <KToolInvocation>
 #include <KDebug>
 
 #define TAB_INFORMATION  1
@@ -56,6 +57,9 @@ Description::Description(QWidget *parent) :
 
     m_namedColors = new ProfileNamedColors;
     m_metadata = new ProfileMetaData;
+
+    QFileInfo gcmCalibrate(QLatin1String("/usr/bin/gcm-calibrate"));
+    ui->calibratePB->setEnabled(gcmCalibrate.isExecutable());
 }
 
 Description::~Description()
@@ -201,13 +205,13 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     }
 
     QString deviceTitle;
-    QString deviceId = deviceInterface.property("DeviceId").toString();
+    m_currentDeviceId = deviceInterface.property("DeviceId").toString();
     QString kind = deviceInterface.property("Kind").toString();
     QString model = deviceInterface.property("Model").toString();
     QString vendor = deviceInterface.property("Vendor").toString();
     QString scope = deviceInterface.property("Scope").toString();
     if (model.isEmpty() && vendor.isEmpty()) {
-        deviceTitle = deviceId;
+        deviceTitle = m_currentDeviceId;
     } else if (model.isEmpty()) {
         deviceTitle = vendor;
     } else if (vendor.isEmpty()) {
@@ -230,7 +234,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     }
     ui->ktitlewidget->setComment(kind);
 
-    ui->deviceIdL->setText(deviceId);
+    ui->deviceIdL->setText(m_currentDeviceId);
 
     if (scope == QLatin1String("temp")) {
         scope = i18n("User session");
@@ -282,6 +286,17 @@ void Description::on_installSystemWideBt_clicked()
                                              QLatin1String("org.freedesktop.ColorManager.Profile"),
                                              QLatin1String("InstallSystemWide"));
     QDBusConnection::systemBus().send(message);
+}
+
+void Description::on_calibratePB_clicked()
+{
+    QStringList args;
+    args << QLatin1String("--parent-window");
+    args << QString::number(winId());
+    args << QLatin1String("--device");
+    args << m_currentDeviceId;
+
+    KToolInvocation::kdeinitExec(QLatin1String("gcm-calibrate"), args);
 }
 
 void Description::insertTab(int index, QWidget *widget, const QString &label)

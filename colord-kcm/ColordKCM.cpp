@@ -182,7 +182,7 @@ void ColordKCM::load()
     ui->offsetSpacer->changeSize(30, offset, QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     // Make sure we have something selected
-    QTimer::singleShot(0, this, SLOT(showProfile()));
+    showProfile();
 }
 
 void ColordKCM::showProfile()
