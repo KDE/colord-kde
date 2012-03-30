@@ -31,6 +31,9 @@
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
 
+#include <KGlobal>
+#include <KLocale>
+#include <KDateTime>
 #include <KDebug>
 
 #define TAB_INFORMATION  1
@@ -85,6 +88,7 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
     QString filename = profileInterface.property("Filename").toString();
     bool hasVcgt = profileInterface.property("HasVcgt").toBool();
     bool isSystemWide = profileInterface.property("IsSystemWide").toBool();
+    qulonglong created = profileInterface.property("Created").toULongLong();
 
     ui->installSystemWideBt->setEnabled(!isSystemWide);
     Profile profile(filename);
@@ -99,7 +103,9 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
         ui->versionL->setText(profile.version());
 
         // Set the created time
-        ui->createdL->setText(profile.datetime().toString());
+        KDateTime createdDT;
+        createdDT.setTime_t(created);
+        ui->createdL->setText(KGlobal::locale()->formatDateTime(createdDT, KLocale::LongDate));
 
         // Set the license
         ui->licenseL->setText(profile.copyright());
@@ -137,7 +143,6 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
         }
         ui->whitepointL->setText(temp);
 
-        kDebug() << profile.datetime();
         kDebug() << profile.description();
         kDebug() << profile.model();
         kDebug() << profile.manufacturer();

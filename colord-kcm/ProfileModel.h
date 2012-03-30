@@ -37,14 +37,17 @@ public:
         SortRole,
         FilenameRole,
         ColorspaceRole,
-        ProfileKindRole,
-        ProfileDisplayNameSourceRole
+        ProfileKindRole
     } ProfileRoles;
     explicit ProfileModel(QObject *parent = 0);
 
     Qt::ItemFlags flags(const QModelIndex &index) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+
+    // Returns a char to help the sort model
+    static QChar getSortChar(const QString &kind);
+    static QString getProfileDataSource(const QDBusObjectPath &objectPath);
 
 signals:
     void changed();
@@ -58,7 +61,6 @@ private slots:
 
 private:
     int findItem(const QDBusObjectPath &objectPath);
-    QChar getSortChar(const QString &kind);
 };
 
 #endif // PROFILE_MODEL_H

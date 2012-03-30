@@ -34,9 +34,6 @@
          </property>
          <widget class="QWidget" name="page">
           <layout class="QFormLayout" name="formLayout">
-           <property name="sizeConstraint">
-            <enum>QLayout::SetNoConstraint</enum>
-           </property>
            <property name="rowWrapPolicy">
             <enum>QFormLayout::WrapLongRows</enum>
            </property>
@@ -49,8 +46,14 @@
            </item>
            <item row="0" column="1">
             <widget class="QLabel" name="typeL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>profile type</string>
+              <string notr="true">profile type</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -66,8 +69,14 @@
            </item>
            <item row="1" column="1">
             <widget class="QLabel" name="colorspaceL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>colorspace</string>
+              <string notr="true">colorspace</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -83,8 +92,14 @@
            </item>
            <item row="2" column="1">
             <widget class="QLabel" name="createdL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>time of creation</string>
+              <string notr="true">creation time</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -100,8 +115,14 @@
            </item>
            <item row="3" column="1">
             <widget class="QLabel" name="versionL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>version</string>
+              <string notr="true">version</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -117,8 +138,14 @@
            </item>
            <item row="4" column="1">
             <widget class="QLabel" name="deviceMakeL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>device make</string>
+              <string notr="true">device make</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -137,8 +164,14 @@
            </item>
            <item row="5" column="1">
             <widget class="QLabel" name="deviceModelL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>device model</string>
+              <string notr="true">device model</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -157,8 +190,14 @@
            </item>
            <item row="6" column="1">
             <widget class="QLabel" name="dpCorrectionL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>dp correction</string>
+              <string notr="true">dp correction</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -174,8 +213,14 @@
            </item>
            <item row="7" column="1">
             <widget class="QLabel" name="whitepointL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>white point</string>
+              <string notr="true">white point</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -191,8 +236,14 @@
            </item>
            <item row="8" column="1">
             <widget class="QLabel" name="licenseL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>license</string>
+              <string notr="true">license</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -211,8 +262,14 @@
            </item>
            <item row="9" column="1">
             <widget class="QLabel" name="filesizeL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>file size</string>
+              <string notr="true">file size</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -228,8 +285,14 @@
            </item>
            <item row="10" column="1">
             <widget class="QLabel" name="filenameL">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>filename</string>
+              <string notr="true">filename</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>

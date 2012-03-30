@@ -20,6 +20,9 @@
 
 #include "DeviceModel.h"
 
+#include "ProfileModel.h"
+#include "Profile.h"
+
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusMetaType>
 #include <QtDBus/QDBusMessage>
@@ -30,7 +33,8 @@
 
 #include <KDebug>
 #include <KLocale>
-#include <KMessageBox>
+#include <KDateTime>
+#include <KIcon>
 
 DeviceModel::DeviceModel(QObject *parent) :
     QStandardItemModel(parent)
@@ -108,31 +112,25 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
     // is what changes including "Modified" property
     QStandardItem *stdItem = item(row);
     for (int i = 0; i < profiles.size(); ++i) {
-        QStandardItem *child;
-        child = stdItem->child(i);
+        // Look for the desired profile
+        QStandardItem *child = findProfile(stdItem, profiles.at(i));
         if (child) {
-            // If the profile item is the same ignore since
-            // Profiles don't actually change
-            if (child->data(ObjectPathRole).value<QDBusObjectPath>() == profiles.at(i)) {
-                // Check if the state has changed
-                Qt::CheckState state = i ? Qt::Unchecked : Qt::Checked;
-                if (child->checkState() != state) {
-                    child->setCheckState(state);
-                }
-                continue;
+            // Check if the state has changed
+            Qt::CheckState state = i ? Qt::Unchecked : Qt::Checked;
+            if (child->checkState() != state) {
+                child->setCheckState(state);
             }
-            // Removes the item since it's not the one we are looking for
-            stdItem->removeRow(i);
-        }
-        // Inserts the profile with the parent object Path
-        QStandardItem *profileItem = createProfileItem(profiles.at(i), objectPath, !i);
-        if (profileItem) {
-            stdItem->insertRow(i, profileItem);
+        } else {
+            // Inserts the profile with the parent object Path
+            QStandardItem *profileItem = createProfileItem(profiles.at(i), objectPath, !i);
+            if (profileItem) {
+                stdItem->insertRow(i, profileItem);
+            }
         }
     }
 
     // Remove the extra items it might have
-    removeRows(profiles.size(), stdItem->rowCount() - profiles.size(), stdItem->index());
+    removeProfilesNotInList(stdItem, profiles);
 
     emit changed();
 }
@@ -255,10 +253,13 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     }
 
     QStandardItem *stdItem = new QStandardItem;
+    QString dataSource = ProfileModel::getProfileDataSource(objectPath);
     QString kind = interface.property("Kind").toString();
     QString filename = interface.property("Filename").toString();
     QString title = interface.property("Title").toString();
+    qulonglong created = interface.property("Created").toULongLong();
 
+    // Sets the profile title
     if (title.isEmpty()) {
         QString colorspace = interface.property("Colorspace").toString();
         if (colorspace == QLatin1String("rgb")) {
@@ -268,18 +269,49 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
         } else if (colorspace == QLatin1String("gray")) {
             title = i18n("Default Gray");
         }
+    } else {
+        KDateTime createdDT;
+        createdDT.setTime_t(created);
+        title = Profile::profileWithSource(dataSource, title, createdDT);
     }
-
     stdItem->setText(title);
+
     stdItem->setData(qVariantFromValue(objectPath), ObjectPathRole);
     stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);
     stdItem->setData(filename, FilenameRole);
     stdItem->setData(kind, ProfileKindRole);
-    stdItem->setData(title, SortRole);
+    stdItem->setData(qVariantFromValue(ProfileModel::getSortChar(kind) + title), SortRole);
     stdItem->setCheckable(true);
     stdItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);
 
     return stdItem;
+}
+
+QStandardItem *DeviceModel::findProfile(QStandardItem *parent, const QDBusObjectPath &objectPath)
+{
+    QStandardItem *child;
+    for (int i = 0; i < parent->rowCount(); ++i) {
+        child = parent->child(i);
+        if (child->data(ObjectPathRole).value<QDBusObjectPath>() == objectPath) {
+            return child;
+        }
+    }
+    return 0;
+}
+
+void DeviceModel::removeProfilesNotInList(QStandardItem *parent, const ObjectPathList &profiles)
+{
+    QStandardItem *child;
+    for (int i = 0; i < parent->rowCount(); ++i) {
+        child = parent->child(i);
+        // If the profile object path is not on the list remove it
+        if (!profiles.contains(child->data(ObjectPathRole).value<QDBusObjectPath>())) {
+            parent->removeRow(i);
+            // i index is now pointing to a different value
+            // we need to go back so we don't skip an item
+            --i;
+        }
+    }
 }
 
 int DeviceModel::findItem(const QDBusObjectPath &objectPath)

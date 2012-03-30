@@ -113,7 +113,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     m_profilesFilter = new QSortFilterProxyModel(this);
     m_profilesFilter->setSourceModel(model);
     m_profilesFilter->setFilterRole(ProfileModel::ColorspaceRole);
-    m_profilesFilter->setSortRole(ProfileModel::ProfileDisplayNameSourceRole);
+    m_profilesFilter->setSortRole(ProfileModel::SortRole);
     m_profilesFilter->setDynamicSortFilter(true);
     m_profilesFilter->sort(0);
 
@@ -335,7 +335,7 @@ void ColordKCM::fillMenu()
         // Create the profile action
         QAction *action;
         QString title;
-        title = profileIndex.data(ProfileModel::ProfileDisplayNameSourceRole).toString();
+        title = profileIndex.data().toString();
         action = m_addAvailableMenu->addAction(title);
         action->setData(profileIndex.data(ProfileModel::ObjectPathRole));
         action->setProperty(DEVICE_PATH, devicePath);

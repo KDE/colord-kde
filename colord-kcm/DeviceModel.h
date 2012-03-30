@@ -39,8 +39,7 @@ public:
         SortRole,
         FilenameRole,
         ColorspaceRole,
-        ProfileKindRole,
-        ProfileDisplayNameSourceRole
+        ProfileKindRole
     } DeviceRoles;
     explicit DeviceModel(QObject *parent = 0);
 
@@ -62,6 +61,8 @@ private:
     QStandardItem* createProfileItem(const QDBusObjectPath &objectPath,
                                      const QDBusObjectPath &parentObjectPath,
                                      bool checked);
+    QStandardItem* findProfile(QStandardItem *parent, const QDBusObjectPath &objectPath);
+    void removeProfilesNotInList(QStandardItem *parent, const ObjectPathList &profiles);
     int findItem(const QDBusObjectPath &objectPath);
 };
 

@@ -25,6 +25,8 @@
 #include <QColor>
 #include <QQuaternion>
 
+#include <KDateTime>
+
 #include <lcms2.h>
 
 class Profile
@@ -57,18 +59,16 @@ public:
     QString copyright() const;
     QString manufacturer() const;
     QString model() const;
-    QDateTime datetime() const;
     QString checksum() const;
     uint temperature() const;
 
     QMap<QString, QColor> getNamedColors();
 
-    static QString profileWithSource(const QString &dataSource, const QString &profilename);
+    static QString profileWithSource(const QString &dataSource, const QString &profilename, const KDateTime &created);
 
 private:
     QColor convertXYZ(cmsCIEXYZ *cieXYZ);
     void parseProfile(const uint *data, size_t length);
-    QDateTime parseDateTime(const struct tm &created);
 
     bool m_loaded;
     ProfileKind m_kind;
@@ -81,18 +81,9 @@ private:
     QString m_copyright;
     QString m_manufacturer;
     QString m_model;
-    QDateTime m_datetime;
     QString m_checksum;
     uint m_temperature;
-//    GHashTable		*dict;
-//    CdColorXYZ		*white;
     QQuaternion m_white;
-//    CdColorXYZ		*red;
-//    CdColorXYZ		*green;
-//    CdColorXYZ		*blue;
-//    GFile			*file;
-//    GFileMonitor		*monitor;
-//    gboolean		 has_mlut;
     cmsHPROFILE m_lcmsProfile;
 };
 

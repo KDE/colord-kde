@@ -19,6 +19,7 @@
 
 #include "Profile.h"
 
+#include <KGlobal>
 #include <KLocale>
 #include <KFile>
 #include <KDebug>
@@ -282,13 +283,6 @@ void Profile::parseProfile(const uint *data, size_t length)
 //        cd_color_clear_xyz (priv->blue);
 //    }
 
-    /* get the profile created time and date */
-    struct tm created;
-    ret = cmsGetHeaderCreationDateTime(m_lcmsProfile, &created);
-    if (ret) {
-        m_datetime = parseDateTime(created);
-    }
-
     /* get profile header version */
     cmsFloat64Number profile_version;
     profile_version = cmsGetProfileVersion(m_lcmsProfile);
@@ -337,19 +331,6 @@ void Profile::parseProfile(const uint *data, size_t length)
 //    g_free (text);
 //    g_free (checksum);
 //    return ret;
-}
-
-QDateTime Profile::parseDateTime(const struct tm &created)
-{
-    QDateTime ret;
-    QTime time;
-    time.setHMS(created.tm_hour, created.tm_min, created.tm_sec);
-    ret.setTime(time);
-    QDate date;
-    date.setYMD(created.tm_year, created.tm_mon + 1, created.tm_mday);
-    ret.setDate(date);
-
-    return ret;
 }
 
 bool Profile::loaded() const
@@ -427,11 +408,6 @@ QString Profile::manufacturer() const
 QString Profile::model() const
 {
     return m_model;
-}
-
-QDateTime Profile::datetime() const
-{
-    return m_datetime;
 }
 
 QString Profile::checksum() const
@@ -537,14 +513,18 @@ out:
     return array;
 }
 
-QString Profile::profileWithSource(const QString &dataSource, const QString &profilename)
+QString Profile::profileWithSource(const QString &dataSource, const QString &profilename, const KDateTime &created)
 {
     if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_EDID)) {
         return i18n("Default: %1", profilename);
     } else if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_STANDARD)) {
         return i18n("Colorspace: %1", profilename);
-    } if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_TEST)) {
+    } else if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_TEST)) {
         return i18n("Test profile: %1", profilename);
+    } else if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_CALIB)) {
+        return i18n("%1 (%2)",
+                    profilename,
+                    KGlobal::locale()->formatDateTime(created, KLocale::LongDate));
     }
     return profilename;
 }

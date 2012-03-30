@@ -32,7 +32,9 @@
 
 #include <KDebug>
 #include <KLocale>
-#include <KMessageBox>
+#include <KGlobal>
+#include <KDateTime>
+#include <KIcon>
 
 typedef QList<QDBusObjectPath> ObjectPathList;
 
@@ -128,34 +130,12 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         return;
     }
 
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             objectPath.path(),
-                                             QLatin1String("org.freedesktop.DBus.Properties"),
-                                             QLatin1String("Get"));
-    message << QString("org.freedesktop.ColorManager.Profile"); // Interface
-    message << QString("Metadata"); // Propertie Name
-    QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
-    QString dataSource;
-    if (reply.isValid()) {
-        QDBusArgument argument = reply.value().value<QDBusArgument>();
-        StringStringMap metadata = qdbus_cast<StringStringMap>(argument);
-        StringStringMap::const_iterator i = metadata.constBegin();
-        while (i != metadata.constEnd()) {
-            if (i.key() == QLatin1String("DATA_source")) {
-                // Found DATA_source
-                dataSource = i.value();
-                break;
-            }
-            ++i;
-        }
-    }
-
+    QString dataSource = getProfileDataSource(objectPath);
     QString profileId = profileInterface.property("ProfileId").toString();
     QString title = profileInterface.property("Title").toString();
     QString kind = profileInterface.property("Kind").toString();
-
     QString colorspace = profileInterface.property("Colorspace").toString();
+    qulonglong created = profileInterface.property("Created").toULongLong();
 
     QStandardItem *item = new QStandardItem;
 
@@ -180,8 +160,13 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         item->setIcon(KIcon(QLatin1String("image-missing")));
     }
 
+    // Sets the profile title
     if (title.isEmpty()) {
         title = profileId;
+    } else {
+        KDateTime createdDT;
+        createdDT.setTime_t(created);
+        title = Profile::profileWithSource(dataSource, title, createdDT);
     }
     item->setText(title);
 
@@ -189,7 +174,6 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     item->setData(qVariantFromValue(getSortChar(kind) + title), SortRole);
     item->setData(filename, FilenameRole);
     item->setData(kind, ProfileKindRole);
-    item->setData(Profile::profileWithSource(dataSource, title), ProfileDisplayNameSourceRole);
 
     appendRow(item);
 
@@ -240,6 +224,33 @@ QChar ProfileModel::getSortChar(const QString &kind)
         return QLatin1Char('3');
     }
     return QLatin1Char('4');
+}
+
+QString ProfileModel::getProfileDataSource(const QDBusObjectPath &objectPath)
+{
+    QString dataSource;
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             objectPath.path(),
+                                             QLatin1String("org.freedesktop.DBus.Properties"),
+                                             QLatin1String("Get"));
+    message << QString("org.freedesktop.ColorManager.Profile"); // Interface
+    message << QString("Metadata"); // Propertie Name
+    QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+    if (reply.isValid()) {
+        QDBusArgument argument = reply.value().value<QDBusArgument>();
+        StringStringMap metadata = qdbus_cast<StringStringMap>(argument);
+        StringStringMap::const_iterator i = metadata.constBegin();
+        while (i != metadata.constEnd()) {
+            if (i.key() == QLatin1String("DATA_source")) {
+                // Found DATA_source
+                dataSource = i.value();
+                break;
+            }
+            ++i;
+        }
+    }
+    return dataSource;
 }
 
 QVariant ProfileModel::headerData(int section, Qt::Orientation orientation, int role) const
