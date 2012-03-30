@@ -82,6 +82,9 @@ private:
     void outputChanged(Output &output);
     void removeOutput(const Output &output);
     void addProfile(const QFileInfo &fileInfo);
+    void addProfileToDevice(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath);
+    void addEdidProfileToDevice(Output &output);
+    StringStringMap getProfileMetadata(const QDBusObjectPath &profilePath);
     QString profilesPath() const;
 
     KDirWatch *m_dirWatch;

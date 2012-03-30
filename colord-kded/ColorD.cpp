@@ -49,6 +49,8 @@
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))
 
+typedef QList<QDBusObjectPath> ObjectPathList;
+
 ColorD::ColorD(QObject *parent, const QVariantList &args) :
     KDEDModule(parent),
     m_dirWatch(0),
@@ -60,6 +62,7 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     // Register this first or the first time will fail
     qDBusRegisterMetaType<StringStringMap>();
     qDBusRegisterMetaType<QDBusUnixFileDescriptor>();
+    qDBusRegisterMetaType<ObjectPathList>();
 
     // connect to colord using DBus
     connectToColorD();
@@ -138,6 +141,70 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
 
     kDebug() << "created profile" << reply.value().path();
+}
+
+void ColorD::addProfileToDevice(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath)
+{
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             devicePath.path(),
+                                             QLatin1String("org.freedesktop.ColorManager.Device"),
+                                             QLatin1String("AddProfile"));
+    message << QString("soft"); // Relation
+    message << qVariantFromValue(profilePath); // Profile Path
+
+    /* call Device.AddProfile() with the device and profile object paths */
+    QDBusConnection::systemBus().send(message);
+    kDebug() << "Profile added" << devicePath.path() << profilePath.path();
+}
+
+void ColorD::addEdidProfileToDevice(Output &output)
+{
+    kDebug();
+    // Ask for profiles
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("/org/freedesktop/ColorManager"),
+                                             QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("GetProfiles"));
+    QDBusReply<ObjectPathList> paths = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+
+    foreach (const QDBusObjectPath &profilePath, paths.value()) {
+        StringStringMap metadata = getProfileMetadata(profilePath);
+
+        StringStringMap::const_iterator i = metadata.constBegin();
+        while (i != metadata.constEnd()) {
+            kDebug() << i.key() << ": " << i.value();
+            if (i.key() == QLatin1String("EDID_md5")) {
+                if (i.value() == output.edidHash()) {
+                    kDebug() << "AUTO ADDING";
+                    addProfileToDevice(profilePath, output.path());
+                }
+                break;
+            }
+        }
+    }
+}
+
+StringStringMap ColorD::getProfileMetadata(const QDBusObjectPath &profilePath)
+{
+    StringStringMap ret;
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             profilePath.path(),
+                                             QLatin1String("org.freedesktop.DBus.Properties"),
+                                             QLatin1String("Get"));
+    message << QString("org.freedesktop.ColorManager.Profile"); // Interface
+    message << QString("Metadata"); // Propertie Name
+    QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+    if (!reply.isValid()) {
+        kWarning() << "Failed to get Metadata from profile" << profilePath.path() << reply.error().message();
+        return ret;
+    }
+
+    QDBusArgument argument = reply.value().value<QDBusArgument>();
+    ret = qdbus_cast<StringStringMap>(argument);
+    return ret;
 }
 
 QString ColorD::profilesPath() const
@@ -520,26 +587,11 @@ void ColorD::checkOutputs()
     }
 }
 
-void ColorD::profileAdded(const QDBusObjectPath &objectPath)
+void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 {
     /* check if the EDID_md5 Profile.Metadata matches any connected
      * XRandR devices (e.g. lvds1), otherwise ignore */
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             objectPath.path(),
-                                             QLatin1String("org.freedesktop.DBus.Properties"),
-                                             QLatin1String("Get"));
-    message << QString("org.freedesktop.ColorManager.Profile"); // Interface
-    message << QString("Metadata"); // Propertie Name
-    QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
-    if (!reply.isValid()) {
-        kWarning() << "Failed to get Metadata from profile" << objectPath.path() << reply.error().message();
-        return;
-    }
-    QDBusArgument argument = reply.value().value<QDBusArgument>();
-    StringStringMap metadata = qdbus_cast<StringStringMap>(argument);
-    kDebug() << reply.value() << metadata;
-    kDebug() << metadata.size();
+    StringStringMap metadata = getProfileMetadata(profilePath);
 
     StringStringMap::const_iterator i = metadata.constBegin();
     while (i != metadata.constEnd()) {
@@ -557,17 +609,7 @@ void ColorD::profileAdded(const QDBusObjectPath &objectPath)
 
             if (output) {
                 // Found an EDID that matches the md5
-                QDBusMessage message;
-                message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                                         output->path().path(),
-                                                         QLatin1String("org.freedesktop.ColorManager.Device"),
-                                                         QLatin1String("AddProfile"));
-                message << QString("soft"); // Relation
-                message << qVariantFromValue(objectPath); // Profile Path
-
-                /* call Device.AddProfile() with the device and profile object paths */
-                QDBusConnection::systemBus().send(message);
-                kDebug() << "Profile added" << output->path().path() << objectPath.path();
+                addProfileToDevice(profilePath, output->path());
             }
         }
         ++i;
@@ -577,6 +619,27 @@ void ColorD::profileAdded(const QDBusObjectPath &objectPath)
 void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 {
     kDebug() << "Device added" << objectPath.path();
+    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   objectPath.path(),
+                                   QLatin1String("org.freedesktop.ColorManager.Device"),
+                                   QDBusConnection::systemBus(),
+                                   this);
+    if (!deviceInterface.isValid()) {
+        return;
+    }
+
+    // check Device.Kind is "display"
+    if (deviceInterface.property("Kind").toString() != QLatin1String("display")) {
+        // not a display device, ignoring
+        return;
+    }
+
+    QList<QDBusObjectPath> profiles = deviceInterface.property("Profiles").value<QList<QDBusObjectPath> >();
+    if (profiles.isEmpty()) {
+        // Device was added but no profile was assigned to it
+        kDebug() << "ADDING addEdidProfileToDevice";
+//        addEdidProfileToDevice(objectPath);
+    }
 
     /* show a notification that the user should calibrate the device */
     //TODO
