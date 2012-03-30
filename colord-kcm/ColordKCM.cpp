@@ -341,12 +341,8 @@ void ColordKCM::fillMenu()
         action->setProperty(DEVICE_PATH, devicePath);
     }
 
-    if (childCount == 0) {
-        // There are no available profiles
-        m_addAvailableMenu->setEnabled(false);
-        return;
-    }
-    m_addAvailableMenu->setEnabled(m_profilesFilter->rowCount());
+    // If the menu doesn't have any entries it should be disabled
+    m_addAvailableMenu->setEnabled(!m_addAvailableMenu->actions().isEmpty());
 }
 
 void ColordKCM::on_tabWidget_currentChanged(int index)
