@@ -156,14 +156,11 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     connect(signalMapper, SIGNAL(mapped(int)),
             this, SLOT(showProfile()));
 
+    // make sure the screen is split on the half
     QList<int> sizes;
     sizes << width() / 2;
     sizes << width() / 2;
     ui->splitter->setSizes(sizes);
-
-    // Make sure we have something selected
-    QTimer::singleShot(0, this, SLOT(adjustTabWidgetSize()));
-    QTimer::singleShot(0, this, SLOT(showProfile()));
 }
 
 ColordKCM::~ColordKCM()
@@ -171,17 +168,21 @@ ColordKCM::~ColordKCM()
     delete ui;
 }
 
-void ColordKCM::adjustTabWidgetSize()
+void ColordKCM::load()
 {
     // Force the profile widget to get a proper height in case
     // the stacked widget is showing the info page first
     if (ui->stackedWidget->currentWidget() != ui->profile_page) {
+        // This is highly needed otherwise the size get wrong on System Settings
         ui->stackedWidget->setCurrentWidget(ui->profile_page);
     }
 
     // align the tabbar to the list view
     int offset = ui->profile->innerHeight() - ui->devicesTV->viewport()->height();
     ui->offsetSpacer->changeSize(30, offset, QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    // Make sure we have something selected
+    QTimer::singleShot(0, this, SLOT(showProfile()));
 }
 
 void ColordKCM::showProfile()

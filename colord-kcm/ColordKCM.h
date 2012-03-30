@@ -44,8 +44,10 @@ public:
     ColordKCM(QWidget *parent, const QVariantList &args);
     ~ColordKCM();
 
+public slots:
+    void load();
+
 private slots:
-    void adjustTabWidgetSize();
     void showProfile();
     void addProfileFile();
     void addProfileAction(QAction *action);
