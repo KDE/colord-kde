@@ -58,8 +58,27 @@ Description::Description(QWidget *parent) :
     m_namedColors = new ProfileNamedColors;
     m_metadata = new ProfileMetaData;
 
-    QFileInfo gcmCalibrate(QLatin1String("/usr/bin/gcm-calibrate"));
-    ui->calibratePB->setEnabled(gcmCalibrate.isExecutable());
+    // Creates a ColorD interface, it must be created with new
+    // otherwise the object will be deleted when this block ends
+    QDBusInterface *interface;
+    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                   QLatin1String("/org/freedesktop/ColorManager"),
+                                   QLatin1String("org.freedesktop.ColorManager"),
+                                   QDBusConnection::systemBus(),
+                                   this);
+    // listen to colord for events
+    connect(interface, SIGNAL(SensorAdded(QDBusObjectPath)),
+            this, SLOT(sensorAdded(QDBusObjectPath)));
+    connect(interface, SIGNAL(SensorRemoved(QDBusObjectPath)),
+            this, SLOT(sensorRemoved(QDBusObjectPath)));
+
+    // Ask for profiles
+    QDBusMessage message;
+    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("/org/freedesktop/ColorManager"),
+                                             QLatin1String("org.freedesktop.ColorManager"),
+                                             QLatin1String("GetSensors"));
+    QDBusConnection::systemBus().callWithCallback(message, this, SLOT(gotSensors(QDBusMessage)));
 }
 
 Description::~Description()
@@ -78,6 +97,7 @@ int Description::innerHeight() const
 void Description::setProfile(const QDBusObjectPath &objectPath)
 {
     m_currentProfile = objectPath;
+    m_currentDeviceId.clear();
 
     ui->stackedWidget->setCurrentIndex(0);
     QDBusInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
@@ -207,6 +227,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     QString deviceTitle;
     m_currentDeviceId = deviceInterface.property("DeviceId").toString();
     QString kind = deviceInterface.property("Kind").toString();
+    m_currentDeviceKind = kind;
     QString model = deviceInterface.property("Model").toString();
     QString vendor = deviceInterface.property("Vendor").toString();
     QString scope = deviceInterface.property("Scope").toString();
@@ -266,16 +287,17 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
                                         QLatin1String("org.freedesktop.ColorManager.Profile"),
                                         QDBusConnection::systemBus(),
                                         this);
-        if (!profileInterface.isValid()) {
-            return;
-        }
-
-        profileTitle = profileInterface.property("Title").toString();
-        if (profileTitle.isEmpty()) {
-            profileTitle = profileInterface.property("ProfileId").toString();
+        if (profileInterface.isValid()) {
+            profileTitle = profileInterface.property("Title").toString();
+            if (profileTitle.isEmpty()) {
+                profileTitle = profileInterface.property("ProfileId").toString();
+            }
         }
     }
     ui->defaultProfileName->setText(profileTitle);
+
+    // Verify if the Calibrate button should be enbled or disabled
+    ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
 }
 
 void Description::on_installSystemWideBt_clicked()
@@ -299,6 +321,50 @@ void Description::on_calibratePB_clicked()
     KToolInvocation::kdeinitExec(QLatin1String("gcm-calibrate"), args);
 }
 
+void Description::gotSensors(const QDBusMessage &message)
+{
+    if (message.type() == QDBusMessage::ReplyMessage && message.arguments().size() == 1) {
+        QDBusArgument argument = message.arguments().first().value<QDBusArgument>();
+        ObjectPathList paths = qdbus_cast<ObjectPathList>(argument);
+        foreach (const QDBusObjectPath &path, paths) {
+            // Add the sensors but don't update the Calibrate button
+            sensorAdded(path, false);
+        }
+        // Update the calibrate button later
+        ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
+    } else {
+        kWarning() << "Unexpected message" << message;
+    }
+}
+
+void Description::sensorAdded(const QDBusObjectPath &sensorPath, bool updateCalibrateButton)
+{
+    if (!m_sensors.contains(sensorPath)) {
+        m_sensors.append(sensorPath);
+    }
+
+    if (updateCalibrateButton) {
+        ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
+    }
+}
+
+void Description::sensorRemoved(const QDBusObjectPath &sensorPath, bool updateCalibrateButton)
+{
+    m_sensors.removeOne(sensorPath);
+    if (updateCalibrateButton) {
+        ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
+    }
+}
+
+void Description::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
+{
+    Q_UNUSED(serviceName)
+    if (newOwner.isEmpty() || oldOwner != newOwner) {
+        // colord has quit or restarted
+        m_sensors.clear();
+    }
+}
+
 void Description::insertTab(int index, QWidget *widget, const QString &label)
 {
     int pos = ui->tabWidget->indexOf(widget);
@@ -313,6 +379,67 @@ void Description::removeTab(QWidget *widget)
     if (pos != -1) {
         ui->tabWidget->removeTab(pos);
     }
+}
+
+bool Description::calibrateEnabled(const QString &kind)
+{
+    QString toolTip;
+    bool ret = false;
+    toolTip = i18n("Create a color profile for the selected device");
+
+    if (m_currentDeviceId.isEmpty()) {
+        // No device was selected
+        return false;
+    }
+
+    QFileInfo gcmCalibrate(QLatin1String("/usr/bin/gcm-calibrate"));
+    if (!gcmCalibrate.isExecutable()) {
+        // We don't have a calibration tool yet
+        toolTip = i18n("You need Gnome Color Management installed in order to calibrate devices");
+    } else if (kind == QLatin1String("display")) {
+        if (m_sensors.isEmpty()) {
+            toolTip = i18n("The measuring instrument is not detected. Please check it is turned on and correctly connected.");
+        } else {
+            ret = true;
+        }
+    } else if (kind == QLatin1String("camera") ||
+               kind == QLatin1String("scanner") ||
+               kind == QLatin1String("webcam")) {
+        ret = true;
+    } else if (kind == QLatin1String("printer")) {
+        // Check if we have any sensor
+        if (m_sensors.isEmpty()) {
+            toolTip = i18n("The measuring instrument is not detected. Please check it is turned on and correctly connected.");
+        } else {
+            // Search for a suitable sensor
+            foreach (const QDBusObjectPath &sensorPath, m_sensors) {
+                QDBusInterface sensorInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                               sensorPath.path(),
+                                               QLatin1String("org.freedesktop.ColorManager.Sensor"),
+                                               QDBusConnection::systemBus(),
+                                               this);
+                if (!sensorInterface.isValid()) {
+                    continue;
+                }
+
+                QStringList capabilities = sensorInterface.property("Capabilities").toStringList();
+                if (capabilities.contains(QLatin1String("printer"))) {
+                    ret = true;
+                    break;
+                }
+            }
+
+            // If we do not found a suitable sensor place a proper tool tip
+            if (!ret) {
+                toolTip = i18n("The measuring instrument does not support printer profiling.");
+            }
+        }
+    } else {
+        toolTip = i18n("The device type is not currently supported.");
+    }
+
+    ui->calibratePB->setToolTip(toolTip);
+    return ret;
 }
 
 #include "Description.moc"

@@ -35,6 +35,7 @@ namespace Ui {
     class ColordKCM;
 }
 class DeviceModel;
+class ProfileModel;
 class ProfileDescription;
 class ColordKCM : public KCModule
 {
@@ -48,9 +49,10 @@ public slots:
     void load();
 
 private slots:
-    void showProfile();
+    void showDescription();
     void addProfileFile();
     void addProfileAction(QAction *action);
+    void updateSelection();
     void removeProfile();
     void fillMenu();
     void on_tabWidget_currentChanged(int index);
@@ -62,7 +64,8 @@ private:
     QString profilesPath() const;
 
     Ui::ColordKCM *ui;
-    DeviceModel *m_model;
+    DeviceModel *m_deviceModel;
+    ProfileModel *m_profileModel;
     QStackedLayout *m_stackedLayout;
     ProfileDescription *m_profileDesc;
     QWidget *m_noPrinter;

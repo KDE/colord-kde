@@ -47,6 +47,9 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
+public slots:
+    void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
+
 signals:
     void changed();
 
@@ -55,7 +58,6 @@ private slots:
     void deviceChanged(const QDBusObjectPath &objectPath);
     void deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);
     void deviceRemoved(const QDBusObjectPath &objectPath);
-    void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
 private:
     QStandardItem* createProfileItem(const QDBusObjectPath &objectPath,

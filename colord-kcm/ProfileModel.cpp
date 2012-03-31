@@ -26,7 +26,6 @@
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusReply>
 #include <QtDBus/QDBusArgument>
-#include <QtDBus/QDBusServiceWatcher>
 #include <QStringBuilder>
 #include <QFileInfo>
 
@@ -58,15 +57,6 @@ ProfileModel::ProfileModel(QObject *parent) :
             this, SLOT(profileRemoved(QDBusObjectPath)));
     connect(interface, SIGNAL(ProfileChanged(QDBusObjectPath)),
             this, SLOT(profileChanged(QDBusObjectPath)));
-
-    // Make sure we know is colord is running
-    QDBusServiceWatcher *watcher;
-    watcher = new QDBusServiceWatcher("org.freedesktop.ColorManager",
-                                      QDBusConnection::systemBus(),
-                                      QDBusServiceWatcher::WatchForOwnerChange,
-                                      this);
-    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
-            this, SLOT(serviceOwnerChanged(QString,QString,QString)));
 
     // Ask for profiles
     QDBusMessage message;

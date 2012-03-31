@@ -284,10 +284,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>stackedWidget</zorder>
-  <zorder>widget</zorder>
-  <zorder>devicesTV</zorder>
-  <zorder>splitter</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -302,6 +298,14 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>devicesTV</tabstop>
+  <tabstop>devicesTb</tabstop>
+  <tabstop>profilesTb</tabstop>
+  <tabstop>removeProfileBt</tabstop>
+  <tabstop>profilesTV</tabstop>
+  <tabstop>addProfileBt</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

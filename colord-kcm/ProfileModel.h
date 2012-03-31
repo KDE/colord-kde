@@ -49,6 +49,9 @@ public:
     static QChar getSortChar(const QString &kind);
     static QString getProfileDataSource(const QDBusObjectPath &objectPath);
 
+public slots:
+    void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
+
 signals:
     void changed();
 
@@ -57,7 +60,6 @@ private slots:
     void profileChanged(const QDBusObjectPath &objectPath);
     void profileAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);
     void profileRemoved(const QDBusObjectPath &objectPath);
-    void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
 private:
     int findItem(const QDBusObjectPath &objectPath);

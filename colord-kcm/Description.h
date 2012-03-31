@@ -22,6 +22,7 @@
 
 #include <QWidget>
 #include <QDBusObjectPath>
+#include <QDBusMessage>
 
 namespace Ui {
     class Description;
@@ -39,19 +40,29 @@ public:
     void setProfile(const QDBusObjectPath &objectPath);
     void setDevice(const QDBusObjectPath &objectPath);
 
+public slots:
+    void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
+
 private slots:
     void on_installSystemWideBt_clicked();
     void on_calibratePB_clicked();
 
+    void gotSensors(const QDBusMessage &message);
+    void sensorAdded(const QDBusObjectPath &sensorPath, bool updateCalibrateButton = true);
+    void sensorRemoved(const QDBusObjectPath &sensorPath, bool updateCalibrateButton = true);
+
 private:
     void insertTab(int index, QWidget *widget, const QString &label);
     void removeTab(QWidget *widget);
+    bool calibrateEnabled(const QString &kind);
 
     Ui::Description *ui;
     QDBusObjectPath m_currentProfile;
     QString m_currentDeviceId;
+    QString m_currentDeviceKind;
     ProfileNamedColors *m_namedColors;
     ProfileMetaData *m_metadata;
+    QList<QDBusObjectPath> m_sensors;
 };
 
 #endif // DESCRIPTION_H

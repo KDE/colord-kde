@@ -28,7 +28,6 @@
 #include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusReply>
-#include <QtDBus/QDBusServiceWatcher>
 #include <QStringBuilder>
 
 #include <KDebug>
@@ -56,15 +55,6 @@ DeviceModel::DeviceModel(QObject *parent) :
             this, SLOT(deviceRemoved(QDBusObjectPath)));
     connect(interface, SIGNAL(DeviceChanged(QDBusObjectPath)),
             this, SLOT(deviceChanged(QDBusObjectPath)));
-
-    // Make sure we know is colord is running
-    QDBusServiceWatcher *watcher;
-    watcher = new QDBusServiceWatcher("org.freedesktop.ColorManager",
-                                      QDBusConnection::systemBus(),
-                                      QDBusServiceWatcher::WatchForOwnerChange,
-                                      this);
-    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
-            this, SLOT(serviceOwnerChanged(QString,QString,QString)));
 
     // Ask for devices
     QDBusMessage message;
@@ -192,7 +182,8 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     if (kind == QLatin1String("display")) {
         kind = QLatin1String("display-device");
     } else if (kind == QLatin1String("camera") ||
-               kind == QLatin1String("scanner")) {
+               kind == QLatin1String("scanner") ||
+               kind == QLatin1String("webcam")) {
         kind = "input-device";
     } else if (kind == QLatin1String("printer")) {
         kind = "output-device";

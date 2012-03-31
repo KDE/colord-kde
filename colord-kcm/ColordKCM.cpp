@@ -36,6 +36,8 @@
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusMessage>
+#include <QtDBus/QDBusServiceWatcher>
+#include <QItemSelectionModel>
 #include <QTimer>
 #include <QFileInfo>
 #include <QStringBuilder>
@@ -92,26 +94,25 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     // Connect this slot prior to defining the model
     // so we get a selection on the first item for free
     connect(sortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-            this, SLOT(showProfile()));
+            this, SLOT(showDescription()));
     sortModel->setDynamicSortFilter(true);
     sortModel->setSortRole(DeviceModel::SortRole);
     sortModel->sort(0);
     // Set the source model then connect to the selection model to get updates
     ui->devicesTV->setModel(sortModel);
     connect(ui->devicesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(showProfile()));
+            this, SLOT(showDescription()));
 
-    m_model = new DeviceModel(this);
-    connect(m_model, SIGNAL(changed()), this, SLOT(showProfile()));
-    sortModel->setSourceModel(m_model);
-
+    m_deviceModel = new DeviceModel(this);
+    connect(m_deviceModel, SIGNAL(changed()), this, SLOT(updateSelection()));
+    sortModel->setSourceModel(m_deviceModel);
 
     // Profiles view setup
-    ProfileModel *model = new ProfileModel(this);
-    connect(m_model, SIGNAL(changed()), this, SLOT(showProfile()));
+    m_profileModel = new ProfileModel(this);
+    connect(m_profileModel, SIGNAL(changed()), this, SLOT(updateSelection()));
     // Filter Proxy for the menu
     m_profilesFilter = new QSortFilterProxyModel(this);
-    m_profilesFilter->setSourceModel(model);
+    m_profilesFilter->setSourceModel(m_profileModel);
     m_profilesFilter->setFilterRole(ProfileModel::ColorspaceRole);
     m_profilesFilter->setSortRole(ProfileModel::SortRole);
     m_profilesFilter->setDynamicSortFilter(true);
@@ -119,15 +120,29 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
 
     // Sort Proxy for the View
     QSortFilterProxyModel *profileSortModel = new QSortFilterProxyModel(this);
-    profileSortModel->setSourceModel(model);
+    profileSortModel->setSourceModel(m_profileModel);
     profileSortModel->setDynamicSortFilter(true);
     profileSortModel->setSortRole(ProfileModel::SortRole);
     profileSortModel->sort(0);
     ui->profilesTV->setModel(profileSortModel);
     connect(ui->profilesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(showProfile()));
+            this, SLOT(showDescription()));
     connect(profileSortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-            this, SLOT(showProfile()));
+            this, SLOT(showDescription()));
+
+
+    // Make sure we know is colord is running
+    QDBusServiceWatcher *watcher;
+    watcher = new QDBusServiceWatcher("org.freedesktop.ColorManager",
+                                      QDBusConnection::systemBus(),
+                                      QDBusServiceWatcher::WatchForOwnerChange,
+                                      this);
+    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
+            m_deviceModel, SLOT(serviceOwnerChanged(QString,QString,QString)));
+    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
+            m_profileModel, SLOT(serviceOwnerChanged(QString,QString,QString)));
+    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
+            ui->profile, SLOT(serviceOwnerChanged(QString,QString,QString)));
 
     // Creates a ColorD interface, it must be created with new
     // otherwise the object will be deleted when this block ends
@@ -154,7 +169,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     connect(signalMapper, SIGNAL(mapped(int)),
             ui->tabWidget, SLOT(setCurrentIndex(int)));
     connect(signalMapper, SIGNAL(mapped(int)),
-            this, SLOT(showProfile()));
+            this, SLOT(showDescription()));
 
     // make sure the screen is split on the half
     QList<int> sizes;
@@ -176,16 +191,17 @@ void ColordKCM::load()
         // This is highly needed otherwise the size get wrong on System Settings
         ui->stackedWidget->setCurrentWidget(ui->profile_page);
     }
+    ui->devicesTV->setFocus();
 
     // align the tabbar to the list view
     int offset = ui->profile->innerHeight() - ui->devicesTV->viewport()->height();
     ui->offsetSpacer->changeSize(30, offset, QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     // Make sure we have something selected
-    showProfile();
+    showDescription();
 }
 
-void ColordKCM::showProfile()
+void ColordKCM::showDescription()
 {
     QModelIndex index = currentIndex();
     if (!index.isValid()) {
@@ -251,6 +267,24 @@ void ColordKCM::addProfileAction(QAction *action)
     QDBusObjectPath deviceObject  = action->property(DEVICE_PATH).value<QDBusObjectPath>();
 
     addProvileToDevice(profileObject, deviceObject);
+}
+
+void ColordKCM::updateSelection()
+{
+    QAbstractItemView *view;
+    if (sender() == m_deviceModel) {
+        view = ui->devicesTV;
+    } else {
+        view = ui->profilesTV;
+    }
+
+    QItemSelection selection;
+    selection = view->selectionModel()->selection();
+    // Make sure we have an index selected
+    if (selection.indexes().isEmpty()) {
+        view->selectionModel()->select(view->model()->index(0, 0),
+                                       QItemSelectionModel::SelectCurrent);
+    }
 }
 
 void ColordKCM::removeProfile()
@@ -428,16 +462,11 @@ QModelIndex ColordKCM::currentIndex() const
     }
 
     QItemSelection selection;
-    // we need to map the selection to source to get the real indexes
     selection = view->selectionModel()->selection();
-    // select the first printer if there are profiles
-    if (selection.indexes().isEmpty()) {
-        view->selectionModel()->select(view->model()->index(0, 0),
-                                       QItemSelectionModel::Select);
-        return ret;
+    // select the first index if the selection is not empty
+    if (!selection.indexes().isEmpty()) {
+        ret = selection.indexes().first();
     }
-
-    ret = selection.indexes().first();
 
     return ret;
 }
