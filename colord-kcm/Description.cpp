@@ -369,7 +369,20 @@ void Description::insertTab(int index, QWidget *widget, const QString &label)
 {
     int pos = ui->tabWidget->indexOf(widget);
     if (pos == -1) {
-        ui->tabWidget->insertTab(index, widget, label);
+        // if the widget was not found set the desired ORDER
+        widget->setProperty("ORDER", index);
+        pos = index;
+        for (int i = 1; i < ui->tabWidget->count(); ++i) {
+            QWidget *widget = ui->tabWidget->widget(i);
+            // Check if the tab widget in greater than our desired position
+            if (widget->property("ORDER").toInt() > index) {
+                // if so make sure the new widget is inserted in the
+                // same position of this widget, pushing it further
+                pos = i;
+                break;
+            }
+        }
+        ui->tabWidget->insertTab(pos, widget, label);
     }
 }
 
