@@ -63,12 +63,12 @@ static QString getConnectorTypeString(Display *dpy, RROutput output)
     unsigned long nitems, bytes_after;
     Atom actual_type;
     Atom connector_type;
-    Atom connector_type_atom = XInternAtom(dpy, "ConnectorType", FALSE);
+    Atom connector_type_atom = XInternAtom(dpy, "ConnectorType", false);
     char *connector_type_str;
     QString result;
 
     XRRGetOutputProperty(dpy, output, connector_type_atom,
-                         0, 100, False, False,
+                         0, 100, false, false,
                          AnyPropertyType,
                          &actual_type, &actual_format,
                          &nitems, &bytes_after, &prop);
@@ -202,7 +202,7 @@ static quint8* getProperty(Display *dpy,
     quint8 *result;
 
     XRRGetOutputProperty(dpy, output, atom,
-                         0, 100, False, False,
+                         0, 100, false, false,
                          AnyPropertyType,
                          &actual_type, &actual_format,
                          &nitems, &bytes_after, &prop);
@@ -223,10 +223,10 @@ quint8* Output::readEdidData(size_t &len)
     Atom edid_atom;
     quint8 *result;
 
-    edid_atom = XInternAtom(QX11Info::display(), RR_PROPERTY_RANDR_EDID, FALSE);
+    edid_atom = XInternAtom(QX11Info::display(), RR_PROPERTY_RANDR_EDID, false);
     result = getProperty(QX11Info::display(), m_output, edid_atom, len);
     if (result == NULL) {
-        edid_atom = XInternAtom(QX11Info::display(), "EDID_DATA", FALSE);
+        edid_atom = XInternAtom(QX11Info::display(), "EDID_DATA", false);
         result = getProperty(QX11Info::display(), m_output, edid_atom, len);
     }
 

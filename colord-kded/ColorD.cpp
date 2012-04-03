@@ -42,9 +42,7 @@
 #include <QtDBus/QDBusMetaType>
 #include <QtDBus/QDBusUnixFileDescriptor>
 #include <QtDBus/QDBusServiceWatcher>
-#include <QDesktopWidget>
 #include <QApplication>
-#include <QDesktopWidget>
 
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))

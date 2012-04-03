@@ -135,7 +135,7 @@ void Profile::parseProfile(const uint *data, size_t length)
             kWarning() << "failed to get color temperature";
         }
     } else {
-        /* this is no big suprise, some profiles don't have these */
+        /* this is no big surprise, some profiles don't have these */
         m_white.setX(0);
         m_white.setY(0);
         m_white.setZ(0);

@@ -32,12 +32,10 @@
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
 
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-#include <fixx11h.h>
-
 extern "C"
 {
+    #include <fixx11h.h>
+    #include <X11/Xatom.h>
     #include <X11/Xlib.h>
     #define INT8 _X11INT8
     #define INT32 _X11INT32
