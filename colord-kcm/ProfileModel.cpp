@@ -235,14 +235,8 @@ QString ProfileModel::getProfileDataSource(const QDBusObjectPath &objectPath)
     if (reply.isValid()) {
         QDBusArgument argument = reply.value().value<QDBusArgument>();
         StringStringMap metadata = qdbus_cast<StringStringMap>(argument);
-        StringStringMap::const_iterator i = metadata.constBegin();
-        while (i != metadata.constEnd()) {
-            if (i.key() == QLatin1String("DATA_source")) {
-                // Found DATA_source
-                dataSource = i.value();
-                break;
-            }
-            ++i;
+        if (metadata.contains(QLatin1String("DATA_source"))) {
+            dataSource = metadata[QLatin1String("DATA_source")];
         }
     }
     return dataSource;
