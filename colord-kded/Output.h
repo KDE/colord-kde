@@ -46,6 +46,7 @@ public:
     bool isLaptop() const;
     bool isPrimary(bool hasXRandR13, Window root) const;
     QString name() const;
+    QString id() const;
     void setPath(const QDBusObjectPath &path);
     QDBusObjectPath path() const;
     RRCrtc crtc() const;
@@ -67,6 +68,7 @@ private:
     RROutput m_output;
     XRRScreenResources *m_resources;
     QString m_edidHash;
+    QString m_id;
     QDBusObjectPath m_path;
 
     bool m_connected;

@@ -37,7 +37,8 @@ public:
         SortRole,
         FilenameRole,
         ColorspaceRole,
-        ProfileKindRole
+        ProfileKindRole,
+        CanRemoveProfileRole
     } ProfileRoles;
     explicit ProfileModel(QObject *parent = 0);
 

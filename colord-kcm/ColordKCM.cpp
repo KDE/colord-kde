@@ -219,17 +219,8 @@ void ColordKCM::showDescription()
     }
 
     // Check if we can remove the Profile
-    bool enable = false;
-    if (ui->tabWidget->currentIndex() == 1) {
-        QString filename = index.data(ProfileModel::FilenameRole).toString();
-        QFileInfo fileInfo(filename);
-        if (!filename.isNull() && fileInfo.isWritable()) {
-            enable = true;
-        }
-    } else if (index.parent().isValid()) {
-        // It's ok to remove profiles from devices
-        enable = true;
-    }
+    bool enable;
+    enable = index.data(ProfileModel::CanRemoveProfileRole).toBool();
     ui->removeProfileBt->setEnabled(enable);
 }
 

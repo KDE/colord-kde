@@ -29,6 +29,11 @@
 
 #include <lcms2.h>
 
+#define CD_PROFILE_METADATA_DATA_SOURCE_EDID	 "edid"
+#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB	 "calib"
+#define CD_PROFILE_METADATA_DATA_SOURCE_STANDARD "standard"
+#define CD_PROFILE_METADATA_DATA_SOURCE_TEST     "test"
+
 class Profile
 {
 public:

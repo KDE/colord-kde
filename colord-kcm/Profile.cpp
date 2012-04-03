@@ -24,11 +24,6 @@
 #include <KFile>
 #include <KDebug>
 
-#define CD_PROFILE_METADATA_DATA_SOURCE_EDID	 "edid"
-#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB	 "calib"
-#define CD_PROFILE_METADATA_DATA_SOURCE_STANDARD "standard"
-#define CD_PROFILE_METADATA_DATA_SOURCE_TEST     "test"
-
 Profile::Profile(const QString &filename) :
     m_lcmsProfile(NULL)
 {

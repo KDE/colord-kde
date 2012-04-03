@@ -39,7 +39,8 @@ public:
         SortRole,
         FilenameRole,
         ColorspaceRole,
-        ProfileKindRole
+        ProfileKindRole,
+        CanRemoveProfileRole
     } DeviceRoles;
     explicit DeviceModel(QObject *parent = 0);
 

@@ -79,7 +79,8 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
             this, SLOT(serviceOwnerChanged(QString,QString,QString)));
 
-    init();
+    // init later on the event loop as this takes quite some time
+    QTimer::singleShot(0, this, SLOT(init()));
 }
 
 ColorD::~ColorD()
@@ -88,11 +89,11 @@ ColorD::~ColorD()
 
 void ColorD::init()
 {
+    // Scan all the *.icc files later on the event loop as this takes quite some time
+    scanHomeDirectory();
+
     // Check outputs add all connected outputs
     checkOutputs();
-
-    // Scan all the *.icc files later on the event loop as this takes quite some time
-    QTimer::singleShot(0, this, SLOT(scanHomeDirectory()));
 }
 
 void ColorD::reset()
@@ -116,7 +117,6 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
     profile.seek(0);
 
     QString profileId = QLatin1String("icc-") + hash;
-    kDebug() << "profileId" << profileId;
 
     bool fdPass;
     fdPass = (QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing);
@@ -140,7 +140,7 @@ void ColorD::addProfile(const QFileInfo &fileInfo)
 
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
 
-    kDebug() << "created profile" << reply.value().path();
+    kDebug() << "created profile" << profileId << reply.value().path();
 }
 
 void ColorD::addProfileToDevice(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath)
@@ -160,7 +160,6 @@ void ColorD::addProfileToDevice(const QDBusObjectPath &profilePath, const QDBusO
 
 void ColorD::addEdidProfileToDevice(Output &output)
 {
-    kDebug();
     // Ask for profiles
     QDBusMessage message;
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
@@ -169,18 +168,14 @@ void ColorD::addEdidProfileToDevice(Output &output)
                                              QLatin1String("GetProfiles"));
     QDBusReply<ObjectPathList> paths = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
 
+    // Search through all profiles to see if the edid md5 matches
     foreach (const QDBusObjectPath &profilePath, paths.value()) {
         StringStringMap metadata = getProfileMetadata(profilePath);
-
-        StringStringMap::const_iterator i = metadata.constBegin();
-        while (i != metadata.constEnd()) {
-            kDebug() << i.key() << ": " << i.value();
-            if (i.key() == QLatin1String("EDID_md5")) {
-                if (i.value() == output.edidHash()) {
-                    kDebug() << "AUTO ADDING";
-                    addProfileToDevice(profilePath, output.path());
-                }
-                break;
+        if (metadata.contains(QLatin1String("EDID_md5"))) {
+            // check if md5 matches
+            if (metadata[QLatin1String("EDID_md5")] == output.edidHash()) {
+                kDebug() << "Foud EDID profile for device" << profilePath.path() << output.path().path();
+                addProfileToDevice(profilePath, output.path());
             }
         }
     }
@@ -301,18 +296,34 @@ void ColorD::addOutput(Output &output)
 
     // grabing the device even if edid is not valid
     // if handles the fallback name if it's not valid
-    deviceId = edid.deviceId(output.name());
+    deviceId = output.id();
 
+
+    // EDID profile Creation
+    // Creates a path for EDID generated profile
+    QString autogenPath = profilesPath();
+    QDir profilesDir(autogenPath);
+    if (!profilesDir.exists()) {
+        kWarning() << "Icc path" << profilesDir.path() << "does not exist";
+        if (!profilesDir.mkpath(autogenPath)) {
+            kWarning() << "Failed to create icc path '~/.local/share/icc'";
+        }
+    }
+    autogenPath.append(QLatin1String("edid-") % edid.hash() % QLatin1String(".icc"));
+    ProfileUtils::createIccProfile(isLaptop, edid, autogenPath);
+
+
+    // build up a map with the output properties to send to colord
     StringStringMap properties;
-    properties["Kind"] = "display";
-    properties["Mode"] = "physical";
-    properties["Colorspace"] = "rgb";
+    properties["Kind"] = QLatin1String("display");
+    properties["Mode"] = QLatin1String("physical");
+    properties["Colorspace"] = QLatin1String("rgb");
     properties["Vendor"] = edidVendor;
     properties["Model"] = edidModel;
     properties["Serial"] = edidSerial;
     properties["XRANDR_name"] = output.name();
 
-    /* call CreateDevice() with a device_id  */
+    // call CreateDevice() with a device_id
     QDBusMessage message;
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("/org/freedesktop/ColorManager"),
@@ -322,33 +333,19 @@ void ColorD::addOutput(Output &output)
     // We use temp because if we crash or quit the device gets removedf
     message << qVariantFromValue(QString("temp"));
     message << qVariantFromValue(properties);
-    kWarning() << "Adding device id:" << deviceId;
+    kDebug() << "Adding device id:" << deviceId;
+    kDebug() << "Output Hash:" << output.edidHash();
     QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
     if (reply.isValid()) {
-        kDebug() << "created colord device" << reply.value().path();
-
+        kDebug() << "Created colord device" << reply.value().path();
         // Store the output path into our Output class
         output.setPath(reply.value());
 
         // Store the connected output into the connected list
         m_connectedOutputs << output;
 
-        // Creates a path for out auto generated profile
-        QString autogenPath = profilesPath();
-        QDir profilesDir(autogenPath);
-        if (!profilesDir.exists()) {
-            kWarning() << "Icc path" << profilesDir.path() << "does not exist";
-            if (!profilesDir.mkpath(autogenPath)) {
-                kWarning() << "Failed to create icc path '~/.local/share/icc'";
-            }
-        }
-        autogenPath.append(QLatin1String("edid-") % edid.hash() % QLatin1String(".icc"));
-
-        bool ret;
-        ret = ProfileUtils::createIccProfile(isLaptop, edid, autogenPath);
-        if (ret == false) {
-            kWarning() << "Failed to create auto profile";
-        }
+        // Check if there is any EDID profile to be added
+        addEdidProfileToDevice(output);
     } else {
         kWarning() << "Failed to register device:" << reply.error().message();
     }
@@ -589,59 +586,46 @@ void ColorD::checkOutputs()
 
 void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 {
-    /* check if the EDID_md5 Profile.Metadata matches any connected
-     * XRandR devices (e.g. lvds1), otherwise ignore */
+    // check if the EDID_md5 Profile.Metadata matches any connected
+    // XRandR devices (e.g. lvds1), otherwise ignore
     StringStringMap metadata = getProfileMetadata(profilePath);
-
-    StringStringMap::const_iterator i = metadata.constBegin();
-    while (i != metadata.constEnd()) {
-        kDebug() << i.key() << ": " << i.value();
-        if (i.key() == QLatin1String("EDID_md5")) {
-            QString edidHash = i.value();
-            const Output *output = 0;
-            // Get the Crtc of this output
-            foreach (const Output &out, m_connectedOutputs) {
-                if (out.edidHash() == edidHash) {
-                    output = &out;
-                    break;
-                }
-            }
-
-            if (output) {
-                // Found an EDID that matches the md5
-                addProfileToDevice(profilePath, output->path());
+    if (metadata.contains(QLatin1String("EDID_md5"))) {
+        QString edidHash = metadata[QLatin1String("EDID_md5")];
+        const Output *output = 0;
+        // Get the Crtc of this output
+        foreach (const Output &out, m_connectedOutputs) {
+            if (out.edidHash() == edidHash) {
+                output = &out;
+                break;
             }
         }
-        ++i;
+
+        if (output) {
+            // Found an EDID that matches the md5
+            addProfileToDevice(profilePath, output->path());
+        }
     }
 }
 
 void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 {
     kDebug() << "Device added" << objectPath.path();
-    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   objectPath.path(),
-                                   QLatin1String("org.freedesktop.ColorManager.Device"),
-                                   QDBusConnection::systemBus(),
-                                   this);
-    if (!deviceInterface.isValid()) {
-        return;
-    }
+//    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
+//                                   objectPath.path(),
+//                                   QLatin1String("org.freedesktop.ColorManager.Device"),
+//                                   QDBusConnection::systemBus(),
+//                                   this);
+//    if (!deviceInterface.isValid()) {
+//        return;
+//    }
 
-    // check Device.Kind is "display"
-    if (deviceInterface.property("Kind").toString() != QLatin1String("display")) {
-        // not a display device, ignoring
-        return;
-    }
+//    // check Device.Kind is "display"
+//    if (deviceInterface.property("Kind").toString() != QLatin1String("display")) {
+//        // not a display device, ignoring
+//        return;
+//    }
 
-    QList<QDBusObjectPath> profiles = deviceInterface.property("Profiles").value<QList<QDBusObjectPath> >();
-    if (profiles.isEmpty()) {
-        // Device was added but no profile was assigned to it
-        kDebug() << "ADDING addEdidProfileToDevice";
-//        addEdidProfileToDevice(objectPath);
-    }
-
-    /* show a notification that the user should calibrate the device */
+    /* show a notification if the user should calibrate the device */
     //TODO
 }
 
@@ -667,14 +651,17 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 
 void ColorD::addProfile(const QString &filename)
 {
-    kDebug() << filename;
-    QFileInfo fileInfo(filename);
-    addProfile(fileInfo);
+    // if the changed file is an ICC profile
+    KMimeType::Ptr mimeType;
+    mimeType = KMimeType::findByFileContent(filename);
+    if (mimeType->is(QLatin1String("application/vnd.iccprofile"))) {
+        QFileInfo fileInfo(filename);
+        addProfile(fileInfo);
+    }
 }
 
 void ColorD::removeProfile(const QString &filename)
 {
-    kDebug() << filename;
     QDBusMessage message;
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
                                              QLatin1String("/org/freedesktop/ColorManager"),

@@ -93,9 +93,8 @@ QString ProfileUtils::getPrecookedMd5(cmsHPROFILE lcms_profile)
 
     /* convert to a hex string */
     for (int i = 0; i < 16; ++i) {
-        md5[i] = profile_id[i];
+        md5.append(profile_id[i]);
     }
-    md5[16] = 0;
 
     return md5.toHex();
 }
@@ -114,7 +113,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     // check if the file doesn't already exist
     QFileInfo fileInfo(filename);
     if (fileInfo.exists()) {
-        kWarning() << "File exists" << filename;
+        kWarning() << "EDID ICC Profile already exists" << filename;
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -141,7 +140,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     // create our generated profile
     lcms_profile = cmsCreateRGBProfile(&white_point, &chroma, transfer_curve);
     if (lcms_profile == NULL) {
-        kWarning() << "failed to create profile";
+        kWarning() << "Failed to create ICC profile on cmsCreateRGBProfile";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -157,7 +156,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigCopyrightTag,
                                "No copyright");
     if (!ret) {
-        kWarning() << "failed to write copyright";
+        kWarning() << "Failed to write copyright";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -178,7 +177,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigDeviceModelDescTag,
                                model);
     if (!ret) {
-        kWarning() << "failed to write model";
+        kWarning() << "Failed to write model";
         if (*transfer_curve != NULL) {
             cmsFreeToneCurve(*transfer_curve);
         }
@@ -190,7 +189,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigProfileDescriptionTag,
                                model);
     if (!ret) {
-        kWarning() << "failed to write description";
+        kWarning() << "Failed to write description";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -211,7 +210,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigDeviceMfgDescTag,
                                vendor);
     if (!ret) {
-        kWarning() << "failed to write manufacturer";
+        kWarning() << "Failed to write manufacturer";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -258,7 +257,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     /* write new tag */
     ret = cmsWriteTag(lcms_profile, cmsSigMetaTag, dict);
     if (!ret) {
-        kWarning() << "failed to write profile metadata";
+        kWarning() << "Failed to write profile metadata";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -267,7 +266,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     /* write profile id */
     ret = cmsMD5computeID(lcms_profile);
     if (!ret) {
-        kWarning() << "failed to write profile id";
+        kWarning() << "Failed to write profile id";
         if (dict != NULL)
             cmsDictFree (dict);
         if (*transfer_curve != NULL)

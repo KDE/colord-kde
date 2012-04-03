@@ -165,6 +165,11 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     item->setData(filename, FilenameRole);
     item->setData(kind, ProfileKindRole);
 
+    if (!filename.isNull() && fileInfo.isWritable()) {
+        // if we can write we can also remove the profile
+        item->setData(true, CanRemoveProfileRole);
+    }
+
     appendRow(item);
 
     if (emitChanged) {

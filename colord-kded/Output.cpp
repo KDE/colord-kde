@@ -128,6 +128,11 @@ QString Output::name() const
     return m_name;
 }
 
+QString Output::id() const
+{
+    return m_id;
+}
+
 void Output::setPath(const QDBusObjectPath &path)
 {
     m_path = path;
@@ -173,6 +178,7 @@ Edid Output::readEdidData()
     // With EDID data we can parse our info
     Edid edid(data, size);
     m_edidHash = edid.hash();
+    m_id = edid.deviceId(name());
     delete data;
 
     return edid;

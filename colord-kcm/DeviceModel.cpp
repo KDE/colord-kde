@@ -251,6 +251,7 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     qulonglong created = interface.property("Created").toULongLong();
 
     // Sets the profile title
+    bool canRemoveProfile = true;
     if (title.isEmpty()) {
         QString colorspace = interface.property("Colorspace").toString();
         if (colorspace == QLatin1String("rgb")) {
@@ -260,12 +261,18 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
         } else if (colorspace == QLatin1String("gray")) {
             title = i18n("Default Gray");
         }
+        canRemoveProfile = false;
     } else {
         KDateTime createdDT;
         createdDT.setTime_t(created);
         title = Profile::profileWithSource(dataSource, title, createdDT);
+
+        if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_EDID)) {
+            canRemoveProfile = false;
+        }
     }
     stdItem->setText(title);
+    stdItem->setData(canRemoveProfile, CanRemoveProfileRole);
 
     stdItem->setData(qVariantFromValue(objectPath), ObjectPathRole);
     stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);

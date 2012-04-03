@@ -224,7 +224,6 @@ bool Edid::parse(const quint8 *data, size_t length)
     /* get the size */
     m_width = data[GCM_EDID_OFFSET_SIZE + 0];
     m_height = data[GCM_EDID_OFFSET_SIZE + 1];
-    kDebug() << "width" << m_width << "height" << m_height;
 
     /* we don't care about aspect */
     if (m_width == 0 || m_height == 0) {
@@ -238,27 +237,22 @@ bool Edid::parse(const quint8 *data, size_t length)
     } else {
         m_gamma = (static_cast<float>(data[GCM_EDID_OFFSET_GAMMA] / 100) + 1);
     }
-    kDebug() << "Gama" << m_gamma;
 
     /* get color red */
     m_red.setX(edidDecodeFraction(data[0x1b], edidGetBits(data[0x19], 6, 7)));
     m_red.setY(edidDecodeFraction(data[0x1c], edidGetBits(data[0x19], 5, 4)));
-    kDebug() << "red" << m_red;
 
     /* get color green */
     m_green.setX(edidDecodeFraction(data[0x1d], edidGetBits(data[0x19], 2, 3)));
     m_green.setY(edidDecodeFraction(data[0x1e], edidGetBits(data[0x19], 0, 1)));
-    kDebug() << "m_green" << m_green;
 
     /* get color blue */
     m_blue.setX(edidDecodeFraction(data[0x1f], edidGetBits(data[0x1a], 6, 7)));
     m_blue.setY(edidDecodeFraction(data[0x20], edidGetBits(data[0x1a], 4, 5)));
-    kDebug() << "m_blue" << m_blue;
 
     /* get color white */
     m_white.setX(edidDecodeFraction(data[0x21], edidGetBits(data[0x1a], 2, 3)));
     m_white.setY(edidDecodeFraction(data[0x22], edidGetBits(data[0x1a], 0, 1)));
-    kDebug() << "m_white" << m_white;
 
     /* parse EDID data */
     for (uint i = GCM_EDID_OFFSET_DATA_BLOCKS;
@@ -278,13 +272,11 @@ bool Edid::parse(const quint8 *data, size_t length)
             if (!tmp.isEmpty()) {
                 m_monitorName = tmp;
             }
-            kDebug() << "i loop:" << i << "m_monitorName >" << m_monitorName;
         } else if (data[i+3] == GCM_DESCRIPTOR_DISPLAY_PRODUCT_SERIAL_NUMBER) {
             QString tmp = edidParseString(&data[i+5]);
             if (!tmp.isEmpty()) {
                 m_serialNumber = tmp;
             }
-            kDebug() << "m_serialNumber" << m_serialNumber;
         } else if (data[i+3] == GCM_DESCRIPTOR_COLOR_MANAGEMENT_DATA) {
             kWarning() << "failing to parse color management data";
         } else if (data[i+3] == GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING) {
@@ -292,19 +284,16 @@ bool Edid::parse(const quint8 *data, size_t length)
             if (!tmp.isEmpty()) {
                 m_eisaId = tmp;
             }
-            kDebug() << "m_eisaId" << m_eisaId;
         } else if (data[i+3] == GCM_DESCRIPTOR_COLOR_POINT) {
             if (data[i+3+9] != 0xff) {
                 /* extended EDID block(1) which contains
                                      * a better gamma value */
                 m_gamma = ((float) data[i+3+9] / 100) + 1;
-                kDebug() << "m_gamma2" << m_gamma;
             }
             if (data[i+3+14] != 0xff) {
                 /* extended EDID block(2) which contains
                                      * a better gamma value */
                 m_gamma = ((float) data[i+3+9] / 100) + 1;
-                kDebug() << "m_gamma3" << m_gamma;
             }
         }
     }
