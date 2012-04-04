@@ -446,7 +446,7 @@ QModelIndex ColordKCM::currentIndex() const
         } else {
             // Profiles is empty
             ui->infoWidget->setText(i18n("You don't have any profiles registered"));
-            ui->infoWidget->setComment(i18n("Add one by clicking add profile buttom"));
+            ui->infoWidget->setComment(i18n("Add one by clicking Add Profile button"));
         }
 
         return ret;
