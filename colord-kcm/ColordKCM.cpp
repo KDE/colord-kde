@@ -62,7 +62,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
                                ki18n("(C) 2012 Daniel Nicoletti"));
     setAboutData(aboutData);
     setButtons(NoAdditionalButton);
-    KGlobal::->insertCatalog(QLatin1String("colord-kde"));
+    KGlobal::insertCatalog(QLatin1String("colord-kde"));
 
     ui->setupUi(this);
     ui->infoWidget->setPixmap(KTitleWidget::InfoMessage);
