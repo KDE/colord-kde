@@ -7,6 +7,7 @@ X-KDE-Kded-autoload=true
 X-KDE-Kded-phase=1
 
 Name=Color Daemon
+Name[cs]=Démon barev
 Name[es]=Demonio de color
 Name[nds]=Klöör-Dämoon
 Name[nl]=Kleur-daemon
@@ -18,6 +19,7 @@ Name[sv]=Färgdemon
 Name[uk]=Фонова служба керування кольорами
 Name[x-test]=xxColor Daemonxx
 Comment=Manage Screen Color Profiles
+Comment[cs]=Spravovat profily barev obrazovky
 Comment[es]=Gestionar perfiles de color de la pantalla
 Comment[nl]=Kleurprofielen van een scherm beheren
 Comment[pl]=Zarządzaj profilami koloru ekranu
