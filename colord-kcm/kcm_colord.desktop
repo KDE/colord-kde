@@ -10,8 +10,10 @@ X-KDE-ParentApp=kcontrol
 
 Name=Color
 Name[cs]=Barva
+Name[da]=Farve
 Name[de]=Farbe
 Name[es]=Color
+Name[fr]=Couleur
 Name[nds]=Klöör
 Name[nl]=Kleur
 Name[pl]=Kolor
@@ -24,7 +26,9 @@ Name[x-test]=xxColorxx
 
 Comment=Manage color correction of devices
 Comment[cs]=Správa korekce barev zařízení
+Comment[da]=Håndtér farvekorrektur for enheder
 Comment[es]=Gestionar corrección de color de los dispositivos
+Comment[fr]=Gère la correction des couleurs des périphériques
 Comment[nl]=Kleurcorrectie beheren van apparaten
 Comment[pl]=Zarządzaj korekcją koloru urządzeń
 Comment[pt]=Gerir a correcção de cores dos dispositivos
