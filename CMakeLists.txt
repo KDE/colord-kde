@@ -11,6 +11,8 @@ include(ConfigureChecks.cmake)
 
 message(STATUS "X randr is required, found: " ${XRANDR_1_3_FOUND})
 
+pkg_check_modules(LCMS2 REQUIRED lcms2)
+
 add_definitions(${QT_DEFINITIONS} ${KDE_DEFINITIONS})
 
 include_directories(${CMAKE_SOURCE_DIR}

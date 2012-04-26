@@ -1,5 +1,3 @@
-pkg_check_modules(LCMS2 lcms2)
-
 set(colord_kded_SRCS
     DmiUtils.cpp
     Edid.cpp
