@@ -28,6 +28,7 @@
 
 typedef QMap<QString, QString>  StringStringMap;
 
+class Edid;
 class ProfilesWatcher : public QThread
 {
     Q_OBJECT
@@ -39,6 +40,7 @@ public:
 
 public slots:
     void scanHomeDirectory();
+    void createIccProfile(bool isLaptop, const Edid &edid);
 
 private slots:
     void addProfile(const QString &fileInfo);

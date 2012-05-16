@@ -24,6 +24,7 @@
 #include <QCryptographicHash>
 #include <QFile>
 #include <QStringList>
+#include <QStringBuilder>
 
 #include <KDebug>
 
@@ -63,20 +64,20 @@ QString Edid::deviceId(const QString &fallbackName) const
     QString id = QLatin1String("xrandr");
     if (m_valid) {
         if (!vendor().isEmpty()) {
-            id.append(QLatin1Char('-') + vendor());
+            id.append(QLatin1Char('-') % vendor());
         }
         if (!name().isEmpty()) {
-            id.append(QLatin1Char('-') + name());
+            id.append(QLatin1Char('-') % name());
         }
         if (!serial().isEmpty()) {
-            id.append(QLatin1Char('-') + serial());
+            id.append(QLatin1Char('-') % serial());
         }
     }
 
     // if no info was added check if the fallbacName is provided
     if (id == QLatin1String("xrandr")) {
         if (!fallbackName.isEmpty()) {
-            id.append(QLatin1Char('-') + fallbackName);
+            id.append(QLatin1Char('-') % fallbackName);
         } else {
             // all info we have are empty strings
             id.append(QLatin1String("-unknown"));

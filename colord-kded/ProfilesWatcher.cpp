@@ -20,6 +20,7 @@
 #include "ProfilesWatcher.h"
 
 #include "ProfileUtils.h"
+#include "Edid.h"
 
 #include <KDirWatch>
 #include <KMimeType>
@@ -79,6 +80,22 @@ void ProfilesWatcher::scanHomeDirectory()
     while (it.hasNext()) {
         addProfile(it.next());
     }
+}
+
+void ProfilesWatcher::createIccProfile(bool isLaptop, const Edid &edid)
+{
+    // EDID profile Creation
+    // Creates a path for EDID generated profile
+    QString autogenPath = profilesPath();
+    QDir profilesDir(autogenPath);
+    if (!profilesDir.exists()) {
+        kWarning() << "Icc path" << profilesDir.path() << "does not exist";
+        if (!profilesDir.mkpath(autogenPath)) {
+            kWarning() << "Failed to create icc path '~/.local/share/icc'";
+        }
+    }
+    autogenPath.append(QLatin1String("edid-") % edid.hash() % QLatin1String(".icc"));
+    ProfileUtils::createIccProfile(isLaptop, edid, autogenPath);
 }
 
 void ProfilesWatcher::addProfile(const QString &filePath)

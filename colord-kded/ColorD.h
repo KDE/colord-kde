@@ -24,10 +24,6 @@
 
 #include <KDEDModule>
 
-#include <QVariantList>
-#include <QVariantList>
-#include <QFileInfo>
-
 extern "C"
 {
     #include <fixx11h.h>
@@ -36,9 +32,9 @@ extern "C"
 }
 
 typedef QList<int> ScreenList;
+typedef QList<Output> OutputList;
 typedef QMap<QString, QString>  StringStringMap;
 
-class Edid;
 class XEventHandler;
 class ProfilesWatcher;
 class ColorD : public KDEDModule
@@ -73,7 +69,7 @@ private:
     StringStringMap getProfileMetadata(const QDBusObjectPath &profilePath);
     QString profilesPath() const;
 
-    QList<Output> m_connectedOutputs;
+    OutputList m_connectedOutputs;
 
     Display *m_dpy;
     XRRScreenResources *m_resources;

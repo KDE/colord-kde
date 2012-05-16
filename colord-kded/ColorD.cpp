@@ -20,13 +20,12 @@
 #include "ColorD.h"
 
 #include "ProfilesWatcher.h"
-#include "ProfileUtils.h"
 #include "XEventHandler.h"
 #include "DmiUtils.h"
 
+#include <lcms2.h>
+
 #include <QFile>
-#include <QDir>
-#include <QTimer>
 #include <QStringBuilder>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusInterface>
@@ -223,20 +222,12 @@ void ColorD::addOutput(Output &output)
     // if handles the fallback name if it's not valid
     deviceId = output.id();
 
-
-    // EDID profile Creation
-    // Creates a path for EDID generated profile
-    QString autogenPath = ProfilesWatcher::profilesPath();
-    QDir profilesDir(autogenPath);
-    if (!profilesDir.exists()) {
-        kWarning() << "Icc path" << profilesDir.path() << "does not exist";
-        if (!profilesDir.mkpath(autogenPath)) {
-            kWarning() << "Failed to create icc path '~/.local/share/icc'";
-        }
-    }
-    autogenPath.append(QLatin1String("edid-") % edid.hash() % QLatin1String(".icc"));
-    ProfileUtils::createIccProfile(isLaptop, edid, autogenPath);
-
+    // Creates the default profile
+    QMetaObject::invokeMethod(m_profilesWatcher,
+                              "createIccProfile",
+                              Qt::QueuedConnection,
+                              Q_ARG(bool, isLaptop),
+                              Q_ARG(Edid, edid));
 
     // build up a map with the output properties to send to colord
     StringStringMap properties;

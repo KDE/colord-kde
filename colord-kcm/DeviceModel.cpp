@@ -176,7 +176,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         item->setText(vendor % QLatin1String(" - ") % model);
     }
 
-    item->setData(qVariantFromValue(kind + item->text()), SortRole);
+    item->setData(QString(kind % item->text()), SortRole);
 
     // Convert our Device Kind to Profile Kind
     if (kind == QLatin1String("display")) {
@@ -278,7 +278,7 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);
     stdItem->setData(filename, FilenameRole);
     stdItem->setData(kind, ProfileKindRole);
-    stdItem->setData(qVariantFromValue(ProfileModel::getSortChar(kind) + title), SortRole);
+    stdItem->setData(QString(ProfileModel::getSortChar(kind) % title), SortRole);
     stdItem->setCheckable(true);
     stdItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);
 
@@ -357,5 +357,3 @@ Qt::ItemFlags DeviceModel::flags(const QModelIndex &index) const
     }
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
-
-#include "DeviceModel.moc"

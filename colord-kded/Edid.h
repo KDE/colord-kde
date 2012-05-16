@@ -53,15 +53,15 @@ private:
     QString edidParseString(const quint8 *data) const;
 
     bool m_valid;
-    QString                        m_monitorName;
-    QString                        m_vendorName;
-    QString                        m_serialNumber;
-    QString                        m_eisaId;
-    QString                        m_checksum;
+    QString m_monitorName;
+    QString m_vendorName;
+    QString m_serialNumber;
+    QString m_eisaId;
+    QString m_checksum;
     QString m_pnpId;
-    uint                            m_width;
-    uint                            m_height;
-    qreal                           m_gamma;
+    uint m_width;
+    uint m_height;
+    qreal m_gamma;
     QQuaternion m_red;
     QQuaternion m_green;
     QQuaternion m_blue;
