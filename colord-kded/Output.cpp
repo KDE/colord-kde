@@ -23,8 +23,6 @@
 
 #include <KDebug>
 
-#include <X11/Xatom.h>
-
 #define RR_CONNECTOR_TYPE_PANEL "Panel"
 
 Output::Output(RROutput output, XRRScreenResources *resources) :

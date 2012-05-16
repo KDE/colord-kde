@@ -4,6 +4,7 @@ set(colord_kded_SRCS
     Output.cpp
     ProfileUtils.cpp
     XEventHandler.cpp
+    ProfilesWatcher.cpp
     ColorD.cpp
 )
 

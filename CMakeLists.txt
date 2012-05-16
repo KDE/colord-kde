@@ -1,7 +1,8 @@
 project(colord-kde)
 
-configure_file (config-randr.h.cmake
-                ${CMAKE_CURRENT_BINARY_DIR}/config-randr.h )
+set(COLORD_KDE_VERSION "0.3.0")
+configure_file(config.h.cmake
+               ${CMAKE_CURRENT_BINARY_DIR}/config.h )
 
 find_package(KDE4 REQUIRED)
 

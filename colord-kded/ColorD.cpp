@@ -19,30 +19,24 @@
 
 #include "ColorD.h"
 
-#include "Edid.h"
-#include "DmiUtils.h"
+#include "ProfilesWatcher.h"
 #include "ProfileUtils.h"
 #include "XEventHandler.h"
-
-#include <KLocale>
-#include <KGenericFactory>
-#include <KNotification>
-#include <KIcon>
-#include <KUser>
-#include <KDirWatch>
-#include <KMimeType>
-#include <KApplication>
-
-#include <QX11Info>
+#include "DmiUtils.h"
 
 #include <QFile>
 #include <QDir>
 #include <QTimer>
 #include <QStringBuilder>
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusMetaType>
-#include <QtDBus/QDBusUnixFileDescriptor>
 #include <QtDBus/QDBusServiceWatcher>
-#include <QApplication>
+#include <QtDBus/QDBusUnixFileDescriptor>
+#include <QtDBus/QDBusReply>
+
+#include <KGenericFactory>
+#include <KApplication>
 
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))
@@ -51,10 +45,9 @@ typedef QList<QDBusObjectPath> ObjectPathList;
 
 ColorD::ColorD(QObject *parent, const QVariantList &args) :
     KDEDModule(parent),
-    m_dirWatch(0),
-    m_has_1_3(false)
+    m_x11EventHandler(0)
 {
-    // There's not much use for args in a KCM
+    // There's not much use for args in a KDED
     Q_UNUSED(args)
 
     // Register this first or the first time will fail
@@ -77,18 +70,32 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
             this, SLOT(serviceOwnerChanged(QString,QString,QString)));
 
-    // init later on the event loop as this takes quite some time
-    QTimer::singleShot(0, this, SLOT(init()));
+    // Create the profiles watcher thread
+    m_profilesWatcher = new ProfilesWatcher;
+    m_profilesWatcher->start();
+
+    // init the settings
+    init();
 }
 
 ColorD::~ColorD()
 {
+    if (m_x11EventHandler) {
+        m_x11EventHandler->deleteLater();
+    }
+
+    // Stop the thread
+    m_profilesWatcher->quit();
+    m_profilesWatcher->wait();
+    m_profilesWatcher->deleteLater();
 }
 
 void ColorD::init()
 {
-    // Scan all the *.icc files later on the event loop as this takes quite some time
-    scanHomeDirectory();
+    // Scan all the *.icc files later on it's own thread as this takes quite some time
+    QMetaObject::invokeMethod(m_profilesWatcher,
+                              "scanHomeDirectory",
+                              Qt::QueuedConnection);
 
     // Check outputs add all connected outputs
     checkOutputs();
@@ -97,48 +104,6 @@ void ColorD::init()
 void ColorD::reset()
 {
     m_connectedOutputs.clear();
-}
-
-void ColorD::addProfile(const QFileInfo &fileInfo)
-{
-    // open filename
-    QFile profile(fileInfo.absoluteFilePath());
-    if (!profile.open(QIODevice::ReadOnly)) {
-        kWarning() << "Failed to open profile file:" << fileInfo.absoluteFilePath();
-        return;
-    }
-
-    // get the MD5 hash of the contents
-    QString hash;
-    hash = ProfileUtils::profileHash(profile);
-    // seek(0) so that if we pass the FD to colord it is not at end
-    profile.seek(0);
-
-    QString profileId = QLatin1String("icc-") + hash;
-
-    bool fdPass;
-    fdPass = (QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing);
-
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("/org/freedesktop/ColorManager"),
-                                             QLatin1String("org.freedesktop.ColorManager"),
-                                             fdPass ? QLatin1String("CreateProfileWithFd") :
-                                                      QLatin1String("CreateProfile"));
-    StringStringMap properties;
-    properties["Filename"] = fileInfo.absoluteFilePath();
-    properties["FILE_checksum"] = hash;
-
-    message << qVariantFromValue(profileId);
-    message << qVariantFromValue(QString("temp"));
-    if (fdPass) {
-        message << qVariantFromValue(QDBusUnixFileDescriptor(profile.handle()));
-    }
-    message << qVariantFromValue(properties);
-
-    QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
-
-    kDebug() << "created profile" << profileId << reply.value().path();
 }
 
 void ColorD::addProfileToDevice(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath)
@@ -198,44 +163,6 @@ StringStringMap ColorD::getProfileMetadata(const QDBusObjectPath &profilePath)
     QDBusArgument argument = reply.value().value<QDBusArgument>();
     ret = qdbus_cast<StringStringMap>(argument);
     return ret;
-}
-
-QString ColorD::profilesPath() const
-{
-    KUser user;
-    // ~/.local/share/icc/
-    return user.homeDir() % QLatin1String("/.local/share/icc/");
-}
-
-void ColorD::scanHomeDirectory()
-{
-    // Get a list of files in ~/.local/share/icc/
-    QDir profilesDir(profilesPath());
-    if (!profilesDir.exists()) {
-        kWarning() << "Icc path" << profilesDir.path() << "does not exist";
-        if (!profilesDir.mkpath(profilesPath())) {
-            kWarning() << "Failed to create icc path '~/.local/share/icc'";
-        }
-    }
-
-    //check if any changes to the file occour
-    //this also prevents from reading when a checkUpdate happens
-    if (!m_dirWatch) {
-        m_dirWatch = new KDirWatch(this);
-        m_dirWatch->addDir(profilesDir.path(), KDirWatch::WatchFiles);
-        connect(m_dirWatch, SIGNAL(created(QString)), this, SLOT(addProfile(QString)));
-        connect(m_dirWatch, SIGNAL(deleted(QString)), this, SLOT(removeProfile(QString)));
-        m_dirWatch->startScan();
-    }
-
-    // Call AddProfile() for each file
-    foreach (const QFileInfo &fileInfo, profilesDir.entryInfoList(QDir::Files)) {
-        KMimeType::Ptr mimeType;
-        mimeType = KMimeType::findByFileContent(fileInfo.absoluteFilePath());
-        if (mimeType->is(QLatin1String("application/vnd.iccprofile"))) {
-            addProfile(fileInfo);
-        }
-    }
 }
 
 void ColorD::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
@@ -299,7 +226,7 @@ void ColorD::addOutput(Output &output)
 
     // EDID profile Creation
     // Creates a path for EDID generated profile
-    QString autogenPath = profilesPath();
+    QString autogenPath = ProfilesWatcher::profilesPath();
     QDir profilesDir(autogenPath);
     if (!profilesDir.exists()) {
         kWarning() << "Icc path" << profilesDir.path() << "does not exist";
@@ -517,16 +444,16 @@ void ColorD::connectToDisplay()
     m_dpy = QX11Info::display();
 
     // Check extension
-    if (XRRQueryExtension(m_dpy, &m_eventBase, &m_errorBase) == false) {
-        m_valid = false;
-        return;
+    int eventBase;
+    if (XRRQueryExtension(m_dpy, &eventBase, &m_errorBase) == false) {
+        kWarning() << "Failed to retrieve RandR extension";
     }
 
     // Install our X event handler
-    m_eventHandler = new XEventHandler(m_eventBase);
-    connect(m_eventHandler, SIGNAL(outputChanged()),
+    m_x11EventHandler = new XEventHandler(eventBase);
+    connect(m_x11EventHandler, SIGNAL(outputChanged()),
             this, SLOT(checkOutputs()));
-    kapp->installX11EventFilter(m_eventHandler);
+    kapp->installX11EventFilter(m_x11EventHandler);
 
     int major_version, minor_version;
     XRRQueryVersion(m_dpy, &major_version, &minor_version);
@@ -645,40 +572,6 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     }
 
     outputChanged(*output);
-}
-
-void ColorD::addProfile(const QString &filename)
-{
-    // if the changed file is an ICC profile
-    KMimeType::Ptr mimeType;
-    mimeType = KMimeType::findByFileContent(filename);
-    if (mimeType->is(QLatin1String("application/vnd.iccprofile"))) {
-        QFileInfo fileInfo(filename);
-        addProfile(fileInfo);
-    }
-}
-
-void ColorD::removeProfile(const QString &filename)
-{
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("/org/freedesktop/ColorManager"),
-                                             QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("FindProfileByFilename"));
-    message << qVariantFromValue(filename);
-    QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
-
-    if (!reply.isValid()) {
-        kWarning() << "Could not find the DBus object path for the given file name" << filename;
-        return;
-    }
-
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("/org/freedesktop/ColorManager"),
-                                             QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("DeleteProfile"));
-    message << qVariantFromValue(reply.value());
-    QDBusConnection::systemBus().send(message);
 }
 
 void ColorD::connectToColorD()

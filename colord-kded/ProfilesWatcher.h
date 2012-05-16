@@ -17,58 +17,37 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef OUTPUT_H
-#define OUTPUT_H
+#ifndef PROFILES_WATCHER_H
+#define PROFILES_WATCHER_H
 
-#include <QDBusObjectPath>
-#include <QTextStream>
+#include <KDirWatch>
 
-#include "Edid.h"
+#include <QThread>
+#include <QVariantList>
+#include <QFileInfo>
 
-extern "C"
+typedef QMap<QString, QString>  StringStringMap;
+
+class ProfilesWatcher : public QThread
 {
-    #include <X11/Xatom.h>
-    #include <X11/extensions/Xrandr.h>
-}
-
-class Output
-{
-    Q_GADGET
+    Q_OBJECT
 public:
-    Output(RROutput output, XRRScreenResources *resources);
+    explicit ProfilesWatcher(QObject *parent = 0);
+    void run();
 
-    bool connected() const;
-    bool isLaptop() const;
-    bool isPrimary(bool hasXRandR13, Window root) const;
-    QString name() const;
-    QString id() const;
-    void setPath(const QDBusObjectPath &path);
-    QDBusObjectPath path() const;
-    RRCrtc crtc() const;
-    RROutput output() const;
-    int getGammaSize();
-    void setGamma(XRRCrtcGamma *gamma);
+    static QString profilesPath();
 
-    Edid readEdidData();
-    QString edidHash() const;
+public slots:
+    void scanHomeDirectory();
 
-    bool operator==(const Output &output) const;
+private slots:
+    void addProfile(const QString &fileInfo);
+    void removeProfile(const QString &filename);
 
 private:
-    /**
-      * Callers should delete the data if not 0
-      */
-    quint8* readEdidData(size_t &len);
-
-    RROutput m_output;
-    XRRScreenResources *m_resources;
-    QString m_edidHash;
-    QString m_id;
-    QDBusObjectPath m_path;
-
-    bool m_connected;
-    QString m_name;
-    RRCrtc m_crtc;
+    KDirWatch *m_dirWatch;
 };
 
-#endif // OUTPUT_H
+Q_DECLARE_METATYPE(StringStringMap)
+
+#endif // PROFILES_WATCHER_H

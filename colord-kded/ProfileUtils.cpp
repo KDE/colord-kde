@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 #include "ProfileUtils.h"
+#include "config.h"
 
 #include "Edid.h"
 #include "DmiUtils.h"
@@ -29,7 +30,7 @@
 
 // TODO use cmake magic
 #define PACKAGE_NAME "colord-kde"
-#define PACKAGE_VERSION "0.1.0"
+#define PACKAGE_VERSION COLORD_KDE_VERSION
 
 /* defined in metadata-spec.txt */
 #define CD_PROFILE_METADATA_STANDARD_SPACE	"STANDARD_space"

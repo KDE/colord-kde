@@ -21,6 +21,8 @@
 #include "ColordKCM.h"
 #include "ui_ColordKCM.h"
 
+#include "config.h"
+
 #include "DeviceModel.h"
 #include "ProfileModel.h"
 #include "Description.h"
@@ -56,7 +58,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     aboutData = new KAboutData("kcm_colord",
                                "kcm_colord",
                                ki18n("Color settings"),
-                               "0.3",
+                               COLORD_KDE_VERSION,
                                ki18n("Color settings"),
                                KAboutData::License_GPL,
                                ki18n("(C) 2012 Daniel Nicoletti"));

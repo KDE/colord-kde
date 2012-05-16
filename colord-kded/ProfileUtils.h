@@ -35,11 +35,11 @@ public:
 private:
     static QString getPrecookedMd5(cmsHPROFILE lcms_profile);
     static cmsBool cmsWriteTagTextAscii(cmsHPROFILE lcms_profile,
-                                 cmsTagSignature sig,
-                                 const QString &text);
+                                        cmsTagSignature sig,
+                                        const QString &text);
     static cmsBool cmsDictAddEntryAscii(cmsHANDLE dict,
-                                 const QString &tkey,
-                                 const QString &tvalue);
+                                        const QString &tkey,
+                                        const QString &tvalue);
 };
 
 #endif // PROFILEUTILS_H
