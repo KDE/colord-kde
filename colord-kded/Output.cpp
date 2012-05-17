@@ -170,7 +170,9 @@ Edid Output::readEdidData()
     data = readEdidData(size);
     if (data == 0) {
         kWarning() << "unable to get EDID for output";
-        return Edid();
+        Edid ret;
+        m_id = ret.deviceId(name());
+        return ret;
     }
 
     // With EDID data we can parse our info

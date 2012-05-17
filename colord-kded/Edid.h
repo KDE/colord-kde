@@ -68,4 +68,6 @@ private:
     QQuaternion m_white;
 };
 
+Q_DECLARE_METATYPE(Edid)
+
 #endif // EDID_H

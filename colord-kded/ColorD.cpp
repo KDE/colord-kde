@@ -53,6 +53,7 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     qDBusRegisterMetaType<StringStringMap>();
     qDBusRegisterMetaType<QDBusUnixFileDescriptor>();
     qDBusRegisterMetaType<ObjectPathList>();
+    qRegisterMetaType<Edid>();
 
     // connect to colord using DBus
     connectToColorD();
@@ -211,6 +212,9 @@ void ColorD::addOutput(Output &output)
         // Use the DMI info when on a laptop
         edidModel = DmiUtils::deviceModel();
         edidVendor = DmiUtils::deviceVendor();
+    } else {
+        // Fallback to the output name
+        edidModel = output.name();
     }
 
     if (!edid.serial().isEmpty()) {

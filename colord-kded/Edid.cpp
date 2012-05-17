@@ -62,25 +62,23 @@ bool Edid::isValid() const
 QString Edid::deviceId(const QString &fallbackName) const
 {
     QString id = QLatin1String("xrandr");
-    if (m_valid) {
-        if (!vendor().isEmpty()) {
-            id.append(QLatin1Char('-') % vendor());
-        }
-        if (!name().isEmpty()) {
-            id.append(QLatin1Char('-') % name());
-        }
-        if (!serial().isEmpty()) {
-            id.append(QLatin1Char('-') % serial());
-        }
-    }
-
     // if no info was added check if the fallbacName is provided
-    if (id == QLatin1String("xrandr")) {
+    if (vendor().isNull() && name().isNull() && serial().isNull()) {
         if (!fallbackName.isEmpty()) {
             id.append(QLatin1Char('-') % fallbackName);
         } else {
             // all info we have are empty strings
             id.append(QLatin1String("-unknown"));
+        }
+    } else if (m_valid) {
+        if (!vendor().isNull()) {
+            id.append(QLatin1Char('-') % vendor());
+        }
+        if (!name().isNull()) {
+            id.append(QLatin1Char('-') % name());
+        }
+        if (!serial().isNull()) {
+            id.append(QLatin1Char('-') % serial());
         }
     }
 
