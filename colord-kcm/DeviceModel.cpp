@@ -184,11 +184,11 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     } else if (kind == QLatin1String("camera") ||
                kind == QLatin1String("scanner") ||
                kind == QLatin1String("webcam")) {
-        kind = "input-device";
+        kind = QLatin1String("input-device");
     } else if (kind == QLatin1String("printer")) {
-        kind = "output-device";
+        kind = QLatin1String("output-device");
     } else {
-        kind = "unknown";
+        kind = QLatin1String("unknown");
     }
     item->setData(kind, ProfileKindRole);
 

@@ -145,7 +145,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     } else if (kind == QLatin1String("abstract")) {
         item->setIcon(KIcon(QLatin1String("insert-link")));
     } else if (kind == QLatin1String("named-color")) {
-            item->setIcon(KIcon(QLatin1String("view-preview")));
+        item->setIcon(KIcon(QLatin1String("view-preview")));
     } else {
         item->setIcon(KIcon(QLatin1String("image-missing")));
     }

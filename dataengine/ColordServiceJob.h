@@ -1,5 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012 by Daniel Nicoletti                                *
+ *   dantti12@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,38 +18,22 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILES_WATCHER_H
-#define PROFILES_WATCHER_H
+#ifndef COLORD_SERVICE_JOB_H
+#define COLORD_SERVICE_JOB_H
 
-#include <KDirWatch>
+#include <Plasma/ServiceJob>
 
-#include <QThread>
-#include <QVariantList>
-#include <QFileInfo>
-
-typedef QMap<QString, QString>  StringStringMap;
-
-class Edid;
-class ProfilesWatcher : public QThread
+class ColordServiceJob : public Plasma::ServiceJob
 {
     Q_OBJECT
 public:
-    explicit ProfilesWatcher(QObject *parent = 0);
+    explicit ColordServiceJob(const QString &destination, const QString &operation,
+                                const QMap<QString, QVariant> &parameters, QObject *parent = 0);
 
-public slots:
-    void scanHomeDirectory();
-    void createIccProfile(bool isLaptop, const Edid &edid);
+    void start();
 
 private slots:
-    void addProfile(const QString &fileInfo);
-    void removeProfile(const QString &filename);
-
-private:
-    QString profilesPath() const;
-
-    KDirWatch *m_dirWatch;
+    void jobFinished();
 };
 
-Q_DECLARE_METATYPE(StringStringMap)
-
-#endif // PROFILES_WATCHER_H
+#endif // COLORD_SERVICE_JOB_H

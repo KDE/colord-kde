@@ -1,5 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012 by Daniel Nicoletti                                *
+ *   dantti12@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,38 +18,21 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILES_WATCHER_H
-#define PROFILES_WATCHER_H
+#include "ColordService.h"
 
-#include <KDirWatch>
+#include "ColordServiceJob.h"
 
-#include <QThread>
-#include <QVariantList>
-#include <QFileInfo>
+#include <KDebug>
 
-typedef QMap<QString, QString>  StringStringMap;
-
-class Edid;
-class ProfilesWatcher : public QThread
+ColordService::ColordService(QObject *parent, const QString &destination) :
+    Plasma::Service(parent)
 {
-    Q_OBJECT
-public:
-    explicit ProfilesWatcher(QObject *parent = 0);
+    setName("org.freedesktop.colord");
+    setDestination(destination);
+}
 
-public slots:
-    void scanHomeDirectory();
-    void createIccProfile(bool isLaptop, const Edid &edid);
-
-private slots:
-    void addProfile(const QString &fileInfo);
-    void removeProfile(const QString &filename);
-
-private:
-    QString profilesPath() const;
-
-    KDirWatch *m_dirWatch;
-};
-
-Q_DECLARE_METATYPE(StringStringMap)
-
-#endif // PROFILES_WATCHER_H
+Plasma::ServiceJob* ColordService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
+{
+    kDebug() << destination() << operation;
+    return new ColordServiceJob(destination(), operation, parameters, this);
+}

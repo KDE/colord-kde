@@ -42,12 +42,7 @@ ProfilesWatcher::ProfilesWatcher(QObject *parent) :
 {
 }
 
-void ProfilesWatcher::run()
-{
-    exec();
-}
-
-QString ProfilesWatcher::profilesPath()
+QString ProfilesWatcher::profilesPath() const
 {
     KUser user;
     // ~/.local/share/icc/
