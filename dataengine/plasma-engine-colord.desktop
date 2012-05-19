@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=colord Engine
+Name[pt]=Motor do colord
+Name[pt_BR]=Motor colord
+Name[uk]=Рушій colord
+Name[x-test]=xxcolord Enginexx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/DataEngine
