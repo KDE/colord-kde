@@ -176,37 +176,37 @@ void Profile::parseProfile(const uint *data, size_t length)
     color_space = cmsGetColorSpace(m_lcmsProfile);
     switch (color_space) {
     case cmsSigXYZData:
-        m_colorspace = i18n("XYZ");
+        m_colorspace = i18nc("colorspace", "XYZ");
         break;
     case cmsSigLabData:
-        m_colorspace = i18n("LAB");
+        m_colorspace = i18nc("colorspace", "LAB");
         break;
     case cmsSigLuvData:
-        m_colorspace = i18n("LUV");
+        m_colorspace = i18nc("colorspace", "LUV");
         break;
     case cmsSigYCbCrData:
-        m_colorspace = i18n("YCbCr");
+        m_colorspace = i18nc("colorspace", "YCbCr");
         break;
     case cmsSigYxyData:
-        m_colorspace = i18n("Yxy");
+        m_colorspace = i18nc("colorspace", "Yxy");
         break;
     case cmsSigRgbData:
-        m_colorspace = i18n("RGB");
+        m_colorspace = i18nc("colorspace", "RGB");
         break;
     case cmsSigGrayData:
-        m_colorspace = i18n("Gray");
+        m_colorspace = i18nc("colorspace", "Gray");
         break;
     case cmsSigHsvData:
-        m_colorspace = i18n("HSV");
+        m_colorspace = i18nc("colorspace", "HSV");
         break;
     case cmsSigCmykData:
-        m_colorspace = i18n("CMYK");
+        m_colorspace = i18nc("colorspace", "CMYK");
         break;
     case cmsSigCmyData:
-        m_colorspace = i18n("CMY");
+        m_colorspace = i18nc("colorspace", "CMY");
         break;
     default:
-        m_colorspace = i18n("Unknown");
+        m_colorspace = i18nc("colorspace", "Unknown");
     }
 
     /* get the illuminants from the primaries */
@@ -342,21 +342,21 @@ QString Profile::kindString() const
 {
     switch (kind()) {
     case KindInputDevice:
-        return i18n("Input device");
+        return i18nc("profile kind", "Input device");
     case KindDisplayDevice:
-        return i18n("Display device");
+        return i18nc("profile kind", "Display device");
     case KindOutputDevice:
-        return i18n("Output device");
+        return i18nc("profile kind", "Output device");
     case KindDeviceLink:
-        return i18n("Devicelink");
+        return i18nc("profile kind", "Devicelink");
     case KindColorspaceConversion:
-        return i18n("Colorspace conversion");
+        return i18nc("profile kind", "Colorspace conversion");
     case KindAbstract:
-        return i18n("Abstract");
+        return i18nc("profile kind", "Abstract");
     case KindNamedColor:
-        return i18n("Named color");
+        return i18nc("profile kind", "Named color");
     default:
-        return i18n("Unknown");
+        return i18nc("profile kind", "Unknown");
     }
 }
 

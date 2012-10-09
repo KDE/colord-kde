@@ -444,11 +444,11 @@ QModelIndex ColordKCM::currentIndex() const
 
         if (ui->tabWidget->currentIndex() == 0) {
             // Devices is empty
-            ui->infoWidget->setText(i18n("You don't have any devices registered"));
+            ui->infoWidget->setText(i18n("You do not have any devices registered"));
             ui->infoWidget->setComment(i18n("Make sure colord module on kded is running"));
         } else {
             // Profiles is empty
-            ui->infoWidget->setText(i18n("You don't have any profiles registered"));
+            ui->infoWidget->setText(i18n("You do not have any profiles registered"));
             ui->infoWidget->setComment(i18n("Add one by clicking Add Profile button"));
         }
 

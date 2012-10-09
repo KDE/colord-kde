@@ -243,38 +243,38 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     ui->ktitlewidget->setText(deviceTitle);
 
     if (kind == QLatin1String("printer")) {
-        kind = i18n("Printer");
+        kind = i18nc("device type", "Printer");
     } else if (kind == QLatin1String("display")) {
-        kind = i18n("Display");
+        kind = i18nc("device type", "Display");
     } else if (kind == QLatin1String("webcam")) {
-        kind = i18n("Webcam");
+        kind = i18nc("device type", "Webcam");
     } else if (kind == QLatin1String("scanner")) {
-        kind = i18n("Scanner");
+        kind = i18nc("device type", "Scanner");
     } else {
-        kind = i18n("Unknown");
+        kind = i18nc("device type", "Unknown");
     }
     ui->ktitlewidget->setComment(kind);
 
     ui->deviceIdL->setText(m_currentDeviceId);
 
     if (scope == QLatin1String("temp")) {
-        scope = i18n("User session");
+        scope = i18nc("device scope", "User session");
     } else if (scope == QLatin1String("disk")) {
-        scope = i18n("Auto restore");
+        scope = i18nc("device scope", "Auto restore");
     } else if (scope == QLatin1String("normal")) {
-        scope = i18n("System wide");
+        scope = i18nc("device scope", "System wide");
     } else {
-        scope = i18n("Unknown");
+        scope = i18nc("device scope", "Unknown");
     }
     ui->deviceScopeL->setText(scope);
 
     QString colorspace = deviceInterface.property("Colorspace").toString();
     if (colorspace == QLatin1String("rgb")) {
-        colorspace = i18n("RGB");
+        colorspace = i18nc("colorspace", "RGB");
     } else if (colorspace == QLatin1String("cmyk")) {
-        colorspace = i18n("CMYK");
+        colorspace = i18nc("colorspace", "CMYK");
     } else if (colorspace == QLatin1String("gray")) {
-        colorspace = i18n("Gray");
+        colorspace = i18nc("colorspace", "Gray");
     }
     ui->modeL->setText(colorspace);
 

@@ -255,11 +255,11 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     if (title.isEmpty()) {
         QString colorspace = interface.property("Colorspace").toString();
         if (colorspace == QLatin1String("rgb")) {
-            title = i18n("Default RGB");
+            title = i18nc("colorspace", "Default RGB");
         } else if (colorspace == QLatin1String("cmyk")) {
-            title = i18n("Default CMYK");
+            title = i18nc("colorspace", "Default CMYK");
         } else if (colorspace == QLatin1String("gray")) {
-            title = i18n("Default Gray");
+            title = i18nc("colorspace", "Default Gray");
         }
         canRemoveProfile = false;
     } else {
