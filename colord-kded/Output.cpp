@@ -230,6 +230,11 @@ quint8* Output::readEdidData(size_t &len)
         result = getProperty(QX11Info::display(), m_output, edid_atom, len);
     }
 
+    if (result == NULL) {
+        edid_atom = XInternAtom(QX11Info::display(), "XFree86_DDC_EDID1_RAWDATA", false);
+        result = getProperty(QX11Info::display(), m_output, edid_atom, len);
+    }
+
     if (result) {
         if (len % 128 == 0) {
             return result;
