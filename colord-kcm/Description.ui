@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>532</width>
-    <height>416</height>
+    <height>428</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -348,47 +348,43 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="Line" name="line">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
+           <item row="5" column="0">
             <widget class="QLabel" name="label_10">
              <property name="text">
               <string>Mode:</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="5" column="1">
             <widget class="QLabel" name="modeL">
              <property name="text">
               <string notr="true">Color mode</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
+           <item row="6" column="0">
             <widget class="QLabel" name="label_13">
              <property name="text">
               <string>Current Profile:</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
+           <item row="6" column="1">
             <widget class="QLabel" name="defaultProfileName">
              <property name="text">
               <string notr="true">current prifile name</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="1">
+           <item row="7" column="1">
             <widget class="QPushButton" name="calibratePB">
              <property name="text">
               <string>Calibrate</string>
              </property>
             </widget>
+           </item>
+           <item row="8" column="0" colspan="2">
+            <widget class="KMessageWidget" name="msgWidget"/>
            </item>
           </layout>
          </widget>
@@ -419,6 +415,11 @@
   </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KSeparator</class>
+   <extends>QFrame</extends>
+   <header>kseparator.h</header>
+  </customwidget>
   <customwidget>
    <class>KTitleWidget</class>
    <extends>QWidget</extends>

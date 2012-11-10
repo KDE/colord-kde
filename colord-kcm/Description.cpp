@@ -36,6 +36,7 @@
 #include <KDateTime>
 #include <KToolInvocation>
 #include <KDebug>
+#include <KMessageWidget>
 
 #define TAB_INFORMATION  1
 #define TAB_CIE_1931     2
@@ -54,6 +55,10 @@ Description::Description(QWidget *parent) :
     ui(new Ui::Description)
 {
     ui->setupUi(this);
+    ui->msgWidget->setMessageType(KMessageWidget::Information);
+    ui->msgWidget->setWordWrap(true);
+    ui->msgWidget->setCloseButtonVisible(false);
+    ui->msgWidget->hide();
 
     m_namedColors = new ProfileNamedColors;
     m_metadata = new ProfileMetaData;
@@ -136,7 +141,7 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
         ui->licenseL->setVisible(!profile.copyright().isEmpty());
         ui->licenseLabel->setVisible(!profile.copyright().isEmpty());
 
-        // Set the manufaturer
+        // Set the manufacturer
         ui->deviceMakeL->setText(profile.manufacturer());
         ui->deviceMakeL->setVisible(!profile.manufacturer().isEmpty());
         ui->makeLabel->setVisible(!profile.manufacturer().isEmpty());
@@ -188,7 +193,7 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
                                                  QLatin1String("org.freedesktop.DBus.Properties"),
                                                  QLatin1String("Get"));
         message << QString("org.freedesktop.ColorManager.Profile"); // Interface
-        message << QString("Metadata"); // Propertie Name
+        message << QString("Metadata"); // Property Name
         QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
 
         StringStringMap metadata;
@@ -296,7 +301,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     }
     ui->defaultProfileName->setText(profileTitle);
 
-    // Verify if the Calibrate button should be enbled or disabled
+    // Verify if the Calibrate button should be enabled or disabled
     ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
 }
 
@@ -442,7 +447,7 @@ bool Description::calibrateEnabled(const QString &kind)
                 }
             }
 
-            // If we do not found a suitable sensor place a proper tool tip
+            // If we did not find a suitable sensor, display a warning
             if (!ret) {
                 toolTip = i18n("The measuring instrument does not support printer profiling.");
             }
@@ -451,7 +456,13 @@ bool Description::calibrateEnabled(const QString &kind)
         toolTip = i18n("The device type is not currently supported.");
     }
 
-    ui->calibratePB->setToolTip(toolTip);
+    //ui->calibratePB->setToolTip(toolTip);
+    if (!ret)
+        ui->msgWidget->setMessageType(KMessageWidget::Warning);
+    else
+        ui->msgWidget->setMessageType(KMessageWidget::Information);
+    ui->msgWidget->setText(toolTip);
+    ui->msgWidget->show();
     return ret;
 }
 
