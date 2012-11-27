@@ -168,8 +168,8 @@ Edid Output::readEdidData()
     size_t size;
     const quint8 *data;
     data = readEdidData(size);
-    if (data == 0) {
-        kWarning() << "unable to get EDID for output";
+    if (data == NULL) {
+        kWarning() << "Unable to get EDID for output" << name();
         Edid ret;
         m_id = ret.deviceId(name());
         return ret;
@@ -225,10 +225,6 @@ quint8* Output::readEdidData(size_t &len)
 
     edid_atom = XInternAtom(QX11Info::display(), RR_PROPERTY_RANDR_EDID, false);
     result = getProperty(QX11Info::display(), m_output, edid_atom, len);
-    if (result == NULL) {
-        edid_atom = XInternAtom(QX11Info::display(), "EDID_DATA", false);
-        result = getProperty(QX11Info::display(), m_output, edid_atom, len);
-    }
 
     if (result) {
         if (len % 128 == 0) {
@@ -239,7 +235,7 @@ quint8* Output::readEdidData(size_t &len)
         }
     }
 
-    return 0;
+    return NULL;
 }
 
 bool Output::operator==(const Output &output) const

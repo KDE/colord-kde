@@ -44,7 +44,8 @@ typedef QList<QDBusObjectPath> ObjectPathList;
 
 ColorD::ColorD(QObject *parent, const QVariantList &args) :
     KDEDModule(parent),
-    m_x11EventHandler(0)
+    m_x11EventHandler(0),
+    m_profilesWatcher(0)
 {
     // There's not much use for args in a KDED
     Q_UNUSED(args)
@@ -59,7 +60,10 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     connectToColorD();
 
     // Connect to the display
-    connectToDisplay();
+    if ((m_resources = connectToDisplay()) == 0) {
+        kWarning() << "Failed to connect to DISPLAY and get the needed resources";
+        return;
+    }
 
     // Make sure we know is colord is running
     QDBusServiceWatcher *watcher;
@@ -434,14 +438,18 @@ void ColorD::removeOutput(const Output &output)
     m_connectedOutputs.removeOne(output);
 }
 
-void ColorD::connectToDisplay()
+XRRScreenResources *ColorD::connectToDisplay()
 {
     m_dpy = QX11Info::display();
 
     // Check extension
     int eventBase;
-    if (XRRQueryExtension(m_dpy, &eventBase, &m_errorBase) == false) {
-        kWarning() << "Failed to retrieve RandR extension";
+    int major_version, minor_version;
+    if (!XRRQueryExtension(m_dpy, &eventBase, &m_errorBase) ||
+            !XRRQueryVersion(m_dpy, &major_version, &minor_version))
+    {
+        kWarning() << "RandR extension missing";
+        return 0;
     }
 
     // Install our X event handler
@@ -449,12 +457,6 @@ void ColorD::connectToDisplay()
     connect(m_x11EventHandler, SIGNAL(outputChanged()),
             this, SLOT(checkOutputs()));
     kapp->installX11EventFilter(m_x11EventHandler);
-
-    int major_version, minor_version;
-    XRRQueryVersion(m_dpy, &major_version, &minor_version);
-
-    m_version = i18n("X Resize and Rotate extension version %1.%2",
-                     major_version,minor_version);
 
     // check if we have the new version of the XRandR extension
     bool has_1_2;
@@ -469,19 +471,18 @@ void ColorD::connectToDisplay()
         kDebug() << "Using legacy XRANDR extension (1.1 or earlier).";
     }
 
-    kDebug() << "XRANDR error base: " << m_errorBase;
-
-    /* XRRGetScreenResourcesCurrent is less expensive than
-     * XRRGetScreenResources, however it is available only
-     * in RandR 1.3 or higher
-     */
     m_root = RootWindow(m_dpy, 0);
 
-    if (m_has_1_3) {
-        m_resources = XRRGetScreenResourcesCurrent(m_dpy, m_root);
-    } else {
-        m_resources = XRRGetScreenResources(m_dpy, m_root);
-    }
+    // This call is CRITICAL:
+    // RR 1.3 has a new method called XRRGetScreenResourcesCurrent,
+    // that method is less expensive since it only gets the current
+    // cached values from X. On the other hand in the case of
+    // a session startup the EDID of the output is not cached, leading
+    // to our code failing to get a valid EDID. This call ensures the
+    // X server will probe all outputs again and cache the EDID.
+    // Note: This code only runs once so it's nothing that would
+    // actually slow things down.
+    return XRRGetScreenResources(m_dpy, m_root);
 }
 
 void ColorD::checkOutputs()

@@ -59,7 +59,7 @@ private slots:
 
 private:
     quint8* readEdidData(RROutput output, size_t &len);
-    void connectToDisplay();
+    XRRScreenResources *connectToDisplay();
     void connectToColorD();
     void addOutput(Output &output);
     void outputChanged(Output &output);
@@ -76,7 +76,6 @@ private:
     Window m_root;
 
     QString m_errorCode;
-    QString m_version;
 
     bool m_has_1_3;
     int m_errorBase;

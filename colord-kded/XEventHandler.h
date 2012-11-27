@@ -26,7 +26,7 @@ class XEventHandler : public QWidget
 {
     Q_OBJECT
 public:
-    XEventHandler(int randr_base);
+    XEventHandler(int randrBase);
 
 signals:
     void outputChanged();
@@ -35,7 +35,7 @@ protected:
     virtual bool x11Event(XEvent *event);
 
 private:
-    int m_randr_notify;
+    int m_randrBase;
 };
 
 #endif // XEVENTHANDLER_H

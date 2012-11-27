@@ -23,18 +23,18 @@
 
 #include <X11/extensions/Xrandr.h>
 
-XEventHandler::XEventHandler(int randr_base) :
-    m_randr_notify(randr_base + RRNotify)
+XEventHandler::XEventHandler(int randrBase) :
+    m_randrBase(randrBase)
 {
 }
 
 bool XEventHandler::x11Event(XEvent *event)
 {
-    if (event->xany.type == m_randr_notify) {
-        XRRNotifyEvent *notifyEvent = reinterpret_cast<XRRNotifyEvent*>(event);
-        if(notifyEvent->subtype == RRNotify_OutputChange) {
-            emit outputChanged();
-        }
+    int eventCode = event->xany.type - m_randrBase;
+    // We care about any kind of screen change
+    if (eventCode == RRScreenChangeNotify) {
+        emit outputChanged();
     }
+
     return QWidget::x11Event(event);
 }
