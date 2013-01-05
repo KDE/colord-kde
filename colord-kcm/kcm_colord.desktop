@@ -9,6 +9,7 @@ X-KDE-System-Settings-Parent-Category-V2=hardware
 X-KDE-ParentApp=kcontrol
 
 Name=Color
+Name[bs]=boja
 Name[cs]=Barva
 Name[da]=Farve
 Name[de]=Farbe
