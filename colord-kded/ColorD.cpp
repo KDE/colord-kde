@@ -27,6 +27,7 @@
 
 #include <QFile>
 #include <QStringBuilder>
+#include <QX11Info>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusMetaType>
@@ -35,7 +36,6 @@
 #include <QtDBus/QDBusReply>
 
 #include <KGenericFactory>
-#include <KApplication>
 
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 K_EXPORT_PLUGIN(ColorDFactory("colord"))
@@ -456,7 +456,6 @@ XRRScreenResources *ColorD::connectToDisplay()
     m_x11EventHandler = new XEventHandler(eventBase);
     connect(m_x11EventHandler, SIGNAL(outputChanged()),
             this, SLOT(checkOutputs()));
-    kapp->installX11EventFilter(m_x11EventHandler);
 
     // check if we have the new version of the XRandR extension
     bool has_1_2;

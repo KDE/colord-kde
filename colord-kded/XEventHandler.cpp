@@ -19,6 +19,7 @@
 
 #include "XEventHandler.h"
 
+#include <KSystemEventFilter>
 #include <KDebug>
 
 #include <X11/extensions/Xrandr.h>
@@ -26,6 +27,7 @@
 XEventHandler::XEventHandler(int randrBase) :
     m_randrBase(randrBase)
 {
+    KSystemEventFilter::installEventFilter(this);
 }
 
 bool XEventHandler::x11Event(XEvent *event)
