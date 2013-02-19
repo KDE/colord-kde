@@ -3,7 +3,7 @@ Type=Service
 Icon=preferences-desktop-color
 
 X-KDE-Library=kcm_colord
-X-KDE-ServiceTypes=KCModule,KCModuleInit
+X-KDE-ServiceTypes=KCModule
 X-KDE-System-Settings-Parent-Category=hardware
 X-KDE-System-Settings-Parent-Category-V2=hardware
 X-KDE-ParentApp=kcontrol
