@@ -100,7 +100,7 @@ void ProfilesWatcher::addProfile(const QString &filePath)
     mimeType = KMimeType::findByFileContent(filePath);
 
     if (!mimeType->is(QLatin1String("application/vnd.iccprofile"))) {
-        // not a prifile file
+        // not a profile file
         return;
     }
 
