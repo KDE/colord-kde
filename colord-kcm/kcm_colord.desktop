@@ -31,6 +31,7 @@ Name[pt]=Cor
 Name[pt_BR]=Cor
 Name[sk]=Farba
 Name[sv]=Färg
+Name[tr]=Renk
 Name[uk]=Колір
 Name[x-test]=xxColorxx
 
@@ -54,5 +55,6 @@ Comment[pt]=Gerir a correcção de cores dos dispositivos
 Comment[pt_BR]=Gerenciar a correção de cores dos dispositivos
 Comment[sk]=Spravovať farebnú korekciu zariadení
 Comment[sv]=Hantera färgkorrektion för enheter
+Comment[tr]=Aygıtların renk düzeltmesini yönetin
 Comment[uk]=Керування виправленням кольорів на пристроях
 Comment[x-test]=xxManage color correction of devicesxx
