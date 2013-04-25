@@ -7,6 +7,7 @@ X-KDE-ServiceTypes=KCModule
 X-KDE-System-Settings-Parent-Category=hardware
 X-KDE-System-Settings-Parent-Category-V2=hardware
 X-KDE-ParentApp=kcontrol
+X-KDE-Kded-phase=1
 
 Name=Color
 Name[bs]=boja
