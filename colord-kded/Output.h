@@ -46,7 +46,7 @@ public:
     QDBusObjectPath path() const;
     RRCrtc crtc() const;
     RROutput output() const;
-    int getGammaSize();
+    int getGammaSize() const;
     void setGamma(XRRCrtcGamma *gamma);
 
     Edid readEdidData();

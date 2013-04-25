@@ -275,6 +275,9 @@ void ColorD::addOutput(Output &output)
 
         // Check if there is any EDID profile to be added
         addEdidProfileToDevice(output);
+
+        // Make sure we set the profile on this device
+        outputChanged(output);
     } else {
         kWarning() << "Failed to register device:" << reply.error().message();
     }
@@ -535,7 +538,6 @@ void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 {
     kDebug() << "Device added" << objectPath.path();
-    deviceChanged(objectPath);
 //    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
 //                                   objectPath.path(),
 //                                   QLatin1String("org.freedesktop.ColorManager.Device"),

@@ -151,7 +151,7 @@ RROutput Output::output() const
     return m_output;
 }
 
-int Output::getGammaSize()
+int Output::getGammaSize() const
 {
     // The gama size of this output
     return XRRGetCrtcGammaSize(QX11Info::display(), m_crtc);
