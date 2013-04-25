@@ -21,7 +21,6 @@
 #define COLORD_H
 
 #include "Output.h"
-#include "../dbus-types.h"
 
 #include <KDEDModule>
 

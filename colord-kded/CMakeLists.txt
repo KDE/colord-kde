@@ -25,17 +25,17 @@ set(COLORD_PROFILE_INTERFACE_XML
 #        message (FATAL_ERROR "Unable to find colord DBus specifications! Please install colord to continue!")
 #endif ()
 
-set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES INCLUDE "../dbus-types.h")
+set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES CLASSNAME CdInterface)
 qt4_add_dbus_interface(colord_kded_SRCS ${COLORD_INTERFACE_XML} CdInterface)
 
-set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES INCLUDE "../dbus-types.h")
+set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES CLASSNAME CdDeviceInterface)
 qt4_add_dbus_interface(colord_kded_SRCS ${COLORD_DEVICE_INTERFACE_XML} CdDeviceInterface)
 
-set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES INCLUDE "../dbus-types.h")
+set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES CLASSNAME CdProfileInterface)
 qt4_add_dbus_interface(colord_kded_SRCS ${COLORD_PROFILE_INTERFACE_XML} CdProfileInterface)
