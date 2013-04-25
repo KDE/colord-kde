@@ -39,6 +39,9 @@ public slots:
     void scanHomeDirectory();
     void createIccProfile(bool isLaptop, const Edid &edid);
 
+signals:
+    void scanFinished();
+
 private slots:
     void addProfile(const QString &fileInfo);
     void removeProfile(const QString &filename);

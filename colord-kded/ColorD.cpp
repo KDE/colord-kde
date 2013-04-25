@@ -78,12 +78,20 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     m_profilesWatcher = new ProfilesWatcher;
     m_profilesWatcher->start();
 
+    // Check outputs add all connected outputs, once profiles are ready
+    connect(m_profilesWatcher, SIGNAL(scanFinished()),
+            this, SLOT(checkOutputs()), Qt::QueuedConnection);
+
     // init the settings
     init();
 }
 
 ColorD::~ColorD()
 {
+    foreach (const Output &out, m_connectedOutputs) {
+        removeOutput(out);
+    }
+
     if (m_x11EventHandler) {
         m_x11EventHandler->deleteLater();
     }
@@ -100,9 +108,6 @@ void ColorD::init()
     QMetaObject::invokeMethod(m_profilesWatcher,
                               "scanHomeDirectory",
                               Qt::QueuedConnection);
-
-    // Check outputs add all connected outputs
-    checkOutputs();
 }
 
 void ColorD::reset()
@@ -277,7 +282,7 @@ void ColorD::addOutput(Output &output)
 
 void ColorD::outputChanged(Output &output)
 {
-    kDebug() << "Device changed" << output.path().path();
+    kWarning() << "Device changed" << output.path().path();
 
     QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
                                    output.path().path(),
@@ -401,6 +406,7 @@ void ColorD::outputChanged(Output &output)
         }
     }
 
+    kWarning() << "Setting X atom on output:"  << output.name() << isPrimary;
     if (isPrimary) {
         kDebug() << "Setting X atom on output:"  << output.name();
         // export the file data as an x atom on PRIMARY *screen* (not output)
@@ -530,6 +536,7 @@ void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 {
     kDebug() << "Device added" << objectPath.path();
+    deviceChanged(objectPath);
 //    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
 //                                   objectPath.path(),
 //                                   QLatin1String("org.freedesktop.ColorManager.Device"),
