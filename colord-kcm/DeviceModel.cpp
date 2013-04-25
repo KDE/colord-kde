@@ -191,6 +191,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         kind = QLatin1String("unknown");
     }
     item->setData(kind, ProfileKindRole);
+    appendRow(item);
 
     QList<QStandardItem*> profileItems;
     foreach (const QDBusObjectPath &profileObjectPath, profiles) {
@@ -202,8 +203,6 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         }
     }
     item->appendRows(profileItems);
-
-    appendRow(item);
 
     if (emitChanged) {
         emit changed();
