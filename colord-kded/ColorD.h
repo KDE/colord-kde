@@ -32,6 +32,7 @@ extern "C"
     #include <X11/extensions/Xrandr.h>
 }
 
+class CdInterface;
 class XEventHandler;
 class ProfilesWatcher;
 class ColorD : public KDEDModule
@@ -77,6 +78,7 @@ private:
     int m_errorBase;
     XEventHandler *m_x11EventHandler;
     ProfilesWatcher *m_profilesWatcher;
+    CdInterface *m_cdInterface;
 };
 
 #endif // COLORD_H
