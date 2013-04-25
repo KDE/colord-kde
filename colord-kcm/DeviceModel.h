@@ -23,11 +23,11 @@
 
 #include <QStandardItemModel>
 #include <QtDBus/QDBusObjectPath>
-#include <QtDBus/QDBusMessage>
+#include <QtDBus/QDBusPendingCallWatcher>
 
-typedef QMap<QString, QString>  StringStringMap;
 typedef QList<QDBusObjectPath> ObjectPathList;
 
+class CdInterface;
 class DeviceModel : public QStandardItemModel
 {
     Q_OBJECT
@@ -42,7 +42,7 @@ public:
         ProfileKindRole,
         CanRemoveProfileRole
     } DeviceRoles;
-    explicit DeviceModel(QObject *parent = 0);
+    explicit DeviceModel(CdInterface *cdInterface, QObject *parent = 0);
 
     Qt::ItemFlags flags(const QModelIndex &index) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
@@ -55,7 +55,7 @@ signals:
     void changed();
 
 private slots:
-    void gotDevices(const QDBusMessage &message);
+    void gotDevices(QDBusPendingCallWatcher *call);
     void deviceChanged(const QDBusObjectPath &objectPath);
     void deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);
     void deviceRemoved(const QDBusObjectPath &objectPath);
@@ -67,6 +67,8 @@ private:
     QStandardItem* findProfile(QStandardItem *parent, const QDBusObjectPath &objectPath);
     void removeProfilesNotInList(QStandardItem *parent, const ObjectPathList &profiles);
     int findItem(const QDBusObjectPath &objectPath);
+
+    CdInterface*m_cdInterface;
 };
 
 #endif // DEVICE_MODEL_H

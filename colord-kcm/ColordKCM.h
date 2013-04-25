@@ -34,6 +34,7 @@ typedef QPair<QString, QDBusObjectPath> KindAndPath;
 namespace Ui {
     class ColordKCM;
 }
+class CdInterface;
 class DeviceModel;
 class ProfileModel;
 class ProfileDescription;
@@ -59,7 +60,7 @@ private slots:
     void profileAdded(const QDBusObjectPath &objectPath);
 
 private:
-    void addProvileToDevice(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath) const;
+    void addProvileToDevice(const QDBusObjectPath &profile, const QDBusObjectPath &devicePath) const;
     QModelIndex currentIndex() const;
     QString profilesPath() const;
 
@@ -80,6 +81,7 @@ private:
     QAction *m_addAction;
     QAction *m_removeAction;
     QAction *m_configureAction;
+    CdInterface *m_cdInterface;
 };
 
 #endif // COLORD_KCM_H

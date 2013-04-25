@@ -23,11 +23,10 @@
 #include "ProfileModel.h"
 #include "Profile.h"
 
-#include <QtDBus/QDBusInterface>
-#include <QtDBus/QDBusMetaType>
-#include <QtDBus/QDBusMessage>
-#include <QtDBus/QDBusConnection>
-#include <QtDBus/QDBusReply>
+#include "CdInterface.h"
+#include "CdDeviceInterface.h"
+#include "CdProfileInterface.h"
+
 #include <QStringBuilder>
 
 #include <KDebug>
@@ -35,48 +34,38 @@
 #include <KDateTime>
 #include <KIcon>
 
-DeviceModel::DeviceModel(QObject *parent) :
-    QStandardItemModel(parent)
+DeviceModel::DeviceModel(CdInterface *cdInterface, QObject *parent) :
+    QStandardItemModel(parent),
+    m_cdInterface(cdInterface)
 {
-    qDBusRegisterMetaType<ObjectPathList>();
-
-    // Creates a ColorD interface, it must be created with new
-    // otherwise the object will be deleted when this block ends
-    QDBusInterface *interface;
-    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   QLatin1String("/org/freedesktop/ColorManager"),
-                                   QLatin1String("org.freedesktop.ColorManager"),
-                                   QDBusConnection::systemBus(),
-                                   this);
     // listen to colord for events
-    connect(interface, SIGNAL(DeviceAdded(QDBusObjectPath)),
+    connect(m_cdInterface, SIGNAL(DeviceAdded(QDBusObjectPath)),
             this, SLOT(deviceAdded(QDBusObjectPath)));
-    connect(interface, SIGNAL(DeviceRemoved(QDBusObjectPath)),
+    connect(m_cdInterface, SIGNAL(DeviceRemoved(QDBusObjectPath)),
             this, SLOT(deviceRemoved(QDBusObjectPath)));
-    connect(interface, SIGNAL(DeviceChanged(QDBusObjectPath)),
+    connect(m_cdInterface, SIGNAL(DeviceChanged(QDBusObjectPath)),
             this, SLOT(deviceChanged(QDBusObjectPath)));
 
     // Ask for devices
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("/org/freedesktop/ColorManager"),
-                                             QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("GetDevices"));
-    QDBusConnection::systemBus().callWithCallback(message, this, SLOT(gotDevices(QDBusMessage)));
+    QDBusPendingReply<ObjectPathList> async = m_cdInterface->GetDevices();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
+    connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+            this, SLOT(gotDevices(QDBusPendingCallWatcher*)));
 }
 
-void DeviceModel::gotDevices(const QDBusMessage &message)
+void DeviceModel::gotDevices(QDBusPendingCallWatcher *call)
 {
-    if (message.type() == QDBusMessage::ReplyMessage && message.arguments().size() == 1) {
-        QDBusArgument argument = message.arguments().first().value<QDBusArgument>();
-        ObjectPathList paths = qdbus_cast<ObjectPathList>(argument);
-        foreach (const QDBusObjectPath &path, paths) {
-            deviceAdded(path, false);
+    QDBusPendingReply<ObjectPathList> reply = *call;
+    if (reply.isError()) {
+        kWarning() << "Unexpected message" << reply.error().message();
+    } else {
+        ObjectPathList devices = reply.argumentAt<0>();
+        foreach (const QDBusObjectPath &device, devices) {
+            deviceAdded(device, false);
         }
         emit changed();
-    } else {
-        kWarning() << "Unexpected message" << message;
     }
+    call->deleteLater();
 }
 
 void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
@@ -87,16 +76,14 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
         return;
     }
 
-    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   objectPath.path(),
-                                   QLatin1String("org.freedesktop.ColorManager.Device"),
-                                   QDBusConnection::systemBus(),
-                                   this);
-    if (!deviceInterface.isValid()) {
+    CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+                             objectPath.path(),
+                             QDBusConnection::systemBus());
+    if (!device.isValid()) {
         return;
     }
 
-    ObjectPathList profiles = deviceInterface.property("Profiles").value<ObjectPathList>();
+    ObjectPathList profiles = device.profiles();
 
     // Normally just the profile list bound this device
     // is what changes including "Modified" property
@@ -132,21 +119,19 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         return;
     }
 
-    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   objectPath.path(),
-                                   QLatin1String("org.freedesktop.ColorManager.Device"),
-                                   QDBusConnection::systemBus(),
-                                   this);
-    if (!deviceInterface.isValid()) {
+    CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+                             objectPath.path(),
+                             QDBusConnection::systemBus());
+    if (!device.isValid()) {
         return;
     }
 
-    QString deviceId = deviceInterface.property("DeviceId").toString();
-    QString kind = deviceInterface.property("Kind").toString();
-    QString model = deviceInterface.property("Model").toString();
-    QString vendor = deviceInterface.property("Vendor").toString();
-    QString colorspace = deviceInterface.property("Colorspace").toString();
-    ObjectPathList profiles = deviceInterface.property("Profiles").value<ObjectPathList>();
+    QString deviceId = device.deviceId();
+    QString kind = device.kind();
+    QString model = device.model();
+    QString vendor = device.vendor();
+    QString colorspace = device.colorspace();
+    ObjectPathList profiles = device.profiles();
 
     QStandardItem *item = new QStandardItem;
     item->setData(qVariantFromValue(objectPath), ObjectPathRole);
@@ -233,26 +218,24 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
                                               const QDBusObjectPath &parentObjectPath,
                                               bool checked)
 {
-    QDBusInterface interface(QLatin1String("org.freedesktop.ColorManager"),
-                             objectPath.path(),
-                             QLatin1String("org.freedesktop.ColorManager.Profile"),
-                             QDBusConnection::systemBus(),
-                             this);
-    if (!interface.isValid()) {
+    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+                               objectPath.path(),
+                               QDBusConnection::systemBus());
+    if (!profile.isValid()) {
         return 0;
     }
 
     QStandardItem *stdItem = new QStandardItem;
     QString dataSource = ProfileModel::getProfileDataSource(objectPath);
-    QString kind = interface.property("Kind").toString();
-    QString filename = interface.property("Filename").toString();
-    QString title = interface.property("Title").toString();
-    qulonglong created = interface.property("Created").toULongLong();
+    QString kind = profile.kind();
+    QString filename = profile.filename();
+    QString title = profile.title();
+    qulonglong created = profile.created();
 
     // Sets the profile title
     bool canRemoveProfile = true;
     if (title.isEmpty()) {
-        QString colorspace = interface.property("Colorspace").toString();
+        QString colorspace = profile.colorspace();
         if (colorspace == QLatin1String("rgb")) {
             title = i18nc("colorspace", "Default RGB");
         } else if (colorspace == QLatin1String("cmyk")) {
@@ -335,14 +318,13 @@ bool DeviceModel::setData(const QModelIndex &index, const QVariant &value, int r
     Q_UNUSED(role)
 
     QStandardItem *stdItem = itemFromIndex(index);
-    QDBusMessage message;
     QDBusObjectPath parentObjPath = stdItem->data(ParentObjectPathRole).value<QDBusObjectPath>();
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             parentObjPath.path(),
-                                             QLatin1String("org.freedesktop.ColorManager.Device"),
-                                             QLatin1String("MakeProfileDefault"));
-    message << stdItem->data(ObjectPathRole);
-    QDBusConnection::systemBus().send(message);
+    CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+                             parentObjPath.path(),
+                             QDBusConnection::systemBus());
+    if (device.isValid()) {
+        device.MakeProfileDefault(stdItem->data(ObjectPathRole).value<QDBusObjectPath>());
+    }
 
     // We return false since colord will emit a DeviceChanged signal telling us about this change
     return false;
