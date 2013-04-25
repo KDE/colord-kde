@@ -27,6 +27,7 @@
 namespace Ui {
     class Description;
 }
+class CdInterface;
 class ProfileNamedColors;
 class ProfileMetaData;
 class Description : public QWidget
@@ -37,6 +38,7 @@ public:
     ~Description();
 
     int innerHeight() const;
+    void setCdInterface(CdInterface *interface);
     void setProfile(const QDBusObjectPath &objectPath);
     void setDevice(const QDBusObjectPath &objectPath);
 

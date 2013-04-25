@@ -24,6 +24,10 @@
 #include "ProfileNamedColors.h"
 #include "ProfileMetaData.h"
 
+#include "CdInterface.h"
+#include "CdDeviceInterface.h"
+#include "CdProfileInterface.h"
+
 #include <math.h>
 
 #include <QFileInfo>
@@ -63,20 +67,6 @@ Description::Description(QWidget *parent) :
     m_namedColors = new ProfileNamedColors;
     m_metadata = new ProfileMetaData;
 
-    // Creates a ColorD interface, it must be created with new
-    // otherwise the object will be deleted when this block ends
-    QDBusInterface *interface;
-    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   QLatin1String("/org/freedesktop/ColorManager"),
-                                   QLatin1String("org.freedesktop.ColorManager"),
-                                   QDBusConnection::systemBus(),
-                                   this);
-    // listen to colord for events
-    connect(interface, SIGNAL(SensorAdded(QDBusObjectPath)),
-            this, SLOT(sensorAdded(QDBusObjectPath)));
-    connect(interface, SIGNAL(SensorRemoved(QDBusObjectPath)),
-            this, SLOT(sensorRemoved(QDBusObjectPath)));
-
     // Ask for profiles
     QDBusMessage message;
     message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
@@ -99,25 +89,32 @@ int Description::innerHeight() const
     return ui->tabWidget->currentWidget()->height();
 }
 
+void Description::setCdInterface(CdInterface *interface)
+{
+    // listen to colord for events
+    connect(interface, SIGNAL(SensorAdded(QDBusObjectPath)),
+            this, SLOT(sensorAdded(QDBusObjectPath)));
+    connect(interface, SIGNAL(SensorRemoved(QDBusObjectPath)),
+            this, SLOT(sensorRemoved(QDBusObjectPath)));
+}
+
 void Description::setProfile(const QDBusObjectPath &objectPath)
 {
     m_currentProfile = objectPath;
     m_currentDeviceId.clear();
 
     ui->stackedWidget->setCurrentIndex(0);
-    QDBusInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                    objectPath.path(),
-                                    QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                    QDBusConnection::systemBus(),
-                                    this);
+    CdProfileInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
+                               objectPath.path(),
+                               QDBusConnection::systemBus());
     if (!profileInterface.isValid()) {
         return;
     }
 
-    QString filename = profileInterface.property("Filename").toString();
-    bool hasVcgt = profileInterface.property("HasVcgt").toBool();
-    bool isSystemWide = profileInterface.property("IsSystemWide").toBool();
-    qulonglong created = profileInterface.property("Created").toULongLong();
+    QString filename = profileInterface.filename();
+    bool hasVcgt = profileInterface.hasVcgt();
+    bool isSystemWide = profileInterface.isSystemWide();
+    qulonglong created = profileInterface.created();
 
     ui->installSystemWideBt->setEnabled(!isSystemWide);
     Profile profile(filename);
@@ -220,22 +217,20 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
 
     ui->stackedWidget->setCurrentIndex(1);
 
-    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   objectPath.path(),
-                                   QLatin1String("org.freedesktop.ColorManager.Device"),
-                                   QDBusConnection::systemBus(),
-                                   this);
-    if (!deviceInterface.isValid()) {
+    CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+                             objectPath.path(),
+                             QDBusConnection::systemBus());
+    if (!device.isValid()) {
         return;
     }
 
     QString deviceTitle;
-    m_currentDeviceId = deviceInterface.property("DeviceId").toString();
-    QString kind = deviceInterface.property("Kind").toString();
+    m_currentDeviceId = device.deviceId();
+    QString kind = device.kind();
     m_currentDeviceKind = kind;
-    QString model = deviceInterface.property("Model").toString();
-    QString vendor = deviceInterface.property("Vendor").toString();
-    QString scope = deviceInterface.property("Scope").toString();
+    QString model = device.model();
+    QString vendor = device.vendor();
+    QString scope = device.scope();
     if (model.isEmpty() && vendor.isEmpty()) {
         deviceTitle = m_currentDeviceId;
     } else if (model.isEmpty()) {
@@ -273,7 +268,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     }
     ui->deviceScopeL->setText(scope);
 
-    QString colorspace = deviceInterface.property("Colorspace").toString();
+    QString colorspace = device.colorspace();
     if (colorspace == QLatin1String("rgb")) {
         colorspace = i18nc("colorspace", "RGB");
     } else if (colorspace == QLatin1String("cmyk")) {
@@ -283,19 +278,17 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     }
     ui->modeL->setText(colorspace);
 
-    ObjectPathList profiles = deviceInterface.property("Profiles").value<ObjectPathList>();
+    ObjectPathList profiles = device.profiles();
 
     QString profileTitle = i18n("This device has no profile assigned to it");
     if (!profiles.isEmpty()) {
-        QDBusInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                        profiles.first().path(),
-                                        QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                        QDBusConnection::systemBus(),
-                                        this);
-        if (profileInterface.isValid()) {
-            profileTitle = profileInterface.property("Title").toString();
+        CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+                                   profiles.first().path(),
+                                   QDBusConnection::systemBus());
+        if (profile.isValid()) {
+            profileTitle = profile.title();
             if (profileTitle.isEmpty()) {
-                profileTitle = profileInterface.property("ProfileId").toString();
+                profileTitle = profile.profileId();
             }
         }
     }

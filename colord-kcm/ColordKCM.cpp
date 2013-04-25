@@ -100,6 +100,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
                                     QLatin1String("/org/freedesktop/ColorManager"),
                                     QDBusConnection::systemBus(),
                                     this);
+    ui->profile->setCdInterface(m_cdInterface);
 
     // listen to colord for events
     connect(m_cdInterface, SIGNAL(ProfileAdded(QDBusObjectPath)),
