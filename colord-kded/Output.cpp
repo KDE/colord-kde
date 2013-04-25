@@ -28,6 +28,7 @@
 Output::Output(RROutput output, XRRScreenResources *resources) :
     m_output(output),
     m_resources(resources),
+    m_interface(0),
     m_connected(false)
 {
     XRROutputInfo *info;
@@ -47,6 +48,11 @@ Output::Output(RROutput output, XRRScreenResources *resources) :
     m_crtc = info->crtc;
 
     XRRFreeOutputInfo(info);
+}
+
+Output::~Output()
+{
+    delete m_interface;
 }
 
 bool Output::connected() const
@@ -133,12 +139,30 @@ QString Output::id() const
 
 void Output::setPath(const QDBusObjectPath &path)
 {
+    if (m_interface && m_interface->path() == path.path()) {
+        return;
+    }
     m_path = path;
+
+    delete m_interface;
+    m_interface = new CdDeviceInterface(QLatin1String("org.freedesktop.ColorManager"),
+                                        path.path(),
+                                        QDBusConnection::systemBus());
+    if (!m_interface->isValid()) {
+        kWarning() << "Invalid interface" << path.path() << m_interface->lastError().message();
+        delete m_interface;
+        m_interface = 0;
+    }
 }
 
 QDBusObjectPath Output::path() const
 {
     return m_path;
+}
+
+CdDeviceInterface *Output::interface()
+{
+    return m_interface;
 }
 
 RRCrtc Output::crtc() const

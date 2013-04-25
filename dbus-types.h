@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2013 by Daniel Nicoletti <dantti12@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,37 +17,13 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILES_WATCHER_H
-#define PROFILES_WATCHER_H
+#ifndef DBUS_TYPES_H
+#define DBUS_TYPES_H
 
-#include <KDirWatch>
+#include <QMap>
+#include <QMetaType>
 
-#include <QThread>
-#include <QVariantList>
-#include <QFileInfo>
+typedef QMap<QString, QString> CdStringMap;
+Q_DECLARE_METATYPE(CdStringMap)
 
-class Edid;
-class ProfilesWatcher : public QThread
-{
-    Q_OBJECT
-public:
-    explicit ProfilesWatcher(QObject *parent = 0);
-
-public slots:
-    void scanHomeDirectory();
-    void createIccProfile(bool isLaptop, const Edid &edid);
-
-signals:
-    void scanFinished();
-
-private slots:
-    void addProfile(const QString &fileInfo);
-    void removeProfile(const QString &filename);
-
-private:
-    QString profilesPath() const;
-
-    KDirWatch *m_dirWatch;
-};
-
-#endif // PROFILES_WATCHER_H
+#endif

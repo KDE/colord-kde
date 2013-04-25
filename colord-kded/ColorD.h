@@ -21,6 +21,7 @@
 #define COLORD_H
 
 #include "Output.h"
+#include "../dbus-types.h"
 
 #include <KDEDModule>
 
@@ -30,10 +31,6 @@ extern "C"
     #include <X11/Xatom.h>
     #include <X11/extensions/Xrandr.h>
 }
-
-typedef QList<int> ScreenList;
-typedef QList<Output> OutputList;
-typedef QMap<QString, QString>  StringStringMap;
 
 class XEventHandler;
 class ProfilesWatcher;
@@ -61,15 +58,14 @@ private:
     quint8* readEdidData(RROutput output, size_t &len);
     XRRScreenResources *connectToDisplay();
     void connectToColorD();
-    void addOutput(Output &output);
-    void outputChanged(Output &output);
-    void removeOutput(const Output &output);
-    void addProfileToDevice(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath);
-    void addEdidProfileToDevice(Output &output);
-    StringStringMap getProfileMetadata(const QDBusObjectPath &profilePath);
+    void addOutput(const Output::Ptr &output);
+    void outputChanged(const Output::Ptr &output);
+    void removeOutput(const Output::Ptr &output);
+    void addEdidProfileToDevice(const Output::Ptr &output);
+    CdStringMap getProfileMetadata(const QDBusObjectPath &profilePath);
     QString profilesPath() const;
 
-    OutputList m_connectedOutputs;
+    Output::List m_connectedOutputs;
 
     Display *m_dpy;
     XRRScreenResources *m_resources;

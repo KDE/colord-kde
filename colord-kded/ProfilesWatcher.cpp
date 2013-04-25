@@ -21,6 +21,7 @@
 
 #include "ProfileUtils.h"
 #include "Edid.h"
+#include "../dbus-types.h"
 
 #include <KDirWatch>
 #include <KMimeType>
@@ -130,7 +131,7 @@ void ProfilesWatcher::addProfile(const QString &filePath)
                                              QLatin1String("org.freedesktop.ColorManager"),
                                              fdPass ? QLatin1String("CreateProfileWithFd") :
                                                       QLatin1String("CreateProfile"));
-    StringStringMap properties;
+    CdStringMap properties;
     properties["Filename"] = filePath;
     properties["FILE_checksum"] = hash;
 

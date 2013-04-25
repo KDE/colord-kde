@@ -22,6 +22,7 @@
 
 #include <QDBusObjectPath>
 #include <QTextStream>
+#include "CdDeviceInterface.h"
 
 #include "Edid.h"
 
@@ -35,7 +36,10 @@ class Output
 {
     Q_GADGET
 public:
+    typedef QSharedPointer<Output> Ptr;
+    typedef QList<Ptr> List;
     Output(RROutput output, XRRScreenResources *resources);
+    ~Output();
 
     bool connected() const;
     bool isLaptop() const;
@@ -44,6 +48,7 @@ public:
     QString id() const;
     void setPath(const QDBusObjectPath &path);
     QDBusObjectPath path() const;
+    CdDeviceInterface* interface();
     RRCrtc crtc() const;
     RROutput output() const;
     int getGammaSize() const;
@@ -64,6 +69,7 @@ private:
     XRRScreenResources *m_resources;
     QString m_edidHash;
     QString m_id;
+    CdDeviceInterface *m_interface;
     QDBusObjectPath m_path;
 
     bool m_connected;
