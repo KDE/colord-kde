@@ -57,7 +57,7 @@ Description::Description(QWidget *parent) :
     ui(new Ui::Description)
 {
     ui->setupUi(this);
-    ui->msgWidget->setMessageType(KMessageWidget::Information);
+    ui->msgWidget->setMessageType(KMessageWidget::Warning);
     ui->msgWidget->setWordWrap(true);
     ui->msgWidget->setCloseButtonVisible(false);
     ui->msgWidget->hide();
@@ -374,7 +374,7 @@ void Description::removeTab(QWidget *widget)
 bool Description::calibrateEnabled(const QString &kind)
 {
     QString toolTip;
-    bool ret = false;
+    bool canCalibrate = false;
     toolTip = i18n("Create a color profile for the selected device");
 
     if (m_currentDeviceId.isEmpty()) {
@@ -390,12 +390,12 @@ bool Description::calibrateEnabled(const QString &kind)
         if (m_sensors.isEmpty()) {
             toolTip = i18n("The measuring instrument is not detected. Please check it is turned on and correctly connected.");
         } else {
-            ret = true;
+            canCalibrate = true;
         }
     } else if (kind == QLatin1String("camera") ||
                kind == QLatin1String("scanner") ||
                kind == QLatin1String("webcam")) {
-        ret = true;
+        canCalibrate = true;
     } else if (kind == QLatin1String("printer")) {
         // Check if we have any sensor
         if (m_sensors.isEmpty()) {
@@ -412,13 +412,13 @@ bool Description::calibrateEnabled(const QString &kind)
 
                 QStringList capabilities = sensor.capabilities();
                 if (capabilities.contains(QLatin1String("printer"))) {
-                    ret = true;
+                    canCalibrate = true;
                     break;
                 }
             }
 
             // If we did not find a suitable sensor, display a warning
-            if (!ret) {
+            if (!canCalibrate) {
                 toolTip = i18n("The measuring instrument does not support printer profiling.");
             }
         }
@@ -426,14 +426,15 @@ bool Description::calibrateEnabled(const QString &kind)
         toolTip = i18n("The device type is not currently supported.");
     }
 
-    //ui->calibratePB->setToolTip(toolTip);
-    if (!ret)
-        ui->msgWidget->setMessageType(KMessageWidget::Warning);
-    else
-        ui->msgWidget->setMessageType(KMessageWidget::Information);
-    ui->msgWidget->setText(toolTip);
-    ui->msgWidget->show();
-    return ret;
+    if (canCalibrate) {
+        ui->calibratePB->setToolTip(toolTip);
+        ui->msgWidget->hide();
+    } else {
+        ui->msgWidget->setText(toolTip);
+        ui->msgWidget->show();
+    }
+
+    return canCalibrate;
 }
 
 #include "Description.moc"

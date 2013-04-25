@@ -26,6 +26,7 @@
 #include "DeviceModel.h"
 #include "ProfileModel.h"
 #include "Description.h"
+#include "NoSelectionRectDelegate.h"
 
 #include "CdInterface.h"
 #include "CdProfileInterface.h"
@@ -116,6 +117,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     sortModel->sort(0);
     // Set the source model then connect to the selection model to get updates
     ui->devicesTV->setModel(sortModel);
+    ui->devicesTV->setItemDelegate(new NoSelectionRectDelegate(this));
     connect(ui->devicesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this, SLOT(showDescription()));
 
@@ -141,6 +143,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     profileSortModel->setSortRole(ProfileModel::SortRole);
     profileSortModel->sort(0);
     ui->profilesTV->setModel(profileSortModel);
+    ui->profilesTV->setItemDelegate(new NoSelectionRectDelegate(this));
     connect(ui->profilesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this, SLOT(showDescription()));
     connect(profileSortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),

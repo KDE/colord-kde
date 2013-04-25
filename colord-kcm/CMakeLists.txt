@@ -1,4 +1,5 @@
 set(kcm_colord_SRCS
+    NoSelectionRectDelegate.cpp
     DeviceModel.cpp
     ProfileModel.cpp
     Profile.cpp
