@@ -54,11 +54,11 @@ ProfileMetaData::~ProfileMetaData()
     delete ui;
 }
 
-void ProfileMetaData::setMetadata(const QMap<QString, QString> &metadata)
+void ProfileMetaData::setMetadata(const CdStringMap &metadata)
 {
     m_model->removeRows(0, m_model->rowCount());
 
-    QMap<QString, QString>::const_iterator i = metadata.constBegin();
+    CdStringMap::const_iterator i = metadata.constBegin();
     while (i != metadata.constEnd()) {
         kDebug() << i.key() << ": " << i.value();
         QList<QStandardItem *> row;

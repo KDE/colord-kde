@@ -21,7 +21,7 @@
 
 #include "ProfileUtils.h"
 #include "Edid.h"
-#include "../dbus-types.h"
+#include "CdInterface.h"
 
 #include <KDirWatch>
 #include <KMimeType>
@@ -29,8 +29,6 @@
 
 #include <QStringBuilder>
 #include <QDirIterator>
-#include <QtDBus/QDBusConnection>
-#include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusUnixFileDescriptor>
 #include <QtDBus/QDBusReply>
 #include <QtDBus/QDBusObjectPath>
@@ -120,52 +118,41 @@ void ProfilesWatcher::addProfile(const QString &filePath)
     // seek(0) so that if we pass the FD to colord it is not at end
     profile.seek(0);
 
-    QString profileId = QLatin1String("icc-") + hash;
-
-    bool fdPass;
-    fdPass = (QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing);
-
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("/org/freedesktop/ColorManager"),
-                                             QLatin1String("org.freedesktop.ColorManager"),
-                                             fdPass ? QLatin1String("CreateProfileWithFd") :
-                                                      QLatin1String("CreateProfile"));
+    QString profileId = QLatin1String("icc-") % hash;
     CdStringMap properties;
     properties["Filename"] = filePath;
     properties["FILE_checksum"] = hash;
 
-    message << qVariantFromValue(profileId);
-    message << qVariantFromValue(QString("temp"));
-    if (fdPass) {
-        message << qVariantFromValue(QDBusUnixFileDescriptor(profile.handle()));
-    }
-    message << qVariantFromValue(properties);
+    CdInterface cdInterface(QLatin1String("org.freedesktop.ColorManager"),
+                          QLatin1String("/org/freedesktop/ColorManager"),
+                          QDBusConnection::systemBus());
 
-    QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
+    QDBusReply<QDBusObjectPath> reply;
+    if (QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing) {
+        reply = cdInterface.CreateProfileWithFd(profileId,
+                                                QLatin1String("temp"),
+                                                QDBusUnixFileDescriptor(profile.handle()),
+                                                properties);
+    } else {
+        reply = cdInterface.CreateProfile(profileId,
+                                          QLatin1String("temp"),
+                                          properties);
+    }
 
     kDebug() << "created profile" << profileId << reply.value().path();
 }
 
 void ProfilesWatcher::removeProfile(const QString &filename)
 {
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("/org/freedesktop/ColorManager"),
-                                             QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("FindProfileByFilename"));
-    message << qVariantFromValue(filename);
-    QDBusReply<QDBusObjectPath> reply = QDBusConnection::systemBus().call(message);
+    CdInterface cdInterface(QLatin1String("org.freedesktop.ColorManager"),
+                            QLatin1String("/org/freedesktop/ColorManager"),
+                            QDBusConnection::systemBus());
 
+    QDBusReply<QDBusObjectPath> reply = cdInterface.FindProfileByFilename(filename);
     if (!reply.isValid()) {
         kWarning() << "Could not find the DBus object path for the given file name" << filename;
         return;
     }
 
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("/org/freedesktop/ColorManager"),
-                                             QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("DeleteProfile"));
-    message << qVariantFromValue(reply.value());
-    QDBusConnection::systemBus().send(message);
+    cdInterface.DeleteProfile(reply.value());
 }

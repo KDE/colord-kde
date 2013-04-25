@@ -22,7 +22,7 @@
 
 #include <QWidget>
 #include <QDBusObjectPath>
-#include <QDBusMessage>
+#include <QDBusPendingCallWatcher>
 
 namespace Ui {
     class Description;
@@ -49,7 +49,7 @@ private slots:
     void on_installSystemWideBt_clicked();
     void on_calibratePB_clicked();
 
-    void gotSensors(const QDBusMessage &message);
+    void gotSensors(QDBusPendingCallWatcher *call);
     void sensorAdded(const QDBusObjectPath &sensorPath, bool updateCalibrateButton = true);
     void sensorRemoved(const QDBusObjectPath &sensorPath, bool updateCalibrateButton = true);
 

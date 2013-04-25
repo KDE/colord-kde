@@ -23,6 +23,8 @@
 #include <QWidget>
 #include <QStandardItemModel>
 
+#include "dbus-types.h"
+
 namespace Ui {
     class ProfileMetaData;
 }
@@ -30,12 +32,11 @@ namespace Ui {
 class ProfileMetaData : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit ProfileMetaData(QWidget *parent = 0);
     ~ProfileMetaData();
 
-    void setMetadata(const QMap<QString, QString> &metadata);
+    void setMetadata(const CdStringMap &metadata);
 
 private:
     QString metadataLabel(const QString &key);

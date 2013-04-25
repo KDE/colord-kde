@@ -20,9 +20,10 @@
 #include "ProfileModel.h"
 #include "Profile.h"
 
-#include <QtDBus/QDBusInterface>
+#include "CdInterface.h"
+#include "CdProfileInterface.h"
+
 #include <QtDBus/QDBusMetaType>
-#include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusReply>
 #include <QtDBus/QDBusArgument>
@@ -37,48 +38,39 @@
 
 typedef QList<QDBusObjectPath> ObjectPathList;
 
-ProfileModel::ProfileModel(QObject *parent) :
+ProfileModel::ProfileModel(CdInterface *cdInterface, QObject *parent) :
     QStandardItemModel(parent)
 {
     qDBusRegisterMetaType<ObjectPathList>();
 
-    // Creates a ColorD interface, it must be created with new
-    // otherwise the object will be deleted when this block ends
-    QDBusInterface *interface;
-    interface = new QDBusInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                   QLatin1String("/org/freedesktop/ColorManager"),
-                                   QLatin1String("org.freedesktop.ColorManager"),
-                                   QDBusConnection::systemBus(),
-                                   this);
     // listen to colord for events
-    connect(interface, SIGNAL(ProfileAdded(QDBusObjectPath)),
+    connect(cdInterface, SIGNAL(ProfileAdded(QDBusObjectPath)),
             this, SLOT(profileAdded(QDBusObjectPath)));
-    connect(interface, SIGNAL(ProfileRemoved(QDBusObjectPath)),
+    connect(cdInterface, SIGNAL(ProfileRemoved(QDBusObjectPath)),
             this, SLOT(profileRemoved(QDBusObjectPath)));
-    connect(interface, SIGNAL(ProfileChanged(QDBusObjectPath)),
+    connect(cdInterface, SIGNAL(ProfileChanged(QDBusObjectPath)),
             this, SLOT(profileChanged(QDBusObjectPath)));
 
     // Ask for profiles
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("/org/freedesktop/ColorManager"),
-                                             QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("GetProfiles"));
-    QDBusConnection::systemBus().callWithCallback(message, this, SLOT(gotProfiles(QDBusMessage)));
+    QDBusPendingReply<ObjectPathList> async = cdInterface->GetProfiles();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
+    connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+            this, SLOT(gotProfiles(QDBusPendingCallWatcher*)));
 }
 
-void ProfileModel::gotProfiles(const QDBusMessage &message)
+void ProfileModel::gotProfiles(QDBusPendingCallWatcher *call)
 {
-    if (message.type() == QDBusMessage::ReplyMessage && message.arguments().size() == 1) {
-        QDBusArgument argument = message.arguments().first().value<QDBusArgument>();
-        ObjectPathList paths = qdbus_cast<ObjectPathList>(argument);
-        foreach (const QDBusObjectPath &path, paths) {
-            profileAdded(path, false);
+    QDBusPendingReply<ObjectPathList> reply = *call;
+    if (reply.isError()) {
+        kWarning() << "Unexpected message" << reply.error().message();
+    } else {
+        ObjectPathList profiles = reply.argumentAt<0>();
+        foreach (const QDBusObjectPath &profile, profiles) {
+            profileAdded(profile, false);
         }
         emit changed();
-    } else {
-        kWarning() << "Unexpected message" << message;
     }
+    call->deleteLater();
 }
 
 void ProfileModel::profileChanged(const QDBusObjectPath &objectPath)
@@ -99,17 +91,15 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         return;
     }
 
-    QDBusInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                    objectPath.path(),
-                                    QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                    QDBusConnection::systemBus(),
-                                    this);
-    if (!profileInterface.isValid()) {
+    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+                               objectPath.path(),
+                               QDBusConnection::systemBus());
+    if (!profile.isValid()) {
         return;
     }
 
     // Verify if the profile has a filename
-    QString filename = profileInterface.property("Filename").toString();
+    QString filename = profile.filename();
     if (filename.isEmpty()) {
         return;
     }
@@ -121,11 +111,11 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     }
 
     QString dataSource = getProfileDataSource(objectPath);
-    QString profileId = profileInterface.property("ProfileId").toString();
-    QString title = profileInterface.property("Title").toString();
-    QString kind = profileInterface.property("Kind").toString();
-    QString colorspace = profileInterface.property("Colorspace").toString();
-    qulonglong created = profileInterface.property("Created").toULongLong();
+    QString profileId = profile.profileId();
+    QString title = profile.title();
+    QString kind = profile.kind();
+    QString colorspace = profile.colorspace();
+    qulonglong created = profile.created();
 
     QStandardItem *item = new QStandardItem;
 
@@ -224,21 +214,15 @@ QChar ProfileModel::getSortChar(const QString &kind)
 QString ProfileModel::getProfileDataSource(const QDBusObjectPath &objectPath)
 {
     QString dataSource;
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             objectPath.path(),
-                                             QLatin1String("org.freedesktop.DBus.Properties"),
-                                             QLatin1String("Get"));
-    message << QString("org.freedesktop.ColorManager.Profile"); // Interface
-    message << QString("Metadata"); // Propertie Name
-    QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
-    if (reply.isValid()) {
-        QDBusArgument argument = reply.value().value<QDBusArgument>();
-        StringStringMap metadata = qdbus_cast<StringStringMap>(argument);
-        if (metadata.contains(QLatin1String("DATA_source"))) {
-            dataSource = metadata[QLatin1String("DATA_source")];
-        }
+    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+                               objectPath.path(),
+                               QDBusConnection::systemBus());
+
+    CdStringMap metadata = profile.metadata();
+    if (metadata.contains(QLatin1String("DATA_source"))) {
+        dataSource = metadata[QLatin1String("DATA_source")];
     }
+
     return dataSource;
 }
 
@@ -248,25 +232,6 @@ QVariant ProfileModel::headerData(int section, Qt::Orientation orientation, int 
         return i18n("Profiles");
     }
     return QVariant();
-}
-
-bool ProfileModel::setData(const QModelIndex &index, const QVariant &value, int role)
-{
-    Q_UNUSED(value)
-    Q_UNUSED(role)
-
-    QStandardItem *stdItem = itemFromIndex(index);
-    QDBusMessage message;
-    QDBusObjectPath parentObjPath = stdItem->data(ParentObjectPathRole).value<QDBusObjectPath>();
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             parentObjPath.path(),
-                                             QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                             QLatin1String("MakeProfileDefault"));
-    message << stdItem->data(ObjectPathRole);
-    QDBusConnection::systemBus().send(message);
-
-    // We return false since colord will emit a DeviceChanged signal telling us about this change
-    return false;
 }
 
 Qt::ItemFlags ProfileModel::flags(const QModelIndex &index) const

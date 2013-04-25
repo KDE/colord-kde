@@ -21,11 +21,10 @@
 #define PROFILE_MODEL_H
 
 #include <QStandardItemModel>
-#include <QtDBus/QDBusObjectPath>
-#include <QtDBus/QDBusMessage>
+#include <QDBusObjectPath>
+#include <QDBusPendingCallWatcher>
 
-typedef QMap<QString, QString>  StringStringMap;
-
+class CdInterface;
 class ProfileModel : public QStandardItemModel
 {
     Q_OBJECT
@@ -40,11 +39,10 @@ public:
         ProfileKindRole,
         CanRemoveProfileRole
     } ProfileRoles;
-    explicit ProfileModel(QObject *parent = 0);
+    explicit ProfileModel(CdInterface *cdInterface, QObject *parent = 0);
 
     Qt::ItemFlags flags(const QModelIndex &index) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
     // Returns a char to help the sort model
     static QChar getSortChar(const QString &kind);
@@ -57,7 +55,7 @@ signals:
     void changed();
 
 private slots:
-    void gotProfiles(const QDBusMessage &message);
+    void gotProfiles(QDBusPendingCallWatcher *call);
     void profileChanged(const QDBusObjectPath &objectPath);
     void profileAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);
     void profileRemoved(const QDBusObjectPath &objectPath);

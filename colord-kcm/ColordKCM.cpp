@@ -39,7 +39,6 @@
 #include <KIcon>
 #include <KUser>
 
-#include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusServiceWatcher>
 #include <QItemSelectionModel>
 #include <QTimer>
@@ -125,7 +124,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     sortModel->setSourceModel(m_deviceModel);
 
     // Profiles view setup
-    m_profileModel = new ProfileModel(this);
+    m_profileModel = new ProfileModel(m_cdInterface, this);
     connect(m_profileModel, SIGNAL(changed()), this, SLOT(updateSelection()));
     // Filter Proxy for the menu
     m_profilesFilter = new QSortFilterProxyModel(this);

@@ -27,13 +27,12 @@
 #include "CdInterface.h"
 #include "CdDeviceInterface.h"
 #include "CdProfileInterface.h"
+#include "CdSensorInterface.h"
 
 #include <math.h>
 
 #include <QFileInfo>
 #include <QStringBuilder>
-#include <QtDBus/QDBusInterface>
-#include <QtDBus/QDBusReply>
 
 #include <KGlobal>
 #include <KLocale>
@@ -52,7 +51,6 @@
 #define TAB_METADATA     8
 
 typedef QList<QDBusObjectPath> ObjectPathList;
-typedef QMap<QString, QString>  StringStringMap;
 
 Description::Description(QWidget *parent) :
     QWidget(parent),
@@ -66,14 +64,6 @@ Description::Description(QWidget *parent) :
 
     m_namedColors = new ProfileNamedColors;
     m_metadata = new ProfileMetaData;
-
-    // Ask for profiles
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("/org/freedesktop/ColorManager"),
-                                             QLatin1String("org.freedesktop.ColorManager"),
-                                             QLatin1String("GetSensors"));
-    QDBusConnection::systemBus().callWithCallback(message, this, SLOT(gotSensors(QDBusMessage)));
 }
 
 Description::~Description()
@@ -96,6 +86,11 @@ void Description::setCdInterface(CdInterface *interface)
             this, SLOT(sensorAdded(QDBusObjectPath)));
     connect(interface, SIGNAL(SensorRemoved(QDBusObjectPath)),
             this, SLOT(sensorRemoved(QDBusObjectPath)));
+
+    QDBusPendingReply<ObjectPathList> async = interface->GetSensors();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
+    connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+            this, SLOT(gotSensors(QDBusPendingCallWatcher*)));
 }
 
 void Description::setProfile(const QDBusObjectPath &objectPath)
@@ -105,8 +100,8 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
 
     ui->stackedWidget->setCurrentIndex(0);
     CdProfileInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
-                               objectPath.path(),
-                               QDBusConnection::systemBus());
+                                        objectPath.path(),
+                                        QDBusConnection::systemBus());
     if (!profileInterface.isValid()) {
         return;
     }
@@ -183,22 +178,7 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
             removeTab(m_namedColors);
         }
 
-        // Get profile metadata
-        QDBusMessage message;
-        message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                                 objectPath.path(),
-                                                 QLatin1String("org.freedesktop.DBus.Properties"),
-                                                 QLatin1String("Get"));
-        message << QString("org.freedesktop.ColorManager.Profile"); // Interface
-        message << QString("Metadata"); // Property Name
-        QDBusReply<QVariant> reply = QDBusConnection::systemBus().call(message, QDBus::BlockWithGui);
-
-        StringStringMap metadata;
-        if (reply.isValid()) {
-            QDBusArgument argument = reply.value().value<QDBusArgument>();
-            metadata = qdbus_cast<StringStringMap>(argument);
-        }
-
+        CdStringMap metadata = profileInterface.metadata();
         if (!metadata.isEmpty()) {
             m_metadata->setMetadata(metadata);
             insertTab(TAB_METADATA, m_metadata, i18n("Metadata"));
@@ -300,12 +280,10 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
 
 void Description::on_installSystemWideBt_clicked()
 {
-    QDBusMessage message;
-    message = QDBusMessage::createMethodCall(QLatin1String("org.freedesktop.ColorManager"),
-                                             m_currentProfile.path(),
-                                             QLatin1String("org.freedesktop.ColorManager.Profile"),
-                                             QLatin1String("InstallSystemWide"));
-    QDBusConnection::systemBus().send(message);
+    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+                               m_currentProfile.path(),
+                               QDBusConnection::systemBus());
+    profile.InstallSystemWide();
 }
 
 void Description::on_calibratePB_clicked()
@@ -319,19 +297,20 @@ void Description::on_calibratePB_clicked()
     KToolInvocation::kdeinitExec(QLatin1String("gcm-calibrate"), args);
 }
 
-void Description::gotSensors(const QDBusMessage &message)
+void Description::gotSensors(QDBusPendingCallWatcher *call)
 {
-    if (message.type() == QDBusMessage::ReplyMessage && message.arguments().size() == 1) {
-        QDBusArgument argument = message.arguments().first().value<QDBusArgument>();
-        ObjectPathList paths = qdbus_cast<ObjectPathList>(argument);
-        foreach (const QDBusObjectPath &path, paths) {
+    QDBusPendingReply<ObjectPathList> reply = *call;
+    if (reply.isError()) {
+        kWarning() << "Unexpected message" << reply.error().message();
+    } else {
+        ObjectPathList sensors = reply.argumentAt<0>();
+        foreach (const QDBusObjectPath &sensor, sensors) {
             // Add the sensors but don't update the Calibrate button
-            sensorAdded(path, false);
+            sensorAdded(sensor, false);
         }
+
         // Update the calibrate button later
         ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
-    } else {
-        kWarning() << "Unexpected message" << message;
     }
 }
 
@@ -424,16 +403,14 @@ bool Description::calibrateEnabled(const QString &kind)
         } else {
             // Search for a suitable sensor
             foreach (const QDBusObjectPath &sensorPath, m_sensors) {
-                QDBusInterface sensorInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                               sensorPath.path(),
-                                               QLatin1String("org.freedesktop.ColorManager.Sensor"),
-                                               QDBusConnection::systemBus(),
-                                               this);
-                if (!sensorInterface.isValid()) {
+                CdSensorInterface sensor(QLatin1String("org.freedesktop.ColorManager"),
+                                         sensorPath.path(),
+                                         QDBusConnection::systemBus());
+                if (!sensor.isValid()) {
                     continue;
                 }
 
-                QStringList capabilities = sensorInterface.property("Capabilities").toStringList();
+                QStringList capabilities = sensor.capabilities();
                 if (capabilities.contains(QLatin1String("printer"))) {
                     ret = true;
                     break;

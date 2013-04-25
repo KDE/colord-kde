@@ -27,6 +27,9 @@ set(COLORD_DEVICE_INTERFACE_XML
 set(COLORD_PROFILE_INTERFACE_XML
     ../colord-tmp-interfaces/org.freedesktop.ColorManager.Profile.xml
 )
+set(COLORD_SENSOR_INTERFACE_XML
+    ../colord-tmp-interfaces/org.freedesktop.ColorManager.Sensor.xml
+)
 #if (COLORD_INTERFACE_XML STREQUAL "COLORD_INTERFACE_XML-NOTFOUND" OR
 #    COLORD_DEVICE_INTERFACE_XML STREQUAL "COLORD_DEVICE_INTERFACE_XML-NOTFOUND")
 #        message (FATAL_ERROR "Unable to find colord DBus specifications! Please install colord to continue!")
@@ -46,6 +49,11 @@ set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES INCLUDE "
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES CLASSNAME CdProfileInterface)
 qt4_add_dbus_interface(kcm_colord_SRCS ${COLORD_PROFILE_INTERFACE_XML} CdProfileInterface)
+
+set_source_files_properties(${COLORD_SENSOR_INTERFACE_XML} PROPERTIES INCLUDE "../dbus-types.h")
+set_source_files_properties(${COLORD_SENSOR_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
+set_source_files_properties(${COLORD_SENSOR_INTERFACE_XML} PROPERTIES CLASSNAME CdSensorInterface)
+qt4_add_dbus_interface(kcm_colord_SRCS ${COLORD_SENSOR_INTERFACE_XML} CdSensorInterface)
 
 kde4_add_plugin(kcm_colord ${kcm_colord_SRCS})
 target_link_libraries(kcm_colord

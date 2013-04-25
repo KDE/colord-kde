@@ -131,7 +131,7 @@ void ColorD::addEdidProfileToDevice(const Output::Ptr &output)
         if (metadata.contains(QLatin1String("EDID_md5"))) {
             // check if md5 matches
             if (metadata[QLatin1String("EDID_md5")] == output->edidHash()) {
-                kDebug() << "Foud EDID profile for device" << profilePath.path() << output->path().path();
+                kDebug() << "Found EDID profile for device" << profilePath.path() << output->name();
                 if (output->interface()) {
                     output->interface()->AddProfile(QLatin1String("soft"), profilePath);
                 }
