@@ -24,6 +24,8 @@
 #include <QDBusObjectPath>
 #include <QDBusPendingCallWatcher>
 
+#include "dbus-types.h"
+
 class CdInterface;
 class ProfileModel : public QStandardItemModel
 {
@@ -46,7 +48,7 @@ public:
 
     // Returns a char to help the sort model
     static QChar getSortChar(const QString &kind);
-    static QString getProfileDataSource(const QDBusObjectPath &objectPath);
+    static QString getProfileDataSource(const CdStringMap &metadata);
 
 public slots:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);

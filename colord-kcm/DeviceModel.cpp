@@ -38,6 +38,8 @@ DeviceModel::DeviceModel(CdInterface *cdInterface, QObject *parent) :
     QStandardItemModel(parent),
     m_cdInterface(cdInterface)
 {
+    qDBusRegisterMetaType<CdStringMap>();
+
     // listen to colord for events
     connect(m_cdInterface, SIGNAL(DeviceAdded(QDBusObjectPath)),
             this, SLOT(deviceAdded(QDBusObjectPath)));
@@ -226,7 +228,7 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     }
 
     QStandardItem *stdItem = new QStandardItem;
-    QString dataSource = ProfileModel::getProfileDataSource(objectPath);
+    QString dataSource = ProfileModel::getProfileDataSource(profile.metadata());
     QString kind = profile.kind();
     QString filename = profile.filename();
     QString title = profile.title();

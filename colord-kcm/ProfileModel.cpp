@@ -42,6 +42,7 @@ ProfileModel::ProfileModel(CdInterface *cdInterface, QObject *parent) :
     QStandardItemModel(parent)
 {
     qDBusRegisterMetaType<ObjectPathList>();
+    qDBusRegisterMetaType<CdStringMap>();
 
     // listen to colord for events
     connect(cdInterface, SIGNAL(ProfileAdded(QDBusObjectPath)),
@@ -110,7 +111,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         return;
     }
 
-    QString dataSource = getProfileDataSource(objectPath);
+    QString dataSource = getProfileDataSource(profile.metadata());
     QString profileId = profile.profileId();
     QString title = profile.title();
     QString kind = profile.kind();
@@ -211,14 +212,9 @@ QChar ProfileModel::getSortChar(const QString &kind)
     return QLatin1Char('4');
 }
 
-QString ProfileModel::getProfileDataSource(const QDBusObjectPath &objectPath)
+QString ProfileModel::getProfileDataSource(const CdStringMap &metadata)
 {
     QString dataSource;
-    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
-                               objectPath.path(),
-                               QDBusConnection::systemBus());
-
-    CdStringMap metadata = profile.metadata();
     if (metadata.contains(QLatin1String("DATA_source"))) {
         dataSource = metadata[QLatin1String("DATA_source")];
     }
