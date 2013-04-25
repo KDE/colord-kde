@@ -282,7 +282,7 @@ void ColorD::addOutput(Output &output)
 
 void ColorD::outputChanged(Output &output)
 {
-    kWarning() << "Device changed" << output.path().path();
+    kDebug() << "Device changed" << output.path().path();
 
     QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
                                    output.path().path(),
@@ -406,11 +406,10 @@ void ColorD::outputChanged(Output &output)
         }
     }
 
-    kWarning() << "Setting X atom on output:"  << output.name() << isPrimary;
     if (isPrimary) {
         kDebug() << "Setting X atom on output:"  << output.name();
         // export the file data as an x atom on PRIMARY *screen* (not output)
-        Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", true);
+        Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", false);
         int rc = XChangeProperty(m_dpy,
                                  m_root,
                                  prop,
