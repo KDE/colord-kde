@@ -26,4 +26,13 @@
 typedef QMap<QString, QString> CdStringMap;
 Q_DECLARE_METATYPE(CdStringMap)
 
+struct Gamma {
+    double red;
+    double green;
+    double blue;
+};
+typedef QList<Gamma> CdGamaList;
+Q_DECLARE_METATYPE(CdGamaList)
+
+
 #endif

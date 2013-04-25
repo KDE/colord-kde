@@ -16,8 +16,11 @@ kde4_add_ui_files(kcm_colord_SRCS
     ColordKCM.ui
 )
 
-#find_file(COLORD_INTERFACE_XML org.freedesktop.ColorManager.xml
+#find_file(COLOR_HELPER_INTERFACE_XML org.freedesktop.ColorHelper.xml
 #        PATHS ${CMAKE_INSTALL_PREFIX}/share/dbus-1/interfaces/
+#)
+#set(COLOR_HELPER_INTERFACE_XML
+#    ../colord-tmp-interfaces/org.freedesktop.ColorHelper.xml
 #)
 set(COLORD_INTERFACE_XML
     ../colord-tmp-interfaces/org.freedesktop.ColorManager.xml
@@ -35,6 +38,10 @@ set(COLORD_SENSOR_INTERFACE_XML
 #    COLORD_DEVICE_INTERFACE_XML STREQUAL "COLORD_DEVICE_INTERFACE_XML-NOTFOUND")
 #        message (FATAL_ERROR "Unable to find colord DBus specifications! Please install colord to continue!")
 #endif ()
+
+#set_source_files_properties(${COLOR_HELPER_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
+#set_source_files_properties(${COLOR_HELPER_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
+#qt4_add_dbus_interfaces(kcm_colord_SRCS ${COLOR_HELPER_INTERFACE_XML})
 
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
