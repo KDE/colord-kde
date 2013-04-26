@@ -63,7 +63,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
                                COLORD_KDE_VERSION,
                                ki18n("Color settings"),
                                KAboutData::License_GPL,
-                               ki18n("(C) 2012 Daniel Nicoletti"));
+                               ki18n("(C) 2012-2013 Daniel Nicoletti"));
     setAboutData(aboutData);
     setButtons(NoAdditionalButton);
     KGlobal::insertCatalog(QLatin1String("colord-kde"));

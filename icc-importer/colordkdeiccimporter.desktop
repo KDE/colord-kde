@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=System;
+Exec=colord-kde-icc-importer %F
+Terminal=false
+Type=Application
+Icon=application-vnd.iccprofile
+StartupNotify=true
+NoDisplay=true
+MimeType=application/vnd.iccprofile;
+
+Name=ICC Profile Installer
+Comment=Install ICC profiles
