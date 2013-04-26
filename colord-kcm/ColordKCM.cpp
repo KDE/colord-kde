@@ -245,7 +245,15 @@ void ColordKCM::addProfileFile()
     QFileInfo fileInfo(fileName);
     QString newFilename = profilesPath() % fileInfo.fileName();
     if (!QFile::copy(fileName, newFilename)) {
-        KMessageBox::sorry(this, i18n("Failed to import color profile"), i18n("Importing Color Profile"));
+        if (QFile::exists(newFilename)) {
+            KMessageBox::error(this,
+                               i18n("Failed to import color profile: file already exists"),
+                               i18n("Importing Color Profile"));
+        } else {
+            KMessageBox::sorry(this,
+                               i18n("Failed to import color profile: could not copy the file"),
+                               i18n("Importing Color Profile"));
+        }
     } else if (index.isValid()) {
         // Store the device kind and device object path
         // so that we assign the profile to the device when
