@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "../colord-kcm/Profile.h"
+#include "CdInterface.h"
 
 #include <config.h>
 
@@ -34,6 +35,27 @@
 #include <KCmdLineArgs>
 
 #include <KDebug>
+
+QString message(const QString &title, const QString &description, const QString &copyright)
+{
+    QString ret;
+    ret = QLatin1String("<p><strong>") % title % QLatin1String("</strong></p>");
+    if (!description.isNull()) {
+        ret.append(i18n("Description: %1", description));
+        if (copyright.isNull()) {
+            return ret;
+        }
+    }
+
+    if (!copyright.isNull()) {
+        if (!description.isNull()) {
+            ret.append(QLatin1String("<br>"));
+        }
+        ret.append(i18n("Copyright: %1", copyright));
+    }
+
+    return ret;
+}
 
 int main(int argc, char **argv)
 {
@@ -56,54 +78,71 @@ int main(int argc, char **argv)
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    if (args->count() == 0) {
+    if (args->count() != 1) {
         KCmdLineArgs::usage();
     }
 
     KApplication app;
 
     KUser user;
+    QFileInfo fileInfo(args->url(0).toLocalFile());
     // ~/.local/share/icc/
-    QString profilesPath = user.homeDir() % QLatin1String("/.local/share/icc/");
+    QString destFilename = user.homeDir() % QLatin1String("/.local/share/icc/") % fileInfo.fileName();
 
-    // grab the list of files
-    for (int i = 0; i < args->count(); i++) {
-        QFileInfo fileInfo(args->url(i).toLocalFile());
-        Profile profile(fileInfo.filePath());
-        if (!profile.loaded()) {
+    Profile profile(fileInfo.filePath());
+    if (!profile.loaded()) {
+        KMessageBox::error(0,
+                           i18n("Failed to parse file: %1", profile.errorMessage()),
+                           i18n("Failed to open ICC profile"));
+        return 1;
+    }
+    kDebug() << fileInfo.filePath();
+    kDebug() << destFilename;
+    kDebug() << profile.checksum();
+
+    if (QFile::exists(destFilename)) {
+        KMessageBox::sorry(0,
+                           message(i18n("Color profile is already imported"),
+                                   profile.description(),
+                                   profile.copyright()),
+                           i18n("ICC Profile Importer"));
+        return 3;
+    }
+
+    CdInterface interface(QLatin1String("org.freedesktop.ColorManager"),
+                          QLatin1String("/org/freedesktop/ColorManager"),
+                          QDBusConnection::systemBus());
+    QDBusReply<QDBusObjectPath> reply = interface.FindProfileById(profile.checksum());
+    if (reply.isValid() && !reply.value().path().isNull()) {
+        KMessageBox::sorry(0,
+                           message(i18n("ICC profile already installed system-wide"),
+                                   profile.description(),
+                                   profile.copyright()),
+                           i18n("ICC Profile Importer"));
+        return 3;
+    }
+
+    int ret;
+    ret = KMessageBox::questionYesNo(0,
+                                     message(i18n("Would you like to import the color profile?"),
+                                             profile.description(),
+                                             profile.copyright()),
+                                     i18n("ICC Profile Importer"));
+    if (ret == KMessageBox::No) {
+        return 2;
+    }
+
+    if (!QFile::copy(fileInfo.filePath(), destFilename)) {
+        if (QFile::exists(destFilename)) {
+            KMessageBox::error(0,
+                               i18n("Failed to import color profile: color profile is already imported"),
+                               i18n("Importing Color Profile"));
+            return 3;
+        } else {
             KMessageBox::sorry(0,
-                               i18n("Failed to read color profile"),
-                               i18n("Import Color Profile"));
-            return 1;
-        }
-        kDebug() << fileInfo.filePath();
-
-        QString text;
-        text.append(QLatin1String("<p><strong>"));
-        text.append(i18n("Would you like to import the color profile?"));
-        text.append(QLatin1String("</strong></p>"));
-        text.append(i18n("Description: %1", profile.description()));
-        text.append(QLatin1String("<br>"));
-        text.append(i18n("Copyright: %1", profile.copyright()));
-        int ret;
-        ret = KMessageBox::questionYesNo(0,
-                                         text,
-                                         i18n("Import Color Profile"));
-        if (ret == KMessageBox::No) {
-            return 2;
-        }
-
-        QString newFilename = profilesPath % fileInfo.filePath();
-        if (!QFile::copy(fileInfo.filePath(), newFilename)) {
-            if (QFile::exists(newFilename)) {
-                KMessageBox::error(0,
-                                   i18n("Failed to import color profile: file already exists"),
-                                   i18n("Importing Color Profile"));
-            } else {
-                KMessageBox::sorry(0,
-                                   i18n("Failed to import color profile: could not copy the file"),
-                                   i18n("Importing Color Profile"));
-            }
+                               i18n("Failed to import color profile: could not copy the file"),
+                               i18n("Importing Color Profile"));
+            return 3;
         }
     }
 

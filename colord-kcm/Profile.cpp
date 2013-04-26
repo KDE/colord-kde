@@ -50,6 +50,11 @@ void Profile::setFilename(const QString &filename)
     }
 }
 
+QString Profile::errorMessage() const
+{
+    return m_errorMessage;
+}
+
 QColor Profile::convertXYZ(cmsCIEXYZ *cieXYZ)
 {
     typedef struct {
@@ -99,6 +104,8 @@ void Profile::parseProfile(const uint *data, size_t length)
     /* ensure we have the header */
     if (length < 0x84) {
         kWarning() << "profile was not valid (file size too small)";
+        m_errorMessage = i18n("file too small");
+        m_loaded = false;
         return;
     }
 
@@ -106,6 +113,8 @@ void Profile::parseProfile(const uint *data, size_t length)
     m_lcmsProfile = cmsOpenProfileFromMem(data, length);
     if (m_lcmsProfile == NULL) {
         kWarning() << "failed to load: not an ICC profile";
+        m_errorMessage = i18n("not an ICC profile");
+        m_loaded = false;
         return;
     }
 

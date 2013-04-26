@@ -39,7 +39,7 @@ public:
 
     int innerHeight() const;
     void setCdInterface(CdInterface *interface);
-    void setProfile(const QDBusObjectPath &objectPath);
+    void setProfile(const QDBusObjectPath &objectPath, bool canRemoveProfile);
     void setDevice(const QDBusObjectPath &objectPath);
 
 public slots:

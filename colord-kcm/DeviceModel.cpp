@@ -256,6 +256,10 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
         }
     }
     stdItem->setText(title);
+    if (canRemoveProfile) {
+        canRemoveProfile = !profile.isSystemWide();
+    }
+    kDebug() << canRemoveProfile << profile.isSystemWide() << title;
     stdItem->setData(canRemoveProfile, CanRemoveProfileRole);
 
     stdItem->setData(qVariantFromValue(objectPath), ObjectPathRole);

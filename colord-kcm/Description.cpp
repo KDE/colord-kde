@@ -93,7 +93,7 @@ void Description::setCdInterface(CdInterface *interface)
             this, SLOT(gotSensors(QDBusPendingCallWatcher*)));
 }
 
-void Description::setProfile(const QDBusObjectPath &objectPath)
+void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemoveProfile)
 {
     m_currentProfile = objectPath;
     m_currentDeviceId.clear();
@@ -108,10 +108,9 @@ void Description::setProfile(const QDBusObjectPath &objectPath)
 
     QString filename = profileInterface.filename();
     bool hasVcgt = profileInterface.hasVcgt();
-    bool isSystemWide = profileInterface.isSystemWide();
     qulonglong created = profileInterface.created();
 
-    ui->installSystemWideBt->setEnabled(!isSystemWide);
+    ui->installSystemWideBt->setEnabled(canRemoveProfile);
     Profile profile(filename);
     if (profile.loaded()) {
         // Set the profile type

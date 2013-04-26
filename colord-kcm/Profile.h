@@ -51,6 +51,7 @@ public:
     ~Profile();
 
     void setFilename(const QString &filename);
+    QString errorMessage() const;
 
     bool loaded() const;
     ProfileKind kind() const;
@@ -90,6 +91,7 @@ private:
     uint m_temperature;
     QQuaternion m_white;
     cmsHPROFILE m_lcmsProfile;
+    QString m_errorMessage;
 };
 
 #endif // PROFILE_H

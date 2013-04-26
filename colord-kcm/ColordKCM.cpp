@@ -214,20 +214,18 @@ void ColordKCM::showDescription()
         return;
     }
 
+    bool canRemoveProfile = index.data(ProfileModel::CanRemoveProfileRole).toBool();
     if (index.data(DeviceModel::IsDeviceRole).toBool()) {
         ui->profile->setDevice(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
     } else {
-        ui->profile->setProfile(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
+        ui->profile->setProfile(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>(),
+                                canRemoveProfile);
     }
+    ui->removeProfileBt->setEnabled(canRemoveProfile);
 
     if (ui->stackedWidget->currentWidget() != ui->profile_page) {
         ui->stackedWidget->setCurrentWidget(ui->profile_page);
     }
-
-    // Check if we can remove the Profile
-    bool enable;
-    enable = index.data(ProfileModel::CanRemoveProfileRole).toBool();
-    ui->removeProfileBt->setEnabled(enable);
 }
 
 void ColordKCM::addProfileFile()
