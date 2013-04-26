@@ -29,7 +29,8 @@ Output::Output(RROutput output, XRRScreenResources *resources) :
     m_output(output),
     m_resources(resources),
     m_interface(0),
-    m_connected(false)
+    m_connected(false),
+    m_isLaptop(false)
 {
     XRROutputInfo *info;
     info = XRRGetOutputInfo(QX11Info::display(), m_resources, m_output);
@@ -48,6 +49,21 @@ Output::Output(RROutput output, XRRScreenResources *resources) :
     m_crtc = info->crtc;
 
     XRRFreeOutputInfo(info);
+
+    // The ConnectorType property is present in RANDR 1.3 and greater
+    if (connectorType() == QLatin1String(RR_CONNECTOR_TYPE_PANEL)) {
+        m_isLaptop = true;
+    } else if (m_name.contains(QLatin1String("lvds"), Qt::CaseInsensitive) ||
+               // Most drivers use an "LVDS" prefix...
+               m_name.contains(QLatin1String("LCD"), Qt::CaseInsensitive) ||
+               // ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye.
+               m_name.contains(QLatin1String("eDP"), Qt::CaseInsensitive)
+               /* eDP is for internal laptop panel connections */) {
+        // Older versions of RANDR - this is a best guess,
+        // as @#$% RANDR doesn't have standard output names,
+        // so drivers can use whatever they like.
+        m_isLaptop = true;
+    }
 }
 
 Output::~Output()
@@ -60,62 +76,9 @@ bool Output::connected() const
     return m_connected;
 }
 
-static QString getConnectorTypeString(Display *dpy, RROutput output)
-{
-    unsigned char *prop;
-    int actual_format;
-    unsigned long nitems, bytes_after;
-    Atom actual_type;
-    Atom connector_type;
-    Atom connector_type_atom = XInternAtom(dpy, "ConnectorType", false);
-    char *connector_type_str;
-    QString result;
-
-    XRRGetOutputProperty(dpy, output, connector_type_atom,
-                         0, 100, false, false,
-                         AnyPropertyType,
-                         &actual_type, &actual_format,
-                         &nitems, &bytes_after, &prop);
-    if (!(actual_type == XA_ATOM && actual_format == 32 && nitems == 1)) {
-        XFree(prop);
-        return result;
-    }
-
-    connector_type = *((Atom *) prop);
-
-    connector_type_str = XGetAtomName(dpy, connector_type);
-    if (connector_type_str) {
-        result = connector_type_str;
-        XFree(connector_type_str);
-    }
-
-    XFree (prop);
-
-    return result;
-}
-
 bool Output::isLaptop() const
 {
-    // The ConnectorType property is present in RANDR 1.3 and greater
-    QString connectorType = getConnectorTypeString(QX11Info::display(), m_output);
-    kDebug() << connectorType;
-    if (connectorType == QLatin1String(RR_CONNECTOR_TYPE_PANEL)) {
-        return true;
-    }
-
-    // Older versions of RANDR - this is a best guess, as @#$% RANDR doesn't have standard output names,
-    // so drivers can use whatever they like.
-
-    // Most drivers use an "LVDS" prefix...
-    if (m_name.contains(QLatin1String("lvds"), Qt::CaseInsensitive) ||
-            // ... but fglrx uses "LCD" in some versions.  Shoot me now, kthxbye.
-        m_name.contains(QLatin1String("LCD"), Qt::CaseInsensitive) ||
-            // eDP is for internal laptop panel connections
-        m_name.contains(QLatin1String("eDP"), Qt::CaseInsensitive)) {
-        return true;
-    }
-
-    return false;
+    return m_isLaptop;
 }
 
 bool Output::isPrimary(bool hasXRandR13, Window root) const
@@ -211,6 +174,40 @@ Edid Output::readEdidData()
 QString Output::edidHash() const
 {
     return m_edidHash;
+}
+
+QString Output::connectorType() const
+{
+    unsigned char *prop;
+    int actual_format;
+    unsigned long nitems, bytes_after;
+    Atom actual_type;
+    Atom connector_type;
+    Atom connector_type_atom = XInternAtom(QX11Info::display(), "ConnectorType", false);
+    char *connector_type_str;
+    QString result;
+
+    XRRGetOutputProperty(QX11Info::display(), m_output, connector_type_atom,
+                         0, 100, false, false,
+                         AnyPropertyType,
+                         &actual_type, &actual_format,
+                         &nitems, &bytes_after, &prop);
+    if (!(actual_type == XA_ATOM && actual_format == 32 && nitems == 1)) {
+        XFree(prop);
+        return result;
+    }
+
+    connector_type = *((Atom *) prop);
+
+    connector_type_str = XGetAtomName(QX11Info::display(), connector_type);
+    if (connector_type_str) {
+        result = connector_type_str;
+        XFree(connector_type_str);
+    }
+
+    XFree (prop);
+
+    return result;
 }
 
 /* This is what gnome-desktop does */

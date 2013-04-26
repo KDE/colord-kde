@@ -56,6 +56,7 @@ public:
 
     Edid readEdidData();
     QString edidHash() const;
+    QString connectorType() const;
 
     bool operator==(const Output &output) const;
 
@@ -73,6 +74,7 @@ private:
     QDBusObjectPath m_path;
 
     bool m_connected;
+    bool m_isLaptop;
     QString m_name;
     RRCrtc m_crtc;
 };

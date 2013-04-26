@@ -218,20 +218,27 @@ void ColorD::addOutput(const Output::Ptr &output)
 
     // build up a map with the output properties to send to colord
     CdStringMap properties;
-    properties["Kind"] = QLatin1String("display");
-    properties["Mode"] = QLatin1String("physical");
-    properties["Colorspace"] = QLatin1String("rgb");
-    properties["Vendor"] = edidVendor;
-    properties["Model"] = edidModel;
-    properties["Serial"] = edidSerial;
-    properties["XRANDR_name"] = output->name();
+    properties[CD_DEVICE_PROPERTY_KIND] = QLatin1String("display");
+    properties[CD_DEVICE_PROPERTY_MODE] = QLatin1String("physical");
+    properties[CD_DEVICE_PROPERTY_COLORSPACE] = QLatin1String("rgb");
+    properties[CD_DEVICE_PROPERTY_VENDOR] = edidVendor;
+    properties[CD_DEVICE_PROPERTY_MODEL] = edidModel;
+    properties[CD_DEVICE_PROPERTY_SERIAL] = edidSerial;
+    properties[CD_DEVICE_METADATA_XRANDR_NAME] = output->name();
+    if (output->isPrimary(m_has_1_3, m_root)) {
+        properties[CD_DEVICE_METADATA_OUTPUT_PRIORITY] = CD_DEVICE_METADATA_OUTPUT_PRIORITY_PRIMARY;
+    } else {
+        properties[CD_DEVICE_METADATA_OUTPUT_PRIORITY] = CD_DEVICE_METADATA_OUTPUT_PRIORITY_PRIMARY;
+    }
+    properties[CD_DEVICE_METADATA_OUTPUT_EDID_MD5] = output->edidHash();
+    properties[CD_DEVICE_PROPERTY_EMBEDDED] = output->isLaptop();
 
     // We use temp because if we crash or quit the device gets removed
-    kDebug() << "Adding device id:" << deviceId;
-    kDebug() << "Output Hash:" << output->edidHash();
-    QDBusReply<QDBusObjectPath> reply = m_cdInterface->CreateDevice(deviceId,
-                                                                    QLatin1String("temp"),
-                                                                    properties);
+    kDebug() << "Adding device id" << deviceId;
+    kDebug() << "Output Hash" << output->edidHash();
+    kDebug() << "Output isLaptop" << output->isLaptop();
+    QDBusReply<QDBusObjectPath> reply;
+    reply = m_cdInterface->CreateDevice(deviceId, QLatin1String("temp"), properties);
     if (reply.isValid()) {
         kDebug() << "Created colord device" << reply.value().path();
         // Store the output path into our Output class
