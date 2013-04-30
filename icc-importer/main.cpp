@@ -73,14 +73,11 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
+    options.add("yes", ki18n("Do not prompt the user if he want to install"));
     options.add("+file", ki18n("Color profile to install"));
     KCmdLineArgs::addCmdLineOptions(options);
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-
-    if (args->count() != 1) {
-        KCmdLineArgs::usage();
-    }
 
     KApplication app;
 
@@ -122,14 +119,16 @@ int main(int argc, char **argv)
         return 3;
     }
 
-    int ret;
-    ret = KMessageBox::questionYesNo(0,
-                                     message(i18n("Would you like to import the color profile?"),
-                                             profile.description(),
-                                             profile.copyright()),
-                                     i18n("ICC Profile Importer"));
-    if (ret == KMessageBox::No) {
-        return 2;
+    if (!args->isSet("yes")) {
+        int ret;
+        ret = KMessageBox::questionYesNo(0,
+                                         message(i18n("Would you like to import the color profile?"),
+                                                 profile.description(),
+                                                 profile.copyright()),
+                                         i18n("ICC Profile Importer"));
+        if (ret == KMessageBox::No) {
+            return 2;
+        }
     }
 
     if (!QFile::copy(fileInfo.filePath(), destFilename)) {
