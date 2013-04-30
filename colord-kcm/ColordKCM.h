@@ -40,8 +40,7 @@ class ProfileModel;
 class ProfileDescription;
 class ColordKCM : public KCModule
 {
-Q_OBJECT
-
+    Q_OBJECT
 public:
     ColordKCM(QWidget *parent, const QVariantList &args);
     ~ColordKCM();

@@ -32,6 +32,8 @@
 #include "CdProfileInterface.h"
 #include "CdDeviceInterface.h"
 
+#include <KProcess>
+
 #include <KMessageBox>
 #include <KGenericFactory>
 #include <KAboutData>
@@ -240,27 +242,23 @@ void ColordKCM::addProfileFile()
         return;
     }
 
+    // Store the device kind and device object path
+    // so that we assign the profile to the device when
+    // ProfileAdded is emitted
     QFileInfo fileInfo(fileName);
+    QString kind = index.data(DeviceModel::ProfileKindRole).toString();
     QString newFilename = profilesPath() % fileInfo.fileName();
-    if (!QFile::copy(fileName, newFilename)) {
-        if (QFile::exists(newFilename)) {
-            KMessageBox::error(this,
-                               i18n("Failed to import color profile: file already exists"),
-                               i18n("Importing Color Profile"));
-        } else {
-            KMessageBox::sorry(this,
-                               i18n("Failed to import color profile: could not copy the file"),
-                               i18n("Importing Color Profile"));
-        }
-    } else if (index.isValid()) {
-        // Store the device kind and device object path
-        // so that we assign the profile to the device when
-        // ProfileAdded is emitted
-        QString kind;
-        QDBusObjectPath devicePath;
-        kind = index.data(DeviceModel::ProfileKindRole).toString();
-        devicePath = index.data(DeviceModel::ObjectPathRole).value<QDBusObjectPath>();
-        m_profileFiles[newFilename] = KindAndPath(kind, devicePath);
+    QDBusObjectPath devicePath;
+    devicePath = index.data(DeviceModel::ObjectPathRole).value<QDBusObjectPath>();
+    m_profileFiles[newFilename] = KindAndPath(kind, devicePath);
+
+    KProcess process;
+    process << QLatin1String("colord-kde-icc-importer");
+    process << QLatin1String("--yes");
+    process << fileName;
+    process.execute();
+    if (process.exitStatus() != QProcess::NormalExit || process.exitCode()) {
+        m_profileFiles.remove(newFilename);
     }
 }
 
