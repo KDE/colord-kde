@@ -19,6 +19,8 @@
 
 #include "Profile.h"
 
+#include <QCryptographicHash>
+
 #include <KGlobal>
 #include <KLocale>
 #include <KFile>
@@ -327,6 +329,11 @@ void Profile::parseProfile(const uint *data, size_t length)
 
 //    /* success */
 //    ret = TRUE;
+
+    QCryptographicHash hash(QCryptographicHash::Md5);
+    hash.addData(reinterpret_cast<const char *>(data), length);
+    m_checksum = hash.result().toHex();
+    kDebug() << "checksum" << m_checksum;
 
 //    /* generate and set checksum */
 //    checksum = g_compute_checksum_for_data (G_CHECKSUM_MD5, (const guchar *) data, length);

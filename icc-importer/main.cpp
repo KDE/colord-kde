@@ -110,7 +110,8 @@ int main(int argc, char **argv)
                           QLatin1String("/org/freedesktop/ColorManager"),
                           QDBusConnection::systemBus());
     QDBusReply<QDBusObjectPath> reply = interface.FindProfileById(profile.checksum());
-    if (reply.isValid() && !reply.value().path().isNull()) {
+    kDebug() << reply.error().message();
+    if (reply.isValid() && reply.error().type() != QDBusError::NoError) {
         KMessageBox::sorry(0,
                            message(i18n("ICC profile already installed system-wide"),
                                    profile.description(),
