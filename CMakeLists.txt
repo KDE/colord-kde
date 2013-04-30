@@ -1,6 +1,6 @@
 project(colord-kde)
 
-set(COLORD_KDE_VERSION "0.3.0")
+set(COLORD_KDE_VERSION "0.4.0")
 configure_file(config.h.cmake
                ${CMAKE_CURRENT_BINARY_DIR}/config.h )
 
