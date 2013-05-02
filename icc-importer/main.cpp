@@ -73,7 +73,7 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
-    options.add("yes", ki18n("Do not prompt the user if he want to install"));
+    options.add("yes", ki18n("Do not prompt the user if he wants to install"));
     options.add("+file", ki18n("Color profile to install"));
     KCmdLineArgs::addCmdLineOptions(options);
 
