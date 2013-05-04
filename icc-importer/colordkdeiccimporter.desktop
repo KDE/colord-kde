@@ -9,6 +9,7 @@ NoDisplay=true
 MimeType=application/vnd.iccprofile;
 
 Name=ICC Profile Installer
+Name[cs]=Instalátor profilu ICC
 Name[fi]=ICC-profiilin asennusohjelma
 Name[nl]=Installatieprogramma van ICC-profiel
 Name[pt]=Instalador de Perfis ICC
@@ -17,6 +18,7 @@ Name[sv]=ICC-profilinstallation
 Name[uk]=Програма для встановлення профілів ICC
 Name[x-test]=xxICC Profile Installerxx
 Comment=Install ICC profiles
+Comment[cs]=Nainstalovat profily ICC
 Comment[fi]=Asenna ICC-profiileja
 Comment[nl]=ICC-profielen installeren
 Comment[pt]=Instalar perfis do ICC
