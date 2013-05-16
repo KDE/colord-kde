@@ -11,6 +11,7 @@ X-KDE-Kded-phase=1
 
 Name=Color
 Name[bs]=boja
+Name[ca]=Color
 Name[cs]=Barva
 Name[da]=Farve
 Name[de]=Farbe
@@ -37,6 +38,7 @@ Name[uk]=Колір
 Name[x-test]=xxColorxx
 
 Comment=Manage color correction of devices
+Comment[ca]=Gestiona la correcció del color dels dispositius
 Comment[cs]=Správa korekce barev zařízení
 Comment[da]=Håndtér farvekorrektur for enheder
 Comment[de]=Verwaltung der Farbkorrektur von Geräten
