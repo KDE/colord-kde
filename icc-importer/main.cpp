@@ -61,9 +61,9 @@ int main(int argc, char **argv)
 {
     KAboutData about("colord-kde-icc-importer",
                      "colord-kde",
-                     ki18n("Apper"),
+                     ki18n("ICC Profile Installer"),
                      COLORD_KDE_VERSION,
-                     ki18n("Apper is an Application to Get and Manage Software"),
+                     ki18n("An application to install ICC profiles"),
                      KAboutData::License_GPL,
                      ki18n("(C) 2008-2013 Daniel Nicoletti"));
 
