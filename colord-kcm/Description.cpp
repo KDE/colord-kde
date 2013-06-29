@@ -155,11 +155,11 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
         QString temp;
         uint temperature = profile.temperature();
         if (fabs(temperature - 5000) < 10) {
-            temp = QString::fromUtf8("%1ºK (D50)").arg(QString::number(temperature));
+            temp = QString::fromUtf8("%1K (D50)").arg(QString::number(temperature));
         } else if (fabs(temperature - 6500) < 10) {
-            temp = QString::fromUtf8("%1ºK (D65)").arg(QString::number(temperature));
+            temp = QString::fromUtf8("%1K (D65)").arg(QString::number(temperature));
         } else {
-            temp = QString::fromUtf8("%1ºK").arg(QString::number(temperature));
+            temp = QString::fromUtf8("%1K").arg(QString::number(temperature));
         }
         ui->whitepointL->setText(temp);
 
