@@ -41,7 +41,7 @@ public:
     Output(RROutput output, XRRScreenResources *resources);
     ~Output();
 
-    bool connected() const;
+    bool isActive() const;
     bool isLaptop() const;
     bool isPrimary(bool hasXRandR13, Window root) const;
     QString name() const;
@@ -73,7 +73,7 @@ private:
     CdDeviceInterface *m_interface;
     QDBusObjectPath m_path;
 
-    bool m_connected;
+    bool m_active;
     bool m_isLaptop;
     QString m_name;
     RRCrtc m_crtc;

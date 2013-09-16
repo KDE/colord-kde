@@ -83,7 +83,7 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
     m_profilesWatcher = new ProfilesWatcher;
     m_profilesWatcher->start();
 
-    // Check outputs add all connected outputs, once profiles are ready
+    // Check outputs add all active outputs, once profiles are ready
     connect(m_profilesWatcher, SIGNAL(scanFinished()),
             this, SLOT(checkOutputs()), Qt::QueuedConnection);
 
@@ -172,8 +172,8 @@ void ColorD::addOutput(const Output::Ptr &output)
     QString edidSerial = QLatin1String("unknown");
     QString deviceId = QLatin1String("xrandr-unknown");
 
-    // ensure the RROutput is connected
-    if (!output->connected()) {
+    // ensure the RROutput is active
+    if (!output->isActive()) {
         return;
     }
 
@@ -244,7 +244,7 @@ void ColorD::addOutput(const Output::Ptr &output)
         // Store the output path into our Output class
         output->setPath(reply.value());
 
-        // Store the connected output into the connected list
+        // Store the active output into the connected list
         m_connectedOutputs << output;
 
         // Check if there is any EDID profile to be added
@@ -369,7 +369,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
                 // in a Laptop's case it's probably the one
                 isPrimary = true;
             } else if (!m_connectedOutputs.isEmpty()) {
-                // Last resort just take the first connected
+                // Last resort just take the first active
                 // output
                 isPrimary = m_connectedOutputs.first() == output;
             }
@@ -460,8 +460,8 @@ void ColorD::checkOutputs()
         Output::Ptr currentOutput(new Output(m_resources->outputs[i], m_resources));
         foreach (const Output::Ptr &output, m_connectedOutputs) {
             if (output->output() == m_resources->outputs[i]) {
-                if (!currentOutput->connected()) {
-                    // The device is not connected anymore
+                if (!currentOutput->isActive()) {
+                    // The device is not active anymore
                     kDebug() << "remove device";
                     removeOutput(output);
                     found = true;
@@ -470,8 +470,8 @@ void ColorD::checkOutputs()
             }
         }
 
-        if (!found && currentOutput->connected()) {
-            // Output is now connected
+        if (!found && currentOutput->isActive()) {
+            // Output is now connected and active
             addOutput(currentOutput);
         }
     }
@@ -479,7 +479,7 @@ void ColorD::checkOutputs()
 
 void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 {
-    // check if the EDID_md5 Profile.Metadata matches any connected
+    // check if the EDID_md5 Profile.Metadata matches any active
     // XRandR devices (e.g. lvds1), otherwise ignore
     CdStringMap metadata = getProfileMetadata(profilePath);
     if (metadata.contains(QLatin1String("EDID_md5"))) {

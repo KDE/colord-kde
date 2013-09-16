@@ -29,7 +29,7 @@ Output::Output(RROutput output, XRRScreenResources *resources) :
     m_output(output),
     m_resources(resources),
     m_interface(0),
-    m_connected(false),
+    m_active(false),
     m_isLaptop(false)
 {
     XRROutputInfo *info;
@@ -39,8 +39,8 @@ Output::Output(RROutput output, XRRScreenResources *resources) :
         return;
     }
 
-    // store if RROutput is connected
-    m_connected = info->connection == RR_Connected;
+    // store if RROutput is connected and active
+    m_active = info->connection == RR_Connected && info->crtc != None;
 
     // store output name
     m_name = info->name;
@@ -71,9 +71,9 @@ Output::~Output()
     delete m_interface;
 }
 
-bool Output::connected() const
+bool Output::isActive() const
 {
-    return m_connected;
+    return m_active;
 }
 
 bool Output::isLaptop() const
