@@ -166,7 +166,7 @@ Edid Output::readEdidData()
     Edid edid(data, size);
     m_edidHash = edid.hash();
     m_id = edid.deviceId(name());
-    delete data;
+    delete[] data;
 
     return edid;
 }
@@ -252,7 +252,7 @@ quint8* Output::readEdidData(size_t &len)
             return result;
         } else {
             len = 0;
-            delete result;
+            delete[] result;
         }
     }
 
