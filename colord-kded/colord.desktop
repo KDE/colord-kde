@@ -8,6 +8,7 @@ X-KDE-Kded-phase=1
 
 Name=Color Daemon
 Name[ca]=Dimoni de color
+Name[ca@valencia]=Dimoni de color
 Name[cs]=Démon barev
 Name[da]=Farvedæmon
 Name[de]=Farben-Dienst
@@ -38,6 +39,7 @@ Name[uk]=Фонова служба керування кольорами
 Name[x-test]=xxColor Daemonxx
 Comment=Manage Screen Color Profiles
 Comment[ca]=Gestiona els perfils de color de la pantalla
+Comment[ca@valencia]=Gestiona els perfils de color de la pantalla
 Comment[cs]=Spravovat profily barev obrazovky
 Comment[da]=Håndtér profiler til skærmfarver
 Comment[de]=Verwaltung von Bildschirm-Farbprofilen

@@ -10,6 +10,7 @@ MimeType=application/vnd.iccprofile;
 
 Name=ICC Profile Installer
 Name[ca]=Instal·lador del perfil ICC
+Name[ca@valencia]=Instal·lador del perfil ICC
 Name[cs]=Instalátor profilu ICC
 Name[da]=Installationsprogram til ICC-profiler
 Name[de]=Installationsprogramm für ICC-Profile
@@ -35,6 +36,7 @@ Name[uk]=Програма для встановлення профілів ICC
 Name[x-test]=xxICC Profile Installerxx
 Comment=Install ICC profiles
 Comment[ca]=Instal·la perfils ICC
+Comment[ca@valencia]=Instal·la perfils ICC
 Comment[cs]=Nainstalovat profily ICC
 Comment[da]=Installér ICC-profiler
 Comment[de]=ICC-Profile installieren
