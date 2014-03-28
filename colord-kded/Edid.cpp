@@ -334,9 +334,9 @@ QString Edid::edidParseString(const quint8 *data) const
 {
     QString text;
 
-    /* this is always 12 bytes, but we can't guarantee it's null
+    /* this is always 13 bytes, but we can't guarantee it's null
      * terminated or not junk. */
-    text = QString::fromLocal8Bit((const char*) data, 12);
+    text = QString::fromLocal8Bit((const char*) data, 13);
 
     // Remove newlines, extra spaces and stuff
     text = text.simplified();
