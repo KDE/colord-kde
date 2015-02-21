@@ -10,7 +10,7 @@ X-KDE-ParentApp=kcontrol
 X-KDE-Kded-phase=1
 
 Name=Color
-Name[bs]=boja
+Name[bs]=Boja
 Name[ca]=Color
 Name[ca@valencia]=Color
 Name[cs]=Barva
@@ -44,6 +44,7 @@ Name[uk]=Колір
 Name[x-test]=xxColorxx
 
 Comment=Manage color correction of devices
+Comment[bs]=Upravljanje korekcijom boja uređaja
 Comment[ca]=Gestiona la correcció del color dels dispositius
 Comment[ca@valencia]=Gestiona la correcció del color dels dispositius
 Comment[cs]=Správa korekce barev zařízení
