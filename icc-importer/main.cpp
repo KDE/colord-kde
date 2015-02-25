@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 
     QFileInfo fileInfo(args.first());
     // ~/.local/share/icc/
-    const QString destFilename = QDir::homePath() % QLatin1String("/.local/share/icc/") % fileInfo.fileName(); // kf5 FIXME port to QStandardPaths
+    const QString destFilename = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QStringLiteral("/icc/") % fileInfo.fileName();
 
     Profile profile(fileInfo.filePath());
     if (!profile.loaded()) {

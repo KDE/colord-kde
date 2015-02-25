@@ -245,9 +245,8 @@ void ColordKCM::addProfileFile()
     devicePath = index.data(DeviceModel::ObjectPathRole).value<QDBusObjectPath>();
     m_profileFiles[newFilename] = KindAndPath(kind, devicePath);
 
-    QProcess process;
-    process.start(QStringLiteral("colord-kde-icc-importer"), {QStringLiteral("--yes")});
-    if (process.exitStatus() != QProcess::NormalExit || process.exitCode()) {
+    int ret = QProcess::execute(QStringLiteral("colord-kde-icc-importer"), {QStringLiteral("--yes"), fileName});
+    if (ret != EXIT_SUCCESS) {
         m_profileFiles.remove(newFilename);
     }
 }
@@ -456,7 +455,7 @@ QModelIndex ColordKCM::currentIndex() const
 QString ColordKCM::profilesPath() const
 {
     // ~/.local/share/icc/
-    return QDir::homePath() % QLatin1String("/.local/share/icc/"); // kf5 FIXME use QStandardPaths
+    return QStandardPaths::writableLocation(QStandardPaths::DataLocation) % QStringLiteral("icc/");
 }
 
 #include "ColordKCM.moc"
