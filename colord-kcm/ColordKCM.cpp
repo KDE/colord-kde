@@ -455,7 +455,7 @@ QModelIndex ColordKCM::currentIndex() const
 QString ColordKCM::profilesPath() const
 {
     // ~/.local/share/icc/
-    return QStandardPaths::writableLocation(QStandardPaths::DataLocation) % QStringLiteral("icc/");
+    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QStringLiteral("/icc/");
 }
 
 #include "ColordKCM.moc"
