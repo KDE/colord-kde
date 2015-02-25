@@ -49,7 +49,7 @@ DeviceModel::DeviceModel(CdInterface *cdInterface, QObject *parent) :
             this, SLOT(deviceChanged(QDBusObjectPath)));
 
     // Ask for devices
-    QDBusPendingReply<ObjectPathList> async = m_cdInterface->GetDevices();
+    auto async = m_cdInterface->GetDevices();
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
             this, SLOT(gotDevices(QDBusPendingCallWatcher*)));
@@ -85,7 +85,7 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
         return;
     }
 
-    ObjectPathList profiles = device.profiles();
+    const ObjectPathList profiles = device.profiles();
 
     // Normally just the profile list bound this device
     // is what changes including "Modified" property
@@ -128,12 +128,12 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         return;
     }
 
-    QString deviceId = device.deviceId();
+    const QString deviceId = device.deviceId();
     QString kind = device.kind();
-    QString model = device.model();
-    QString vendor = device.vendor();
-    QString colorspace = device.colorspace();
-    ObjectPathList profiles = device.profiles();
+    const QString model = device.model();
+    const QString vendor = device.vendor();
+    const QString colorspace = device.colorspace();
+    const ObjectPathList profiles = device.profiles();
 
     QStandardItem *item = new QStandardItem;
     item->setData(qVariantFromValue(objectPath), ObjectPathRole);
@@ -228,11 +228,11 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     }
 
     QStandardItem *stdItem = new QStandardItem;
-    QString dataSource = ProfileModel::getProfileDataSource(profile.metadata());
-    QString kind = profile.kind();
-    QString filename = profile.filename();
+    const QString dataSource = ProfileModel::getProfileDataSource(profile.metadata());
+    const QString kind = profile.kind();
+    const QString filename = profile.filename();
     QString title = profile.title();
-    qulonglong created = profile.created();
+    const qlonglong created = profile.created();
 
     // Sets the profile title
     bool canRemoveProfile = true;

@@ -110,12 +110,12 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         return;
     }
 
-    QString dataSource = getProfileDataSource(profile.metadata());
-    QString profileId = profile.profileId();
+    const QString dataSource = getProfileDataSource(profile.metadata());
+    const QString profileId = profile.profileId();
     QString title = profile.title();
-    QString kind = profile.kind();
-    QString colorspace = profile.colorspace();
-    qulonglong created = profile.created();
+    const QString kind = profile.kind();
+    const QString colorspace = profile.colorspace();
+    const qlonglong created = profile.created();
 
     QStandardItem *item = new QStandardItem;
 

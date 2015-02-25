@@ -23,7 +23,6 @@
 #include "CdInterface.h"
 
 #include <KDirWatch>
-#include <KUser>
 
 #include <QMimeDatabase>
 #include <QMimeType>
@@ -42,9 +41,8 @@ ProfilesWatcher::ProfilesWatcher(QObject *parent) :
 
 QString ProfilesWatcher::profilesPath() const
 {
-    KUser user;
     // ~/.local/share/icc/
-    return user.homeDir() % QLatin1String("/.local/share/icc/");
+    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QStringLiteral("/icc/");
 }
 
 void ProfilesWatcher::scanHomeDirectory()
@@ -124,8 +122,8 @@ void ProfilesWatcher::addProfile(const QString &filePath)
     properties["FILE_checksum"] = hash;
 
     CdInterface cdInterface(QLatin1String("org.freedesktop.ColorManager"),
-                          QLatin1String("/org/freedesktop/ColorManager"),
-                          QDBusConnection::systemBus());
+                            QLatin1String("/org/freedesktop/ColorManager"),
+                            QDBusConnection::systemBus());
 
     QDBusReply<QDBusObjectPath> reply;
     if (QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing) {
@@ -154,5 +152,5 @@ void ProfilesWatcher::removeProfile(const QString &filename)
         return;
     }
 
-    cdInterface.DeleteProfile(reply.value());
+    cdInterface.DeleteProfile(reply);
 }

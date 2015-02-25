@@ -105,9 +105,9 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
         return;
     }
 
-    QString filename = profileInterface.filename();
-    bool hasVcgt = profileInterface.hasVcgt();
-    qulonglong created = profileInterface.created();
+    const QString filename = profileInterface.filename();
+    const bool hasVcgt = profileInterface.hasVcgt();
+    const qlonglong created = profileInterface.created();
 
     ui->installSystemWideBt->setEnabled(canRemoveProfile);
     Profile profile(filename);
@@ -206,8 +206,8 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     m_currentDeviceId = device.deviceId();
     QString kind = device.kind();
     m_currentDeviceKind = kind;
-    QString model = device.model();
-    QString vendor = device.vendor();
+    const QString model = device.model();
+    const QString vendor = device.vendor();
     QString scope = device.scope();
     if (model.isEmpty() && vendor.isEmpty()) {
         deviceTitle = m_currentDeviceId;
@@ -380,7 +380,7 @@ bool Description::calibrateEnabled(const QString &kind)
         return false;
     }
 
-    QFileInfo gcmCalibrate(QLatin1String("/usr/bin/gcm-calibrate"));
+    QFileInfo gcmCalibrate(QStandardPaths::findExecutable("gcm-calibrate"));
     if (!gcmCalibrate.isExecutable()) {
         // We don't have a calibration tool yet
         toolTip = i18n("You need Gnome Color Management installed in order to calibrate devices");

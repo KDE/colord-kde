@@ -286,12 +286,12 @@ bool Edid::parse(const quint8 *data, size_t length)
         } else if (data[i+3] == GCM_DESCRIPTOR_COLOR_POINT) {
             if (data[i+3+9] != 0xff) {
                 /* extended EDID block(1) which contains
-                                     * a better gamma value */
+                 * a better gamma value */
                 m_gamma = ((float) data[i+3+9] / 100) + 1;
             }
             if (data[i+3+14] != 0xff) {
                 /* extended EDID block(2) which contains
-                                     * a better gamma value */
+                 * a better gamma value */
                 m_gamma = ((float) data[i+3+9] / 100) + 1;
             }
         }
@@ -308,38 +308,38 @@ bool Edid::parse(const quint8 *data, size_t length)
 
 int Edid::edidGetBit(int in, int bit) const
 {
-        return (in & (1 << bit)) >> bit;
+    return (in & (1 << bit)) >> bit;
 }
 
 int Edid::edidGetBits(int in, int begin, int end) const
 {
-        int mask = (1 << (end - begin + 1)) - 1;
+    int mask = (1 << (end - begin + 1)) - 1;
 
-        return (in >> begin) & mask;
+    return (in >> begin) & mask;
 }
 
 double Edid::edidDecodeFraction(int high, int low) const
 {
-        double result = 0.0;
-        int i;
+    double result = 0.0;
+    int i;
 
-        high = (high << 2) | low;
-        for (i = 0; i < 10; ++i) {
-            result += edidGetBit(high, i) * pow(2, i - 10);
-        }
-        return result;
+    high = (high << 2) | low;
+    for (i = 0; i < 10; ++i) {
+        result += edidGetBit(high, i) * pow(2, i - 10);
+    }
+    return result;
 }
 
 QString Edid::edidParseString(const quint8 *data) const
 {
-        QString text;
+    QString text;
 
-        /* this is always 12 bytes, but we can't guarantee it's null
-         * terminated or not junk. */
-        text = QString::fromLocal8Bit((const char*) data, 12);
+    /* this is always 12 bytes, but we can't guarantee it's null
+     * terminated or not junk. */
+    text = QString::fromLocal8Bit((const char*) data, 12);
 
-        // Remove newlines, extra spaces and stuff
-        text = text.simplified();
+    // Remove newlines, extra spaces and stuff
+    text = text.simplified();
 
-        return text;
+    return text;
 }

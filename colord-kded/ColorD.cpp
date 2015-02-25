@@ -48,8 +48,8 @@ typedef QList<QDBusObjectPath> ObjectPathList;
 
 ColorD::ColorD(QObject *parent, const QVariantList &) :
     KDEDModule(parent),
-    m_x11EventHandler(0),
-    m_profilesWatcher(0)
+    m_x11EventHandler(Q_NULLPTR),
+    m_profilesWatcher(Q_NULLPTR)
 {
     // Register this first or the first time will fail
     qRegisterMetaType<CdStringMap>();
