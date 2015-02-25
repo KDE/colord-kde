@@ -26,11 +26,7 @@
 
 #include "Edid.h"
 
-extern "C"
-{
-    #include <X11/Xatom.h>
-    #include <X11/extensions/Xrandr.h>
-}
+#include "../xlibandxrandr.h"
 
 class Output
 {

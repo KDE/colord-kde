@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2015 Lukáš Tinkl <ltinkl@redhat.com>                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,24 +20,28 @@
 
 #include "XEventHandler.h"
 
-#include <KSystemEventFilter>
-#include <KDebug>
+#include <QCoreApplication>
 
-#include <X11/extensions/Xrandr.h>
+#include <xcb/randr.h>
 
 XEventHandler::XEventHandler(int randrBase) :
     m_randrBase(randrBase)
 {
-    KSystemEventFilter::installEventFilter(this);
+    qApp->installNativeEventFilter(this);
 }
 
-bool XEventHandler::x11Event(XEvent *event)
+bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message, long int*)
 {
-    int eventCode = event->xany.type - m_randrBase;
-    // We care about any kind of screen change
-    if (eventCode == RRScreenChangeNotify) {
+    if (eventType != "xcb_generic_event_t") {
+        // only interested in XCB  events
+        return false;
+    }
+    auto *e = static_cast<xcb_generic_event_t*>(message);
+    auto xEventType = e->response_type & ~0x80;
+
+    if (xEventType == m_randrBase + XCB_RANDR_SCREEN_CHANGE_NOTIFY) {
         emit outputChanged();
     }
 
-    return QWidget::x11Event(event);
+    return false;
 }

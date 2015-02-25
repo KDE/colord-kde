@@ -32,28 +32,25 @@
 #include <QFile>
 #include <QStringBuilder>
 #include <QX11Info>
-#include <QtDBus/QDBusError>
-#include <QtDBus/QDBusConnection>
-#include <QtDBus/QDBusMetaType>
-#include <QtDBus/QDBusServiceWatcher>
-#include <QtDBus/QDBusUnixFileDescriptor>
-#include <QtDBus/QDBusReply>
+#include <QDebug>
+#include <QDBusError>
+#include <QDBusConnection>
+#include <QDBusMetaType>
+#include <QDBusServiceWatcher>
+#include <QDBusUnixFileDescriptor>
+#include <QDBusReply>
 
-#include <KGenericFactory>
+#include <KPluginFactory>
 
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
-K_EXPORT_PLUGIN(ColorDFactory("colord"))
 
 typedef QList<QDBusObjectPath> ObjectPathList;
 
-ColorD::ColorD(QObject *parent, const QVariantList &args) :
+ColorD::ColorD(QObject *parent, const QVariantList &) :
     KDEDModule(parent),
     m_x11EventHandler(0),
     m_profilesWatcher(0)
 {
-    // There's not much use for args in a KDED
-    Q_UNUSED(args)
-
     // Register this first or the first time will fail
     qRegisterMetaType<CdStringMap>();
     qDBusRegisterMetaType<CdStringMap>();
@@ -66,7 +63,7 @@ ColorD::ColorD(QObject *parent, const QVariantList &args) :
 
     // Connect to the display
     if ((m_resources = connectToDisplay()) == 0) {
-        kWarning() << "Failed to connect to DISPLAY and get the needed resources";
+        qWarning() << "Failed to connect to DISPLAY and get the needed resources";
         return;
     }
 
@@ -131,7 +128,7 @@ void ColorD::addEdidProfileToDevice(const Output::Ptr &output)
         if (metadata.contains(QLatin1String("EDID_md5"))) {
             // check if md5 matches
             if (metadata[QLatin1String("EDID_md5")] == output->edidHash()) {
-                kDebug() << "Found EDID profile for device" << profilePath.path() << output->name();
+                qDebug() << "Found EDID profile for device" << profilePath.path() << output->name();
                 if (output->interface()) {
                     output->interface()->AddProfile(QLatin1String("soft"), profilePath);
                 }
@@ -151,7 +148,7 @@ CdStringMap ColorD::getProfileMetadata(const QDBusObjectPath &profilePath)
 void ColorD::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
 {
     Q_UNUSED(serviceName)
-    kDebug() << oldOwner << newOwner;
+    qDebug() << oldOwner << newOwner;
     if (newOwner.isEmpty()) {
         // colord has quit
         reset();
@@ -234,13 +231,13 @@ void ColorD::addOutput(const Output::Ptr &output)
     properties[CD_DEVICE_PROPERTY_EMBEDDED] = output->isLaptop();
 
     // We use temp because if we crash or quit the device gets removed
-    kDebug() << "Adding device id" << deviceId;
-    kDebug() << "Output Hash" << output->edidHash();
-    kDebug() << "Output isLaptop" << output->isLaptop();
+    qDebug() << "Adding device id" << deviceId;
+    qDebug() << "Output Hash" << output->edidHash();
+    qDebug() << "Output isLaptop" << output->isLaptop();
     QDBusReply<QDBusObjectPath> reply;
     reply = m_cdInterface->CreateDevice(deviceId, QLatin1String("temp"), properties);
     if (reply.isValid()) {
-        kDebug() << "Created colord device" << reply.value().path();
+        qDebug() << "Created colord device" << reply.value().path();
         // Store the output path into our Output class
         output->setPath(reply.value());
 
@@ -253,13 +250,13 @@ void ColorD::addOutput(const Output::Ptr &output)
         // Make sure we set the profile on this device
         outputChanged(output);
     } else {
-        kWarning() << "Failed to register device:" << reply.error().message();
+        qWarning() << "Failed to register device:" << reply.error().message();
     }
 }
 
 void ColorD::outputChanged(const Output::Ptr &output)
 {
-    kDebug() << "Device changed" << output->path().path();
+    qDebug() << "Device changed" << output->path().path();
 
     if (!output->interface()) {
         return;
@@ -279,7 +276,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
 
     // read the default profile (the first path in the Device.Profiles property)
     QDBusObjectPath profileDefault = profiles.first();
-    kDebug() << "profileDefault" << profileDefault.path();
+    qDebug() << "profileDefault" << profileDefault.path();
     CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
                                profileDefault.path(),
                                QDBusConnection::systemBus());
@@ -287,14 +284,14 @@ void ColorD::outputChanged(const Output::Ptr &output)
         return;
     }
     QString filename = profile.filename();
-    kDebug() << "Default Profile Filename" << filename;
+    qDebug() << "Default Profile Filename" << filename;
 
     QFile file(filename);
     QByteArray data;
     if (file.open(QIODevice::ReadOnly)) {
         data = file.readAll();
     } else {
-        kWarning() << "Failed to open profile" << filename;
+        qWarning() << "Failed to open profile" << filename;
         return;
     }
 
@@ -305,14 +302,14 @@ void ColorD::outputChanged(const Output::Ptr &output)
     // open file
     lcms_profile = cmsOpenProfileFromMem((const uint*) data.data(), data.size());
     if (lcms_profile == NULL) {
-        kWarning() << "Could not open profile with lcms" << filename;
+        qWarning() << "Could not open profile with lcms" << filename;
         return;
     }
 
     // The gama size of this output
     int gamaSize = output->getGammaSize();
     if (gamaSize == 0) {
-        kWarning() << "Gamma size is zero";
+        qWarning() << "Gamma size is zero";
         cmsCloseProfile(lcms_profile);
         return;
     }
@@ -323,7 +320,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
     // get tone curves from profile
     vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
     if (vcgt == NULL || vcgt[0] == NULL) {
-        kDebug() << "Profile does not have any VCGT data, reseting";
+        qDebug() << "Profile does not have any VCGT data, reseting";
         // Reset the gamma table
         for (int i = 0; i < gamaSize; ++i) {
             uint value = (i * 0xffff) / (gamaSize - 1);
@@ -377,7 +374,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
     }
 
     if (isPrimary) {
-        kDebug() << "Setting X atom on output:"  << output->name();
+        qDebug() << "Setting X atom on output:"  << output->name();
         // export the file data as an x atom on PRIMARY *screen* (not output)
         Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", false);
         int rc = XChangeProperty(m_dpy,
@@ -391,7 +388,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
 
         // for some reason this fails with BadRequest, but actually sets the value
         if (rc != BadRequest && rc != Success) {
-            kWarning() << "Failed to set XProperty";
+            qWarning() << "Failed to set XProperty";
         }
     }
 }
@@ -415,7 +412,7 @@ XRRScreenResources *ColorD::connectToDisplay()
     if (!XRRQueryExtension(m_dpy, &eventBase, &m_errorBase) ||
             !XRRQueryVersion(m_dpy, &major_version, &minor_version))
     {
-        kWarning() << "RandR extension missing";
+        qWarning() << "RandR extension missing";
         return 0;
     }
 
@@ -430,11 +427,11 @@ XRRScreenResources *ColorD::connectToDisplay()
     m_has_1_3 = (major_version > 1 || (major_version == 1 && minor_version >= 3));
 
     if (m_has_1_3) {
-        kDebug() << "Using XRANDR extension 1.3 or greater.";
+        qDebug() << "Using XRANDR extension 1.3 or greater.";
     } else if (has_1_2) {
-        kDebug() << "Using XRANDR extension 1.2.";
+        qDebug() << "Using XRANDR extension 1.2.";
     } else {
-        kDebug() << "Using legacy XRANDR extension (1.1 or earlier).";
+        qDebug() << "Using legacy XRANDR extension (1.1 or earlier).";
     }
 
     m_root = RootWindow(m_dpy, 0);
@@ -453,7 +450,7 @@ XRRScreenResources *ColorD::connectToDisplay()
 
 void ColorD::checkOutputs()
 {
-    kDebug();
+    qDebug();
     // Check the output as something has changed
     for (int i = 0; i < m_resources->noutput; ++i) {
         bool found = false;
@@ -462,7 +459,7 @@ void ColorD::checkOutputs()
             if (output->output() == m_resources->outputs[i]) {
                 if (!currentOutput->isActive()) {
                     // The device is not active anymore
-                    kDebug() << "remove device";
+                    qDebug() << "remove device";
                     removeOutput(output);
                     found = true;
                     break;
@@ -502,7 +499,7 @@ void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 
 void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 {
-    kDebug() << "Device added" << objectPath.path();
+    qDebug() << "Device added" << objectPath.path();
 //    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
 //                                   objectPath.path(),
 //                                   QLatin1String("org.freedesktop.ColorManager.Device"),
@@ -524,7 +521,7 @@ void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 
 void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 {
-    kDebug() << "Device changed" << objectPath.path();
+    qDebug() << "Device changed" << objectPath.path();
     Output::Ptr output;
     // Get the Crtc of this output
     for (int i = 0; i < m_connectedOutputs.size(); ++i) {
@@ -535,7 +532,7 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     }
 
     if (output.isNull()) {
-        kWarning() << "Output not found";
+        qWarning() << "Output not found";
         return;
     }
 
@@ -559,3 +556,5 @@ void ColorD::connectToColorD()
     connect(m_cdInterface, SIGNAL(DeviceChanged(QDBusObjectPath)),
             this, SLOT(deviceChanged(QDBusObjectPath)));
 }
+
+#include "ColorD.moc"

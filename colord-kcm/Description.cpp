@@ -29,17 +29,16 @@
 #include "CdProfileInterface.h"
 #include "CdSensorInterface.h"
 
-#include <math.h>
-
 #include <QFileInfo>
 #include <QStringBuilder>
+#include <QDebug>
+#include <QDateTime>
+#include <QDebug>
 
-#include <KGlobal>
-#include <KLocale>
-#include <KDateTime>
+#include <KLocalizedString>
 #include <KToolInvocation>
-#include <KDebug>
 #include <KMessageWidget>
+#include <KFormat>
 
 #define TAB_INFORMATION  1
 #define TAB_CIE_1931     2
@@ -87,7 +86,7 @@ void Description::setCdInterface(CdInterface *interface)
     connect(interface, SIGNAL(SensorRemoved(QDBusObjectPath)),
             this, SLOT(sensorRemoved(QDBusObjectPath)));
 
-    QDBusPendingReply<ObjectPathList> async = interface->GetSensors();
+    auto async = interface->GetSensors();
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
             this, SLOT(gotSensors(QDBusPendingCallWatcher*)));
@@ -123,9 +122,9 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
         ui->versionL->setText(profile.version());
 
         // Set the created time
-        KDateTime createdDT;
+        QDateTime createdDT;
         createdDT.setTime_t(created);
-        ui->createdL->setText(KGlobal::locale()->formatDateTime(createdDT, KLocale::LongDate));
+        ui->createdL->setText(QLocale().toString(createdDT, QLocale::LongFormat));
 
         // Set the license
         ui->licenseL->setText(profile.copyright());
@@ -146,31 +145,31 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
         ui->dpCorrectionL->setText(hasVcgt ? i18n("Yes") : i18n("None"));
 
         // Set the file size
-        ui->filesizeL->setText(KGlobal::locale()->formatByteSize(profile.size()));
+        ui->filesizeL->setText(KFormat().formatByteSize(profile.size()));
 
         // Set the file name
         QFileInfo fileinfo(profile.filename());
         ui->filenameL->setText(fileinfo.fileName());
 
         QString temp;
-        uint temperature = profile.temperature();
-        if (fabs(temperature - 5000) < 10) {
+        const uint temperature = profile.temperature();
+        if (qAbs(temperature - 5000) < 10) {
             temp = QString::fromUtf8("%1K (D50)").arg(QString::number(temperature));
-        } else if (fabs(temperature - 6500) < 10) {
+        } else if (qAbs(temperature - 6500) < 10) {
             temp = QString::fromUtf8("%1K (D65)").arg(QString::number(temperature));
         } else {
             temp = QString::fromUtf8("%1K").arg(QString::number(temperature));
         }
         ui->whitepointL->setText(temp);
 
-        kDebug() << profile.description();
-        kDebug() << profile.model();
-        kDebug() << profile.manufacturer();
-        kDebug() << profile.copyright();
+        qDebug() << profile.description();
+        qDebug() << profile.model();
+        qDebug() << profile.manufacturer();
+        qDebug() << profile.copyright();
 
         // Get named colors
         QMap<QString, QColor> namedColors = profile.getNamedColors();
-        if (namedColors.size()) {
+        if (!namedColors.isEmpty()) {
             m_namedColors->setNamedColors(namedColors);
             insertTab(TAB_NAMED_COLORS, m_namedColors, i18n("Named Colors"));
         } else {
@@ -185,7 +184,7 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
             removeTab(m_metadata);
         }
     }
-    kDebug() << profile.filename();
+    qDebug() << profile.filename();
 }
 
 void Description::setDevice(const QDBusObjectPath &objectPath)
@@ -300,7 +299,7 @@ void Description::gotSensors(QDBusPendingCallWatcher *call)
 {
     QDBusPendingReply<ObjectPathList> reply = *call;
     if (reply.isError()) {
-        kWarning() << "Unexpected message" << reply.error().message();
+        qWarning() << "Unexpected message" << reply.error().message();
     } else {
         ObjectPathList sensors = reply.argumentAt<0>();
         foreach (const QDBusObjectPath &sensor, sensors) {
@@ -435,5 +434,3 @@ bool Description::calibrateEnabled(const QString &kind)
 
     return canCalibrate;
 }
-
-#include "Description.moc"

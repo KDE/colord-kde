@@ -20,9 +20,10 @@
 #ifndef XEVENTHANDLER_H
 #define XEVENTHANDLER_H
 
-#include <QWidget>
+#include <QAbstractNativeEventFilter>
+#include <QObject>
 
-class XEventHandler : public QWidget
+class Q_DECL_EXPORT XEventHandler : public QObject, public QAbstractNativeEventFilter
 {
     Q_OBJECT
 public:
@@ -32,7 +33,7 @@ signals:
     void outputChanged();
 
 protected:
-    virtual bool x11Event(XEvent *event);
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long int*) Q_DECL_OVERRIDE;
 
 private:
     int m_randrBase;

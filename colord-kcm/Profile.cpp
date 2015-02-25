@@ -20,11 +20,11 @@
 #include "Profile.h"
 
 #include <QCryptographicHash>
+#include <QDebug>
+#include <QFile>
+#include <QLocale>
 
-#include <KGlobal>
-#include <KLocale>
-#include <KFile>
-#include <KDebug>
+#include <KLocalizedString>
 
 Profile::Profile(const QString &filename) :
     m_lcmsProfile(NULL)
@@ -105,7 +105,7 @@ void Profile::parseProfile(const uint *data, size_t length)
 
     /* ensure we have the header */
     if (length < 0x84) {
-        kWarning() << "profile was not valid (file size too small)";
+        qWarning() << "profile was not valid (file size too small)";
         m_errorMessage = i18n("file too small");
         m_loaded = false;
         return;
@@ -114,7 +114,7 @@ void Profile::parseProfile(const uint *data, size_t length)
     /* load profile into lcms */
     m_lcmsProfile = cmsOpenProfileFromMem(data, length);
     if (m_lcmsProfile == NULL) {
-        kWarning() << "failed to load: not an ICC profile";
+        qWarning() << "failed to load: not an ICC profile";
         m_errorMessage = i18n("not an ICC profile");
         m_loaded = false;
         return;
@@ -133,24 +133,24 @@ void Profile::parseProfile(const uint *data, size_t length)
 
         /* convert to lcms xyY values */
         cmsXYZ2xyY(&xyY, cie_xyz);
-        kDebug() << "whitepoint:" << xyY.x << xyY.y << xyY.Y;
+        qDebug() << "whitepoint:" << xyY.x << xyY.y << xyY.Y;
 
         /* get temperature */
         ret = cmsTempFromWhitePoint(&temp_float, &xyY);
         if (ret) {
             /* round to nearest 100K */
             m_temperature = (((uint) temp_float) / 100) * 100;
-            kDebug() << "color temperature:" << m_temperature;
+            qDebug() << "color temperature:" << m_temperature;
         } else {
             m_temperature = 0;
-            kWarning() << "failed to get color temperature";
+            qWarning() << "failed to get color temperature";
         }
     } else {
         /* this is no big surprise, some profiles don't have these */
         m_white.setX(0);
         m_white.setY(0);
         m_white.setZ(0);
-        kDebug() << "failed to get white point";
+        qDebug() << "failed to get white point";
     }
 
     /* get the profile kind */
@@ -295,34 +295,34 @@ void Profile::parseProfile(const uint *data, size_t length)
     m_version = QString::number(profile_version, 'f', 2);
 
     /* allocate temporary buffer */
-    char *text = new char[1024];
+    wchar_t *text = new wchar_t[1024];
 
     /* get description */
-    ret = cmsGetProfileInfoASCII(m_lcmsProfile, cmsInfoDescription, "en", "US", text, 1024);
+    ret = cmsGetProfileInfo(m_lcmsProfile, cmsInfoDescription, "en", "US", text, 1024);
     if (ret) {
-        m_description = QString::fromAscii(text).simplified();
+        m_description = QString::fromWCharArray(text).simplified();
         if (m_description.isEmpty()) {
             m_description = i18n("Missing description");
         }
     }
 
     /* get copyright */
-    ret = cmsGetProfileInfoASCII(m_lcmsProfile, cmsInfoCopyright, "en", "US", text, 1024);
+    ret = cmsGetProfileInfo(m_lcmsProfile, cmsInfoCopyright, "en", "US", text, 1024);
     if (ret) {
-        m_copyright = QString::fromAscii(text).simplified();
+        m_copyright = QString::fromWCharArray(text).simplified();
     }
 
     /* get description */
-    ret = cmsGetProfileInfoASCII(m_lcmsProfile, cmsInfoManufacturer, "en", "US", text, 1024);
+    ret = cmsGetProfileInfo(m_lcmsProfile, cmsInfoManufacturer, "en", "US", text, 1024);
     if (ret) {
-        m_manufacturer = QString::fromAscii(text).simplified();
+        m_manufacturer = QString::fromWCharArray(text).simplified();
 
     }
 
     /* get description */
-    ret = cmsGetProfileInfoASCII(m_lcmsProfile, cmsInfoModel, "en", "US", text, 1024);
+    ret = cmsGetProfileInfo(m_lcmsProfile, cmsInfoModel, "en", "US", text, 1024);
     if (ret) {
-        m_model = QString::fromAscii(text).simplified();
+        m_model = QString::fromWCharArray(text).simplified();
     }
 
     delete [] text;
@@ -333,7 +333,7 @@ void Profile::parseProfile(const uint *data, size_t length)
     QCryptographicHash hash(QCryptographicHash::Md5);
     hash.addData(reinterpret_cast<const char *>(data), length);
     m_checksum = hash.result().toHex();
-    kDebug() << "checksum" << m_checksum;
+    qDebug() << "checksum" << m_checksum;
 
 //    /* generate and set checksum */
 //    checksum = g_compute_checksum_for_data (G_CHECKSUM_MD5, (const guchar *) data, length);
@@ -458,21 +458,21 @@ QMap<QString, QColor> Profile::getNamedColors()
                                profile_xyz, TYPE_XYZ_DBL,
                                INTENT_ABSOLUTE_COLORIMETRIC, 0);
     if (xform == NULL) {
-        kWarning() << "no transform";
+        qWarning() << "no transform";
         goto out;
     }
 
     /* retrieve named color list from transform */
     nc2 = static_cast<cmsNAMEDCOLORLIST*>(cmsReadTag(m_lcmsProfile, cmsSigNamedColor2Tag));
     if (nc2 == NULL) {
-        kWarning() << "no named color list";
+        qWarning() << "no named color list";
         goto out;
     }
 
     /* get the number of NCs */
     count = cmsNamedColorCount(nc2);
     if (count == 0) {
-        kWarning() << "no named colors";
+        qWarning() << "no named colors";
         goto out;
     }
 
@@ -487,7 +487,7 @@ QMap<QString, QColor> Profile::getNamedColors()
                                 (cmsUInt16Number *)&pcs,
                                 NULL);
         if (!ret) {
-            kWarning() << "failed to get NC #" << i;
+            qWarning() << "failed to get NC #" << i;
             goto out;
         }
 
@@ -524,7 +524,7 @@ out:
     return array;
 }
 
-QString Profile::profileWithSource(const QString &dataSource, const QString &profilename, const KDateTime &created)
+QString Profile::profileWithSource(const QString &dataSource, const QString &profilename, const QDateTime &created)
 {
     if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_EDID)) {
         return i18n("Default: %1", profilename);
@@ -533,9 +533,7 @@ QString Profile::profileWithSource(const QString &dataSource, const QString &pro
     } else if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_TEST)) {
         return i18n("Test profile: %1", profilename);
     } else if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_CALIB)) {
-        return i18n("%1 (%2)",
-                    profilename,
-                    KGlobal::locale()->formatDateTime(created, KLocale::LongDate));
+        return i18n("%1 (%2)", profilename, QLocale().toString(created, QLocale::LongFormat));
     }
     return profilename;
 }

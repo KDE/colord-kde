@@ -23,8 +23,6 @@
 #include <QColor>
 #include <QHeaderView>
 
-#include <KDebug>
-
 ProfileNamedColors::ProfileNamedColors(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProfileNamedColors)
@@ -34,7 +32,7 @@ ProfileNamedColors::ProfileNamedColors(QWidget *parent) :
     m_model = new QStandardItemModel(this);
     m_model->setColumnCount(2);
     ui->treeView->setModel(m_model);
-    ui->treeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+    ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
 }
 
 ProfileNamedColors::~ProfileNamedColors()

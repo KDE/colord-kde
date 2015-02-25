@@ -38,6 +38,7 @@ class CdInterface;
 class DeviceModel;
 class ProfileModel;
 class ProfileDescription;
+
 class ColordKCM : public KCModule
 {
     Q_OBJECT
@@ -46,7 +47,7 @@ public:
     ~ColordKCM();
 
 public slots:
-    void load();
+    void load() Q_DECL_OVERRIDE;
 
 private slots:
     void showDescription();

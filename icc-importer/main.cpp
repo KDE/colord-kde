@@ -21,34 +21,34 @@
 #include "../colord-kcm/Profile.h"
 #include "CdInterface.h"
 
+#include <stdlib.h>
+
 #include <config.h>
 
 #include <QFileInfo>
 #include <QStringBuilder>
+#include <QDebug>
+#include <QApplication>
+#include <QCommandLineParser>
 
-#include <KUrl>
-#include <KUser>
 #include <KMessageBox>
-#include <KApplication>
 #include <KConfig>
 #include <KAboutData>
-#include <KCmdLineArgs>
-
-#include <KDebug>
+#include <KLocalizedString>
 
 QString message(const QString &title, const QString &description, const QString &copyright)
 {
     QString ret;
-    ret = QLatin1String("<p><strong>") % title % QLatin1String("</strong></p>");
-    if (!description.isNull()) {
+    ret = QStringLiteral("<p><strong>") % title % QStringLiteral("</strong></p>");
+    if (!description.isEmpty()) {
         ret.append(i18n("Description: %1", description));
-        if (copyright.isNull()) {
+        if (copyright.isEmpty()) {
             return ret;
         }
     }
 
-    if (!copyright.isNull()) {
-        if (!description.isNull()) {
+    if (!copyright.isEmpty()) {
+        if (!description.isEmpty()) {
             ret.append(QLatin1String("<br>"));
         }
         ret.append(i18n("Copyright: %1", copyright));
@@ -59,32 +59,37 @@ QString message(const QString &title, const QString &description, const QString 
 
 int main(int argc, char **argv)
 {
+    QApplication app(argc, argv);
     KAboutData about("colord-kde-icc-importer",
-                     "colord-kde",
-                     ki18n("ICC Profile Installer"),
+                     i18n("ICC Profile Installer"),
                      COLORD_KDE_VERSION,
-                     ki18n("An application to install ICC profiles"),
-                     KAboutData::License_GPL,
-                     ki18n("(C) 2008-2013 Daniel Nicoletti"));
+                     i18n("An application to install ICC profiles"),
+                     KAboutLicense::GPL,
+                     i18n("(C) 2008-2013 Daniel Nicoletti"));
 
-    about.addAuthor(ki18n("Daniel Nicoletti"), KLocalizedString(), "dantti12@gmail.com", "http://dantti.wordpress.com");
+    about.addAuthor(QStringLiteral("Daniel Nicoletti"), QString(), "dantti12@gmail.com", "http://dantti.wordpress.com");
+    about.addCredit(QStringLiteral("Lukáš Tinkl"), i18n("Port to kf5"), QStringLiteral("ltinkl@redhat.com"));
     about.setProgramIconName("application-vnd.iccprofile");
 
-    KCmdLineArgs::init(argc, argv, &about);
+    KAboutData::setApplicationData(about);
 
-    KCmdLineOptions options;
-    options.add("yes", ki18n("Do not prompt the user if he wants to install"));
-    options.add("+file", ki18n("Color profile to install"));
-    KCmdLineArgs::addCmdLineOptions(options);
+    QCommandLineParser parser;
+    about.setupCommandLine(&parser);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    parser.addOption(QCommandLineOption(QStringLiteral("yes"), i18n("Do not prompt the user if he wants to install")));
+    parser.addPositionalArgument("file", i18n("Color profile to install"), "+file");
+    parser.process(app);
+    about.processCommandLine(&parser);
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    const QStringList args = parser.positionalArguments();
+    if (args.isEmpty()) {
+        parser.showHelp(EXIT_FAILURE);
+    }
 
-    KApplication app;
-
-    KUser user;
-    QFileInfo fileInfo(args->url(0).toLocalFile());
+    QFileInfo fileInfo(args.first());
     // ~/.local/share/icc/
-    QString destFilename = user.homeDir() % QLatin1String("/.local/share/icc/") % fileInfo.fileName();
+    const QString destFilename = QDir::homePath() % QLatin1String("/.local/share/icc/") % fileInfo.fileName(); // kf5 FIXME port to QStandardPaths
 
     Profile profile(fileInfo.filePath());
     if (!profile.loaded()) {
@@ -93,9 +98,9 @@ int main(int argc, char **argv)
                            i18n("Failed to open ICC profile"));
         return 1;
     }
-    kDebug() << fileInfo.filePath();
-    kDebug() << destFilename;
-    kDebug() << profile.checksum();
+    qDebug() << fileInfo.filePath();
+    qDebug() << destFilename;
+    qDebug() << profile.checksum();
 
     if (QFile::exists(destFilename)) {
         KMessageBox::sorry(0,
@@ -106,27 +111,24 @@ int main(int argc, char **argv)
         return 3;
     }
 
-    CdInterface interface(QLatin1String("org.freedesktop.ColorManager"),
-                          QLatin1String("/org/freedesktop/ColorManager"),
+    CdInterface interface(QStringLiteral("org.freedesktop.ColorManager"),
+                          QStringLiteral("/org/freedesktop/ColorManager"),
                           QDBusConnection::systemBus());
     QDBusReply<QDBusObjectPath> reply = interface.FindProfileById(profile.checksum());
-    kDebug() << reply.error().message();
+    qDebug() << reply.error().message();
     if (reply.isValid() && reply.error().type() != QDBusError::NoError) {
-        KMessageBox::sorry(0,
-                           message(i18n("ICC profile already installed system-wide"),
-                                   profile.description(),
-                                   profile.copyright()),
+        KMessageBox::sorry(0, message(i18n("ICC profile already installed system-wide"),
+                                      profile.description(),
+                                      profile.copyright()),
                            i18n("ICC Profile Importer"));
         return 3;
     }
 
-    if (!args->isSet("yes")) {
-        int ret;
-        ret = KMessageBox::questionYesNo(0,
-                                         message(i18n("Would you like to import the color profile?"),
-                                                 profile.description(),
-                                                 profile.copyright()),
-                                         i18n("ICC Profile Importer"));
+    if (!parser.isSet("yes")) {
+        const int ret = KMessageBox::questionYesNo(0, message(i18n("Would you like to import the color profile?"),
+                                                              profile.description(),
+                                                              profile.copyright()),
+                                                   i18n("ICC Profile Importer"));
         if (ret == KMessageBox::No) {
             return 2;
         }
@@ -146,5 +148,5 @@ int main(int argc, char **argv)
         }
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }

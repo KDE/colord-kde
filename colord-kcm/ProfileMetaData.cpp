@@ -20,22 +20,22 @@
 #include "ProfileMetaData.h"
 #include "ui_ProfileMetaData.h"
 
-#include <KDebug>
+#include <QDebug>
 
 /* defined in metadata-spec.txt */
-#define CD_PROFILE_METADATA_STANDARD_SPACE	"STANDARD_space"
-#define CD_PROFILE_METADATA_EDID_MD5		"EDID_md5"
-#define CD_PROFILE_METADATA_EDID_MODEL		"EDID_model"
-#define CD_PROFILE_METADATA_EDID_SERIAL		"EDID_serial"
-#define CD_PROFILE_METADATA_EDID_MNFT		"EDID_mnft"
-#define CD_PROFILE_METADATA_EDID_VENDOR		"EDID_manufacturer"
-#define CD_PROFILE_METADATA_FILE_CHECKSUM	"FILE_checksum"
-#define CD_PROFILE_METADATA_CMF_PRODUCT		"CMF_product"
-#define CD_PROFILE_METADATA_CMF_BINARY		"CMF_binary"
-#define CD_PROFILE_METADATA_CMF_VERSION		"CMF_version"
-#define CD_PROFILE_METADATA_DATA_SOURCE		"DATA_source"
-#define CD_PROFILE_METADATA_MAPPING_FORMAT	"MAPPING_format"
-#define CD_PROFILE_METADATA_MAPPING_QUALIFIER	"MAPPING_qualifier"
+#define CD_PROFILE_METADATA_STANDARD_SPACE	QStringLiteral("STANDARD_space")
+#define CD_PROFILE_METADATA_EDID_MD5		QStringLiteral("EDID_md5")
+#define CD_PROFILE_METADATA_EDID_MODEL		QStringLiteral("EDID_model")
+#define CD_PROFILE_METADATA_EDID_SERIAL		QStringLiteral("EDID_serial")
+#define CD_PROFILE_METADATA_EDID_MNFT		QStringLiteral("EDID_mnft")
+#define CD_PROFILE_METADATA_EDID_VENDOR		QStringLiteral("EDID_manufacturer")
+#define CD_PROFILE_METADATA_FILE_CHECKSUM	QStringLiteral("FILE_checksum")
+#define CD_PROFILE_METADATA_CMF_PRODUCT		QStringLiteral("CMF_product")
+#define CD_PROFILE_METADATA_CMF_BINARY		QStringLiteral("CMF_binary")
+#define CD_PROFILE_METADATA_CMF_VERSION		QStringLiteral("CMF_version")
+#define CD_PROFILE_METADATA_DATA_SOURCE		QStringLiteral("DATA_source")
+#define CD_PROFILE_METADATA_MAPPING_FORMAT	QStringLiteral("MAPPING_format")
+#define CD_PROFILE_METADATA_MAPPING_QUALIFIER	QStringLiteral("MAPPING_qualifier")
 
 ProfileMetaData::ProfileMetaData(QWidget *parent) :
     QWidget(parent),
@@ -46,7 +46,7 @@ ProfileMetaData::ProfileMetaData(QWidget *parent) :
     m_model = new QStandardItemModel(this);
     m_model->setColumnCount(2);
     ui->treeView->setModel(m_model);
-    ui->treeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+    ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
 }
 
 ProfileMetaData::~ProfileMetaData()
@@ -60,7 +60,7 @@ void ProfileMetaData::setMetadata(const CdStringMap &metadata)
 
     CdStringMap::const_iterator i = metadata.constBegin();
     while (i != metadata.constEnd()) {
-        kDebug() << i.key() << ": " << i.value();
+        qDebug() << i.key() << ": " << i.value();
         QList<QStandardItem *> row;
         QStandardItem *name = new QStandardItem(metadataLabel(i.key()));
         row << name;
@@ -74,43 +74,43 @@ void ProfileMetaData::setMetadata(const CdStringMap &metadata)
 
 QString ProfileMetaData::metadataLabel(const QString &key)
 {
-    if (key == QLatin1String(CD_PROFILE_METADATA_STANDARD_SPACE)) {
+    if (key == CD_PROFILE_METADATA_STANDARD_SPACE) {
         return i18n("Standard space");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_EDID_MD5)) {
+    if (key == CD_PROFILE_METADATA_EDID_MD5) {
         return i18n("Display checksum");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_EDID_MODEL)) {
+    if (key == CD_PROFILE_METADATA_EDID_MODEL) {
         return i18n("Display model");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_EDID_SERIAL)) {
+    if (key == CD_PROFILE_METADATA_EDID_SERIAL) {
         return i18n("Display serial number");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_EDID_MNFT)) {
+    if (key == CD_PROFILE_METADATA_EDID_MNFT) {
         return i18n("Display PNPID");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_EDID_VENDOR)) {
+    if (key == CD_PROFILE_METADATA_EDID_VENDOR) {
         return i18n("Display vendor");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_FILE_CHECKSUM)) {
+    if (key == CD_PROFILE_METADATA_FILE_CHECKSUM) {
         return i18n("File checksum");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_CMF_PRODUCT)) {
+    if (key == CD_PROFILE_METADATA_CMF_PRODUCT) {
         return i18n("Framework product");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_CMF_BINARY)) {
+    if (key == CD_PROFILE_METADATA_CMF_BINARY) {
         return i18n("Framework program");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_CMF_VERSION)) {
+    if (key == CD_PROFILE_METADATA_CMF_VERSION) {
         return i18n("Framework version");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE)) {
+    if (key == CD_PROFILE_METADATA_DATA_SOURCE) {
         return i18n("Data source type");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_MAPPING_FORMAT)) {
+    if (key == CD_PROFILE_METADATA_MAPPING_FORMAT) {
         return i18n("Mapping format");
     }
-    if (key == QLatin1String(CD_PROFILE_METADATA_MAPPING_QUALIFIER)) {
+    if (key == CD_PROFILE_METADATA_MAPPING_QUALIFIER) {
         return i18n("Mapping qualifier");
     }
     return key;

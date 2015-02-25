@@ -32,50 +32,44 @@
 #include "CdProfileInterface.h"
 #include "CdDeviceInterface.h"
 
-#include <KProcess>
-
 #include <KMessageBox>
-#include <KGenericFactory>
+#include <KPluginFactory>
 #include <KAboutData>
-#include <KFileDialog>
-#include <KMimeType>
-#include <KIcon>
-#include <KUser>
 
-#include <QtDBus/QDBusServiceWatcher>
+#include <QProcess>
+#include <QFileDialog>
 #include <QItemSelectionModel>
 #include <QTimer>
 #include <QFileInfo>
 #include <QStringBuilder>
 #include <QSignalMapper>
+#include <QIcon>
 
 #define DEVICE_PATH "device-path"
 
 K_PLUGIN_FACTORY(ColordKCMFactory, registerPlugin<ColordKCM>();)
-K_EXPORT_PLUGIN(ColordKCMFactory("kcm_colord"))
 
 ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
-    KCModule(ColordKCMFactory::componentData(), parent, args),
+    KCModule(parent, args),
     ui(new Ui::ColordKCM)
 {
     KAboutData *aboutData;
     aboutData = new KAboutData("kcm_colord",
-                               "kcm_colord",
-                               ki18n("Color settings"),
+                               i18n("Color settings"),
                                COLORD_KDE_VERSION,
-                               ki18n("Color settings"),
-                               KAboutData::License_GPL,
-                               ki18n("(C) 2012-2013 Daniel Nicoletti"));
+                               i18n("Color settings"),
+                               KAboutLicense::GPL,
+                               i18n("(C) 2012-2013 Daniel Nicoletti"));
+    aboutData->addCredit(QStringLiteral("Lukáš Tinkl"), i18n("Port to kf5"), QStringLiteral("ltinkl@redhat.com"));
     setAboutData(aboutData);
     setButtons(NoAdditionalButton);
-    KGlobal::insertCatalog(QLatin1String("colord-kde"));
 
     ui->setupUi(this);
     ui->infoWidget->setPixmap(KTitleWidget::InfoMessage);
     connect(ui->addProfileBt, SIGNAL(clicked()), this, SLOT(addProfileFile()));
 
     m_addMenu = new QMenu(this);
-    m_addMenu->addAction(KIcon("document-new"),
+    m_addMenu->addAction(QIcon::fromTheme("document-new"),
                          i18n("From File..."),
                          this, SLOT(addProfileFile()));
 
@@ -84,7 +78,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
             this, SLOT(addProfileAction(QAction*)));
     m_addMenu->addMenu(m_addAvailableMenu);
     ui->addProfileBt->setMenu(m_addMenu);
-    ui->addProfileBt->setIcon(KIcon("list-add"));
+    ui->addProfileBt->setIcon(QIcon::fromTheme("list-add"));
 
     connect(m_addMenu, SIGNAL(aboutToShow()),
             this, SLOT(fillMenu()));
@@ -92,7 +86,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     connect(ui->tabWidget, SIGNAL(currentChanged(int)),
             this, SLOT(on_tabWidget_currentChanged(int)));
 
-    ui->removeProfileBt->setIcon(KIcon("list-remove"));
+    ui->removeProfileBt->setIcon(QIcon::fromTheme("list-remove"));
     connect(ui->removeProfileBt, SIGNAL(clicked()),
             this, SLOT(removeProfile()));
 
@@ -165,8 +159,8 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
             ui->profile, SLOT(serviceOwnerChanged(QString,QString,QString)));
 
-    ui->devicesTb->setIcon(KIcon("preferences-activities"));
-    ui->profilesTb->setIcon(KIcon("application-vnd.iccprofile"));
+    ui->devicesTb->setIcon(QIcon::fromTheme("preferences-activities"));
+    ui->profilesTb->setIcon(QIcon::fromTheme("application-vnd.iccprofile"));
 
     QSignalMapper *signalMapper = new QSignalMapper(this);
     signalMapper->setMapping(ui->devicesTb, 0);
@@ -233,14 +227,13 @@ void ColordKCM::showDescription()
 void ColordKCM::addProfileFile()
 {
     QModelIndex index = currentIndex();
-    QString fileName;
-    fileName = KFileDialog::getOpenFileName(KUrl(),
-                                            QLatin1String("application/vnd.iccprofile"),
-                                            this,
-                                            i18n("Importing Color Profile"));
-    if (fileName.isEmpty()) {
+    QFileDialog dlg(this, i18n("Importing Color Profile"));
+    dlg.setMimeTypeFilters({QStringLiteral("application/vnd.iccprofile")});
+    if (dlg.exec() != QFileDialog::Accepted) {
         return;
     }
+
+    const QString fileName = dlg.selectedFiles().first();
 
     // Store the device kind and device object path
     // so that we assign the profile to the device when
@@ -252,11 +245,8 @@ void ColordKCM::addProfileFile()
     devicePath = index.data(DeviceModel::ObjectPathRole).value<QDBusObjectPath>();
     m_profileFiles[newFilename] = KindAndPath(kind, devicePath);
 
-    KProcess process;
-    process << QLatin1String("colord-kde-icc-importer");
-    process << QLatin1String("--yes");
-    process << fileName;
-    process.execute();
+    QProcess process;
+    process.start(QStringLiteral("colord-kde-icc-importer"), {QStringLiteral("--yes")});
     if (process.exitStatus() != QProcess::NormalExit || process.exitCode()) {
         m_profileFiles.remove(newFilename);
     }
@@ -465,7 +455,8 @@ QModelIndex ColordKCM::currentIndex() const
 
 QString ColordKCM::profilesPath() const
 {
-    KUser user;
     // ~/.local/share/icc/
-    return user.homeDir() % QLatin1String("/.local/share/icc/");
+    return QDir::homePath() % QLatin1String("/.local/share/icc/"); // kf5 FIXME use QStandardPaths
 }
+
+#include "ColordKCM.moc"

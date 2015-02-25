@@ -25,8 +25,6 @@
 #include <QColor>
 #include <QQuaternion>
 
-#include <KDateTime>
-
 #include <lcms2.h>
 
 #define CD_PROFILE_METADATA_DATA_SOURCE_EDID	 "edid"
@@ -34,7 +32,7 @@
 #define CD_PROFILE_METADATA_DATA_SOURCE_STANDARD "standard"
 #define CD_PROFILE_METADATA_DATA_SOURCE_TEST     "test"
 
-class Profile
+class Q_DECL_EXPORT Profile
 {
 public:
     typedef enum {
@@ -70,7 +68,7 @@ public:
 
     QMap<QString, QColor> getNamedColors();
 
-    static QString profileWithSource(const QString &dataSource, const QString &profilename, const KDateTime &created);
+    static QString profileWithSource(const QString &dataSource, const QString &profilename, const QDateTime &created);
 
 private:
     QColor convertXYZ(cmsCIEXYZ *cieXYZ);

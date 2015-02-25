@@ -20,8 +20,7 @@
 #include "Output.h"
 
 #include <QX11Info>
-
-#include <KDebug>
+#include <QDebug>
 
 #define RR_CONNECTOR_TYPE_PANEL "Panel"
 
@@ -112,7 +111,7 @@ void Output::setPath(const QDBusObjectPath &path)
                                         path.path(),
                                         QDBusConnection::systemBus());
     if (!m_interface->isValid()) {
-        kWarning() << "Invalid interface" << path.path() << m_interface->lastError().message();
+        qWarning() << "Invalid interface" << path.path() << m_interface->lastError().message();
         delete m_interface;
         m_interface = 0;
     }
@@ -156,7 +155,7 @@ Edid Output::readEdidData()
     const quint8 *data;
     data = readEdidData(size);
     if (data == NULL) {
-        kWarning() << "Unable to get EDID for output" << name();
+        qWarning() << "Unable to get EDID for output" << name();
         Edid ret;
         m_id = ret.deviceId(name());
         return ret;
@@ -263,3 +262,5 @@ bool Output::operator==(const Output &output) const
 {
     return m_output == output.output();
 }
+
+#include "moc_Output.cpp"

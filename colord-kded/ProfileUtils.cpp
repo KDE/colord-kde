@@ -26,7 +26,7 @@
 #include <QFileInfo>
 #include <QCryptographicHash>
 
-#include <KDebug>
+#include <QDebug>
 
 // TODO use cmake magic
 #define PACKAGE_NAME "colord-kde"
@@ -114,7 +114,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     // check if the file doesn't already exist
     QFileInfo fileInfo(filename);
     if (fileInfo.exists()) {
-        kWarning() << "EDID ICC Profile already exists" << filename;
+        qWarning() << "EDID ICC Profile already exists" << filename;
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -141,7 +141,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     // create our generated profile
     lcms_profile = cmsCreateRGBProfile(&white_point, &chroma, transfer_curve);
     if (lcms_profile == NULL) {
-        kWarning() << "Failed to create ICC profile on cmsCreateRGBProfile";
+        qWarning() << "Failed to create ICC profile on cmsCreateRGBProfile";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -157,7 +157,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigCopyrightTag,
                                "No copyright");
     if (!ret) {
-        kWarning() << "Failed to write copyright";
+        qWarning() << "Failed to write copyright";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -178,7 +178,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigDeviceModelDescTag,
                                model);
     if (!ret) {
-        kWarning() << "Failed to write model";
+        qWarning() << "Failed to write model";
         if (*transfer_curve != NULL) {
             cmsFreeToneCurve(*transfer_curve);
         }
@@ -190,7 +190,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigProfileDescriptionTag,
                                model);
     if (!ret) {
-        kWarning() << "Failed to write description";
+        qWarning() << "Failed to write description";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -211,7 +211,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigDeviceMfgDescTag,
                                vendor);
     if (!ret) {
-        kWarning() << "Failed to write manufacturer";
+        qWarning() << "Failed to write manufacturer";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -258,7 +258,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     /* write new tag */
     ret = cmsWriteTag(lcms_profile, cmsSigMetaTag, dict);
     if (!ret) {
-        kWarning() << "Failed to write profile metadata";
+        qWarning() << "Failed to write profile metadata";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -267,7 +267,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     /* write profile id */
     ret = cmsMD5computeID(lcms_profile);
     if (!ret) {
-        kWarning() << "Failed to write profile id";
+        qWarning() << "Failed to write profile id";
         if (dict != NULL)
             cmsDictFree (dict);
         if (*transfer_curve != NULL)
@@ -294,7 +294,7 @@ cmsBool ProfileUtils::cmsWriteTagTextAscii(cmsHPROFILE lcms_profile,
 {
     cmsBool ret;
     cmsMLU *mlu = cmsMLUalloc(0, 1);
-    cmsMLUsetASCII(mlu, "EN", "us", text.toAscii());
+    cmsMLUsetASCII(mlu, "EN", "us", text.toLatin1().constData());
     ret = cmsWriteTag(lcms_profile, sig, mlu);
     cmsMLUfree(mlu);
     return ret;
@@ -304,7 +304,7 @@ cmsBool ProfileUtils::cmsDictAddEntryAscii(cmsHANDLE dict,
                                            const QString &key,
                                            const QString &value)
 {
-    kDebug() << key << value;
+    qDebug() << key << value;
     cmsBool ret;
 
     wchar_t *mb_key = new wchar_t[key.length() + 1];

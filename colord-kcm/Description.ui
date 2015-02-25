@@ -15,7 +15,7 @@
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="KTabWidget" name="tabWidget">
+    <widget class="QTabWidget" name="tabWidget">
      <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>Information</string>
@@ -424,12 +424,6 @@
    <class>KTitleWidget</class>
    <extends>QWidget</extends>
    <header>ktitlewidget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

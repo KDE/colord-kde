@@ -28,11 +28,11 @@
 #include "CdProfileInterface.h"
 
 #include <QStringBuilder>
+#include <QDebug>
+#include <QDateTime>
+#include <QIcon>
 
-#include <KDebug>
-#include <KLocale>
-#include <KDateTime>
-#include <KIcon>
+#include <KLocalizedString>
 
 DeviceModel::DeviceModel(CdInterface *cdInterface, QObject *parent) :
     QStandardItemModel(parent),
@@ -59,7 +59,7 @@ void DeviceModel::gotDevices(QDBusPendingCallWatcher *call)
 {
     QDBusPendingReply<ObjectPathList> reply = *call;
     if (reply.isError()) {
-        kWarning() << "Unexpected message" << reply.error().message();
+        qWarning() << "Unexpected message" << reply.error().message();
     } else {
         ObjectPathList devices = reply.argumentAt<0>();
         foreach (const QDBusObjectPath &device, devices) {
@@ -74,7 +74,7 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
 {
     int row = findItem(objectPath);
     if (row == -1) {
-        kWarning() << "Device not found" << objectPath.path();
+        qWarning() << "Device not found" << objectPath.path();
         return;
     }
 
@@ -117,7 +117,7 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
 void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged)
 {
     if (findItem(objectPath) != -1) {
-        kWarning() << "Device is already on the list" << objectPath.path();
+        qWarning() << "Device is already on the list" << objectPath.path();
         return;
     }
 
@@ -140,17 +140,17 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     item->setData(true, IsDeviceRole);
 
     if (kind == QLatin1String("display")) {
-        item->setIcon(KIcon(QLatin1String("video-display")));
+        item->setIcon(QIcon::fromTheme(QLatin1String("video-display")));
     } else if (kind == QLatin1String("scanner")) {
-        item->setIcon(KIcon(QLatin1String("scanner")));
+        item->setIcon(QIcon::fromTheme(QLatin1String("scanner")));
     } else if (kind == QLatin1String("printer")) {
         if (colorspace == QLatin1String("gray")) {
-            item->setIcon(KIcon(QLatin1String("printer-laser")));
+            item->setIcon(QIcon::fromTheme(QLatin1String("printer-laser")));
         } else {
-            item->setIcon(KIcon(QLatin1String("printer")));
+            item->setIcon(QIcon::fromTheme(QLatin1String("printer")));
         }
     } else if (kind == QLatin1String("webcam")) {
-        item->setIcon(KIcon(QLatin1String("camera-web")));
+        item->setIcon(QIcon::fromTheme(QLatin1String("camera-web")));
     }
 
     if (model.isEmpty() && vendor.isEmpty()) {
@@ -247,7 +247,7 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
         }
         canRemoveProfile = false;
     } else {
-        KDateTime createdDT;
+        QDateTime createdDT;
         createdDT.setTime_t(created);
         title = Profile::profileWithSource(dataSource, title, createdDT);
 

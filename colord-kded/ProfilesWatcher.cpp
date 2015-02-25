@@ -18,22 +18,21 @@
  ***************************************************************************/
 
 #include "ProfilesWatcher.h"
-
 #include "ProfileUtils.h"
 #include "Edid.h"
 #include "CdInterface.h"
 
 #include <KDirWatch>
-#include <KMimeType>
 #include <KUser>
 
+#include <QMimeDatabase>
+#include <QMimeType>
 #include <QStringBuilder>
 #include <QDirIterator>
-#include <QtDBus/QDBusUnixFileDescriptor>
-#include <QtDBus/QDBusReply>
-#include <QtDBus/QDBusObjectPath>
-
-#include <KDebug>
+#include <QDBusUnixFileDescriptor>
+#include <QDBusReply>
+#include <QDBusObjectPath>
+#include <QDebug>
 
 ProfilesWatcher::ProfilesWatcher(QObject *parent) :
     QThread(parent),
@@ -53,9 +52,9 @@ void ProfilesWatcher::scanHomeDirectory()
     // Get a list of files in ~/.local/share/icc/
     QDir profilesDir(profilesPath());
     if (!profilesDir.exists()) {
-        kWarning() << "Icc path" << profilesDir.path() << "does not exist";
+        qWarning() << "Icc path" << profilesDir.path() << "does not exist";
         if (!profilesDir.mkpath(profilesPath())) {
-            kWarning() << "Failed to create icc path '~/.local/share/icc'";
+            qWarning() << "Failed to create icc path '~/.local/share/icc'";
         }
     }
 
@@ -85,9 +84,9 @@ void ProfilesWatcher::createIccProfile(bool isLaptop, const Edid &edid)
     QString autogenPath = profilesPath();
     QDir profilesDir(autogenPath);
     if (!profilesDir.exists()) {
-        kWarning() << "Icc path" << profilesDir.path() << "does not exist";
+        qWarning() << "Icc path" << profilesDir.path() << "does not exist";
         if (!profilesDir.mkpath(autogenPath)) {
-            kWarning() << "Failed to create icc path '~/.local/share/icc'";
+            qWarning() << "Failed to create icc path '~/.local/share/icc'";
         }
     }
     autogenPath.append(QLatin1String("edid-") % edid.hash() % QLatin1String(".icc"));
@@ -97,18 +96,19 @@ void ProfilesWatcher::createIccProfile(bool isLaptop, const Edid &edid)
 void ProfilesWatcher::addProfile(const QString &filePath)
 {
     // if the changed file is an ICC profile
-    KMimeType::Ptr mimeType;
-    mimeType = KMimeType::findByFileContent(filePath);
+    QMimeDatabase db;
+    const QMimeType mimeType = db.mimeTypeForFile(filePath);
 
-    if (!mimeType->is(QLatin1String("application/vnd.iccprofile"))) {
+    if (!mimeType.inherits(QLatin1String("application/vnd.iccprofile"))) {
         // not a profile file
+        qWarning() << filePath << "is not an ICC profile";
         return;
     }
 
     // open filename
     QFile profile(filePath);
     if (!profile.open(QIODevice::ReadOnly)) {
-        kWarning() << "Failed to open profile file:" << filePath;
+        qWarning() << "Failed to open profile file:" << filePath;
         return;
     }
 
@@ -139,7 +139,7 @@ void ProfilesWatcher::addProfile(const QString &filePath)
                                           properties);
     }
 
-    kDebug() << "created profile" << profileId << reply.value().path();
+    qDebug() << "created profile" << profileId << reply.value().path();
 }
 
 void ProfilesWatcher::removeProfile(const QString &filename)
@@ -150,7 +150,7 @@ void ProfilesWatcher::removeProfile(const QString &filename)
 
     QDBusReply<QDBusObjectPath> reply = cdInterface.FindProfileByFilename(filename);
     if (!reply.isValid()) {
-        kWarning() << "Could not find the DBus object path for the given file name" << filename;
+        qWarning() << "Could not find the DBus object path for the given file name" << filename;
         return;
     }
 

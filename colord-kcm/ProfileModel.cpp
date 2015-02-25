@@ -23,18 +23,17 @@
 #include "CdInterface.h"
 #include "CdProfileInterface.h"
 
-#include <QtDBus/QDBusMetaType>
-#include <QtDBus/QDBusConnection>
-#include <QtDBus/QDBusReply>
-#include <QtDBus/QDBusArgument>
+#include <QDBusMetaType>
+#include <QDBusConnection>
+#include <QDBusReply>
+#include <QDBusArgument>
 #include <QStringBuilder>
 #include <QFileInfo>
+#include <QDebug>
+#include <QIcon>
+#include <QDateTime>
 
-#include <KDebug>
-#include <KLocale>
-#include <KGlobal>
-#include <KDateTime>
-#include <KIcon>
+#include <KLocalizedString>
 
 typedef QList<QDBusObjectPath> ObjectPathList;
 
@@ -53,7 +52,7 @@ ProfileModel::ProfileModel(CdInterface *cdInterface, QObject *parent) :
             this, SLOT(profileChanged(QDBusObjectPath)));
 
     // Ask for profiles
-    QDBusPendingReply<ObjectPathList> async = cdInterface->GetProfiles();
+    auto async = cdInterface->GetProfiles();
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
     connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
             this, SLOT(gotProfiles(QDBusPendingCallWatcher*)));
@@ -63,7 +62,7 @@ void ProfileModel::gotProfiles(QDBusPendingCallWatcher *call)
 {
     QDBusPendingReply<ObjectPathList> reply = *call;
     if (reply.isError()) {
-        kWarning() << "Unexpected message" << reply.error().message();
+        qWarning() << "Unexpected message" << reply.error().message();
     } else {
         ObjectPathList profiles = reply.argumentAt<0>();
         foreach (const QDBusObjectPath &profile, profiles) {
@@ -78,7 +77,7 @@ void ProfileModel::profileChanged(const QDBusObjectPath &objectPath)
 {
     int row = findItem(objectPath);
     if (row == -1) {
-        kWarning() << "Profile not found" << objectPath.path();
+        qWarning() << "Profile not found" << objectPath.path();
         return;
     }
 
@@ -88,7 +87,7 @@ void ProfileModel::profileChanged(const QDBusObjectPath &objectPath)
 void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChanged)
 {
     if (findItem(objectPath) != -1) {
-        kWarning() << "Profile is already on the list" << objectPath.path();
+        qWarning() << "Profile is already on the list" << objectPath.path();
         return;
     }
 
@@ -122,37 +121,37 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
 
     // Choose a nice icon
     if (kind == QLatin1String("display-device")) {
-        item->setIcon(KIcon(QLatin1String("video-display")));
+        item->setIcon(QIcon::fromTheme("video-display"));
     } else if (kind == QLatin1String("input-device")) {
-        item->setIcon(KIcon(QLatin1String("scanner")));
+        item->setIcon(QIcon::fromTheme("scanner"));
     } else if (kind == QLatin1String("output-device")) {
         if (colorspace == QLatin1String("gray")) {
-            item->setIcon(KIcon(QLatin1String("printer-laser")));
+            item->setIcon(QIcon::fromTheme("printer-laser"));
         } else {
-            item->setIcon(KIcon(QLatin1String("printer")));
+            item->setIcon(QIcon::fromTheme("printer"));
         }
     } else if (kind == QLatin1String("colorspace-conversion")) {
-        item->setIcon(KIcon(QLatin1String("view-refresh")));
+        item->setIcon(QIcon::fromTheme("view-refresh"));
     } else if (kind == QLatin1String("abstract")) {
-        item->setIcon(KIcon(QLatin1String("insert-link")));
+        item->setIcon(QIcon::fromTheme("insert-link"));
     } else if (kind == QLatin1String("named-color")) {
-        item->setIcon(KIcon(QLatin1String("view-preview")));
+        item->setIcon(QIcon::fromTheme("view-preview"));
     } else {
-        item->setIcon(KIcon(QLatin1String("image-missing")));
+        item->setIcon(QIcon::fromTheme("image-missing"));
     }
 
     // Sets the profile title
     if (title.isEmpty()) {
         title = profileId;
     } else {
-        KDateTime createdDT;
+        QDateTime createdDT;
         createdDT.setTime_t(created);
         title = Profile::profileWithSource(dataSource, title, createdDT);
     }
     item->setText(title);
 
     item->setData(qVariantFromValue(objectPath), ObjectPathRole);
-    item->setData(qVariantFromValue(getSortChar(kind) + title), SortRole);
+    item->setData(QString(getSortChar(kind) + title), SortRole);
     item->setData(filename, FilenameRole);
     item->setData(kind, ProfileKindRole);
 
@@ -242,5 +241,3 @@ Qt::ItemFlags ProfileModel::flags(const QModelIndex &index) const
     }
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
-
-#include "ProfileModel.moc"

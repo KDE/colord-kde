@@ -26,7 +26,7 @@
 #include <QStringList>
 #include <QStringBuilder>
 
-#include <KDebug>
+#include <QDebug>
 
 #define GCM_EDID_OFFSET_PNPID                           0x08
 #define GCM_EDID_OFFSET_SERIAL                          0x0c
@@ -174,12 +174,12 @@ bool Edid::parse(const quint8 *data, size_t length)
 
     /* check header */
     if (length < 128) {
-        kWarning() << "EDID length is too small";
+        qWarning() << "EDID length is too small";
         m_valid = false;
         return m_valid;
     }
     if (data[0] != 0x00 || data[1] != 0xff) {
-        kWarning() << "Failed to parse EDID header";
+        qWarning() << "Failed to parse EDID header";
         m_valid = false;
         return m_valid;
     }
@@ -207,7 +207,7 @@ bool Edid::parse(const quint8 *data, size_t length)
                     break;
                 }
             }
-            kDebug() << "PNP ID" << m_pnpId << "Vendor Name" << m_vendorName;
+            qDebug() << "PNP ID" << m_pnpId << "Vendor Name" << m_vendorName;
         }
     }
 
@@ -277,7 +277,7 @@ bool Edid::parse(const quint8 *data, size_t length)
                 m_serialNumber = tmp;
             }
         } else if (data[i+3] == GCM_DESCRIPTOR_COLOR_MANAGEMENT_DATA) {
-            kWarning() << "failing to parse color management data";
+            qWarning() << "failing to parse color management data";
         } else if (data[i+3] == GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING) {
             QString tmp = edidParseString(&data[i+5]);
             if (!tmp.isEmpty()) {

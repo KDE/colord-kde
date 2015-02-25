@@ -1,3 +1,8 @@
+include_directories(${CMAKE_SOURCE_DIR}/colord-kded
+                    ${CMAKE_BUILD_DIR}
+                    ${X11_Xrandr_INCLUDE_PATH}
+)
+
 set(colord_kded_SRCS
     DmiUtils.cpp
     Edid.cpp
@@ -8,43 +13,37 @@ set(colord_kded_SRCS
     ColorD.cpp
 )
 
-#find_file(COLORD_INTERFACE_XML org.freedesktop.ColorManager.xml
-#        PATHS ${CMAKE_INSTALL_PREFIX}/share/dbus-1/interfaces/
-#)
-set(COLORD_INTERFACE_XML
-    ../colord-tmp-interfaces/org.freedesktop.ColorManager.xml
-)
-set(COLORD_DEVICE_INTERFACE_XML
-    ../colord-tmp-interfaces/org.freedesktop.ColorManager.Device.xml
-)
-set(COLORD_PROFILE_INTERFACE_XML
-    ../colord-tmp-interfaces/org.freedesktop.ColorManager.Profile.xml
-)
-#if (COLORD_INTERFACE_XML STREQUAL "COLORD_INTERFACE_XML-NOTFOUND" OR
-#    COLORD_DEVICE_INTERFACE_XML STREQUAL "COLORD_DEVICE_INTERFACE_XML-NOTFOUND")
-#        message (FATAL_ERROR "Unable to find colord DBus specifications! Please install colord to continue!")
-#endif ()
+set(COLORD_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorManager.xml)
+set(COLORD_DEVICE_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorManager.Device.xml)
+set(COLORD_PROFILE_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorManager.Profile.xml)
 
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES CLASSNAME CdInterface)
-qt4_add_dbus_interface(colord_kded_SRCS ${COLORD_INTERFACE_XML} CdInterface)
+qt5_add_dbus_interface(colord_kded_SRCS ${COLORD_INTERFACE_XML} CdInterface)
 
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES CLASSNAME CdDeviceInterface)
-qt4_add_dbus_interface(colord_kded_SRCS ${COLORD_DEVICE_INTERFACE_XML} CdDeviceInterface)
+qt5_add_dbus_interface(colord_kded_SRCS ${COLORD_DEVICE_INTERFACE_XML} CdDeviceInterface)
 
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES CLASSNAME CdProfileInterface)
-qt4_add_dbus_interface(colord_kded_SRCS ${COLORD_PROFILE_INTERFACE_XML} CdProfileInterface)
+qt5_add_dbus_interface(colord_kded_SRCS ${COLORD_PROFILE_INTERFACE_XML} CdProfileInterface)
 
-kde4_add_plugin(kded_colord ${colord_kded_SRCS})
+add_library(kded_colord MODULE ${colord_kded_SRCS})
 target_link_libraries(kded_colord
-    ${KDE4_KDEUI_LIBS}
+    Qt5::Core
+    Qt5::Widgets
+    Qt5::DBus
+    Qt5::X11Extras
+    KF5::CoreAddons
+    KF5::DBusAddons
+    KF5::WindowSystem
     ${X11_Xrandr_LIB}
-    ${X11_X11_LIB}
+    ${X11_LIBRARIES}
+    ${XCB_LIBRARIES}
     ${LCMS2_LIBRARIES}
 )
 

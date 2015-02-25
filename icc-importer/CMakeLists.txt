@@ -3,19 +3,25 @@ set(iccimporter_SRCS
     main.cpp
 )
 
-set(COLORD_INTERFACE_XML
-    ../colord-tmp-interfaces/org.freedesktop.ColorManager.xml
-)
+set(COLORD_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorManager.xml)
+
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES CLASSNAME CdInterface)
-qt4_add_dbus_interface(iccimporter_SRCS ${COLORD_INTERFACE_XML} CdInterface)
+qt5_add_dbus_interface(iccimporter_SRCS ${COLORD_INTERFACE_XML} CdInterface)
 
-kde4_add_executable(colord-kde-icc-importer ${iccimporter_SRCS})
+add_executable(colord-kde-icc-importer ${iccimporter_SRCS})
 target_link_libraries(colord-kde-icc-importer
-    ${KDE4_KDEUI_LIBS}
+    Qt5::Core
+    Qt5::Widgets
+    Qt5::DBus
+    KF5::CoreAddons
+    KF5::I18n
+    KF5::WidgetsAddons
+    KF5::IconThemes
+    KF5::ConfigCore
     ${LCMS2_LIBRARIES}
 )
 
-install(TARGETS colord-kde-icc-importer DESTINATION ${BIN_INSTALL_DIR})
+install(TARGETS colord-kde-icc-importer DESTINATION ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES colordkdeiccimporter.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

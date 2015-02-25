@@ -24,22 +24,18 @@
 
 #include <KDEDModule>
 
-extern "C"
-{
-    #include <fixx11h.h>
-    #include <X11/Xatom.h>
-    #include <X11/extensions/Xrandr.h>
-}
+#include "../xlibandxrandr.h"
 
 class CdInterface;
 class XEventHandler;
 class ProfilesWatcher;
-class ColorD : public KDEDModule
+
+class Q_DECL_EXPORT ColorD : public KDEDModule
 {
     Q_OBJECT
 public:
-    ColorD(QObject *parent, const QVariantList &args);
-    ~ColorD();
+    ColorD(QObject *parent, const QVariantList &);
+    virtual ~ColorD();
     void reset();
     int eventBase() const;
     bool isValid() const;
