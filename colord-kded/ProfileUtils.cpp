@@ -28,8 +28,7 @@
 
 #include <QDebug>
 
-// TODO use cmake magic
-#define PACKAGE_NAME "colord-kde"
+#define PACKAGE_NAME PROJECT_NAME
 #define PACKAGE_VERSION COLORD_KDE_VERSION
 
 /* defined in metadata-spec.txt */
