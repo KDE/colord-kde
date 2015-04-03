@@ -7,6 +7,7 @@ X-KDE-Kded-autoload=true
 X-KDE-Kded-phase=1
 
 Name=Color Daemon
+Name[ast]=Degorriu de color
 Name[bs]=Color Daemon
 Name[ca]=Dimoni de color
 Name[ca@valencia]=Dimoni de color
