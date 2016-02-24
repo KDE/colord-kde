@@ -1,3 +1,4 @@
+include(CheckIncludeFiles)
 include(CheckTypeSize)
 include(FindPkgConfig)
 
