@@ -31,6 +31,8 @@ find_package(XCB COMPONENTS XCB RANDR)
 find_package(KF5 REQUIRED Config ConfigWidgets CoreAddons DBusAddons IconThemes I18n KCMUtils KIO
              Notifications Plasma WidgetsAddons WindowSystem ItemViews)
 
+add_definitions(-DTRANSLATION_DOMAIN=\"colord-kde\")
+
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 
 message(STATUS "X randr is required, found: " ${XRANDR_1_3_FOUND})
