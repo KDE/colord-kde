@@ -40,6 +40,7 @@ Name[tr]=Renk Yardımcısı
 Name[uk]=Фонова служба керування кольорами
 Name[x-test]=xxColor Daemonxx
 Comment=Manage Screen Color Profiles
+Comment[ast]=Xestiona los perfiles de color de pantalla
 Comment[bs]=Upravljanje profilima ekranskih boja
 Comment[ca]=Gestiona els perfils de color de la pantalla
 Comment[ca@valencia]=Gestiona els perfils de color de la pantalla
