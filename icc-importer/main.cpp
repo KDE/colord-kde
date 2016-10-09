@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2013 by Daniel Nicoletti                                *
+ *   Copyright (C) 2013-2016 by Daniel Nicoletti                           *
  *   dantti12@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -60,16 +60,16 @@ QString message(const QString &title, const QString &description, const QString 
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
     KAboutData about("colord-kde-icc-importer",
                      i18n("ICC Profile Installer"),
                      COLORD_KDE_VERSION,
                      i18n("An application to install ICC profiles"),
                      KAboutLicense::GPL,
-                     i18n("(C) 2008-2013 Daniel Nicoletti"));
+                     i18n("(C) 2008-2016 Daniel Nicoletti"));
 
     about.addAuthor(QStringLiteral("Daniel Nicoletti"), QString(), "dantti12@gmail.com", "http://dantti.wordpress.com");
     about.addCredit(QStringLiteral("Lukáš Tinkl"), i18n("Port to kf5"), QStringLiteral("ltinkl@redhat.com"));
-    about.setProgramIconName("application-vnd.iccprofile");
 
     KAboutData::setApplicationData(about);
 
