@@ -29,6 +29,7 @@
 
 #include <lcms2.h>
 
+#include <QApplication>
 #include <QFile>
 #include <QStringBuilder>
 #include <QX11Info>
@@ -51,6 +52,11 @@ ColorD::ColorD(QObject *parent, const QVariantList &) :
     m_x11EventHandler(Q_NULLPTR),
     m_profilesWatcher(Q_NULLPTR)
 {
+    if (QApplication::platformName() != QLatin1String("xcb")) {
+        // Wayland is not supported
+        return;
+    }
+
     // Register this first or the first time will fail
     qRegisterMetaType<CdStringMap>();
     qDBusRegisterMetaType<CdStringMap>();
