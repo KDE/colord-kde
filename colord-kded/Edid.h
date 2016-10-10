@@ -53,7 +53,7 @@ private:
     double edidDecodeFraction(int high, int low) const;
     QString edidParseString(const quint8 *data) const;
 
-    bool m_valid;
+    bool m_valid = false;
     QString m_monitorName;
     QString m_vendorName;
     QString m_serialNumber;

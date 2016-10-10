@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -71,8 +71,8 @@ private:
 
     bool m_has_1_3;
     int m_errorBase;
-    XEventHandler *m_x11EventHandler;
-    ProfilesWatcher *m_profilesWatcher;
+    XEventHandler *m_x11EventHandler = nullptr;
+    ProfilesWatcher *m_profilesWatcher = nullptr;
     CdInterface *m_cdInterface;
 };
 

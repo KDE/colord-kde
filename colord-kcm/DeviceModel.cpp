@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti                                *
- *   dantti12@gmail.com                                                    *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -41,18 +40,18 @@ DeviceModel::DeviceModel(CdInterface *cdInterface, QObject *parent) :
     qDBusRegisterMetaType<CdStringMap>();
 
     // listen to colord for events
-    connect(m_cdInterface, SIGNAL(DeviceAdded(QDBusObjectPath)),
-            this, SLOT(deviceAdded(QDBusObjectPath)));
-    connect(m_cdInterface, SIGNAL(DeviceRemoved(QDBusObjectPath)),
-            this, SLOT(deviceRemoved(QDBusObjectPath)));
-    connect(m_cdInterface, SIGNAL(DeviceChanged(QDBusObjectPath)),
-            this, SLOT(deviceChanged(QDBusObjectPath)));
+    connect(m_cdInterface, &CdInterface::DeviceAdded,
+            this, &DeviceModel::deviceAddedEmit);
+    connect(m_cdInterface, &CdInterface::DeviceRemoved,
+            this, &DeviceModel::deviceRemoved);
+    connect(m_cdInterface, &CdInterface::DeviceChanged,
+            this, &DeviceModel::deviceChanged);
 
     // Ask for devices
     auto async = m_cdInterface->GetDevices();
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
-    connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-            this, SLOT(gotDevices(QDBusPendingCallWatcher*)));
+    auto watcher = new QDBusPendingCallWatcher(async, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished,
+            this, &DeviceModel::gotDevices);
 }
 
 void DeviceModel::gotDevices(QDBusPendingCallWatcher *call)
@@ -61,8 +60,8 @@ void DeviceModel::gotDevices(QDBusPendingCallWatcher *call)
     if (reply.isError()) {
         qWarning() << "Unexpected message" << reply.error().message();
     } else {
-        ObjectPathList devices = reply.argumentAt<0>();
-        foreach (const QDBusObjectPath &device, devices) {
+        const ObjectPathList devices = reply.argumentAt<0>();
+        for (const QDBusObjectPath &device : devices) {
             deviceAdded(device, false);
         }
         emit changed();
@@ -78,7 +77,7 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
         return;
     }
 
-    CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
                              objectPath.path(),
                              QDBusConnection::systemBus());
     if (!device.isValid()) {
@@ -121,7 +120,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         return;
     }
 
-    CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
                              objectPath.path(),
                              QDBusConnection::systemBus());
     if (!device.isValid()) {
@@ -140,17 +139,17 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     item->setData(true, IsDeviceRole);
 
     if (kind == QLatin1String("display")) {
-        item->setIcon(QIcon::fromTheme(QLatin1String("video-display")));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("video-display")));
     } else if (kind == QLatin1String("scanner")) {
-        item->setIcon(QIcon::fromTheme(QLatin1String("scanner")));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("scanner")));
     } else if (kind == QLatin1String("printer")) {
         if (colorspace == QLatin1String("gray")) {
-            item->setIcon(QIcon::fromTheme(QLatin1String("printer-laser")));
+            item->setIcon(QIcon::fromTheme(QStringLiteral("printer-laser")));
         } else {
-            item->setIcon(QIcon::fromTheme(QLatin1String("printer")));
+            item->setIcon(QIcon::fromTheme(QStringLiteral("printer")));
         }
     } else if (kind == QLatin1String("webcam")) {
-        item->setIcon(QIcon::fromTheme(QLatin1String("camera-web")));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("camera-web")));
     }
 
     if (model.isEmpty() && vendor.isEmpty()) {
@@ -167,21 +166,21 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
 
     // Convert our Device Kind to Profile Kind
     if (kind == QLatin1String("display")) {
-        kind = QLatin1String("display-device");
+        kind = QStringLiteral("display-device");
     } else if (kind == QLatin1String("camera") ||
                kind == QLatin1String("scanner") ||
                kind == QLatin1String("webcam")) {
-        kind = QLatin1String("input-device");
+        kind = QStringLiteral("input-device");
     } else if (kind == QLatin1String("printer")) {
-        kind = QLatin1String("output-device");
+        kind = QStringLiteral("output-device");
     } else {
-        kind = QLatin1String("unknown");
+        kind = QStringLiteral("unknown");
     }
     item->setData(kind, ProfileKindRole);
     appendRow(item);
 
     QList<QStandardItem*> profileItems;
-    foreach (const QDBusObjectPath &profileObjectPath, profiles) {
+    for (const QDBusObjectPath &profileObjectPath : profiles) {
         QStandardItem *profileItem = createProfileItem(profileObjectPath,
                                                        objectPath,
                                                        profileItems.isEmpty());
@@ -194,6 +193,11 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     if (emitChanged) {
         emit changed();
     }
+}
+
+void DeviceModel::deviceAddedEmit(const QDBusObjectPath &objectPath)
+{
+    deviceAdded(objectPath);
 }
 
 void DeviceModel::deviceRemoved(const QDBusObjectPath &objectPath)
@@ -220,7 +224,7 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
                                               const QDBusObjectPath &parentObjectPath,
                                               bool checked)
 {
-    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
                                objectPath.path(),
                                QDBusConnection::systemBus());
     if (!profile.isValid()) {
@@ -321,7 +325,7 @@ bool DeviceModel::setData(const QModelIndex &index, const QVariant &value, int r
 
     QStandardItem *stdItem = itemFromIndex(index);
     QDBusObjectPath parentObjPath = stdItem->data(ParentObjectPathRole).value<QDBusObjectPath>();
-    CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
                              parentObjPath.path(),
                              QDBusConnection::systemBus());
     if (device.isValid()) {

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -53,16 +53,15 @@ typedef QList<QDBusObjectPath> ObjectPathList;
 
 Description::Description(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Description)
+    ui(new Ui::Description),
+    m_namedColors(new ProfileNamedColors),
+    m_metadata(new ProfileMetaData)
 {
     ui->setupUi(this);
     ui->msgWidget->setMessageType(KMessageWidget::Warning);
     ui->msgWidget->setWordWrap(true);
     ui->msgWidget->setCloseButtonVisible(false);
     ui->msgWidget->hide();
-
-    m_namedColors = new ProfileNamedColors;
-    m_metadata = new ProfileMetaData;
 }
 
 Description::~Description()
@@ -81,15 +80,15 @@ int Description::innerHeight() const
 void Description::setCdInterface(CdInterface *interface)
 {
     // listen to colord for events
-    connect(interface, SIGNAL(SensorAdded(QDBusObjectPath)),
-            this, SLOT(sensorAdded(QDBusObjectPath)));
-    connect(interface, SIGNAL(SensorRemoved(QDBusObjectPath)),
-            this, SLOT(sensorRemoved(QDBusObjectPath)));
+    connect(interface, &CdInterface::SensorAdded,
+            this, &Description::sensorAddedUpdateCalibrateButton);
+    connect(interface, &CdInterface::SensorRemoved,
+            this, &Description::sensorRemovedUpdateCalibrateButton);
 
     auto async = interface->GetSensors();
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
-    connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-            this, SLOT(gotSensors(QDBusPendingCallWatcher*)));
+    auto watcher = new QDBusPendingCallWatcher(async, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished,
+            this, &Description::gotSensors);
 }
 
 void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemoveProfile)
@@ -98,7 +97,7 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
     m_currentDeviceId.clear();
 
     ui->stackedWidget->setCurrentIndex(0);
-    CdProfileInterface profileInterface(QLatin1String("org.freedesktop.ColorManager"),
+    CdProfileInterface profileInterface(QStringLiteral("org.freedesktop.ColorManager"),
                                         objectPath.path(),
                                         QDBusConnection::systemBus());
     if (!profileInterface.isValid()) {
@@ -124,7 +123,7 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
         // Set the created time
         QDateTime createdDT;
         createdDT.setTime_t(created);
-        ui->createdL->setText(QLocale().toString(createdDT, QLocale::LongFormat));
+        ui->createdL->setText(QLocale::system().toString(createdDT, QLocale::LongFormat));
 
         // Set the license
         ui->licenseL->setText(profile.copyright());
@@ -195,7 +194,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
 
     ui->stackedWidget->setCurrentIndex(1);
 
-    CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
                              objectPath.path(),
                              QDBusConnection::systemBus());
     if (!device.isValid()) {
@@ -260,7 +259,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
 
     QString profileTitle = i18n("This device has no profile assigned to it");
     if (!profiles.isEmpty()) {
-        CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+        CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
                                    profiles.first().path(),
                                    QDBusConnection::systemBus());
         if (profile.isValid()) {
@@ -278,7 +277,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
 
 void Description::on_installSystemWideBt_clicked()
 {
-    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
                                m_currentProfile.path(),
                                QDBusConnection::systemBus());
     profile.InstallSystemWide();
@@ -286,11 +285,12 @@ void Description::on_installSystemWideBt_clicked()
 
 void Description::on_calibratePB_clicked()
 {
-    QStringList args;
-    args << QLatin1String("--parent-window");
-    args << QString::number(winId());
-    args << QLatin1String("--device");
-    args << m_currentDeviceId;
+    const QStringList args = {
+        QLatin1String("--parent-window"),
+        QString::number(winId()),
+        QLatin1String("--device"),
+        m_currentDeviceId
+    };
 
     KToolInvocation::kdeinitExec(QLatin1String("gcm-calibrate"), args);
 }
@@ -301,8 +301,8 @@ void Description::gotSensors(QDBusPendingCallWatcher *call)
     if (reply.isError()) {
         qWarning() << "Unexpected message" << reply.error().message();
     } else {
-        ObjectPathList sensors = reply.argumentAt<0>();
-        foreach (const QDBusObjectPath &sensor, sensors) {
+        const ObjectPathList sensors = reply.argumentAt<0>();
+        for (const QDBusObjectPath &sensor : sensors) {
             // Add the sensors but don't update the Calibrate button
             sensorAdded(sensor, false);
         }
@@ -323,12 +323,22 @@ void Description::sensorAdded(const QDBusObjectPath &sensorPath, bool updateCali
     }
 }
 
+void Description::sensorAddedUpdateCalibrateButton(const QDBusObjectPath &sensorPath)
+{
+    sensorAdded(sensorPath);
+}
+
 void Description::sensorRemoved(const QDBusObjectPath &sensorPath, bool updateCalibrateButton)
 {
     m_sensors.removeOne(sensorPath);
     if (updateCalibrateButton) {
         ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
     }
+}
+
+void Description::sensorRemovedUpdateCalibrateButton(const QDBusObjectPath &sensorPath)
+{
+    sensorRemoved(sensorPath);
 }
 
 void Description::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
@@ -401,7 +411,7 @@ bool Description::calibrateEnabled(const QString &kind)
         } else {
             // Search for a suitable sensor
             foreach (const QDBusObjectPath &sensorPath, m_sensors) {
-                CdSensorInterface sensor(QLatin1String("org.freedesktop.ColorManager"),
+                CdSensorInterface sensor(QStringLiteral("org.freedesktop.ColorManager"),
                                          sensorPath.path(),
                                          QDBusConnection::systemBus());
                 if (!sensor.isValid()) {
@@ -409,7 +419,7 @@ bool Description::calibrateEnabled(const QString &kind)
                 }
 
                 QStringList capabilities = sensor.capabilities();
-                if (capabilities.contains(QLatin1String("printer"))) {
+                if (capabilities.contains(QStringLiteral("printer"))) {
                     canCalibrate = true;
                     break;
                 }

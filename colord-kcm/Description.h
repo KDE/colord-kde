@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -51,7 +51,9 @@ private slots:
 
     void gotSensors(QDBusPendingCallWatcher *call);
     void sensorAdded(const QDBusObjectPath &sensorPath, bool updateCalibrateButton = true);
+    void sensorAddedUpdateCalibrateButton(const QDBusObjectPath &sensorPath);
     void sensorRemoved(const QDBusObjectPath &sensorPath, bool updateCalibrateButton = true);
+    void sensorRemovedUpdateCalibrateButton(const QDBusObjectPath &sensorPath);
 
 private:
     void insertTab(int index, QWidget *widget, const QString &label);

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -26,15 +26,14 @@
 
 #include <KLocalizedString>
 
-Profile::Profile(const QString &filename) :
-    m_lcmsProfile(NULL)
+Profile::Profile(const QString &filename)
 {
     setFilename(filename);
 }
 
 Profile::~Profile()
 {
-    if (m_lcmsProfile != NULL) {
+    if (m_lcmsProfile) {
         cmsCloseProfile(m_lcmsProfile);
     }
 }
@@ -60,9 +59,9 @@ QString Profile::errorMessage() const
 QColor Profile::convertXYZ(cmsCIEXYZ *cieXYZ)
 {
     typedef struct {
-            quint8	 R;
-            quint8	 G;
-            quint8	 B;
+        quint8	 R;
+        quint8	 G;
+        quint8	 B;
     } CdColorRGB8;
     QColor ret;
     CdColorRGB8 rgb;

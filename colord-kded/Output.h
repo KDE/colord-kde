@@ -66,11 +66,11 @@ private:
     XRRScreenResources *m_resources;
     QString m_edidHash;
     QString m_id;
-    CdDeviceInterface *m_interface;
+    CdDeviceInterface *m_interface = nullptr;
     QDBusObjectPath m_path;
 
-    bool m_active;
-    bool m_isLaptop;
+    bool m_active = false;
+    bool m_isLaptop = false;
     QString m_name;
     RRCrtc m_crtc;
 };

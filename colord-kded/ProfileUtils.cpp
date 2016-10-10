@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -171,7 +171,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     }
 
     if (model.isEmpty()) {
-        model = "Unknown monitor";
+        model = QStringLiteral("Unknown monitor");
     }
     ret = cmsWriteTagTextAscii(lcms_profile,
                                cmsSigDeviceModelDescTag,
@@ -204,7 +204,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     }
 
     if (vendor.isEmpty()) {
-        vendor = "Unknown vendor";
+        vendor = QStringLiteral("Unknown vendor");
     }
     ret = cmsWriteTagTextAscii(lcms_profile,
                                cmsSigDeviceMfgDescTag,

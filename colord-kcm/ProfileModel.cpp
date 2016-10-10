@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -44,18 +44,18 @@ ProfileModel::ProfileModel(CdInterface *cdInterface, QObject *parent) :
     qDBusRegisterMetaType<CdStringMap>();
 
     // listen to colord for events
-    connect(cdInterface, SIGNAL(ProfileAdded(QDBusObjectPath)),
-            this, SLOT(profileAdded(QDBusObjectPath)));
-    connect(cdInterface, SIGNAL(ProfileRemoved(QDBusObjectPath)),
-            this, SLOT(profileRemoved(QDBusObjectPath)));
-    connect(cdInterface, SIGNAL(ProfileChanged(QDBusObjectPath)),
-            this, SLOT(profileChanged(QDBusObjectPath)));
+    connect(cdInterface, &CdInterface::ProfileAdded,
+            this, &ProfileModel::profileAddedEmit);
+    connect(cdInterface, &CdInterface::ProfileRemoved,
+            this, &ProfileModel::profileRemoved);
+    connect(cdInterface, &CdInterface::ProfileChanged,
+            this, &ProfileModel::profileChanged);
 
     // Ask for profiles
     auto async = cdInterface->GetProfiles();
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
-    connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-            this, SLOT(gotProfiles(QDBusPendingCallWatcher*)));
+    auto watcher = new QDBusPendingCallWatcher(async, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished,
+            this, &ProfileModel::gotProfiles);
 }
 
 void ProfileModel::gotProfiles(QDBusPendingCallWatcher *call)
@@ -64,8 +64,8 @@ void ProfileModel::gotProfiles(QDBusPendingCallWatcher *call)
     if (reply.isError()) {
         qWarning() << "Unexpected message" << reply.error().message();
     } else {
-        ObjectPathList profiles = reply.argumentAt<0>();
-        foreach (const QDBusObjectPath &profile, profiles) {
+        const ObjectPathList profiles = reply.argumentAt<0>();
+        for (const QDBusObjectPath &profile : profiles) {
             profileAdded(profile, false);
         }
         emit changed();
@@ -91,7 +91,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         return;
     }
 
-    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
                                objectPath.path(),
                                QDBusConnection::systemBus());
     if (!profile.isValid()) {
@@ -121,23 +121,23 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
 
     // Choose a nice icon
     if (kind == QLatin1String("display-device")) {
-        item->setIcon(QIcon::fromTheme("video-display"));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("video-display")));
     } else if (kind == QLatin1String("input-device")) {
-        item->setIcon(QIcon::fromTheme("scanner"));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("scanner")));
     } else if (kind == QLatin1String("output-device")) {
         if (colorspace == QLatin1String("gray")) {
-            item->setIcon(QIcon::fromTheme("printer-laser"));
+            item->setIcon(QIcon::fromTheme(QStringLiteral("printer-laser")));
         } else {
-            item->setIcon(QIcon::fromTheme("printer"));
+            item->setIcon(QIcon::fromTheme(QStringLiteral("printer")));
         }
     } else if (kind == QLatin1String("colorspace-conversion")) {
-        item->setIcon(QIcon::fromTheme("view-refresh"));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("view-refresh")));
     } else if (kind == QLatin1String("abstract")) {
-        item->setIcon(QIcon::fromTheme("insert-link"));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("insert-link")));
     } else if (kind == QLatin1String("named-color")) {
-        item->setIcon(QIcon::fromTheme("view-preview"));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("view-preview")));
     } else {
-        item->setIcon(QIcon::fromTheme("image-missing"));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("image-missing")));
     }
 
     // Sets the profile title
@@ -169,6 +169,11 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     if (emitChanged) {
         emit changed();
     }
+}
+
+void ProfileModel::profileAddedEmit(const QDBusObjectPath &objectPath)
+{
+    profileAdded(objectPath);
 }
 
 void ProfileModel::profileRemoved(const QDBusObjectPath &objectPath)
@@ -218,10 +223,10 @@ QChar ProfileModel::getSortChar(const QString &kind)
 QString ProfileModel::getProfileDataSource(const CdStringMap &metadata)
 {
     QString dataSource;
-    if (metadata.contains(QLatin1String("DATA_source"))) {
-        dataSource = metadata[QLatin1String("DATA_source")];
+    auto it = metadata.constFind(QStringLiteral("DATA_source"));
+    if (it != metadata.constEnd()) {
+        dataSource = it.value();
     }
-
     return dataSource;
 }
 

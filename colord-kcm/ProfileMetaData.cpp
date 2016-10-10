@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -39,11 +39,11 @@
 
 ProfileMetaData::ProfileMetaData(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ProfileMetaData)
+    ui(new Ui::ProfileMetaData),
+    m_model(new QStandardItemModel(this))
 {
     ui->setupUi(this);
 
-    m_model = new QStandardItemModel(this);
     m_model->setColumnCount(2);
     ui->treeView->setModel(m_model);
     ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -60,6 +60,7 @@ private slots:
     void gotProfiles(QDBusPendingCallWatcher *call);
     void profileChanged(const QDBusObjectPath &objectPath);
     void profileAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);
+    void profileAddedEmit(const QDBusObjectPath &objectPath);
     void profileRemoved(const QDBusObjectPath &objectPath);
 
 private:

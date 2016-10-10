@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -44,8 +44,7 @@
 
 #define PNP_IDS "/usr/share/hwdata/pnp.ids"
 
-Edid::Edid() :
-    m_valid(false)
+Edid::Edid()
 {
 }
 
@@ -61,7 +60,7 @@ bool Edid::isValid() const
 
 QString Edid::deviceId(const QString &fallbackName) const
 {
-    QString id = QLatin1String("xrandr");
+    QString id = QStringLiteral("xrandr");
     // if no info was added check if the fallbacName is provided
     if (vendor().isNull() && name().isNull() && serial().isNull()) {
         if (!fallbackName.isEmpty()) {
@@ -336,7 +335,7 @@ QString Edid::edidParseString(const quint8 *data) const
 
     /* this is always 13 bytes, but we can't guarantee it's null
      * terminated or not junk. */
-    text = QString::fromLocal8Bit((const char*) data, 13);
+    text = QString::fromLatin1((const char*) data, 13);
 
     // Remove newlines, extra spaces and stuff
     text = text.simplified();

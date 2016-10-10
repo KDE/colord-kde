@@ -47,7 +47,7 @@ private slots:
 private:
     QString profilesPath() const;
 
-    KDirWatch *m_dirWatch;
+    KDirWatch *m_dirWatch = nullptr;
 };
 
 #endif // PROFILES_WATCHER_H

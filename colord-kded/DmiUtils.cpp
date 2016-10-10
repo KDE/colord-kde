@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -25,10 +25,12 @@
 QString DmiUtils::deviceModel()
 {
     QString ret;
-    QStringList sysfsNames;
-    sysfsNames << "/sys/class/dmi/id/product_name";
-    sysfsNames << "/sys/class/dmi/id/board_name";
-    foreach (const QString &filename, sysfsNames) {
+    const QStringList sysfsNames = {
+        QStringLiteral("/sys/class/dmi/id/product_name"),
+        QStringLiteral("/sys/class/dmi/id/board_name")
+    };
+
+    for (const QString &filename : sysfsNames) {
         QFile file(filename);
         if (file.open(QIODevice::ReadOnly)) {
             QString tmp = file.readAll();
@@ -45,14 +47,16 @@ QString DmiUtils::deviceModel()
 QString DmiUtils::deviceVendor()
 {
     QString ret;
-    QStringList sysfsVendors;
-    sysfsVendors << "/sys/class/dmi/id/sys_vendor";
-    sysfsVendors << "/sys/class/dmi/id/chassis_vendor";
-    sysfsVendors << "/sys/class/dmi/id/board_vendor";
-    foreach (const QString &filename, sysfsVendors) {
+    const QStringList sysfsVendors = {
+        QStringLiteral("/sys/class/dmi/id/sys_vendor"),
+        QStringLiteral("/sys/class/dmi/id/chassis_vendor"),
+        QStringLiteral("/sys/class/dmi/id/board_vendor")
+    };
+
+    for (const QString &filename : sysfsVendors) {
         QFile file(filename);
         if (file.open(QIODevice::ReadOnly)) {
-            QString tmp = file.readAll();
+            QString tmp = file.readAll().simplified();
             tmp = tmp.simplified();
             if (!tmp.isEmpty()) {
                 ret = tmp;

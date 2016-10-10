@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -26,15 +26,11 @@
 
 Output::Output(RROutput output, XRRScreenResources *resources) :
     m_output(output),
-    m_resources(resources),
-    m_interface(0),
-    m_active(false),
-    m_isLaptop(false)
+    m_resources(resources)
 {
     XRROutputInfo *info;
     info = XRRGetOutputInfo(QX11Info::display(), m_resources, m_output);
-    if (info == NULL) {
-        XRRFreeOutputInfo(info);
+    if (!info) {
         return;
     }
 
@@ -107,7 +103,7 @@ void Output::setPath(const QDBusObjectPath &path)
     m_path = path;
 
     delete m_interface;
-    m_interface = new CdDeviceInterface(QLatin1String("org.freedesktop.ColorManager"),
+    m_interface = new CdDeviceInterface(QStringLiteral("org.freedesktop.ColorManager"),
                                         path.path(),
                                         QDBusConnection::systemBus());
     if (!m_interface->isValid()) {

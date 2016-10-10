@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2013-2016 by Daniel Nicoletti                           *
- *   dantti12@gmail.com                                                    *
+ *   Copyright (C) 2013-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -39,7 +38,7 @@
 QString message(const QString &title, const QString &description, const QString &copyright)
 {
     QString ret;
-    ret = QStringLiteral("<p><strong>") % title % QStringLiteral("</strong></p>");
+    ret = QLatin1String("<p><strong>") % title % QLatin1String("</strong></p>");
     if (!description.isEmpty()) {
         ret.append(i18n("Description: %1", description));
         if (copyright.isEmpty()) {
@@ -61,15 +60,20 @@ int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
-    KAboutData about("colord-kde-icc-importer",
+    KAboutData about(QStringLiteral("colord-kde-icc-importer"),
                      i18n("ICC Profile Installer"),
                      COLORD_KDE_VERSION,
                      i18n("An application to install ICC profiles"),
                      KAboutLicense::GPL,
                      i18n("(C) 2008-2016 Daniel Nicoletti"));
 
-    about.addAuthor(QStringLiteral("Daniel Nicoletti"), QString(), "dantti12@gmail.com", "http://dantti.wordpress.com");
-    about.addCredit(QStringLiteral("Lukáš Tinkl"), i18n("Port to kf5"), QStringLiteral("ltinkl@redhat.com"));
+    about.addAuthor(QStringLiteral("Daniel Nicoletti"),
+                    QString(),
+                    QStringLiteral("dantti12@gmail.com"),
+                    QStringLiteral("http://dantti.wordpress.com"));
+    about.addCredit(QStringLiteral("Lukáš Tinkl"),
+                    i18n("Port to kf5"),
+                    QStringLiteral("ltinkl@redhat.com"));
 
     KAboutData::setApplicationData(about);
 
@@ -89,7 +93,7 @@ int main(int argc, char **argv)
 
     QFileInfo fileInfo(args.first());
     // ~/.local/share/icc/
-    const QString destFilename = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QStringLiteral("/icc/") % fileInfo.fileName();
+    const QString destFilename = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/icc/") % fileInfo.fileName();
 
     Profile profile(fileInfo.filePath());
     if (!profile.loaded()) {

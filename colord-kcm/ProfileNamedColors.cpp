@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -25,11 +25,11 @@
 
 ProfileNamedColors::ProfileNamedColors(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ProfileNamedColors)
+    ui(new Ui::ProfileNamedColors),
+    m_model(new QStandardItemModel(this))
 {
     ui->setupUi(this);
 
-    m_model = new QStandardItemModel(this);
     m_model->setColumnCount(2);
     ui->treeView->setModel(m_model);
     ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
@@ -46,15 +46,12 @@ void ProfileNamedColors::setNamedColors(const QMap<QString, QColor> &namedColors
 
     QMap<QString, QColor>::const_iterator i = namedColors.constBegin();
     while (i != namedColors.constEnd()) {
-        QList<QStandardItem *> row;
-        QStandardItem *name = new QStandardItem(i.key());
+        auto name = new QStandardItem(i.key());
 
-        QStandardItem *color = new QStandardItem;
+        auto color = new QStandardItem;
         color->setBackground(QBrush(i.value()));
 
-        row << name;
-        row << color;
-        m_model->appendRow(row);
+        m_model->appendRow({ name, color });
         ++i;
     }
 }

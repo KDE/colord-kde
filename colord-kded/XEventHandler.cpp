@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *   Copyright (C) 2015 Lukáš Tinkl <ltinkl@redhat.com>                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -36,7 +36,7 @@ bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message
         // only interested in XCB  events
         return false;
     }
-    auto *e = static_cast<xcb_generic_event_t*>(message);
+    auto e = static_cast<xcb_generic_event_t*>(message);
     auto xEventType = e->response_type & ~0x80;
 
     if (xEventType == m_randrBase + XCB_RANDR_SCREEN_CHANGE_NOTIFY) {

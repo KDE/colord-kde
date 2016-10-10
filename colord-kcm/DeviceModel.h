@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti                                *
- *   dantti12@gmail.com                                                    *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -58,6 +57,7 @@ private slots:
     void gotDevices(QDBusPendingCallWatcher *call);
     void deviceChanged(const QDBusObjectPath &objectPath);
     void deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);
+    void deviceAddedEmit(const QDBusObjectPath &objectPath);
     void deviceRemoved(const QDBusObjectPath &objectPath);
 
 private:

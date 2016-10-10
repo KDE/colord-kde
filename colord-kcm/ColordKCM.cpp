@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti                                *
- *   dantti12@gmail.com                                                    *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -51,79 +50,81 @@ K_PLUGIN_FACTORY(ColordKCMFactory, registerPlugin<ColordKCM>();)
 
 ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     KCModule(parent, args),
-    ui(new Ui::ColordKCM)
+    ui(new Ui::ColordKCM),
+    m_addMenu(new QMenu(this)),
+    m_addAvailableMenu(new QMenu(i18n("Available Profiles"), this))
 {
-    KAboutData *aboutData;
-    aboutData = new KAboutData("kcm_colord",
-                               i18n("Color settings"),
-                               COLORD_KDE_VERSION,
-                               i18n("Color settings"),
-                               KAboutLicense::GPL,
-                               i18n("(C) 2012-2013 Daniel Nicoletti"));
-    aboutData->addCredit(QStringLiteral("Lukáš Tinkl"), i18n("Port to kf5"), QStringLiteral("ltinkl@redhat.com"));
+    auto aboutData = new KAboutData(QStringLiteral("kcm_colord"),
+                                    i18n("Color settings"),
+                                    QStringLiteral(COLORD_KDE_VERSION),
+                                    i18n("Color settings"),
+                                    KAboutLicense::GPL,
+                                    i18n("(C) 2012-2016 Daniel Nicoletti"));
+    aboutData->addCredit(QStringLiteral("Lukáš Tinkl"),
+                         i18n("Port to kf5"),
+                         QStringLiteral("ltinkl@redhat.com"));
     setAboutData(aboutData);
     setButtons(NoAdditionalButton);
 
     ui->setupUi(this);
     ui->infoWidget->setPixmap(KTitleWidget::InfoMessage);
-    connect(ui->addProfileBt, SIGNAL(clicked()), this, SLOT(addProfileFile()));
+    connect(ui->addProfileBt, &QToolButton::clicked, this, &ColordKCM::addProfileFile);
 
-    m_addMenu = new QMenu(this);
-    m_addMenu->addAction(QIcon::fromTheme("document-new"),
+    m_addMenu->addAction(QIcon::fromTheme(QStringLiteral("document-new")),
                          i18n("From File..."),
                          this, SLOT(addProfileFile()));
 
-    m_addAvailableMenu = new QMenu(i18n("Available Profiles"), this);
-    connect(m_addAvailableMenu, SIGNAL(triggered(QAction*)),
-            this, SLOT(addProfileAction(QAction*)));
+    connect(m_addAvailableMenu, &QMenu::triggered,
+            this, &ColordKCM::addProfileAction);
     m_addMenu->addMenu(m_addAvailableMenu);
     ui->addProfileBt->setMenu(m_addMenu);
-    ui->addProfileBt->setIcon(QIcon::fromTheme("list-add"));
+    ui->addProfileBt->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
 
-    connect(m_addMenu, SIGNAL(aboutToShow()),
-            this, SLOT(fillMenu()));
+    connect(m_addMenu, &QMenu::aboutToShow,
+            this, &ColordKCM::fillMenu);
 
-    connect(ui->tabWidget, SIGNAL(currentChanged(int)),
-            this, SLOT(on_tabWidget_currentChanged(int)));
+    connect(ui->tabWidget, &QStackedWidget::currentChanged,
+            this, &ColordKCM::on_tabWidget_currentChanged);
 
-    ui->removeProfileBt->setIcon(QIcon::fromTheme("list-remove"));
-    connect(ui->removeProfileBt, SIGNAL(clicked()),
-            this, SLOT(removeProfile()));
+    ui->removeProfileBt->setIcon(QIcon::fromTheme(QStringLiteral("list-remove")));
+    connect(ui->removeProfileBt, &QToolButton::clicked,
+            this, &ColordKCM::removeProfile);
 
     // Creates a ColorD interface, it must be created with new
     // otherwise the object will be deleted when this block ends
-    m_cdInterface = new CdInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                    QLatin1String("/org/freedesktop/ColorManager"),
+    m_cdInterface = new CdInterface(QStringLiteral("org.freedesktop.ColorManager"),
+                                    QStringLiteral("/org/freedesktop/ColorManager"),
                                     QDBusConnection::systemBus(),
                                     this);
     ui->profile->setCdInterface(m_cdInterface);
 
     // listen to colord for events
-    connect(m_cdInterface, SIGNAL(ProfileAdded(QDBusObjectPath)),
-            this, SLOT(profileAdded(QDBusObjectPath)));
+    connect(m_cdInterface, &CdInterface::ProfileAdded,
+            this, &ColordKCM::profileAdded);
 
     // Devices view setup
-    QSortFilterProxyModel *sortModel = new QSortFilterProxyModel(this);
+    auto sortModel = new QSortFilterProxyModel(this);
+
     // Connect this slot prior to defining the model
     // so we get a selection on the first item for free
-    connect(sortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-            this, SLOT(showDescription()));
+    connect(sortModel, &QSortFilterProxyModel::dataChanged,
+            this, &ColordKCM::showDescription);
     sortModel->setDynamicSortFilter(true);
     sortModel->setSortRole(DeviceModel::SortRole);
     sortModel->sort(0);
     // Set the source model then connect to the selection model to get updates
     ui->devicesTV->setModel(sortModel);
     ui->devicesTV->setItemDelegate(new NoSelectionRectDelegate(this));
-    connect(ui->devicesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(showDescription()));
+    connect(ui->devicesTV->selectionModel(), &QItemSelectionModel::selectionChanged,
+            this, &ColordKCM::showDescription);
 
     m_deviceModel = new DeviceModel(m_cdInterface, this);
-    connect(m_deviceModel, SIGNAL(changed()), this, SLOT(updateSelection()));
+    connect(m_deviceModel, &DeviceModel::changed, this, &ColordKCM::updateSelection);
     sortModel->setSourceModel(m_deviceModel);
 
     // Profiles view setup
     m_profileModel = new ProfileModel(m_cdInterface, this);
-    connect(m_profileModel, SIGNAL(changed()), this, SLOT(updateSelection()));
+    connect(m_profileModel, &ProfileModel::changed, this, &ColordKCM::updateSelection);
     // Filter Proxy for the menu
     m_profilesFilter = new QSortFilterProxyModel(this);
     m_profilesFilter->setSourceModel(m_profileModel);
@@ -133,51 +134,46 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     m_profilesFilter->sort(0);
 
     // Sort Proxy for the View
-    QSortFilterProxyModel *profileSortModel = new QSortFilterProxyModel(this);
+    auto profileSortModel = new QSortFilterProxyModel(this);
     profileSortModel->setSourceModel(m_profileModel);
     profileSortModel->setDynamicSortFilter(true);
     profileSortModel->setSortRole(ProfileModel::SortRole);
     profileSortModel->sort(0);
     ui->profilesTV->setModel(profileSortModel);
     ui->profilesTV->setItemDelegate(new NoSelectionRectDelegate(this));
-    connect(ui->profilesTV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(showDescription()));
-    connect(profileSortModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-            this, SLOT(showDescription()));
-
+    connect(ui->profilesTV->selectionModel(), &QItemSelectionModel::selectionChanged,
+            this, &ColordKCM::showDescription);
+    connect(profileSortModel, &QSortFilterProxyModel::dataChanged,
+            this, &ColordKCM::showDescription);
 
     // Make sure we know is colord is running
-    QDBusServiceWatcher *watcher;
-    watcher = new QDBusServiceWatcher("org.freedesktop.ColorManager",
-                                      QDBusConnection::systemBus(),
-                                      QDBusServiceWatcher::WatchForOwnerChange,
-                                      this);
-    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
-            m_deviceModel, SLOT(serviceOwnerChanged(QString,QString,QString)));
-    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
-            m_profileModel, SLOT(serviceOwnerChanged(QString,QString,QString)));
-    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
-            ui->profile, SLOT(serviceOwnerChanged(QString,QString,QString)));
+    auto watcher = new QDBusServiceWatcher(QStringLiteral("org.freedesktop.ColorManager"),
+                                           QDBusConnection::systemBus(),
+                                           QDBusServiceWatcher::WatchForOwnerChange,
+                                           this);
+    connect(watcher, &QDBusServiceWatcher::serviceOwnerChanged,
+            m_deviceModel, &DeviceModel::serviceOwnerChanged);
+    connect(watcher, &QDBusServiceWatcher::serviceOwnerChanged,
+            m_profileModel, &ProfileModel::serviceOwnerChanged);
+    connect(watcher, &QDBusServiceWatcher::serviceOwnerChanged,
+            ui->profile, &Description::serviceOwnerChanged);
 
-    ui->devicesTb->setIcon(QIcon::fromTheme("preferences-activities"));
-    ui->profilesTb->setIcon(QIcon::fromTheme("application-vnd.iccprofile"));
+    ui->devicesTb->setIcon(QIcon::fromTheme(QStringLiteral("preferences-activities")));
+    ui->profilesTb->setIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
 
-    QSignalMapper *signalMapper = new QSignalMapper(this);
+    auto signalMapper = new QSignalMapper(this);
     signalMapper->setMapping(ui->devicesTb, 0);
     connect(ui->devicesTb, SIGNAL(clicked()), signalMapper, SLOT(map()));
     signalMapper->setMapping(ui->profilesTb, 1);
     connect(ui->profilesTb, SIGNAL(clicked()), signalMapper, SLOT(map()));
 
-    connect(signalMapper, SIGNAL(mapped(int)),
-            ui->tabWidget, SLOT(setCurrentIndex(int)));
-    connect(signalMapper, SIGNAL(mapped(int)),
-            this, SLOT(showDescription()));
+    connect(signalMapper, static_cast<void(QSignalMapper::*)(int)>(&QSignalMapper::mapped),
+            ui->tabWidget, &QStackedWidget::setCurrentIndex);
+    connect(signalMapper, static_cast<void(QSignalMapper::*)(int)>(&QSignalMapper::mapped),
+            this, &ColordKCM::showDescription);
 
     // make sure the screen is split on the half
-    QList<int> sizes;
-    sizes << width() / 2;
-    sizes << width() / 2;
-    ui->splitter->setSizes(sizes);
+    ui->splitter->setSizes({ width() / 2, width() / 2 });
 }
 
 ColordKCM::~ColordKCM()
@@ -253,8 +249,8 @@ void ColordKCM::addProfileFile()
 
 void ColordKCM::addProfileAction(QAction *action)
 {
-    QDBusObjectPath profileObject = action->data().value<QDBusObjectPath>();
-    QDBusObjectPath deviceObject  = action->property(DEVICE_PATH).value<QDBusObjectPath>();
+    auto profileObject = action->data().value<QDBusObjectPath>();
+    auto deviceObject  = action->property(DEVICE_PATH).value<QDBusObjectPath>();
 
     addProvileToDevice(profileObject, deviceObject);
 }
@@ -293,12 +289,10 @@ void ColordKCM::removeProfile()
 
     if (index.parent().isValid()) {
         // If the item has a parent we are on the devices view
-        QDBusObjectPath deviceObject;
-        QDBusObjectPath profileObject;
-        deviceObject  = index.data(ProfileModel::ParentObjectPathRole).value<QDBusObjectPath>();
-        profileObject = index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>();
+        auto deviceObject  = index.data(ProfileModel::ParentObjectPathRole).value<QDBusObjectPath>();
+        auto profileObject = index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>();
 
-        CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+        CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
                                  deviceObject.path(),
                                  QDBusConnection::systemBus());
         if (device.isValid()) {
@@ -380,7 +374,7 @@ void ColordKCM::on_tabWidget_currentChanged(int index)
 
 void ColordKCM::profileAdded(const QDBusObjectPath &objectPath)
 {
-    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
                                objectPath.path(),
                                QDBusConnection::systemBus());
 
@@ -406,7 +400,7 @@ void ColordKCM::profileAdded(const QDBusObjectPath &objectPath)
 
 void ColordKCM::addProvileToDevice(const QDBusObjectPath &profile, const QDBusObjectPath &devicePath) const
 {
-    CdDeviceInterface device(QLatin1String("org.freedesktop.ColorManager"),
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
                              devicePath.path(),
                              QDBusConnection::systemBus());
     if (device.isValid()) {
@@ -455,7 +449,7 @@ QModelIndex ColordKCM::currentIndex() const
 QString ColordKCM::profilesPath() const
 {
     // ~/.local/share/icc/
-    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QStringLiteral("/icc/");
+    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/icc/");
 }
 
 #include "ColordKCM.moc"

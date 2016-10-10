@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -48,9 +48,7 @@ K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 typedef QList<QDBusObjectPath> ObjectPathList;
 
 ColorD::ColorD(QObject *parent, const QVariantList &) :
-    KDEDModule(parent),
-    m_x11EventHandler(Q_NULLPTR),
-    m_profilesWatcher(Q_NULLPTR)
+    KDEDModule(parent)
 {
     if (QApplication::platformName() != QLatin1String("xcb")) {
         // Wayland is not supported
@@ -74,21 +72,20 @@ ColorD::ColorD(QObject *parent, const QVariantList &) :
     }
 
     // Make sure we know is colord is running
-    QDBusServiceWatcher *watcher;
-    watcher = new QDBusServiceWatcher(QLatin1String("org.freedesktop.ColorManager"),
-                                      QDBusConnection::systemBus(),
-                                      QDBusServiceWatcher::WatchForOwnerChange,
-                                      this);
-    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
-            this, SLOT(serviceOwnerChanged(QString,QString,QString)));
+    auto watcher = new QDBusServiceWatcher(QStringLiteral("org.freedesktop.ColorManager"),
+                                           QDBusConnection::systemBus(),
+                                           QDBusServiceWatcher::WatchForOwnerChange,
+                                           this);
+    connect(watcher, &QDBusServiceWatcher::serviceOwnerChanged,
+            this, &ColorD::serviceOwnerChanged);
 
     // Create the profiles watcher thread
     m_profilesWatcher = new ProfilesWatcher;
     m_profilesWatcher->start();
 
     // Check outputs add all active outputs, once profiles are ready
-    connect(m_profilesWatcher, SIGNAL(scanFinished()),
-            this, SLOT(checkOutputs()), Qt::QueuedConnection);
+    connect(m_profilesWatcher, &ProfilesWatcher::scanFinished,
+            this, &ColorD::checkOutputs, Qt::QueuedConnection);
 
     // init the settings
     init();
@@ -96,7 +93,8 @@ ColorD::ColorD(QObject *parent, const QVariantList &) :
 
 ColorD::~ColorD()
 {
-    foreach (const Output::Ptr &out, m_connectedOutputs) {
+    const auto connectedOutputs = m_connectedOutputs;
+    for (const Output::Ptr &out : connectedOutputs) {
         removeOutput(out);
     }
 
@@ -126,18 +124,17 @@ void ColorD::reset()
 void ColorD::addEdidProfileToDevice(const Output::Ptr &output)
 {
     // Ask for profiles
+    // TODO do it async
     QDBusReply<ObjectPathList> paths = m_cdInterface->GetProfiles();
 
     // Search through all profiles to see if the edid md5 matches
     foreach (const QDBusObjectPath &profilePath, paths.value()) {
-        CdStringMap metadata = getProfileMetadata(profilePath);
-        if (metadata.contains(QLatin1String("EDID_md5"))) {
-            // check if md5 matches
-            if (metadata[QLatin1String("EDID_md5")] == output->edidHash()) {
-                qDebug() << "Found EDID profile for device" << profilePath.path() << output->name();
-                if (output->interface()) {
-                    output->interface()->AddProfile(QLatin1String("soft"), profilePath);
-                }
+        const CdStringMap metadata = getProfileMetadata(profilePath);
+        const auto data = metadata.constFind(QStringLiteral("EDID_md5"));
+        if (data != metadata.constEnd() && data.value() == output->edidHash()) {
+            qDebug() << "Found EDID profile for device" << profilePath.path() << output->name();
+            if (output->interface()) {
+                output->interface()->AddProfile(QStringLiteral("soft"), profilePath);
             }
         }
     }
@@ -145,7 +142,7 @@ void ColorD::addEdidProfileToDevice(const Output::Ptr &output)
 
 CdStringMap ColorD::getProfileMetadata(const QDBusObjectPath &profilePath)
 {
-    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
                                profilePath.path(),
                                QDBusConnection::systemBus());
     return profile.metadata();
@@ -170,10 +167,10 @@ void ColorD::serviceOwnerChanged(const QString &serviceName, const QString &oldO
 
 void ColorD::addOutput(const Output::Ptr &output)
 {
-    QString edidVendor = QLatin1String("unknown");
-    QString edidModel = QLatin1String("unknown");
-    QString edidSerial = QLatin1String("unknown");
-    QString deviceId = QLatin1String("xrandr-unknown");
+    QString edidVendor = QStringLiteral("unknown");
+    QString edidModel = edidVendor;
+    QString edidSerial = edidVendor;
+    QString deviceId = QStringLiteral("xrandr-unknown");
 
     // ensure the RROutput is active
     if (!output->isActive()) {
@@ -221,9 +218,9 @@ void ColorD::addOutput(const Output::Ptr &output)
 
     // build up a map with the output properties to send to colord
     CdStringMap properties;
-    properties[CD_DEVICE_PROPERTY_KIND] = QLatin1String("display");
-    properties[CD_DEVICE_PROPERTY_MODE] = QLatin1String("physical");
-    properties[CD_DEVICE_PROPERTY_COLORSPACE] = QLatin1String("rgb");
+    properties[CD_DEVICE_PROPERTY_KIND] = QStringLiteral("display");
+    properties[CD_DEVICE_PROPERTY_MODE] = QStringLiteral("physical");
+    properties[CD_DEVICE_PROPERTY_COLORSPACE] = QStringLiteral("rgb");
     properties[CD_DEVICE_PROPERTY_VENDOR] = edidVendor;
     properties[CD_DEVICE_PROPERTY_MODEL] = edidModel;
     properties[CD_DEVICE_PROPERTY_SERIAL] = edidSerial;
@@ -240,8 +237,10 @@ void ColorD::addOutput(const Output::Ptr &output)
     qDebug() << "Adding device id" << deviceId;
     qDebug() << "Output Hash" << output->edidHash();
     qDebug() << "Output isLaptop" << output->isLaptop();
+
+    // TODO do async
     QDBusReply<QDBusObjectPath> reply;
-    reply = m_cdInterface->CreateDevice(deviceId, QLatin1String("temp"), properties);
+    reply = m_cdInterface->CreateDevice(deviceId, QStringLiteral("temp"), properties);
     if (reply.isValid()) {
         qDebug() << "Created colord device" << reply.value().path();
         // Store the output path into our Output class
@@ -283,7 +282,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
     // read the default profile (the first path in the Device.Profiles property)
     QDBusObjectPath profileDefault = profiles.first();
     qDebug() << "profileDefault" << profileDefault.path();
-    CdProfileInterface profile(QLatin1String("org.freedesktop.ColorManager"),
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
                                profileDefault.path(),
                                QDBusConnection::systemBus());
     if (!profile.isValid()) {
@@ -312,33 +311,33 @@ void ColorD::outputChanged(const Output::Ptr &output)
         return;
     }
 
-    // The gama size of this output
-    int gamaSize = output->getGammaSize();
-    if (gamaSize == 0) {
+    // The gamma size of this output
+    int gammaSize = output->getGammaSize();
+    if (gammaSize == 0) {
         qWarning() << "Gamma size is zero";
         cmsCloseProfile(lcms_profile);
         return;
     }
 
     // Allocate the gamma
-    XRRCrtcGamma *gamma = XRRAllocGamma(gamaSize);
+    XRRCrtcGamma *gamma = XRRAllocGamma(gammaSize);
 
     // get tone curves from profile
     vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
     if (vcgt == NULL || vcgt[0] == NULL) {
         qDebug() << "Profile does not have any VCGT data, reseting";
         // Reset the gamma table
-        for (int i = 0; i < gamaSize; ++i) {
-            uint value = (i * 0xffff) / (gamaSize - 1);
+        for (int i = 0; i < gammaSize; ++i) {
+            uint value = (i * 0xffff) / (gammaSize - 1);
             gamma->red[i]   = value;
             gamma->green[i] = value;
             gamma->blue[i]  = value;
         }
     } else {
         // Fill the gamma table with the VCGT data
-        for (int i = 0; i < gamaSize; ++i) {
+        for (int i = 0; i < gammaSize; ++i) {
             cmsFloat32Number in;
-            in = (double) i / (double) (gamaSize - 1);
+            in = (double) i / (double) (gammaSize - 1);
             gamma->red[i]   = cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
             gamma->green[i] = cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
             gamma->blue[i]  = cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
@@ -484,9 +483,10 @@ void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 {
     // check if the EDID_md5 Profile.Metadata matches any active
     // XRandR devices (e.g. lvds1), otherwise ignore
-    CdStringMap metadata = getProfileMetadata(profilePath);
-    if (metadata.contains(QLatin1String("EDID_md5"))) {
-        QString edidHash = metadata[QLatin1String("EDID_md5")];
+    const CdStringMap metadata = getProfileMetadata(profilePath);
+    const auto data = metadata.constFind(QStringLiteral("EDID_md5"));
+    if (data != metadata.constEnd()) {
+        const QString edidHash = data.value();
         Output::Ptr output;
         // Get the Crtc of this output
         for (int i = 0; i < m_connectedOutputs.size(); ++i) {
@@ -498,7 +498,7 @@ void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 
         if (output && output->interface()) {
             // Found an EDID that matches the md5
-            output->interface()->AddProfile(QLatin1String("soft"), profilePath);
+            output->interface()->AddProfile(QStringLiteral("soft"), profilePath);
         }
     }
 }
@@ -549,18 +549,18 @@ void ColorD::connectToColorD()
 {
     // Creates a ColorD interface, it must be created with new
     // otherwise the object will be deleted when this block ends
-    m_cdInterface = new CdInterface(QLatin1String("org.freedesktop.ColorManager"),
-                                    QLatin1String("/org/freedesktop/ColorManager"),
+    m_cdInterface = new CdInterface(QStringLiteral("org.freedesktop.ColorManager"),
+                                    QStringLiteral("/org/freedesktop/ColorManager"),
                                     QDBusConnection::systemBus(),
                                     this);
 
     // listen to colord for events
-    connect(m_cdInterface, SIGNAL(ProfileAdded(QDBusObjectPath)),
-            this, SLOT(profileAdded(QDBusObjectPath)));
-    connect(m_cdInterface, SIGNAL(DeviceAdded(QDBusObjectPath)),
-            this, SLOT(deviceAdded(QDBusObjectPath)));
-    connect(m_cdInterface, SIGNAL(DeviceChanged(QDBusObjectPath)),
-            this, SLOT(deviceChanged(QDBusObjectPath)));
+    connect(m_cdInterface, &CdInterface::ProfileAdded,
+            this, &ColorD::profileAdded);
+    connect(m_cdInterface, &CdInterface::DeviceAdded,
+            this, &ColorD::deviceAdded);
+    connect(m_cdInterface, &CdInterface::DeviceChanged,
+            this, &ColorD::deviceChanged);
 }
 
 #include "ColorD.moc"

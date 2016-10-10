@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
+ *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -88,7 +88,7 @@ private:
     QString m_checksum;
     uint m_temperature;
     QQuaternion m_white;
-    cmsHPROFILE m_lcmsProfile;
+    cmsHPROFILE m_lcmsProfile = nullptr;
     QString m_errorMessage;
 };
 
