@@ -53,7 +53,6 @@ target_link_libraries(kcm_colord
     Qt5::DBus
     KF5::CoreAddons
     KF5::I18n
-    KF5::IconThemes
     KF5::KCMUtils
     ${LCMS2_LIBRARIES}
 )

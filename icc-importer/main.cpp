@@ -31,7 +31,6 @@
 #include <QCommandLineParser>
 
 #include <KMessageBox>
-#include <KConfig>
 #include <KAboutData>
 #include <KLocalizedString>
 

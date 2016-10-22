@@ -18,8 +18,6 @@ target_link_libraries(colord-kde-icc-importer
     KF5::CoreAddons
     KF5::I18n
     KF5::WidgetsAddons
-    KF5::IconThemes
-    KF5::ConfigCore
     ${LCMS2_LIBRARIES}
 )
 
