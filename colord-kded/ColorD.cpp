@@ -33,7 +33,7 @@
 #include <QFile>
 #include <QStringBuilder>
 #include <QX11Info>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QDBusError>
 #include <QDBusConnection>
 #include <QDBusMetaType>
@@ -45,6 +45,8 @@
 
 K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
 
+Q_LOGGING_CATEGORY(COLORD, "colord")
+
 typedef QList<QDBusObjectPath> ObjectPathList;
 
 ColorD::ColorD(QObject *parent, const QVariantList &) :
@@ -52,6 +54,7 @@ ColorD::ColorD(QObject *parent, const QVariantList &) :
 {
     if (QApplication::platformName() != QLatin1String("xcb")) {
         // Wayland is not supported
+        qCInfo(COLORD, "X11 not detect disabling");
         return;
     }
 
@@ -67,7 +70,7 @@ ColorD::ColorD(QObject *parent, const QVariantList &) :
 
     // Connect to the display
     if ((m_resources = connectToDisplay()) == 0) {
-        qWarning() << "Failed to connect to DISPLAY and get the needed resources";
+        qCWarning(COLORD) << "Failed to connect to DISPLAY and get the needed resources";
         return;
     }
 
@@ -132,7 +135,7 @@ void ColorD::addEdidProfileToDevice(const Output::Ptr &output)
         const CdStringMap metadata = getProfileMetadata(profilePath);
         const auto data = metadata.constFind(QStringLiteral("EDID_md5"));
         if (data != metadata.constEnd() && data.value() == output->edidHash()) {
-            qDebug() << "Found EDID profile for device" << profilePath.path() << output->name();
+            qCDebug(COLORD) << "Found EDID profile for device" << profilePath.path() << output->name();
             if (output->interface()) {
                 output->interface()->AddProfile(QStringLiteral("soft"), profilePath);
             }
@@ -151,7 +154,6 @@ CdStringMap ColorD::getProfileMetadata(const QDBusObjectPath &profilePath)
 void ColorD::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
 {
     Q_UNUSED(serviceName)
-    qDebug() << oldOwner << newOwner;
     if (newOwner.isEmpty()) {
         // colord has quit
         reset();
@@ -174,6 +176,7 @@ void ColorD::addOutput(const Output::Ptr &output)
 
     // ensure the RROutput is active
     if (!output->isActive()) {
+        qCDebug(COLORD) << "output is not active" << output->name();
         return;
     }
 
@@ -234,15 +237,15 @@ void ColorD::addOutput(const Output::Ptr &output)
     properties[CD_DEVICE_PROPERTY_EMBEDDED] = output->isLaptop();
 
     // We use temp because if we crash or quit the device gets removed
-    qDebug() << "Adding device id" << deviceId;
-    qDebug() << "Output Hash" << output->edidHash();
-    qDebug() << "Output isLaptop" << output->isLaptop();
+    qCDebug(COLORD) << "Adding device id" << deviceId;
+    qCDebug(COLORD) << "Output Hash" << output->edidHash();
+    qCDebug(COLORD) << "Output isLaptop" << output->isLaptop();
 
     // TODO do async
     QDBusReply<QDBusObjectPath> reply;
     reply = m_cdInterface->CreateDevice(deviceId, QStringLiteral("temp"), properties);
     if (reply.isValid()) {
-        qDebug() << "Created colord device" << reply.value().path();
+        qCDebug(COLORD) << "Created colord device" << reply.value().path();
         // Store the output path into our Output class
         output->setPath(reply.value());
 
@@ -255,13 +258,13 @@ void ColorD::addOutput(const Output::Ptr &output)
         // Make sure we set the profile on this device
         outputChanged(output);
     } else {
-        qWarning() << "Failed to register device:" << reply.error().message();
+        qCWarning(COLORD) << "Failed to register device:" << reply.error().message();
     }
 }
 
 void ColorD::outputChanged(const Output::Ptr &output)
 {
-    qDebug() << "Device changed" << output->path().path();
+    qCDebug(COLORD) << "Device changed" << output->path().path();
 
     if (!output->interface()) {
         return;
@@ -270,33 +273,36 @@ void ColorD::outputChanged(const Output::Ptr &output)
     // check Device.Kind is "display"
     if (output->interface()->kind() != QLatin1String("display")) {
         // not a display device, ignoring
+        qCDebug(COLORD) << "Not a display device, ignoring" << output->name() << output->interface()->kind();
         return;
     }
 
     QList<QDBusObjectPath> profiles = output->interface()->profiles();
     if (profiles.isEmpty()) {
         // There are no profiles ignoring
+        qCDebug(COLORD) << "There are no profiles, ignoring" << output->name();
         return;
     }
 
     // read the default profile (the first path in the Device.Profiles property)
     QDBusObjectPath profileDefault = profiles.first();
-    qDebug() << "profileDefault" << profileDefault.path();
+    qCDebug(COLORD) << "profileDefault" << profileDefault.path();
     CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
                                profileDefault.path(),
                                QDBusConnection::systemBus());
     if (!profile.isValid()) {
+        qCDebug(COLORD) << "Profile invalid" << output->name() << profile.lastError();
         return;
     }
     QString filename = profile.filename();
-    qDebug() << "Default Profile Filename" << filename;
+    qCDebug(COLORD) << "Default Profile Filename" << output->name() << filename;
 
     QFile file(filename);
     QByteArray data;
     if (file.open(QIODevice::ReadOnly)) {
         data = file.readAll();
     } else {
-        qWarning() << "Failed to open profile" << filename;
+        qCWarning(COLORD) << "Failed to open profile" << output->name() << filename;
         return;
     }
 
@@ -307,14 +313,14 @@ void ColorD::outputChanged(const Output::Ptr &output)
     // open file
     lcms_profile = cmsOpenProfileFromMem((const uint*) data.data(), data.size());
     if (lcms_profile == NULL) {
-        qWarning() << "Could not open profile with lcms" << filename;
+        qCWarning(COLORD) << "Could not open profile with lcms" << output->name() << filename;
         return;
     }
 
     // The gamma size of this output
     int gammaSize = output->getGammaSize();
     if (gammaSize == 0) {
-        qWarning() << "Gamma size is zero";
+        qCWarning(COLORD) << "Gamma size is zero" << output->name();
         cmsCloseProfile(lcms_profile);
         return;
     }
@@ -325,7 +331,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
     // get tone curves from profile
     vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
     if (vcgt == NULL || vcgt[0] == NULL) {
-        qDebug() << "Profile does not have any VCGT data, reseting";
+        qCDebug(COLORD) << "Profile does not have any VCGT data, reseting" << output->name() << filename;
         // Reset the gamma table
         for (int i = 0; i < gammaSize; ++i) {
             uint value = (i * 0xffff) / (gammaSize - 1);
@@ -379,7 +385,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
     }
 
     if (isPrimary) {
-        qDebug() << "Setting X atom on output:"  << output->name();
+        qCDebug(COLORD) << "Setting X atom on output:"  << output->name();
         // export the file data as an x atom on PRIMARY *screen* (not output)
         Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", false);
         int rc = XChangeProperty(m_dpy,
@@ -393,7 +399,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
 
         // for some reason this fails with BadRequest, but actually sets the value
         if (rc != BadRequest && rc != Success) {
-            qWarning() << "Failed to set XProperty";
+            qCWarning(COLORD) << "Failed to set XProperty";
         }
     }
 }
@@ -417,7 +423,7 @@ XRRScreenResources *ColorD::connectToDisplay()
     if (!XRRQueryExtension(m_dpy, &eventBase, &m_errorBase) ||
             !XRRQueryVersion(m_dpy, &major_version, &minor_version))
     {
-        qWarning() << "RandR extension missing";
+        qCWarning(COLORD) << "RandR extension missing";
         return 0;
     }
 
@@ -432,11 +438,11 @@ XRRScreenResources *ColorD::connectToDisplay()
     m_has_1_3 = (major_version > 1 || (major_version == 1 && minor_version >= 3));
 
     if (m_has_1_3) {
-        qDebug() << "Using XRANDR extension 1.3 or greater.";
+        qCDebug(COLORD) << "Using XRANDR extension 1.3 or greater.";
     } else if (has_1_2) {
-        qDebug() << "Using XRANDR extension 1.2.";
+        qCDebug(COLORD) << "Using XRANDR extension 1.2.";
     } else {
-        qDebug() << "Using legacy XRANDR extension (1.1 or earlier).";
+        qCDebug(COLORD) << "Using legacy XRANDR extension (1.1 or earlier).";
     }
 
     m_root = RootWindow(m_dpy, 0);
@@ -455,7 +461,7 @@ XRRScreenResources *ColorD::connectToDisplay()
 
 void ColorD::checkOutputs()
 {
-    qDebug();
+    qCDebug(COLORD) << "Checking outputs";
     // Check the output as something has changed
     for (int i = 0; i < m_resources->noutput; ++i) {
         bool found = false;
@@ -464,7 +470,7 @@ void ColorD::checkOutputs()
             if (output->output() == m_resources->outputs[i]) {
                 if (!currentOutput->isActive()) {
                     // The device is not active anymore
-                    qDebug() << "remove device";
+                    qCDebug(COLORD) << "remove device";
                     removeOutput(output);
                     found = true;
                     break;
@@ -505,7 +511,7 @@ void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 
 void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 {
-    qDebug() << "Device added" << objectPath.path();
+    qCDebug(COLORD) << "Device added" << objectPath.path();
 //    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
 //                                   objectPath.path(),
 //                                   QLatin1String("org.freedesktop.ColorManager.Device"),
@@ -527,7 +533,7 @@ void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 
 void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
 {
-    qDebug() << "Device changed" << objectPath.path();
+    qCDebug(COLORD) << "Device changed" << objectPath.path();
     Output::Ptr output;
     // Get the Crtc of this output
     for (int i = 0; i < m_connectedOutputs.size(); ++i) {
@@ -538,7 +544,7 @@ void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
     }
 
     if (output.isNull()) {
-        qWarning() << "Output not found";
+        qCWarning(COLORD) << "Output not found";
         return;
     }
 

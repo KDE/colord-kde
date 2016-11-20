@@ -20,9 +20,11 @@
 #include "Output.h"
 
 #include <QX11Info>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #define RR_CONNECTOR_TYPE_PANEL "Panel"
+
+Q_DECLARE_LOGGING_CATEGORY(COLORD)
 
 Output::Output(RROutput output, XRRScreenResources *resources) :
     m_output(output),
@@ -107,7 +109,7 @@ void Output::setPath(const QDBusObjectPath &path)
                                         path.path(),
                                         QDBusConnection::systemBus());
     if (!m_interface->isValid()) {
-        qWarning() << "Invalid interface" << path.path() << m_interface->lastError().message();
+        qCWarning(COLORD) << "Invalid interface" << path.path() << m_interface->lastError().message();
         delete m_interface;
         m_interface = 0;
     }
@@ -151,7 +153,7 @@ Edid Output::readEdidData()
     const quint8 *data;
     data = readEdidData(size);
     if (data == NULL) {
-        qWarning() << "Unable to get EDID for output" << name();
+        qCWarning(COLORD) << "Unable to get EDID for output" << name();
         Edid ret;
         m_id = ret.deviceId(name());
         return ret;

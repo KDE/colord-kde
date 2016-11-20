@@ -26,7 +26,7 @@
 #include <QFileInfo>
 #include <QCryptographicHash>
 
-#include <QDebug>
+#include <QLoggingCategory>
 
 #define PACKAGE_NAME PROJECT_NAME
 #define PACKAGE_VERSION COLORD_KDE_VERSION
@@ -47,6 +47,8 @@
 #define CD_PROFILE_METADATA_DATA_SOURCE_CALIB	"calib"
 #define CD_PROFILE_METADATA_MAPPING_FORMAT	"MAPPING_format"
 #define CD_PROFILE_METADATA_MAPPING_QUALIFIER	"MAPPING_qualifier"
+
+Q_DECLARE_LOGGING_CATEGORY(COLORD)
 
 QString ProfileUtils::profileHash(QFile &profile)
 {
@@ -113,7 +115,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     // check if the file doesn't already exist
     QFileInfo fileInfo(filename);
     if (fileInfo.exists()) {
-        qWarning() << "EDID ICC Profile already exists" << filename;
+        qCWarning(COLORD) << "EDID ICC Profile already exists" << filename;
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -140,7 +142,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     // create our generated profile
     lcms_profile = cmsCreateRGBProfile(&white_point, &chroma, transfer_curve);
     if (lcms_profile == NULL) {
-        qWarning() << "Failed to create ICC profile on cmsCreateRGBProfile";
+        qCWarning(COLORD) << "Failed to create ICC profile on cmsCreateRGBProfile";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -156,7 +158,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigCopyrightTag,
                                "No copyright");
     if (!ret) {
-        qWarning() << "Failed to write copyright";
+        qCWarning(COLORD) << "Failed to write copyright";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -177,7 +179,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigDeviceModelDescTag,
                                model);
     if (!ret) {
-        qWarning() << "Failed to write model";
+        qCWarning(COLORD) << "Failed to write model";
         if (*transfer_curve != NULL) {
             cmsFreeToneCurve(*transfer_curve);
         }
@@ -189,7 +191,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigProfileDescriptionTag,
                                model);
     if (!ret) {
-        qWarning() << "Failed to write description";
+        qCWarning(COLORD) << "Failed to write description";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -210,7 +212,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                cmsSigDeviceMfgDescTag,
                                vendor);
     if (!ret) {
-        qWarning() << "Failed to write manufacturer";
+        qCWarning(COLORD) << "Failed to write manufacturer";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -257,7 +259,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     /* write new tag */
     ret = cmsWriteTag(lcms_profile, cmsSigMetaTag, dict);
     if (!ret) {
-        qWarning() << "Failed to write profile metadata";
+        qCWarning(COLORD) << "Failed to write profile metadata";
         if (*transfer_curve != NULL)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -266,7 +268,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     /* write profile id */
     ret = cmsMD5computeID(lcms_profile);
     if (!ret) {
-        qWarning() << "Failed to write profile id";
+        qCWarning(COLORD) << "Failed to write profile id";
         if (dict != NULL)
             cmsDictFree (dict);
         if (*transfer_curve != NULL)
@@ -303,7 +305,7 @@ cmsBool ProfileUtils::cmsDictAddEntryAscii(cmsHANDLE dict,
                                            const QString &key,
                                            const QString &value)
 {
-    qDebug() << key << value;
+    qCDebug(COLORD) << key << value;
     cmsBool ret;
 
     wchar_t *mb_key = new wchar_t[key.length() + 1];
