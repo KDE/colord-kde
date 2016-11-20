@@ -106,9 +106,11 @@ ColorD::~ColorD()
     }
 
     // Stop the thread
-    m_profilesWatcher->quit();
-    m_profilesWatcher->wait();
-    m_profilesWatcher->deleteLater();
+    if (m_profilesWatcher) {
+        m_profilesWatcher->quit();
+        m_profilesWatcher->wait();
+        m_profilesWatcher->deleteLater();
+    }
 }
 
 void ColorD::init()
