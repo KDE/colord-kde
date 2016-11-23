@@ -49,6 +49,7 @@ include_directories(${CMAKE_SOURCE_DIR}
 add_subdirectory(colord-kded)
 add_subdirectory(colord-kcm)
 add_subdirectory(icc-importer)
+add_subdirectory(calibrate)
 #add_subdirectory(dataengine)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
