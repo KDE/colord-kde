@@ -24,6 +24,9 @@
 #include <QGuiApplication>
 #include <QCommandLineParser>
 
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+
 #include <iostream>
 
 int main(int argc, char **argv)
@@ -37,9 +40,18 @@ int main(int argc, char **argv)
     QCommandLineParser parser;
     parser.addVersionOption();
     parser.addHelpOption();
+
     QCommandLineOption showDaemonVersionOption("daemon-version",
                                                QCoreApplication::translate("main", "Prints the colord-session daemon version."));
-    parser.addOption(showDaemonVersionOption);
+
+    QCommandLineOption deviceIdOption("device",
+                                      QCoreApplication::translate("main", "Set the specific device to calibrate."),
+                                      QCoreApplication::translate("main", "device"));
+    parser.addOptions({
+                          showDaemonVersionOption,
+                          deviceIdOption
+                      });
+
     parser.process(app);
 
     if (parser.isSet(showDaemonVersionOption)) {
@@ -47,8 +59,16 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    ColordHelper helper;
+    if (!parser.isSet(deviceIdOption)) {
+        std::cout << QCoreApplication::translate("main", "No device was specified!").toUtf8().constData() << std::endl;
+        return 1;
+    }
 
+    ColordHelper helper(parser.value(deviceIdOption));
 
-    return 0;
+    QQmlApplicationEngine *engine = new QQmlApplicationEngine;
+    engine->rootContext()->setContextProperty("ColordHelper", &helper);
+    engine->load(QUrl(QLatin1String("qrc:/main.qml")));
+
+    return app.exec();
 }

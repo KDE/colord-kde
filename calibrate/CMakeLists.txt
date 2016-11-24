@@ -1,4 +1,4 @@
-file(GLOB QML_SRC qml/*.qml qml/*.js)
+file(GLOB QML_SRC *.qml qml/*.qml qml/*.js)
 
 set(calibrate_SRCS
     ${QML_SRC}
@@ -23,5 +23,6 @@ add_executable(quick-color-calibrate
 
 target_link_libraries(quick-color-calibrate
     Qt5::Gui
+    Qt5::Qml
     Qt5::DBus
 )

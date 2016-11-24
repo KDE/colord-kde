@@ -20,14 +20,28 @@
 
 #include "CdHelperInterface.h"
 
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(CALIBRATE, "calibrate")
+
 static QString service = QStringLiteral("org.freedesktop.ColorHelper");
 static QString servicePath = QStringLiteral("/");
 
-ColordHelper::ColordHelper(QObject *parent) : QObject(parent)
+ColordHelper::ColordHelper(const QString &deviceId, QObject *parent) : QObject(parent)
+  , m_deviceId(deviceId)
 {
     m_displayInterface = new OrgFreedesktopColorHelperDisplayInterface(service,
                                                                        servicePath,
                                                                        QDBusConnection::sessionBus());
+    connect(m_displayInterface, &OrgFreedesktopColorHelperDisplayInterface::Finished,
+            this, &ColordHelper::Finished);
+    connect(m_displayInterface, &OrgFreedesktopColorHelperDisplayInterface::InteractionRequired,
+            this, &ColordHelper::InteractionRequired);
+    connect(m_displayInterface, &OrgFreedesktopColorHelperDisplayInterface::UpdateGamma,
+            this, &ColordHelper::UpdateGamma);
+    connect(m_displayInterface, &OrgFreedesktopColorHelperDisplayInterface::UpdateSample,
+            this, &ColordHelper::UpdateSample);
+
 }
 
 QString ColordHelper::daemonVersion()
@@ -35,4 +49,56 @@ QString ColordHelper::daemonVersion()
     return OrgFreedesktopColorHelperInterface(service,
                                               servicePath,
                                               QDBusConnection::sessionBus()).daemonVersion();
+}
+
+void ColordHelper::start()
+{
+    qCDebug(CALIBRATE) << m_quality << m_displayType << m_profileTitle;
+
+    m_profileId = "colorhug-08"; // TODO make this dynamic
+    auto reply = m_displayInterface->Start(m_deviceId,
+                                           m_profileId,
+                                           QVariantMap{
+                                               {QStringLiteral("Quality"), m_quality},
+                                               {QStringLiteral("Whitepoint"), 0},
+                                               {QStringLiteral("Title"), m_profileTitle},
+                                               {QStringLiteral("DeviceKind"), m_displayType},
+                                               {QStringLiteral("Brightness"), 100}
+                                           });
+    auto watcher = new QDBusPendingCallWatcher(reply, this);
+
+    connect(watcher, &QDBusPendingCallWatcher::finished,
+            this, &ColordHelper::startCallFinished);
+}
+
+void ColordHelper::startCallFinished(QDBusPendingCallWatcher *call)
+{
+    QDBusPendingReply<void> reply = *call;
+    if (reply.isError()) {
+        qCDebug(CALIBRATE) << reply.error();
+    } else {
+//        qCDebug(CALIBRATE) << reply.error();
+    }
+    call->deleteLater();
+}
+
+void ColordHelper::Finished(uint error_code, const QVariantMap &details)
+{
+    qCDebug(CALIBRATE) << error_code << details;
+}
+
+void ColordHelper::InteractionRequired(uint code, const QString &message, const QString &image)
+{
+    qCDebug(CALIBRATE) << code << message << image;
+    Q_EMIT interaction(code, image);
+}
+
+void ColordHelper::UpdateGamma(CdGamaList gamma)
+{
+    qCDebug(CALIBRATE) << gamma.size();
+}
+
+void ColordHelper::UpdateSample(double red, double green, double blue)
+{
+    qCDebug(CALIBRATE) << red << green << blue;
 }

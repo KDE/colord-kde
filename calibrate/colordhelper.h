@@ -21,19 +21,46 @@
 
 #include <QObject>
 
+#include <dbus-types.h>
+
 class OrgFreedesktopColorHelperInterface;
 class OrgFreedesktopColorHelperDisplayInterface;
+class QDBusPendingCallWatcher;
 
 class ColordHelper : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(uint quality MEMBER m_quality NOTIFY qualityChanged)
+    Q_PROPERTY(uint displayType MEMBER m_displayType NOTIFY displayTypeChanged)
+    Q_PROPERTY(QString profileTitle MEMBER m_profileTitle NOTIFY profileTitleChanged)
 public:
-    explicit ColordHelper(QObject *parent = 0);
+    explicit ColordHelper(const QString &deviceId, QObject *parent = 0);
 
     static QString daemonVersion();
 
+public Q_SLOTS:
+    void start();
+
+private Q_SLOTS:
+    void startCallFinished(QDBusPendingCallWatcher *call);
+    void Finished(uint error_code, const QVariantMap &details);
+    void InteractionRequired(uint code, const QString &message, const QString &image);
+    void UpdateGamma(CdGamaList gamma);
+    void UpdateSample(double red, double green, double blue);
+
+Q_SIGNALS:
+    void qualityChanged();
+    void displayTypeChanged();
+    void profileTitleChanged();
+    void interaction(uint code, const QString &image);
+
 private:
     OrgFreedesktopColorHelperDisplayInterface *m_displayInterface;
+    QString m_deviceId;
+    QString m_profileId;
+    QString m_profileTitle;
+    uint m_quality = 0;
+    uint m_displayType = 0;
 };
 
 #endif // COLORDHELPER_H

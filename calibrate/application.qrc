@@ -1,5 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Introduction.qml</file>
+        <file>CheckSettings.qml</file>
+        <file>CalibrationQuality.qml</file>
+        <file>DisplayType.qml</file>
+        <file>ProfileTitle.qml</file>
+        <file>Action.qml</file>
     </qresource>
 </RCC>
