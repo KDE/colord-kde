@@ -16,39 +16,24 @@
  *   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,  *
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
-#include "colordhelper.h"
+#ifndef COLORDHELPER_H
+#define COLORDHELPER_H
 
-#include <QFileInfo>
-#include <QIcon>
-#include <QDebug>
-#include <QGuiApplication>
-#include <QCommandLineParser>
+#include <QObject>
 
-#include <iostream>
+class OrgFreedesktopColorHelperInterface;
+class OrgFreedesktopColorHelperDisplayInterface;
 
-int main(int argc, char **argv)
+class ColordHelper : public QObject
 {
-    Q_INIT_RESOURCE(application);
+    Q_OBJECT
+public:
+    explicit ColordHelper(QObject *parent = 0);
 
-    QGuiApplication app(argc, argv);
+    static QString daemonVersion();
 
-    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
+private:
+    OrgFreedesktopColorHelperDisplayInterface *m_displayInterface;
+};
 
-    QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.addHelpOption();
-    QCommandLineOption showDaemonVersionOption("daemon-version",
-                                               QCoreApplication::translate("main", "Prints the colord-session daemon version."));
-    parser.addOption(showDaemonVersionOption);
-    parser.process(app);
-
-    if (parser.isSet(showDaemonVersionOption)) {
-        std::cout << ColordHelper::daemonVersion().toLatin1().constData() << std::endl;
-        return 0;
-    }
-
-    ColordHelper helper;
-
-
-    return 0;
-}
+#endif // COLORDHELPER_H

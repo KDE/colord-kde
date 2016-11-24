@@ -18,37 +18,21 @@
  ***************************************************************************/
 #include "colordhelper.h"
 
-#include <QFileInfo>
-#include <QIcon>
-#include <QDebug>
-#include <QGuiApplication>
-#include <QCommandLineParser>
+#include "CdHelperInterface.h"
 
-#include <iostream>
+static QString service = QStringLiteral("org.freedesktop.ColorHelper");
+static QString servicePath = QStringLiteral("/");
 
-int main(int argc, char **argv)
+ColordHelper::ColordHelper(QObject *parent) : QObject(parent)
 {
-    Q_INIT_RESOURCE(application);
+    m_displayInterface = new OrgFreedesktopColorHelperDisplayInterface(service,
+                                                                       servicePath,
+                                                                       QDBusConnection::sessionBus());
+}
 
-    QGuiApplication app(argc, argv);
-
-    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
-
-    QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.addHelpOption();
-    QCommandLineOption showDaemonVersionOption("daemon-version",
-                                               QCoreApplication::translate("main", "Prints the colord-session daemon version."));
-    parser.addOption(showDaemonVersionOption);
-    parser.process(app);
-
-    if (parser.isSet(showDaemonVersionOption)) {
-        std::cout << ColordHelper::daemonVersion().toLatin1().constData() << std::endl;
-        return 0;
-    }
-
-    ColordHelper helper;
-
-
-    return 0;
+QString ColordHelper::daemonVersion()
+{
+    return OrgFreedesktopColorHelperInterface(service,
+                                              servicePath,
+                                              QDBusConnection::sessionBus()).daemonVersion();
 }

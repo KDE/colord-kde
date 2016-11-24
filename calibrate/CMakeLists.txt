@@ -2,6 +2,7 @@ file(GLOB QML_SRC qml/*.qml qml/*.js)
 
 set(calibrate_SRCS
     ${QML_SRC}
+    colordhelper.cpp
     main.cpp
 )
 
@@ -13,7 +14,7 @@ qt5_add_resources(calibrate_SRCS
 set(COLORD_HELPER_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorHelper.xml)
 set_source_files_properties(${COLORD_HELPER_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_HELPER_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
-set_source_files_properties(${COLORD_HELPER_INTERFACE_XML} PROPERTIES CLASSNAME CdHelperInterfaceDisplay)
+#set_source_files_properties(${COLORD_HELPER_INTERFACE_XML} PROPERTIES CLASSNAME CdHelperInterfaceDisplay)
 qt5_add_dbus_interface(calibrate_SRCS ${COLORD_HELPER_INTERFACE_XML} CdHelperInterface)
 
 add_executable(quick-color-calibrate
@@ -22,4 +23,5 @@ add_executable(quick-color-calibrate
 
 target_link_libraries(quick-color-calibrate
     Qt5::Gui
+    Qt5::DBus
 )
