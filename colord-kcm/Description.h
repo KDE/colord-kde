@@ -66,7 +66,7 @@ private:
     QString m_currentDeviceKind;
     ProfileNamedColors *m_namedColors;
     ProfileMetaData *m_metadata;
-    QList<QDBusObjectPath> m_sensors;
+    QVector<QDBusObjectPath> m_sensors;
 };
 
 #endif // DESCRIPTION_H

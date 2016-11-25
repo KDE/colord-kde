@@ -20,11 +20,14 @@
 #define COLORDHELPER_H
 
 #include <QObject>
+#include <QVector>
+#include <QDBusObjectPath>
 
 #include <dbus-types.h>
 
 class OrgFreedesktopColorHelperInterface;
 class OrgFreedesktopColorHelperDisplayInterface;
+
 class QDBusPendingCallWatcher;
 
 class ColordHelper : public QObject
@@ -33,15 +36,23 @@ class ColordHelper : public QObject
     Q_PROPERTY(uint quality MEMBER m_quality NOTIFY qualityChanged)
     Q_PROPERTY(uint displayType MEMBER m_displayType NOTIFY displayTypeChanged)
     Q_PROPERTY(QString profileTitle MEMBER m_profileTitle NOTIFY profileTitleChanged)
+    Q_PROPERTY(bool sensorDetected READ sensorDetected NOTIFY sensorDetectedChanged)
 public:
     explicit ColordHelper(const QString &deviceId, QObject *parent = 0);
+    ~ColordHelper();
 
     static QString daemonVersion();
+
+    bool sensorDetected() const;
 
 public Q_SLOTS:
     void start();
 
 private Q_SLOTS:
+    void gotSensors(QDBusPendingCallWatcher *call);
+    void sensorAdded(const QDBusObjectPath &object_path);
+    void sensorRemoved(const QDBusObjectPath &object_path);
+
     void startCallFinished(QDBusPendingCallWatcher *call);
     void Finished(uint error_code, const QVariantMap &details);
     void InteractionRequired(uint code, const QString &message, const QString &image);
@@ -52,13 +63,15 @@ Q_SIGNALS:
     void qualityChanged();
     void displayTypeChanged();
     void profileTitleChanged();
+    void sensorDetectedChanged();
     void interaction(uint code, const QString &image);
 
 private:
     OrgFreedesktopColorHelperDisplayInterface *m_displayInterface;
+    QVector<QDBusObjectPath> m_sensors;
     QString m_deviceId;
-    QString m_profileId;
     QString m_profileTitle;
+    bool m_started = false;
     uint m_quality = 0;
     uint m_displayType = 0;
 };

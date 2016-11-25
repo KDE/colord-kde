@@ -33,11 +33,10 @@ Page {
         }
 
         Image {
-            source: image
-        }
-
-        Item {
             Layout.fillHeight: true
+            Layout.fillWidth: true
+            fillMode: Image.PreserveAspectFit
+            source: "file:///usr/share/colord/icons/colorhug-attach.svg" + image
         }
     }
 

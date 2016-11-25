@@ -14,8 +14,13 @@ qt5_add_resources(calibrate_SRCS
 set(COLORD_HELPER_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorHelper.xml)
 set_source_files_properties(${COLORD_HELPER_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_HELPER_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
-#set_source_files_properties(${COLORD_HELPER_INTERFACE_XML} PROPERTIES CLASSNAME CdHelperInterfaceDisplay)
 qt5_add_dbus_interface(calibrate_SRCS ${COLORD_HELPER_INTERFACE_XML} CdHelperInterface)
+
+set(COLORD_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorManager.xml)
+set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
+set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
+set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES CLASSNAME CdInterface)
+qt5_add_dbus_interface(calibrate_SRCS ${COLORD_INTERFACE_XML} CdInterface)
 
 add_executable(quick-color-calibrate
     ${calibrate_SRCS}

@@ -19,6 +19,7 @@
 #include "colordhelper.h"
 
 #include "CdHelperInterface.h"
+#include "CdInterface.h"
 
 #include <QLoggingCategory>
 
@@ -27,12 +28,15 @@ Q_LOGGING_CATEGORY(CALIBRATE, "calibrate")
 static QString service = QStringLiteral("org.freedesktop.ColorHelper");
 static QString servicePath = QStringLiteral("/");
 
+typedef QList<QDBusObjectPath> ObjectPathList;
+
 ColordHelper::ColordHelper(const QString &deviceId, QObject *parent) : QObject(parent)
   , m_deviceId(deviceId)
 {
     m_displayInterface = new OrgFreedesktopColorHelperDisplayInterface(service,
                                                                        servicePath,
-                                                                       QDBusConnection::sessionBus());
+                                                                       QDBusConnection::sessionBus(),
+                                                                       this);
     connect(m_displayInterface, &OrgFreedesktopColorHelperDisplayInterface::Finished,
             this, &ColordHelper::Finished);
     connect(m_displayInterface, &OrgFreedesktopColorHelperDisplayInterface::InteractionRequired,
@@ -42,6 +46,29 @@ ColordHelper::ColordHelper(const QString &deviceId, QObject *parent) : QObject(p
     connect(m_displayInterface, &OrgFreedesktopColorHelperDisplayInterface::UpdateSample,
             this, &ColordHelper::UpdateSample);
 
+    // listen to colord sensor events
+    auto interface = new CdInterface(QStringLiteral("org.freedesktop.ColorManager"),
+                                     QStringLiteral("/org/freedesktop/ColorManager"),
+                                     QDBusConnection::systemBus(),
+                                     this);
+    connect(interface, &CdInterface::SensorAdded, this, &ColordHelper::sensorAdded);
+    connect(interface, &CdInterface::SensorRemoved, this, &ColordHelper::sensorRemoved);
+
+    auto async = interface->GetSensors();
+    auto watcher = new QDBusPendingCallWatcher(async, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, &ColordHelper::gotSensors);
+}
+
+ColordHelper::~ColordHelper()
+{
+    qCDebug(CALIBRATE) << "quiting" << true;
+
+    if (m_started) {
+        QDBusPendingReply<void> reply = m_displayInterface->Cancel();
+        QThread::sleep(1);
+        reply.waitForFinished();
+        qCDebug(CALIBRATE) << "canceling calibration" << reply.error();
+    }
 }
 
 QString ColordHelper::daemonVersion()
@@ -51,13 +78,25 @@ QString ColordHelper::daemonVersion()
                                               QDBusConnection::sessionBus()).daemonVersion();
 }
 
+bool ColordHelper::sensorDetected() const
+{
+    return m_sensors.size() == 1;
+}
+
 void ColordHelper::start()
 {
-    qCDebug(CALIBRATE) << m_quality << m_displayType << m_profileTitle;
+    qCDebug(CALIBRATE) << m_quality << m_displayType << m_profileTitle << m_started << m_sensors.size();
+    if (m_started || m_sensors.size() != 1) {
+        return;
+    }
+    m_started = true;
 
-    m_profileId = "colorhug-08"; // TODO make this dynamic
+    const QString profileId = m_sensors.first().path()
+            .section(QLatin1Char('/'), -1, -1).replace(QLatin1Char('_'), QLatin1Char('-'));
+    qCDebug(CALIBRATE) << "start using sensor" << profileId;
+
     auto reply = m_displayInterface->Start(m_deviceId,
-                                           m_profileId,
+                                           profileId,
                                            QVariantMap{
                                                {QStringLiteral("Quality"), m_quality},
                                                {QStringLiteral("Whitepoint"), 0},
@@ -66,9 +105,38 @@ void ColordHelper::start()
                                                {QStringLiteral("Brightness"), 100}
                                            });
     auto watcher = new QDBusPendingCallWatcher(reply, this);
-
     connect(watcher, &QDBusPendingCallWatcher::finished,
             this, &ColordHelper::startCallFinished);
+}
+
+void ColordHelper::gotSensors(QDBusPendingCallWatcher *call)
+{
+    QDBusPendingReply<ObjectPathList> reply = *call;
+    if (reply.isError()) {
+        qCWarning(CALIBRATE) << "Unexpected message" << reply.error().message();
+    } else {
+        const ObjectPathList sensors = reply.argumentAt<0>();
+        for (const QDBusObjectPath &sensor : sensors) {
+            // Add the sensors but don't update the Calibrate button
+            sensorAdded(sensor);
+        }
+
+        // Update the calibrate button later
+    }
+}
+
+void ColordHelper::sensorAdded(const QDBusObjectPath &object_path)
+{
+    qCDebug(CALIBRATE) << "sensor added" << object_path.path();
+    m_sensors.push_back(object_path);
+    Q_EMIT sensorDetectedChanged();
+}
+
+void ColordHelper::sensorRemoved(const QDBusObjectPath &object_path)
+{
+    qCDebug(CALIBRATE) << "sensor removed" << object_path.path();
+    m_sensors.removeOne(object_path);
+    Q_EMIT sensorDetectedChanged();
 }
 
 void ColordHelper::startCallFinished(QDBusPendingCallWatcher *call)
@@ -76,6 +144,7 @@ void ColordHelper::startCallFinished(QDBusPendingCallWatcher *call)
     QDBusPendingReply<void> reply = *call;
     if (reply.isError()) {
         qCDebug(CALIBRATE) << reply.error();
+        m_started = false;
     } else {
 //        qCDebug(CALIBRATE) << reply.error();
     }
