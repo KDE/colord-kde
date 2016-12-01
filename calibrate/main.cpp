@@ -31,12 +31,6 @@
 
 int main(int argc, char **argv)
 {
-    Q_INIT_RESOURCE(application);
-
-    QGuiApplication app(argc, argv);
-
-    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
-
     QCommandLineParser parser;
     parser.addVersionOption();
     parser.addHelpOption();
@@ -52,6 +46,14 @@ int main(int argc, char **argv)
                           deviceIdOption
                       });
 
+
+    Q_INIT_RESOURCE(application);
+
+    QGuiApplication app(argc, argv);
+
+    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
     parser.process(app);
 
     if (parser.isSet(showDaemonVersionOption)) {
@@ -64,11 +66,12 @@ int main(int argc, char **argv)
         return 1;
     }
 
+
     ColordHelper helper(parser.value(deviceIdOption));
 
-    QQmlApplicationEngine *engine = new QQmlApplicationEngine;
-    engine->rootContext()->setContextProperty("ColordHelper", &helper);
-    engine->load(QUrl(QLatin1String("qrc:/main.qml")));
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("ColordHelper", &helper);
+    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
     return app.exec();
 }

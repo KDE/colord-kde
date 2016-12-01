@@ -7,5 +7,6 @@
         <file>DisplayType.qml</file>
         <file>ProfileTitle.qml</file>
         <file>Action.qml</file>
+        <file>SamplesWindow.qml</file>
     </qresource>
 </RCC>

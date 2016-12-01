@@ -1,12 +1,13 @@
 import QtQuick 2.6
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 
 Page {
     padding: 10
+    title: qsTr("Calibration quality")
 
     header: Label {
-        text: qsTr("Calibration quality")
+        text: qsTr("Choose calibration quality")
         font.pixelSize: 20
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter

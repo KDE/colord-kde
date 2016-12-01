@@ -1,8 +1,10 @@
 import QtQuick 2.6
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 
 Page {
+    title: qsTr("Choose Display Type")
+
     header: Label {
         padding: 10
         text: qsTr("Choose your display type")

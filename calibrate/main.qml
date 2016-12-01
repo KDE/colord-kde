@@ -1,16 +1,35 @@
 import QtQuick 2.6
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 
 ApplicationWindow {
+    id: mainWindow
     width: 300
     height: 400
     visible: true
-    title: qsTr("Introduction")
+    title: view.currentItem.title
+
+    property bool sensorPresent: ColordHelper.sensorDetected
+    property int maxCurrentIndex: 0
+    onSensorPresentChanged: {
+        console.debug(sensorPresent)
+        if (sensorPresent) {
+            if (view.currentIndex === 0) {
+                view.currentIndex = 1
+            }
+        } else {
+            view.currentIndex = 0
+        }
+    }
 
     SwipeView {
         id: view
         anchors.fill: parent
+        onCurrentIndexChanged: {
+            if (currentIndex > 0 && !sensorPresent) {
+                currentIndex = 0
+            }
+        }
 
         Introduction {
 
@@ -44,6 +63,11 @@ ApplicationWindow {
         }
     }
 
+    SamplesWindow {
+        id: samplesWindow
+        visible: action.current
+    }
+
     PageIndicator {
         id: indicator
 
@@ -67,12 +91,12 @@ ApplicationWindow {
         Button {
             enabled: view.currentIndex > 0
             text: qsTr("Back")
-            onClicked: view.currentIndex = view.currentIndex - 1
+            onClicked: view.decrementCurrentIndex()
         }
         Button {
             enabled: view.currentIndex + 1 < view.count
             text: qsTr("Next")
-            onClicked: view.currentIndex = view.currentIndex + 1
+            onClicked: view.incrementCurrentIndex()
         }
     }
 }

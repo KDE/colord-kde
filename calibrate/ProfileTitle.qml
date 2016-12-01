@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.1
 
 Page {
     padding: 10
+    title: qsTr("Profile Title")
 
     header: Label {
         text: qsTr("Profile title")

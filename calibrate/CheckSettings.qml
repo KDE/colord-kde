@@ -5,6 +5,8 @@ import QtQuick.Layouts 1.1
 Page {
     padding: 10
 
+    title: qsTr("Check Settings")
+
     header: Label {
         text: qsTr("Calibration checklist")
         font.pixelSize: 20

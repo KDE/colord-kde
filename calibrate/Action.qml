@@ -6,6 +6,7 @@ Page {
     property string image
 
     padding: 10
+    title: qsTr("Action")
 
     header: Label {
         text: qsTr("Please attach instrument")
