@@ -83,6 +83,11 @@ bool ColordHelper::sensorDetected() const
     return m_sensors.size() == 1;
 }
 
+uint ColordHelper::progress() const
+{
+    return m_progress;
+}
+
 void ColordHelper::start()
 {
     qCDebug(CALIBRATE) << m_quality << m_displayType << m_profileTitle << m_started << m_sensors.size();
@@ -107,6 +112,18 @@ void ColordHelper::start()
     auto watcher = new QDBusPendingCallWatcher(reply, this);
     connect(watcher, &QDBusPendingCallWatcher::finished,
             this, &ColordHelper::startCallFinished);
+}
+
+void ColordHelper::resume()
+{
+    m_displayInterface->Resume();
+}
+
+void ColordHelper::cancel()
+{
+    QDBusPendingReply<void> reply = m_displayInterface->Cancel();
+    reply.waitForFinished();
+    qCDebug(CALIBRATE) << "canceled calibration" << reply.error();
 }
 
 void ColordHelper::gotSensors(QDBusPendingCallWatcher *call)
@@ -146,19 +163,23 @@ void ColordHelper::startCallFinished(QDBusPendingCallWatcher *call)
         qCDebug(CALIBRATE) << reply.error();
         m_started = false;
     } else {
-//        qCDebug(CALIBRATE) << reply.error();
+        //        qCDebug(CALIBRATE) << reply.error();
     }
     call->deleteLater();
 }
 
 void ColordHelper::Finished(uint error_code, const QVariantMap &details)
 {
-    qCDebug(CALIBRATE) << error_code << details;
+    qCDebug(CALIBRATE) << "finished, error code:" << error_code << details;
 }
 
 void ColordHelper::InteractionRequired(uint code, const QString &message, const QString &image)
 {
     qCDebug(CALIBRATE) << code << message << image;
+    // 0 = attach to screen
+    // 1 = move to calibration mode.
+    // 2 = move to surface mode.
+    // 3 = shut the laptop lid.
     Q_EMIT interaction(code, image);
 }
 

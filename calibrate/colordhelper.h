@@ -45,8 +45,13 @@ public:
 
     bool sensorDetected() const;
 
+    Q_PROPERTY(uint Progress READ progress NOTIFY progressChanged)
+    uint progress() const;
+
 public Q_SLOTS:
     void start();
+    void resume();
+    void cancel();
 
 private Q_SLOTS:
     void gotSensors(QDBusPendingCallWatcher *call);
@@ -60,6 +65,7 @@ private Q_SLOTS:
     void UpdateSample(double red, double green, double blue);
 
 Q_SIGNALS:
+    void progressChanged();
     void qualityChanged();
     void displayTypeChanged();
     void profileTitleChanged();
@@ -74,6 +80,8 @@ private:
     bool m_started = false;
     uint m_quality = 0;
     uint m_displayType = 0;
+    uint m_progress = 0;
+
 };
 
 #endif // COLORDHELPER_H

@@ -52,7 +52,7 @@ ApplicationWindow {
         }
 
         Action {
-            id: action
+            id: actionPage
 
             property bool current: SwipeView.isCurrentItem
             onCurrentChanged: {
@@ -65,7 +65,7 @@ ApplicationWindow {
 
     SamplesWindow {
         id: samplesWindow
-        visible: action.current
+        visible: actionPage.current
     }
 
     PageIndicator {
@@ -78,25 +78,27 @@ ApplicationWindow {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    Connections {
-        target: ColordHelper
-        onInteraction: {
-            console.debug(image)
-            action.image = image
-        }
-    }
-
     footer: RowLayout {
         Layout.fillWidth: true
         Button {
             enabled: view.currentIndex > 0
             text: qsTr("Back")
-            onClicked: view.decrementCurrentIndex()
+            onClicked: {
+                if (view.currentItem === actionPage) {
+                    ColordHelper.cancel()
+                }
+                view.decrementCurrentIndex()
+            }
         }
         Button {
-            enabled: view.currentIndex + 1 < view.count
+            enabled: view.currentIndex + 1 < view.count || (view.currentItem === actionPage && actionPage.interactionRequired)
             text: qsTr("Next")
-            onClicked: view.incrementCurrentIndex()
+            onClicked: {
+                if (view.currentItem === actionPage) {
+                    ColordHelper.resume()
+                }
+                view.incrementCurrentIndex()
+            }
         }
     }
 }
