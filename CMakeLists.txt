@@ -35,8 +35,6 @@ add_definitions(-DTRANSLATION_DOMAIN=\"colord-kde\")
 
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 
-message(STATUS "X randr is required, found: " ${XRANDR_1_3_FOUND})
-
 pkg_check_modules(LCMS2 REQUIRED lcms2)
 
 include_directories(${CMAKE_SOURCE_DIR}
