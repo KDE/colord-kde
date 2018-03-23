@@ -11,7 +11,7 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDECompilerSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 
 include(FindPkgConfig)
 include(ECMPackageConfigHelpers)
