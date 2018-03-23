@@ -47,5 +47,6 @@ target_link_libraries(kded_colord
     ${LCMS2_LIBRARIES}
 )
 
-install(TARGETS kded_colord DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES colord.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kded)
+set_target_properties(kded_colord PROPERTIES OUTPUT_NAME colord)
+kcoreaddons_desktop_to_json(kded_colord colord.desktop)
+install(TARGETS kded_colord DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kded)

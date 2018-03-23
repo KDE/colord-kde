@@ -3,6 +3,7 @@ Type=Service
 
 X-KDE-ServiceTypes=KDEDModule
 X-KDE-Library=colord
+X-KDE-DBus-ModuleName=colord
 X-KDE-Kded-autoload=true
 X-KDE-Kded-phase=1
 

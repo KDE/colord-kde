@@ -43,7 +43,9 @@
 
 #include <KPluginFactory>
 
-K_PLUGIN_FACTORY(ColorDFactory, registerPlugin<ColorD>();)
+K_PLUGIN_FACTORY_WITH_JSON(ColorDFactory,
+                           "colord.json",
+                           registerPlugin<ColorD>();)
 
 Q_LOGGING_CATEGORY(COLORD, "colord")
 
