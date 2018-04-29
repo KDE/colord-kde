@@ -61,10 +61,21 @@ private:
     CdStringMap getProfileMetadata(const QDBusObjectPath &profilePath);
     QString profilesPath() const;
 
+    struct X11Monitor
+    {
+      QString name;
+      RRCrtc crtc;
+      bool isPrimary;
+      int atomId;
+    };
+
+    int getPrimaryCRTCId(XID primary) const;
+    QList<X11Monitor> getAtomIds() const;
+
     Output::List m_connectedOutputs;
 
-    Display *m_dpy;
-    XRRScreenResources *m_resources;
+    Display *m_dpy = nullptr;
+    XRRScreenResources *m_resources = nullptr;
     Window m_root;
 
     QString m_errorCode;
@@ -73,7 +84,7 @@ private:
     int m_errorBase;
     XEventHandler *m_x11EventHandler = nullptr;
     ProfilesWatcher *m_profilesWatcher = nullptr;
-    CdInterface *m_cdInterface;
+    CdInterface *m_cdInterface = nullptr;
 };
 
 #endif // COLORD_H

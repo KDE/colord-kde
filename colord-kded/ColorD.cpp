@@ -263,7 +263,149 @@ void ColorD::addOutput(const Output::Ptr &output)
         outputChanged(output);
     } else {
         qCWarning(COLORD) << "Failed to register device:" << reply.error().message();
+        reply = m_cdInterface->FindDeviceById(deviceId);
+        if (reply.isValid()) {
+            qCDebug(COLORD) << "Found colord device" << reply.value().path();
+
+            bool found = false;
+            for (auto iter : m_connectedOutputs) {
+                if (iter->id() == deviceId) {
+                    found = true;
+
+                    // Store the output path into our Output class
+                    iter->setPath(reply.value());
+
+                    // Check if there is any EDID profile to be added
+                    addEdidProfileToDevice(iter);
+
+                    // Make sure we set the profile on this device
+                    outputChanged(iter);
+                    break;
+                }
+            }
+
+            if (!found) {
+                qCDebug(COLORD) << "Failed to locate" << deviceId << "in the list of known outputs";
+            }
+        }
     }
+}
+
+int ColorD::getPrimaryCRTCId(XID primary) const
+{
+    for (int crtc = 0; crtc < m_resources->ncrtc; crtc++) {
+        XRRCrtcInfo *crtcInfo = XRRGetCrtcInfo(m_dpy, m_resources, m_resources->crtcs[crtc]);
+        if (!crtcInfo) {
+            continue;
+        }
+
+        if (crtcInfo->mode != None && crtcInfo->noutput > 0) {
+            for (int output = 0; output < crtcInfo->noutput; output++) {
+                if (crtcInfo->outputs[output] == primary) {
+                    return crtc;
+                }
+            }
+        }
+        XRRFreeCrtcInfo(crtcInfo);
+    }
+
+    return -1;
+}
+
+QList<ColorD::X11Monitor> ColorD::getAtomIds() const
+{
+    QList<ColorD::X11Monitor> monitorList;
+
+    if (!m_resources) {
+        return monitorList;
+    }
+
+    // see if there is a primary screen.
+    const XID primary = XRRGetOutputPrimary(m_dpy, m_root);
+    const int primaryId = getPrimaryCRTCId(primary);
+    bool havePrimary = false;
+    if (primaryId == -1) {
+        qCDebug(COLORD) << "Couldn't locate primary CRTC.";
+    } else {
+        qCDebug(COLORD) << "Primary CRTC is at CRTC " << primaryId;
+        havePrimary = true;
+    }
+
+    // now iterate over the CRTCs again and add the relevant ones to the list
+    int atomId = 0; // the id of the x atom. might be changed when sorting in the primary later!
+    for (int crtc = 0; crtc < m_resources->ncrtc; ++crtc) {
+        XRROutputInfo *outputInfo = nullptr;
+        XRRCrtcInfo *crtcInfo = XRRGetCrtcInfo(m_dpy, m_resources, m_resources->crtcs[crtc]);
+        if (!crtcInfo) {
+            qCDebug(COLORD) << "Can't get CRTC info for CRTC " << crtc;
+            continue;
+        }
+        // only handle those that are attached though
+        if (crtcInfo->mode == None || crtcInfo->noutput <= 0) {
+            qCDebug(COLORD) << "CRTC for CRTC " << crtc << " has no mode or no output, skipping";
+            XRRFreeCrtcInfo(crtcInfo);
+            continue;
+        }
+
+        // Choose the primary output of the CRTC if we have one, else default to the first. i.e. we punt with
+        // mirrored displays.
+        bool isPrimary = false;
+        int output = 0;
+        if (havePrimary) {
+            for (int j = 0; j < crtcInfo->noutput; j++) {
+                if (crtcInfo->outputs[j] == primary) {
+                    output = j;
+                    isPrimary = true;
+                    break;
+                }
+            }
+        }
+
+        outputInfo = XRRGetOutputInfo(m_dpy, m_resources, crtcInfo->outputs[output]);
+        if (!outputInfo) {
+            qCDebug(COLORD) << "Can't get output info for CRTC " << crtc << " output " << output;
+            XRRFreeCrtcInfo(crtcInfo);
+            XRRFreeOutputInfo(outputInfo);
+            continue;
+        }
+
+        if (outputInfo->connection == RR_Disconnected) {
+            qCDebug(COLORD) << "CRTC " << crtc << " output " << output << " is disconnected, skipping";
+            XRRFreeCrtcInfo(crtcInfo);
+            XRRFreeOutputInfo(outputInfo);
+            continue;
+        }
+
+        ColorD::X11Monitor monitor;
+
+        monitor.crtc = m_resources->crtcs[crtc];
+        monitor.isPrimary = isPrimary;
+        monitor.atomId = atomId++;
+        monitor.name = outputInfo->name;
+        monitorList.append(monitor);
+
+        XRRFreeCrtcInfo(crtcInfo);
+        XRRFreeOutputInfo(outputInfo);
+    }
+
+    // sort the list of monitors so that the primary one is first. also updates the atomId.
+    struct {
+        bool operator()(const ColorD::X11Monitor &monitorA,
+                        const ColorD::X11Monitor &monitorB) const
+        {
+            if(monitorA.isPrimary) return true;
+            if(monitorB.isPrimary) return false;
+
+            return monitorA.atomId < monitorB.atomId;
+        }
+    } sortMonitorList;
+    std::sort(monitorList.begin(), monitorList.end(), sortMonitorList);
+    atomId = 0;
+    for (auto monitor : monitorList) {
+        monitor.atomId = atomId++;
+    }
+
+    return monitorList;
 }
 
 void ColorD::outputChanged(const Output::Ptr &output)
@@ -360,38 +502,25 @@ void ColorD::outputChanged(const Output::Ptr &output)
 
     XRRFreeGamma(gamma);
 
-    bool isPrimary = false;
-    if (output->isPrimary(m_has_1_3, m_root)) {
-        isPrimary = true;
-    } else {
-        // if we find another primary output we are sure
-        // this is not the primary one..
-        bool foundPrimary = false;
-        foreach (const Output::Ptr &out, m_connectedOutputs) {
-            if (out->isPrimary(m_has_1_3, m_root)) {
-                foundPrimary = true;
-                break;
-            }
-        }
-
-        // We did not found the primary
-        if (!foundPrimary) {
-            if (output->isLaptop()) {
-                // there are no other primary outputs
-                // in a Laptop's case it's probably the one
-                isPrimary = true;
-            } else if (!m_connectedOutputs.isEmpty()) {
-                // Last resort just take the first active
-                // output
-                isPrimary = m_connectedOutputs.first() == output;
-            }
+    // export the file data as an x atom
+    // during startup the order of outputs can change, so caching the atomId doesn't work that great
+    int atomId = -1;
+    const QList<ColorD::X11Monitor> monitorList = getAtomIds();
+    for (auto monitor : monitorList) {
+        if (monitor.crtc == output->crtc()) {
+            atomId = monitor.atomId;
+            break;
         }
     }
-
-    if (isPrimary) {
-        qCDebug(COLORD) << "Setting X atom on output:"  << output->name();
-        // export the file data as an x atom on PRIMARY *screen* (not output)
-        Atom prop = XInternAtom(m_dpy, "_ICC_PROFILE", false);
+    if (atomId >= 0) {
+        QString atomString = QLatin1String("_ICC_PROFILE");
+        if (atomId > 0) {
+            atomString.append(QString("_%1").arg(atomId));
+        }
+        qCInfo(COLORD) << "Setting X atom (id:" << atomId << ")" << atomString << "on output:"  << output->name();
+        QByteArray atomBytes = atomString.toLatin1();
+        const char *atomChars = atomBytes.constData();
+        Atom prop = XInternAtom(m_dpy, atomChars, false);
         int rc = XChangeProperty(m_dpy,
                                  m_root,
                                  prop,
@@ -405,6 +534,9 @@ void ColorD::outputChanged(const Output::Ptr &output)
         if (rc != BadRequest && rc != Success) {
             qCWarning(COLORD) << "Failed to set XProperty";
         }
+    }
+    else {
+      qCDebug(COLORD) << "Failed to get an atomId for" << output->name();
     }
 }
 
