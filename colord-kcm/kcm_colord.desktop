@@ -76,8 +76,11 @@ Comment[zh_CN]=管理设备的色彩矫正
 
 X-KDE-Keywords=color,color correction,icc
 X-KDE-Keywords[ca]=color,correccions del color,icc
+X-KDE-Keywords[ca@valencia]=color,correccions del color,icc
+X-KDE-Keywords[cs]=barva,korekce barvy,icc
 X-KDE-Keywords[fr]=couleur,correction des couleurs,icc
 X-KDE-Keywords[nl]=kleur,kleurcorrectie,icc
 X-KDE-Keywords[pt]=cor,correcções de cores,icc
 X-KDE-Keywords[sv]=färg,färgkorrektion,icc
+X-KDE-Keywords[uk]=колір,виправлення кольорів,color,color correction,icc
 X-KDE-Keywords[x-test]=xxcolorxx,xxcolor correctionxx,xxiccxx
