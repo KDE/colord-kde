@@ -33,6 +33,7 @@ Name[tr]=colord Motoru
 Name[uk]=Рушій colord
 Name[x-test]=xxcolord Enginexx
 Name[zh_CN]=colord 引擎
+Name[zh_TW]=colord 引擎
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/DataEngine
