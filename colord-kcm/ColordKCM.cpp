@@ -158,7 +158,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     connect(watcher, &QDBusServiceWatcher::serviceOwnerChanged,
             ui->profile, &Description::serviceOwnerChanged);
 
-    ui->devicesTb->setIcon(QIcon::fromTheme(QStringLiteral("preferences-activities")));
+    ui->devicesTb->setIcon(QIcon::fromTheme(QStringLiteral("computer")));
     ui->profilesTb->setIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
 
     auto signalMapper = new QSignalMapper(this);
