@@ -1,0 +1,8 @@
+*.log
+stamp-*
+colord-kde
+files
+colord-kde.postinst.debhelper
+colord-kde.postrm.debhelper
+colord-kde.substvars
+colord-kde.dsc

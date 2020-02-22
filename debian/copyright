@@ -1,0 +1,27 @@
+This package was debianized by Ernst Martin Witte <emw@users.sourceforge.net> on
+Sat, 22 Feb 2020 22:00:00 +0100.
+
+It was downloaded from https://github.com/KDE/colord-kde
+Copyright information below was extracted from
+    https://github.com/KDE/colord-kde/blob/master/MAINTAINERS
+    https://github.com/KDE/colord-kde/blob/master/COPYING
+
+Upstream Authors: Richard Hughes <richard@hughsie.com>
+                  Daniel Nicoletti <dantti12@gmail.com>
+
+Copyright Holder: Richard Hughes <richard@hughsie.com>
+                  Daniel Nicoletti <dantti12@gmail.com>
+
+License:
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License, version 2
+or higher as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANDABILITY of FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for details.
+
+On Debian GNU/Linux systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL-2'.
