@@ -401,7 +401,7 @@ QList<ColorD::X11Monitor> ColorD::getAtomIds() const
     } sortMonitorList;
     std::sort(monitorList.begin(), monitorList.end(), sortMonitorList);
     atomId = 0;
-    for (auto monitor : monitorList) {
+    for (auto & monitor : monitorList) {
         monitor.atomId = atomId++;
     }
 
