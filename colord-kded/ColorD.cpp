@@ -405,6 +405,9 @@ QList<ColorD::X11Monitor> ColorD::getAtomIds() const
         monitor.atomId = atomId++;
     }
 
+    for (const auto & monitor : monitorList) {
+        qCDebug(COLORD) << "CRTC " << monitor.crtc << "==" << monitor.name << ", atomId =" << monitor.atomId << ", primary =" << monitor.isPrimary;
+    }
     return monitorList;
 }
 
@@ -504,11 +507,13 @@ void ColorD::outputChanged(const Output::Ptr &output)
 
     // export the file data as an x atom
     // during startup the order of outputs can change, so caching the atomId doesn't work that great
-    int atomId = -1;
+    int  atomId    = -1;
+    bool isPrimary = false;
     const QList<ColorD::X11Monitor> monitorList = getAtomIds();
     for (auto monitor : monitorList) {
         if (monitor.crtc == output->crtc()) {
-            atomId = monitor.atomId;
+            atomId    = monitor.atomId;
+            isPrimary = monitor.isPrimary;
             break;
         }
     }
@@ -517,7 +522,9 @@ void ColorD::outputChanged(const Output::Ptr &output)
         if (atomId > 0) {
             atomString.append(QString("_%1").arg(atomId));
         }
-        qCInfo(COLORD) << "Setting X atom (id:" << atomId << ")" << atomString << "on output:"  << output->name();
+        qCInfo(COLORD) << "Setting X atom (id:" << atomId << ")" 
+                       << atomString << "on output:"  << output->name() 
+                       << (isPrimary ? "(primary)" : "(not primary)");
         QByteArray atomBytes = atomString.toLatin1();
         const char *atomChars = atomBytes.constData();
         Atom prop = XInternAtom(m_dpy, atomChars, false);
