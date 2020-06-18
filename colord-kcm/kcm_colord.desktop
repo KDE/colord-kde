@@ -38,6 +38,7 @@ Name[sl]=Popravki barv
 Name[sv]=Färgkorrektion
 Name[tr]=Renk Düzeltmeleri
 Name[uk]=Виправлення кольорів
+Name[x-test]=xxColor Correctionsxx
 Name[zh_CN]=色彩矫正
 Name[zh_TW]=色彩校正
 
@@ -73,6 +74,7 @@ Comment[sl]=Upravljajte popravke barv za naprave
 Comment[sv]=Hantera färgkorrektion för enheter
 Comment[tr]=Aygıtların renk düzeltmesini yönetin
 Comment[uk]=Керування виправленням кольорів на пристроях
+Comment[x-test]=xxManage color correction of devicesxx
 Comment[zh_CN]=管理设备的色彩矫正
 Comment[zh_TW]=管理裝置的色彩校正
 
@@ -98,5 +100,6 @@ X-KDE-Keywords[ru]=color,color correction,icc,цветовая коррекци�
 X-KDE-Keywords[sl]=barva,barve,popravki barv,icc
 X-KDE-Keywords[sv]=färg,färgkorrektion,icc
 X-KDE-Keywords[uk]=колір,виправлення кольорів,color,color correction,icc
+X-KDE-Keywords[x-test]=xxcolorxx,xxcolor correctionxx,xxiccxx
 X-KDE-Keywords[zh_CN]=颜色、颜色校正、ICC
 X-KDE-Keywords[zh_TW]=color,color correction,icc
