@@ -11,6 +11,7 @@ X-KDE-ParentApp=kcontrol
 X-KDE-Kded-phase=1
 
 Name=Color Corrections
+Name[az]=Rəng Korreksiyası
 Name[bs]=JKorekcije boja
 Name[ca]=Correccions del color
 Name[ca@valencia]=Correccions del color
@@ -46,6 +47,7 @@ Name[zh_CN]=色彩管理
 Name[zh_TW]=色彩校正
 
 Comment=Manage color correction of devices
+Comment[az]=Rəng korreksiyasını idarı edin
 Comment[bs]=Upravljanje korekcijom boja uređaja
 Comment[ca]=Gestiona la correcció del color dels dispositius
 Comment[ca@valencia]=Gestiona la correcció del color dels dispositius
@@ -84,6 +86,7 @@ Comment[zh_CN]=对设备进行色彩管理
 Comment[zh_TW]=管理裝置的色彩校正
 
 X-KDE-Keywords=color,color correction,icc
+X-KDE-Keywords[az]=color,color correction,icc,rəng,rəng korreksiyası
 X-KDE-Keywords[ca]=color,correccions del color,icc
 X-KDE-Keywords[ca@valencia]=color,correccions del color,icc
 X-KDE-Keywords[cs]=barva,korekce barvy,icc
