@@ -22,11 +22,18 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     DBus
     Widgets
-    X11Extras
 )
 
 find_package(X11)
-find_package(XCB COMPONENTS XCB RANDR)
+set_package_properties(X11 PROPERTIES
+    TYPE OPTIONAL
+    PURPOSE "For colord integration on X11"
+)
+
+if (X11_FOUND)
+    find_package(XCB REQUIRED COMPONENTS XCB RANDR)
+    find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
+endif()
 
 find_package(KF5 REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
              WidgetsAddons WindowSystem)
@@ -38,13 +45,13 @@ add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 pkg_check_modules(LCMS2 REQUIRED lcms2)
 
 include_directories(${CMAKE_SOURCE_DIR}
-    ${X11_Xrandr_INCLUDE_PATH}
-    ${X11_X11_INCLUDE_PATH}
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-add_subdirectory(colord-kded)
+if (X11_FOUND)
+    add_subdirectory(colord-kded)
+endif()
 add_subdirectory(colord-kcm)
 add_subdirectory(icc-importer)
 #add_subdirectory(dataengine)

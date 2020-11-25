@@ -1,6 +1,5 @@
 include_directories(${CMAKE_SOURCE_DIR}/colord-kded
                     ${CMAKE_BUILD_DIR}
-                    ${X11_Xrandr_INCLUDE_PATH}
 )
 
 set(colord_kded_SRCS
@@ -41,8 +40,8 @@ target_link_libraries(kded_colord
     KF5::CoreAddons
     KF5::DBusAddons
     KF5::WindowSystem
-    ${X11_Xrandr_LIB}
-    ${X11_LIBRARIES}
+    X11::X11
+    X11::Xrandr
     ${XCB_LIBRARIES}
     ${LCMS2_LIBRARIES}
 )
