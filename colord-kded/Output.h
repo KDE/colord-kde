@@ -26,7 +26,7 @@
 
 #include "Edid.h"
 
-#include "../xlibandxrandr.h"
+#include "xlibandxrandr.h"
 
 class Output
 {

@@ -24,7 +24,7 @@
 
 #include <KDEDModule>
 
-#include "../xlibandxrandr.h"
+#include "xlibandxrandr.h"
 
 class CdInterface;
 class XEventHandler;
