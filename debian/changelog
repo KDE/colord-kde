@@ -1,3 +1,9 @@
+colord-kde (0.5.0-2) unstable; urgency=low
+
+  * upstream updates
+
+ -- Ernst Martin Witte <emw@users.sourceforge.net>  Sat, 05 Dec 2020 12:00:00 +0100
+
 colord-kde (0.5.0-1) unstable; urgency=low
 
   * initial debianization
