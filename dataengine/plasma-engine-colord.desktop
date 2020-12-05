@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=colord Engine
+Name[az]=colord mexanizmi
 Name[bs]=colord pogon
 Name[ca]=Motor colord
 Name[ca@valencia]=Motor colord
@@ -10,9 +11,11 @@ Name[el]=μηχανή colord
 Name[en_GB]=colord Engine
 Name[es]=Motor para colord
 Name[et]=colord mootor
+Name[eu]=colord motorra
 Name[fi]=colord-moottori
 Name[fr]=Moteur colord
 Name[gl]=Motor colord
+Name[hi]=colord इंजन
 Name[hu]=colord motor
 Name[it]=Motore colord
 Name[km]=ម៉ាស៊ីណ colord

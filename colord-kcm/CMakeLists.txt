@@ -1,6 +1,5 @@
 include_directories(${CMAKE_SOURCE_DIR}/colord-kcm
                     ${CMAKE_BUILD_DIR}
-                    ${X11_Xrandr_INCLUDE_PATH}
 )
 
 set(kcm_colord_SRCS
