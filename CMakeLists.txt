@@ -14,7 +14,6 @@ include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 
 include(FindPkgConfig)
-include(ECMPackageConfigHelpers)
 include(ECMOptionalAddSubdirectory)
 include(FeatureSummary)
 
