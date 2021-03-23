@@ -53,6 +53,5 @@ if (X11_FOUND)
 endif()
 add_subdirectory(colord-kcm)
 add_subdirectory(icc-importer)
-#add_subdirectory(dataengine)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
