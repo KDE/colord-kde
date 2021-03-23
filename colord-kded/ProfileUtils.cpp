@@ -18,7 +18,6 @@
  ***************************************************************************/
 
 #include "ProfileUtils.h"
-#include <config.h>
 
 #include "Edid.h"
 #include "DmiUtils.h"

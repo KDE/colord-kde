@@ -20,8 +20,6 @@
 #include "ColordKCM.h"
 #include "ui_ColordKCM.h"
 
-#include <config.h>
-
 #include "DeviceModel.h"
 #include "ProfileModel.h"
 #include "Description.h"

@@ -7,7 +7,6 @@ find_package(ECM 1.3.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 set(COLORD_KDE_VERSION "0.5.0")
-configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)

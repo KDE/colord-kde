@@ -22,8 +22,6 @@
 
 #include <stdlib.h>
 
-#include <config.h>
-
 #include <QFileInfo>
 #include <QStringBuilder>
 #include <QDebug>

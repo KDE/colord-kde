@@ -1,2 +1,0 @@
-#cmakedefine PROJECT_NAME "@PROJECT_NAME@"
-#cmakedefine COLORD_KDE_VERSION "@COLORD_KDE_VERSION@"
