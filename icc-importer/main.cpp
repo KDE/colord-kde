@@ -34,6 +34,8 @@
 #include <KAboutData>
 #include <KLocalizedString>
 
+#include <version.h>
+
 QString message(const QString &title, const QString &description, const QString &copyright)
 {
     QString ret;
@@ -61,7 +63,7 @@ int main(int argc, char **argv)
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
     KAboutData about(QStringLiteral("colord-kde-icc-importer"),
                      i18n("ICC Profile Installer"),
-                     COLORD_KDE_VERSION,
+                     COLORD_KDE_VERSION_STRING,
                      i18n("An application to install ICC profiles"),
                      KAboutLicense::GPL,
                      i18n("(C) 2008-2016 Daniel Nicoletti"));

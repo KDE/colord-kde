@@ -16,6 +16,12 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(FindPkgConfig)
 include(ECMOptionalAddSubdirectory)
 include(FeatureSummary)
+include(ECMSetupVersion)
+
+ecm_setup_version("${COLORD_KDE_VERSION}"
+    VARIABLE_PREFIX "COLORD_KDE"
+    VERSION_HEADER "version.h"
+)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Core

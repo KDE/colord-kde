@@ -28,8 +28,10 @@
 
 #include <QLoggingCategory>
 
+#include <version.h>
+
 #define PACKAGE_NAME PROJECT_NAME
-#define PACKAGE_VERSION COLORD_KDE_VERSION
+#define PACKAGE_VERSION COLORD_KDE_VERSION_STRING
 
 /* defined in metadata-spec.txt */
 #define CD_PROFILE_METADATA_STANDARD_SPACE	"STANDARD_space"

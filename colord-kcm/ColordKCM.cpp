@@ -44,6 +44,8 @@
 #include <QSignalMapper>
 #include <QIcon>
 
+#include <version.h>
+
 #define DEVICE_PATH "device-path"
 
 K_PLUGIN_FACTORY(ColordKCMFactory, registerPlugin<ColordKCM>();)
@@ -56,7 +58,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
 {
     auto aboutData = new KAboutData(QStringLiteral("kcm_colord"),
                                     i18n("Color settings"),
-                                    QStringLiteral(COLORD_KDE_VERSION),
+                                    QStringLiteral(COLORD_KDE_VERSION_STRING),
                                     i18n("Color settings"),
                                     KAboutLicense::GPL,
                                     i18n("(C) 2012-2016 Daniel Nicoletti"));
