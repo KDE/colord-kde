@@ -73,7 +73,7 @@ void ProfilesWatcher::scanHomeDirectory()
         addProfile(it.next());
     }
 
-    emit scanFinished();
+    Q_EMIT scanFinished();
 }
 
 void ProfilesWatcher::createIccProfile(bool isLaptop, const Edid &edid)

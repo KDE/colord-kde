@@ -42,7 +42,7 @@
 #define GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING         0xfe
 #define GCM_DESCRIPTOR_COLOR_POINT                      0xfb
 
-#define PNP_IDS "/usr/share/hwdata/pnp.ids"
+#define PNP_IDS QStringLiteral("/usr/share/hwdata/pnp.ids")
 
 Q_DECLARE_LOGGING_CATEGORY(COLORD)
 
@@ -199,7 +199,7 @@ bool Edid::parse(const quint8 *data, size_t length)
         QFile pnpIds(PNP_IDS);
         if (pnpIds.open(QIODevice::ReadOnly)) {
             while (!pnpIds.atEnd()) {
-                QString line = pnpIds.readLine();
+                QString line = QString::fromUtf8(pnpIds.readLine());
                 if (line.startsWith(m_pnpId)) {
                     QStringList parts = line.split(QLatin1Char('\t'));
                     if (parts.size() == 2) {
@@ -301,7 +301,7 @@ bool Edid::parse(const quint8 *data, size_t length)
     // calculate checksum
     QCryptographicHash hash(QCryptographicHash::Md5);
     hash.addData(reinterpret_cast<const char *>(data), length);
-    m_checksum = hash.result().toHex();
+    m_checksum = QString::fromUtf8(hash.result().toHex());
 
     m_valid = true;
     return m_valid;

@@ -80,12 +80,12 @@ ColorD::ColorD(QObject *parent, const QVariantList &) :
     auto watcher = new QDBusServiceWatcher(QStringLiteral("org.freedesktop.ColorManager"),
                                            QDBusConnection::systemBus(),
                                            QDBusServiceWatcher::WatchForOwnerChange,
-                                           this);
+                                           (QObject *)this);
     connect(watcher, &QDBusServiceWatcher::serviceOwnerChanged,
             this, &ColorD::serviceOwnerChanged);
 
     // Create the profiles watcher thread
-    m_profilesWatcher = new ProfilesWatcher;
+    m_profilesWatcher = new ProfilesWatcher();
     m_profilesWatcher->start();
 
     // Check outputs add all active outputs, once profiles are ready
@@ -135,7 +135,7 @@ void ColorD::addEdidProfileToDevice(const Output::Ptr &output)
     QDBusReply<ObjectPathList> paths = m_cdInterface->GetProfiles();
 
     // Search through all profiles to see if the edid md5 matches
-    foreach (const QDBusObjectPath &profilePath, paths.value()) {
+    for (const QDBusObjectPath &profilePath : paths.value()) {
         const CdStringMap metadata = getProfileMetadata(profilePath);
         const auto data = metadata.constFind(QStringLiteral("EDID_md5"));
         if (data != metadata.constEnd() && data.value() == output->edidHash()) {
@@ -381,7 +381,7 @@ QList<ColorD::X11Monitor> ColorD::getAtomIds() const
         monitor.crtc = m_resources->crtcs[crtc];
         monitor.isPrimary = isPrimary;
         monitor.atomId = atomId++;
-        monitor.name = outputInfo->name;
+        monitor.name = QString::fromLatin1(outputInfo->name);
         monitorList.append(monitor);
 
         XRRFreeCrtcInfo(crtcInfo);
@@ -515,7 +515,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
     if (atomId >= 0) {
         QString atomString = QLatin1String("_ICC_PROFILE");
         if (atomId > 0) {
-            atomString.append(QString("_%1").arg(atomId));
+            atomString.append(QStringLiteral("_%1").arg(atomId));
         }
         qCInfo(COLORD) << "Setting X atom (id:" << atomId << ")" << atomString << "on output:"  << output->name();
         QByteArray atomBytes = atomString.toLatin1();
@@ -602,7 +602,7 @@ void ColorD::checkOutputs()
     for (int i = 0; i < m_resources->noutput; ++i) {
         bool found = false;
         Output::Ptr currentOutput(new Output(m_resources->outputs[i], m_resources));
-        foreach (const Output::Ptr &output, m_connectedOutputs) {
+        for (const Output::Ptr &output : m_connectedOutputs) {
             if (output->output() == m_resources->outputs[i]) {
                 if (!currentOutput->isActive()) {
                     // The device is not active anymore

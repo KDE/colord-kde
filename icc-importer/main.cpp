@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("application-vnd.iccprofile")));
     KAboutData about(QStringLiteral("colord-kde-icc-importer"),
                      i18n("ICC Profile Installer"),
-                     COLORD_KDE_VERSION_STRING,
+                     QStringLiteral(COLORD_KDE_VERSION_STRING),
                      i18n("An application to install ICC profiles"),
                      KAboutLicense::GPL,
                      i18n("(C) 2008-2016 Daniel Nicoletti"));
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
     parser.addVersionOption();
     parser.addHelpOption();
     parser.addOption(QCommandLineOption(QStringLiteral("yes"), i18n("Do not prompt the user if he wants to install")));
-    parser.addPositionalArgument("file", i18n("Color profile to install"), "+file");
+    parser.addPositionalArgument(QStringLiteral("file"), i18n("Color profile to install"), QStringLiteral("+file"));
     parser.process(app);
     about.processCommandLine(&parser);
 
@@ -127,7 +127,7 @@ int main(int argc, char **argv)
         return 3;
     }
 
-    if (!parser.isSet("yes")) {
+    if (!parser.isSet(QStringLiteral("yes"))) {
         const int ret = KMessageBox::questionYesNo(0, message(i18n("Would you like to import the color profile?"),
                                                               profile.description(),
                                                               profile.copyright()),

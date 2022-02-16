@@ -331,7 +331,7 @@ void Profile::parseProfile(const uint *data, size_t length)
 
     QCryptographicHash hash(QCryptographicHash::Md5);
     hash.addData(reinterpret_cast<const char *>(data), length);
-    m_checksum = hash.result().toHex();
+    m_checksum = QString::fromUtf8(hash.result().toHex());
     qDebug() << "checksum" << m_checksum;
 
 //    /* generate and set checksum */
@@ -494,9 +494,9 @@ QMap<QString, QColor> Profile::getNamedColors()
 //            string.append(prefix);
         // Add a space if we got the above prefix
 //        }
-        string.append(name);
+        string.append(QString::fromLatin1(name));
         if (suffix[0] != '\0') {
-            string.append(suffix);
+            string.append(QString::fromLatin1(suffix));
         }
 
         /* get color */

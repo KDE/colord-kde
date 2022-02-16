@@ -40,7 +40,7 @@ Output::Output(RROutput output, XRRScreenResources *resources) :
     m_active = info->connection == RR_Connected && info->crtc != None;
 
     // store output name
-    m_name = info->name;
+    m_name = QString::fromLatin1(info->name);
 
     // store the crtc
     m_crtc = info->crtc;
@@ -198,7 +198,7 @@ QString Output::connectorType() const
 
     connector_type_str = XGetAtomName(QX11Info::display(), connector_type);
     if (connector_type_str) {
-        result = connector_type_str;
+        result = QString::fromLatin1(connector_type_str);
         XFree(connector_type_str);
     }
 

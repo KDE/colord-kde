@@ -21,67 +21,62 @@
 #ifndef COLORD_KCM_H
 #define COLORD_KCM_H
 
-#include <KCModule>
-#include <KTitleWidget>
+#include <KConfigGroup>
+#include <KQuickAddons/ManagedConfigModule>
 
-#include <QMenu>
-#include <QStackedLayout>
-#include <QSortFilterProxyModel>
-#include <QDBusObjectPath>
+// typedef QPair<QString, QDBusObjectPath> KindAndPath;
 
-typedef QPair<QString, QDBusObjectPath> KindAndPath;
+// namespace Ui {
+//     class ColordKCM;
+// }
+// class CdInterface;
+// class DeviceModel;
+// class ProfileModel;
+// class ProfileDescription;
 
-namespace Ui {
-    class ColordKCM;
-}
-class CdInterface;
-class DeviceModel;
-class ProfileModel;
-class ProfileDescription;
-
-class ColordKCM : public KCModule
+class ColordKCM : public KQuickAddons::ManagedConfigModule
 {
     Q_OBJECT
 public:
     ColordKCM(QWidget *parent, const QVariantList &args);
-    ~ColordKCM();
+    //    ~ColordKCM();
 
-public slots:
-    void load() Q_DECL_OVERRIDE;
+    // public slots:
+    //     void load() Q_DECL_OVERRIDE;
 
-private slots:
-    void showDescription();
-    void addProfileFile();
-    void addProfileAction(QAction *action);
-    void updateSelection();
-    void removeProfile();
-    void fillMenu();
-    void on_tabWidget_currentChanged(int index);
-    void profileAdded(const QDBusObjectPath &objectPath);
+    // private slots:
+    //     void showDescription();
+    //     void addProfileFile();
+    //     void addProfileAction(QAction *action);
+    //     void updateSelection();
+    //     void removeProfile();
+    //     void fillMenu();
+    //     void on_tabWidget_currentChanged(int index);
+    //     void profileAdded(const QDBusObjectPath &objectPath);
 
-private:
-    void addProvileToDevice(const QDBusObjectPath &profile, const QDBusObjectPath &devicePath) const;
-    QModelIndex currentIndex() const;
-    QString profilesPath() const;
+    // private:
+    //     void addProvileToDevice(const QDBusObjectPath &profile, const QDBusObjectPath &devicePath) const;
+    //     QModelIndex currentIndex() const;
+    //     QString profilesPath() const;
 
-    Ui::ColordKCM *ui;
-    DeviceModel *m_deviceModel;
-    ProfileModel *m_profileModel;
-    QStackedLayout *m_stackedLayout;
-    ProfileDescription *m_profileDesc;
-    QWidget *m_noPrinter;
-    QWidget *m_serverError;
-    KTitleWidget *m_serverErrorW;
-    int m_lastError;
-    QMenu *m_addMenu;
-    QMenu *m_addAvailableMenu;
-    QSortFilterProxyModel *m_profilesFilter;
-    QHash<QString, KindAndPath> m_profileFiles;
+    //    Ui::ColordKCM *ui;
+    //    DeviceModel *m_deviceModel;
+    //    ProfileModel *m_profileModel;
+    //    QStackedLayout *m_stackedLayout;
+    //    ProfileDescription *m_profileDesc;
+    //    QWidget *m_noPrinter;
+    //    QWidget *m_serverError;
+    //    KTitleWidget *m_serverErrorW;
+    //    int m_lastError;
+    //    QMenu *m_addMenu;
+    //    QMenu *m_addAvailableMenu;
+    //    QSortFilterProxyModel *m_profilesFilter;
+    //    QHash<QString, KindAndPath> m_profileFiles;
 
-    QAction *m_addAction;
-    QAction *m_removeAction;
-    QAction *m_configureAction;
-    CdInterface *m_cdInterface;
+    //    QAction *m_addAction;
+    //    QAction *m_removeAction;
+    //    QAction *m_configureAction;
+    //    CdInterface *m_cdInterface;
 };
 
 #endif // COLORD_KCM_H

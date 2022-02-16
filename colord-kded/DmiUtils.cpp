@@ -33,7 +33,7 @@ QString DmiUtils::deviceModel()
     for (const QString &filename : sysfsNames) {
         QFile file(filename);
         if (file.open(QIODevice::ReadOnly)) {
-            QString tmp = file.readAll();
+            QString tmp = QString::fromLatin1(file.readAll());
             tmp = tmp.simplified();
             if (!tmp.isEmpty()) {
                 ret = tmp;
@@ -56,7 +56,7 @@ QString DmiUtils::deviceVendor()
     for (const QString &filename : sysfsVendors) {
         QFile file(filename);
         if (file.open(QIODevice::ReadOnly)) {
-            QString tmp = file.readAll().simplified();
+            QString tmp = QString::fromLatin1(file.readAll().simplified());
             tmp = tmp.simplified();
             if (!tmp.isEmpty()) {
                 ret = tmp;

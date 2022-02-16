@@ -33,21 +33,21 @@
 #define PACKAGE_VERSION COLORD_KDE_VERSION_STRING
 
 /* defined in metadata-spec.txt */
-#define CD_PROFILE_METADATA_STANDARD_SPACE	"STANDARD_space"
-#define CD_PROFILE_METADATA_EDID_MD5		"EDID_md5"
-#define CD_PROFILE_METADATA_EDID_MODEL		"EDID_model"
-#define CD_PROFILE_METADATA_EDID_SERIAL		"EDID_serial"
-#define CD_PROFILE_METADATA_EDID_MNFT		"EDID_mnft"
-#define CD_PROFILE_METADATA_EDID_VENDOR		"EDID_manufacturer"
-#define CD_PROFILE_METADATA_FILE_CHECKSUM	"FILE_checksum"
-#define CD_PROFILE_METADATA_CMF_PRODUCT		"CMF_product"
-#define CD_PROFILE_METADATA_CMF_BINARY		"CMF_binary"
-#define CD_PROFILE_METADATA_CMF_VERSION		"CMF_version"
-#define CD_PROFILE_METADATA_DATA_SOURCE		"DATA_source"
-#define CD_PROFILE_METADATA_DATA_SOURCE_EDID	"edid"
-#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB	"calib"
-#define CD_PROFILE_METADATA_MAPPING_FORMAT	"MAPPING_format"
-#define CD_PROFILE_METADATA_MAPPING_QUALIFIER	"MAPPING_qualifier"
+#define CD_PROFILE_METADATA_STANDARD_SPACE QStringLiteral("STANDARD_space")
+#define CD_PROFILE_METADATA_EDID_MD5 QStringLiteral("EDID_md5")
+#define CD_PROFILE_METADATA_EDID_MODEL QStringLiteral("EDID_model")
+#define CD_PROFILE_METADATA_EDID_SERIAL QStringLiteral("EDID_serial")
+#define CD_PROFILE_METADATA_EDID_MNFT QStringLiteral("EDID_mnft")
+#define CD_PROFILE_METADATA_EDID_VENDOR QStringLiteral("EDID_manufacturer")
+#define CD_PROFILE_METADATA_FILE_CHECKSUM QStringLiteral("FILE_checksum")
+#define CD_PROFILE_METADATA_CMF_PRODUCT QStringLiteral("CMF_product")
+#define CD_PROFILE_METADATA_CMF_BINARY QStringLiteral("CMF_binary")
+#define CD_PROFILE_METADATA_CMF_VERSION QStringLiteral("CMF_version")
+#define CD_PROFILE_METADATA_DATA_SOURCE QStringLiteral("DATA_source")
+#define CD_PROFILE_METADATA_DATA_SOURCE_EDID QStringLiteral("edid")
+#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB QStringLiteral("calib")
+#define CD_PROFILE_METADATA_MAPPING_FORMAT QStringLiteral("MAPPING_format")
+#define CD_PROFILE_METADATA_MAPPING_QUALIFIER QStringLiteral("MAPPING_qualifier")
 
 Q_DECLARE_LOGGING_CATEGORY(COLORD)
 
@@ -57,10 +57,10 @@ QString ProfileUtils::profileHash(QFile &profile)
     cmsHPROFILE lcms_profile = NULL;
 
     /* get the internal profile id, if it exists */
-    lcms_profile = cmsOpenProfileFromFile(profile.fileName().toUtf8(), "r");
+    lcms_profile = cmsOpenProfileFromFile(profile.fileName().toUtf8().data(), "r");
     if (lcms_profile == NULL) {
         // Compute the hash from the whole file..
-        return QCryptographicHash::hash(profile.readAll(), QCryptographicHash::Md5).toHex();
+        return QString::fromUtf8(QCryptographicHash::hash(profile.readAll(), QCryptographicHash::Md5).toHex());
     } else {
         checksum = getPrecookedMd5(lcms_profile);
         if (lcms_profile != NULL) {
@@ -69,7 +69,7 @@ QString ProfileUtils::profileHash(QFile &profile)
 
         if (checksum.isNull()) {
             // Compute the hash from the whole file..
-            return QCryptographicHash::hash(profile.readAll(), QCryptographicHash::Md5).toHex();
+            return QString::fromUtf8(QCryptographicHash::hash(profile.readAll(), QCryptographicHash::Md5).toHex());
         } else {
             return checksum;
         }
@@ -99,7 +99,7 @@ QString ProfileUtils::getPrecookedMd5(cmsHPROFILE lcms_profile)
         md5.append(profile_id[i]);
     }
 
-    return md5.toHex();
+    return QString::fromUtf8(md5.toHex());
 }
 
 bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QString &filename)
@@ -155,9 +155,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     cmsSetDeviceClass(lcms_profile, cmsSigDisplayClass);
 
     // copyright
-    ret = cmsWriteTagTextAscii(lcms_profile,
-                               cmsSigCopyrightTag,
-                               "No copyright");
+    ret = cmsWriteTagTextAscii(lcms_profile, cmsSigCopyrightTag, QStringLiteral("No copyright"));
     if (!ret) {
         qCWarning(COLORD) << "Failed to write copyright";
         if (*transfer_curve != NULL)
@@ -223,15 +221,9 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     dict = cmsDictAlloc(NULL);
 
     // set the framework creator metadata
-    cmsDictAddEntryAscii(dict,
-                         CD_PROFILE_METADATA_CMF_PRODUCT,
-                         PACKAGE_NAME);
-    cmsDictAddEntryAscii(dict,
-                         CD_PROFILE_METADATA_CMF_BINARY,
-                         PACKAGE_NAME);
-    cmsDictAddEntryAscii(dict,
-                         CD_PROFILE_METADATA_CMF_VERSION,
-                         PACKAGE_VERSION);
+    cmsDictAddEntryAscii(dict, CD_PROFILE_METADATA_CMF_PRODUCT, QStringLiteral(PACKAGE_NAME));
+    cmsDictAddEntryAscii(dict, CD_PROFILE_METADATA_CMF_BINARY, QStringLiteral(PACKAGE_NAME));
+    cmsDictAddEntryAscii(dict, CD_PROFILE_METADATA_CMF_VERSION, QStringLiteral(PACKAGE_VERSION));
 
     /* set the data source so we don't ever prompt the user to
          * recalibrate (as the EDID data won't have changed) */
@@ -240,21 +232,21 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                          CD_PROFILE_METADATA_DATA_SOURCE_EDID);
 
     // set 'ICC meta Tag for Monitor Profiles' data
-    cmsDictAddEntryAscii(dict, "EDID_md5", edid.hash());
+    cmsDictAddEntryAscii(dict, QStringLiteral("EDID_md5"), edid.hash());
 
     if (!model.isEmpty())
-        cmsDictAddEntryAscii(dict, "EDID_model", model);
+        cmsDictAddEntryAscii(dict, QStringLiteral("EDID_model"), model);
 
     if (!edid.serial().isEmpty()) {
-        cmsDictAddEntryAscii(dict, "EDID_serial", edid.serial());
+        cmsDictAddEntryAscii(dict, QStringLiteral("EDID_serial"), edid.serial());
     }
 
     if (!edid.pnpId().isEmpty()) {
-        cmsDictAddEntryAscii(dict, "EDID_mnft", edid.pnpId());
+        cmsDictAddEntryAscii(dict, QStringLiteral("EDID_mnft"), edid.pnpId());
     }
 
     if (!vendor.isEmpty()) {
-        cmsDictAddEntryAscii(dict, "EDID_manufacturer", vendor);
+        cmsDictAddEntryAscii(dict, QStringLiteral("EDID_manufacturer"), vendor);
     }
 
     /* write new tag */
@@ -278,7 +270,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     }
 
     /* save, TODO: get error */
-    ret = cmsSaveProfileToFile(lcms_profile, filename.toUtf8());
+    ret = cmsSaveProfileToFile(lcms_profile, filename.toUtf8().data());
 
     if (dict != NULL) {
         cmsDictFree (dict);

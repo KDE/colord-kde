@@ -1,33 +1,47 @@
 project(colord-kde)
 
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-set(QT_MIN_VERSION "5.3.0")
+cmake_minimum_required(VERSION 3.16)
+set(QT_MIN_VERSION "5.15.0")
+set(KF5_MIN_VERSION "5.89")
 
-find_package(ECM 1.3.0 REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+set(PROJECT_VERSION "5.24.80")
+set(PROJECT_VERSION_MAJOR 5)
 
-set(COLORD_KDE_VERSION "0.5.0")
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
-
-include(FindPkgConfig)
-include(ECMOptionalAddSubdirectory)
+include(ECMMarkNonGuiExecutable)
+include(CMakePackageConfigHelpers)
+include(WriteBasicConfigVersionFile)
+include(CheckIncludeFiles)
 include(FeatureSummary)
+include(ECMOptionalAddSubdirectory)
+include(ECMQtDeclareLoggingCategory)
+include(ECMQueryQmake)
+include(ECMInstallIcons)
 include(ECMSetupVersion)
-
-ecm_setup_version("${COLORD_KDE_VERSION}"
-    VARIABLE_PREFIX "COLORD_KDE"
-    VERSION_HEADER "version.h"
-)
+include(KDEClangFormat)
+include(KDEGitCommitHooks)
+include(ECMConfiguredInstall)
+include(ECMGenerateDBusServiceFile)
+include(ECMQMLModules)
+include(ECMGenerateExportHeader)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     DBus
     Widgets
 )
-
+ecm_setup_version("${PROJECT_VERSION}"
+    VARIABLE_PREFIX "COLORD_KDE"
+    VERSION_HEADER "version.h"
+)
 find_package(X11)
 set_package_properties(X11 PROPERTIES
     TYPE OPTIONAL
@@ -40,7 +54,7 @@ if (X11_FOUND)
 endif()
 
 find_package(KF5 REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
-             WidgetsAddons WindowSystem)
+             WidgetsAddons WindowSystem Declarative)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"colord-kde\")
 
@@ -56,7 +70,7 @@ include_directories(${CMAKE_SOURCE_DIR}
 if (X11_FOUND)
     add_subdirectory(colord-kded)
 endif()
-add_subdirectory(colord-kcm)
+#add_subdirectory(colord-kcm)
 add_subdirectory(icc-importer)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

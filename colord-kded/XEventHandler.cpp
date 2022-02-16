@@ -40,7 +40,7 @@ bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message
     auto xEventType = e->response_type & ~0x80;
 
     if (xEventType == m_randrBase + XCB_RANDR_SCREEN_CHANGE_NOTIFY) {
-        emit outputChanged();
+        Q_EMIT outputChanged();
     }
 
     return false;
