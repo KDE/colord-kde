@@ -17,7 +17,11 @@
 // *   Boston, MA 02110-1301, USA.                                           *
 // ***************************************************************************/
 
-//#include "ColordKCM.h"
+#include "ColordKCM.h"
+#include <KLocalizedString>
+#include <KPluginFactory>
+#include <KSharedConfig>
+
 //#include "ui_ColordKCM.h"
 
 //#include "DeviceModel.h"
@@ -46,8 +50,9 @@
 
 //#define DEVICE_PATH "device-path"
 
-// K_PLUGIN_FACTORY(ColordKCMFactory, registerPlugin<ColordKCM>();)
-
+K_PLUGIN_CLASS_WITH_JSON(ColordKCM, "kcm_colord.json")
+ColordKCM::ColordKCM(QObject *parent, const KPluginMetaData &data, const QVariantList &list)
+    : KQuickAddons::ManagedConfigModule(parent, data, list){};
 // ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
 //     KCModule(parent, args),
 //     ui(new Ui::ColordKCM),
@@ -452,4 +457,4 @@
 //     return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) % QLatin1String("/icc/");
 // }
 
-//#include "ColordKCM.moc"
+#include "ColordKCM.moc"

@@ -70,7 +70,7 @@ include_directories(${CMAKE_SOURCE_DIR}
 if (X11_FOUND)
     add_subdirectory(colord-kded)
 endif()
-#add_subdirectory(colord-kcm)
+add_subdirectory(colord-kcm)
 add_subdirectory(icc-importer)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

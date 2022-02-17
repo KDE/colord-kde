@@ -11,5 +11,7 @@ import org.kde.kirigami 2.15 as Kirigami
 import org.kde.kcm 1.2 as KCM
 
 KCM.ScrollViewKCM {
-
+    QQC2.Label {
+        text: "Hello :)"
+    }
 }

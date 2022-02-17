@@ -18,8 +18,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef COLORD_KCM_H
-#define COLORD_KCM_H
+#pragma once
 
 #include <KConfigGroup>
 #include <KQuickAddons/ManagedConfigModule>
@@ -38,7 +37,7 @@ class ColordKCM : public KQuickAddons::ManagedConfigModule
 {
     Q_OBJECT
 public:
-    ColordKCM(QWidget *parent, const QVariantList &args);
+    explicit ColordKCM(QObject *parent, const KPluginMetaData &data, const QVariantList &list = QVariantList());
     //    ~ColordKCM();
 
     // public slots:
@@ -79,4 +78,3 @@ public:
     //    CdInterface *m_cdInterface;
 };
 
-#endif // COLORD_KCM_H
