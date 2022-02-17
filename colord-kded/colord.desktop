@@ -8,6 +8,7 @@ X-KDE-Kded-autoload=true
 X-KDE-Kded-phase=1
 
 Name=Color Daemon
+Name[ar]=خدمة اللون
 Name[az]=Rəngləri idarəetmə xidməti
 Name[bs]=Color Daemon
 Name[ca]=Dimoni de color
@@ -48,6 +49,7 @@ Name[x-test]=xxColor Daemonxx
 Name[zh_CN]=色彩管理系统服务
 Name[zh_TW]=色彩守護進程
 Comment=Manage Screen Color Profiles
+Comment[ar]=أدر تشكيلات ألوان الشاشة
 Comment[az]=Monitorun rəng profilləırinin idarə edilməsi
 Comment[bs]=Upravljanje profilima ekranskih boja
 Comment[ca]=Gestiona els perfils de color de la pantalla
