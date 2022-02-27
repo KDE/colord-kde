@@ -68,7 +68,7 @@ void ProfileModel::gotProfiles(QDBusPendingCallWatcher *call)
         for (const QDBusObjectPath &profile : profiles) {
             profileAdded(profile, false);
         }
-        emit changed();
+        Q_EMIT changed();
     }
     call->deleteLater();
 }
@@ -150,7 +150,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     }
     item->setText(title);
 
-    item->setData(qVariantFromValue(objectPath), ObjectPathRole);
+    item->setData(QVariant::fromValue(objectPath), ObjectPathRole);
     item->setData(QString(getSortChar(kind) + title), SortRole);
     item->setData(filename, FilenameRole);
     item->setData(kind, ProfileKindRole);
@@ -167,7 +167,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     appendRow(item);
 
     if (emitChanged) {
-        emit changed();
+        Q_EMIT changed();
     }
 }
 
@@ -183,7 +183,7 @@ void ProfileModel::profileRemoved(const QDBusObjectPath &objectPath)
         removeRow(row);
     }
 
-    emit changed();
+    Q_EMIT changed();
 }
 
 void ProfileModel::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
@@ -192,7 +192,7 @@ void ProfileModel::serviceOwnerChanged(const QString &serviceName, const QString
     if (newOwner.isEmpty() || oldOwner != newOwner) {
         // colord has quit or restarted
         removeRows(0, rowCount());
-        emit changed();
+        Q_EMIT changed();
     }
 }
 
@@ -245,4 +245,16 @@ Qt::ItemFlags ProfileModel::flags(const QModelIndex &index) const
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
     }
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}
+
+QHash<int, QByteArray> ProfileModel::roleNames() const
+{
+    return {{ObjectPathRole, "objectPath"},
+            {ParentObjectPathRole, "parentObjectPath"},
+            {IsDeviceRole, "isDevice"},
+            {SortRole, "sort"},
+            {FilenameRole, "filename"},
+            {ColorspaceRole, "colorSpace"},
+            {ProfileKindRole, "profileKind"},
+            {CanRemoveProfileRole, "canRemoveProfile"}};
 }

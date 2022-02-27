@@ -41,22 +41,22 @@ public:
         ProfileKindRole,
         CanRemoveProfileRole
     } ProfileRoles;
-    explicit ProfileModel(CdInterface *cdInterface, QObject *parent = 0);
+    explicit ProfileModel(CdInterface *cdInterface, QObject *parent = nullptr);
 
-    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const override;
     // Returns a char to help the sort model
     static QChar getSortChar(const QString &kind);
     static QString getProfileDataSource(const CdStringMap &metadata);
 
-public slots:
+public Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
-signals:
+Q_SIGNALS:
     void changed();
 
-private slots:
+private Q_SLOTS:
     void gotProfiles(QDBusPendingCallWatcher *call);
     void profileChanged(const QDBusObjectPath &objectPath);
     void profileAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);

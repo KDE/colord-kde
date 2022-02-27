@@ -4,9 +4,9 @@ include_directories(${CMAKE_SOURCE_DIR}/colord-kcm
 
 set(kcm_colord_SRCS
 #    NoSelectionRectDelegate.cpp
-#    DeviceModel.cpp
-#    ProfileModel.cpp
-#    Profile.cpp
+    DeviceModel.cpp
+    ProfileModel.cpp
+    Profile.cpp
 #    ProfileNamedColors.cpp
 #    ProfileMetaData.cpp
 #    Description.cpp

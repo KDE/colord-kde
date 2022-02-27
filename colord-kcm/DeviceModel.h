@@ -41,19 +41,20 @@ public:
         ProfileKindRole,
         CanRemoveProfileRole
     } DeviceRoles;
-    explicit DeviceModel(CdInterface *cdInterface, QObject *parent = 0);
+    explicit DeviceModel(CdInterface *cdInterface, QObject *parent = nullptr);
 
-    Qt::ItemFlags flags(const QModelIndex &index) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) Q_DECL_OVERRIDE;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    QHash<int, QByteArray> roleNames() const override;
 
-public slots:
+public Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
-signals:
+Q_SIGNALS:
     void changed();
 
-private slots:
+private Q_SLOTS:
     void gotDevices(QDBusPendingCallWatcher *call);
     void deviceChanged(const QDBusObjectPath &objectPath);
     void deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);

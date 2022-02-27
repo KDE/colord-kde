@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>629</width>
+    <width>669</width>
     <height>344</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <property name="margin">
+   <property name="margin" stdset="0">
     <number>0</number>
    </property>
    <item row="0" column="0">
@@ -24,7 +24,7 @@
        <property name="verticalSpacing">
         <number>0</number>
        </property>
-       <property name="margin">
+       <property name="margin" stdset="0">
         <number>0</number>
        </property>
        <item row="0" column="4">
@@ -82,7 +82,7 @@
         <widget class="QStackedWidget" name="tabWidget">
          <widget class="QWidget" name="page_1">
           <layout class="QGridLayout" name="gridLayout_3">
-           <property name="margin">
+           <property name="margin" stdset="0">
             <number>0</number>
            </property>
            <item row="0" column="0">
@@ -117,7 +117,7 @@
          </widget>
          <widget class="QWidget" name="page_2">
           <layout class="QGridLayout" name="gridLayout_6">
-           <property name="margin">
+           <property name="margin" stdset="0">
             <number>0</number>
            </property>
            <item row="0" column="0">
@@ -240,11 +240,11 @@
          </spacer>
         </item>
         <item row="1" column="0">
-         <widget class="KTitleWidget" name="infoWidget">
-          <property name="text">
+         <widget class="KTitleWidget" name="infoWidget" native="true">
+          <property name="text" stdset="0">
            <string notr="true">You have no devices created</string>
           </property>
-          <property name="comment">
+          <property name="comment" stdset="0">
            <string notr="true">This is probably a problem</string>
           </property>
          </widget>
@@ -256,7 +256,7 @@
         <property name="verticalSpacing">
          <number>0</number>
         </property>
-        <property name="margin">
+        <property name="margin" stdset="0">
          <number>0</number>
         </property>
         <item row="1" column="0">

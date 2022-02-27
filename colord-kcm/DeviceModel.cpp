@@ -64,7 +64,7 @@ void DeviceModel::gotDevices(QDBusPendingCallWatcher *call)
         for (const QDBusObjectPath &device : devices) {
             deviceAdded(device, false);
         }
-        emit changed();
+        Q_EMIT changed();
     }
     call->deleteLater();
 }
@@ -110,7 +110,7 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
     // Remove the extra items it might have
     removeProfilesNotInList(stdItem, profiles);
 
-    emit changed();
+    Q_EMIT changed();
 }
 
 void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged)
@@ -135,7 +135,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     const ObjectPathList profiles = device.profiles();
 
     QStandardItem *item = new QStandardItem;
-    item->setData(qVariantFromValue(objectPath), ObjectPathRole);
+    item->setData(QVariant::fromValue(objectPath), ObjectPathRole);
     item->setData(true, IsDeviceRole);
 
     if (kind == QLatin1String("display")) {
@@ -191,7 +191,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     item->appendRows(profileItems);
 
     if (emitChanged) {
-        emit changed();
+        Q_EMIT changed();
     }
 }
 
@@ -207,7 +207,7 @@ void DeviceModel::deviceRemoved(const QDBusObjectPath &objectPath)
         removeRow(row);
     }
 
-    emit changed();
+    Q_EMIT changed();
 }
 
 void DeviceModel::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
@@ -216,7 +216,7 @@ void DeviceModel::serviceOwnerChanged(const QString &serviceName, const QString 
     if (newOwner.isEmpty() || oldOwner != newOwner) {
         // colord has quit or restarted
         removeRows(0, rowCount());
-        emit changed();
+        Q_EMIT changed();
     }
 }
 
@@ -228,7 +228,7 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
                                objectPath.path(),
                                QDBusConnection::systemBus());
     if (!profile.isValid()) {
-        return 0;
+        return nullptr;
     }
 
     QStandardItem *stdItem = new QStandardItem;
@@ -262,8 +262,8 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     stdItem->setText(title);
     stdItem->setData(canRemoveProfile, CanRemoveProfileRole);
 
-    stdItem->setData(qVariantFromValue(objectPath), ObjectPathRole);
-    stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);
+    stdItem->setData(QVariant::fromValue(objectPath), ObjectPathRole);
+    stdItem->setData(QVariant::fromValue(parentObjectPath), ParentObjectPathRole);
     stdItem->setData(filename, FilenameRole);
     stdItem->setData(kind, ProfileKindRole);
     stdItem->setData(QString(ProfileModel::getSortChar(kind) % title), SortRole);
@@ -282,7 +282,7 @@ QStandardItem *DeviceModel::findProfile(QStandardItem *parent, const QDBusObject
             return child;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void DeviceModel::removeProfilesNotInList(QStandardItem *parent, const ObjectPathList &profiles)
@@ -332,7 +332,7 @@ bool DeviceModel::setData(const QModelIndex &index, const QVariant &value, int r
         device.MakeProfileDefault(stdItem->data(ObjectPathRole).value<QDBusObjectPath>());
     }
 
-    // We return false since colord will emit a DeviceChanged signal telling us about this change
+    // We return false since colord will Q_EMIT a DeviceChanged signal telling us about this change
     return false;
 }
 
@@ -343,4 +343,16 @@ Qt::ItemFlags DeviceModel::flags(const QModelIndex &index) const
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
     }
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}
+
+QHash<int, QByteArray> DeviceModel::roleNames() const
+{
+    return {{ObjectPathRole, "objectPath"},
+            {ParentObjectPathRole, "parentObjectPath"},
+            {IsDeviceRole, "isDevice"},
+            {SortRole, "sort"},
+            {FilenameRole, "filename"},
+            {ColorspaceRole, "colorSpace"},
+            {ProfileKindRole, "profileKind"},
+            {CanRemoveProfileRole, "canRemoveProfile"}};
 }

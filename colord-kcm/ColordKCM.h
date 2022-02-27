@@ -22,15 +22,15 @@
 
 #include <KConfigGroup>
 #include <KQuickAddons/ManagedConfigModule>
-
-// typedef QPair<QString, QDBusObjectPath> KindAndPath;
+#include <QDBusObjectPath>
+using KindAndPath = QPair<QString, QDBusObjectPath>;
 
 // namespace Ui {
 //     class ColordKCM;
 // }
-// class CdInterface;
-// class DeviceModel;
-// class ProfileModel;
+class CdInterface;
+class DeviceModel;
+class ProfileModel;
 // class ProfileDescription;
 
 class ColordKCM : public KQuickAddons::ManagedConfigModule
@@ -43,15 +43,15 @@ public:
     // public slots:
     //     void load() Q_DECL_OVERRIDE;
 
-    // private slots:
-    //     void showDescription();
+private Q_SLOTS:
+    void showDescription();
     //     void addProfileFile();
     //     void addProfileAction(QAction *action);
-    //     void updateSelection();
+    void updateSelection();
     //     void removeProfile();
     //     void fillMenu();
     //     void on_tabWidget_currentChanged(int index);
-    //     void profileAdded(const QDBusObjectPath &objectPath);
+    void profileAdded(const QDBusObjectPath &objectPath);
 
     // private:
     //     void addProvileToDevice(const QDBusObjectPath &profile, const QDBusObjectPath &devicePath) const;
@@ -59,8 +59,8 @@ public:
     //     QString profilesPath() const;
 
     //    Ui::ColordKCM *ui;
-    //    DeviceModel *m_deviceModel;
-    //    ProfileModel *m_profileModel;
+    DeviceModel *m_deviceModel;
+    ProfileModel *m_profileModel;
     //    QStackedLayout *m_stackedLayout;
     //    ProfileDescription *m_profileDesc;
     //    QWidget *m_noPrinter;
@@ -69,12 +69,12 @@ public:
     //    int m_lastError;
     //    QMenu *m_addMenu;
     //    QMenu *m_addAvailableMenu;
-    //    QSortFilterProxyModel *m_profilesFilter;
-    //    QHash<QString, KindAndPath> m_profileFiles;
+    QSortFilterProxyModel *m_profilesFilter;
+    QHash<QString, KindAndPath> m_profileFiles;
 
     //    QAction *m_addAction;
     //    QAction *m_removeAction;
     //    QAction *m_configureAction;
-    //    CdInterface *m_cdInterface;
+    CdInterface *m_cdInterface;
 };
 
