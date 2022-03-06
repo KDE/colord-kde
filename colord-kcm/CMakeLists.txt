@@ -9,7 +9,7 @@ set(kcm_colord_SRCS
     Profile.cpp
 #    ProfileNamedColors.cpp
 #    ProfileMetaData.cpp
-#    Description.cpp
+    Description.cpp
     ColordKCM.cpp
 )
 

@@ -22,11 +22,9 @@
 #include <KPluginFactory>
 #include <KSharedConfig>
 
-//#include "ui_ColordKCM.h"
-
+#include "Description.h"
 #include "DeviceModel.h"
 #include "ProfileModel.h"
-//#include "Description.h"
 //#include "NoSelectionRectDelegate.h"
 
 #include "CdInterface.h"
@@ -54,6 +52,8 @@ K_PLUGIN_CLASS_WITH_JSON(ColordKCM, "kcm_colord.json")
 ColordKCM::ColordKCM(QObject *parent, const KPluginMetaData &data, const QVariantList &list)
     : KQuickAddons::ManagedConfigModule(parent, data, list)
 {
+    qmlRegisterAnonymousType<DeviceModel>("colordkcm", 1.0);
+    qmlRegisterAnonymousType<ProfileModel>("colordkcm", 1.0);
     // ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     //     KCModule(parent, args),
     //     ui(new Ui::ColordKCM),
@@ -173,6 +173,15 @@ ColordKCM::ColordKCM(QObject *parent, const KPluginMetaData &data, const QVarian
     //    ui->splitter->setSizes({ width() / 2, width() / 2 });
 }
 
+DeviceModel *ColordKCM::deviceModel() const
+{
+    return m_deviceModel;
+}
+
+ProfileModel *ColordKCM::profileModel() const
+{
+    return m_profileModel;
+}
 // ColordKCM::~ColordKCM()
 //{
 //     delete ui;
@@ -196,26 +205,26 @@ ColordKCM::ColordKCM(QObject *parent, const KPluginMetaData &data, const QVarian
 //    showDescription();
 //}
 
-// void ColordKCM::showDescription()
-//{
-//     QModelIndex index = currentIndex();
-//     if (!index.isValid()) {
-//         return;
-//     }
+void ColordKCM::showDescription()
+{
+    //     QModelIndex index = currentIndex();
+    //     if (!index.isValid()) {
+    //         return;
+    //     }
 
-//    bool canRemoveProfile = index.data(ProfileModel::CanRemoveProfileRole).toBool();
-//    if (index.data(DeviceModel::IsDeviceRole).toBool()) {
-//        ui->profile->setDevice(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
-//    } else {
-//        ui->profile->setProfile(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>(),
-//                                canRemoveProfile);
-//    }
-//    ui->removeProfileBt->setEnabled(canRemoveProfile);
+    //    bool canRemoveProfile = index.data(ProfileModel::CanRemoveProfileRole).toBool();
+    //    if (index.data(DeviceModel::IsDeviceRole).toBool()) {
+    //        ui->profile->setDevice(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>());
+    //    } else {
+    //        ui->profile->setProfile(index.data(ProfileModel::ObjectPathRole).value<QDBusObjectPath>(),
+    //                                canRemoveProfile);
+    //    }
+    //    ui->removeProfileBt->setEnabled(canRemoveProfile);
 
-//    if (ui->stackedWidget->currentWidget() != ui->profile_page) {
-//        ui->stackedWidget->setCurrentWidget(ui->profile_page);
-//    }
-//}
+    //    if (ui->stackedWidget->currentWidget() != ui->profile_page) {
+    //        ui->stackedWidget->setCurrentWidget(ui->profile_page);
+    //    }
+}
 
 // void ColordKCM::addProfileFile()
 //{
@@ -252,23 +261,23 @@ ColordKCM::ColordKCM(QObject *parent, const KPluginMetaData &data, const QVarian
 //    addProvileToDevice(profileObject, deviceObject);
 //}
 
-// void ColordKCM::updateSelection()
-//{
-//     QAbstractItemView *view;
-//     if (sender() == m_deviceModel) {
-//         view = ui->devicesTV;
-//     } else {
-//         view = ui->profilesTV;
-//     }
+void ColordKCM::updateSelection()
+{
+    //     QAbstractItemView *view;
+    //     if (sender() == m_deviceModel) {
+    //         view = ui->devicesTV;
+    //     } else {
+    //         view = ui->profilesTV;
+    //     }
 
-//    QItemSelection selection;
-//    selection = view->selectionModel()->selection();
-//    // Make sure we have an index selected
-//    if (selection.indexes().isEmpty()) {
-//        view->selectionModel()->select(view->model()->index(0, 0),
-//                                       QItemSelectionModel::SelectCurrent);
-//    }
-//}
+    //    QItemSelection selection;
+    //    selection = view->selectionModel()->selection();
+    //    // Make sure we have an index selected
+    //    if (selection.indexes().isEmpty()) {
+    //        view->selectionModel()->select(view->model()->index(0, 0),
+    //                                       QItemSelectionModel::SelectCurrent);
+    //    }
+}
 
 // void ColordKCM::removeProfile()
 //{
@@ -369,31 +378,31 @@ ColordKCM::ColordKCM(QObject *parent, const KPluginMetaData &data, const QVarian
 //     }
 // }
 
-// void ColordKCM::profileAdded(const QDBusObjectPath &objectPath)
-//{
-//     CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
-//                                objectPath.path(),
-//                                QDBusConnection::systemBus());
+void ColordKCM::profileAdded(const QDBusObjectPath &objectPath)
+{
+    //     CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
+    //                                objectPath.path(),
+    //                                QDBusConnection::systemBus());
 
-//    if (!profile.isValid()) {
-//        return;
-//    }
+    //    if (!profile.isValid()) {
+    //        return;
+    //    }
 
-//    QString kind = profile.kind();
-//    QString filename = profile.filename();
+    //    QString kind = profile.kind();
+    //    QString filename = profile.filename();
 
-//    if (m_profileFiles.contains(filename)) {
-//        if (m_profileFiles[filename].first != kind) {
-//            // The desired device did not match the profile kind
-//            KMessageBox::sorry(this,
-//                               i18n("Your profile did not match the device kind"),
-//                               i18n("Importing Color Profile"));
-//        } else {
-//            addProvileToDevice(objectPath, m_profileFiles[filename].second);
-//        }
-//        m_profileFiles.remove(filename);
-//    }
-//}
+    //    if (m_profileFiles.contains(filename)) {
+    //        if (m_profileFiles[filename].first != kind) {
+    //            // The desired device did not match the profile kind
+    //            KMessageBox::sorry(this,
+    //                               i18n("Your profile did not match the device kind"),
+    //                               i18n("Importing Color Profile"));
+    //        } else {
+    //            addProvileToDevice(objectPath, m_profileFiles[filename].second);
+    //        }
+    //        m_profileFiles.remove(filename);
+    //    }
+}
 
 // void ColordKCM::addProvileToDevice(const QDBusObjectPath &profile, const QDBusObjectPath &devicePath) const
 //{

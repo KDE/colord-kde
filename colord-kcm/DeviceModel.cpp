@@ -347,7 +347,9 @@ Qt::ItemFlags DeviceModel::flags(const QModelIndex &index) const
 
 QHash<int, QByteArray> DeviceModel::roleNames() const
 {
-    return {{ObjectPathRole, "objectPath"},
+    return {{Qt::DisplayRole, "deviceName"},
+            {Qt::DecorationRole, "deviceIcon"},
+            {ObjectPathRole, "objectPath"},
             {ParentObjectPathRole, "parentObjectPath"},
             {IsDeviceRole, "isDevice"},
             {SortRole, "sort"},

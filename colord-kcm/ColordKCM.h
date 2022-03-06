@@ -36,10 +36,14 @@ class ProfileModel;
 class ColordKCM : public KQuickAddons::ManagedConfigModule
 {
     Q_OBJECT
+    Q_PROPERTY(DeviceModel *deviceModel READ deviceModel CONSTANT)
+    Q_PROPERTY(ProfileModel *profileModel READ profileModel CONSTANT)
 public:
     explicit ColordKCM(QObject *parent, const KPluginMetaData &data, const QVariantList &list = QVariantList());
     //    ~ColordKCM();
 
+    DeviceModel *deviceModel() const;
+    ProfileModel *profileModel() const;
     // public slots:
     //     void load() Q_DECL_OVERRIDE;
 
@@ -59,6 +63,7 @@ private Q_SLOTS:
     //     QString profilesPath() const;
 
     //    Ui::ColordKCM *ui;
+private:
     DeviceModel *m_deviceModel;
     ProfileModel *m_profileModel;
     //    QStackedLayout *m_stackedLayout;

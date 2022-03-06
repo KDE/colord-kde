@@ -18,10 +18,8 @@
  ***************************************************************************/
 
 #include "Description.h"
-#include "ui_Description.h"
 
 #include "Profile.h"
-#include "ProfileNamedColors.h"
 #include "ProfileMetaData.h"
 
 #include "CdInterface.h"
@@ -40,41 +38,11 @@
 #include <KMessageWidget>
 #include <KFormat>
 
-#define TAB_INFORMATION  1
-#define TAB_CIE_1931     2
-#define TAB_TRC          3
-#define TAB_VCGT         4
-#define TAB_FROM_SRGB    5
-#define TAB_TO_SRGB      6
-#define TAB_NAMED_COLORS 7
-#define TAB_METADATA     8
-
 typedef QList<QDBusObjectPath> ObjectPathList;
 
-Description::Description(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Description),
-    m_namedColors(new ProfileNamedColors),
-    m_metadata(new ProfileMetaData)
+Description::Description(QObject *parent)
+    : QObject(parent)
 {
-    ui->setupUi(this);
-    ui->msgWidget->setMessageType(KMessageWidget::Warning);
-    ui->msgWidget->setWordWrap(true);
-    ui->msgWidget->setCloseButtonVisible(false);
-    ui->msgWidget->hide();
-}
-
-Description::~Description()
-{
-    delete m_namedColors;
-    delete m_metadata;
-
-    delete ui;
-}
-
-int Description::innerHeight() const
-{
-    return ui->tabWidget->currentWidget()->height();
 }
 
 void Description::setCdInterface(CdInterface *interface)
@@ -96,7 +64,6 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
     m_currentProfile = objectPath;
     m_currentDeviceId.clear();
 
-    ui->stackedWidget->setCurrentIndex(0);
     CdProfileInterface profileInterface(QStringLiteral("org.freedesktop.ColorManager"),
                                         objectPath.path(),
                                         QDBusConnection::systemBus());
@@ -108,47 +75,39 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
     const bool hasVcgt = profileInterface.hasVcgt();
     const qlonglong created = profileInterface.created();
 
-    ui->installSystemWideBt->setEnabled(canRemoveProfile);
     Profile profile(filename);
     if (profile.loaded()) {
         // Set the profile type
-        ui->typeL->setText(profile.kindString());
+        m_type = profile.kindString();
 
         // Set the colorspace
-        ui->colorspaceL->setText(profile.colorspace());
+        m_colorspace = profile.colorspace();
 
         // Set the version
-        ui->versionL->setText(profile.version());
+        m_version = profile.version();
 
         // Set the created time
-        QDateTime createdDT;
-        createdDT.setTime_t(created);
-        ui->createdL->setText(QLocale::system().toString(createdDT, QLocale::LongFormat));
+        QDateTime createdDT = QDateTime::fromMSecsSinceEpoch(created);
+        m_created = QLocale::system().toString(createdDT, QLocale::LongFormat);
 
         // Set the license
-        ui->licenseL->setText(profile.copyright());
-        ui->licenseL->setVisible(!profile.copyright().isEmpty());
-        ui->licenseLabel->setVisible(!profile.copyright().isEmpty());
+        m_license = profile.copyright();
 
         // Set the manufacturer
-        ui->deviceMakeL->setText(profile.manufacturer());
-        ui->deviceMakeL->setVisible(!profile.manufacturer().isEmpty());
-        ui->makeLabel->setVisible(!profile.manufacturer().isEmpty());
+        m_deviceManufacturer = profile.manufacturer();
 
         // Set the Model
-        ui->deviceModelL->setText(profile.model());
-        ui->deviceModelL->setVisible(!profile.model().isEmpty());
-        ui->modelLabel->setVisible(!profile.model().isEmpty());
+        m_deviceModel = profile.model();
 
         // Set the Display Correction
-        ui->dpCorrectionL->setText(hasVcgt ? i18n("Yes") : i18n("None"));
+        m_dpCorrection = hasVcgt ? i18n("Yes") : i18n("None");
 
         // Set the file size
-        ui->filesizeL->setText(KFormat().formatByteSize(profile.size()));
+        m_filesize = KFormat().formatByteSize(profile.size());
 
         // Set the file name
         QFileInfo fileinfo(profile.filename());
-        ui->filenameL->setText(fileinfo.fileName());
+        m_filename = fileinfo.fileName();
 
         QString temp;
         const uint temperature = profile.temperature();
@@ -159,7 +118,7 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
         } else {
             temp = QString::fromUtf8("%1K").arg(QString::number(temperature));
         }
-        ui->whitepointL->setText(temp);
+        m_whitepoint = temp;
 
         qDebug() << profile.description();
         qDebug() << profile.model();
@@ -167,33 +126,15 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
         qDebug() << profile.copyright();
 
         // Get named colors
-        QMap<QString, QColor> namedColors = profile.getNamedColors();
-        if (!namedColors.isEmpty()) {
-            m_namedColors->setNamedColors(namedColors);
-            insertTab(TAB_NAMED_COLORS, m_namedColors, i18n("Named Colors"));
-        } else {
-            removeTab(m_namedColors);
-        }
+        //        QMap<QString, QColor> namedColors = profile.getNamedColors();
 
-        CdStringMap metadata = profileInterface.metadata();
-        if (!metadata.isEmpty()) {
-            m_metadata->setMetadata(metadata);
-            insertTab(TAB_METADATA, m_metadata, i18n("Metadata"));
-        } else {
-            removeTab(m_metadata);
-        }
+        //        CdStringMap metadata = profileInterface.metadata();
     }
     qDebug() << profile.filename();
 }
 
 void Description::setDevice(const QDBusObjectPath &objectPath)
 {
-    while (ui->tabWidget->count() > 1) {
-        ui->tabWidget->removeTab(1);
-    }
-
-    ui->stackedWidget->setCurrentIndex(1);
-
     CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
                              objectPath.path(),
                              QDBusConnection::systemBus());
@@ -209,15 +150,14 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     const QString vendor = device.vendor();
     QString scope = device.scope();
     if (model.isEmpty() && vendor.isEmpty()) {
-        deviceTitle = m_currentDeviceId;
+        m_deviceTitle = m_currentDeviceId;
     } else if (model.isEmpty()) {
-        deviceTitle = vendor;
+        m_deviceTitle = vendor;
     } else if (vendor.isEmpty()) {
-        deviceTitle = model;
+        m_deviceTitle = model;
     } else {
-        deviceTitle = vendor % QLatin1String(" - ") % model;
+        m_deviceTitle = vendor % QLatin1String(" - ") % model;
     }
-    ui->ktitlewidget->setText(deviceTitle);
 
     if (kind == QLatin1String("printer")) {
         kind = i18nc("device type", "Printer");
@@ -230,9 +170,8 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     } else {
         kind = i18nc("device type", "Unknown");
     }
-    ui->ktitlewidget->setComment(kind);
-
-    ui->deviceIdL->setText(m_currentDeviceId);
+    m_deviceKindTranslated = kind;
+    m_deviceId = m_currentDeviceId;
 
     if (scope == QLatin1String("temp")) {
         scope = i18nc("device scope", "User session");
@@ -243,7 +182,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     } else {
         scope = i18nc("device scope", "Unknown");
     }
-    ui->deviceScopeL->setText(scope);
+    m_deviceScope = scope;
 
     QString colorspace = device.colorspace();
     if (colorspace == QLatin1String("rgb")) {
@@ -253,7 +192,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
     } else if (colorspace == QLatin1String("gray")) {
         colorspace = i18nc("colorspace", "Gray");
     }
-    ui->modeL->setText(colorspace);
+    m_mode = colorspace;
 
     ObjectPathList profiles = device.profiles();
 
@@ -269,10 +208,15 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
             }
         }
     }
-    ui->defaultProfileName->setText(profileTitle);
+    m_defaultProfileName = profileTitle;
 
     // Verify if the Calibrate button should be enabled or disabled
-    ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
+    m_calibrateButtonEnabled = calibrateEnabled(m_currentDeviceKind);
+    Q_EMIT dataChanged();
+    if (!m_isDevice) {
+        m_isDevice = true;
+        Q_EMIT isDeviceChanged();
+    }
 }
 
 void Description::on_installSystemWideBt_clicked()
@@ -285,14 +229,14 @@ void Description::on_installSystemWideBt_clicked()
 
 void Description::on_calibratePB_clicked()
 {
-    const QStringList args = {
-        QLatin1String("--parent-window"),
-        QString::number(winId()),
-        QLatin1String("--device"),
-        m_currentDeviceId
-    };
+    //    const QStringList args = {
+    //        QLatin1String("--parent-window"),
+    //        QString::number(winId()),
+    //        QLatin1String("--device"),
+    //        m_currentDeviceId
+    //    };
 
-    KToolInvocation::kdeinitExec(QLatin1String("gcm-calibrate"), args);
+    //    KToolInvocation::kdeinitExec(QLatin1String("gcm-calibrate"), args);
 }
 
 void Description::gotSensors(QDBusPendingCallWatcher *call)
@@ -308,7 +252,7 @@ void Description::gotSensors(QDBusPendingCallWatcher *call)
         }
 
         // Update the calibrate button later
-        ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
+        calibrateEnabled(m_currentDeviceKind);
     }
 }
 
@@ -319,7 +263,7 @@ void Description::sensorAdded(const QDBusObjectPath &sensorPath, bool updateCali
     }
 
     if (updateCalibrateButton) {
-        ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
+        calibrateEnabled(m_currentDeviceKind);
     }
 }
 
@@ -332,7 +276,7 @@ void Description::sensorRemoved(const QDBusObjectPath &sensorPath, bool updateCa
 {
     m_sensors.removeOne(sensorPath);
     if (updateCalibrateButton) {
-        ui->calibratePB->setEnabled(calibrateEnabled(m_currentDeviceKind));
+        calibrateEnabled(m_currentDeviceKind);
     }
 }
 
@@ -350,35 +294,6 @@ void Description::serviceOwnerChanged(const QString &serviceName, const QString 
     }
 }
 
-void Description::insertTab(int index, QWidget *widget, const QString &label)
-{
-    int pos = ui->tabWidget->indexOf(widget);
-    if (pos == -1) {
-        // if the widget was not found set the desired ORDER
-        widget->setProperty("ORDER", index);
-        pos = index;
-        for (int i = 1; i < ui->tabWidget->count(); ++i) {
-            QWidget *widget = ui->tabWidget->widget(i);
-            // Check if the tab widget in greater than our desired position
-            if (widget->property("ORDER").toInt() > index) {
-                // if so make sure the new widget is inserted in the
-                // same position of this widget, pushing it further
-                pos = i;
-                break;
-            }
-        }
-        ui->tabWidget->insertTab(pos, widget, label);
-    }
-}
-
-void Description::removeTab(QWidget *widget)
-{
-    int pos = ui->tabWidget->indexOf(widget);
-    if (pos != -1) {
-        ui->tabWidget->removeTab(pos);
-    }
-}
-
 bool Description::calibrateEnabled(const QString &kind)
 {
     QString toolTip;
@@ -390,7 +305,7 @@ bool Description::calibrateEnabled(const QString &kind)
         return false;
     }
 
-    QFileInfo gcmCalibrate(QStandardPaths::findExecutable("gcm-calibrate"));
+    QFileInfo gcmCalibrate(QStandardPaths::findExecutable(QStringLiteral("gcm-calibrate")));
     if (!gcmCalibrate.isExecutable()) {
         // We don't have a calibration tool yet
         toolTip = i18n("You need Gnome Color Management installed in order to calibrate devices");
@@ -410,7 +325,7 @@ bool Description::calibrateEnabled(const QString &kind)
             toolTip = i18n("The measuring instrument is not detected. Please check it is turned on and correctly connected.");
         } else {
             // Search for a suitable sensor
-            foreach (const QDBusObjectPath &sensorPath, m_sensors) {
+            for (const QDBusObjectPath &sensorPath : std::as_const(m_sensors)) {
                 CdSensorInterface sensor(QStringLiteral("org.freedesktop.ColorManager"),
                                          sensorPath.path(),
                                          QDBusConnection::systemBus());
@@ -435,12 +350,11 @@ bool Description::calibrateEnabled(const QString &kind)
     }
 
     if (canCalibrate) {
-        ui->calibratePB->setToolTip(toolTip);
-        ui->msgWidget->hide();
+        m_calibrateButtonTooltip.clear();
     } else {
-        ui->msgWidget->setText(toolTip);
-        ui->msgWidget->show();
+        m_calibrateButtonTooltip = toolTip;
     }
 
+    Q_EMIT calibrateChanged();
     return canCalibrate;
 }

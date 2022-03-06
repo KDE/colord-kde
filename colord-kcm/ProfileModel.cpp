@@ -249,7 +249,9 @@ Qt::ItemFlags ProfileModel::flags(const QModelIndex &index) const
 
 QHash<int, QByteArray> ProfileModel::roleNames() const
 {
-    return {{ObjectPathRole, "objectPath"},
+    return {{Qt::DisplayRole, "profileName"},
+            {Qt::DecorationRole, "profileIcon"},
+            {ObjectPathRole, "objectPath"},
             {ParentObjectPathRole, "parentObjectPath"},
             {IsDeviceRole, "isDevice"},
             {SortRole, "sort"},

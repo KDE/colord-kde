@@ -20,32 +20,49 @@
 #ifndef DESCRIPTION_H
 #define DESCRIPTION_H
 
-#include <QWidget>
 #include <QDBusObjectPath>
 #include <QDBusPendingCallWatcher>
-
-namespace Ui {
-    class Description;
-}
 class CdInterface;
-class ProfileNamedColors;
-class ProfileMetaData;
-class Description : public QWidget
+class Description : public QObject
 {
     Q_OBJECT
-public:
-    explicit Description(QWidget *parent = 0);
-    ~Description();
+    Q_PROPERTY(bool isDevice MEMBER m_isDevice NOTIFY isDeviceChanged)
+    Q_PROPERTY(QString type MEMBER m_type NOTIFY dataChanged)
+    Q_PROPERTY(QString colorspace MEMBER m_colorspace NOTIFY dataChanged)
+    Q_PROPERTY(QString version MEMBER m_version NOTIFY dataChanged)
+    Q_PROPERTY(QString created MEMBER m_created NOTIFY dataChanged)
+    Q_PROPERTY(QString license MEMBER m_license NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceManufacturer MEMBER m_deviceManufacturer NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceModel MEMBER m_deviceModel NOTIFY dataChanged)
+    Q_PROPERTY(QString dpCorrection MEMBER m_dpCorrection NOTIFY dataChanged)
+    Q_PROPERTY(QString filesize MEMBER m_filesize NOTIFY dataChanged)
+    Q_PROPERTY(QString filename MEMBER m_filename NOTIFY dataChanged)
+    Q_PROPERTY(QString whitepoint MEMBER m_whitepoint NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceTitle MEMBER m_deviceTitle NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceId MEMBER m_deviceId NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceScope MEMBER m_deviceScope NOTIFY dataChanged)
+    Q_PROPERTY(QString mode MEMBER m_mode NOTIFY dataChanged)
+    Q_PROPERTY(QString defaultProfileName MEMBER m_defaultProfileName NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceKindTranslated MEMBER m_deviceKindTranslated NOTIFY dataChanged)
+    Q_PROPERTY(QString calibrateButtonTooltip MEMBER m_calibrateButtonTooltip NOTIFY calibrateChanged)
+    Q_PROPERTY(bool calibrateButtonEnabled MEMBER m_calibrateButtonEnabled NOTIFY calibrateChanged)
 
-    int innerHeight() const;
+public:
+    explicit Description(QObject *parent = nullptr);
+
     void setCdInterface(CdInterface *interface);
     void setProfile(const QDBusObjectPath &objectPath, bool canRemoveProfile);
     void setDevice(const QDBusObjectPath &objectPath);
 
-public slots:
+Q_SIGNALS:
+    void isDeviceChanged();
+    void dataChanged();
+    void calibrateChanged();
+
+public Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
-private slots:
+private Q_SLOTS:
     void on_installSystemWideBt_clicked();
     void on_calibratePB_clicked();
 
@@ -56,17 +73,35 @@ private slots:
     void sensorRemovedUpdateCalibrateButton(const QDBusObjectPath &sensorPath);
 
 private:
-    void insertTab(int index, QWidget *widget, const QString &label);
-    void removeTab(QWidget *widget);
     bool calibrateEnabled(const QString &kind);
 
-    Ui::Description *ui;
     QDBusObjectPath m_currentProfile;
+    QList<QDBusObjectPath> m_sensors;
+
+    QString m_type;
+    QString m_colorspace;
+    QString m_version;
+    QString m_created;
+    QString m_license;
+    QString m_deviceManufacturer;
+    QString m_deviceModel;
+    QString m_dpCorrection;
+    QString m_filesize;
+    QString m_filename;
+    QString m_whitepoint;
+
+    QString m_deviceTitle;
+    QString m_deviceId;
+    QString m_deviceScope;
+    QString m_mode;
+    QString m_defaultProfileName;
     QString m_currentDeviceId;
     QString m_currentDeviceKind;
-    ProfileNamedColors *m_namedColors;
-    ProfileMetaData *m_metadata;
-    QList<QDBusObjectPath> m_sensors;
+    QString m_deviceKindTranslated;
+    QString m_calibrateButtonTooltip;
+    bool m_calibrateButtonEnabled = true;
+
+    bool m_isDevice = true;
 };
 
 #endif // DESCRIPTION_H
