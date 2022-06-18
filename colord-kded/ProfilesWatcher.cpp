@@ -50,6 +50,7 @@ void ProfilesWatcher::scanHomeDirectory()
 {
     // Get a list of files in ~/.local/share/icc/
     QDir profilesDir(profilesPath());
+    profilesDir.setFilter(QDir::Files);
     if (!profilesDir.exists()) {
         qCWarning(COLORD) << "Icc path" << profilesDir.path() << "does not exist";
         if (!profilesDir.mkpath(profilesPath())) {
