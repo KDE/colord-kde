@@ -44,8 +44,7 @@ target_link_libraries(kded_colord
     KF5::WindowSystem
     X11::X11
     X11::Xrandr
-    ${XCB_LIBRARIES}
-    ${LCMS2_LIBRARIES}
+    PkgConfig::LCMS2
 )
 
 set_target_properties(kded_colord PROPERTIES OUTPUT_NAME colord)

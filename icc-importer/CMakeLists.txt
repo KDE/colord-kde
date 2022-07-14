@@ -18,7 +18,7 @@ target_link_libraries(colord-kde-icc-importer
     KF5::CoreAddons
     KF5::I18n
     KF5::WidgetsAddons
-    ${LCMS2_LIBRARIES}
+    PkgConfig::LCMS2
 )
 
 install(TARGETS colord-kde-icc-importer DESTINATION ${INSTALL_TARGETS_DEFAULT_ARGS})

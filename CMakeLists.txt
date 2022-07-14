@@ -1,6 +1,6 @@
 project(colord-kde)
 
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 set(QT_MIN_VERSION "5.3.0")
 
 find_package(ECM 1.3.0 REQUIRED NO_MODULE)
@@ -46,7 +46,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"colord-kde\")
 
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 
-pkg_check_modules(LCMS2 REQUIRED lcms2)
+pkg_check_modules(LCMS2 REQUIRED lcms2 IMPORTED_TARGET)
 
 include_directories(${CMAKE_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}

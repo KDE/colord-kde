@@ -53,7 +53,7 @@ target_link_libraries(kcm_colord
     KF5::CoreAddons
     KF5::I18n
     KF5::KCMUtils
-    ${LCMS2_LIBRARIES}
+    PkgConfig::LCMS2
 )
 
 install(TARGETS kcm_colord DESTINATION ${PLUGIN_INSTALL_DIR})
