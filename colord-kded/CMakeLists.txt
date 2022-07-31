@@ -4,7 +4,9 @@ include_directories(${CMAKE_SOURCE_DIR}/colord-kded
 
 add_definitions(-DPROJECT_NAME=\"${PROJECT_NAME}\")
 
-set(colord_kded_SRCS
+kcoreaddons_add_plugin(kded_colord INSTALL_NAMESPACE "kf5/kded")
+
+target_sources(kded_colord PRIVATE
     DmiUtils.cpp
     Edid.cpp
     Output.cpp
@@ -29,19 +31,20 @@ set(COLORD_PROFILE_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.f
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES CLASSNAME CdInterface)
-qt_add_dbus_interface(colord_kded_SRCS ${COLORD_INTERFACE_XML} CdInterface)
+qt_add_dbus_interface(dbus_SRCS ${COLORD_INTERFACE_XML} CdInterface)
 
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES CLASSNAME CdDeviceInterface)
-qt_add_dbus_interface(colord_kded_SRCS ${COLORD_DEVICE_INTERFACE_XML} CdDeviceInterface)
+qt_add_dbus_interface(dbus_SRCS ${COLORD_DEVICE_INTERFACE_XML} CdDeviceInterface)
 
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES CLASSNAME CdProfileInterface)
-qt_add_dbus_interface(colord_kded_SRCS ${COLORD_PROFILE_INTERFACE_XML} CdProfileInterface)
+qt_add_dbus_interface(dbus_SRCS ${COLORD_PROFILE_INTERFACE_XML} CdProfileInterface)
 
-add_library(kded_colord MODULE ${colord_kded_SRCS})
+target_sources(kded_colord PRIVATE ${dbus_SRCS})
+
 target_link_libraries(kded_colord
     Qt::Core
     Qt::Widgets
@@ -61,4 +64,3 @@ endif()
 
 set_target_properties(kded_colord PROPERTIES OUTPUT_NAME colord)
 kcoreaddons_desktop_to_json(kded_colord colord.desktop)
-install(TARGETS kded_colord DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kded)
