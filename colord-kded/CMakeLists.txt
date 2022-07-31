@@ -63,4 +63,4 @@ elseif (QT_MAJOR_VERSION STREQUAL "6")
 endif()
 
 set_target_properties(kded_colord PROPERTIES OUTPUT_NAME colord)
-kcoreaddons_desktop_to_json(kded_colord colord.desktop)
+install(TARGETS kded_colord DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kded)
