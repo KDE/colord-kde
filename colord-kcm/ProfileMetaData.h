@@ -34,7 +34,7 @@ class ProfileMetaData : public QWidget
     Q_OBJECT
 public:
     explicit ProfileMetaData(QWidget *parent = nullptr);
-    ~ProfileMetaData();
+    ~ProfileMetaData() override;
 
     void setMetadata(const CdStringMap &metadata);
 

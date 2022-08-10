@@ -33,7 +33,7 @@ class ProfileNamedColors : public QWidget
 
 public:
     explicit ProfileNamedColors(QWidget *parent = nullptr);
-    ~ProfileNamedColors();
+    ~ProfileNamedColors() override;
 
     void setNamedColors(const QMap<QString, QColor> &namedColors);
 

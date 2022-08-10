@@ -44,7 +44,7 @@ class ColordKCM : public KCModule
     Q_OBJECT
 public:
     ColordKCM(QWidget *parent, const QVariantList &args);
-    ~ColordKCM();
+    ~ColordKCM() override;
 
 public slots:
     void load() Q_DECL_OVERRIDE;

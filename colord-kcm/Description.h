@@ -35,7 +35,7 @@ class Description : public QWidget
     Q_OBJECT
 public:
     explicit Description(QWidget *parent = nullptr);
-    ~Description();
+    ~Description() override;
 
     int innerHeight() const;
     void setCdInterface(CdInterface *interface);

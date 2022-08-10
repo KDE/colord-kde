@@ -35,7 +35,7 @@ class Q_DECL_EXPORT ColorD : public KDEDModule
     Q_OBJECT
 public:
     ColorD(QObject *parent, const QVariantList &);
-    virtual ~ColorD();
+    ~ColorD() override;
     void reset();
     int eventBase() const;
     bool isValid() const;
