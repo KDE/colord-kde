@@ -32,7 +32,7 @@ class ProfileNamedColors : public QWidget
     Q_OBJECT
 
 public:
-    explicit ProfileNamedColors(QWidget *parent = 0);
+    explicit ProfileNamedColors(QWidget *parent = nullptr);
     ~ProfileNamedColors();
 
     void setNamedColors(const QMap<QString, QColor> &namedColors);

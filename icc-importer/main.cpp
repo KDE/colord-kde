@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 
     Profile profile(fileInfo.filePath());
     if (!profile.loaded()) {
-        KMessageBox::error(0,
+        KMessageBox::error(nullptr,
                            i18n("Failed to parse file: %1", profile.errorMessage()),
                            i18n("Failed to open ICC profile"));
         return 1;
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
     qDebug() << profile.checksum();
 
     if (QFile::exists(destFilename)) {
-        KMessageBox::sorry(0,
+        KMessageBox::sorry(nullptr,
                            message(i18n("Color profile is already imported"),
                                    profile.description(),
                                    profile.copyright()),
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
     QDBusReply<QDBusObjectPath> reply = interface.FindProfileById(profile.checksum());
     qDebug() << reply.error().message();
     if (reply.isValid() && reply.error().type() != QDBusError::NoError) {
-        KMessageBox::sorry(0, message(i18n("ICC profile already installed system-wide"),
+        KMessageBox::sorry(nullptr, message(i18n("ICC profile already installed system-wide"),
                                       profile.description(),
                                       profile.copyright()),
                            i18n("ICC Profile Importer"));
@@ -128,7 +128,7 @@ int main(int argc, char **argv)
     }
 
     if (!parser.isSet("yes")) {
-        const int ret = KMessageBox::questionYesNo(0, message(i18n("Would you like to import the color profile?"),
+        const int ret = KMessageBox::questionYesNo(nullptr, message(i18n("Would you like to import the color profile?"),
                                                               profile.description(),
                                                               profile.copyright()),
                                                    i18n("ICC Profile Importer"));
@@ -139,12 +139,12 @@ int main(int argc, char **argv)
 
     if (!QFile::copy(fileInfo.filePath(), destFilename)) {
         if (QFile::exists(destFilename)) {
-            KMessageBox::error(0,
+            KMessageBox::error(nullptr,
                                i18n("Failed to import color profile: color profile is already imported"),
                                i18n("Importing Color Profile"));
             return 3;
         } else {
-            KMessageBox::sorry(0,
+            KMessageBox::sorry(nullptr,
                                i18n("Failed to import color profile: could not copy the file"),
                                i18n("Importing Color Profile"));
             return 3;

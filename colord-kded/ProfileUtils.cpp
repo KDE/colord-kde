@@ -54,16 +54,16 @@ Q_DECLARE_LOGGING_CATEGORY(COLORD)
 QString ProfileUtils::profileHash(QFile &profile)
 {
     QString checksum;
-    cmsHPROFILE lcms_profile = NULL;
+    cmsHPROFILE lcms_profile = nullptr;
 
     /* get the internal profile id, if it exists */
     lcms_profile = cmsOpenProfileFromFile(profile.fileName().toUtf8(), "r");
-    if (lcms_profile == NULL) {
+    if (lcms_profile == nullptr) {
         // Compute the hash from the whole file..
         return QCryptographicHash::hash(profile.readAll(), QCryptographicHash::Md5).toHex();
     } else {
         checksum = getPrecookedMd5(lcms_profile);
-        if (lcms_profile != NULL) {
+        if (lcms_profile != nullptr) {
             cmsCloseProfile (lcms_profile);
         }
 
@@ -106,10 +106,10 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
 {
     cmsCIExyYTRIPLE chroma;
     cmsCIExyY white_point;
-    cmsHPROFILE lcms_profile = NULL;
-    cmsToneCurve *transfer_curve[3] = { NULL, NULL, NULL };
+    cmsHPROFILE lcms_profile = nullptr;
+    cmsToneCurve *transfer_curve[3] = { nullptr, nullptr, nullptr };
     bool ret = false;
-    cmsHANDLE dict = NULL;
+    cmsHANDLE dict = nullptr;
 
     /* ensure the per-user directory exists */
     // Create dir path if not available
@@ -117,7 +117,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     QFileInfo fileInfo(filename);
     if (fileInfo.exists()) {
         qCWarning(COLORD) << "EDID ICC Profile already exists" << filename;
-        if (*transfer_curve != NULL)
+        if (*transfer_curve != nullptr)
             cmsFreeToneCurve(*transfer_curve);
         return false;
     }
@@ -138,13 +138,13 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     white_point.Y = 1.0;
 
     // estimate the transfer function for the gamma
-    transfer_curve[0] = transfer_curve[1] = transfer_curve[2] = cmsBuildGamma(NULL, edid.gamma());
+    transfer_curve[0] = transfer_curve[1] = transfer_curve[2] = cmsBuildGamma(nullptr, edid.gamma());
 
     // create our generated profile
     lcms_profile = cmsCreateRGBProfile(&white_point, &chroma, transfer_curve);
-    if (lcms_profile == NULL) {
+    if (lcms_profile == nullptr) {
         qCWarning(COLORD) << "Failed to create ICC profile on cmsCreateRGBProfile";
-        if (*transfer_curve != NULL)
+        if (*transfer_curve != nullptr)
             cmsFreeToneCurve(*transfer_curve);
         return false;
     }
@@ -160,7 +160,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                "No copyright");
     if (!ret) {
         qCWarning(COLORD) << "Failed to write copyright";
-        if (*transfer_curve != NULL)
+        if (*transfer_curve != nullptr)
             cmsFreeToneCurve(*transfer_curve);
         return false;
     }
@@ -181,7 +181,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                model);
     if (!ret) {
         qCWarning(COLORD) << "Failed to write model";
-        if (*transfer_curve != NULL) {
+        if (*transfer_curve != nullptr) {
             cmsFreeToneCurve(*transfer_curve);
         }
         return false;
@@ -193,7 +193,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                model);
     if (!ret) {
         qCWarning(COLORD) << "Failed to write description";
-        if (*transfer_curve != NULL)
+        if (*transfer_curve != nullptr)
             cmsFreeToneCurve(*transfer_curve);
         return false;
     }
@@ -214,13 +214,13 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
                                vendor);
     if (!ret) {
         qCWarning(COLORD) << "Failed to write manufacturer";
-        if (*transfer_curve != NULL)
+        if (*transfer_curve != nullptr)
             cmsFreeToneCurve(*transfer_curve);
         return false;
     }
 
     // just create a new dict
-    dict = cmsDictAlloc(NULL);
+    dict = cmsDictAlloc(nullptr);
 
     // set the framework creator metadata
     cmsDictAddEntryAscii(dict,
@@ -261,7 +261,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     ret = cmsWriteTag(lcms_profile, cmsSigMetaTag, dict);
     if (!ret) {
         qCWarning(COLORD) << "Failed to write profile metadata";
-        if (*transfer_curve != NULL)
+        if (*transfer_curve != nullptr)
             cmsFreeToneCurve(*transfer_curve);
         return false;
     }
@@ -270,9 +270,9 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     ret = cmsMD5computeID(lcms_profile);
     if (!ret) {
         qCWarning(COLORD) << "Failed to write profile id";
-        if (dict != NULL)
+        if (dict != nullptr)
             cmsDictFree (dict);
-        if (*transfer_curve != NULL)
+        if (*transfer_curve != nullptr)
             cmsFreeToneCurve(*transfer_curve);
         return false;
     }
@@ -280,10 +280,10 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     /* save, TODO: get error */
     ret = cmsSaveProfileToFile(lcms_profile, filename.toUtf8());
 
-    if (dict != NULL) {
+    if (dict != nullptr) {
         cmsDictFree (dict);
     }
-    if (*transfer_curve != NULL) {
+    if (*transfer_curve != nullptr) {
         cmsFreeToneCurve (*transfer_curve);
     }
 
@@ -295,7 +295,7 @@ cmsBool ProfileUtils::cmsWriteTagTextAscii(cmsHPROFILE lcms_profile,
                                            const QString &text)
 {
     cmsBool ret;
-    cmsMLU *mlu = cmsMLUalloc(0, 1);
+    cmsMLU *mlu = cmsMLUalloc(nullptr, 1);
     cmsMLUsetASCII(mlu, "EN", "us", text.toLatin1().constData());
     ret = cmsWriteTag(lcms_profile, sig, mlu);
     cmsMLUfree(mlu);
@@ -324,7 +324,7 @@ cmsBool ProfileUtils::cmsDictAddEntryAscii(cmsHANDLE dict,
     }
     mb_value[value.length()] = 0;
 
-    ret = cmsDictAddEntry(dict, mb_key, mb_value, NULL, NULL);
+    ret = cmsDictAddEntry(dict, mb_key, mb_value, nullptr, nullptr);
     delete [] mb_key;
     delete [] mb_value;
     return ret;

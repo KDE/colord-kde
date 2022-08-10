@@ -362,13 +362,13 @@ void ColordKCM::fillMenu()
 
 void ColordKCM::on_tabWidget_currentChanged(int index)
 {
-    if (index == 0 && ui->addProfileBt->menu() == 0) {
+    if (index == 0 && ui->addProfileBt->menu() == nullptr) {
         // adds the menu to the Add Profile button
         ui->addProfileBt->setMenu(m_addMenu);
     } else if (index) {
         // Remove the menu from the buttom since we can
         // only add files anyway
-        ui->addProfileBt->setMenu(0);
+        ui->addProfileBt->setMenu(nullptr);
     }
 }
 

@@ -31,7 +31,7 @@ class ProfilesWatcher : public QThread
 {
     Q_OBJECT
 public:
-    explicit ProfilesWatcher(QObject *parent = 0);
+    explicit ProfilesWatcher(QObject *parent = nullptr);
 
 public slots:
     void scanHomeDirectory();

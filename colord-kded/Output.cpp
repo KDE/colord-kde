@@ -111,7 +111,7 @@ void Output::setPath(const QDBusObjectPath &path)
     if (!m_interface->isValid()) {
         qCWarning(COLORD) << "Invalid interface" << path.path() << m_interface->lastError().message();
         delete m_interface;
-        m_interface = 0;
+        m_interface = nullptr;
     }
 }
 
@@ -152,7 +152,7 @@ Edid Output::readEdidData()
     size_t size;
     const quint8 *data;
     data = readEdidData(size);
-    if (data == NULL) {
+    if (data == nullptr) {
         qCWarning(COLORD) << "Unable to get EDID for output" << name();
         Edid ret;
         m_id = ret.deviceId(name());
@@ -229,7 +229,7 @@ static quint8* getProperty(Display *dpy,
         memcpy(result, prop, nitems);
         len = nitems;
     } else {
-        result = NULL;
+        result = nullptr;
     }
 
     XFree (prop);
@@ -253,7 +253,7 @@ quint8* Output::readEdidData(size_t &len)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 bool Output::operator==(const Output &output) const

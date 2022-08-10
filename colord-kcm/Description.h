@@ -34,7 +34,7 @@ class Description : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Description(QWidget *parent = 0);
+    explicit Description(QWidget *parent = nullptr);
     ~Description();
 
     int innerHeight() const;

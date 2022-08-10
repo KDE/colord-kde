@@ -71,7 +71,7 @@ ColorD::ColorD(QObject *parent, const QVariantList &) :
     connectToColorD();
 
     // Connect to the display
-    if ((m_resources = connectToDisplay()) == 0) {
+    if ((m_resources = connectToDisplay()) == nullptr) {
         qCWarning(COLORD) << "Failed to connect to DISPLAY and get the needed resources";
         return;
     }
@@ -454,11 +454,11 @@ void ColorD::outputChanged(const Output::Ptr &output)
 
     // read the VCGT data using lcms2
     const cmsToneCurve **vcgt;
-    cmsHPROFILE lcms_profile = NULL;
+    cmsHPROFILE lcms_profile = nullptr;
 
     // open file
     lcms_profile = cmsOpenProfileFromMem((const uint*) data.data(), data.size());
-    if (lcms_profile == NULL) {
+    if (lcms_profile == nullptr) {
         qCWarning(COLORD) << "Could not open profile with lcms" << output->name() << filename;
         return;
     }
@@ -476,7 +476,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
 
     // get tone curves from profile
     vcgt = static_cast<const cmsToneCurve **>(cmsReadTag(lcms_profile, cmsSigVcgtTag));
-    if (vcgt == NULL || vcgt[0] == NULL) {
+    if (vcgt == nullptr || vcgt[0] == nullptr) {
         qCDebug(COLORD) << "Profile does not have any VCGT data, reseting" << output->name() << filename;
         // Reset the gamma table
         for (int i = 0; i < gammaSize; ++i) {
@@ -560,7 +560,7 @@ XRRScreenResources *ColorD::connectToDisplay()
             !XRRQueryVersion(m_dpy, &major_version, &minor_version))
     {
         qCWarning(COLORD) << "RandR extension missing";
-        return 0;
+        return nullptr;
     }
 
     // Install our X event handler

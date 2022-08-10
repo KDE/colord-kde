@@ -65,12 +65,12 @@ QColor Profile::convertXYZ(cmsCIEXYZ *cieXYZ)
     } CdColorRGB8;
     QColor ret;
     CdColorRGB8 rgb;
-    cmsHPROFILE profile_srgb = NULL;
-    cmsHPROFILE profile_xyz = NULL;
-    cmsHTRANSFORM xform = NULL;
+    cmsHPROFILE profile_srgb = nullptr;
+    cmsHPROFILE profile_xyz = nullptr;
+    cmsHTRANSFORM xform = nullptr;
 
     /* nothing set yet */
-    if (cieXYZ == NULL) {
+    if (cieXYZ == nullptr) {
         return ret;
     }
 
@@ -84,13 +84,13 @@ QColor Profile::convertXYZ(cmsCIEXYZ *cieXYZ)
 
     ret.setRgb(rgb.R, rgb.G, rgb.B);
 
-    if (profile_srgb != NULL) {
+    if (profile_srgb != nullptr) {
         cmsCloseProfile(profile_srgb);
     }
-    if (profile_xyz != NULL) {
+    if (profile_xyz != nullptr) {
         cmsCloseProfile(profile_xyz);
     }
-    if (xform != NULL) {
+    if (xform != nullptr) {
         cmsDeleteTransform(xform);
     }
     return ret;
@@ -112,7 +112,7 @@ void Profile::parseProfile(const uint *data, size_t length)
 
     /* load profile into lcms */
     m_lcmsProfile = cmsOpenProfileFromMem(data, length);
-    if (m_lcmsProfile == NULL) {
+    if (m_lcmsProfile == nullptr) {
         qWarning() << "failed to load: not an ICC profile";
         m_errorMessage = i18n("not an ICC profile");
         m_loaded = false;
@@ -123,7 +123,7 @@ void Profile::parseProfile(const uint *data, size_t length)
     cmsCIEXYZ *cie_xyz;
     bool ret;
     cie_xyz = static_cast<cmsCIEXYZ*>(cmsReadTag(m_lcmsProfile, cmsSigMediaWhitePointTag));
-    if (cie_xyz != NULL) {
+    if (cie_xyz != nullptr) {
         cmsCIExyY xyY;
         double temp_float;
         m_white.setX(cie_xyz->X);
@@ -433,16 +433,16 @@ uint Profile::temperature() const
 QMap<QString, QColor> Profile::getNamedColors()
 {
     QMap<QString, QColor> array;
-    if (m_lcmsProfile == NULL) {
+    if (m_lcmsProfile == nullptr) {
         return array;
     }
 
     cmsCIELab lab;
     cmsCIEXYZ xyz;
-    cmsHPROFILE profile_lab = NULL;
-    cmsHPROFILE profile_xyz = NULL;
-    cmsHTRANSFORM xform = NULL;
-    cmsNAMEDCOLORLIST *nc2 = NULL;
+    cmsHPROFILE profile_lab = nullptr;
+    cmsHPROFILE profile_xyz = nullptr;
+    cmsHTRANSFORM xform = nullptr;
+    cmsNAMEDCOLORLIST *nc2 = nullptr;
     cmsUInt16Number pcs[3];
     cmsUInt32Number count;
     bool ret;
@@ -451,19 +451,19 @@ QMap<QString, QColor> Profile::getNamedColors()
     char suffix[33];
 
     /* setup a dummy transform so we can get all the named colors */
-    profile_lab = cmsCreateLab2Profile(NULL);
+    profile_lab = cmsCreateLab2Profile(nullptr);
     profile_xyz = cmsCreateXYZProfile();
     xform = cmsCreateTransform(profile_lab, TYPE_Lab_DBL,
                                profile_xyz, TYPE_XYZ_DBL,
                                INTENT_ABSOLUTE_COLORIMETRIC, 0);
-    if (xform == NULL) {
+    if (xform == nullptr) {
         qWarning() << "no transform";
         goto out;
     }
 
     /* retrieve named color list from transform */
     nc2 = static_cast<cmsNAMEDCOLORLIST*>(cmsReadTag(m_lcmsProfile, cmsSigNamedColor2Tag));
-    if (nc2 == NULL) {
+    if (nc2 == nullptr) {
         qWarning() << "no named color list";
         goto out;
     }
@@ -484,7 +484,7 @@ QMap<QString, QColor> Profile::getNamedColors()
                                 prefix,
                                 suffix,
                                 (cmsUInt16Number *)&pcs,
-                                NULL);
+                                nullptr);
         if (!ret) {
             qWarning() << "failed to get NC #" << i;
             goto out;
@@ -514,11 +514,11 @@ QMap<QString, QColor> Profile::getNamedColors()
     }
 
 out:
-    if (profile_lab != NULL)
+    if (profile_lab != nullptr)
         cmsCloseProfile(profile_lab);
-    if (profile_xyz != NULL)
+    if (profile_xyz != nullptr)
         cmsCloseProfile(profile_xyz);
-    if (xform != NULL)
+    if (xform != nullptr)
         cmsDeleteTransform(xform);
     return array;
 }

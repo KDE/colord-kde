@@ -41,7 +41,7 @@ public:
         ProfileKindRole,
         CanRemoveProfileRole
     } DeviceRoles;
-    explicit DeviceModel(CdInterface *cdInterface, QObject *parent = 0);
+    explicit DeviceModel(CdInterface *cdInterface, QObject *parent = nullptr);
 
     Qt::ItemFlags flags(const QModelIndex &index) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;

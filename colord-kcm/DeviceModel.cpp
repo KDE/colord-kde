@@ -228,7 +228,7 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
                                objectPath.path(),
                                QDBusConnection::systemBus());
     if (!profile.isValid()) {
-        return 0;
+        return nullptr;
     }
 
     QStandardItem *stdItem = new QStandardItem;
@@ -282,7 +282,7 @@ QStandardItem *DeviceModel::findProfile(QStandardItem *parent, const QDBusObject
             return child;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void DeviceModel::removeProfilesNotInList(QStandardItem *parent, const ObjectPathList &profiles)
