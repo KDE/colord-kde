@@ -21,5 +21,5 @@ target_link_libraries(colord-kde-icc-importer
     PkgConfig::LCMS2
 )
 
-install(TARGETS colord-kde-icc-importer DESTINATION ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES colordkdeiccimporter.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(TARGETS colord-kde-icc-importer DESTINATION ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES colordkdeiccimporter.desktop DESTINATION ${KDE_INSTALL_APPDIR})
