@@ -1,6 +1,7 @@
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
+
 project(colord-kde)
 
-cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 set(QT_MIN_VERSION "5.3.0")
 
 find_package(ECM 1.3.0 REQUIRED NO_MODULE)
