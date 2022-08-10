@@ -106,7 +106,7 @@ int main(int argc, char **argv)
     qDebug() << profile.checksum();
 
     if (QFile::exists(destFilename)) {
-        KMessageBox::sorry(nullptr,
+        KMessageBox::error(nullptr,
                            message(i18n("Color profile is already imported"),
                                    profile.description(),
                                    profile.copyright()),
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
     QDBusReply<QDBusObjectPath> reply = interface.FindProfileById(profile.checksum());
     qDebug() << reply.error().message();
     if (reply.isValid() && reply.error().type() != QDBusError::NoError) {
-        KMessageBox::sorry(nullptr, message(i18n("ICC profile already installed system-wide"),
+        KMessageBox::error(nullptr, message(i18n("ICC profile already installed system-wide"),
                                       profile.description(),
                                       profile.copyright()),
                            i18n("ICC Profile Importer"));
@@ -144,7 +144,7 @@ int main(int argc, char **argv)
                                i18n("Importing Color Profile"));
             return 3;
         } else {
-            KMessageBox::sorry(nullptr,
+            KMessageBox::error(nullptr,
                                i18n("Failed to import color profile: could not copy the file"),
                                i18n("Importing Color Profile"));
             return 3;

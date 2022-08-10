@@ -388,7 +388,7 @@ void ColordKCM::profileAdded(const QDBusObjectPath &objectPath)
     if (m_profileFiles.contains(filename)) {
         if (m_profileFiles[filename].first != kind) {
             // The desired device did not match the profile kind
-            KMessageBox::sorry(this,
+            KMessageBox::error(this,
                                i18n("Your profile did not match the device kind"),
                                i18n("Importing Color Profile"));
         } else {
