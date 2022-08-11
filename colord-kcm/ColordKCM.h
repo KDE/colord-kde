@@ -47,7 +47,7 @@ public:
     ~ColordKCM() override;
 
 public slots:
-    void load() Q_DECL_OVERRIDE;
+    void load() override;
 
 private slots:
     void showDescription();

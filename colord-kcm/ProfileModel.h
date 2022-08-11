@@ -43,8 +43,8 @@ public:
     } ProfileRoles;
     explicit ProfileModel(CdInterface *cdInterface, QObject *parent = nullptr);
 
-    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
     // Returns a char to help the sort model
     static QChar getSortChar(const QString &kind);

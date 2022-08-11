@@ -33,7 +33,7 @@ signals:
     void outputChanged();
 
 protected:
-    bool nativeEventFilter(const QByteArray &eventType, void *message, long int*) Q_DECL_OVERRIDE;
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long int*) override;
 
 private:
     int m_randrBase;
