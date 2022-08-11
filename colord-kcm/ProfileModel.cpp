@@ -150,7 +150,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     }
     item->setText(title);
 
-    item->setData(qVariantFromValue(objectPath), ObjectPathRole);
+    item->setData(QVariant::fromValue(objectPath), ObjectPathRole);
     item->setData(QString(getSortChar(kind) + title), SortRole);
     item->setData(filename, FilenameRole);
     item->setData(kind, ProfileKindRole);

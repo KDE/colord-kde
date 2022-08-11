@@ -63,6 +63,7 @@ target_link_libraries(kcm_colord
     KF5::I18n
     KF5::KCMUtils
     PkgConfig::LCMS2
+    KF5::KIOGui
 )
 
 install(TARGETS kcm_colord DESTINATION ${KDE_INSTALL_PLUGINDIR})

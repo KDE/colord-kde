@@ -135,7 +135,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     const ObjectPathList profiles = device.profiles();
 
     QStandardItem *item = new QStandardItem;
-    item->setData(qVariantFromValue(objectPath), ObjectPathRole);
+    item->setData(QVariant::fromValue(objectPath), ObjectPathRole);
     item->setData(true, IsDeviceRole);
 
     if (kind == QLatin1String("display")) {
@@ -262,8 +262,8 @@ QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     stdItem->setText(title);
     stdItem->setData(canRemoveProfile, CanRemoveProfileRole);
 
-    stdItem->setData(qVariantFromValue(objectPath), ObjectPathRole);
-    stdItem->setData(qVariantFromValue(parentObjectPath), ParentObjectPathRole);
+    stdItem->setData(QVariant::fromValue(objectPath), ObjectPathRole);
+    stdItem->setData(QVariant::fromValue(parentObjectPath), ParentObjectPathRole);
     stdItem->setData(filename, FilenameRole);
     stdItem->setData(kind, ProfileKindRole);
     stdItem->setData(QString(ProfileModel::getSortChar(kind) % title), SortRole);

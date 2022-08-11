@@ -33,7 +33,11 @@ signals:
     void outputChanged();
 
 protected:
-    bool nativeEventFilter(const QByteArray &eventType, void *message, long int*) override;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long int *result);
+#else
+    bool nativeEventFilter(const QByteArray &eventType, void *message, qintptr *result);
+#endif
 
 private:
     int m_randrBase;

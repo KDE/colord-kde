@@ -30,7 +30,11 @@ XEventHandler::XEventHandler(int randrBase) :
     qApp->installNativeEventFilter(this);
 }
 
-bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message, long int*)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message, long int *result)
+#else
+bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message, qintptr *result)
+#endif
 {
     if (eventType != "xcb_generic_event_t") {
         // only interested in XCB  events

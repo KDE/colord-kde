@@ -67,7 +67,7 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     setButtons(NoAdditionalButton);
 
     ui->setupUi(this);
-    ui->infoWidget->setPixmap(KTitleWidget::InfoMessage);
+    ui->infoWidget->setIcon(KTitleWidget::InfoMessage);
     connect(ui->addProfileBt, &QToolButton::clicked, this, &ColordKCM::addProfileFile);
 
     m_addMenu->addAction(QIcon::fromTheme(QStringLiteral("document-new")),
@@ -167,9 +167,9 @@ ColordKCM::ColordKCM(QWidget *parent, const QVariantList &args) :
     signalMapper->setMapping(ui->profilesTb, 1);
     connect(ui->profilesTb, SIGNAL(clicked()), signalMapper, SLOT(map()));
 
-    connect(signalMapper, static_cast<void(QSignalMapper::*)(int)>(&QSignalMapper::mapped),
+    connect(signalMapper, &QSignalMapper::mappedInt,
             ui->tabWidget, &QStackedWidget::setCurrentIndex);
-    connect(signalMapper, static_cast<void(QSignalMapper::*)(int)>(&QSignalMapper::mapped),
+    connect(signalMapper, &QSignalMapper::mappedInt,
             this, &ColordKCM::showDescription);
 
     // make sure the screen is split on the half

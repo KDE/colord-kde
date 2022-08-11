@@ -39,6 +39,7 @@
 #include <KToolInvocation>
 #include <KMessageWidget>
 #include <KFormat>
+#include <KIO/CommandLauncherJob>
 
 #define TAB_INFORMATION  1
 #define TAB_CIE_1931     2
@@ -291,8 +292,8 @@ void Description::on_calibratePB_clicked()
         QLatin1String("--device"),
         m_currentDeviceId
     };
-
-    KToolInvocation::kdeinitExec(QLatin1String("gcm-calibrate"), args);
+    auto *job = new KIO::CommandLauncherJob(QLatin1String("gcm-calibrate"), args);
+    job->start();
 }
 
 void Description::gotSensors(QDBusPendingCallWatcher *call)
