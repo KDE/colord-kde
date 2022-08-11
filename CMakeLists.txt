@@ -25,7 +25,7 @@ ecm_setup_version("${COLORD_KDE_VERSION}"
     VERSION_HEADER "version.h"
 )
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
+find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     DBus
     Widgets
@@ -39,7 +39,7 @@ set_package_properties(X11 PROPERTIES
 
 if (X11_FOUND)
     find_package(XCB REQUIRED COMPONENTS XCB RANDR)
-    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS X11Extras)
+    find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS X11Extras)
 endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
