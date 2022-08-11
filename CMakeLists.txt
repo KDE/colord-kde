@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project(colord-kde)
 
-set(QT_MIN_VERSION "5.3.0")
+set(KF5_MIN_VERSION "5.91.0")
+set(REQUIRED_QT_VERSION "5.15.2")
+set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
-find_package(ECM 1.3.0 REQUIRED NO_MODULE)
+find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 set(COLORD_KDE_VERSION "0.5.0")
@@ -23,7 +25,7 @@ ecm_setup_version("${COLORD_KDE_VERSION}"
     VERSION_HEADER "version.h"
 )
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     DBus
     Widgets
@@ -37,10 +39,10 @@ set_package_properties(X11 PROPERTIES
 
 if (X11_FOUND)
     find_package(XCB REQUIRED COMPONENTS XCB RANDR)
-    find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS X11Extras)
+    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS X11Extras)
 endif()
 
-find_package(KF5 REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
              WidgetsAddons WindowSystem)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"colord-kde\")

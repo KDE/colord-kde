@@ -12,6 +12,14 @@ set(colord_kded_SRCS
     XEventHandler.cpp
     ProfilesWatcher.cpp
     ColorD.cpp
+
+    DmiUtils.h
+    Edid.h
+    Output.h
+    ProfileUtils.h
+    XEventHandler.h
+    ProfilesWatcher.h
+    ColorD.h
 )
 
 set(COLORD_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorManager.xml)
@@ -21,24 +29,24 @@ set(COLORD_PROFILE_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.f
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_INTERFACE_XML} PROPERTIES CLASSNAME CdInterface)
-qt5_add_dbus_interface(colord_kded_SRCS ${COLORD_INTERFACE_XML} CdInterface)
+qt_add_dbus_interface(colord_kded_SRCS ${COLORD_INTERFACE_XML} CdInterface)
 
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_DEVICE_INTERFACE_XML} PROPERTIES CLASSNAME CdDeviceInterface)
-qt5_add_dbus_interface(colord_kded_SRCS ${COLORD_DEVICE_INTERFACE_XML} CdDeviceInterface)
+qt_add_dbus_interface(colord_kded_SRCS ${COLORD_DEVICE_INTERFACE_XML} CdDeviceInterface)
 
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES INCLUDE "dbus-types.h")
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES NO_NAMESPACE true)
 set_source_files_properties(${COLORD_PROFILE_INTERFACE_XML} PROPERTIES CLASSNAME CdProfileInterface)
-qt5_add_dbus_interface(colord_kded_SRCS ${COLORD_PROFILE_INTERFACE_XML} CdProfileInterface)
+qt_add_dbus_interface(colord_kded_SRCS ${COLORD_PROFILE_INTERFACE_XML} CdProfileInterface)
 
 add_library(kded_colord MODULE ${colord_kded_SRCS})
 target_link_libraries(kded_colord
-    Qt5::Core
-    Qt5::Widgets
-    Qt5::DBus
-    Qt5::X11Extras
+    Qt::Core
+    Qt::Widgets
+    Qt::DBus
+    Qt::X11Extras
     KF5::CoreAddons
     KF5::DBusAddons
     KF5::WindowSystem

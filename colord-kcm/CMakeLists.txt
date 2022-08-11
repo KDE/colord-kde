@@ -11,6 +11,15 @@ set(kcm_colord_SRCS
     ProfileMetaData.cpp
     Description.cpp
     ColordKCM.cpp
+
+    NoSelectionRectDelegate.h
+    DeviceModel.h
+    ProfileModel.h
+    Profile.h
+    ProfileNamedColors.h
+    ProfileMetaData.h
+    Description.h
+    ColordKCM.h
 )
 
 ki18n_wrap_ui(kcm_colord_SRCS
@@ -47,9 +56,9 @@ qt5_add_dbus_interface(kcm_colord_SRCS ${COLORD_SENSOR_INTERFACE_XML} CdSensorIn
 
 add_library(kcm_colord MODULE ${kcm_colord_SRCS})
 target_link_libraries(kcm_colord
-    Qt5::Core
-    Qt5::Widgets
-    Qt5::DBus
+    Qt::Core
+    Qt::Widgets
+    Qt::DBus
     KF5::CoreAddons
     KF5::I18n
     KF5::KCMUtils
