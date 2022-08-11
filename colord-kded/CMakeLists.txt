@@ -46,7 +46,6 @@ target_link_libraries(kded_colord
     Qt::Core
     Qt::Widgets
     Qt::DBus
-    Qt::X11Extras
     KF5::CoreAddons
     KF5::DBusAddons
     KF5::WindowSystem
@@ -54,6 +53,11 @@ target_link_libraries(kded_colord
     X11::Xrandr
     PkgConfig::LCMS2
 )
+if (QT_MAJOR_VERSION STREQUAL "5")
+    target_link_libraries(kded_colord Qt::X11Extras)
+elseif (QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(kded_colord Qt::Gui)
+endif()
 
 set_target_properties(kded_colord PROPERTIES OUTPUT_NAME colord)
 kcoreaddons_desktop_to_json(kded_colord colord.desktop)

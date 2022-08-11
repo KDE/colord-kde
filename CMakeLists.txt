@@ -39,7 +39,11 @@ set_package_properties(X11 PROPERTIES
 
 if (X11_FOUND)
     find_package(XCB REQUIRED COMPONENTS XCB RANDR)
-    find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS X11Extras)
+    if (QT_MAJOR_VERSION STREQUAL "5")
+        find_package(Qt5X11Extras ${REQUIRED_QT_VERSION} NO_MODULE)
+    elseif (QT_MAJOR_VERSION STREQUAL "6")
+        find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui) # qtx11extras_p.h
+    endif()
 endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
