@@ -50,13 +50,13 @@ public:
     static QChar getSortChar(const QString &kind);
     static QString getProfileDataSource(const CdStringMap &metadata);
 
-public slots:
+public Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
-signals:
+Q_SIGNALS:
     void changed();
 
-private slots:
+private Q_SLOTS:
     void gotProfiles(QDBusPendingCallWatcher *call);
     void profileChanged(const QDBusObjectPath &objectPath);
     void profileAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);

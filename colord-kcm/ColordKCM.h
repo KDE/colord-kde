@@ -46,10 +46,10 @@ public:
     ColordKCM(QWidget *parent, const QVariantList &args);
     ~ColordKCM() override;
 
-public slots:
+public Q_SLOTS:
     void load() override;
 
-private slots:
+private Q_SLOTS:
     void showDescription();
     void addProfileFile();
     void addProfileAction(QAction *action);

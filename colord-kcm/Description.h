@@ -42,10 +42,10 @@ public:
     void setProfile(const QDBusObjectPath &objectPath, bool canRemoveProfile);
     void setDevice(const QDBusObjectPath &objectPath);
 
-public slots:
+public Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
-private slots:
+private Q_SLOTS:
     void on_installSystemWideBt_clicked();
     void on_calibratePB_clicked();
 

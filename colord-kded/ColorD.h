@@ -40,7 +40,7 @@ public:
     int eventBase() const;
     bool isValid() const;
 
-private slots:
+private Q_SLOTS:
     void init();
     void checkOutputs();
 

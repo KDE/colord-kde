@@ -47,13 +47,13 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
-public slots:
+public Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
-signals:
+Q_SIGNALS:
     void changed();
 
-private slots:
+private Q_SLOTS:
     void gotDevices(QDBusPendingCallWatcher *call);
     void deviceChanged(const QDBusObjectPath &objectPath);
     void deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged = true);

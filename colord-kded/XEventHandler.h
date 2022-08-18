@@ -29,7 +29,7 @@ class Q_DECL_EXPORT XEventHandler : public QObject, public QAbstractNativeEventF
 public:
     XEventHandler(int randrBase);
 
-signals:
+Q_SIGNALS:
     void outputChanged();
 
 protected:

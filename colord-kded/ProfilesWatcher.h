@@ -33,14 +33,14 @@ class ProfilesWatcher : public QThread
 public:
     explicit ProfilesWatcher(QObject *parent = nullptr);
 
-public slots:
+public Q_SLOTS:
     void scanHomeDirectory();
     void createIccProfile(bool isLaptop, const Edid &edid);
 
-signals:
+Q_SIGNALS:
     void scanFinished();
 
-private slots:
+private Q_SLOTS:
     void addProfile(const QString &fileInfo);
     void removeProfile(const QString &filename);
 
