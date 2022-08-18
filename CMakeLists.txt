@@ -19,6 +19,10 @@ include(FindPkgConfig)
 include(ECMOptionalAddSubdirectory)
 include(FeatureSummary)
 include(ECMSetupVersion)
+include(KDEGitCommitHooks)
+include(KDEClangFormat)
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 ecm_setup_version("${COLORD_KDE_VERSION}"
     VARIABLE_PREFIX "COLORD_KDE"
@@ -65,5 +69,5 @@ if (X11_FOUND)
 endif()
 add_subdirectory(colord-kcm)
 add_subdirectory(icc-importer)
-
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
