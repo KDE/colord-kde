@@ -38,8 +38,8 @@ public:
     void setNamedColors(const QMap<QString, QColor> &namedColors);
 
 private:
-    Ui::ProfileNamedColors *ui;
-    QStandardItemModel *m_model;
+    Ui::ProfileNamedColors *const ui;
+    QStandardItemModel *m_model = nullptr;
 };
 
 #endif // PROFILENAMEDCOLORS_H

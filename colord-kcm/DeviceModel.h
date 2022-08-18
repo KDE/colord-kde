@@ -68,7 +68,7 @@ private:
     void removeProfilesNotInList(QStandardItem *parent, const ObjectPathList &profiles);
     int findItem(const QDBusObjectPath &objectPath);
 
-    CdInterface*m_cdInterface;
+    CdInterface *const m_cdInterface;
 };
 
 #endif // DEVICE_MODEL_H

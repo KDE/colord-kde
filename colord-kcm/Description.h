@@ -60,12 +60,12 @@ private:
     void removeTab(QWidget *widget);
     bool calibrateEnabled(const QString &kind);
 
-    Ui::Description *ui;
+    Ui::Description *const ui;
     QDBusObjectPath m_currentProfile;
     QString m_currentDeviceId;
     QString m_currentDeviceKind;
-    ProfileNamedColors *m_namedColors;
-    ProfileMetaData *m_metadata;
+    ProfileNamedColors *m_namedColors = nullptr;
+    ProfileMetaData *m_metadata = nullptr;
     QList<QDBusObjectPath> m_sensors;
 };
 

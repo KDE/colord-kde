@@ -64,24 +64,24 @@ private:
     QModelIndex currentIndex() const;
     QString profilesPath() const;
 
-    Ui::ColordKCM *ui;
-    DeviceModel *m_deviceModel;
-    ProfileModel *m_profileModel;
-    QStackedLayout *m_stackedLayout;
-    ProfileDescription *m_profileDesc;
-    QWidget *m_noPrinter;
-    QWidget *m_serverError;
-    KTitleWidget *m_serverErrorW;
+    Ui::ColordKCM *const ui;
+    DeviceModel *m_deviceModel = nullptr;
+    ProfileModel *m_profileModel = nullptr;
+    QStackedLayout *m_stackedLayout = nullptr;
+    ProfileDescription *m_profileDesc = nullptr;
+    QWidget *m_noPrinter = nullptr;
+    QWidget *m_serverError = nullptr;
+    KTitleWidget *m_serverErrorW = nullptr;
     int m_lastError;
-    QMenu *m_addMenu;
-    QMenu *m_addAvailableMenu;
-    QSortFilterProxyModel *m_profilesFilter;
+    QMenu *m_addMenu = nullptr;
+    QMenu *m_addAvailableMenu = nullptr;
+    QSortFilterProxyModel *m_profilesFilter = nullptr;
     QHash<QString, KindAndPath> m_profileFiles;
 
-    QAction *m_addAction;
-    QAction *m_removeAction;
-    QAction *m_configureAction;
-    CdInterface *m_cdInterface;
+    QAction *m_addAction = nullptr;
+    QAction *m_removeAction = nullptr;
+    QAction *m_configureAction = nullptr;
+    CdInterface *m_cdInterface = nullptr;
 };
 
 #endif // COLORD_KCM_H
