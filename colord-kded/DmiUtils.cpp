@@ -25,10 +25,7 @@
 QString DmiUtils::deviceModel()
 {
     QString ret;
-    const QStringList sysfsNames = {
-        QStringLiteral("/sys/class/dmi/id/product_name"),
-        QStringLiteral("/sys/class/dmi/id/board_name")
-    };
+    const QStringList sysfsNames = {QStringLiteral("/sys/class/dmi/id/product_name"), QStringLiteral("/sys/class/dmi/id/board_name")};
 
     for (const QString &filename : sysfsNames) {
         QFile file(filename);
@@ -47,11 +44,9 @@ QString DmiUtils::deviceModel()
 QString DmiUtils::deviceVendor()
 {
     QString ret;
-    const QStringList sysfsVendors = {
-        QStringLiteral("/sys/class/dmi/id/sys_vendor"),
-        QStringLiteral("/sys/class/dmi/id/chassis_vendor"),
-        QStringLiteral("/sys/class/dmi/id/board_vendor")
-    };
+    const QStringList sysfsVendors = {QStringLiteral("/sys/class/dmi/id/sys_vendor"),
+                                      QStringLiteral("/sys/class/dmi/id/chassis_vendor"),
+                                      QStringLiteral("/sys/class/dmi/id/board_vendor")};
 
     for (const QString &filename : sysfsVendors) {
         QFile file(filename);

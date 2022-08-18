@@ -19,11 +19,11 @@
 
 #include "ProfileUtils.h"
 
-#include "Edid.h"
 #include "DmiUtils.h"
+#include "Edid.h"
 
-#include <QFileInfo>
 #include <QCryptographicHash>
+#include <QFileInfo>
 
 #include <QLoggingCategory>
 
@@ -33,21 +33,21 @@
 #define PACKAGE_VERSION COLORD_KDE_VERSION_STRING
 
 /* defined in metadata-spec.txt */
-#define CD_PROFILE_METADATA_STANDARD_SPACE	"STANDARD_space"
-#define CD_PROFILE_METADATA_EDID_MD5		"EDID_md5"
-#define CD_PROFILE_METADATA_EDID_MODEL		"EDID_model"
-#define CD_PROFILE_METADATA_EDID_SERIAL		"EDID_serial"
-#define CD_PROFILE_METADATA_EDID_MNFT		"EDID_mnft"
-#define CD_PROFILE_METADATA_EDID_VENDOR		"EDID_manufacturer"
-#define CD_PROFILE_METADATA_FILE_CHECKSUM	"FILE_checksum"
-#define CD_PROFILE_METADATA_CMF_PRODUCT		"CMF_product"
-#define CD_PROFILE_METADATA_CMF_BINARY		"CMF_binary"
-#define CD_PROFILE_METADATA_CMF_VERSION		"CMF_version"
-#define CD_PROFILE_METADATA_DATA_SOURCE		"DATA_source"
-#define CD_PROFILE_METADATA_DATA_SOURCE_EDID	"edid"
-#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB	"calib"
-#define CD_PROFILE_METADATA_MAPPING_FORMAT	"MAPPING_format"
-#define CD_PROFILE_METADATA_MAPPING_QUALIFIER	"MAPPING_qualifier"
+#define CD_PROFILE_METADATA_STANDARD_SPACE "STANDARD_space"
+#define CD_PROFILE_METADATA_EDID_MD5 "EDID_md5"
+#define CD_PROFILE_METADATA_EDID_MODEL "EDID_model"
+#define CD_PROFILE_METADATA_EDID_SERIAL "EDID_serial"
+#define CD_PROFILE_METADATA_EDID_MNFT "EDID_mnft"
+#define CD_PROFILE_METADATA_EDID_VENDOR "EDID_manufacturer"
+#define CD_PROFILE_METADATA_FILE_CHECKSUM "FILE_checksum"
+#define CD_PROFILE_METADATA_CMF_PRODUCT "CMF_product"
+#define CD_PROFILE_METADATA_CMF_BINARY "CMF_binary"
+#define CD_PROFILE_METADATA_CMF_VERSION "CMF_version"
+#define CD_PROFILE_METADATA_DATA_SOURCE "DATA_source"
+#define CD_PROFILE_METADATA_DATA_SOURCE_EDID "edid"
+#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB "calib"
+#define CD_PROFILE_METADATA_MAPPING_FORMAT "MAPPING_format"
+#define CD_PROFILE_METADATA_MAPPING_QUALIFIER "MAPPING_qualifier"
 
 Q_DECLARE_LOGGING_CATEGORY(COLORD)
 
@@ -64,7 +64,7 @@ QString ProfileUtils::profileHash(QFile &profile)
     } else {
         checksum = getPrecookedMd5(lcms_profile);
         if (lcms_profile != nullptr) {
-            cmsCloseProfile (lcms_profile);
+            cmsCloseProfile(lcms_profile);
         }
 
         if (checksum.isNull()) {
@@ -107,7 +107,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     cmsCIExyYTRIPLE chroma;
     cmsCIExyY white_point;
     cmsHPROFILE lcms_profile = nullptr;
-    cmsToneCurve *transfer_curve[3] = { nullptr, nullptr, nullptr };
+    cmsToneCurve *transfer_curve[3] = {nullptr, nullptr, nullptr};
     bool ret = false;
     cmsHANDLE dict = nullptr;
 
@@ -155,9 +155,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     cmsSetDeviceClass(lcms_profile, cmsSigDisplayClass);
 
     // copyright
-    ret = cmsWriteTagTextAscii(lcms_profile,
-                               cmsSigCopyrightTag,
-                               "No copyright");
+    ret = cmsWriteTagTextAscii(lcms_profile, cmsSigCopyrightTag, "No copyright");
     if (!ret) {
         qCWarning(COLORD) << "Failed to write copyright";
         if (*transfer_curve != nullptr)
@@ -176,9 +174,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     if (model.isEmpty()) {
         model = QStringLiteral("Unknown monitor");
     }
-    ret = cmsWriteTagTextAscii(lcms_profile,
-                               cmsSigDeviceModelDescTag,
-                               model);
+    ret = cmsWriteTagTextAscii(lcms_profile, cmsSigDeviceModelDescTag, model);
     if (!ret) {
         qCWarning(COLORD) << "Failed to write model";
         if (*transfer_curve != nullptr) {
@@ -188,9 +184,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     }
 
     // write title
-    ret = cmsWriteTagTextAscii(lcms_profile,
-                               cmsSigProfileDescriptionTag,
-                               model);
+    ret = cmsWriteTagTextAscii(lcms_profile, cmsSigProfileDescriptionTag, model);
     if (!ret) {
         qCWarning(COLORD) << "Failed to write description";
         if (*transfer_curve != nullptr)
@@ -209,9 +203,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     if (vendor.isEmpty()) {
         vendor = QStringLiteral("Unknown vendor");
     }
-    ret = cmsWriteTagTextAscii(lcms_profile,
-                               cmsSigDeviceMfgDescTag,
-                               vendor);
+    ret = cmsWriteTagTextAscii(lcms_profile, cmsSigDeviceMfgDescTag, vendor);
     if (!ret) {
         qCWarning(COLORD) << "Failed to write manufacturer";
         if (*transfer_curve != nullptr)
@@ -223,21 +215,13 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     dict = cmsDictAlloc(nullptr);
 
     // set the framework creator metadata
-    cmsDictAddEntryAscii(dict,
-                         CD_PROFILE_METADATA_CMF_PRODUCT,
-                         PACKAGE_NAME);
-    cmsDictAddEntryAscii(dict,
-                         CD_PROFILE_METADATA_CMF_BINARY,
-                         PACKAGE_NAME);
-    cmsDictAddEntryAscii(dict,
-                         CD_PROFILE_METADATA_CMF_VERSION,
-                         PACKAGE_VERSION);
+    cmsDictAddEntryAscii(dict, CD_PROFILE_METADATA_CMF_PRODUCT, PACKAGE_NAME);
+    cmsDictAddEntryAscii(dict, CD_PROFILE_METADATA_CMF_BINARY, PACKAGE_NAME);
+    cmsDictAddEntryAscii(dict, CD_PROFILE_METADATA_CMF_VERSION, PACKAGE_VERSION);
 
     /* set the data source so we don't ever prompt the user to
-         * recalibrate (as the EDID data won't have changed) */
-    cmsDictAddEntryAscii(dict,
-                         CD_PROFILE_METADATA_DATA_SOURCE,
-                         CD_PROFILE_METADATA_DATA_SOURCE_EDID);
+     * recalibrate (as the EDID data won't have changed) */
+    cmsDictAddEntryAscii(dict, CD_PROFILE_METADATA_DATA_SOURCE, CD_PROFILE_METADATA_DATA_SOURCE_EDID);
 
     // set 'ICC meta Tag for Monitor Profiles' data
     cmsDictAddEntryAscii(dict, "EDID_md5", edid.hash());
@@ -271,7 +255,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     if (!ret) {
         qCWarning(COLORD) << "Failed to write profile id";
         if (dict != nullptr)
-            cmsDictFree (dict);
+            cmsDictFree(dict);
         if (*transfer_curve != nullptr)
             cmsFreeToneCurve(*transfer_curve);
         return false;
@@ -281,18 +265,16 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     ret = cmsSaveProfileToFile(lcms_profile, filename.toUtf8());
 
     if (dict != nullptr) {
-        cmsDictFree (dict);
+        cmsDictFree(dict);
     }
     if (*transfer_curve != nullptr) {
-        cmsFreeToneCurve (*transfer_curve);
+        cmsFreeToneCurve(*transfer_curve);
     }
 
     return ret;
 }
 
-cmsBool ProfileUtils::cmsWriteTagTextAscii(cmsHPROFILE lcms_profile,
-                                           cmsTagSignature sig,
-                                           const QString &text)
+cmsBool ProfileUtils::cmsWriteTagTextAscii(cmsHPROFILE lcms_profile, cmsTagSignature sig, const QString &text)
 {
     cmsBool ret;
     cmsMLU *mlu = cmsMLUalloc(nullptr, 1);
@@ -302,30 +284,28 @@ cmsBool ProfileUtils::cmsWriteTagTextAscii(cmsHPROFILE lcms_profile,
     return ret;
 }
 
-cmsBool ProfileUtils::cmsDictAddEntryAscii(cmsHANDLE dict,
-                                           const QString &key,
-                                           const QString &value)
+cmsBool ProfileUtils::cmsDictAddEntryAscii(cmsHANDLE dict, const QString &key, const QString &value)
 {
     qCDebug(COLORD) << key << value;
     cmsBool ret;
 
     wchar_t *mb_key = new wchar_t[key.length() + 1];
     if (key.toWCharArray(mb_key) != key.length()) {
-        delete [] mb_key;
+        delete[] mb_key;
         return false;
     }
     mb_key[key.length()] = 0;
 
     wchar_t *mb_value = new wchar_t[value.length() + 1];
     if (value.toWCharArray(mb_value) != value.length()) {
-        delete [] mb_key;
-        delete [] mb_value;
+        delete[] mb_key;
+        delete[] mb_value;
         return false;
     }
     mb_value[value.length()] = 0;
 
     ret = cmsDictAddEntry(dict, mb_key, mb_value, nullptr, nullptr);
-    delete [] mb_key;
-    delete [] mb_value;
+    delete[] mb_key;
+    delete[] mb_value;
     return ret;
 }

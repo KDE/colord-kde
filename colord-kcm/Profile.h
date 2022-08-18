@@ -20,17 +20,17 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
-#include <QString>
-#include <QDateTime>
 #include <QColor>
+#include <QDateTime>
 #include <QQuaternion>
+#include <QString>
 
 #include <lcms2.h>
 
-#define CD_PROFILE_METADATA_DATA_SOURCE_EDID	 "edid"
-#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB	 "calib"
+#define CD_PROFILE_METADATA_DATA_SOURCE_EDID "edid"
+#define CD_PROFILE_METADATA_DATA_SOURCE_CALIB "calib"
 #define CD_PROFILE_METADATA_DATA_SOURCE_STANDARD "standard"
-#define CD_PROFILE_METADATA_DATA_SOURCE_TEST     "test"
+#define CD_PROFILE_METADATA_DATA_SOURCE_TEST "test"
 
 class Q_DECL_EXPORT Profile
 {

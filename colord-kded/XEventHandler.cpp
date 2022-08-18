@@ -24,8 +24,8 @@
 
 #include <xcb/randr.h>
 
-XEventHandler::XEventHandler(int randrBase) :
-    m_randrBase(randrBase)
+XEventHandler::XEventHandler(int randrBase)
+    : m_randrBase(randrBase)
 {
     qApp->installNativeEventFilter(this);
 }
@@ -40,7 +40,7 @@ bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message
         // only interested in XCB  events
         return false;
     }
-    auto e = static_cast<xcb_generic_event_t*>(message);
+    auto e = static_cast<xcb_generic_event_t *>(message);
     auto xEventType = e->response_type & ~0x80;
 
     if (xEventType == m_randrBase + XCB_RANDR_SCREEN_CHANGE_NOTIFY) {

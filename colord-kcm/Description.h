@@ -20,12 +20,13 @@
 #ifndef DESCRIPTION_H
 #define DESCRIPTION_H
 
-#include <QWidget>
 #include <QDBusObjectPath>
 #include <QDBusPendingCallWatcher>
+#include <QWidget>
 
-namespace Ui {
-    class Description;
+namespace Ui
+{
+class Description;
 }
 class CdInterface;
 class ProfileNamedColors;

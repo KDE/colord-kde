@@ -23,24 +23,24 @@
 #include <QDebug>
 
 /* defined in metadata-spec.txt */
-#define CD_PROFILE_METADATA_STANDARD_SPACE	QStringLiteral("STANDARD_space")
-#define CD_PROFILE_METADATA_EDID_MD5		QStringLiteral("EDID_md5")
-#define CD_PROFILE_METADATA_EDID_MODEL		QStringLiteral("EDID_model")
-#define CD_PROFILE_METADATA_EDID_SERIAL		QStringLiteral("EDID_serial")
-#define CD_PROFILE_METADATA_EDID_MNFT		QStringLiteral("EDID_mnft")
-#define CD_PROFILE_METADATA_EDID_VENDOR		QStringLiteral("EDID_manufacturer")
-#define CD_PROFILE_METADATA_FILE_CHECKSUM	QStringLiteral("FILE_checksum")
-#define CD_PROFILE_METADATA_CMF_PRODUCT		QStringLiteral("CMF_product")
-#define CD_PROFILE_METADATA_CMF_BINARY		QStringLiteral("CMF_binary")
-#define CD_PROFILE_METADATA_CMF_VERSION		QStringLiteral("CMF_version")
-#define CD_PROFILE_METADATA_DATA_SOURCE		QStringLiteral("DATA_source")
-#define CD_PROFILE_METADATA_MAPPING_FORMAT	QStringLiteral("MAPPING_format")
-#define CD_PROFILE_METADATA_MAPPING_QUALIFIER	QStringLiteral("MAPPING_qualifier")
+#define CD_PROFILE_METADATA_STANDARD_SPACE QStringLiteral("STANDARD_space")
+#define CD_PROFILE_METADATA_EDID_MD5 QStringLiteral("EDID_md5")
+#define CD_PROFILE_METADATA_EDID_MODEL QStringLiteral("EDID_model")
+#define CD_PROFILE_METADATA_EDID_SERIAL QStringLiteral("EDID_serial")
+#define CD_PROFILE_METADATA_EDID_MNFT QStringLiteral("EDID_mnft")
+#define CD_PROFILE_METADATA_EDID_VENDOR QStringLiteral("EDID_manufacturer")
+#define CD_PROFILE_METADATA_FILE_CHECKSUM QStringLiteral("FILE_checksum")
+#define CD_PROFILE_METADATA_CMF_PRODUCT QStringLiteral("CMF_product")
+#define CD_PROFILE_METADATA_CMF_BINARY QStringLiteral("CMF_binary")
+#define CD_PROFILE_METADATA_CMF_VERSION QStringLiteral("CMF_version")
+#define CD_PROFILE_METADATA_DATA_SOURCE QStringLiteral("DATA_source")
+#define CD_PROFILE_METADATA_MAPPING_FORMAT QStringLiteral("MAPPING_format")
+#define CD_PROFILE_METADATA_MAPPING_QUALIFIER QStringLiteral("MAPPING_qualifier")
 
-ProfileMetaData::ProfileMetaData(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ProfileMetaData),
-    m_model(new QStandardItemModel(this))
+ProfileMetaData::ProfileMetaData(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::ProfileMetaData)
+    , m_model(new QStandardItemModel(this))
 {
     ui->setupUi(this);
 

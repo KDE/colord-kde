@@ -61,10 +61,8 @@ private Q_SLOTS:
     void deviceRemoved(const QDBusObjectPath &objectPath);
 
 private:
-    QStandardItem* createProfileItem(const QDBusObjectPath &objectPath,
-                                     const QDBusObjectPath &parentObjectPath,
-                                     bool checked);
-    QStandardItem* findProfile(QStandardItem *parent, const QDBusObjectPath &objectPath);
+    QStandardItem *createProfileItem(const QDBusObjectPath &objectPath, const QDBusObjectPath &parentObjectPath, bool checked);
+    QStandardItem *findProfile(QStandardItem *parent, const QDBusObjectPath &objectPath);
     void removeProfilesNotInList(QStandardItem *parent, const ObjectPathList &profiles);
     int findItem(const QDBusObjectPath &objectPath);
 

@@ -19,39 +19,35 @@
 
 #include "DeviceModel.h"
 
-#include "ProfileModel.h"
 #include "Profile.h"
+#include "ProfileModel.h"
 
-#include "CdInterface.h"
 #include "CdDeviceInterface.h"
+#include "CdInterface.h"
 #include "CdProfileInterface.h"
 
-#include <QStringBuilder>
-#include <QDebug>
 #include <QDateTime>
+#include <QDebug>
 #include <QIcon>
+#include <QStringBuilder>
 
 #include <KLocalizedString>
 
-DeviceModel::DeviceModel(CdInterface *cdInterface, QObject *parent) :
-    QStandardItemModel(parent),
-    m_cdInterface(cdInterface)
+DeviceModel::DeviceModel(CdInterface *cdInterface, QObject *parent)
+    : QStandardItemModel(parent)
+    , m_cdInterface(cdInterface)
 {
     qDBusRegisterMetaType<CdStringMap>();
 
     // listen to colord for events
-    connect(m_cdInterface, &CdInterface::DeviceAdded,
-            this, &DeviceModel::deviceAddedEmit);
-    connect(m_cdInterface, &CdInterface::DeviceRemoved,
-            this, &DeviceModel::deviceRemoved);
-    connect(m_cdInterface, &CdInterface::DeviceChanged,
-            this, &DeviceModel::deviceChanged);
+    connect(m_cdInterface, &CdInterface::DeviceAdded, this, &DeviceModel::deviceAddedEmit);
+    connect(m_cdInterface, &CdInterface::DeviceRemoved, this, &DeviceModel::deviceRemoved);
+    connect(m_cdInterface, &CdInterface::DeviceChanged, this, &DeviceModel::deviceChanged);
 
     // Ask for devices
     auto async = m_cdInterface->GetDevices();
     auto watcher = new QDBusPendingCallWatcher(async, this);
-    connect(watcher, &QDBusPendingCallWatcher::finished,
-            this, &DeviceModel::gotDevices);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, &DeviceModel::gotDevices);
 }
 
 void DeviceModel::gotDevices(QDBusPendingCallWatcher *call)
@@ -77,9 +73,7 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
         return;
     }
 
-    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
-                             objectPath.path(),
-                             QDBusConnection::systemBus());
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"), objectPath.path(), QDBusConnection::systemBus());
     if (!device.isValid()) {
         return;
     }
@@ -120,9 +114,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         return;
     }
 
-    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
-                             objectPath.path(),
-                             QDBusConnection::systemBus());
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"), objectPath.path(), QDBusConnection::systemBus());
     if (!device.isValid()) {
         return;
     }
@@ -167,9 +159,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     // Convert our Device Kind to Profile Kind
     if (kind == QLatin1String("display")) {
         kind = QStringLiteral("display-device");
-    } else if (kind == QLatin1String("camera") ||
-               kind == QLatin1String("scanner") ||
-               kind == QLatin1String("webcam")) {
+    } else if (kind == QLatin1String("camera") || kind == QLatin1String("scanner") || kind == QLatin1String("webcam")) {
         kind = QStringLiteral("input-device");
     } else if (kind == QLatin1String("printer")) {
         kind = QStringLiteral("output-device");
@@ -179,11 +169,9 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     item->setData(kind, ProfileKindRole);
     appendRow(item);
 
-    QList<QStandardItem*> profileItems;
+    QList<QStandardItem *> profileItems;
     for (const QDBusObjectPath &profileObjectPath : profiles) {
-        QStandardItem *profileItem = createProfileItem(profileObjectPath,
-                                                       objectPath,
-                                                       profileItems.isEmpty());
+        QStandardItem *profileItem = createProfileItem(profileObjectPath, objectPath, profileItems.isEmpty());
         if (profileItem) {
             profileItems << profileItem;
         }
@@ -220,13 +208,9 @@ void DeviceModel::serviceOwnerChanged(const QString &serviceName, const QString 
     }
 }
 
-QStandardItem* DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
-                                              const QDBusObjectPath &parentObjectPath,
-                                              bool checked)
+QStandardItem *DeviceModel::createProfileItem(const QDBusObjectPath &objectPath, const QDBusObjectPath &parentObjectPath, bool checked)
 {
-    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
-                               objectPath.path(),
-                               QDBusConnection::systemBus());
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"), objectPath.path(), QDBusConnection::systemBus());
     if (!profile.isValid()) {
         return nullptr;
     }
@@ -325,9 +309,7 @@ bool DeviceModel::setData(const QModelIndex &index, const QVariant &value, int r
 
     QStandardItem *stdItem = itemFromIndex(index);
     QDBusObjectPath parentObjPath = stdItem->data(ParentObjectPathRole).value<QDBusObjectPath>();
-    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
-                             parentObjPath.path(),
-                             QDBusConnection::systemBus());
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"), parentObjPath.path(), QDBusConnection::systemBus());
     if (device.isValid()) {
         device.MakeProfileDefault(stdItem->data(ObjectPathRole).value<QDBusObjectPath>());
     }

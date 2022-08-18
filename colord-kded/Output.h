@@ -20,9 +20,9 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
+#include "CdDeviceInterface.h"
 #include <QDBusObjectPath>
 #include <QTextStream>
-#include "CdDeviceInterface.h"
 
 #include "Edid.h"
 
@@ -44,7 +44,7 @@ public:
     QString id() const;
     void setPath(const QDBusObjectPath &path);
     QDBusObjectPath path() const;
-    CdDeviceInterface* interface();
+    CdDeviceInterface *interface();
     RRCrtc crtc() const;
     RROutput output() const;
     int getGammaSize() const;
@@ -58,9 +58,9 @@ public:
 
 private:
     /**
-      * Callers should delete the data if not 0
-      */
-    quint8* readEdidData(size_t &len);
+     * Callers should delete the data if not 0
+     */
+    quint8 *readEdidData(size_t &len);
 
     RROutput m_output;
     XRRScreenResources *m_resources;

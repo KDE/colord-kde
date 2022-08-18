@@ -21,42 +21,41 @@
 #include "ui_Description.h"
 
 #include "Profile.h"
-#include "ProfileNamedColors.h"
 #include "ProfileMetaData.h"
+#include "ProfileNamedColors.h"
 
-#include "CdInterface.h"
 #include "CdDeviceInterface.h"
+#include "CdInterface.h"
 #include "CdProfileInterface.h"
 #include "CdSensorInterface.h"
 
-#include <QFileInfo>
-#include <QStringBuilder>
-#include <QDebug>
 #include <QDateTime>
 #include <QDebug>
+#include <QFileInfo>
+#include <QStringBuilder>
 
-#include <KLocalizedString>
-#include <KToolInvocation>
-#include <KMessageWidget>
 #include <KFormat>
 #include <KIO/CommandLauncherJob>
+#include <KLocalizedString>
+#include <KMessageWidget>
+#include <KToolInvocation>
 
-#define TAB_INFORMATION  1
-#define TAB_CIE_1931     2
-#define TAB_TRC          3
-#define TAB_VCGT         4
-#define TAB_FROM_SRGB    5
-#define TAB_TO_SRGB      6
+#define TAB_INFORMATION 1
+#define TAB_CIE_1931 2
+#define TAB_TRC 3
+#define TAB_VCGT 4
+#define TAB_FROM_SRGB 5
+#define TAB_TO_SRGB 6
 #define TAB_NAMED_COLORS 7
-#define TAB_METADATA     8
+#define TAB_METADATA 8
 
 typedef QList<QDBusObjectPath> ObjectPathList;
 
-Description::Description(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Description),
-    m_namedColors(new ProfileNamedColors),
-    m_metadata(new ProfileMetaData)
+Description::Description(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::Description)
+    , m_namedColors(new ProfileNamedColors)
+    , m_metadata(new ProfileMetaData)
 {
     ui->setupUi(this);
     ui->msgWidget->setMessageType(KMessageWidget::Warning);
@@ -81,15 +80,12 @@ int Description::innerHeight() const
 void Description::setCdInterface(CdInterface *interface)
 {
     // listen to colord for events
-    connect(interface, &CdInterface::SensorAdded,
-            this, &Description::sensorAddedUpdateCalibrateButton);
-    connect(interface, &CdInterface::SensorRemoved,
-            this, &Description::sensorRemovedUpdateCalibrateButton);
+    connect(interface, &CdInterface::SensorAdded, this, &Description::sensorAddedUpdateCalibrateButton);
+    connect(interface, &CdInterface::SensorRemoved, this, &Description::sensorRemovedUpdateCalibrateButton);
 
     auto async = interface->GetSensors();
     auto watcher = new QDBusPendingCallWatcher(async, this);
-    connect(watcher, &QDBusPendingCallWatcher::finished,
-            this, &Description::gotSensors);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, &Description::gotSensors);
 }
 
 void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemoveProfile)
@@ -98,9 +94,7 @@ void Description::setProfile(const QDBusObjectPath &objectPath, bool canRemovePr
     m_currentDeviceId.clear();
 
     ui->stackedWidget->setCurrentIndex(0);
-    CdProfileInterface profileInterface(QStringLiteral("org.freedesktop.ColorManager"),
-                                        objectPath.path(),
-                                        QDBusConnection::systemBus());
+    CdProfileInterface profileInterface(QStringLiteral("org.freedesktop.ColorManager"), objectPath.path(), QDBusConnection::systemBus());
     if (!profileInterface.isValid()) {
         return;
     }
@@ -195,9 +189,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
 
     ui->stackedWidget->setCurrentIndex(1);
 
-    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"),
-                             objectPath.path(),
-                             QDBusConnection::systemBus());
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"), objectPath.path(), QDBusConnection::systemBus());
     if (!device.isValid()) {
         return;
     }
@@ -260,9 +252,7 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
 
     QString profileTitle = i18n("This device has no profile assigned to it");
     if (!profiles.isEmpty()) {
-        CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
-                                   profiles.first().path(),
-                                   QDBusConnection::systemBus());
+        CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"), profiles.first().path(), QDBusConnection::systemBus());
         if (profile.isValid()) {
             profileTitle = profile.title();
             if (profileTitle.isEmpty()) {
@@ -278,20 +268,13 @@ void Description::setDevice(const QDBusObjectPath &objectPath)
 
 void Description::on_installSystemWideBt_clicked()
 {
-    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
-                               m_currentProfile.path(),
-                               QDBusConnection::systemBus());
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"), m_currentProfile.path(), QDBusConnection::systemBus());
     profile.InstallSystemWide();
 }
 
 void Description::on_calibratePB_clicked()
 {
-    const QStringList args = {
-        QLatin1String("--parent-window"),
-        QString::number(winId()),
-        QLatin1String("--device"),
-        m_currentDeviceId
-    };
+    const QStringList args = {QLatin1String("--parent-window"), QString::number(winId()), QLatin1String("--device"), m_currentDeviceId};
     auto *job = new KIO::CommandLauncherJob(QLatin1String("gcm-calibrate"), args);
     job->start();
 }
@@ -401,9 +384,7 @@ bool Description::calibrateEnabled(const QString &kind)
         } else {
             canCalibrate = true;
         }
-    } else if (kind == QLatin1String("camera") ||
-               kind == QLatin1String("scanner") ||
-               kind == QLatin1String("webcam")) {
+    } else if (kind == QLatin1String("camera") || kind == QLatin1String("scanner") || kind == QLatin1String("webcam")) {
         canCalibrate = true;
     } else if (kind == QLatin1String("printer")) {
         // Check if we have any sensor
@@ -412,9 +393,7 @@ bool Description::calibrateEnabled(const QString &kind)
         } else {
             // Search for a suitable sensor
             foreach (const QDBusObjectPath &sensorPath, m_sensors) {
-                CdSensorInterface sensor(QStringLiteral("org.freedesktop.ColorManager"),
-                                         sensorPath.path(),
-                                         QDBusConnection::systemBus());
+                CdSensorInterface sensor(QStringLiteral("org.freedesktop.ColorManager"), sensorPath.path(), QDBusConnection::systemBus());
                 if (!sensor.isValid()) {
                     continue;
                 }

@@ -23,10 +23,10 @@
 #include <QColor>
 #include <QHeaderView>
 
-ProfileNamedColors::ProfileNamedColors(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ProfileNamedColors),
-    m_model(new QStandardItemModel(this))
+ProfileNamedColors::ProfileNamedColors(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::ProfileNamedColors)
+    , m_model(new QStandardItemModel(this))
 {
     ui->setupUi(this);
 
@@ -51,7 +51,7 @@ void ProfileNamedColors::setNamedColors(const QMap<QString, QColor> &namedColors
         auto color = new QStandardItem;
         color->setBackground(QBrush(i.value()));
 
-        m_model->appendRow({ name, color });
+        m_model->appendRow({name, color});
         ++i;
     }
 }

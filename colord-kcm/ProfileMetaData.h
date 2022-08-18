@@ -20,13 +20,14 @@
 #ifndef PROFILEMETADATA_H
 #define PROFILEMETADATA_H
 
-#include <QWidget>
 #include <QStandardItemModel>
+#include <QWidget>
 
 #include "dbus-types.h"
 
-namespace Ui {
-    class ProfileMetaData;
+namespace Ui
+{
+class ProfileMetaData;
 }
 
 class ProfileMetaData : public QWidget

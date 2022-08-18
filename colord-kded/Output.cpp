@@ -19,16 +19,16 @@
 
 #include "Output.h"
 
-#include <QX11Info>
 #include <QLoggingCategory>
+#include <QX11Info>
 
 #define RR_CONNECTOR_TYPE_PANEL "Panel"
 
 Q_DECLARE_LOGGING_CATEGORY(COLORD)
 
-Output::Output(RROutput output, XRRScreenResources *resources) :
-    m_output(output),
-    m_resources(resources)
+Output::Output(RROutput output, XRRScreenResources *resources)
+    : m_output(output)
+    , m_resources(resources)
 {
     XRROutputInfo *info;
     info = XRRGetOutputInfo(QX11Info::display(), m_resources, m_output);
@@ -105,9 +105,7 @@ void Output::setPath(const QDBusObjectPath &path)
     m_path = path;
 
     delete m_interface;
-    m_interface = new CdDeviceInterface(QStringLiteral("org.freedesktop.ColorManager"),
-                                        path.path(),
-                                        QDBusConnection::systemBus());
+    m_interface = new CdDeviceInterface(QStringLiteral("org.freedesktop.ColorManager"), path.path(), QDBusConnection::systemBus());
     if (!m_interface->isValid()) {
         qCWarning(COLORD) << "Invalid interface" << path.path() << m_interface->lastError().message();
         delete m_interface;
@@ -184,17 +182,25 @@ QString Output::connectorType() const
     char *connector_type_str;
     QString result;
 
-    XRRGetOutputProperty(QX11Info::display(), m_output, connector_type_atom,
-                         0, 100, false, false,
+    XRRGetOutputProperty(QX11Info::display(),
+                         m_output,
+                         connector_type_atom,
+                         0,
+                         100,
+                         false,
+                         false,
                          AnyPropertyType,
-                         &actual_type, &actual_format,
-                         &nitems, &bytes_after, &prop);
+                         &actual_type,
+                         &actual_format,
+                         &nitems,
+                         &bytes_after,
+                         &prop);
     if (!(actual_type == XA_ATOM && actual_format == 32 && nitems == 1)) {
         XFree(prop);
         return result;
     }
 
-    connector_type = *((Atom *) prop);
+    connector_type = *((Atom *)prop);
 
     connector_type_str = XGetAtomName(QX11Info::display(), connector_type);
     if (connector_type_str) {
@@ -202,16 +208,13 @@ QString Output::connectorType() const
         XFree(connector_type_str);
     }
 
-    XFree (prop);
+    XFree(prop);
 
     return result;
 }
 
 /* This is what gnome-desktop does */
-static quint8* getProperty(Display *dpy,
-                           RROutput output,
-                           Atom atom,
-                           size_t &len)
+static quint8 *getProperty(Display *dpy, RROutput output, Atom atom, size_t &len)
 {
     unsigned char *prop;
     int actual_format;
@@ -219,11 +222,7 @@ static quint8* getProperty(Display *dpy,
     Atom actual_type;
     quint8 *result;
 
-    XRRGetOutputProperty(dpy, output, atom,
-                         0, 100, false, false,
-                         AnyPropertyType,
-                         &actual_type, &actual_format,
-                         &nitems, &bytes_after, &prop);
+    XRRGetOutputProperty(dpy, output, atom, 0, 100, false, false, AnyPropertyType, &actual_type, &actual_format, &nitems, &bytes_after, &prop);
     if (actual_type == XA_INTEGER && actual_format == 8) {
         result = new quint8[nitems];
         memcpy(result, prop, nitems);
@@ -232,11 +231,11 @@ static quint8* getProperty(Display *dpy,
         result = nullptr;
     }
 
-    XFree (prop);
+    XFree(prop);
     return result;
 }
 
-quint8* Output::readEdidData(size_t &len)
+quint8 *Output::readEdidData(size_t &len)
 {
     Atom edid_atom;
     quint8 *result;

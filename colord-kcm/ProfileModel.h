@@ -20,9 +20,9 @@
 #ifndef PROFILE_MODEL_H
 #define PROFILE_MODEL_H
 
-#include <QStandardItemModel>
 #include <QDBusObjectPath>
 #include <QDBusPendingCallWatcher>
+#include <QStandardItemModel>
 
 #include "dbus-types.h"
 

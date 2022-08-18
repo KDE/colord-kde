@@ -23,39 +23,35 @@
 #include "CdInterface.h"
 #include "CdProfileInterface.h"
 
-#include <QDBusMetaType>
-#include <QDBusConnection>
-#include <QDBusReply>
 #include <QDBusArgument>
-#include <QStringBuilder>
-#include <QFileInfo>
-#include <QDebug>
-#include <QIcon>
+#include <QDBusConnection>
+#include <QDBusMetaType>
+#include <QDBusReply>
 #include <QDateTime>
+#include <QDebug>
+#include <QFileInfo>
+#include <QIcon>
+#include <QStringBuilder>
 
 #include <KLocalizedString>
 
 typedef QList<QDBusObjectPath> ObjectPathList;
 
-ProfileModel::ProfileModel(CdInterface *cdInterface, QObject *parent) :
-    QStandardItemModel(parent)
+ProfileModel::ProfileModel(CdInterface *cdInterface, QObject *parent)
+    : QStandardItemModel(parent)
 {
     qDBusRegisterMetaType<ObjectPathList>();
     qDBusRegisterMetaType<CdStringMap>();
 
     // listen to colord for events
-    connect(cdInterface, &CdInterface::ProfileAdded,
-            this, &ProfileModel::profileAddedEmit);
-    connect(cdInterface, &CdInterface::ProfileRemoved,
-            this, &ProfileModel::profileRemoved);
-    connect(cdInterface, &CdInterface::ProfileChanged,
-            this, &ProfileModel::profileChanged);
+    connect(cdInterface, &CdInterface::ProfileAdded, this, &ProfileModel::profileAddedEmit);
+    connect(cdInterface, &CdInterface::ProfileRemoved, this, &ProfileModel::profileRemoved);
+    connect(cdInterface, &CdInterface::ProfileChanged, this, &ProfileModel::profileChanged);
 
     // Ask for profiles
     auto async = cdInterface->GetProfiles();
     auto watcher = new QDBusPendingCallWatcher(async, this);
-    connect(watcher, &QDBusPendingCallWatcher::finished,
-            this, &ProfileModel::gotProfiles);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, &ProfileModel::gotProfiles);
 }
 
 void ProfileModel::gotProfiles(QDBusPendingCallWatcher *call)
@@ -91,9 +87,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         return;
     }
 
-    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
-                               objectPath.path(),
-                               QDBusConnection::systemBus());
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"), objectPath.path(), QDBusConnection::systemBus());
     if (!profile.isValid()) {
         return;
     }
@@ -156,9 +150,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     item->setData(kind, ProfileKindRole);
 
     bool canRemoveProfile = false;
-    if (!filename.isNull() &&
-            fileInfo.isWritable() &&
-            dataSource != QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_EDID)) {
+    if (!filename.isNull() && fileInfo.isWritable() && dataSource != QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_EDID)) {
         // if we can write we can also remove the profile
         canRemoveProfile = true;
     }

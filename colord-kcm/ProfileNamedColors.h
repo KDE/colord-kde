@@ -20,11 +20,12 @@
 #ifndef PROFILENAMEDCOLORS_H
 #define PROFILENAMEDCOLORS_H
 
-#include <QWidget>
 #include <QStandardItemModel>
+#include <QWidget>
 
-namespace Ui {
-    class ProfileNamedColors;
+namespace Ui
+{
+class ProfileNamedColors;
 }
 
 class ProfileNamedColors : public QWidget

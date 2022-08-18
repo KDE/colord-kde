@@ -18,25 +18,25 @@
  ***************************************************************************/
 
 #include "ProfilesWatcher.h"
-#include "ProfileUtils.h"
-#include "Edid.h"
 #include "CdInterface.h"
+#include "Edid.h"
+#include "ProfileUtils.h"
 
 #include <KDirWatch>
 
+#include <QDBusObjectPath>
+#include <QDBusReply>
+#include <QDBusUnixFileDescriptor>
+#include <QDirIterator>
+#include <QLoggingCategory>
 #include <QMimeDatabase>
 #include <QMimeType>
 #include <QStringBuilder>
-#include <QDirIterator>
-#include <QDBusUnixFileDescriptor>
-#include <QDBusReply>
-#include <QDBusObjectPath>
-#include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(COLORD)
 
-ProfilesWatcher::ProfilesWatcher(QObject *parent) :
-    QThread(parent)
+ProfilesWatcher::ProfilesWatcher(QObject *parent)
+    : QThread(parent)
 {
 }
 
@@ -58,8 +58,8 @@ void ProfilesWatcher::scanHomeDirectory()
         }
     }
 
-    //check if any changes to the file occour
-    //this also prevents from reading when a checkUpdate happens
+    // check if any changes to the file occour
+    // this also prevents from reading when a checkUpdate happens
     if (!m_dirWatch) {
         m_dirWatch = new KDirWatch(this);
         m_dirWatch->addDir(profilesDir.path(), KDirWatch::WatchFiles);
@@ -119,26 +119,16 @@ void ProfilesWatcher::addProfile(const QString &filePath)
     profile.seek(0);
 
     QString profileId = QLatin1String("icc-") % hash;
-    const CdStringMap properties = {
-        {QStringLiteral("Filename"), filePath},
-        {QStringLiteral("FILE_checksum"), hash}
-    };
+    const CdStringMap properties = {{QStringLiteral("Filename"), filePath}, {QStringLiteral("FILE_checksum"), hash}};
 
-    CdInterface cdInterface(QStringLiteral("org.freedesktop.ColorManager"),
-                            QStringLiteral("/org/freedesktop/ColorManager"),
-                            QDBusConnection::systemBus());
+    CdInterface cdInterface(QStringLiteral("org.freedesktop.ColorManager"), QStringLiteral("/org/freedesktop/ColorManager"), QDBusConnection::systemBus());
 
     QDBusReply<QDBusObjectPath> reply;
     // TODO async
     if (QDBusConnection::systemBus().connectionCapabilities() & QDBusConnection::UnixFileDescriptorPassing) {
-        reply = cdInterface.CreateProfileWithFd(profileId,
-                                                QStringLiteral("temp"),
-                                                QDBusUnixFileDescriptor(profile.handle()),
-                                                properties);
+        reply = cdInterface.CreateProfileWithFd(profileId, QStringLiteral("temp"), QDBusUnixFileDescriptor(profile.handle()), properties);
     } else {
-        reply = cdInterface.CreateProfile(profileId,
-                                          QStringLiteral("temp"),
-                                          properties);
+        reply = cdInterface.CreateProfile(profileId, QStringLiteral("temp"), properties);
     }
 
     qCDebug(COLORD) << "created profile" << profileId << reply.value().path();
@@ -146,9 +136,7 @@ void ProfilesWatcher::addProfile(const QString &filePath)
 
 void ProfilesWatcher::removeProfile(const QString &filename)
 {
-    CdInterface cdInterface(QStringLiteral("org.freedesktop.ColorManager"),
-                            QStringLiteral("/org/freedesktop/ColorManager"),
-                            QDBusConnection::systemBus());
+    CdInterface cdInterface(QStringLiteral("org.freedesktop.ColorManager"), QStringLiteral("/org/freedesktop/ColorManager"), QDBusConnection::systemBus());
 
     // TODO async
     QDBusReply<QDBusObjectPath> reply = cdInterface.FindProfileByFilename(filename);

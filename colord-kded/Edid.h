@@ -20,9 +20,9 @@
 #ifndef EDID_H
 #define EDID_H
 
-#include <QtGlobal>
 #include <QQuaternion>
 #include <QString>
+#include <QtGlobal>
 
 class Edid
 {

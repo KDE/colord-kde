@@ -19,10 +19,9 @@
 #ifndef XLIBANDXRANDR_H
 #define XLIBANDXRANDR_H
 
-extern "C"
-{
-#include <X11/Xlib.h>
+extern "C" {
 #include <X11/Xatom.h>
+#include <X11/Xlib.h>
 #define INT8 _X11INT8
 #define INT32 _X11INT32
 #include <X11/Xproto.h>

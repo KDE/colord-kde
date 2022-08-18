@@ -19,40 +19,38 @@
 
 #include "ColorD.h"
 
+#include "DmiUtils.h"
 #include "ProfilesWatcher.h"
 #include "XEventHandler.h"
-#include "DmiUtils.h"
 
-#include "CdInterface.h"
 #include "CdDeviceInterface.h"
+#include "CdInterface.h"
 #include "CdProfileInterface.h"
 
 #include <lcms2.h>
 
 #include <QApplication>
-#include <QFile>
-#include <QStringBuilder>
-#include <QX11Info>
-#include <QLoggingCategory>
-#include <QDBusError>
 #include <QDBusConnection>
+#include <QDBusError>
 #include <QDBusMetaType>
+#include <QDBusReply>
 #include <QDBusServiceWatcher>
 #include <QDBusUnixFileDescriptor>
-#include <QDBusReply>
+#include <QFile>
+#include <QLoggingCategory>
+#include <QStringBuilder>
+#include <QX11Info>
 
 #include <KPluginFactory>
 
-K_PLUGIN_FACTORY_WITH_JSON(ColorDFactory,
-                           "colord.json",
-                           registerPlugin<ColorD>();)
+K_PLUGIN_FACTORY_WITH_JSON(ColorDFactory, "colord.json", registerPlugin<ColorD>();)
 
 Q_LOGGING_CATEGORY(COLORD, "colord")
 
 typedef QList<QDBusObjectPath> ObjectPathList;
 
-ColorD::ColorD(QObject *parent, const QVariantList &) :
-    KDEDModule(parent)
+ColorD::ColorD(QObject *parent, const QVariantList &)
+    : KDEDModule(parent)
 {
     if (QApplication::platformName() != QLatin1String("xcb")) {
         // Wayland is not supported
@@ -77,20 +75,16 @@ ColorD::ColorD(QObject *parent, const QVariantList &) :
     }
 
     // Make sure we know is colord is running
-    auto watcher = new QDBusServiceWatcher(QStringLiteral("org.freedesktop.ColorManager"),
-                                           QDBusConnection::systemBus(),
-                                           QDBusServiceWatcher::WatchForOwnerChange,
-                                           this);
-    connect(watcher, &QDBusServiceWatcher::serviceOwnerChanged,
-            this, &ColorD::serviceOwnerChanged);
+    auto watcher =
+        new QDBusServiceWatcher(QStringLiteral("org.freedesktop.ColorManager"), QDBusConnection::systemBus(), QDBusServiceWatcher::WatchForOwnerChange, this);
+    connect(watcher, &QDBusServiceWatcher::serviceOwnerChanged, this, &ColorD::serviceOwnerChanged);
 
     // Create the profiles watcher thread
     m_profilesWatcher = new ProfilesWatcher;
     m_profilesWatcher->start();
 
     // Check outputs add all active outputs, once profiles are ready
-    connect(m_profilesWatcher, &ProfilesWatcher::scanFinished,
-            this, &ColorD::checkOutputs, Qt::QueuedConnection);
+    connect(m_profilesWatcher, &ProfilesWatcher::scanFinished, this, &ColorD::checkOutputs, Qt::QueuedConnection);
 
     // init the settings
     init();
@@ -118,9 +112,7 @@ ColorD::~ColorD()
 void ColorD::init()
 {
     // Scan all the *.icc files later on it's own thread as this takes quite some time
-    QMetaObject::invokeMethod(m_profilesWatcher,
-                              "scanHomeDirectory",
-                              Qt::QueuedConnection);
+    QMetaObject::invokeMethod(m_profilesWatcher, "scanHomeDirectory", Qt::QueuedConnection);
 }
 
 void ColorD::reset()
@@ -149,9 +141,7 @@ void ColorD::addEdidProfileToDevice(const Output::Ptr &output)
 
 CdStringMap ColorD::getProfileMetadata(const QDBusObjectPath &profilePath)
 {
-    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
-                               profilePath.path(),
-                               QDBusConnection::systemBus());
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"), profilePath.path(), QDBusConnection::systemBus());
     return profile.metadata();
 }
 
@@ -217,11 +207,7 @@ void ColorD::addOutput(const Output::Ptr &output)
     deviceId = output->id();
 
     // Creates the default profile
-    QMetaObject::invokeMethod(m_profilesWatcher,
-                              "createIccProfile",
-                              Qt::QueuedConnection,
-                              Q_ARG(bool, isLaptop),
-                              Q_ARG(Edid, edid));
+    QMetaObject::invokeMethod(m_profilesWatcher, "createIccProfile", Qt::QueuedConnection, Q_ARG(bool, isLaptop), Q_ARG(Edid, edid));
 
     // build up a map with the output properties to send to colord
     CdStringMap properties;
@@ -390,11 +376,12 @@ QList<ColorD::X11Monitor> ColorD::getAtomIds() const
 
     // sort the list of monitors so that the primary one is first. also updates the atomId.
     struct {
-        bool operator()(const ColorD::X11Monitor &monitorA,
-                        const ColorD::X11Monitor &monitorB) const
+        bool operator()(const ColorD::X11Monitor &monitorA, const ColorD::X11Monitor &monitorB) const
         {
-            if(monitorA.isPrimary) return true;
-            if(monitorB.isPrimary) return false;
+            if (monitorA.isPrimary)
+                return true;
+            if (monitorB.isPrimary)
+                return false;
 
             return monitorA.atomId < monitorB.atomId;
         }
@@ -433,9 +420,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
     // read the default profile (the first path in the Device.Profiles property)
     QDBusObjectPath profileDefault = profiles.first();
     qCDebug(COLORD) << "profileDefault" << profileDefault.path();
-    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"),
-                               profileDefault.path(),
-                               QDBusConnection::systemBus());
+    CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"), profileDefault.path(), QDBusConnection::systemBus());
     if (!profile.isValid()) {
         qCDebug(COLORD) << "Profile invalid" << output->name() << profile.lastError();
         return;
@@ -457,7 +442,7 @@ void ColorD::outputChanged(const Output::Ptr &output)
     cmsHPROFILE lcms_profile = nullptr;
 
     // open file
-    lcms_profile = cmsOpenProfileFromMem((const uint*) data.data(), data.size());
+    lcms_profile = cmsOpenProfileFromMem((const uint *)data.data(), data.size());
     if (lcms_profile == nullptr) {
         qCWarning(COLORD) << "Could not open profile with lcms" << output->name() << filename;
         return;
@@ -481,18 +466,18 @@ void ColorD::outputChanged(const Output::Ptr &output)
         // Reset the gamma table
         for (int i = 0; i < gammaSize; ++i) {
             uint value = (i * 0xffff) / (gammaSize - 1);
-            gamma->red[i]   = value;
+            gamma->red[i] = value;
             gamma->green[i] = value;
-            gamma->blue[i]  = value;
+            gamma->blue[i] = value;
         }
     } else {
         // Fill the gamma table with the VCGT data
         for (int i = 0; i < gammaSize; ++i) {
             cmsFloat32Number in;
-            in = (double) i / (double) (gammaSize - 1);
-            gamma->red[i]   = cmsEvalToneCurveFloat(vcgt[0], in) * (double) 0xffff;
-            gamma->green[i] = cmsEvalToneCurveFloat(vcgt[1], in) * (double) 0xffff;
-            gamma->blue[i]  = cmsEvalToneCurveFloat(vcgt[2], in) * (double) 0xffff;
+            in = (double)i / (double)(gammaSize - 1);
+            gamma->red[i] = cmsEvalToneCurveFloat(vcgt[0], in) * (double)0xffff;
+            gamma->green[i] = cmsEvalToneCurveFloat(vcgt[1], in) * (double)0xffff;
+            gamma->blue[i] = cmsEvalToneCurveFloat(vcgt[2], in) * (double)0xffff;
         }
     }
     cmsCloseProfile(lcms_profile);
@@ -517,26 +502,18 @@ void ColorD::outputChanged(const Output::Ptr &output)
         if (atomId > 0) {
             atomString.append(QString("_%1").arg(atomId));
         }
-        qCInfo(COLORD) << "Setting X atom (id:" << atomId << ")" << atomString << "on output:"  << output->name();
+        qCInfo(COLORD) << "Setting X atom (id:" << atomId << ")" << atomString << "on output:" << output->name();
         QByteArray atomBytes = atomString.toLatin1();
         const char *atomChars = atomBytes.constData();
         Atom prop = XInternAtom(m_dpy, atomChars, false);
-        int rc = XChangeProperty(m_dpy,
-                                 m_root,
-                                 prop,
-                                 XA_CARDINAL,
-                                 8,
-                                 PropModeReplace,
-                                 (unsigned char *) data.data(),
-                                 data.size());
+        int rc = XChangeProperty(m_dpy, m_root, prop, XA_CARDINAL, 8, PropModeReplace, (unsigned char *)data.data(), data.size());
 
         // for some reason this fails with BadRequest, but actually sets the value
         if (rc != BadRequest && rc != Success) {
             qCWarning(COLORD) << "Failed to set XProperty";
         }
-    }
-    else {
-      qCDebug(COLORD) << "Failed to get an atomId for" << output->name();
+    } else {
+        qCDebug(COLORD) << "Failed to get an atomId for" << output->name();
     }
 }
 
@@ -556,17 +533,14 @@ XRRScreenResources *ColorD::connectToDisplay()
     // Check extension
     int eventBase;
     int major_version, minor_version;
-    if (!XRRQueryExtension(m_dpy, &eventBase, &m_errorBase) ||
-            !XRRQueryVersion(m_dpy, &major_version, &minor_version))
-    {
+    if (!XRRQueryExtension(m_dpy, &eventBase, &m_errorBase) || !XRRQueryVersion(m_dpy, &major_version, &minor_version)) {
         qCWarning(COLORD) << "RandR extension missing";
         return nullptr;
     }
 
     // Install our X event handler
     m_x11EventHandler = new XEventHandler(eventBase);
-    connect(m_x11EventHandler, SIGNAL(outputChanged()),
-            this, SLOT(checkOutputs()));
+    connect(m_x11EventHandler, SIGNAL(outputChanged()), this, SLOT(checkOutputs()));
 
     // check if we have the new version of the XRandR extension
     bool has_1_2;
@@ -648,23 +622,23 @@ void ColorD::profileAdded(const QDBusObjectPath &profilePath)
 void ColorD::deviceAdded(const QDBusObjectPath &objectPath)
 {
     qCDebug(COLORD) << "Device added" << objectPath.path();
-//    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
-//                                   objectPath.path(),
-//                                   QLatin1String("org.freedesktop.ColorManager.Device"),
-//                                   QDBusConnection::systemBus(),
-//                                   this);
-//    if (!deviceInterface.isValid()) {
-//        return;
-//    }
+    //    QDBusInterface deviceInterface(QLatin1String("org.freedesktop.ColorManager"),
+    //                                   objectPath.path(),
+    //                                   QLatin1String("org.freedesktop.ColorManager.Device"),
+    //                                   QDBusConnection::systemBus(),
+    //                                   this);
+    //    if (!deviceInterface.isValid()) {
+    //        return;
+    //    }
 
-//    // check Device.Kind is "display"
-//    if (deviceInterface.property("Kind").toString() != QLatin1String("display")) {
-//        // not a display device, ignoring
-//        return;
-//    }
+    //    // check Device.Kind is "display"
+    //    if (deviceInterface.property("Kind").toString() != QLatin1String("display")) {
+    //        // not a display device, ignoring
+    //        return;
+    //    }
 
     /* show a notification if the user should calibrate the device */
-    //TODO
+    // TODO
 }
 
 void ColorD::deviceChanged(const QDBusObjectPath &objectPath)
@@ -691,18 +665,13 @@ void ColorD::connectToColorD()
 {
     // Creates a ColorD interface, it must be created with new
     // otherwise the object will be deleted when this block ends
-    m_cdInterface = new CdInterface(QStringLiteral("org.freedesktop.ColorManager"),
-                                    QStringLiteral("/org/freedesktop/ColorManager"),
-                                    QDBusConnection::systemBus(),
-                                    this);
+    m_cdInterface =
+        new CdInterface(QStringLiteral("org.freedesktop.ColorManager"), QStringLiteral("/org/freedesktop/ColorManager"), QDBusConnection::systemBus(), this);
 
     // listen to colord for events
-    connect(m_cdInterface, &CdInterface::ProfileAdded,
-            this, &ColorD::profileAdded);
-    connect(m_cdInterface, &CdInterface::DeviceAdded,
-            this, &ColorD::deviceAdded);
-    connect(m_cdInterface, &CdInterface::DeviceChanged,
-            this, &ColorD::deviceChanged);
+    connect(m_cdInterface, &CdInterface::ProfileAdded, this, &ColorD::profileAdded);
+    connect(m_cdInterface, &CdInterface::DeviceAdded, this, &ColorD::deviceAdded);
+    connect(m_cdInterface, &CdInterface::DeviceChanged, this, &ColorD::deviceChanged);
 }
 
 #include "ColorD.moc"

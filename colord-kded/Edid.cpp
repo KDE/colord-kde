@@ -23,24 +23,24 @@
 
 #include <QCryptographicHash>
 #include <QFile>
-#include <QStringList>
 #include <QStringBuilder>
+#include <QStringList>
 
 #include <QLoggingCategory>
 
-#define GCM_EDID_OFFSET_PNPID                           0x08
-#define GCM_EDID_OFFSET_SERIAL                          0x0c
-#define GCM_EDID_OFFSET_SIZE                            0x15
-#define GCM_EDID_OFFSET_GAMMA                           0x17
-#define GCM_EDID_OFFSET_DATA_BLOCKS                     0x36
-#define GCM_EDID_OFFSET_LAST_BLOCK                      0x6c
-#define GCM_EDID_OFFSET_EXTENSION_BLOCK_COUNT           0x7e
+#define GCM_EDID_OFFSET_PNPID 0x08
+#define GCM_EDID_OFFSET_SERIAL 0x0c
+#define GCM_EDID_OFFSET_SIZE 0x15
+#define GCM_EDID_OFFSET_GAMMA 0x17
+#define GCM_EDID_OFFSET_DATA_BLOCKS 0x36
+#define GCM_EDID_OFFSET_LAST_BLOCK 0x6c
+#define GCM_EDID_OFFSET_EXTENSION_BLOCK_COUNT 0x7e
 
-#define GCM_DESCRIPTOR_DISPLAY_PRODUCT_NAME             0xfc
-#define GCM_DESCRIPTOR_DISPLAY_PRODUCT_SERIAL_NUMBER    0xff
-#define GCM_DESCRIPTOR_COLOR_MANAGEMENT_DATA            0xf9
-#define GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING         0xfe
-#define GCM_DESCRIPTOR_COLOR_POINT                      0xfb
+#define GCM_DESCRIPTOR_DISPLAY_PRODUCT_NAME 0xfc
+#define GCM_DESCRIPTOR_DISPLAY_PRODUCT_SERIAL_NUMBER 0xff
+#define GCM_DESCRIPTOR_COLOR_MANAGEMENT_DATA 0xf9
+#define GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING 0xfe
+#define GCM_DESCRIPTOR_COLOR_POINT 0xfb
 
 #define PNP_IDS "/usr/share/hwdata/pnp.ids"
 
@@ -191,7 +191,7 @@ bool Edid::parse(const quint8 *data, size_t length)
      * |\---/\---/\---/
      * R  C1   C2   C3 */
     m_pnpId[0] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x7c) / 4) - 1;
-    m_pnpId[1] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x3) * 8) + ((data[GCM_EDID_OFFSET_PNPID+1] & 0xe0) / 32) - 1;
+    m_pnpId[1] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x3) * 8) + ((data[GCM_EDID_OFFSET_PNPID + 1] & 0xe0) / 32) - 1;
     m_pnpId[2] = 'A' + (data[GCM_EDID_OFFSET_PNPID + 1] & 0x1f) - 1;
 
     // load the PNP_IDS file and load the vendor name
@@ -255,45 +255,43 @@ bool Edid::parse(const quint8 *data, size_t length)
     m_white.setY(edidDecodeFraction(data[0x22], edidGetBits(data[0x1a], 0, 1)));
 
     /* parse EDID data */
-    for (uint i = GCM_EDID_OFFSET_DATA_BLOCKS;
-         i <= GCM_EDID_OFFSET_LAST_BLOCK;
-         i += 18) {
+    for (uint i = GCM_EDID_OFFSET_DATA_BLOCKS; i <= GCM_EDID_OFFSET_LAST_BLOCK; i += 18) {
         /* ignore pixel clock data */
         if (data[i] != 0) {
             continue;
         }
-        if (data[i+2] != 0) {
+        if (data[i + 2] != 0) {
             continue;
         }
 
         /* any useful blocks? */
-        if (data[i+3] == GCM_DESCRIPTOR_DISPLAY_PRODUCT_NAME) {
-            QString tmp = edidParseString(&data[i+5]);
+        if (data[i + 3] == GCM_DESCRIPTOR_DISPLAY_PRODUCT_NAME) {
+            QString tmp = edidParseString(&data[i + 5]);
             if (!tmp.isEmpty()) {
                 m_monitorName = tmp;
             }
-        } else if (data[i+3] == GCM_DESCRIPTOR_DISPLAY_PRODUCT_SERIAL_NUMBER) {
-            QString tmp = edidParseString(&data[i+5]);
+        } else if (data[i + 3] == GCM_DESCRIPTOR_DISPLAY_PRODUCT_SERIAL_NUMBER) {
+            QString tmp = edidParseString(&data[i + 5]);
             if (!tmp.isEmpty()) {
                 m_serialNumber = tmp;
             }
-        } else if (data[i+3] == GCM_DESCRIPTOR_COLOR_MANAGEMENT_DATA) {
+        } else if (data[i + 3] == GCM_DESCRIPTOR_COLOR_MANAGEMENT_DATA) {
             qCWarning(COLORD) << "failing to parse color management data";
-        } else if (data[i+3] == GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING) {
-            QString tmp = edidParseString(&data[i+5]);
+        } else if (data[i + 3] == GCM_DESCRIPTOR_ALPHANUMERIC_DATA_STRING) {
+            QString tmp = edidParseString(&data[i + 5]);
             if (!tmp.isEmpty()) {
                 m_eisaId = tmp;
             }
-        } else if (data[i+3] == GCM_DESCRIPTOR_COLOR_POINT) {
-            if (data[i+3+9] != 0xff) {
+        } else if (data[i + 3] == GCM_DESCRIPTOR_COLOR_POINT) {
+            if (data[i + 3 + 9] != 0xff) {
                 /* extended EDID block(1) which contains
                  * a better gamma value */
-                m_gamma = ((float) data[i+3+9] / 100) + 1;
+                m_gamma = ((float)data[i + 3 + 9] / 100) + 1;
             }
-            if (data[i+3+14] != 0xff) {
+            if (data[i + 3 + 14] != 0xff) {
                 /* extended EDID block(2) which contains
                  * a better gamma value */
-                m_gamma = ((float) data[i+3+9] / 100) + 1;
+                m_gamma = ((float)data[i + 3 + 9] / 100) + 1;
             }
         }
     }
@@ -337,7 +335,7 @@ QString Edid::edidParseString(const quint8 *data) const
 
     /* this is always 13 bytes, but we can't guarantee it's null
      * terminated or not junk. */
-    text = QString::fromLatin1((const char*) data, 13);
+    text = QString::fromLatin1((const char *)data, 13);
 
     // Remove newlines, extra spaces and stuff
     text = text.simplified();

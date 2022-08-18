@@ -24,15 +24,16 @@
 #include <KCModule>
 #include <KTitleWidget>
 
-#include <QMenu>
-#include <QStackedLayout>
-#include <QSortFilterProxyModel>
 #include <QDBusObjectPath>
+#include <QMenu>
+#include <QSortFilterProxyModel>
+#include <QStackedLayout>
 
 typedef QPair<QString, QDBusObjectPath> KindAndPath;
 
-namespace Ui {
-    class ColordKCM;
+namespace Ui
+{
+class ColordKCM;
 }
 class CdInterface;
 class DeviceModel;

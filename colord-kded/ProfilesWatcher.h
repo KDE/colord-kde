@@ -22,9 +22,9 @@
 
 #include <KDirWatch>
 
+#include <QFileInfo>
 #include <QThread>
 #include <QVariantList>
-#include <QFileInfo>
 
 class Edid;
 class ProfilesWatcher : public QThread

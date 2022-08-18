@@ -46,7 +46,7 @@ void Profile::setFilename(const QString &filename)
         if (file.open(QIODevice::ReadOnly)) {
             QByteArray data;
             data = file.readAll();
-            parseProfile((const uint*) data.data(), data.size());
+            parseProfile((const uint *)data.data(), data.size());
         }
     }
 }
@@ -59,9 +59,9 @@ QString Profile::errorMessage() const
 QColor Profile::convertXYZ(cmsCIEXYZ *cieXYZ)
 {
     typedef struct {
-        quint8	 R;
-        quint8	 G;
-        quint8	 B;
+        quint8 R;
+        quint8 G;
+        quint8 B;
     } CdColorRGB8;
     QColor ret;
     CdColorRGB8 rgb;
@@ -77,9 +77,7 @@ QColor Profile::convertXYZ(cmsCIEXYZ *cieXYZ)
     /* convert the color to sRGB */
     profile_xyz = cmsCreateXYZProfile();
     profile_srgb = cmsCreate_sRGBProfile();
-    xform = cmsCreateTransform(profile_xyz, TYPE_XYZ_DBL,
-                               profile_srgb, TYPE_RGB_8,
-                               INTENT_ABSOLUTE_COLORIMETRIC, 0);
+    xform = cmsCreateTransform(profile_xyz, TYPE_XYZ_DBL, profile_srgb, TYPE_RGB_8, INTENT_ABSOLUTE_COLORIMETRIC, 0);
     cmsDoTransform(xform, cieXYZ, &rgb, 1);
 
     ret.setRgb(rgb.R, rgb.G, rgb.B);
@@ -122,7 +120,7 @@ void Profile::parseProfile(const uint *data, size_t length)
     /* get white point */
     cmsCIEXYZ *cie_xyz;
     bool ret;
-    cie_xyz = static_cast<cmsCIEXYZ*>(cmsReadTag(m_lcmsProfile, cmsSigMediaWhitePointTag));
+    cie_xyz = static_cast<cmsCIEXYZ *>(cmsReadTag(m_lcmsProfile, cmsSigMediaWhitePointTag));
     if (cie_xyz != nullptr) {
         cmsCIExyY xyY;
         double temp_float;
@@ -138,7 +136,7 @@ void Profile::parseProfile(const uint *data, size_t length)
         ret = cmsTempFromWhitePoint(&temp_float, &xyY);
         if (ret) {
             /* round to nearest 100K */
-            m_temperature = (((uint) temp_float) / 100) * 100;
+            m_temperature = (((uint)temp_float) / 100) * 100;
             qDebug() << "color temperature:" << m_temperature;
         } else {
             m_temperature = 0;
@@ -220,73 +218,73 @@ void Profile::parseProfile(const uint *data, size_t length)
     }
 
     /* get the illuminants from the primaries */
-//    if (color_space == cmsSigRgbData) {
-//        cie_xyz = cmsReadTag (m_lcmsProfile, cmsSigRedMatrixColumnTag);
-//        if (cie_xyz != NULL) {
-//            /* assume that if red is present, the green and blue are too */
-//            cd_color_copy_xyz ((CdColorXYZ *) cie_xyz, (CdColorXYZ *) &cie_illum.Red);
-//            cie_xyz = cmsReadTag (m_lcmsProfile, cmsSigGreenMatrixColumnTag);
-//            cd_color_copy_xyz ((CdColorXYZ *) cie_xyz, (CdColorXYZ *) &cie_illum.Green);
-//            cie_xyz = cmsReadTag (m_lcmsProfile, cmsSigBlueMatrixColumnTag);
-//            cd_color_copy_xyz ((CdColorXYZ *) cie_xyz, (CdColorXYZ *) &cie_illum.Blue);
-//            got_illuminants = TRUE;
-//        } else {
-//            g_debug ("failed to get illuminants");
-//        }
-//    }
+    //    if (color_space == cmsSigRgbData) {
+    //        cie_xyz = cmsReadTag (m_lcmsProfile, cmsSigRedMatrixColumnTag);
+    //        if (cie_xyz != NULL) {
+    //            /* assume that if red is present, the green and blue are too */
+    //            cd_color_copy_xyz ((CdColorXYZ *) cie_xyz, (CdColorXYZ *) &cie_illum.Red);
+    //            cie_xyz = cmsReadTag (m_lcmsProfile, cmsSigGreenMatrixColumnTag);
+    //            cd_color_copy_xyz ((CdColorXYZ *) cie_xyz, (CdColorXYZ *) &cie_illum.Green);
+    //            cie_xyz = cmsReadTag (m_lcmsProfile, cmsSigBlueMatrixColumnTag);
+    //            cd_color_copy_xyz ((CdColorXYZ *) cie_xyz, (CdColorXYZ *) &cie_illum.Blue);
+    //            got_illuminants = TRUE;
+    //        } else {
+    //            g_debug ("failed to get illuminants");
+    //        }
+    //    }
 
     /* get the illuminants by running it through the profile */
-//    if (!got_illuminants && color_space == cmsSigRgbData) {
-//        gdouble rgb_values[3];
+    //    if (!got_illuminants && color_space == cmsSigRgbData) {
+    //        gdouble rgb_values[3];
 
-//        /* create a transform from profile to XYZ */
-//        xyz_profile = cmsCreateXYZProfile ();
-//        transform = cmsCreateTransform (m_lcmsProfile, TYPE_RGB_DBL, xyz_profile, TYPE_XYZ_DBL, INTENT_PERCEPTUAL, 0);
-//        if (transform != NULL) {
+    //        /* create a transform from profile to XYZ */
+    //        xyz_profile = cmsCreateXYZProfile ();
+    //        transform = cmsCreateTransform (m_lcmsProfile, TYPE_RGB_DBL, xyz_profile, TYPE_XYZ_DBL, INTENT_PERCEPTUAL, 0);
+    //        if (transform != NULL) {
 
-//            /* red */
-//            rgb_values[0] = 1.0;
-//            rgb_values[1] = 0.0;
-//            rgb_values[2] = 0.0;
-//            cmsDoTransform (transform, rgb_values, &cie_illum.Red, 1);
+    //            /* red */
+    //            rgb_values[0] = 1.0;
+    //            rgb_values[1] = 0.0;
+    //            rgb_values[2] = 0.0;
+    //            cmsDoTransform (transform, rgb_values, &cie_illum.Red, 1);
 
-//            /* green */
-//            rgb_values[0] = 0.0;
-//            rgb_values[1] = 1.0;
-//            rgb_values[2] = 0.0;
-//            cmsDoTransform (transform, rgb_values, &cie_illum.Green, 1);
+    //            /* green */
+    //            rgb_values[0] = 0.0;
+    //            rgb_values[1] = 1.0;
+    //            rgb_values[2] = 0.0;
+    //            cmsDoTransform (transform, rgb_values, &cie_illum.Green, 1);
 
-//            /* blue */
-//            rgb_values[0] = 0.0;
-//            rgb_values[1] = 0.0;
-//            rgb_values[2] = 1.0;
-//            cmsDoTransform (transform, rgb_values, &cie_illum.Blue, 1);
+    //            /* blue */
+    //            rgb_values[0] = 0.0;
+    //            rgb_values[1] = 0.0;
+    //            rgb_values[2] = 1.0;
+    //            cmsDoTransform (transform, rgb_values, &cie_illum.Blue, 1);
 
-//            /* we're done */
-//            cmsDeleteTransform (transform);
-//            got_illuminants = TRUE;
-//        } else {
-//            g_debug ("failed to run through profile");
-//        }
+    //            /* we're done */
+    //            cmsDeleteTransform (transform);
+    //            got_illuminants = TRUE;
+    //        } else {
+    //            g_debug ("failed to run through profile");
+    //        }
 
-//        /* no more need for the output profile */
-//        cmsCloseProfile (xyz_profile);
-//    }
+    //        /* no more need for the output profile */
+    //        cmsCloseProfile (xyz_profile);
+    //    }
 
     /* we've got valid values */
-//    if (got_illuminants) {
-//        cd_color_set_xyz (priv->red,
-//                          cie_illum.Red.X, cie_illum.Red.Y, cie_illum.Red.Z);
-//        cd_color_set_xyz (priv->green,
-//                          cie_illum.Green.X, cie_illum.Green.Y, cie_illum.Green.Z);
-//        cd_color_set_xyz (priv->blue,
-//                          cie_illum.Blue.X, cie_illum.Blue.Y, cie_illum.Blue.Z);
-//    } else {
-//        g_debug ("failed to get luminance values");
-//        cd_color_clear_xyz (priv->red);
-//        cd_color_clear_xyz (priv->green);
-//        cd_color_clear_xyz (priv->blue);
-//    }
+    //    if (got_illuminants) {
+    //        cd_color_set_xyz (priv->red,
+    //                          cie_illum.Red.X, cie_illum.Red.Y, cie_illum.Red.Z);
+    //        cd_color_set_xyz (priv->green,
+    //                          cie_illum.Green.X, cie_illum.Green.Y, cie_illum.Green.Z);
+    //        cd_color_set_xyz (priv->blue,
+    //                          cie_illum.Blue.X, cie_illum.Blue.Y, cie_illum.Blue.Z);
+    //    } else {
+    //        g_debug ("failed to get luminance values");
+    //        cd_color_clear_xyz (priv->red);
+    //        cd_color_clear_xyz (priv->green);
+    //        cd_color_clear_xyz (priv->blue);
+    //    }
 
     /* get profile header version */
     cmsFloat64Number profile_version;
@@ -315,7 +313,6 @@ void Profile::parseProfile(const uint *data, size_t length)
     ret = cmsGetProfileInfo(m_lcmsProfile, cmsInfoManufacturer, "en", "US", text, 1024);
     if (ret) {
         m_manufacturer = QString::fromWCharArray(text).simplified();
-
     }
 
     /* get description */
@@ -324,23 +321,23 @@ void Profile::parseProfile(const uint *data, size_t length)
         m_model = QString::fromWCharArray(text).simplified();
     }
 
-    delete [] text;
+    delete[] text;
 
-//    /* success */
-//    ret = TRUE;
+    //    /* success */
+    //    ret = TRUE;
 
     QCryptographicHash hash(QCryptographicHash::Md5);
     hash.addData(reinterpret_cast<const char *>(data), length);
     m_checksum = hash.result().toHex();
     qDebug() << "checksum" << m_checksum;
 
-//    /* generate and set checksum */
-//    checksum = g_compute_checksum_for_data (G_CHECKSUM_MD5, (const guchar *) data, length);
-//    gcm_profile_set_checksum (profile, checksum);
-//out:
-//    g_free (text);
-//    g_free (checksum);
-//    return ret;
+    //    /* generate and set checksum */
+    //    checksum = g_compute_checksum_for_data (G_CHECKSUM_MD5, (const guchar *) data, length);
+    //    gcm_profile_set_checksum (profile, checksum);
+    // out:
+    //    g_free (text);
+    //    g_free (checksum);
+    //    return ret;
 }
 
 bool Profile::loaded() const
@@ -453,16 +450,14 @@ QMap<QString, QColor> Profile::getNamedColors()
     /* setup a dummy transform so we can get all the named colors */
     profile_lab = cmsCreateLab2Profile(nullptr);
     profile_xyz = cmsCreateXYZProfile();
-    xform = cmsCreateTransform(profile_lab, TYPE_Lab_DBL,
-                               profile_xyz, TYPE_XYZ_DBL,
-                               INTENT_ABSOLUTE_COLORIMETRIC, 0);
+    xform = cmsCreateTransform(profile_lab, TYPE_Lab_DBL, profile_xyz, TYPE_XYZ_DBL, INTENT_ABSOLUTE_COLORIMETRIC, 0);
     if (xform == nullptr) {
         qWarning() << "no transform";
         goto out;
     }
 
     /* retrieve named color list from transform */
-    nc2 = static_cast<cmsNAMEDCOLORLIST*>(cmsReadTag(m_lcmsProfile, cmsSigNamedColor2Tag));
+    nc2 = static_cast<cmsNAMEDCOLORLIST *>(cmsReadTag(m_lcmsProfile, cmsSigNamedColor2Tag));
     if (nc2 == nullptr) {
         qWarning() << "no named color list";
         goto out;
@@ -476,31 +471,25 @@ QMap<QString, QColor> Profile::getNamedColors()
     }
 
     for (uint i = 0; i < count; ++i) {
-
         /* parse title */
         QString string;
-        ret = cmsNamedColorInfo(nc2, i,
-                                name,
-                                prefix,
-                                suffix,
-                                (cmsUInt16Number *)&pcs,
-                                nullptr);
+        ret = cmsNamedColorInfo(nc2, i, name, prefix, suffix, (cmsUInt16Number *)&pcs, nullptr);
         if (!ret) {
             qWarning() << "failed to get NC #" << i;
             goto out;
         }
 
-//        if (prefix[0] != '\0') {
-//            string.append(prefix);
+        //        if (prefix[0] != '\0') {
+        //            string.append(prefix);
         // Add a space if we got the above prefix
-//        }
+        //        }
         string.append(name);
         if (suffix[0] != '\0') {
             string.append(suffix);
         }
 
         /* get color */
-        cmsLabEncoded2Float((cmsCIELab *) &lab, pcs);
+        cmsLabEncoded2Float((cmsCIELab *)&lab, pcs);
         cmsDoTransform(xform, &lab, &xyz, 1);
 
         QColor color;

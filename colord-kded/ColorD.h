@@ -51,7 +51,7 @@ private Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
 private:
-    quint8* readEdidData(RROutput output, size_t &len);
+    quint8 *readEdidData(RROutput output, size_t &len);
     XRRScreenResources *connectToDisplay();
     void connectToColorD();
     void addOutput(const Output::Ptr &output);
@@ -61,12 +61,11 @@ private:
     CdStringMap getProfileMetadata(const QDBusObjectPath &profilePath);
     QString profilesPath() const;
 
-    struct X11Monitor
-    {
-      QString name;
-      RRCrtc crtc;
-      bool isPrimary;
-      int atomId;
+    struct X11Monitor {
+        QString name;
+        RRCrtc crtc;
+        bool isPrimary;
+        int atomId;
     };
 
     int getPrimaryCRTCId(XID primary) const;
