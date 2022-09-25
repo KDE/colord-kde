@@ -23,15 +23,12 @@
 #include "CdInterface.h"
 #include "CdProfileInterface.h"
 
-#include <QDBusArgument>
 #include <QDBusConnection>
 #include <QDBusMetaType>
-#include <QDBusReply>
 #include <QDateTime>
 #include <QDebug>
 #include <QFileInfo>
 #include <QIcon>
-#include <QStringBuilder>
 
 #include <KLocalizedString>
 

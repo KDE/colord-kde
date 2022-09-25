@@ -39,8 +39,6 @@
 #include <QItemSelectionModel>
 #include <QProcess>
 #include <QSignalMapper>
-#include <QStringBuilder>
-#include <QTimer>
 
 #include <version.h>
 

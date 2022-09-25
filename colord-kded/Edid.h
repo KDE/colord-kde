@@ -22,7 +22,6 @@
 
 #include <QQuaternion>
 #include <QString>
-#include <QtGlobal>
 
 class Edid
 {

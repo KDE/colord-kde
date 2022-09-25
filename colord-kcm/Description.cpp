@@ -32,13 +32,11 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QFileInfo>
-#include <QStringBuilder>
 
 #include <KFormat>
 #include <KIO/CommandLauncherJob>
 #include <KLocalizedString>
 #include <KMessageWidget>
-#include <KToolInvocation>
 
 #define TAB_INFORMATION 1
 #define TAB_CIE_1931 2

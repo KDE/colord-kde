@@ -31,14 +31,12 @@
 
 #include <QApplication>
 #include <QDBusConnection>
-#include <QDBusError>
 #include <QDBusMetaType>
 #include <QDBusReply>
 #include <QDBusServiceWatcher>
 #include <QDBusUnixFileDescriptor>
 #include <QFile>
 #include <QLoggingCategory>
-#include <QStringBuilder>
 #include <QX11Info>
 
 #include <KPluginFactory>

@@ -26,7 +26,6 @@
 #include <QCommandLineParser>
 #include <QDebug>
 #include <QFileInfo>
-#include <QStringBuilder>
 
 #include <KAboutData>
 #include <KLocalizedString>

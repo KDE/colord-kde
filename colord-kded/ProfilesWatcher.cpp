@@ -31,7 +31,6 @@
 #include <QLoggingCategory>
 #include <QMimeDatabase>
 #include <QMimeType>
-#include <QStringBuilder>
 
 Q_DECLARE_LOGGING_CATEGORY(COLORD)
 

@@ -29,7 +29,6 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QIcon>
-#include <QStringBuilder>
 
 #include <KLocalizedString>
 

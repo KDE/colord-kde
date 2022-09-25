@@ -22,7 +22,6 @@
 
 #include "CdDeviceInterface.h"
 #include <QDBusObjectPath>
-#include <QTextStream>
 
 #include "Edid.h"
 

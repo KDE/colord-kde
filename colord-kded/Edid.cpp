@@ -23,7 +23,6 @@
 
 #include <QCryptographicHash>
 #include <QFile>
-#include <QStringBuilder>
 #include <QStringList>
 
 #include <QLoggingCategory>
