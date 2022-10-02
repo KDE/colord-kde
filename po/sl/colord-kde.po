@@ -1,0 +1,694 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Andrej Mernik <andrejm@ubuntu.si>, 2013, 2015, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-26 00:42+0000\n"
+"PO-Revision-Date: 2016-10-31 20:26+0100\n"
+"Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Andrej Mernik"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "andrejm@ubuntu.si"
+
+#: colord-kcm/ColordKCM.cpp:53
+#, kde-format
+msgid "Available Profiles"
+msgstr "Razpoložljivi profili"
+
+#: colord-kcm/ColordKCM.cpp:56 colord-kcm/ColordKCM.cpp:58
+#, kde-format
+msgid "Color settings"
+msgstr "Nastavitve barv"
+
+#: colord-kcm/ColordKCM.cpp:60
+#, kde-format
+msgid "(C) 2012-2016 Daniel Nicoletti"
+msgstr "(C) 2012-2016 Daniel Nicoletti"
+
+#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "Predelava za kf5"
+
+#: colord-kcm/ColordKCM.cpp:69
+#, kde-format
+msgid "From File..."
+msgstr "Iz datoteke ..."
+
+#: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
+#: icc-importer/main.cpp:128 icc-importer/main.cpp:131
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "Uvažanje barvnega profila"
+
+#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
+#: colord-kcm/ColordKCM.cpp:257 colord-kcm/ColordKCM.ui:33
+#, kde-format
+msgid "Remove Profile"
+msgstr "Odstrani profil"
+
+#: colord-kcm/ColordKCM.cpp:257
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Ali ste prepričani, da želite odstraniti ta profil?"
+
+#: colord-kcm/ColordKCM.cpp:359
+#, kde-format
+msgid "Your profile did not match the device kind"
+msgstr "Vaš profil se ni ujemal z vrsto naprave"
+
+#: colord-kcm/ColordKCM.cpp:392
+#, kde-format
+msgid "You do not have any devices registered"
+msgstr "Nimate nobene registrirane naprave"
+
+#: colord-kcm/ColordKCM.cpp:393
+#, kde-format
+msgid "Make sure colord module on kded is running"
+msgstr "Prepričajte se, da je zagnan modul colord preko kded"
+
+#: colord-kcm/ColordKCM.cpp:396
+#, kde-format
+msgid "You do not have any profiles registered"
+msgstr "Nimate nobenih registriranih profilov"
+
+#: colord-kcm/ColordKCM.cpp:397
+#, kde-format
+msgid "Add one by clicking Add Profile button"
+msgstr "Dodajte jih s klikom na gumb Dodaj profil"
+
+#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
+#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
+#, kde-format
+msgid "Profiles"
+msgstr "Profili"
+
+#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
+#: colord-kcm/ColordKCM.ui:161
+#, kde-format
+msgid "Add Profile"
+msgstr "Dodaj profil"
+
+#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
+#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
+#, kde-format
+msgid "Devices"
+msgstr "Naprave"
+
+#: colord-kcm/Description.cpp:137
+#, kde-format
+msgid "Yes"
+msgstr "Da"
+
+#: colord-kcm/Description.cpp:137
+#, kde-format
+msgid "None"
+msgstr "Brez"
+
+#: colord-kcm/Description.cpp:166
+#, kde-format
+msgid "Named Colors"
+msgstr "Poimenovane barve"
+
+#: colord-kcm/Description.cpp:174
+#, kde-format
+msgid "Metadata"
+msgstr "Metapodatki"
+
+#: colord-kcm/Description.cpp:214
+#, kde-format
+msgctxt "device type"
+msgid "Printer"
+msgstr "Tiskalnik"
+
+#: colord-kcm/Description.cpp:216
+#, kde-format
+msgctxt "device type"
+msgid "Display"
+msgstr "Zaslon"
+
+#: colord-kcm/Description.cpp:218
+#, kde-format
+msgctxt "device type"
+msgid "Webcam"
+msgstr "Spletna kamera"
+
+#: colord-kcm/Description.cpp:220
+#, kde-format
+msgctxt "device type"
+msgid "Scanner"
+msgstr "Optični bralnik"
+
+#: colord-kcm/Description.cpp:222
+#, kde-format
+msgctxt "device type"
+msgid "Unknown"
+msgstr "Neznano"
+
+#: colord-kcm/Description.cpp:229
+#, kde-format
+msgctxt "device scope"
+msgid "User session"
+msgstr "Uporabniška seja"
+
+#: colord-kcm/Description.cpp:231
+#, kde-format
+msgctxt "device scope"
+msgid "Auto restore"
+msgstr "Samodejno obnovi"
+
+#: colord-kcm/Description.cpp:233
+#, kde-format
+msgctxt "device scope"
+msgid "System wide"
+msgstr "Sistemsko"
+
+#: colord-kcm/Description.cpp:235
+#, kde-format
+msgctxt "device scope"
+msgid "Unknown"
+msgstr "Neznano"
+
+#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#, kde-format
+msgctxt "colorspace"
+msgid "RGB"
+msgstr "RGB"
+
+#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#, kde-format
+msgctxt "colorspace"
+msgid "CMYK"
+msgstr "CMYK"
+
+#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#, kde-format
+msgctxt "colorspace"
+msgid "Gray"
+msgstr "Sivine"
+
+#: colord-kcm/Description.cpp:251
+#, kde-format
+msgid "This device has no profile assigned to it"
+msgstr "Ta naprava nima dodeljenega profila"
+
+#: colord-kcm/Description.cpp:368
+#, kde-format
+msgid "Create a color profile for the selected device"
+msgstr "Ustvari barvni profil za izbrano napravo"
+
+#: colord-kcm/Description.cpp:378
+#, kde-format
+msgid "You need Gnome Color Management installed in order to calibrate devices"
+msgstr "Za umerjanje naprav morate imeti nameščeno Upravljanje barv za Gnome"
+
+#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
+#, kde-format
+msgid ""
+"The measuring instrument is not detected. Please check it is turned on and "
+"correctly connected."
+msgstr ""
+"Merilni inštrument ni bil zaznan. Preverite, če je vklopljen in pravilno "
+"povezan."
+
+#: colord-kcm/Description.cpp:408
+#, kde-format
+msgid "The measuring instrument does not support printer profiling."
+msgstr "Merilni inštrument ne podpira profiliranja tiskalnika."
+
+#: colord-kcm/Description.cpp:412
+#, kde-format
+msgid "The device type is not currently supported."
+msgstr "Vrsta naprave trenutno ni podprta."
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: colord-kcm/Description.ui:21
+#, kde-format
+msgid "Information"
+msgstr "Podrobnosti"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/Description.ui:40
+#, kde-format
+msgid "Profile type:"
+msgstr "Vrsta profila:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: colord-kcm/Description.ui:63
+#, kde-format
+msgid "Colorspace:"
+msgstr "Barvni prostor:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: colord-kcm/Description.ui:86
+#, kde-format
+msgid "Created:"
+msgstr "Ustvarjen:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: colord-kcm/Description.ui:109
+#, kde-format
+msgid "Version:"
+msgstr "Različica:"
+
+#. i18n: ectx: property (text), widget (QLabel, makeLabel)
+#: colord-kcm/Description.ui:132
+#, kde-format
+msgid "Device Manufacturer:"
+msgstr "Proizvajalec naprave:"
+
+#. i18n: ectx: property (text), widget (QLabel, modelLabel)
+#: colord-kcm/Description.ui:158
+#, kde-format
+msgid "Device Model:"
+msgstr "Model naprave:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: colord-kcm/Description.ui:184
+#, kde-format
+msgid "Display correction:"
+msgstr "Popravki zaslona:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: colord-kcm/Description.ui:207
+#, kde-format
+msgid "White Point:"
+msgstr "Bela točka:"
+
+#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
+#: colord-kcm/Description.ui:230
+#, kde-format
+msgid "License:"
+msgstr "Licenca:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_15)
+#: colord-kcm/Description.ui:256
+#, kde-format
+msgid "File size:"
+msgstr "Velikost datoteke:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: colord-kcm/Description.ui:279
+#, kde-format
+msgid "Filename:"
+msgstr "Ime datoteke:"
+
+#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
+#: colord-kcm/Description.ui:302
+#, kde-format
+msgid "Install System Wide"
+msgstr "Namesti sistemsko"
+
+#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
+#: colord-kcm/Description.ui:316
+#, kde-format
+msgid "device name"
+msgstr "ime naprave"
+
+#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
+#: colord-kcm/Description.ui:319
+#, kde-format
+msgid "Printer"
+msgstr "Tiskalnik"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: colord-kcm/Description.ui:326
+#, kde-format
+msgid "Id:"
+msgstr "ID:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: colord-kcm/Description.ui:340
+#, kde-format
+msgid "Scope:"
+msgstr "Obseg:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: colord-kcm/Description.ui:354
+#, kde-format
+msgid "Mode:"
+msgstr "Način:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: colord-kcm/Description.ui:368
+#, kde-format
+msgid "Current Profile:"
+msgstr "Trenutni profil:"
+
+#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
+#: colord-kcm/Description.ui:382
+#, kde-format
+msgid "Calibrate"
+msgstr "Umeri"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:400
+#, kde-format
+msgid "Print Test Page"
+msgstr "Natisni preizkusno stran"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:405
+#, kde-format
+msgid "Clean Print Heads"
+msgstr "Očisti tiskalne glave"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:410
+#, kde-format
+msgid "Print Self Test Page"
+msgstr "Natisni stran samo-preizkusa"
+
+#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:413
+#, kde-format
+msgid "Print Self-Test Page"
+msgstr "Natisni stran samo-preizkusa"
+
+#: colord-kcm/DeviceModel.cpp:229
+#, kde-format
+msgctxt "colorspace"
+msgid "Default RGB"
+msgstr "Privzet RGB"
+
+#: colord-kcm/DeviceModel.cpp:231
+#, kde-format
+msgctxt "colorspace"
+msgid "Default CMYK"
+msgstr "Privzet CMYK"
+
+#: colord-kcm/DeviceModel.cpp:233
+#, kde-format
+msgctxt "colorspace"
+msgid "Default Gray"
+msgstr "Privzete sivine"
+
+#: colord-kcm/Profile.cpp:106
+#, kde-format
+msgid "file too small"
+msgstr "datoteka premajhna"
+
+#: colord-kcm/Profile.cpp:115
+#, kde-format
+msgid "not an ICC profile"
+msgstr "ni profil ICC"
+
+#: colord-kcm/Profile.cpp:187
+#, kde-format
+msgctxt "colorspace"
+msgid "XYZ"
+msgstr "XYZ"
+
+#: colord-kcm/Profile.cpp:190
+#, kde-format
+msgctxt "colorspace"
+msgid "LAB"
+msgstr "LAB"
+
+#: colord-kcm/Profile.cpp:193
+#, kde-format
+msgctxt "colorspace"
+msgid "LUV"
+msgstr "LUV"
+
+#: colord-kcm/Profile.cpp:196
+#, kde-format
+msgctxt "colorspace"
+msgid "YCbCr"
+msgstr "YCbCr"
+
+#: colord-kcm/Profile.cpp:199
+#, kde-format
+msgctxt "colorspace"
+msgid "Yxy"
+msgstr "Yxy"
+
+#: colord-kcm/Profile.cpp:208
+#, kde-format
+msgctxt "colorspace"
+msgid "HSV"
+msgstr "HSV"
+
+#: colord-kcm/Profile.cpp:214
+#, kde-format
+msgctxt "colorspace"
+msgid "CMY"
+msgstr "CMY"
+
+#: colord-kcm/Profile.cpp:217
+#, kde-format
+msgctxt "colorspace"
+msgid "Unknown"
+msgstr "Neznano"
+
+#: colord-kcm/Profile.cpp:302
+#, kde-format
+msgid "Missing description"
+msgstr "Manjka opis"
+
+#: colord-kcm/Profile.cpp:357
+#, kde-format
+msgctxt "profile kind"
+msgid "Input device"
+msgstr "Vhodna naprava"
+
+#: colord-kcm/Profile.cpp:359
+#, kde-format
+msgctxt "profile kind"
+msgid "Display device"
+msgstr "Naprava za prikaz"
+
+#: colord-kcm/Profile.cpp:361
+#, kde-format
+msgctxt "profile kind"
+msgid "Output device"
+msgstr "Izhodna naprava"
+
+#: colord-kcm/Profile.cpp:363
+#, kde-format
+msgctxt "profile kind"
+msgid "Devicelink"
+msgstr "PovezavaNaprave"
+
+#: colord-kcm/Profile.cpp:365
+#, kde-format
+msgctxt "profile kind"
+msgid "Colorspace conversion"
+msgstr "Pretvorba barvnega prostora"
+
+#: colord-kcm/Profile.cpp:367
+#, kde-format
+msgctxt "profile kind"
+msgid "Abstract"
+msgstr "Povzetek"
+
+#: colord-kcm/Profile.cpp:369
+#, kde-format
+msgctxt "profile kind"
+msgid "Named color"
+msgstr "Poimenovana barva"
+
+#: colord-kcm/Profile.cpp:371
+#, kde-format
+msgctxt "profile kind"
+msgid "Unknown"
+msgstr "Neznana"
+
+#: colord-kcm/Profile.cpp:518
+#, kde-format
+msgid "Default: %1"
+msgstr "Privzeto: %1"
+
+#: colord-kcm/Profile.cpp:520
+#, kde-format
+msgid "Colorspace: %1"
+msgstr "Barvni prostor: %1"
+
+#: colord-kcm/Profile.cpp:522
+#, kde-format
+msgid "Test profile: %1"
+msgstr "Preizkusni profil: %1"
+
+#: colord-kcm/Profile.cpp:524
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: colord-kcm/ProfileMetaData.cpp:78
+#, kde-format
+msgid "Standard space"
+msgstr "Standardni prostor"
+
+#: colord-kcm/ProfileMetaData.cpp:81
+#, kde-format
+msgid "Display checksum"
+msgstr "Pokaži nadzorno vsoto"
+
+#: colord-kcm/ProfileMetaData.cpp:84
+#, kde-format
+msgid "Display model"
+msgstr "Pokaži model"
+
+#: colord-kcm/ProfileMetaData.cpp:87
+#, kde-format
+msgid "Display serial number"
+msgstr "Pokaži zaporedno številko"
+
+#: colord-kcm/ProfileMetaData.cpp:90
+#, kde-format
+msgid "Display PNPID"
+msgstr "Pokaži PNPID"
+
+#: colord-kcm/ProfileMetaData.cpp:93
+#, kde-format
+msgid "Display vendor"
+msgstr "Pokaži proizvajalca"
+
+#: colord-kcm/ProfileMetaData.cpp:96
+#, kde-format
+msgid "File checksum"
+msgstr "Nadzorna vsota datoteke"
+
+#: colord-kcm/ProfileMetaData.cpp:99
+#, kde-format
+msgid "Framework product"
+msgstr "Izdelek ogrodja"
+
+#: colord-kcm/ProfileMetaData.cpp:102
+#, kde-format
+msgid "Framework program"
+msgstr "Program ogrodja"
+
+#: colord-kcm/ProfileMetaData.cpp:105
+#, kde-format
+msgid "Framework version"
+msgstr "Različica ogrodja"
+
+#: colord-kcm/ProfileMetaData.cpp:108
+#, kde-format
+msgid "Data source type"
+msgstr "Vrsta vira podatkov"
+
+#: colord-kcm/ProfileMetaData.cpp:111
+#, kde-format
+msgid "Mapping format"
+msgstr "Vrsta preslikave"
+
+#: colord-kcm/ProfileMetaData.cpp:114
+#, kde-format
+msgid "Mapping qualifier"
+msgstr "Uvrščevalnik preslikave"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/ProfileMetaData.ui:39
+#, kde-format
+msgid ""
+"Meta data is additional information stored in the profile for programs to "
+"use."
+msgstr ""
+"Metapodaki so dodatne podrobnosti shranjene v profilih, ki jih lahko "
+"uporabijo programi."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/ProfileNamedColors.ui:17
+#, kde-format
+msgid "Named colors are specific colors defined in the profile"
+msgstr "Poimenovane barve so barve določene v profilu"
+
+#: icc-importer/main.cpp:41
+#, kde-format
+msgid "Description: %1"
+msgstr "Opis: %1"
+
+#: icc-importer/main.cpp:51
+#, kde-format
+msgid "Copyright: %1"
+msgstr "Avtorske pravice: %1"
+
+#: icc-importer/main.cpp:62
+#, kde-format
+msgid "ICC Profile Installer"
+msgstr "Namestilnik profilov ICC"
+
+#: icc-importer/main.cpp:64
+#, kde-format
+msgid "An application to install ICC profiles"
+msgstr "Program za nameščanje profilov ICC"
+
+#: icc-importer/main.cpp:66
+#, kde-format
+msgid "(C) 2008-2016 Daniel Nicoletti"
+msgstr "(C) 2008-2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:77
+#, kde-format
+msgid "Do not prompt the user if he wants to install"
+msgstr "Ne vprašaj uporabnika, če želi namestiti"
+
+#: icc-importer/main.cpp:78
+#, kde-format
+msgid "Color profile to install"
+msgstr "Barvni profil za namestitev"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to parse file: %1"
+msgstr "Ni bilo mogoče razčleniti datoteke: %1"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to open ICC profile"
+msgstr "Ni bilo mogoče odpreti profila ICC"
+
+#: icc-importer/main.cpp:102
+#, kde-format
+msgid "Color profile is already imported"
+msgstr "Barvni profil je že uvožen"
+
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:120
+#, kde-format
+msgid "ICC Profile Importer"
+msgstr "Uvoz profilov ICC"
+
+#: icc-importer/main.cpp:112
+#, kde-format
+msgid "ICC profile already installed system-wide"
+msgstr "Profil je že nameščen sistemsko"
+
+#: icc-importer/main.cpp:119
+#, kde-format
+msgid "Would you like to import the color profile?"
+msgstr "Ali bi radi uvozili barvni profil?"
+
+#: icc-importer/main.cpp:128
+#, kde-format
+msgid "Failed to import color profile: color profile is already imported"
+msgstr "Ni bilo mogoče uvoziti barvnega profila: je že uvožen"
+
+#: icc-importer/main.cpp:131
+#, kde-format
+msgid "Failed to import color profile: could not copy the file"
+msgstr ""
+"Ni bilo mogoče uvoziti barvnega profila: datoteke ni bilo mogoče kopirati"
+
+#~ msgid "Daniel Nicoletti"
+#~ msgstr "Daniel Nicoletti"

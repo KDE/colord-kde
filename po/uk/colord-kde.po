@@ -1,0 +1,716 @@
+# Translation of colord-kde.po to Ukrainian
+# Copyright (C) 2012-2016 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Yuri Chornoivan <yurchor@ukr.net>, 2012, 2013, 2015, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: colord-kde\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-26 00:42+0000\n"
+"PO-Revision-Date: 2016-10-10 13:23+0300\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 1.5\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Юрій Чорноіван"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "yurchor@ukr.net"
+
+#: colord-kcm/ColordKCM.cpp:53
+#, kde-format
+msgid "Available Profiles"
+msgstr "Доступні профілі"
+
+#: colord-kcm/ColordKCM.cpp:56 colord-kcm/ColordKCM.cpp:58
+#, kde-format
+msgid "Color settings"
+msgstr "Параметри кольорів"
+
+#: colord-kcm/ColordKCM.cpp:60
+#, kde-format
+msgid "(C) 2012-2016 Daniel Nicoletti"
+msgstr "© Daniel Nicoletti, 2012–2016"
+
+#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "Портування на kf5"
+
+#: colord-kcm/ColordKCM.cpp:69
+#, kde-format
+msgid "From File..."
+msgstr "З файла…"
+
+#: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
+#: icc-importer/main.cpp:128 icc-importer/main.cpp:131
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "Імпортування профілю кольорів"
+
+#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
+#: colord-kcm/ColordKCM.cpp:257 colord-kcm/ColordKCM.ui:33
+#, kde-format
+msgid "Remove Profile"
+msgstr "Вилучити профіль"
+
+#: colord-kcm/ColordKCM.cpp:257
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Ви справді хочете вилучити цей профіль?"
+
+#: colord-kcm/ColordKCM.cpp:359
+#, kde-format
+msgid "Your profile did not match the device kind"
+msgstr "Ваш профіль не відповідає типові пристрою"
+
+#: colord-kcm/ColordKCM.cpp:392
+#, kde-format
+msgid "You do not have any devices registered"
+msgstr "У вашій системі не зареєстровано жодного пристрою"
+
+#: colord-kcm/ColordKCM.cpp:393
+#, kde-format
+msgid "Make sure colord module on kded is running"
+msgstr "Переконайтеся, що запущено модуль colord для kded"
+
+#: colord-kcm/ColordKCM.cpp:396
+#, kde-format
+msgid "You do not have any profiles registered"
+msgstr "Вами не зареєстровано жодного профілю"
+
+#: colord-kcm/ColordKCM.cpp:397
+#, kde-format
+msgid "Add one by clicking Add Profile button"
+msgstr "Додайте профіль натисканням кнопки «Додати профіль»"
+
+#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
+#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
+#, kde-format
+msgid "Profiles"
+msgstr "Профілі"
+
+#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
+#: colord-kcm/ColordKCM.ui:161
+#, kde-format
+msgid "Add Profile"
+msgstr "Додати профіль"
+
+#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
+#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
+#, kde-format
+msgid "Devices"
+msgstr "Пристрої"
+
+#: colord-kcm/Description.cpp:137
+#, kde-format
+msgid "Yes"
+msgstr "Так"
+
+#: colord-kcm/Description.cpp:137
+#, kde-format
+msgid "None"
+msgstr "Немає"
+
+#: colord-kcm/Description.cpp:166
+#, kde-format
+msgid "Named Colors"
+msgstr "Іменовані кольори"
+
+#: colord-kcm/Description.cpp:174
+#, kde-format
+msgid "Metadata"
+msgstr "Метадані"
+
+#: colord-kcm/Description.cpp:214
+#, kde-format
+msgctxt "device type"
+msgid "Printer"
+msgstr "Принтер"
+
+#: colord-kcm/Description.cpp:216
+#, kde-format
+msgctxt "device type"
+msgid "Display"
+msgstr "Дисплей"
+
+#: colord-kcm/Description.cpp:218
+#, kde-format
+msgctxt "device type"
+msgid "Webcam"
+msgstr "Вебкамера"
+
+#: colord-kcm/Description.cpp:220
+#, kde-format
+msgctxt "device type"
+msgid "Scanner"
+msgstr "Сканер"
+
+#: colord-kcm/Description.cpp:222
+#, kde-format
+msgctxt "device type"
+msgid "Unknown"
+msgstr "Невідомо"
+
+#: colord-kcm/Description.cpp:229
+#, kde-format
+msgctxt "device scope"
+msgid "User session"
+msgstr "Сеанс користувача"
+
+#: colord-kcm/Description.cpp:231
+#, kde-format
+msgctxt "device scope"
+msgid "Auto restore"
+msgstr "Автовідновлення"
+
+#: colord-kcm/Description.cpp:233
+#, kde-format
+msgctxt "device scope"
+msgid "System wide"
+msgstr "Загальносистемний"
+
+#: colord-kcm/Description.cpp:235
+#, kde-format
+msgctxt "device scope"
+msgid "Unknown"
+msgstr "Невідомо"
+
+#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#, kde-format
+msgctxt "colorspace"
+msgid "RGB"
+msgstr "RGB"
+
+#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#, kde-format
+msgctxt "colorspace"
+msgid "CMYK"
+msgstr "CMYK"
+
+#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#, kde-format
+msgctxt "colorspace"
+msgid "Gray"
+msgstr "Сірий"
+
+#: colord-kcm/Description.cpp:251
+#, kde-format
+msgid "This device has no profile assigned to it"
+msgstr "З цим пристроєм не пов’язано жодного профілю"
+
+#: colord-kcm/Description.cpp:368
+#, kde-format
+msgid "Create a color profile for the selected device"
+msgstr "Створити профіль кольорів для позначеного пристрою"
+
+#: colord-kcm/Description.cpp:378
+#, kde-format
+msgid "You need Gnome Color Management installed in order to calibrate devices"
+msgstr ""
+"Для виконання калібрування пристроїв вам слід встановити Керування кольорами "
+"Gnome"
+
+#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
+#, kde-format
+msgid ""
+"The measuring instrument is not detected. Please check it is turned on and "
+"correctly connected."
+msgstr ""
+"Не виявлено інструмента вимірювання. Будь ласка, переконайтеся, що "
+"інструмент увімкнено і належним чином з’єднано з комп’ютером."
+
+#: colord-kcm/Description.cpp:408
+#, kde-format
+msgid "The measuring instrument does not support printer profiling."
+msgstr ""
+"Підтримки профілювання принтерів у інструментів вимірювання не передбачено."
+
+#: colord-kcm/Description.cpp:412
+#, kde-format
+msgid "The device type is not currently supported."
+msgstr "Підтримки цього типу пристроїв у поточній версії не передбачено."
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: colord-kcm/Description.ui:21
+#, kde-format
+msgid "Information"
+msgstr "Інформація"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/Description.ui:40
+#, kde-format
+msgid "Profile type:"
+msgstr "Тип профілю:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: colord-kcm/Description.ui:63
+#, kde-format
+msgid "Colorspace:"
+msgstr "Простір кольорів:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: colord-kcm/Description.ui:86
+#, kde-format
+msgid "Created:"
+msgstr "Створено:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: colord-kcm/Description.ui:109
+#, kde-format
+msgid "Version:"
+msgstr "Версія:"
+
+#. i18n: ectx: property (text), widget (QLabel, makeLabel)
+#: colord-kcm/Description.ui:132
+#, kde-format
+msgid "Device Manufacturer:"
+msgstr "Виробник пристрою:"
+
+#. i18n: ectx: property (text), widget (QLabel, modelLabel)
+#: colord-kcm/Description.ui:158
+#, kde-format
+msgid "Device Model:"
+msgstr "Модель пристрою:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: colord-kcm/Description.ui:184
+#, kde-format
+msgid "Display correction:"
+msgstr "Виправлення показу:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: colord-kcm/Description.ui:207
+#, kde-format
+msgid "White Point:"
+msgstr "Точка білого:"
+
+#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
+#: colord-kcm/Description.ui:230
+#, kde-format
+msgid "License:"
+msgstr "Ліцензування:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_15)
+#: colord-kcm/Description.ui:256
+#, kde-format
+msgid "File size:"
+msgstr "Розмір файла:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: colord-kcm/Description.ui:279
+#, kde-format
+msgid "Filename:"
+msgstr "Назва файла:"
+
+#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
+#: colord-kcm/Description.ui:302
+#, kde-format
+msgid "Install System Wide"
+msgstr "Встановити на загальносистемному рівні"
+
+#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
+#: colord-kcm/Description.ui:316
+#, kde-format
+msgid "device name"
+msgstr "назва пристрою"
+
+#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
+#: colord-kcm/Description.ui:319
+#, kde-format
+msgid "Printer"
+msgstr "Принтер"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: colord-kcm/Description.ui:326
+#, kde-format
+msgid "Id:"
+msgstr "Ід.:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: colord-kcm/Description.ui:340
+#, kde-format
+msgid "Scope:"
+msgstr "Область дії:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: colord-kcm/Description.ui:354
+#, kde-format
+msgid "Mode:"
+msgstr "Режим:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: colord-kcm/Description.ui:368
+#, kde-format
+msgid "Current Profile:"
+msgstr "Поточний профіль:"
+
+#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
+#: colord-kcm/Description.ui:382
+#, kde-format
+msgid "Calibrate"
+msgstr "Калібрувати"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:400
+#, kde-format
+msgid "Print Test Page"
+msgstr "Надрукувати пробну сторінку"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:405
+#, kde-format
+msgid "Clean Print Heads"
+msgstr "Почистити голівки принтера"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:410
+#, kde-format
+msgid "Print Self Test Page"
+msgstr "Надрукувати сторінку самоперевірки"
+
+#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:413
+#, kde-format
+msgid "Print Self-Test Page"
+msgstr "Надрукувати сторінку самоперевірки"
+
+#: colord-kcm/DeviceModel.cpp:229
+#, kde-format
+msgctxt "colorspace"
+msgid "Default RGB"
+msgstr "Типовий RGB"
+
+#: colord-kcm/DeviceModel.cpp:231
+#, kde-format
+msgctxt "colorspace"
+msgid "Default CMYK"
+msgstr "Типовий CMYK"
+
+#: colord-kcm/DeviceModel.cpp:233
+#, kde-format
+msgctxt "colorspace"
+msgid "Default Gray"
+msgstr "Типовий сірий"
+
+#: colord-kcm/Profile.cpp:106
+#, kde-format
+msgid "file too small"
+msgstr "файл є занадто малим"
+
+#: colord-kcm/Profile.cpp:115
+#, kde-format
+msgid "not an ICC profile"
+msgstr "не є профілем ICC"
+
+#: colord-kcm/Profile.cpp:187
+#, kde-format
+msgctxt "colorspace"
+msgid "XYZ"
+msgstr "XYZ"
+
+#: colord-kcm/Profile.cpp:190
+#, kde-format
+msgctxt "colorspace"
+msgid "LAB"
+msgstr "LAB"
+
+#: colord-kcm/Profile.cpp:193
+#, kde-format
+msgctxt "colorspace"
+msgid "LUV"
+msgstr "LUV"
+
+#: colord-kcm/Profile.cpp:196
+#, kde-format
+msgctxt "colorspace"
+msgid "YCbCr"
+msgstr "YCbCr"
+
+#: colord-kcm/Profile.cpp:199
+#, kde-format
+msgctxt "colorspace"
+msgid "Yxy"
+msgstr "Yxy"
+
+#: colord-kcm/Profile.cpp:208
+#, kde-format
+msgctxt "colorspace"
+msgid "HSV"
+msgstr "HSV"
+
+#: colord-kcm/Profile.cpp:214
+#, kde-format
+msgctxt "colorspace"
+msgid "CMY"
+msgstr "CMY"
+
+#: colord-kcm/Profile.cpp:217
+#, kde-format
+msgctxt "colorspace"
+msgid "Unknown"
+msgstr "Невідомо"
+
+#: colord-kcm/Profile.cpp:302
+#, kde-format
+msgid "Missing description"
+msgstr "Немає опису"
+
+#: colord-kcm/Profile.cpp:357
+#, kde-format
+msgctxt "profile kind"
+msgid "Input device"
+msgstr "Пристрій введення"
+
+#: colord-kcm/Profile.cpp:359
+#, kde-format
+msgctxt "profile kind"
+msgid "Display device"
+msgstr "Пристрій показу"
+
+#: colord-kcm/Profile.cpp:361
+#, kde-format
+msgctxt "profile kind"
+msgid "Output device"
+msgstr "Пристрій виведення"
+
+#: colord-kcm/Profile.cpp:363
+#, kde-format
+msgctxt "profile kind"
+msgid "Devicelink"
+msgstr "Зв’язок між пристроями"
+
+#: colord-kcm/Profile.cpp:365
+#, kde-format
+msgctxt "profile kind"
+msgid "Colorspace conversion"
+msgstr "Перетворення простору кольорів"
+
+#: colord-kcm/Profile.cpp:367
+#, kde-format
+msgctxt "profile kind"
+msgid "Abstract"
+msgstr "Абстрактне"
+
+#: colord-kcm/Profile.cpp:369
+#, kde-format
+msgctxt "profile kind"
+msgid "Named color"
+msgstr "Іменований колір"
+
+#: colord-kcm/Profile.cpp:371
+#, kde-format
+msgctxt "profile kind"
+msgid "Unknown"
+msgstr "Невідомо"
+
+#: colord-kcm/Profile.cpp:518
+#, kde-format
+msgid "Default: %1"
+msgstr "Типовий: %1"
+
+#: colord-kcm/Profile.cpp:520
+#, kde-format
+msgid "Colorspace: %1"
+msgstr "Простір кольорів: %1"
+
+#: colord-kcm/Profile.cpp:522
+#, kde-format
+msgid "Test profile: %1"
+msgstr "Тестовий профіль: %1"
+
+#: colord-kcm/Profile.cpp:524
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: colord-kcm/ProfileMetaData.cpp:78
+#, kde-format
+msgid "Standard space"
+msgstr "Стандартний простір"
+
+#: colord-kcm/ProfileMetaData.cpp:81
+#, kde-format
+msgid "Display checksum"
+msgstr "Контрольна сума дисплея"
+
+#: colord-kcm/ProfileMetaData.cpp:84
+#, kde-format
+msgid "Display model"
+msgstr "Модель дисплея"
+
+#: colord-kcm/ProfileMetaData.cpp:87
+#, kde-format
+msgid "Display serial number"
+msgstr "Серійний номер дисплея"
+
+#: colord-kcm/ProfileMetaData.cpp:90
+#, kde-format
+msgid "Display PNPID"
+msgstr "PNPID дисплея"
+
+#: colord-kcm/ProfileMetaData.cpp:93
+#, kde-format
+msgid "Display vendor"
+msgstr "Виробник дисплея"
+
+#: colord-kcm/ProfileMetaData.cpp:96
+#, kde-format
+msgid "File checksum"
+msgstr "Контрольна сума файла"
+
+#: colord-kcm/ProfileMetaData.cpp:99
+#, kde-format
+msgid "Framework product"
+msgstr "Назва продукту комплексу"
+
+#: colord-kcm/ProfileMetaData.cpp:102
+#, kde-format
+msgid "Framework program"
+msgstr "Програма комплексу"
+
+#: colord-kcm/ProfileMetaData.cpp:105
+#, kde-format
+msgid "Framework version"
+msgstr "Версія комплексу"
+
+#: colord-kcm/ProfileMetaData.cpp:108
+#, kde-format
+msgid "Data source type"
+msgstr "Тип даних джерела"
+
+#: colord-kcm/ProfileMetaData.cpp:111
+#, kde-format
+msgid "Mapping format"
+msgstr "Формат відображення"
+
+#: colord-kcm/ProfileMetaData.cpp:114
+#, kde-format
+msgid "Mapping qualifier"
+msgstr "Специфікатор відображення"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/ProfileMetaData.ui:39
+#, kde-format
+msgid ""
+"Meta data is additional information stored in the profile for programs to "
+"use."
+msgstr ""
+"Метадані — це додаткові дані, що зберігаються у профілі для програм, які "
+"ними користуються."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/ProfileNamedColors.ui:17
+#, kde-format
+msgid "Named colors are specific colors defined in the profile"
+msgstr "Іменовані кольори — це кольори, окремо визначені у профілі"
+
+#: icc-importer/main.cpp:41
+#, kde-format
+msgid "Description: %1"
+msgstr "Опис: %1"
+
+#: icc-importer/main.cpp:51
+#, kde-format
+msgid "Copyright: %1"
+msgstr "Авторські права: %1"
+
+#: icc-importer/main.cpp:62
+#, kde-format
+msgid "ICC Profile Installer"
+msgstr "Встановлювач профілів ICC"
+
+#: icc-importer/main.cpp:64
+#, kde-format
+msgid "An application to install ICC profiles"
+msgstr "Програма для встановлення профілів ICC"
+
+#: icc-importer/main.cpp:66
+#, kde-format
+msgid "(C) 2008-2016 Daniel Nicoletti"
+msgstr "© Daniel Nicoletti, 2008–2016"
+
+#: icc-importer/main.cpp:77
+#, kde-format
+msgid "Do not prompt the user if he wants to install"
+msgstr "Не запитувати користувача про те, чи бажаним є встановлення"
+
+#: icc-importer/main.cpp:78
+#, kde-format
+msgid "Color profile to install"
+msgstr "Профіль кольорів, який слід встановити"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to parse file: %1"
+msgstr "Не вдалося обробити файл: %1"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to open ICC profile"
+msgstr "Не вдалося відкрити профіль ICC"
+
+#: icc-importer/main.cpp:102
+#, kde-format
+msgid "Color profile is already imported"
+msgstr "Профіль кольорів вже імпортовано"
+
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:120
+#, kde-format
+msgid "ICC Profile Importer"
+msgstr "Засіб імпортування профілів ICC"
+
+#: icc-importer/main.cpp:112
+#, kde-format
+msgid "ICC profile already installed system-wide"
+msgstr "Профіль ICC вже встановлено на загальносистемному рівні"
+
+#: icc-importer/main.cpp:119
+#, kde-format
+msgid "Would you like to import the color profile?"
+msgstr "Хочете імпортувати профіль кольорів?"
+
+#: icc-importer/main.cpp:128
+#, kde-format
+msgid "Failed to import color profile: color profile is already imported"
+msgstr ""
+"Не вдалося імпортувати профіль кольорів: профіль кольорів вже імпортовано"
+
+#: icc-importer/main.cpp:131
+#, kde-format
+msgid "Failed to import color profile: could not copy the file"
+msgstr "Не вдалося імпортувати профіль кольорів: не вдалося скопіювати файл"
+
+#~ msgid "Daniel Nicoletti"
+#~ msgstr "Daniel Nicoletti"
+
+#~ msgid "Apper"
+#~ msgstr "Apper"
+
+#~ msgid "Apper is an Application to Get and Manage Software"
+#~ msgstr ""
+#~ "Apper — програма для отримання і керування пакунками програмного "
+#~ "забезпечення"
+
+#~ msgid "Failed to import color profile: file already exists"
+#~ msgstr "Не вдалося імпортувати профіль кольорів: файл вже існує"
+
+#~ msgid "X Resize and Rotate extension version %1.%2"
+#~ msgstr "Версія розширення для зміни розміру та обертання X %1.%2"
+
+#~ msgid "Form"
+#~ msgstr "Форма"

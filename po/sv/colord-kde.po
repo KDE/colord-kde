@@ -1,0 +1,706 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2012, 2013, 2015, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-26 00:42+0000\n"
+"PO-Revision-Date: 2016-10-10 17:13+0100\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Stefan Asserhäll"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "stefan.asserhall@bredband.net"
+
+#: colord-kcm/ColordKCM.cpp:53
+#, kde-format
+msgid "Available Profiles"
+msgstr "Tillgängliga profiler"
+
+#: colord-kcm/ColordKCM.cpp:56 colord-kcm/ColordKCM.cpp:58
+#, kde-format
+msgid "Color settings"
+msgstr "Färginställningar"
+
+#: colord-kcm/ColordKCM.cpp:60
+#, kde-format
+msgid "(C) 2012-2016 Daniel Nicoletti"
+msgstr "© 2012-2016 Daniel Nicoletti"
+
+#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "Konvertering till Kf5"
+
+#: colord-kcm/ColordKCM.cpp:69
+#, kde-format
+msgid "From File..."
+msgstr "Från fil..."
+
+#: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
+#: icc-importer/main.cpp:128 icc-importer/main.cpp:131
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "Importerar färgprofil"
+
+#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
+#: colord-kcm/ColordKCM.cpp:257 colord-kcm/ColordKCM.ui:33
+#, kde-format
+msgid "Remove Profile"
+msgstr "Ta bort profil"
+
+#: colord-kcm/ColordKCM.cpp:257
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Är du säker på att du vill ta bort profilen?"
+
+#: colord-kcm/ColordKCM.cpp:359
+#, kde-format
+msgid "Your profile did not match the device kind"
+msgstr "Profilen motsvarar inte enhetens sort"
+
+#: colord-kcm/ColordKCM.cpp:392
+#, kde-format
+msgid "You do not have any devices registered"
+msgstr "Du har inte några enheter registrerade"
+
+#: colord-kcm/ColordKCM.cpp:393
+#, kde-format
+msgid "Make sure colord module on kded is running"
+msgstr "Försäkra dig om att modulen colord i kded kör"
+
+#: colord-kcm/ColordKCM.cpp:396
+#, kde-format
+msgid "You do not have any profiles registered"
+msgstr "Du har inte registrerat några profiler"
+
+#: colord-kcm/ColordKCM.cpp:397
+#, kde-format
+msgid "Add one by clicking Add Profile button"
+msgstr "Lägg till en genom att klicka på knappen Lägg till profil"
+
+#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
+#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
+#, kde-format
+msgid "Profiles"
+msgstr "Profiler"
+
+#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
+#: colord-kcm/ColordKCM.ui:161
+#, kde-format
+msgid "Add Profile"
+msgstr "Lägg till profil"
+
+#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
+#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
+#, kde-format
+msgid "Devices"
+msgstr "Enheter"
+
+#: colord-kcm/Description.cpp:137
+#, kde-format
+msgid "Yes"
+msgstr "Ja"
+
+#: colord-kcm/Description.cpp:137
+#, kde-format
+msgid "None"
+msgstr "Ingen"
+
+#: colord-kcm/Description.cpp:166
+#, kde-format
+msgid "Named Colors"
+msgstr "Namngivna färger"
+
+#: colord-kcm/Description.cpp:174
+#, kde-format
+msgid "Metadata"
+msgstr "Metadata"
+
+#: colord-kcm/Description.cpp:214
+#, kde-format
+msgctxt "device type"
+msgid "Printer"
+msgstr "Skrivare"
+
+#: colord-kcm/Description.cpp:216
+#, kde-format
+msgctxt "device type"
+msgid "Display"
+msgstr "Bildskärm"
+
+#: colord-kcm/Description.cpp:218
+#, kde-format
+msgctxt "device type"
+msgid "Webcam"
+msgstr "Webbkamera"
+
+#: colord-kcm/Description.cpp:220
+#, kde-format
+msgctxt "device type"
+msgid "Scanner"
+msgstr "Bildläsare"
+
+#: colord-kcm/Description.cpp:222
+#, kde-format
+msgctxt "device type"
+msgid "Unknown"
+msgstr "Okänd"
+
+#: colord-kcm/Description.cpp:229
+#, kde-format
+msgctxt "device scope"
+msgid "User session"
+msgstr "Användarsession"
+
+#: colord-kcm/Description.cpp:231
+#, kde-format
+msgctxt "device scope"
+msgid "Auto restore"
+msgstr "Återställ automatiskt"
+
+#: colord-kcm/Description.cpp:233
+#, kde-format
+msgctxt "device scope"
+msgid "System wide"
+msgstr "Hela systemet"
+
+#: colord-kcm/Description.cpp:235
+#, kde-format
+msgctxt "device scope"
+msgid "Unknown"
+msgstr "Okänt"
+
+#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#, kde-format
+msgctxt "colorspace"
+msgid "RGB"
+msgstr "RGB"
+
+#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#, kde-format
+msgctxt "colorspace"
+msgid "CMYK"
+msgstr "CMYK"
+
+#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#, kde-format
+msgctxt "colorspace"
+msgid "Gray"
+msgstr "Gråskala"
+
+#: colord-kcm/Description.cpp:251
+#, kde-format
+msgid "This device has no profile assigned to it"
+msgstr "Enheten har ingen tilldelad profil"
+
+#: colord-kcm/Description.cpp:368
+#, kde-format
+msgid "Create a color profile for the selected device"
+msgstr "Skapa en färgprofil för vald enhet"
+
+#: colord-kcm/Description.cpp:378
+#, kde-format
+msgid "You need Gnome Color Management installed in order to calibrate devices"
+msgstr ""
+"Gnome Color Management måste vara installerat för att kunna kalibrera enheter"
+
+#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
+#, kde-format
+msgid ""
+"The measuring instrument is not detected. Please check it is turned on and "
+"correctly connected."
+msgstr ""
+"Mätinstrumentet kunde inte detekteras. Kontrollera att det är påslaget och "
+"riktigt anslutet."
+
+#: colord-kcm/Description.cpp:408
+#, kde-format
+msgid "The measuring instrument does not support printer profiling."
+msgstr "Mätinstrumentet stöder inte profilering av skrivare."
+
+#: colord-kcm/Description.cpp:412
+#, kde-format
+msgid "The device type is not currently supported."
+msgstr "Enhetstypen stöds för närvarande inte."
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: colord-kcm/Description.ui:21
+#, kde-format
+msgid "Information"
+msgstr "Information"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/Description.ui:40
+#, kde-format
+msgid "Profile type:"
+msgstr "Profiltyp:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: colord-kcm/Description.ui:63
+#, kde-format
+msgid "Colorspace:"
+msgstr "Färgrymd:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: colord-kcm/Description.ui:86
+#, kde-format
+msgid "Created:"
+msgstr "Skapad:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: colord-kcm/Description.ui:109
+#, kde-format
+msgid "Version:"
+msgstr "Version:"
+
+#. i18n: ectx: property (text), widget (QLabel, makeLabel)
+#: colord-kcm/Description.ui:132
+#, kde-format
+msgid "Device Manufacturer:"
+msgstr "Enhetstillverkare:"
+
+#. i18n: ectx: property (text), widget (QLabel, modelLabel)
+#: colord-kcm/Description.ui:158
+#, kde-format
+msgid "Device Model:"
+msgstr "Enhetsmodell:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: colord-kcm/Description.ui:184
+#, kde-format
+msgid "Display correction:"
+msgstr "Bildskärmskorrigering:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: colord-kcm/Description.ui:207
+#, kde-format
+msgid "White Point:"
+msgstr "Vitpunkt:"
+
+#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
+#: colord-kcm/Description.ui:230
+#, kde-format
+msgid "License:"
+msgstr "Licens:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_15)
+#: colord-kcm/Description.ui:256
+#, kde-format
+msgid "File size:"
+msgstr "Filstorlek:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: colord-kcm/Description.ui:279
+#, kde-format
+msgid "Filename:"
+msgstr "Filnamn:"
+
+#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
+#: colord-kcm/Description.ui:302
+#, kde-format
+msgid "Install System Wide"
+msgstr "Installera för hela systemet"
+
+#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
+#: colord-kcm/Description.ui:316
+#, kde-format
+msgid "device name"
+msgstr "enhetsnamn"
+
+#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
+#: colord-kcm/Description.ui:319
+#, kde-format
+msgid "Printer"
+msgstr "Skrivare"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: colord-kcm/Description.ui:326
+#, kde-format
+msgid "Id:"
+msgstr "Id:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: colord-kcm/Description.ui:340
+#, kde-format
+msgid "Scope:"
+msgstr "Omfattning:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: colord-kcm/Description.ui:354
+#, kde-format
+msgid "Mode:"
+msgstr "Läge:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: colord-kcm/Description.ui:368
+#, kde-format
+msgid "Current Profile:"
+msgstr "Aktuell profil:"
+
+#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
+#: colord-kcm/Description.ui:382
+#, kde-format
+msgid "Calibrate"
+msgstr "Kalibrera"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:400
+#, kde-format
+msgid "Print Test Page"
+msgstr "Skriv ut testsida"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:405
+#, kde-format
+msgid "Clean Print Heads"
+msgstr "Rengör skrivarhuvuden"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:410
+#, kde-format
+msgid "Print Self Test Page"
+msgstr "Skriv ut självtestsida"
+
+#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:413
+#, kde-format
+msgid "Print Self-Test Page"
+msgstr "Skriv ut självtestsida"
+
+#: colord-kcm/DeviceModel.cpp:229
+#, kde-format
+msgctxt "colorspace"
+msgid "Default RGB"
+msgstr "Standard-RGB"
+
+#: colord-kcm/DeviceModel.cpp:231
+#, kde-format
+msgctxt "colorspace"
+msgid "Default CMYK"
+msgstr "Standard-CMYK"
+
+#: colord-kcm/DeviceModel.cpp:233
+#, kde-format
+msgctxt "colorspace"
+msgid "Default Gray"
+msgstr "Standard gråskala"
+
+#: colord-kcm/Profile.cpp:106
+#, kde-format
+msgid "file too small"
+msgstr "filen för liten"
+
+#: colord-kcm/Profile.cpp:115
+#, kde-format
+msgid "not an ICC profile"
+msgstr "inte en ICC-profil"
+
+#: colord-kcm/Profile.cpp:187
+#, kde-format
+msgctxt "colorspace"
+msgid "XYZ"
+msgstr "XYZ"
+
+#: colord-kcm/Profile.cpp:190
+#, kde-format
+msgctxt "colorspace"
+msgid "LAB"
+msgstr "LAB"
+
+#: colord-kcm/Profile.cpp:193
+#, kde-format
+msgctxt "colorspace"
+msgid "LUV"
+msgstr "LUV"
+
+#: colord-kcm/Profile.cpp:196
+#, kde-format
+msgctxt "colorspace"
+msgid "YCbCr"
+msgstr "YCbCr"
+
+#: colord-kcm/Profile.cpp:199
+#, kde-format
+msgctxt "colorspace"
+msgid "Yxy"
+msgstr "Yxy"
+
+#: colord-kcm/Profile.cpp:208
+#, kde-format
+msgctxt "colorspace"
+msgid "HSV"
+msgstr "HSV"
+
+#: colord-kcm/Profile.cpp:214
+#, kde-format
+msgctxt "colorspace"
+msgid "CMY"
+msgstr "CMY"
+
+#: colord-kcm/Profile.cpp:217
+#, kde-format
+msgctxt "colorspace"
+msgid "Unknown"
+msgstr "Okänd"
+
+#: colord-kcm/Profile.cpp:302
+#, kde-format
+msgid "Missing description"
+msgstr "Saknar beskrivning"
+
+#: colord-kcm/Profile.cpp:357
+#, kde-format
+msgctxt "profile kind"
+msgid "Input device"
+msgstr "Indataenhet"
+
+#: colord-kcm/Profile.cpp:359
+#, kde-format
+msgctxt "profile kind"
+msgid "Display device"
+msgstr "Bildskärmsenhet"
+
+#: colord-kcm/Profile.cpp:361
+#, kde-format
+msgctxt "profile kind"
+msgid "Output device"
+msgstr "Utdataenhet"
+
+#: colord-kcm/Profile.cpp:363
+#, kde-format
+msgctxt "profile kind"
+msgid "Devicelink"
+msgstr "Enhetslänk"
+
+#: colord-kcm/Profile.cpp:365
+#, kde-format
+msgctxt "profile kind"
+msgid "Colorspace conversion"
+msgstr "Konvertering av färgrymd"
+
+#: colord-kcm/Profile.cpp:367
+#, kde-format
+msgctxt "profile kind"
+msgid "Abstract"
+msgstr "Abstrakt"
+
+#: colord-kcm/Profile.cpp:369
+#, kde-format
+msgctxt "profile kind"
+msgid "Named color"
+msgstr "Namngiven färg"
+
+#: colord-kcm/Profile.cpp:371
+#, kde-format
+msgctxt "profile kind"
+msgid "Unknown"
+msgstr "Okänd"
+
+#: colord-kcm/Profile.cpp:518
+#, kde-format
+msgid "Default: %1"
+msgstr "Standard: %1"
+
+#: colord-kcm/Profile.cpp:520
+#, kde-format
+msgid "Colorspace: %1"
+msgstr "Färgrymd: %1"
+
+#: colord-kcm/Profile.cpp:522
+#, kde-format
+msgid "Test profile: %1"
+msgstr "Testprofil: %1"
+
+#: colord-kcm/Profile.cpp:524
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: colord-kcm/ProfileMetaData.cpp:78
+#, kde-format
+msgid "Standard space"
+msgstr "Standardrymd"
+
+#: colord-kcm/ProfileMetaData.cpp:81
+#, kde-format
+msgid "Display checksum"
+msgstr "Bildskärmens checksumma"
+
+#: colord-kcm/ProfileMetaData.cpp:84
+#, kde-format
+msgid "Display model"
+msgstr "Bildskärmens modell"
+
+#: colord-kcm/ProfileMetaData.cpp:87
+#, kde-format
+msgid "Display serial number"
+msgstr "Bildskärmens serienummer"
+
+#: colord-kcm/ProfileMetaData.cpp:90
+#, kde-format
+msgid "Display PNPID"
+msgstr "Bildskärmens PNP-identifierare"
+
+#: colord-kcm/ProfileMetaData.cpp:93
+#, kde-format
+msgid "Display vendor"
+msgstr "Bildskärmens tillverkare"
+
+#: colord-kcm/ProfileMetaData.cpp:96
+#, kde-format
+msgid "File checksum"
+msgstr "Filens checksumma"
+
+#: colord-kcm/ProfileMetaData.cpp:99
+#, kde-format
+msgid "Framework product"
+msgstr "Ramverksprodukt"
+
+#: colord-kcm/ProfileMetaData.cpp:102
+#, kde-format
+msgid "Framework program"
+msgstr "Ramverksprogram"
+
+#: colord-kcm/ProfileMetaData.cpp:105
+#, kde-format
+msgid "Framework version"
+msgstr "Ramverksversion"
+
+#: colord-kcm/ProfileMetaData.cpp:108
+#, kde-format
+msgid "Data source type"
+msgstr "Typ av datakälla"
+
+#: colord-kcm/ProfileMetaData.cpp:111
+#, kde-format
+msgid "Mapping format"
+msgstr "Avbildningsformat"
+
+#: colord-kcm/ProfileMetaData.cpp:114
+#, kde-format
+msgid "Mapping qualifier"
+msgstr "Avbildningskvalificerare"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/ProfileMetaData.ui:39
+#, kde-format
+msgid ""
+"Meta data is additional information stored in the profile for programs to "
+"use."
+msgstr ""
+"Metadata är ytterligare information som lagras i profilen för program att "
+"använda sig av."
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/ProfileNamedColors.ui:17
+#, kde-format
+msgid "Named colors are specific colors defined in the profile"
+msgstr "Namngivna färger är specifika färger definierade i profilen"
+
+#: icc-importer/main.cpp:41
+#, kde-format
+msgid "Description: %1"
+msgstr "Beskrivning: %1"
+
+#: icc-importer/main.cpp:51
+#, kde-format
+msgid "Copyright: %1"
+msgstr "Copyright: %1"
+
+#: icc-importer/main.cpp:62
+#, kde-format
+msgid "ICC Profile Installer"
+msgstr "ICC-profilinstallation"
+
+#: icc-importer/main.cpp:64
+#, kde-format
+msgid "An application to install ICC profiles"
+msgstr "Ett program för att installera ICC-profiler"
+
+#: icc-importer/main.cpp:66
+#, kde-format
+msgid "(C) 2008-2016 Daniel Nicoletti"
+msgstr "© 2012-2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:77
+#, kde-format
+msgid "Do not prompt the user if he wants to install"
+msgstr "Fråga inte användaren om han vill installera"
+
+#: icc-importer/main.cpp:78
+#, kde-format
+msgid "Color profile to install"
+msgstr "Färgprofil att installera"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to parse file: %1"
+msgstr "Misslyckades tolka filen: %1"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to open ICC profile"
+msgstr "Misslyckades öppna ICC-profil"
+
+#: icc-importer/main.cpp:102
+#, kde-format
+msgid "Color profile is already imported"
+msgstr "Färgprofil redan importerad"
+
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:120
+#, kde-format
+msgid "ICC Profile Importer"
+msgstr "ICC-profilimport"
+
+#: icc-importer/main.cpp:112
+#, kde-format
+msgid "ICC profile already installed system-wide"
+msgstr "ICC-profil redan installerad för hela systemet"
+
+#: icc-importer/main.cpp:119
+#, kde-format
+msgid "Would you like to import the color profile?"
+msgstr "Vill du importera färgprofilen?"
+
+#: icc-importer/main.cpp:128
+#, kde-format
+msgid "Failed to import color profile: color profile is already imported"
+msgstr "Misslyckades importera färgprofil: färgprofil redan importerad"
+
+#: icc-importer/main.cpp:131
+#, kde-format
+msgid "Failed to import color profile: could not copy the file"
+msgstr "Misslyckades importera färgprofil: kunde inte kopiera filen"
+
+#~ msgid "Daniel Nicoletti"
+#~ msgstr "Daniel Nicoletti"
+
+#~ msgid "Apper"
+#~ msgstr "Apper"
+
+#~ msgid "Apper is an Application to Get and Manage Software"
+#~ msgstr "Apper är ett verktyg för att hämta och hantera programvara"
+
+#~| msgid "Failed to import color profile"
+#~ msgid "Failed to import color profile: file already exists"
+#~ msgstr "Misslyckades importera färgprofil: filen finns redan"
+
+#~ msgid "X Resize and Rotate extension version %1.%2"
+#~ msgstr "X-utökning för storleksändring och rotation, version %1.%2"

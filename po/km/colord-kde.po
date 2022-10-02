@@ -1,0 +1,743 @@
+# translation of colord-kde.po to Khmer
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: colord-kde\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-26 00:42+0000\n"
+"PO-Revision-Date: 2012-06-21 15:18+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer\n"
+"Language: km\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ខឹម សុខែម, ម៉ន ម៉េត, សេង សុត្ថា, ចាន់ សម្បត្តិរតនៈ, សុខ សុភា"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"khoemsokhem@khmeros.info,​​mornmet@khmeros.info,sutha@khmeros.info,"
+"ratanak@khmeros.info,sophea@khmeros.info"
+
+#: colord-kcm/ColordKCM.cpp:53
+#, kde-format
+msgid "Available Profiles"
+msgstr "ទម្រង់​ដែល​អាច​ប្រើ​បាន"
+
+#: colord-kcm/ColordKCM.cpp:56 colord-kcm/ColordKCM.cpp:58
+#, kde-format
+msgid "Color settings"
+msgstr "ការ​កំណត់​ពណ៌"
+
+#: colord-kcm/ColordKCM.cpp:60
+#, fuzzy, kde-format
+#| msgid "(C) 2012 Daniel Nicoletti"
+msgid "(C) 2012-2016 Daniel Nicoletti"
+msgstr "រក្សាសិទ្ធិ​ឆ្នាំ ២០១២ ដោយ Daniel Nicoletti"
+
+#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr ""
+
+#: colord-kcm/ColordKCM.cpp:69
+#, kde-format
+msgid "From File..."
+msgstr "ពី​ឯកសារ..."
+
+#: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
+#: icc-importer/main.cpp:128 icc-importer/main.cpp:131
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "នាំចូល​ទម្រង់​ពណ៌"
+
+#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
+#: colord-kcm/ColordKCM.cpp:257 colord-kcm/ColordKCM.ui:33
+#, kde-format
+msgid "Remove Profile"
+msgstr "យក​ទម្រង់​ចេញ"
+
+#: colord-kcm/ColordKCM.cpp:257
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "តើ​អ្នក​ប្រាកដ​ជា​ចង់​យក​ទម្រង់​នេះ​ចេញ​ឬ ?"
+
+#: colord-kcm/ColordKCM.cpp:359
+#, kde-format
+msgid "Your profile did not match the device kind"
+msgstr "ទម្រង់​របស់​អ្នកមិន​ត្រូវ​នឹង​ប្រភេទ​ឧបករណ៍​ទេ"
+
+#: colord-kcm/ColordKCM.cpp:392
+#, fuzzy, kde-format
+#| msgid "You don't have any devices registered"
+msgid "You do not have any devices registered"
+msgstr "អ្នក​មិនមាន​ឧបករណ៍​​បាន​ចុះ​ឈ្មោះ​ទេ"
+
+#: colord-kcm/ColordKCM.cpp:393
+#, kde-format
+msgid "Make sure colord module on kded is running"
+msgstr "សម​ប្រាកដ​ថា ម៉ូឌុល colord នៅ​លើ kded កំពុង​ដំណើរការ"
+
+#: colord-kcm/ColordKCM.cpp:396
+#, fuzzy, kde-format
+#| msgid "You don't have any profiles registered"
+msgid "You do not have any profiles registered"
+msgstr "អ្នក​មិនមាន​ទម្រង់​ណាមួយ​បាន​ចុះឈ្មោះ​ទេ"
+
+#: colord-kcm/ColordKCM.cpp:397
+#, kde-format
+msgid "Add one by clicking Add Profile button"
+msgstr "បន្ថែម​ទម្រង់​មួយ ដោយ​ចុច​ប៊ូតុង បន្ថែម​ទម្រង់"
+
+#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
+#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
+#, kde-format
+msgid "Profiles"
+msgstr "ទម្រង់"
+
+#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
+#: colord-kcm/ColordKCM.ui:161
+#, kde-format
+msgid "Add Profile"
+msgstr "បន្ថែម​ទម្រង់"
+
+#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
+#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
+#, kde-format
+msgid "Devices"
+msgstr "ឧបករណ៍"
+
+#: colord-kcm/Description.cpp:137
+#, kde-format
+msgid "Yes"
+msgstr "បាទ/ចាស"
+
+#: colord-kcm/Description.cpp:137
+#, kde-format
+msgid "None"
+msgstr "គ្មាន"
+
+#: colord-kcm/Description.cpp:166
+#, kde-format
+msgid "Named Colors"
+msgstr "ពណ៌​ដែល​មាន​ឈ្មោះ"
+
+#: colord-kcm/Description.cpp:174
+#, kde-format
+msgid "Metadata"
+msgstr "ទិន្នន័យ​មេតា"
+
+#: colord-kcm/Description.cpp:214
+#, fuzzy, kde-format
+#| msgid "Printer"
+msgctxt "device type"
+msgid "Printer"
+msgstr "ម៉ាស៊ីន​បោះពុម្ព"
+
+#: colord-kcm/Description.cpp:216
+#, fuzzy, kde-format
+#| msgid "Display"
+msgctxt "device type"
+msgid "Display"
+msgstr "បង្ហាញ"
+
+#: colord-kcm/Description.cpp:218
+#, fuzzy, kde-format
+#| msgid "Webcam"
+msgctxt "device type"
+msgid "Webcam"
+msgstr "វិបខេម "
+
+#: colord-kcm/Description.cpp:220
+#, fuzzy, kde-format
+#| msgid "Scanner"
+msgctxt "device type"
+msgid "Scanner"
+msgstr "ម៉ាស៊ីន​ស្កេន"
+
+#: colord-kcm/Description.cpp:222
+#, fuzzy, kde-format
+#| msgid "Unknown"
+msgctxt "device type"
+msgid "Unknown"
+msgstr "មិន​ស្គាល់"
+
+#: colord-kcm/Description.cpp:229
+#, fuzzy, kde-format
+#| msgid "User session"
+msgctxt "device scope"
+msgid "User session"
+msgstr "សម័យ​អ្នកប្រើ"
+
+#: colord-kcm/Description.cpp:231
+#, fuzzy, kde-format
+#| msgid "Auto restore"
+msgctxt "device scope"
+msgid "Auto restore"
+msgstr "ស្ដារ​ដោយ​ស្វ័យ​ប្រវត្តិ"
+
+#: colord-kcm/Description.cpp:233
+#, fuzzy, kde-format
+#| msgid "System wide"
+msgctxt "device scope"
+msgid "System wide"
+msgstr "ទូទាំង​ប្រព័ន្ធ"
+
+#: colord-kcm/Description.cpp:235
+#, fuzzy, kde-format
+#| msgid "Unknown"
+msgctxt "device scope"
+msgid "Unknown"
+msgstr "មិន​ស្គាល់"
+
+#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#, fuzzy, kde-format
+#| msgid "RGB"
+msgctxt "colorspace"
+msgid "RGB"
+msgstr "RGB"
+
+#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#, fuzzy, kde-format
+#| msgid "CMYK"
+msgctxt "colorspace"
+msgid "CMYK"
+msgstr "CMYK"
+
+#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#, fuzzy, kde-format
+#| msgid "Gray"
+msgctxt "colorspace"
+msgid "Gray"
+msgstr "ប្រផះ"
+
+#: colord-kcm/Description.cpp:251
+#, kde-format
+msgid "This device has no profile assigned to it"
+msgstr "ឧបករណ៍​នេះ​គ្មាន​ទម្រង់​បាន​ផ្ដល់​ឲ្យ​វា​ទេ"
+
+#: colord-kcm/Description.cpp:368
+#, kde-format
+msgid "Create a color profile for the selected device"
+msgstr "បង្កើត​ទម្រង់​ពណ៌​សម្រាប់​ឧបករណ៍​ដែល​បាន​ជ្រើស"
+
+#: colord-kcm/Description.cpp:378
+#, kde-format
+msgid "You need Gnome Color Management installed in order to calibrate devices"
+msgstr "អ្នក​ត្រូវ​ដំឡើង​ការ​គ្រប់គ្រង​ពណ៌​របស់​ Gnome ដើម្បី​កែសម្រួល​ឧបករណ៍"
+
+#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
+#, kde-format
+msgid ""
+"The measuring instrument is not detected. Please check it is turned on and "
+"correctly connected."
+msgstr "ឧបករណ៍​វាស់​មិន​ត្រូវ​បានរក​ឃើញ​ទេ ។ សូម​ពិនិត្យ​មើល​ថា​ វា​បាន​បើក និង​តភ្ជាប់​ត្រឹមត្រូវ​ដែរឬទេ ។"
+
+#: colord-kcm/Description.cpp:408
+#, kde-format
+msgid "The measuring instrument does not support printer profiling."
+msgstr "ឧបករណ៍​វាស់​មិន​គាំទ្រ​ទម្រង់​របស់​ម៉ាស៊ីន​បោះពុម្ព​ទេ ។"
+
+#: colord-kcm/Description.cpp:412
+#, kde-format
+msgid "The device type is not currently supported."
+msgstr "ប្រភេទ​ឧបករណ៍​មិន​ត្រូវ​បាន​គាំទ្រ​ទេ​ពេល​នេះ ។"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: colord-kcm/Description.ui:21
+#, kde-format
+msgid "Information"
+msgstr "ព័ត៌មាន"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/Description.ui:40
+#, kde-format
+msgid "Profile type:"
+msgstr "ប្រភេទ​ទម្រង់ ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: colord-kcm/Description.ui:63
+#, kde-format
+msgid "Colorspace:"
+msgstr "ចន្លោះ​ពណ៌ ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: colord-kcm/Description.ui:86
+#, kde-format
+msgid "Created:"
+msgstr "បាន​បង្កើត ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: colord-kcm/Description.ui:109
+#, kde-format
+msgid "Version:"
+msgstr "កំណែ ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, makeLabel)
+#: colord-kcm/Description.ui:132
+#, kde-format
+msgid "Device Manufacturer:"
+msgstr "ក្រុមហ៊ុន​ផលិត​ឧបករណ៍ ​៖"
+
+#. i18n: ectx: property (text), widget (QLabel, modelLabel)
+#: colord-kcm/Description.ui:158
+#, kde-format
+msgid "Device Model:"
+msgstr "គំរូ​ឧបករណ៍ ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: colord-kcm/Description.ui:184
+#, kde-format
+msgid "Display correction:"
+msgstr "បង្ហាញ​ការ​កែ ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: colord-kcm/Description.ui:207
+#, kde-format
+msgid "White Point:"
+msgstr "ចំណុច​ពណ៌​ស ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
+#: colord-kcm/Description.ui:230
+#, kde-format
+msgid "License:"
+msgstr "អាជ្ញាប័ណ្ណ ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_15)
+#: colord-kcm/Description.ui:256
+#, kde-format
+msgid "File size:"
+msgstr "ទំហំ​ឯកសារ ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: colord-kcm/Description.ui:279
+#, kde-format
+msgid "Filename:"
+msgstr "ឈ្មោះ​ឯកសារ ៖"
+
+#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
+#: colord-kcm/Description.ui:302
+#, kde-format
+msgid "Install System Wide"
+msgstr "ដំឡើង​ទូទាំង​ប្រព័ន្ធ"
+
+#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
+#: colord-kcm/Description.ui:316
+#, kde-format
+msgid "device name"
+msgstr "ឈ្មោះ​ឧបករណ៍"
+
+#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
+#: colord-kcm/Description.ui:319
+#, kde-format
+msgid "Printer"
+msgstr "ម៉ាស៊ីន​បោះពុម្ព"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: colord-kcm/Description.ui:326
+#, kde-format
+msgid "Id:"
+msgstr "លេខ​សម្គាល់ ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: colord-kcm/Description.ui:340
+#, kde-format
+msgid "Scope:"
+msgstr "វិសាលភាព ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: colord-kcm/Description.ui:354
+#, kde-format
+msgid "Mode:"
+msgstr "របៀប ៖"
+
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: colord-kcm/Description.ui:368
+#, kde-format
+msgid "Current Profile:"
+msgstr "ទម្រង់​បច្ចុប្បន្ន ៖"
+
+#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
+#: colord-kcm/Description.ui:382
+#, kde-format
+msgid "Calibrate"
+msgstr "កែសម្រួល"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:400
+#, kde-format
+msgid "Print Test Page"
+msgstr "បោះពុម្ព​ទំព័រ​សាកល្បង"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:405
+#, kde-format
+msgid "Clean Print Heads"
+msgstr "សម្អាត​ក្បាល​បោះពុម្ព"
+
+#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:410
+#, kde-format
+msgid "Print Self Test Page"
+msgstr "បោះពុម្ព​ទំព័រ​សាកល្បង​ដោយ​ខ្លួនឯង"
+
+#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
+#: colord-kcm/Description.ui:413
+#, kde-format
+msgid "Print Self-Test Page"
+msgstr "បោះពុម្ព​ទំព័រ​សាកល្បង​ដោយ​ខ្លួនឯង"
+
+#: colord-kcm/DeviceModel.cpp:229
+#, fuzzy, kde-format
+#| msgid "Default RGB"
+msgctxt "colorspace"
+msgid "Default RGB"
+msgstr "RGB លំនាំដើម"
+
+#: colord-kcm/DeviceModel.cpp:231
+#, fuzzy, kde-format
+#| msgid "Default CMYK"
+msgctxt "colorspace"
+msgid "Default CMYK"
+msgstr "CMYK លំនាំដើម"
+
+#: colord-kcm/DeviceModel.cpp:233
+#, fuzzy, kde-format
+#| msgid "Default Gray"
+msgctxt "colorspace"
+msgid "Default Gray"
+msgstr "ប្រផះ​លំនាំដើម"
+
+#: colord-kcm/Profile.cpp:106
+#, kde-format
+msgid "file too small"
+msgstr ""
+
+#: colord-kcm/Profile.cpp:115
+#, kde-format
+msgid "not an ICC profile"
+msgstr ""
+
+#: colord-kcm/Profile.cpp:187
+#, fuzzy, kde-format
+#| msgid "XYZ"
+msgctxt "colorspace"
+msgid "XYZ"
+msgstr "XYZ"
+
+#: colord-kcm/Profile.cpp:190
+#, fuzzy, kde-format
+#| msgid "LAB"
+msgctxt "colorspace"
+msgid "LAB"
+msgstr "LAB"
+
+#: colord-kcm/Profile.cpp:193
+#, fuzzy, kde-format
+#| msgid "LUV"
+msgctxt "colorspace"
+msgid "LUV"
+msgstr "LUV"
+
+#: colord-kcm/Profile.cpp:196
+#, fuzzy, kde-format
+#| msgid "YCbCr"
+msgctxt "colorspace"
+msgid "YCbCr"
+msgstr "YCbCr"
+
+#: colord-kcm/Profile.cpp:199
+#, fuzzy, kde-format
+#| msgid "Yxy"
+msgctxt "colorspace"
+msgid "Yxy"
+msgstr "Yxy"
+
+#: colord-kcm/Profile.cpp:208
+#, fuzzy, kde-format
+#| msgid "HSV"
+msgctxt "colorspace"
+msgid "HSV"
+msgstr "HSV"
+
+#: colord-kcm/Profile.cpp:214
+#, fuzzy, kde-format
+#| msgid "CMY"
+msgctxt "colorspace"
+msgid "CMY"
+msgstr "CMY"
+
+#: colord-kcm/Profile.cpp:217
+#, fuzzy, kde-format
+#| msgid "Unknown"
+msgctxt "colorspace"
+msgid "Unknown"
+msgstr "មិន​ស្គាល់"
+
+#: colord-kcm/Profile.cpp:302
+#, kde-format
+msgid "Missing description"
+msgstr "បាត់​សេចក្ដី​ពណ៌នា"
+
+#: colord-kcm/Profile.cpp:357
+#, fuzzy, kde-format
+#| msgid "Input device"
+msgctxt "profile kind"
+msgid "Input device"
+msgstr "​ឧបករណ៍បញ្ចូល"
+
+#: colord-kcm/Profile.cpp:359
+#, fuzzy, kde-format
+#| msgid "Display device"
+msgctxt "profile kind"
+msgid "Display device"
+msgstr "បង្ហាញ​ឧបករណ៍"
+
+#: colord-kcm/Profile.cpp:361
+#, fuzzy, kde-format
+#| msgid "Output device"
+msgctxt "profile kind"
+msgid "Output device"
+msgstr "ឧបករណ៍​បង្ហាញ​"
+
+#: colord-kcm/Profile.cpp:363
+#, fuzzy, kde-format
+#| msgid "Devicelink"
+msgctxt "profile kind"
+msgid "Devicelink"
+msgstr "តំណ​ឧបករណ៍"
+
+#: colord-kcm/Profile.cpp:365
+#, fuzzy, kde-format
+#| msgid "Colorspace conversion"
+msgctxt "profile kind"
+msgid "Colorspace conversion"
+msgstr "ការ​បម្លែង​ចន្លោះពណ៌"
+
+#: colord-kcm/Profile.cpp:367
+#, fuzzy, kde-format
+#| msgid "Abstract"
+msgctxt "profile kind"
+msgid "Abstract"
+msgstr "ដក"
+
+#: colord-kcm/Profile.cpp:369
+#, fuzzy, kde-format
+#| msgid "Named color"
+msgctxt "profile kind"
+msgid "Named color"
+msgstr "ពណ៌​មាន​ឈ្មោះ"
+
+#: colord-kcm/Profile.cpp:371
+#, fuzzy, kde-format
+#| msgid "Unknown"
+msgctxt "profile kind"
+msgid "Unknown"
+msgstr "មិន​ស្គាល់"
+
+#: colord-kcm/Profile.cpp:518
+#, kde-format
+msgid "Default: %1"
+msgstr "លំនាំដើម ៖ %1"
+
+#: colord-kcm/Profile.cpp:520
+#, kde-format
+msgid "Colorspace: %1"
+msgstr "ចន្លោះ​ពណ៌ ៖ %1"
+
+#: colord-kcm/Profile.cpp:522
+#, kde-format
+msgid "Test profile: %1"
+msgstr "ទម្រង់​សាកល្បង ៖ %1"
+
+#: colord-kcm/Profile.cpp:524
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: colord-kcm/ProfileMetaData.cpp:78
+#, kde-format
+msgid "Standard space"
+msgstr "ទំហំ​ស្តង់ដារ"
+
+#: colord-kcm/ProfileMetaData.cpp:81
+#, kde-format
+msgid "Display checksum"
+msgstr "បង្ហាញ​ឆេកសាំ"
+
+#: colord-kcm/ProfileMetaData.cpp:84
+#, kde-format
+msgid "Display model"
+msgstr "បង្ហាញ​គំរូ"
+
+#: colord-kcm/ProfileMetaData.cpp:87
+#, kde-format
+msgid "Display serial number"
+msgstr "បង្ហាញ​លេខ​ស៊េរី"
+
+#: colord-kcm/ProfileMetaData.cpp:90
+#, kde-format
+msgid "Display PNPID"
+msgstr "បង្ហាញ PNPID"
+
+#: colord-kcm/ProfileMetaData.cpp:93
+#, kde-format
+msgid "Display vendor"
+msgstr "បង្ហាញ​អ្នក​លក់"
+
+#: colord-kcm/ProfileMetaData.cpp:96
+#, kde-format
+msgid "File checksum"
+msgstr "ឆេកសាំ​ឯកសារ"
+
+#: colord-kcm/ProfileMetaData.cpp:99
+#, kde-format
+msgid "Framework product"
+msgstr "ផលិតផល​​ Framework"
+
+#: colord-kcm/ProfileMetaData.cpp:102
+#, kde-format
+msgid "Framework program"
+msgstr "កម្មវិធី Framework"
+
+#: colord-kcm/ProfileMetaData.cpp:105
+#, kde-format
+msgid "Framework version"
+msgstr "កំណែ Framework"
+
+#: colord-kcm/ProfileMetaData.cpp:108
+#, kde-format
+msgid "Data source type"
+msgstr "ប្រភេទ​ប្រភព​ទិន្នន័យ"
+
+#: colord-kcm/ProfileMetaData.cpp:111
+#, kde-format
+msgid "Mapping format"
+msgstr "ទ្រង់ទ្រាយផ្គូផ្គង"
+
+#: colord-kcm/ProfileMetaData.cpp:114
+#, kde-format
+msgid "Mapping qualifier"
+msgstr "ឧបករណ៍​បញ្ជាក់​គុណភាព​ផ្គូផ្គង"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/ProfileMetaData.ui:39
+#, kde-format
+msgid ""
+"Meta data is additional information stored in the profile for programs to "
+"use."
+msgstr "ទិន្នន័យ​មេតា​ គឺ​ជា​ព័ត៌មាន​បន្ថែម​ដែលបាន​រក្សាទុក​ក្នុង​ទម្រង់​សម្រាប់​កម្មវិធី​ប្រើ ។"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: colord-kcm/ProfileNamedColors.ui:17
+#, kde-format
+msgid "Named colors are specific colors defined in the profile"
+msgstr "ពណ៌​ដែល​មាន​ឈ្មោះ​ គឺ​ជា​ពណ៌​ជាក់លាក់​ដែល​បានកំណត់​ក្នុង​ទម្រង់"
+
+#: icc-importer/main.cpp:41
+#, kde-format
+msgid "Description: %1"
+msgstr ""
+
+#: icc-importer/main.cpp:51
+#, kde-format
+msgid "Copyright: %1"
+msgstr ""
+
+#: icc-importer/main.cpp:62
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "ICC Profile Installer"
+msgstr "ប្រភេទ​ទម្រង់ ៖"
+
+#: icc-importer/main.cpp:64
+#, kde-format
+msgid "An application to install ICC profiles"
+msgstr ""
+
+#: icc-importer/main.cpp:66
+#, fuzzy, kde-format
+#| msgid "(C) 2012 Daniel Nicoletti"
+msgid "(C) 2008-2016 Daniel Nicoletti"
+msgstr "រក្សាសិទ្ធិ​ឆ្នាំ ២០១២ ដោយ Daniel Nicoletti"
+
+#: icc-importer/main.cpp:77
+#, kde-format
+msgid "Do not prompt the user if he wants to install"
+msgstr ""
+
+#: icc-importer/main.cpp:78
+#, kde-format
+msgid "Color profile to install"
+msgstr ""
+
+#: icc-importer/main.cpp:93
+#, fuzzy, kde-format
+#| msgid "Test profile: %1"
+msgid "Failed to parse file: %1"
+msgstr "ទម្រង់​សាកល្បង ៖ %1"
+
+#: icc-importer/main.cpp:93
+#, fuzzy, kde-format
+#| msgid "Failed to import color profile"
+msgid "Failed to open ICC profile"
+msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
+
+#: icc-importer/main.cpp:102
+#, kde-format
+msgid "Color profile is already imported"
+msgstr ""
+
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:120
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "ICC Profile Importer"
+msgstr "ប្រភេទ​ទម្រង់ ៖"
+
+#: icc-importer/main.cpp:112
+#, kde-format
+msgid "ICC profile already installed system-wide"
+msgstr ""
+
+#: icc-importer/main.cpp:119
+#, fuzzy, kde-format
+#| msgid "Failed to import color profile"
+msgid "Would you like to import the color profile?"
+msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
+
+#: icc-importer/main.cpp:128
+#, fuzzy, kde-format
+#| msgid "Failed to import color profile"
+msgid "Failed to import color profile: color profile is already imported"
+msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
+
+#: icc-importer/main.cpp:131
+#, fuzzy, kde-format
+#| msgid "Failed to import color profile"
+msgid "Failed to import color profile: could not copy the file"
+msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
+
+#, fuzzy
+#~| msgid "(C) 2012 Daniel Nicoletti"
+#~ msgid "Daniel Nicoletti"
+#~ msgstr "រក្សាសិទ្ធិ​ឆ្នាំ ២០១២ ដោយ Daniel Nicoletti"
+
+#, fuzzy
+#~| msgid "Failed to import color profile"
+#~ msgid "Failed to import color profile: file already exists"
+#~ msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
+
+#~ msgid "X Resize and Rotate extension version %1.%2"
+#~ msgstr "ផ្លាស់ប្ដូរ​ទំហម X ហើយ​បង្វិល​​កំណែ​ផ្នែក​បន្ថែម %1.%2"
