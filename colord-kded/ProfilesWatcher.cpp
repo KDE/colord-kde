@@ -22,8 +22,6 @@
 #include "Edid.h"
 #include "ProfileUtils.h"
 
-#include <KDirWatch>
-
 #include <QDBusObjectPath>
 #include <QDBusReply>
 #include <QDBusUnixFileDescriptor>
