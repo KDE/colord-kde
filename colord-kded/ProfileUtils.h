@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILEUTILS_H
-#define PROFILEUTILS_H
+#pragma once
 
 #include <lcms2.h>
 
@@ -37,5 +36,3 @@ private:
     static cmsBool cmsWriteTagTextAscii(cmsHPROFILE lcms_profile, cmsTagSignature sig, const QString &text);
     static cmsBool cmsDictAddEntryAscii(cmsHANDLE dict, const QString &tkey, const QString &tvalue);
 };
-
-#endif // PROFILEUTILS_H

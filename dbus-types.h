@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef DBUS_TYPES_H
-#define DBUS_TYPES_H
+#pragma once
 
 #include <QMap>
 #include <QMetaType>
@@ -61,5 +60,3 @@ Q_DECLARE_METATYPE(CdGamaList)
 #define CD_DEVICE_METADATA_OUTPUT_PRIORITY_PRIMARY "primary"
 #define CD_DEVICE_METADATA_OUTPUT_PRIORITY_SECONDARY "secondary"
 #define CD_DEVICE_METADATA_OWNER_CMDLINE "OwnerCmdline"
-
-#endif

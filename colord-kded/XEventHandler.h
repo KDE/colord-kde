@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef XEVENTHANDLER_H
-#define XEVENTHANDLER_H
+#pragma once
 
 #include <QAbstractNativeEventFilter>
 #include <QObject>
@@ -42,5 +41,3 @@ protected:
 private:
     int m_randrBase;
 };
-
-#endif // XEVENTHANDLER_H

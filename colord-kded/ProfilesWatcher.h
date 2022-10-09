@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILES_WATCHER_H
-#define PROFILES_WATCHER_H
+#pragma once
 
 #include <KDirWatch>
 
@@ -47,5 +46,3 @@ private:
 
     KDirWatch *m_dirWatch = nullptr;
 };
-
-#endif // PROFILES_WATCHER_H

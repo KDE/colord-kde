@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef OUTPUT_H
-#define OUTPUT_H
+#pragma once
 
 #include "CdDeviceInterface.h"
 #include <QDBusObjectPath>
@@ -73,5 +72,3 @@ private:
     QString m_name;
     RRCrtc m_crtc;
 };
-
-#endif // OUTPUT_H

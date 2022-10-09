@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILEMETADATA_H
-#define PROFILEMETADATA_H
+#pragma once
 
 #include <QStandardItemModel>
 #include <QWidget>
@@ -45,5 +44,3 @@ private:
     Ui::ProfileMetaData *const ui;
     QStandardItemModel *m_model = nullptr;
 };
-
-#endif // PROFILEMETADATA_H

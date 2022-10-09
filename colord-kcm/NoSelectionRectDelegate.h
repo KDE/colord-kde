@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef NOSELECTIONRECTDELEGATEEGATE_H
-#define NOSELECTIONRECTDELEGATEEGATE_H
+#pragma once
 
 #include <QStyledItemDelegate>
 
@@ -29,5 +28,3 @@ public:
     explicit NoSelectionRectDelegate(QObject *parent = nullptr);
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 };
-
-#endif // NOSELECTIONRECTDELEGATEEGATE_H

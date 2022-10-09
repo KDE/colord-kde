@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef COLORD_H
-#define COLORD_H
+#pragma once
 
 #include "Output.h"
 
@@ -85,5 +84,3 @@ private:
     ProfilesWatcher *m_profilesWatcher = nullptr;
     CdInterface *m_cdInterface = nullptr;
 };
-
-#endif // COLORD_H

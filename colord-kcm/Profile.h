@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILE_H
-#define PROFILE_H
+#pragma once
 
 #include <QColor>
 #include <QDateTime>
@@ -91,5 +90,3 @@ private:
     cmsHPROFILE m_lcmsProfile = nullptr;
     QString m_errorMessage;
 };
-
-#endif // PROFILE_H

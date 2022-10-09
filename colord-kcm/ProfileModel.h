@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILE_MODEL_H
-#define PROFILE_MODEL_H
+#pragma once
 
 #include <QDBusObjectPath>
 #include <QDBusPendingCallWatcher>
@@ -66,5 +65,3 @@ private Q_SLOTS:
 private:
     int findItem(const QDBusObjectPath &objectPath);
 };
-
-#endif // PROFILE_MODEL_H

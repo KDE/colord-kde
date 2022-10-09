@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef DEVICE_MODEL_H
-#define DEVICE_MODEL_H
+#pragma once
 
 #include <QStandardItemModel>
 #include <QtDBus/QDBusObjectPath>
@@ -68,5 +67,3 @@ private:
 
     CdInterface *const m_cdInterface;
 };
-
-#endif // DEVICE_MODEL_H

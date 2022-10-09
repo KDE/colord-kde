@@ -18,8 +18,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef COLORD_KCM_H
-#define COLORD_KCM_H
+#pragma once
 
 #include <KCModule>
 #include <KTitleWidget>
@@ -84,5 +83,3 @@ private:
     QAction *m_configureAction = nullptr;
     CdInterface *m_cdInterface = nullptr;
 };
-
-#endif // COLORD_KCM_H

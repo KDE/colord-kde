@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef DESCRIPTION_H
-#define DESCRIPTION_H
+#pragma once
 
 #include <QDBusObjectPath>
 #include <QDBusPendingCallWatcher>
@@ -69,5 +68,3 @@ private:
     ProfileMetaData *m_metadata = nullptr;
     QList<QDBusObjectPath> m_sensors;
 };
-
-#endif // DESCRIPTION_H

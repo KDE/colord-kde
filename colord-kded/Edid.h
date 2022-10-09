@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef EDID_H
-#define EDID_H
+#pragma once
 
 #include <QQuaternion>
 #include <QString>
@@ -69,5 +68,3 @@ private:
 };
 
 Q_DECLARE_METATYPE(Edid)
-
-#endif // EDID_H

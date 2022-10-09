@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef PROFILENAMEDCOLORS_H
-#define PROFILENAMEDCOLORS_H
+#pragma once
 
 #include <QStandardItemModel>
 #include <QWidget>
@@ -42,5 +41,3 @@ private:
     Ui::ProfileNamedColors *const ui;
     QStandardItemModel *m_model = nullptr;
 };
-
-#endif // PROFILENAMEDCOLORS_H

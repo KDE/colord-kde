@@ -16,8 +16,7 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA       *
  *************************************************************************************/
 
-#ifndef XLIBANDXRANDR_H
-#define XLIBANDXRANDR_H
+#pragma once
 
 extern "C" {
 #include <X11/Xatom.h>
@@ -31,5 +30,3 @@ extern "C" {
 }
 
 #include <fixx11h.h>
-
-#endif // XLIBANDXRANDR

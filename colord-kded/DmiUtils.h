@@ -17,8 +17,7 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#ifndef DMIUTILS_H
-#define DMIUTILS_H
+#pragma once
 
 #include <QString>
 
@@ -28,5 +27,3 @@ public:
     static QString deviceModel();
     static QString deviceVendor();
 };
-
-#endif // DMIUTILS_H
