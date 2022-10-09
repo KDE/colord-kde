@@ -35,8 +35,7 @@
 
 QString message(const QString &title, const QString &description, const QString &copyright)
 {
-    QString ret;
-    ret = QLatin1String("<p><strong>") % title % QLatin1String("</strong></p>");
+    QString ret = QLatin1String("<p><strong>") % title % QLatin1String("</strong></p>");
     if (!description.isEmpty()) {
         ret.append(i18n("Description: %1", description));
         if (copyright.isEmpty()) {
