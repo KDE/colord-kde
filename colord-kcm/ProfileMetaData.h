@@ -42,5 +42,5 @@ private:
     QString metadataLabel(const QString &key);
 
     Ui::ProfileMetaData *const ui;
-    QStandardItemModel *m_model = nullptr;
+    QStandardItemModel *const m_model;
 };

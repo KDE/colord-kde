@@ -64,7 +64,7 @@ private:
     QDBusObjectPath m_currentProfile;
     QString m_currentDeviceId;
     QString m_currentDeviceKind;
-    ProfileNamedColors *m_namedColors = nullptr;
-    ProfileMetaData *m_metadata = nullptr;
+    ProfileNamedColors *const m_namedColors;
+    ProfileMetaData *const m_metadata = nullptr;
     QList<QDBusObjectPath> m_sensors;
 };

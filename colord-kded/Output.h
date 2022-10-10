@@ -61,7 +61,7 @@ private:
     quint8 *readEdidData(size_t &len);
 
     RROutput m_output;
-    XRRScreenResources *m_resources;
+    XRRScreenResources *const m_resources;
     QString m_edidHash;
     QString m_id;
     CdDeviceInterface *m_interface = nullptr;

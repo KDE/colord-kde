@@ -39,5 +39,5 @@ public:
 
 private:
     Ui::ProfileNamedColors *const ui;
-    QStandardItemModel *m_model = nullptr;
+    QStandardItemModel *const m_model;
 };
