@@ -4,7 +4,7 @@ include_directories(${CMAKE_SOURCE_DIR}/colord-kded
 
 add_definitions(-DPROJECT_NAME=\"${PROJECT_NAME}\")
 
-kcoreaddons_add_plugin(kded_colord INSTALL_NAMESPACE "kf5/kded")
+kcoreaddons_add_plugin(kded_colord INSTALL_NAMESPACE kf${QT_MAJOR_VERSION}/kded)
 
 target_sources(kded_colord PRIVATE
     DmiUtils.cpp
