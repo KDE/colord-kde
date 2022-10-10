@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-graphics-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-26 00:42+0000\n"
+"POT-Creation-Date: 2022-10-10 00:43+0000\n"
 "PO-Revision-Date: 2022-03-26 11:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -44,7 +44,7 @@ msgstr "Renk ayarları"
 msgid "(C) 2012-2016 Daniel Nicoletti"
 msgstr "(C) 2012-2016 Daniel Nicoletti"
 
-#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:69
+#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:68
 #, kde-format
 msgid "Port to kf5"
 msgstr "Kf5'e port et"
@@ -55,7 +55,7 @@ msgid "From File..."
 msgstr "Dosyadan..."
 
 #: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
-#: icc-importer/main.cpp:128 icc-importer/main.cpp:131
+#: icc-importer/main.cpp:127 icc-importer/main.cpp:130
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "İçeriye Renk Profili Aktar"
@@ -612,78 +612,78 @@ msgstr "Üst veri, programların kullanması için profilde depolanan ek bilgidi
 msgid "Named colors are specific colors defined in the profile"
 msgstr "Adlandırılmış renkler, profilde tanımlanmış özel renklerdir"
 
-#: icc-importer/main.cpp:41
+#: icc-importer/main.cpp:40
 #, kde-format
 msgid "Description: %1"
 msgstr "Açıklama: %1"
 
-#: icc-importer/main.cpp:51
+#: icc-importer/main.cpp:50
 #, kde-format
 msgid "Copyright: %1"
 msgstr "Telif Hakkı: %1"
 
-#: icc-importer/main.cpp:62
+#: icc-importer/main.cpp:61
 #, kde-format
 msgid "ICC Profile Installer"
 msgstr "ICC Profil Yükleyici"
 
-#: icc-importer/main.cpp:64
+#: icc-importer/main.cpp:63
 #, kde-format
 msgid "An application to install ICC profiles"
 msgstr "ICC profillerini kurmak için bir uygulama"
 
-#: icc-importer/main.cpp:66
+#: icc-importer/main.cpp:65
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2008-2016 Daniel Nicoletti"
 
-#: icc-importer/main.cpp:77
+#: icc-importer/main.cpp:76
 #, kde-format
 msgid "Do not prompt the user if he wants to install"
 msgstr "Kullanıcının kurmak isteyip istemediğini sorma"
 
-#: icc-importer/main.cpp:78
+#: icc-importer/main.cpp:77
 #, kde-format
 msgid "Color profile to install"
 msgstr "Kurulacak renk profili"
 
-#: icc-importer/main.cpp:93
+#: icc-importer/main.cpp:92
 #, kde-format
 msgid "Failed to parse file: %1"
 msgstr "Dosya ayıklama başarısız: %1"
 
-#: icc-importer/main.cpp:93
+#: icc-importer/main.cpp:92
 #, kde-format
 msgid "Failed to open ICC profile"
 msgstr "ICC profili açma başarısız"
 
-#: icc-importer/main.cpp:102
+#: icc-importer/main.cpp:101
 #, kde-format
 msgid "Color profile is already imported"
 msgstr "Renk profili zaten içe aktarılmış"
 
-#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
-#: icc-importer/main.cpp:120
+#: icc-importer/main.cpp:102 icc-importer/main.cpp:112
+#: icc-importer/main.cpp:119
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "ICC Profil Aktarıcı"
 
-#: icc-importer/main.cpp:112
+#: icc-importer/main.cpp:111
 #, kde-format
 msgid "ICC profile already installed system-wide"
 msgstr "ICC profili zaten sistem çapında kurulu"
 
-#: icc-importer/main.cpp:119
+#: icc-importer/main.cpp:118
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "Renk profilini içei aktarmak istiyor musunuz?"
 
-#: icc-importer/main.cpp:128
+#: icc-importer/main.cpp:127
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "Renk profili içe aktarılamadı: renk profili zaten aktarılmış"
 
-#: icc-importer/main.cpp:131
+#: icc-importer/main.cpp:130
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "Renk profili içe aktarılamadı: dosya kopyalanamadı"

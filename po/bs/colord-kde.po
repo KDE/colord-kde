@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kde 49i410\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-26 00:42+0000\n"
+"POT-Creation-Date: 2022-10-10 00:43+0000\n"
 "PO-Revision-Date: 2015-02-26 18:19+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: Bosnian\n"
@@ -46,7 +46,7 @@ msgstr "Podešavanja boja"
 msgid "(C) 2012-2016 Daniel Nicoletti"
 msgstr "(C) 2012-2013 Daniel Nicoletti"
 
-#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:69
+#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:68
 #, kde-format
 msgid "Port to kf5"
 msgstr "Prebacivanje na kf5"
@@ -57,7 +57,7 @@ msgid "From File..."
 msgstr "Iz datoteke..."
 
 #: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
-#: icc-importer/main.cpp:128 icc-importer/main.cpp:131
+#: icc-importer/main.cpp:127 icc-importer/main.cpp:130
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "Uvoz Profila za Boju"
@@ -617,79 +617,79 @@ msgstr ""
 msgid "Named colors are specific colors defined in the profile"
 msgstr "Imenovane boje su specifične boje definirane u profilu"
 
-#: icc-importer/main.cpp:41
+#: icc-importer/main.cpp:40
 #, kde-format
 msgid "Description: %1"
 msgstr "Opis: %1"
 
-#: icc-importer/main.cpp:51
+#: icc-importer/main.cpp:50
 #, kde-format
 msgid "Copyright: %1"
 msgstr "Autorsko pravo: %1"
 
-#: icc-importer/main.cpp:62
+#: icc-importer/main.cpp:61
 #, kde-format
 msgid "ICC Profile Installer"
 msgstr "Instaler ICC profila"
 
-#: icc-importer/main.cpp:64
+#: icc-importer/main.cpp:63
 #, kde-format
 msgid "An application to install ICC profiles"
 msgstr "Aplikacija za instaliranje ICC profila"
 
-#: icc-importer/main.cpp:66
+#: icc-importer/main.cpp:65
 #, fuzzy, kde-format
 #| msgid "(C) 2008-2013 Daniel Nicoletti"
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2008-2013 Daniel Nicoletti"
 
-#: icc-importer/main.cpp:77
+#: icc-importer/main.cpp:76
 #, kde-format
 msgid "Do not prompt the user if he wants to install"
 msgstr "Ne dozivati korisnika ukoliko želi da instalira"
 
-#: icc-importer/main.cpp:78
+#: icc-importer/main.cpp:77
 #, kde-format
 msgid "Color profile to install"
 msgstr "Profil za boju koji će se instalirati"
 
-#: icc-importer/main.cpp:93
+#: icc-importer/main.cpp:92
 #, kde-format
 msgid "Failed to parse file: %1"
 msgstr "Nije uspjela analiza datoteke: %1"
 
-#: icc-importer/main.cpp:93
+#: icc-importer/main.cpp:92
 #, kde-format
 msgid "Failed to open ICC profile"
 msgstr "Nije uspjelo otvaranje ICC profila"
 
-#: icc-importer/main.cpp:102
+#: icc-importer/main.cpp:101
 #, kde-format
 msgid "Color profile is already imported"
 msgstr "Boja profila je već uvezena"
 
-#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
-#: icc-importer/main.cpp:120
+#: icc-importer/main.cpp:102 icc-importer/main.cpp:112
+#: icc-importer/main.cpp:119
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "Uvoznik ICC Profila"
 
-#: icc-importer/main.cpp:112
+#: icc-importer/main.cpp:111
 #, kde-format
 msgid "ICC profile already installed system-wide"
 msgstr "ICC profil je već instaliran širom sistema"
 
-#: icc-importer/main.cpp:119
+#: icc-importer/main.cpp:118
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "Da li želite uvesti profil za boju?"
 
-#: icc-importer/main.cpp:128
+#: icc-importer/main.cpp:127
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "Nije uspio uvoz profila za boju: profil za boju je već uvezen"
 
-#: icc-importer/main.cpp:131
+#: icc-importer/main.cpp:130
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "Nije uspio uvoz profila za boju: nije bilo moguće kopirati datoteku"

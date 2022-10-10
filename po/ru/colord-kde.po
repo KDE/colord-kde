@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde 0.4.0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-26 00:42+0000\n"
+"POT-Creation-Date: 2022-10-10 00:43+0000\n"
 "PO-Revision-Date: 2018-09-22 18:37+0300\n"
 "Last-Translator: Alexander Potashev <aspotashev@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -48,7 +48,7 @@ msgstr "Параметры цветопередачи"
 msgid "(C) 2012-2016 Daniel Nicoletti"
 msgstr "© Daniel Nicoletti, 2012–2016"
 
-#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:69
+#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:68
 #, kde-format
 msgid "Port to kf5"
 msgstr "Перенос на KF5"
@@ -59,7 +59,7 @@ msgid "From File..."
 msgstr "Из файла..."
 
 #: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
-#: icc-importer/main.cpp:128 icc-importer/main.cpp:131
+#: icc-importer/main.cpp:127 icc-importer/main.cpp:130
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "Импорт цветового профиля"
@@ -618,78 +618,78 @@ msgstr "Метаданные — дополнительная информаци
 msgid "Named colors are specific colors defined in the profile"
 msgstr "Именованные цвета — список определений цветов в профиле"
 
-#: icc-importer/main.cpp:41
+#: icc-importer/main.cpp:40
 #, kde-format
 msgid "Description: %1"
 msgstr "Описание: %1"
 
-#: icc-importer/main.cpp:51
+#: icc-importer/main.cpp:50
 #, kde-format
 msgid "Copyright: %1"
 msgstr "Авторские права: %1"
 
-#: icc-importer/main.cpp:62
+#: icc-importer/main.cpp:61
 #, kde-format
 msgid "ICC Profile Installer"
 msgstr "Установщик профилей ICC"
 
-#: icc-importer/main.cpp:64
+#: icc-importer/main.cpp:63
 #, kde-format
 msgid "An application to install ICC profiles"
 msgstr "Программа для установки профилей ICC"
 
-#: icc-importer/main.cpp:66
+#: icc-importer/main.cpp:65
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "© Daniel Nicoletti, 2008–2016"
 
-#: icc-importer/main.cpp:77
+#: icc-importer/main.cpp:76
 #, kde-format
 msgid "Do not prompt the user if he wants to install"
 msgstr "Не запрашивать подтверждение пользователя на установку."
 
-#: icc-importer/main.cpp:78
+#: icc-importer/main.cpp:77
 #, kde-format
 msgid "Color profile to install"
 msgstr "Устанавливаемый цветовой профиль."
 
-#: icc-importer/main.cpp:93
+#: icc-importer/main.cpp:92
 #, kde-format
 msgid "Failed to parse file: %1"
 msgstr "Не удалось выполнить разбор файла: %1"
 
-#: icc-importer/main.cpp:93
+#: icc-importer/main.cpp:92
 #, kde-format
 msgid "Failed to open ICC profile"
 msgstr "Не удалось открыть профиль ICC"
 
-#: icc-importer/main.cpp:102
+#: icc-importer/main.cpp:101
 #, kde-format
 msgid "Color profile is already imported"
 msgstr "Цветовой профиль уже импортирован"
 
-#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
-#: icc-importer/main.cpp:120
+#: icc-importer/main.cpp:102 icc-importer/main.cpp:112
+#: icc-importer/main.cpp:119
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "Программа импорта профилей ICC"
 
-#: icc-importer/main.cpp:112
+#: icc-importer/main.cpp:111
 #, kde-format
 msgid "ICC profile already installed system-wide"
 msgstr "Профиль ICC уже установлен для всех пользователей"
 
-#: icc-importer/main.cpp:119
+#: icc-importer/main.cpp:118
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "Импортировать этот цветовой профиль?"
 
-#: icc-importer/main.cpp:128
+#: icc-importer/main.cpp:127
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "Не удалось импортировать цветовой профиль: он уже добавлен"
 
-#: icc-importer/main.cpp:131
+#: icc-importer/main.cpp:130
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr ""

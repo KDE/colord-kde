@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-26 00:42+0000\n"
+"POT-Creation-Date: 2022-10-10 00:43+0000\n"
 "PO-Revision-Date: 2022-09-06 16:11+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -43,7 +43,7 @@ msgstr "ფერის მორგება"
 msgid "(C) 2012-2016 Daniel Nicoletti"
 msgstr "(C) 2012-2016 დენიელ ნიკოლეტი"
 
-#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:69
+#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:68
 #, kde-format
 msgid "Port to kf5"
 msgstr "KF5-ზე პორტი"
@@ -54,7 +54,7 @@ msgid "From File..."
 msgstr "ფაილიდან..."
 
 #: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
-#: icc-importer/main.cpp:128 icc-importer/main.cpp:131
+#: icc-importer/main.cpp:127 icc-importer/main.cpp:130
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "ფერის პროფილების შემოტანა"
@@ -614,78 +614,78 @@ msgstr ""
 msgid "Named colors are specific colors defined in the profile"
 msgstr "სახელიანი ფერები პროფილში აღწერილი ფერებია"
 
-#: icc-importer/main.cpp:41
+#: icc-importer/main.cpp:40
 #, kde-format
 msgid "Description: %1"
 msgstr "აღწერა: %1"
 
-#: icc-importer/main.cpp:51
+#: icc-importer/main.cpp:50
 #, kde-format
 msgid "Copyright: %1"
 msgstr "საავტორო უფლებები: %1"
 
-#: icc-importer/main.cpp:62
+#: icc-importer/main.cpp:61
 #, kde-format
 msgid "ICC Profile Installer"
 msgstr "ICC პროფილების დაყენება"
 
-#: icc-importer/main.cpp:64
+#: icc-importer/main.cpp:63
 #, kde-format
 msgid "An application to install ICC profiles"
 msgstr "ICC პროფილების დაყენება აპლიკაციისთვის"
 
-#: icc-importer/main.cpp:66
+#: icc-importer/main.cpp:65
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2008-2016 დენიელ ნიკოლეტი"
 
-#: icc-importer/main.cpp:77
+#: icc-importer/main.cpp:76
 #, kde-format
 msgid "Do not prompt the user if he wants to install"
 msgstr "არ ჰკითხო მომხმარებელს, სურს თუ არა დაყენება"
 
-#: icc-importer/main.cpp:78
+#: icc-importer/main.cpp:77
 #, kde-format
 msgid "Color profile to install"
 msgstr "დასაყენებელი ფერის პროფილი"
 
-#: icc-importer/main.cpp:93
+#: icc-importer/main.cpp:92
 #, kde-format
 msgid "Failed to parse file: %1"
 msgstr "ფაილის დამუშავების შეცდომა: %1"
 
-#: icc-importer/main.cpp:93
+#: icc-importer/main.cpp:92
 #, kde-format
 msgid "Failed to open ICC profile"
 msgstr "ICC პროფილის გახსნის შეცდომა"
 
-#: icc-importer/main.cpp:102
+#: icc-importer/main.cpp:101
 #, kde-format
 msgid "Color profile is already imported"
 msgstr "ფერის პროფილი უკვე შემოტანილია"
 
-#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
-#: icc-importer/main.cpp:120
+#: icc-importer/main.cpp:102 icc-importer/main.cpp:112
+#: icc-importer/main.cpp:119
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "ICC პროფილის შემომტან"
 
-#: icc-importer/main.cpp:112
+#: icc-importer/main.cpp:111
 #, kde-format
 msgid "ICC profile already installed system-wide"
 msgstr "ICC პროფილი უკვე მთელ სისტემაშია დაყენებული"
 
-#: icc-importer/main.cpp:119
+#: icc-importer/main.cpp:118
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "გნებავთ ფერის პროფილის შემოტანა?"
 
-#: icc-importer/main.cpp:128
+#: icc-importer/main.cpp:127
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "ფერის პროფილის შემოტანის შეცდომა: ფერის პროფილი უკვე შემოტანილია"
 
-#: icc-importer/main.cpp:131
+#: icc-importer/main.cpp:130
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "ფერის პროფილის შემოტანის შეცდომა: ფაილის კოპირების შეცდომა"
