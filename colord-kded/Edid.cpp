@@ -195,7 +195,7 @@ bool Edid::parse(const quint8 *data, size_t length)
 
     // load the PNP_IDS file and load the vendor name
     if (!m_pnpId.isEmpty()) {
-        QFile pnpIds(PNP_IDS);
+        QFile pnpIds(QLatin1String(PNP_IDS));
         if (pnpIds.open(QIODevice::ReadOnly)) {
             while (!pnpIds.atEnd()) {
                 QString line = pnpIds.readLine();

@@ -96,7 +96,7 @@ void ProfilesWatcher::addProfile(const QString &filePath)
     QMimeDatabase db;
     const QMimeType mimeType = db.mimeTypeForFile(filePath);
 
-    if (!mimeType.inherits(QLatin1String("application/vnd.iccprofile"))) {
+    if (!mimeType.inherits(QStringLiteral("application/vnd.iccprofile"))) {
         // not a profile file
         qCWarning(COLORD) << filePath << "is not an ICC profile";
         return;

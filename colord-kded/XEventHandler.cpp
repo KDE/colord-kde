@@ -36,6 +36,7 @@ bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message
 bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message, qintptr *result)
 #endif
 {
+    Q_UNUSED(result);
     if (eventType != "xcb_generic_event_t") {
         // only interested in XCB  events
         return false;

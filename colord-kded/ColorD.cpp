@@ -252,7 +252,7 @@ void ColorD::addOutput(const Output::Ptr &output)
             qCDebug(COLORD) << "Found colord device" << reply.value().path();
 
             bool found = false;
-            for (auto iter : m_connectedOutputs) {
+            for (auto iter : qAsConst(m_connectedOutputs)) {
                 if (iter->id() == deviceId) {
                     found = true;
 
@@ -386,7 +386,7 @@ QList<ColorD::X11Monitor> ColorD::getAtomIds() const
     } sortMonitorList;
     std::sort(monitorList.begin(), monitorList.end(), sortMonitorList);
     atomId = 0;
-    for (auto monitor : monitorList) {
+    for (auto monitor : qAsConst(monitorList)) {
         monitor.atomId = atomId++;
     }
 
@@ -489,16 +489,16 @@ void ColorD::outputChanged(const Output::Ptr &output)
     // during startup the order of outputs can change, so caching the atomId doesn't work that great
     int atomId = -1;
     const QList<ColorD::X11Monitor> monitorList = getAtomIds();
-    for (auto monitor : monitorList) {
+    for (const auto &monitor : monitorList) {
         if (monitor.crtc == output->crtc()) {
             atomId = monitor.atomId;
             break;
         }
     }
     if (atomId >= 0) {
-        QString atomString = QLatin1String("_ICC_PROFILE");
+        QString atomString = QStringLiteral("_ICC_PROFILE");
         if (atomId > 0) {
-            atomString.append(QString("_%1").arg(atomId));
+            atomString.append(QStringLiteral("_%1").arg(atomId));
         }
         qCInfo(COLORD) << "Setting X atom (id:" << atomId << ")" << atomString << "on output:" << output->name();
         QByteArray atomBytes = atomString.toLatin1();

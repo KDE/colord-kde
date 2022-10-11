@@ -204,7 +204,7 @@ void ColordKCM::addProfileFile()
         return;
     }
 
-    const QString fileName = dlg.selectedFiles().first();
+    const QString fileName = dlg.selectedFiles().constFirst();
 
     // Store the device kind and device object path
     // so that we assign the profile to the device when
@@ -368,7 +368,7 @@ void ColordKCM::addProvileToDevice(const QDBusObjectPath &profile, const QDBusOb
 {
     CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"), devicePath.path(), QDBusConnection::systemBus());
     if (device.isValid()) {
-        device.AddProfile(QLatin1String("hard"), profile);
+        device.AddProfile(QStringLiteral("hard"), profile);
     }
 }
 

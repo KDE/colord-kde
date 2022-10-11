@@ -155,7 +155,7 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     cmsSetDeviceClass(lcms_profile, cmsSigDisplayClass);
 
     // copyright
-    ret = cmsWriteTagTextAscii(lcms_profile, cmsSigCopyrightTag, "No copyright");
+    ret = cmsWriteTagTextAscii(lcms_profile, cmsSigCopyrightTag, QStringLiteral("No copyright"));
     if (!ret) {
         qCWarning(COLORD) << "Failed to write copyright";
         if (*transfer_curve != nullptr)
@@ -224,21 +224,21 @@ bool ProfileUtils::createIccProfile(bool isLaptop, const Edid &edid, const QStri
     cmsDictAddEntryAscii(dict, CD_PROFILE_METADATA_DATA_SOURCE, CD_PROFILE_METADATA_DATA_SOURCE_EDID);
 
     // set 'ICC meta Tag for Monitor Profiles' data
-    cmsDictAddEntryAscii(dict, "EDID_md5", edid.hash());
+    cmsDictAddEntryAscii(dict, QStringLiteral("EDID_md5"), edid.hash());
 
     if (!model.isEmpty())
-        cmsDictAddEntryAscii(dict, "EDID_model", model);
+        cmsDictAddEntryAscii(dict, QStringLiteral("EDID_model"), model);
 
     if (!edid.serial().isEmpty()) {
-        cmsDictAddEntryAscii(dict, "EDID_serial", edid.serial());
+        cmsDictAddEntryAscii(dict, QStringLiteral("EDID_serial"), edid.serial());
     }
 
     if (!edid.pnpId().isEmpty()) {
-        cmsDictAddEntryAscii(dict, "EDID_mnft", edid.pnpId());
+        cmsDictAddEntryAscii(dict, QStringLiteral("EDID_mnft"), edid.pnpId());
     }
 
     if (!vendor.isEmpty()) {
-        cmsDictAddEntryAscii(dict, "EDID_manufacturer", vendor);
+        cmsDictAddEntryAscii(dict, QStringLiteral("EDID_manufacturer"), vendor);
     }
 
     /* write new tag */
