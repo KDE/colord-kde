@@ -430,4 +430,3 @@ QString ColordKCM::profilesPath() const
 }
 
 #include "ColordKCM.moc"
-#include <kwidgetsaddons_version.h>
