@@ -31,6 +31,7 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
+#include <kwidgetsaddons_version.h>
 #include <version.h>
 
 QString message(const QString &title, const QString &description, const QString &copyright)
@@ -114,10 +115,21 @@ int main(int argc, char **argv)
     }
 
     if (!parser.isSet(QStringLiteral("yes"))) {
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        const int ret =
+            KMessageBox::questionTwoActions(nullptr,
+#else
         const int ret = KMessageBox::questionYesNo(nullptr,
-                                                   message(i18n("Would you like to import the color profile?"), profile.description(), profile.copyright()),
-                                                   i18n("ICC Profile Importer"));
+#endif
+                                            message(i18n("Would you like to import the color profile?"), profile.description(), profile.copyright()),
+                                            i18n("ICC Profile Importer"),
+                                            KGuiItem(i18n("import")),
+                                            KStandardGuiItem::cancel());
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+        if (ret == KMessageBox::ButtonCode::SecondaryAction) {
+#else
         if (ret == KMessageBox::No) {
+#endif
             return 2;
         }
     }

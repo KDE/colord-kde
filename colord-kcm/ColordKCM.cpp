@@ -32,6 +32,7 @@
 #include <KAboutData>
 #include <KMessageBox>
 #include <KPluginFactory>
+#include <kwidgetsaddons_version.h>
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -254,8 +255,20 @@ void ColordKCM::removeProfile()
         return;
     }
 
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    int ret = KMessageBox::questionTwoActions(this,
+                                              i18n("Are you sure you want to remove this profile?"),
+                                              i18n("Remove Profile"),
+                                              KStandardGuiItem::remove(),
+                                              KStandardGuiItem::cancel());
+#else
     int ret = KMessageBox::questionYesNo(this, i18n("Are you sure you want to remove this profile?"), i18n("Remove Profile"));
+#endif
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    if (ret == KMessageBox::ButtonCode::SecondaryAction) {
+#else
     if (ret == KMessageBox::No) {
+#endif
         return;
     }
 
@@ -417,3 +430,4 @@ QString ColordKCM::profilesPath() const
 }
 
 #include "ColordKCM.moc"
+#include <kwidgetsaddons_version.h>
