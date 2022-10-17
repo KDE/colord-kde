@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-10 00:43+0000\n"
+"POT-Creation-Date: 2022-10-17 00:43+0000\n"
 "PO-Revision-Date: 2020-01-13 11:37+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -29,69 +29,70 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "smart2128vr@gmail.com,"
 
-#: colord-kcm/ColordKCM.cpp:53
+#: colord-kcm/ColordKCM.cpp:54
 #, kde-format
 msgid "Available Profiles"
 msgstr "Profili disponibili"
 
-#: colord-kcm/ColordKCM.cpp:56 colord-kcm/ColordKCM.cpp:58
+#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
 #, kde-format
 msgid "Color settings"
 msgstr "Impostazioni del colore"
 
-#: colord-kcm/ColordKCM.cpp:60
+#: colord-kcm/ColordKCM.cpp:61
 #, kde-format
 msgid "(C) 2012-2016 Daniel Nicoletti"
 msgstr "© 2012-2016 Daniel Nicoletti"
 
-#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:68
+#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
 #, kde-format
 msgid "Port to kf5"
 msgstr "Adattamento a KF5"
 
-#: colord-kcm/ColordKCM.cpp:69
+#: colord-kcm/ColordKCM.cpp:70
 #, kde-format
 msgid "From File..."
 msgstr "Da file..."
 
-#: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
-#: icc-importer/main.cpp:127 icc-importer/main.cpp:130
+#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "Importazione di profilo di colore"
 
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:257 colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "Rimuovi profilo"
-
-#: colord-kcm/ColordKCM.cpp:257
+#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
 #, kde-format
 msgid "Are you sure you want to remove this profile?"
 msgstr "Sei sicuro di voler rimuovere questo profilo?"
 
-#: colord-kcm/ColordKCM.cpp:359
+#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
+#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
+#: colord-kcm/ColordKCM.ui:33
+#, kde-format
+msgid "Remove Profile"
+msgstr "Rimuovi profilo"
+
+#: colord-kcm/ColordKCM.cpp:372
 #, kde-format
 msgid "Your profile did not match the device kind"
 msgstr "Il tuo profilo non corrisponde al tipo di dispositivo"
 
-#: colord-kcm/ColordKCM.cpp:392
+#: colord-kcm/ColordKCM.cpp:405
 #, kde-format
 msgid "You do not have any devices registered"
 msgstr "Non hai alcun dispositivo configurato"
 
-#: colord-kcm/ColordKCM.cpp:393
+#: colord-kcm/ColordKCM.cpp:406
 #, kde-format
 msgid "Make sure colord module on kded is running"
 msgstr "Assicurati che il modulo colord in kded sia attivo"
 
-#: colord-kcm/ColordKCM.cpp:396
+#: colord-kcm/ColordKCM.cpp:409
 #, kde-format
 msgid "You do not have any profiles registered"
 msgstr "Non hai alcun profilo configurato"
 
-#: colord-kcm/ColordKCM.cpp:397
+#: colord-kcm/ColordKCM.cpp:410
 #, kde-format
 msgid "Add one by clicking Add Profile button"
 msgstr "Aggiungine uno premendo il pulsante Aggiungi profilo"
@@ -615,80 +616,85 @@ msgstr ""
 msgid "Named colors are specific colors defined in the profile"
 msgstr "I colori con nome sono colori specifici definiti nel profilo"
 
-#: icc-importer/main.cpp:40
+#: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
 msgstr "Descrizione : %1"
 
-#: icc-importer/main.cpp:50
+#: icc-importer/main.cpp:51
 #, kde-format
 msgid "Copyright: %1"
 msgstr "Diritto d'autore : %1"
 
-#: icc-importer/main.cpp:61
+#: icc-importer/main.cpp:62
 #, kde-format
 msgid "ICC Profile Installer"
 msgstr "Installatore Profilo ICC"
 
-#: icc-importer/main.cpp:63
+#: icc-importer/main.cpp:64
 #, kde-format
 msgid "An application to install ICC profiles"
 msgstr "Una applicazione per installare profili ICC."
 
-#: icc-importer/main.cpp:65
+#: icc-importer/main.cpp:66
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "© 2008-2016 Daniel Nicoletti"
 
-#: icc-importer/main.cpp:76
+#: icc-importer/main.cpp:77
 #, kde-format
 msgid "Do not prompt the user if he wants to install"
 msgstr "Non richiedere all'utente se vuole installare."
 
-#: icc-importer/main.cpp:77
+#: icc-importer/main.cpp:78
 #, kde-format
 msgid "Color profile to install"
 msgstr "Profilo di colore da installare."
 
-#: icc-importer/main.cpp:92
+#: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to parse file: %1"
 msgstr "Impossibile analizzare il file : %1"
 
-#: icc-importer/main.cpp:92
+#: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to open ICC profile"
 msgstr "Impossibile importare il profilo di colore"
 
-#: icc-importer/main.cpp:101
+#: icc-importer/main.cpp:102
 #, kde-format
 msgid "Color profile is already imported"
 msgstr "Il profilo di colore è già importato."
 
-#: icc-importer/main.cpp:102 icc-importer/main.cpp:112
-#: icc-importer/main.cpp:119
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:125
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "Importatore Profilo ICC"
 
-#: icc-importer/main.cpp:111
+#: icc-importer/main.cpp:112
 #, kde-format
 msgid "ICC profile already installed system-wide"
 msgstr "Profilo ICC già installato a livello di sistema."
 
-#: icc-importer/main.cpp:118
+#: icc-importer/main.cpp:124
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "Vuoi importare il profilo di colore ?"
 
-#: icc-importer/main.cpp:127
+#: icc-importer/main.cpp:126
+#, kde-format
+msgid "import"
+msgstr ""
+
+#: icc-importer/main.cpp:139
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr ""
 "Impossibile importare il profilo di colore : il profilo di colore è già "
 "importato"
 
-#: icc-importer/main.cpp:130
+#: icc-importer/main.cpp:142
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "Impossibile importare profilo di colore : impossibile copiare il file."

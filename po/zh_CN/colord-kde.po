@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-10 00:43+0000\n"
+"POT-Creation-Date: 2022-10-17 00:43+0000\n"
 "PO-Revision-Date: 2022-10-02 15:49\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -27,69 +27,70 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "i@guoyunhe.me, tysontan@tysontan.com"
 
-#: colord-kcm/ColordKCM.cpp:53
+#: colord-kcm/ColordKCM.cpp:54
 #, kde-format
 msgid "Available Profiles"
 msgstr "可用的色彩特性文件"
 
-#: colord-kcm/ColordKCM.cpp:56 colord-kcm/ColordKCM.cpp:58
+#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
 #, kde-format
 msgid "Color settings"
 msgstr "色彩管理设置"
 
-#: colord-kcm/ColordKCM.cpp:60
+#: colord-kcm/ColordKCM.cpp:61
 #, kde-format
 msgid "(C) 2012-2016 Daniel Nicoletti"
 msgstr "(C) 2012-2016 Daniel Nicoletti"
 
-#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:68
+#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
 #, kde-format
 msgid "Port to kf5"
 msgstr "移植到 KF5"
 
-#: colord-kcm/ColordKCM.cpp:69
+#: colord-kcm/ColordKCM.cpp:70
 #, kde-format
 msgid "From File..."
 msgstr "来自文件..."
 
-#: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
-#: icc-importer/main.cpp:127 icc-importer/main.cpp:130
+#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "导入色彩特性文件"
 
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:257 colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "移除特性文件"
-
-#: colord-kcm/ColordKCM.cpp:257
+#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
 #, kde-format
 msgid "Are you sure you want to remove this profile?"
 msgstr "您确定要移除此色彩特性文件吗？"
 
-#: colord-kcm/ColordKCM.cpp:359
+#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
+#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
+#: colord-kcm/ColordKCM.ui:33
+#, kde-format
+msgid "Remove Profile"
+msgstr "移除特性文件"
+
+#: colord-kcm/ColordKCM.cpp:372
 #, kde-format
 msgid "Your profile did not match the device kind"
 msgstr "您的色彩特性文件与设备类型不匹配"
 
-#: colord-kcm/ColordKCM.cpp:392
+#: colord-kcm/ColordKCM.cpp:405
 #, kde-format
 msgid "You do not have any devices registered"
 msgstr "您没有注册过任何设备"
 
-#: colord-kcm/ColordKCM.cpp:393
+#: colord-kcm/ColordKCM.cpp:406
 #, kde-format
 msgid "Make sure colord module on kded is running"
 msgstr "请确保 kded 的 colord 模块正在运行"
 
-#: colord-kcm/ColordKCM.cpp:396
+#: colord-kcm/ColordKCM.cpp:409
 #, kde-format
 msgid "You do not have any profiles registered"
 msgstr "您没有注册过任何色彩特性文件"
 
-#: colord-kcm/ColordKCM.cpp:397
+#: colord-kcm/ColordKCM.cpp:410
 #, kde-format
 msgid "Add one by clicking Add Profile button"
 msgstr "点击“添加色彩特性文件”按钮添加"
@@ -608,78 +609,83 @@ msgstr "元数据是色彩特性文件中储存的附加信息，供程序使用
 msgid "Named colors are specific colors defined in the profile"
 msgstr "具名颜色是色彩特性文件定义的特定颜色"
 
-#: icc-importer/main.cpp:40
+#: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
 msgstr "描述: %1"
 
-#: icc-importer/main.cpp:50
+#: icc-importer/main.cpp:51
 #, kde-format
 msgid "Copyright: %1"
 msgstr "版权: %1"
 
-#: icc-importer/main.cpp:61
+#: icc-importer/main.cpp:62
 #, kde-format
 msgid "ICC Profile Installer"
 msgstr "ICC 特性文件安装程序"
 
-#: icc-importer/main.cpp:63
+#: icc-importer/main.cpp:64
 #, kde-format
 msgid "An application to install ICC profiles"
 msgstr "用于安装 ICC 特性文件的应用程序"
 
-#: icc-importer/main.cpp:65
+#: icc-importer/main.cpp:66
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2008-2016 Daniel Nicoletti"
 
-#: icc-importer/main.cpp:76
+#: icc-importer/main.cpp:77
 #, kde-format
 msgid "Do not prompt the user if he wants to install"
 msgstr "不要询问用户是否确定安装色彩特性文件"
 
-#: icc-importer/main.cpp:77
+#: icc-importer/main.cpp:78
 #, kde-format
 msgid "Color profile to install"
 msgstr "要安装的色彩特性文件"
 
-#: icc-importer/main.cpp:92
+#: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to parse file: %1"
 msgstr "无法解析文件: %1"
 
-#: icc-importer/main.cpp:92
+#: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to open ICC profile"
 msgstr "无法打开 ICC 特性文件"
 
-#: icc-importer/main.cpp:101
+#: icc-importer/main.cpp:102
 #, kde-format
 msgid "Color profile is already imported"
 msgstr "色彩特性文件已经导入"
 
-#: icc-importer/main.cpp:102 icc-importer/main.cpp:112
-#: icc-importer/main.cpp:119
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:125
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "ICC 特性文件导入程序"
 
-#: icc-importer/main.cpp:111
+#: icc-importer/main.cpp:112
 #, kde-format
 msgid "ICC profile already installed system-wide"
 msgstr "ICC 特性文件已经安装到系统全局"
 
-#: icc-importer/main.cpp:118
+#: icc-importer/main.cpp:124
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "您确定要导入此色彩特性文件吗？"
 
-#: icc-importer/main.cpp:127
+#: icc-importer/main.cpp:126
+#, kde-format
+msgid "import"
+msgstr ""
+
+#: icc-importer/main.cpp:139
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "无法导入色彩特性文件: 该特性文件已经导入"
 
-#: icc-importer/main.cpp:130
+#: icc-importer/main.cpp:142
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "无法导入色彩特性文件: 无法复制该文件"

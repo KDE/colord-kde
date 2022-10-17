@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-10 00:43+0000\n"
+"POT-Creation-Date: 2022-10-17 00:43+0000\n"
 "PO-Revision-Date: 2012-06-21 15:18+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer\n"
@@ -30,72 +30,73 @@ msgstr ""
 "khoemsokhem@khmeros.info,​​mornmet@khmeros.info,sutha@khmeros.info,"
 "ratanak@khmeros.info,sophea@khmeros.info"
 
-#: colord-kcm/ColordKCM.cpp:53
+#: colord-kcm/ColordKCM.cpp:54
 #, kde-format
 msgid "Available Profiles"
 msgstr "ទម្រង់​ដែល​អាច​ប្រើ​បាន"
 
-#: colord-kcm/ColordKCM.cpp:56 colord-kcm/ColordKCM.cpp:58
+#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
 #, kde-format
 msgid "Color settings"
 msgstr "ការ​កំណត់​ពណ៌"
 
-#: colord-kcm/ColordKCM.cpp:60
+#: colord-kcm/ColordKCM.cpp:61
 #, fuzzy, kde-format
 #| msgid "(C) 2012 Daniel Nicoletti"
 msgid "(C) 2012-2016 Daniel Nicoletti"
 msgstr "រក្សាសិទ្ធិ​ឆ្នាំ ២០១២ ដោយ Daniel Nicoletti"
 
-#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:68
+#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
 #, kde-format
 msgid "Port to kf5"
 msgstr ""
 
-#: colord-kcm/ColordKCM.cpp:69
+#: colord-kcm/ColordKCM.cpp:70
 #, kde-format
 msgid "From File..."
 msgstr "ពី​ឯកសារ..."
 
-#: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
-#: icc-importer/main.cpp:127 icc-importer/main.cpp:130
+#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "នាំចូល​ទម្រង់​ពណ៌"
 
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:257 colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "យក​ទម្រង់​ចេញ"
-
-#: colord-kcm/ColordKCM.cpp:257
+#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
 #, kde-format
 msgid "Are you sure you want to remove this profile?"
 msgstr "តើ​អ្នក​ប្រាកដ​ជា​ចង់​យក​ទម្រង់​នេះ​ចេញ​ឬ ?"
 
-#: colord-kcm/ColordKCM.cpp:359
+#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
+#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
+#: colord-kcm/ColordKCM.ui:33
+#, kde-format
+msgid "Remove Profile"
+msgstr "យក​ទម្រង់​ចេញ"
+
+#: colord-kcm/ColordKCM.cpp:372
 #, kde-format
 msgid "Your profile did not match the device kind"
 msgstr "ទម្រង់​របស់​អ្នកមិន​ត្រូវ​នឹង​ប្រភេទ​ឧបករណ៍​ទេ"
 
-#: colord-kcm/ColordKCM.cpp:392
+#: colord-kcm/ColordKCM.cpp:405
 #, fuzzy, kde-format
 #| msgid "You don't have any devices registered"
 msgid "You do not have any devices registered"
 msgstr "អ្នក​មិនមាន​ឧបករណ៍​​បាន​ចុះ​ឈ្មោះ​ទេ"
 
-#: colord-kcm/ColordKCM.cpp:393
+#: colord-kcm/ColordKCM.cpp:406
 #, kde-format
 msgid "Make sure colord module on kded is running"
 msgstr "សម​ប្រាកដ​ថា ម៉ូឌុល colord នៅ​លើ kded កំពុង​ដំណើរការ"
 
-#: colord-kcm/ColordKCM.cpp:396
+#: colord-kcm/ColordKCM.cpp:409
 #, fuzzy, kde-format
 #| msgid "You don't have any profiles registered"
 msgid "You do not have any profiles registered"
 msgstr "អ្នក​មិនមាន​ទម្រង់​ណាមួយ​បាន​ចុះឈ្មោះ​ទេ"
 
-#: colord-kcm/ColordKCM.cpp:397
+#: colord-kcm/ColordKCM.cpp:410
 #, kde-format
 msgid "Add one by clicking Add Profile button"
 msgstr "បន្ថែម​ទម្រង់​មួយ ដោយ​ចុច​ប៊ូតុង បន្ថែម​ទម្រង់"
@@ -645,85 +646,90 @@ msgstr "ទិន្នន័យ​មេតា​ គឺ​ជា​ព័ត�
 msgid "Named colors are specific colors defined in the profile"
 msgstr "ពណ៌​ដែល​មាន​ឈ្មោះ​ គឺ​ជា​ពណ៌​ជាក់លាក់​ដែល​បានកំណត់​ក្នុង​ទម្រង់"
 
-#: icc-importer/main.cpp:40
+#: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
 msgstr ""
 
-#: icc-importer/main.cpp:50
+#: icc-importer/main.cpp:51
 #, kde-format
 msgid "Copyright: %1"
 msgstr ""
 
-#: icc-importer/main.cpp:61
+#: icc-importer/main.cpp:62
 #, fuzzy, kde-format
 #| msgid "Profile type:"
 msgid "ICC Profile Installer"
 msgstr "ប្រភេទ​ទម្រង់ ៖"
 
-#: icc-importer/main.cpp:63
+#: icc-importer/main.cpp:64
 #, kde-format
 msgid "An application to install ICC profiles"
 msgstr ""
 
-#: icc-importer/main.cpp:65
+#: icc-importer/main.cpp:66
 #, fuzzy, kde-format
 #| msgid "(C) 2012 Daniel Nicoletti"
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "រក្សាសិទ្ធិ​ឆ្នាំ ២០១២ ដោយ Daniel Nicoletti"
 
-#: icc-importer/main.cpp:76
+#: icc-importer/main.cpp:77
 #, kde-format
 msgid "Do not prompt the user if he wants to install"
 msgstr ""
 
-#: icc-importer/main.cpp:77
+#: icc-importer/main.cpp:78
 #, kde-format
 msgid "Color profile to install"
 msgstr ""
 
-#: icc-importer/main.cpp:92
+#: icc-importer/main.cpp:93
 #, fuzzy, kde-format
 #| msgid "Test profile: %1"
 msgid "Failed to parse file: %1"
 msgstr "ទម្រង់​សាកល្បង ៖ %1"
 
-#: icc-importer/main.cpp:92
+#: icc-importer/main.cpp:93
 #, fuzzy, kde-format
 #| msgid "Failed to import color profile"
 msgid "Failed to open ICC profile"
 msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
 
-#: icc-importer/main.cpp:101
+#: icc-importer/main.cpp:102
 #, kde-format
 msgid "Color profile is already imported"
 msgstr ""
 
-#: icc-importer/main.cpp:102 icc-importer/main.cpp:112
-#: icc-importer/main.cpp:119
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:125
 #, fuzzy, kde-format
 #| msgid "Profile type:"
 msgid "ICC Profile Importer"
 msgstr "ប្រភេទ​ទម្រង់ ៖"
 
-#: icc-importer/main.cpp:111
+#: icc-importer/main.cpp:112
 #, kde-format
 msgid "ICC profile already installed system-wide"
 msgstr ""
 
-#: icc-importer/main.cpp:118
+#: icc-importer/main.cpp:124
 #, fuzzy, kde-format
 #| msgid "Failed to import color profile"
 msgid "Would you like to import the color profile?"
 msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
 
-#: icc-importer/main.cpp:127
+#: icc-importer/main.cpp:126
+#, kde-format
+msgid "import"
+msgstr ""
+
+#: icc-importer/main.cpp:139
 #, fuzzy, kde-format
 #| msgid "Failed to import color profile"
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
 
-#: icc-importer/main.cpp:130
+#: icc-importer/main.cpp:142
 #, fuzzy, kde-format
 #| msgid "Failed to import color profile"
 msgid "Failed to import color profile: could not copy the file"

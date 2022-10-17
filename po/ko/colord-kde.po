@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-10 00:43+0000\n"
+"POT-Creation-Date: 2022-10-17 00:43+0000\n"
 "PO-Revision-Date: 2022-05-07 02:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -27,69 +27,70 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde@peremen.name"
 
-#: colord-kcm/ColordKCM.cpp:53
+#: colord-kcm/ColordKCM.cpp:54
 #, kde-format
 msgid "Available Profiles"
 msgstr "사용 가능한 프로필"
 
-#: colord-kcm/ColordKCM.cpp:56 colord-kcm/ColordKCM.cpp:58
+#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
 #, kde-format
 msgid "Color settings"
 msgstr "색 설정"
 
-#: colord-kcm/ColordKCM.cpp:60
+#: colord-kcm/ColordKCM.cpp:61
 #, kde-format
 msgid "(C) 2012-2016 Daniel Nicoletti"
 msgstr "(C) 2012-2016 Daniel Nicoletti"
 
-#: colord-kcm/ColordKCM.cpp:61 icc-importer/main.cpp:68
+#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
 #, kde-format
 msgid "Port to kf5"
 msgstr "KF5 이식"
 
-#: colord-kcm/ColordKCM.cpp:69
+#: colord-kcm/ColordKCM.cpp:70
 #, kde-format
 msgid "From File..."
 msgstr "파일에서..."
 
-#: colord-kcm/ColordKCM.cpp:201 colord-kcm/ColordKCM.cpp:359
-#: icc-importer/main.cpp:127 icc-importer/main.cpp:130
+#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "색 프로필 가져오기"
 
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:257 colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "프로필 삭제"
-
-#: colord-kcm/ColordKCM.cpp:257
+#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
 #, kde-format
 msgid "Are you sure you want to remove this profile?"
 msgstr "이 프로필을 삭제하시겠습니까?"
 
-#: colord-kcm/ColordKCM.cpp:359
+#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
+#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
+#: colord-kcm/ColordKCM.ui:33
+#, kde-format
+msgid "Remove Profile"
+msgstr "프로필 삭제"
+
+#: colord-kcm/ColordKCM.cpp:372
 #, kde-format
 msgid "Your profile did not match the device kind"
 msgstr "프로필이 장치 종류와 일치하지 않습니다"
 
-#: colord-kcm/ColordKCM.cpp:392
+#: colord-kcm/ColordKCM.cpp:405
 #, kde-format
 msgid "You do not have any devices registered"
 msgstr "등록한 장치가 없습니다"
 
-#: colord-kcm/ColordKCM.cpp:393
+#: colord-kcm/ColordKCM.cpp:406
 #, kde-format
 msgid "Make sure colord module on kded is running"
 msgstr "kded에서 colord 모듈이 실행 중인지 확인하십시오"
 
-#: colord-kcm/ColordKCM.cpp:396
+#: colord-kcm/ColordKCM.cpp:409
 #, kde-format
 msgid "You do not have any profiles registered"
 msgstr "등록한 프로필이 없습니다"
 
-#: colord-kcm/ColordKCM.cpp:397
+#: colord-kcm/ColordKCM.cpp:410
 #, kde-format
 msgid "Add one by clicking Add Profile button"
 msgstr "프로필 추가 단추를 클릭해서 등록하십시오"
@@ -608,78 +609,83 @@ msgstr "메타 데이터는 프로그램에서 저장되는 프로필상 추가 
 msgid "Named colors are specific colors defined in the profile"
 msgstr "이름 있는 색상은 프로필에 지정된 색상입니다"
 
-#: icc-importer/main.cpp:40
+#: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
 msgstr "설명: %1"
 
-#: icc-importer/main.cpp:50
+#: icc-importer/main.cpp:51
 #, kde-format
 msgid "Copyright: %1"
 msgstr "저작권: %1"
 
-#: icc-importer/main.cpp:61
+#: icc-importer/main.cpp:62
 #, kde-format
 msgid "ICC Profile Installer"
 msgstr "ICC 프로필 설치기"
 
-#: icc-importer/main.cpp:63
+#: icc-importer/main.cpp:64
 #, kde-format
 msgid "An application to install ICC profiles"
 msgstr "ICC 프로필을 설치하는 프로그램"
 
-#: icc-importer/main.cpp:65
+#: icc-importer/main.cpp:66
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2008-2016 Daniel Nicoletti"
 
-#: icc-importer/main.cpp:76
+#: icc-importer/main.cpp:77
 #, kde-format
 msgid "Do not prompt the user if he wants to install"
 msgstr "사용자가 설치를 원할 때 묻지 않기"
 
-#: icc-importer/main.cpp:77
+#: icc-importer/main.cpp:78
 #, kde-format
 msgid "Color profile to install"
 msgstr "설치할 색 프로필"
 
-#: icc-importer/main.cpp:92
+#: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to parse file: %1"
 msgstr "파일을 해석할 수 없음: %1"
 
-#: icc-importer/main.cpp:92
+#: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to open ICC profile"
 msgstr "ICC 프로필을 열 수 없음"
 
-#: icc-importer/main.cpp:101
+#: icc-importer/main.cpp:102
 #, kde-format
 msgid "Color profile is already imported"
 msgstr "색 프로필을 이미 가져옴"
 
-#: icc-importer/main.cpp:102 icc-importer/main.cpp:112
-#: icc-importer/main.cpp:119
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:125
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "ICC 프로필 가져오기"
 
-#: icc-importer/main.cpp:111
+#: icc-importer/main.cpp:112
 #, kde-format
 msgid "ICC profile already installed system-wide"
 msgstr "ICC 프로필이 이미 시스템 전역으로 설치됨"
 
-#: icc-importer/main.cpp:118
+#: icc-importer/main.cpp:124
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "색 프로필을 가져오시겠습니까?"
 
-#: icc-importer/main.cpp:127
+#: icc-importer/main.cpp:126
+#, kde-format
+msgid "import"
+msgstr ""
+
+#: icc-importer/main.cpp:139
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "색 프로필을 가져올 수 없음: 이미 가져옴"
 
-#: icc-importer/main.cpp:130
+#: icc-importer/main.cpp:142
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "색 프로필을 가져올 수 없음: 파일을 복사할 수 없음"
