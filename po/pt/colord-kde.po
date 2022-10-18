@@ -681,7 +681,7 @@ msgstr "Deseja importar o perfil de cores?"
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "importar"
 
 #: icc-importer/main.cpp:139
 #, kde-format
