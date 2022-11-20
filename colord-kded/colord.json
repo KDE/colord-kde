@@ -16,6 +16,7 @@
         "Description[tr]": "Ekran Renk Profillerini Yönet",
         "Description[uk]": "Керування профілями кольорів екрана",
         "Description[x-test]": "xxManage Screen Color Profilesxx",
+        "Description[zh_CN]": "管理屏幕等设备的色彩特性文件",
         "Name": "Color Daemon",
         "Name[ar]": "خدمة اللون",
         "Name[az]": "Rəngləri idarəetmə xidməti",
@@ -31,7 +32,8 @@
         "Name[sl]": "Color Daemon",
         "Name[tr]": "Renk Ardalan Süreci",
         "Name[uk]": "Фонова служба керування кольорами",
-        "Name[x-test]": "xxColor Daemonxx"
+        "Name[x-test]": "xxColor Daemonxx",
+        "Name[zh_CN]": "色彩管理系统守护进程"
     },
     "X-KDE-DBus-ModuleName": "colord",
     "X-KDE-Kded-autoload": true,
