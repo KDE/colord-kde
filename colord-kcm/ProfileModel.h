@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
+ *   2022 by Han Young <hanyoung@protonmail.com>                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -48,12 +49,13 @@ public:
     // Returns a char to help the sort model
     static QChar getSortChar(const QString &kind);
     static QString getProfileDataSource(const CdStringMap &metadata);
+    QHash<int, QByteArray> roleNames() const override;
 
 public Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
 Q_SIGNALS:
-    void changed();
+    void changed(); // not used actually
 
 private Q_SLOTS:
     void gotProfiles(QDBusPendingCallWatcher *call);

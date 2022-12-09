@@ -17,11 +17,10 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#include "ProfileMetaData.h"
-#include "ui_ProfileMetaData.h"
+#include "ProfileMetaDataModel.h"
 
 #include <QDebug>
-
+#include <klocalizedstring.h>
 /* defined in metadata-spec.txt */
 #define CD_PROFILE_METADATA_STANDARD_SPACE QStringLiteral("STANDARD_space")
 #define CD_PROFILE_METADATA_EDID_MD5 QStringLiteral("EDID_md5")
@@ -37,42 +36,45 @@
 #define CD_PROFILE_METADATA_MAPPING_FORMAT QStringLiteral("MAPPING_format")
 #define CD_PROFILE_METADATA_MAPPING_QUALIFIER QStringLiteral("MAPPING_qualifier")
 
-ProfileMetaData::ProfileMetaData(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::ProfileMetaData)
-    , m_model(new QStandardItemModel(this))
+ProfileMetaDataModel::ProfileMetaDataModel(QObject *parent)
+    : QAbstractListModel(parent)
 {
-    ui->setupUi(this);
-
-    m_model->setColumnCount(2);
-    ui->treeView->setModel(m_model);
-    ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
 }
 
-ProfileMetaData::~ProfileMetaData()
+void ProfileMetaDataModel::setMetadata(const CdStringMap &metadata)
 {
-    delete ui;
+    beginResetModel();
+    m_data = metadata;
+    m_keys = m_data.keys();
+    endResetModel();
+    qDebug() << "set metadata" << m_data;
 }
 
-void ProfileMetaData::setMetadata(const CdStringMap &metadata)
+int ProfileMetaDataModel::rowCount(const QModelIndex &index) const
 {
-    m_model->removeRows(0, m_model->rowCount());
-
-    CdStringMap::const_iterator i = metadata.constBegin();
-    while (i != metadata.constEnd()) {
-        qDebug() << i.key() << ": " << i.value();
-        QList<QStandardItem *> row;
-        QStandardItem *name = new QStandardItem(metadataLabel(i.key()));
-        row << name;
-        QStandardItem *value = new QStandardItem(i.value());
-        row << value;
-
-        m_model->appendRow(row);
-        ++i;
+    Q_UNUSED(index);
+    return m_keys.count();
+}
+QVariant ProfileMetaDataModel::data(const QModelIndex &index, int role) const
+{
+    if (index.row() < 0 || index.row() >= m_keys.count()) {
+        return QVariant();
     }
+
+    switch (role) {
+    case TitleRole:
+        return metadataLabel(m_keys[index.row()]);
+    case ValueRole:
+        return m_data[m_keys[index.row()]];
+    }
+    return QVariant();
+}
+QHash<int, QByteArray> ProfileMetaDataModel::roleNames() const
+{
+    return {{TitleRole, "title"}, {ValueRole, "textValue"}};
 }
 
-QString ProfileMetaData::metadataLabel(const QString &key)
+QString ProfileMetaDataModel::metadataLabel(const QString &key) const
 {
     if (key == CD_PROFILE_METADATA_STANDARD_SPACE) {
         return i18n("Standard space");

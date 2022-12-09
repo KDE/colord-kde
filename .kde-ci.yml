@@ -12,3 +12,4 @@ Dependencies:
     'frameworks/kcmutils': '@stable'
     'frameworks/kwidgetsaddons': '@stable'
     'frameworks/kwindowsystem': '@stable'
+    'frameworks/kitemmodels': '@latest'

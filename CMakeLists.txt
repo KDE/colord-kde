@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
+set (CMAKE_CXX_STANDARD 17)
+
 # KDE Application Version, managed by release script
 set (RELEASE_SERVICE_VERSION_MAJOR "23")
 set (RELEASE_SERVICE_VERSION_MINOR "03")
@@ -24,6 +26,8 @@ include(FindPkgConfig)
 include(ECMOptionalAddSubdirectory)
 include(FeatureSummary)
 include(ECMSetupVersion)
+include(ECMFindQmlModule)
+include(ECMPoQmTools)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
@@ -33,6 +37,7 @@ ecm_setup_version("${PROJECT_VERSION}"
     VARIABLE_PREFIX "COLORD_KDE"
     VERSION_HEADER "version.h"
 )
+ecm_find_qmlmodule(org.kde.kirigamiaddons.treeview 1.0)
 
 find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
     Core
@@ -56,7 +61,7 @@ if (X11_FOUND)
 endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
-             WidgetsAddons WindowSystem KIO)
+             WidgetsAddons WindowSystem KIO Package Declarative ItemModels)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"colord-kde\")
 

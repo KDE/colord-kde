@@ -19,8 +19,7 @@
 
 #pragma once
 
-#include <QStandardItemModel>
-#include <QWidget>
+#include <QAbstractItemModel>
 
 #include "dbus-types.h"
 
@@ -29,18 +28,20 @@ namespace Ui
 class ProfileMetaData;
 }
 
-class ProfileMetaData : public QWidget
+class ProfileMetaDataModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit ProfileMetaData(QWidget *parent = nullptr);
-    ~ProfileMetaData() override;
+    enum ProfileMetaDataRole { TitleRole = Qt::UserRole + 1, ValueRole };
+    explicit ProfileMetaDataModel(QObject *parent = nullptr);
 
+    int rowCount(const QModelIndex &index = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
     void setMetadata(const CdStringMap &metadata);
 
 private:
-    QString metadataLabel(const QString &key);
-
-    Ui::ProfileMetaData *const ui;
-    QStandardItemModel *const m_model;
+    QString metadataLabel(const QString &key) const;
+    QMap<QString, QString> m_data;
+    QList<QString> m_keys;
 };

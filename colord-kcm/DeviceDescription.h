@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
+ *   2022 by Han Young <hanyoung@protonmail.com>                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,54 +18,57 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#pragma once
+#ifndef DESCRIPTION_H
+#define DESCRIPTION_H
 
 #include <QDBusObjectPath>
 #include <QDBusPendingCallWatcher>
-#include <QWidget>
-
-namespace Ui
-{
-class Description;
-}
 class CdInterface;
-class ProfileNamedColors;
-class ProfileMetaData;
-class Description : public QWidget
+class DeviceDescription : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString colorSpace MEMBER m_colorSpace NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceTitle MEMBER m_deviceTitle NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceID MEMBER m_currentDeviceID NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceScope MEMBER m_deviceScope NOTIFY dataChanged)
+    Q_PROPERTY(QString deviceKind MEMBER m_currentDeviceKind NOTIFY dataChanged)
+    Q_PROPERTY(QString currentProfileTitle MEMBER m_currentProfileTitle NOTIFY dataChanged)
+    Q_PROPERTY(QString calibrateTipMessage MEMBER m_calibrateMsg NOTIFY calibrateMessageChanged)
+
 public:
-    explicit Description(QWidget *parent = nullptr);
-    ~Description() override;
+    explicit DeviceDescription(QObject *parent = nullptr);
 
-    int innerHeight() const;
     void setCdInterface(CdInterface *interface);
-    void setProfile(const QDBusObjectPath &objectPath, bool canRemoveProfile);
-    void setDevice(const QDBusObjectPath &objectPath);
-
-public Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
-private Q_SLOTS:
-    void on_installSystemWideBt_clicked();
-    void on_calibratePB_clicked();
+    Q_INVOKABLE void setDevice(const QDBusObjectPath &objectPath);
 
+Q_SIGNALS:
+    void isDeviceChanged();
+    void dataChanged();
+    void calibrateChanged();
+    void calibrateMessageChanged();
+
+private Q_SLOTS:
     void gotSensors(QDBusPendingCallWatcher *call);
-    void sensorAdded(const QDBusObjectPath &sensorPath, bool updateCalibrateButton = true);
     void sensorAddedUpdateCalibrateButton(const QDBusObjectPath &sensorPath);
-    void sensorRemoved(const QDBusObjectPath &sensorPath, bool updateCalibrateButton = true);
     void sensorRemovedUpdateCalibrateButton(const QDBusObjectPath &sensorPath);
 
 private:
-    void insertTab(int index, QWidget *widget, const QString &label);
-    void removeTab(QWidget *widget);
-    bool calibrateEnabled(const QString &kind);
+    void generateCalibrateMessage(const QString &kind);
+    void sensorAdded(const QDBusObjectPath &sensorPath, bool updateCalibrateMessage = true);
+    void sensorRemoved(const QDBusObjectPath &sensorPath, bool updateCalibrateMessage = true);
 
-    Ui::Description *const ui;
     QDBusObjectPath m_currentProfile;
-    QString m_currentDeviceId;
+
+    QString m_deviceTitle;
+    QString m_deviceScope;
     QString m_currentDeviceKind;
-    ProfileNamedColors *const m_namedColors;
-    ProfileMetaData *const m_metadata = nullptr;
+    QString m_currentDeviceID;
+    QString m_colorSpace;
+    QString m_currentProfileTitle;
+    QString m_calibrateMsg;
     QList<QDBusObjectPath> m_sensors;
 };
+
+#endif // DESCRIPTION_H

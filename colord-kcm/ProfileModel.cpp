@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
+ *   2022 by Han Young <hanyoung@protonmail.com>                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -61,7 +62,7 @@ void ProfileModel::gotProfiles(QDBusPendingCallWatcher *call)
         for (const QDBusObjectPath &profile : profiles) {
             profileAdded(profile, false);
         }
-        emit changed();
+        Q_EMIT changed();
     }
     call->deleteLater();
 }
@@ -74,7 +75,7 @@ void ProfileModel::profileChanged(const QDBusObjectPath &objectPath)
         return;
     }
 
-    // TODO what should we do when the profile changes?
+    Q_EMIT dataChanged(index(row, 0), index(row, 0));
 }
 
 void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChanged)
@@ -109,26 +110,26 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     const qlonglong created = profile.created();
 
     QStandardItem *item = new QStandardItem;
-
+    item->setData(colorspace, ColorspaceRole);
     // Choose a nice icon
     if (kind == QLatin1String("display-device")) {
-        item->setIcon(QIcon::fromTheme(QStringLiteral("video-display")));
+        item->setData(QStringLiteral("video-display"), Qt::DecorationRole);
     } else if (kind == QLatin1String("input-device")) {
-        item->setIcon(QIcon::fromTheme(QStringLiteral("scanner")));
+        item->setData(QStringLiteral("scanner"), Qt::DecorationRole);
     } else if (kind == QLatin1String("output-device")) {
         if (colorspace == QLatin1String("gray")) {
-            item->setIcon(QIcon::fromTheme(QStringLiteral("printer-laser")));
+            item->setData(QStringLiteral("printer-laser"), Qt::DecorationRole);
         } else {
-            item->setIcon(QIcon::fromTheme(QStringLiteral("printer")));
+            item->setData(QStringLiteral("printer"), Qt::DecorationRole);
         }
     } else if (kind == QLatin1String("colorspace-conversion")) {
-        item->setIcon(QIcon::fromTheme(QStringLiteral("view-refresh")));
+        item->setData(QStringLiteral("view-refresh"), Qt::DecorationRole);
     } else if (kind == QLatin1String("abstract")) {
-        item->setIcon(QIcon::fromTheme(QStringLiteral("insert-link")));
+        item->setData(QStringLiteral("insert-link"), Qt::DecorationRole);
     } else if (kind == QLatin1String("named-color")) {
-        item->setIcon(QIcon::fromTheme(QStringLiteral("view-preview")));
+        item->setData(QStringLiteral("view-preview"), Qt::DecorationRole);
     } else {
-        item->setIcon(QIcon::fromTheme(QStringLiteral("image-missing")));
+        item->setData(QStringLiteral("image-missing"), Qt::DecorationRole);
     }
 
     // Sets the profile title
@@ -156,7 +157,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
     appendRow(item);
 
     if (emitChanged) {
-        emit changed();
+        Q_EMIT changed();
     }
 }
 
@@ -172,7 +173,7 @@ void ProfileModel::profileRemoved(const QDBusObjectPath &objectPath)
         removeRow(row);
     }
 
-    emit changed();
+    Q_EMIT changed();
 }
 
 void ProfileModel::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
@@ -181,7 +182,7 @@ void ProfileModel::serviceOwnerChanged(const QString &serviceName, const QString
     if (newOwner.isEmpty() || oldOwner != newOwner) {
         // colord has quit or restarted
         removeRows(0, rowCount());
-        emit changed();
+        Q_EMIT changed();
     }
 }
 
@@ -234,4 +235,17 @@ Qt::ItemFlags ProfileModel::flags(const QModelIndex &index) const
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
     }
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}
+
+QHash<int, QByteArray> ProfileModel::roleNames() const
+{
+    return {{Qt::DisplayRole, "title"},
+            {ObjectPathRole, "objectPath"},
+            {ParentObjectPathRole, "parentObjectPath"},
+            {FilenameRole, "fileName"},
+            {ProfileKindRole, "profileKind"},
+            {CanRemoveProfileRole, "canRemove"},
+            {SortRole, "sortString"},
+            {ColorspaceRole, "colorspace"},
+            {Qt::DecorationRole, "iconName"}};
 }

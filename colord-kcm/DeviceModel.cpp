@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
+ *   2022 by Han Young <hanyoung@protonmail.com>                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -26,11 +27,9 @@
 #include "CdInterface.h"
 #include "CdProfileInterface.h"
 
+#include <KLocalizedString>
 #include <QDateTime>
 #include <QDebug>
-#include <QIcon>
-
-#include <KLocalizedString>
 
 DeviceModel::DeviceModel(CdInterface *cdInterface, QObject *parent)
     : QStandardItemModel(parent)
@@ -49,6 +48,19 @@ DeviceModel::DeviceModel(CdInterface *cdInterface, QObject *parent)
     connect(watcher, &QDBusPendingCallWatcher::finished, this, &DeviceModel::gotDevices);
 }
 
+int DeviceModel::findDeviceIndex(const QDBusObjectPath &device) const
+{
+    for (int i = 0; i < rowCount(); i++) {
+        auto _item = item(i);
+        if (_item) {
+            auto path = _item->data(ObjectPathRole).value<QDBusObjectPath>();
+            if (path == device) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
 void DeviceModel::gotDevices(QDBusPendingCallWatcher *call)
 {
     QDBusPendingReply<ObjectPathList> reply = *call;
@@ -59,9 +71,17 @@ void DeviceModel::gotDevices(QDBusPendingCallWatcher *call)
         for (const QDBusObjectPath &device : devices) {
             deviceAdded(device, false);
         }
-        emit changed();
+        Q_EMIT changed();
     }
     call->deleteLater();
+}
+
+void DeviceModel::removeProfile(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath)
+{
+    CdDeviceInterface device(QStringLiteral("org.freedesktop.ColorManager"), devicePath.path(), QDBusConnection::systemBus());
+    if (device.isValid()) {
+        device.RemoveProfile(profilePath);
+    }
 }
 
 void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
@@ -103,7 +123,7 @@ void DeviceModel::deviceChanged(const QDBusObjectPath &objectPath)
     // Remove the extra items it might have
     removeProfilesNotInList(stdItem, profiles);
 
-    emit changed();
+    Q_EMIT changed();
 }
 
 void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChanged)
@@ -130,18 +150,19 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     item->setData(true, IsDeviceRole);
 
     if (kind == QLatin1String("display")) {
-        item->setIcon(QIcon::fromTheme(QStringLiteral("video-display")));
+        item->setData(QStringLiteral("video-display"), Qt::DecorationRole);
     } else if (kind == QLatin1String("scanner")) {
-        item->setIcon(QIcon::fromTheme(QStringLiteral("scanner")));
+        item->setData(QStringLiteral("scanner"), Qt::DecorationRole);
     } else if (kind == QLatin1String("printer")) {
         if (colorspace == QLatin1String("gray")) {
-            item->setIcon(QIcon::fromTheme(QStringLiteral("printer-laser")));
+            item->setData(QStringLiteral("printer-laser"), Qt::DecorationRole);
         } else {
-            item->setIcon(QIcon::fromTheme(QStringLiteral("printer")));
+            item->setData(QStringLiteral("printer"), Qt::DecorationRole);
         }
     } else if (kind == QLatin1String("webcam")) {
-        item->setIcon(QIcon::fromTheme(QStringLiteral("camera-web")));
+        item->setData(QStringLiteral("camera-web"), Qt::DecorationRole);
     }
+    item->setData(colorspace, ColorspaceRole);
 
     if (model.isEmpty() && vendor.isEmpty()) {
         item->setText(deviceId);
@@ -166,6 +187,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
         kind = QStringLiteral("unknown");
     }
     item->setData(kind, ProfileKindRole);
+    item->setData(QStringLiteral("device"), ItemTypeRole);
     appendRow(item);
 
     QList<QStandardItem *> profileItems;
@@ -178,7 +200,7 @@ void DeviceModel::deviceAdded(const QDBusObjectPath &objectPath, bool emitChange
     item->appendRows(profileItems);
 
     if (emitChanged) {
-        emit changed();
+        Q_EMIT changed();
     }
 }
 
@@ -194,7 +216,7 @@ void DeviceModel::deviceRemoved(const QDBusObjectPath &objectPath)
         removeRow(row);
     }
 
-    emit changed();
+    Q_EMIT changed();
 }
 
 void DeviceModel::serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner)
@@ -203,7 +225,7 @@ void DeviceModel::serviceOwnerChanged(const QString &serviceName, const QString 
     if (newOwner.isEmpty() || oldOwner != newOwner) {
         // colord has quit or restarted
         removeRows(0, rowCount());
-        emit changed();
+        Q_EMIT changed();
     }
 }
 
@@ -221,7 +243,6 @@ QStandardItem *DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     QString title = profile.title();
     const qlonglong created = profile.created();
 
-    // Sets the profile title
     bool canRemoveProfile = true;
     if (title.isEmpty()) {
         QString colorspace = profile.colorspace();
@@ -252,6 +273,7 @@ QStandardItem *DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
     stdItem->setData(QString(ProfileModel::getSortChar(kind) % title), SortRole);
     stdItem->setCheckable(true);
     stdItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);
+    stdItem->setData(QStringLiteral("profile"), ItemTypeRole);
 
     return stdItem;
 }
@@ -313,7 +335,7 @@ bool DeviceModel::setData(const QModelIndex &index, const QVariant &value, int r
         device.MakeProfileDefault(stdItem->data(ObjectPathRole).value<QDBusObjectPath>());
     }
 
-    // We return false since colord will emit a DeviceChanged signal telling us about this change
+    // We return false since colord will Q_EMIT a DeviceChanged signal telling us about this change
     return false;
 }
 
@@ -324,4 +346,19 @@ Qt::ItemFlags DeviceModel::flags(const QModelIndex &index) const
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
     }
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}
+
+QHash<int, QByteArray> DeviceModel::roleNames() const
+{
+    return {{Qt::DisplayRole, "title"},
+            {ObjectPathRole, "objectPath"},
+            {ParentObjectPathRole, "parentObjectPath"},
+            {FilenameRole, "fileName"},
+            {ProfileKindRole, "profileKind"},
+            {SortRole, "sortString"},
+            {CanRemoveProfileRole, "canRemoveProfile"},
+            {Qt::CheckStateRole, "profileCheckState"},
+            {ItemTypeRole, "itemType"},
+            {ColorspaceRole, "colorspace"},
+            {Qt::DecorationRole, "iconName"}};
 }

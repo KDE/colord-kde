@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
+ *   Copyright (C) 2012 by Daniel Nicoletti <dantti12@gmail.com>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,41 +17,23 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#include "ProfileNamedColors.h"
-#include "ui_ProfileNamedColors.h"
+#pragma once
 
-#include <QColor>
-#include <QHeaderView>
+#include <QAbstractListModel>
 
-ProfileNamedColors::ProfileNamedColors(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::ProfileNamedColors)
-    , m_model(new QStandardItemModel(this))
+class ProfileNamedColorsModel : public QAbstractListModel
 {
-    ui->setupUi(this);
+    Q_OBJECT
+public:
+    enum ColorRoles { NameRole = Qt::UserRole + 1, ColorRole, IsDarkColorRole };
+    explicit ProfileNamedColorsModel(QObject *parent = nullptr);
+    int rowCount(const QModelIndex &index = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
-    m_model->setColumnCount(2);
-    ui->treeView->setModel(m_model);
-    ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-}
+    void setNamedColors(const QMap<QString, QColor> &namedColors);
 
-ProfileNamedColors::~ProfileNamedColors()
-{
-    delete ui;
-}
-
-void ProfileNamedColors::setNamedColors(const QMap<QString, QColor> &namedColors)
-{
-    m_model->removeRows(0, m_model->rowCount());
-
-    QMap<QString, QColor>::const_iterator i = namedColors.constBegin();
-    while (i != namedColors.constEnd()) {
-        auto name = new QStandardItem(i.key());
-
-        auto color = new QStandardItem;
-        color->setBackground(QBrush(i.value()));
-
-        m_model->appendRow({name, color});
-        ++i;
-    }
-}
+private:
+    QMap<QString, QColor> m_data;
+    QList<QString> m_keys;
+};

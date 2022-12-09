@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2012 by Daniel Nicoletti                                *
  *   dantti12@gmail.com                                                    *
+ *   2022 by Han Young <hanyoung@protonmail.com                            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,66 +21,70 @@
 
 #pragma once
 
-#include <KCModule>
-#include <KTitleWidget>
-
+#include <KConfigGroup>
+#include <KQuickAddons/ConfigModule>
 #include <QDBusObjectPath>
-#include <QMenu>
-#include <QSortFilterProxyModel>
-#include <QStackedLayout>
 
-typedef QPair<QString, QDBusObjectPath> KindAndPath;
-
-namespace Ui
-{
-class ColordKCM;
-}
-class CdInterface;
 class DeviceModel;
 class ProfileModel;
+class CdInterface;
+class DeviceDescription;
 class ProfileDescription;
-
-class ColordKCM : public KCModule
+class QSortFilterProxyModel;
+class AddProfileComboBoxItem;
+class KCMColord : public KQuickAddons::ConfigModule
 {
     Q_OBJECT
+    Q_PROPERTY(DeviceModel *deviceModel READ deviceModel CONSTANT)
+    Q_PROPERTY(ProfileModel *profileModel READ profileModel CONSTANT)
+    Q_PROPERTY(DeviceDescription *deviceDescription READ deviceDescription CONSTANT)
+    Q_PROPERTY(ProfileDescription *profileDescription READ profileDescription CONSTANT)
+
 public:
-    explicit ColordKCM(QWidget *parent, const QVariantList &args);
-    ~ColordKCM() override;
+    explicit KCMColord(QObject *parent, const KPluginMetaData &data, const QVariantList &list = QVariantList());
+    DeviceModel *deviceModel() const;
+    ProfileModel *profileModel() const;
+    DeviceDescription *deviceDescription() const;
+    ProfileDescription *profileDescription() const;
 
-public Q_SLOTS:
-    void load() override;
+    Q_INVOKABLE void makeProfileDefault(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath);
+    Q_INVOKABLE void assignProfileToDevice(const QDBusObjectPath &profile, const QDBusObjectPath &devicePath) const;
+    Q_INVOKABLE bool canAddProfileForDevice(const QDBusObjectPath &device);
 
-private Q_SLOTS:
-    void showDescription();
-    void addProfileFile();
-    void addProfileAction(QAction *action);
-    void updateSelection();
-    void removeProfile();
-    void fillMenu();
-    void on_tabWidget_currentChanged(int index);
-    void profileAdded(const QDBusObjectPath &objectPath);
+    // DO NOT RETAIN OR USE ANY OBJECT IN THE FIRST CALL AFTER SECOND CALL!!!
+    // This method destroy any objects allocated in the previous call after
+    // returning for the second call. This behavior is to prevent memory leak
+    Q_INVOKABLE QList<QObject *> getComboBoxItemsForDevice(const QDBusObjectPath &device);
+    Q_INVOKABLE void importProfile(const QUrl &filepath);
+    Q_INVOKABLE void removeProfile(const QString &filename);
 
 private:
-    void addProvileToDevice(const QDBusObjectPath &profile, const QDBusObjectPath &devicePath) const;
-    QModelIndex currentIndex() const;
-    QString profilesPath() const;
+    CdInterface *m_cdInterface;
+    DeviceModel *m_deviceModel;
+    ProfileModel *m_profileModel;
+    DeviceDescription *m_deviceDescription;
+    ProfileDescription *m_profileDescription;
+    QSortFilterProxyModel *m_filterModel;
+    QList<QObject *> m_comboBoxItemsToBeDestroyed;
+};
 
-    Ui::ColordKCM *const ui;
-    DeviceModel *m_deviceModel = nullptr;
-    ProfileModel *m_profileModel = nullptr;
-    QStackedLayout *m_stackedLayout = nullptr;
-    ProfileDescription *m_profileDesc = nullptr;
-    QWidget *m_noPrinter = nullptr;
-    QWidget *m_serverError = nullptr;
-    KTitleWidget *m_serverErrorW = nullptr;
-    int m_lastError;
-    QMenu *m_addMenu = nullptr;
-    QMenu *m_addAvailableMenu = nullptr;
-    QSortFilterProxyModel *m_profilesFilter = nullptr;
-    QHash<QString, KindAndPath> m_profileFiles;
+class AddProfileComboBoxItem : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QDBusObjectPath objectPath MEMBER m_objectPath NOTIFY dataChanged)
+    Q_PROPERTY(QString profileName MEMBER m_profileName NOTIFY dataChanged)
+public:
+    AddProfileComboBoxItem(QObject *parent, const QDBusObjectPath &path, const QString &name)
+        : QObject(parent)
+        , m_objectPath(path)
+        , m_profileName(name)
+    {
+    }
 
-    QAction *m_addAction = nullptr;
-    QAction *m_removeAction = nullptr;
-    QAction *m_configureAction = nullptr;
-    CdInterface *m_cdInterface = nullptr;
+Q_SIGNALS:
+    void dataChanged();
+
+private:
+    QDBusObjectPath m_objectPath;
+    QString m_profileName;
 };

@@ -17,20 +17,45 @@
  *   Boston, MA 02110-1301, USA.                                           *
  ***************************************************************************/
 
-#include "NoSelectionRectDelegate.h"
-
-NoSelectionRectDelegate::NoSelectionRectDelegate(QObject *parent)
-    : QStyledItemDelegate(parent)
+#include "ProfileNamedColorsModel.h"
+#include <QColor>
+ProfileNamedColorsModel::ProfileNamedColorsModel(QObject *parent)
+    : QAbstractListModel(parent)
 {
 }
 
-void NoSelectionRectDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void ProfileNamedColorsModel::setNamedColors(const QMap<QString, QColor> &namedColors)
 {
-    // For some reason some styles don't honor the views SelectionRectVisible
-    // and I just hate that selection rect thing...
-    QStyleOptionViewItem opt(option);
-    if (opt.state & QStyle::State_HasFocus) {
-        opt.state ^= QStyle::State_HasFocus;
+    beginResetModel();
+    m_data = namedColors;
+    m_keys = m_data.keys();
+    endResetModel();
+}
+
+int ProfileNamedColorsModel::rowCount(const QModelIndex &index) const
+{
+    Q_UNUSED(index);
+    return m_keys.count();
+}
+QVariant ProfileNamedColorsModel::data(const QModelIndex &index, int role) const
+{
+    if (index.row() < 0 || index.row() >= m_keys.count()) {
+        return QVariant();
     }
-    QStyledItemDelegate::paint(painter, opt, index);
+    switch (role) {
+    case NameRole:
+        return m_keys[index.row()];
+    case ColorRole:
+        return m_data[m_keys[index.row()]];
+    case IsDarkColorRole:
+        auto color = m_data[m_keys[index.row()]];
+        // 0.2126*r + 0.7151*g + 0.0721*b
+        int y = 0.2126 * color.red() + 0.7151 * color.green() + 0.0721 * color.blue();
+        return y < 140;
+    }
+    return QVariant();
+}
+QHash<int, QByteArray> ProfileNamedColorsModel::roleNames() const
+{
+    return {{NameRole, "name"}, {ColorRole, "colorValue"}, {IsDarkColorRole, "isDarkColor"}};
 }

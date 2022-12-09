@@ -3,30 +3,15 @@ include_directories(${CMAKE_SOURCE_DIR}/colord-kcm
 )
 
 set(kcm_colord_SRCS
-    NoSelectionRectDelegate.cpp
     DeviceModel.cpp
     ProfileModel.cpp
     Profile.cpp
-    ProfileNamedColors.cpp
-    ProfileMetaData.cpp
-    Description.cpp
     ColordKCM.cpp
-
-    NoSelectionRectDelegate.h
-    DeviceModel.h
-    ProfileModel.h
-    Profile.h
-    ProfileNamedColors.h
-    ProfileMetaData.h
-    Description.h
-    ColordKCM.h
-)
-
-ki18n_wrap_ui(kcm_colord_SRCS
-    ProfileNamedColors.ui
-    ProfileMetaData.ui
-    Description.ui
-    ColordKCM.ui
+    DeviceDescription.cpp
+    ProfileDescription.cpp
+    ProfileMetaDataModel.cpp
+    ProfileNamedColorsModel.cpp
+    Profile.cpp
 )
 
 set(COLORD_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorManager.xml)
@@ -54,17 +39,15 @@ set_source_files_properties(${COLORD_SENSOR_INTERFACE_XML} PROPERTIES NO_NAMESPA
 set_source_files_properties(${COLORD_SENSOR_INTERFACE_XML} PROPERTIES CLASSNAME CdSensorInterface)
 qt_add_dbus_interface(kcm_colord_SRCS ${COLORD_SENSOR_INTERFACE_XML} CdSensorInterface)
 
-add_library(kcm_colord MODULE ${kcm_colord_SRCS})
+kcoreaddons_add_plugin(kcm_colord SOURCES ${kcm_colord_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
+
 target_link_libraries(kcm_colord
     Qt::Core
-    Qt::Widgets
     Qt::DBus
-    KF5::CoreAddons
+    KF5::QuickAddons
     KF5::I18n
     KF5::KCMUtils
     PkgConfig::LCMS2
-    KF5::KIOGui
 )
 
-install(TARGETS kcm_colord DESTINATION ${KDE_INSTALL_PLUGINDIR})
-install(FILES kcm_colord.desktop DESTINATION ${KDE_INSTALL_KSERVICESDIR})
+kpackage_install_package(package kcm_colord kcms)

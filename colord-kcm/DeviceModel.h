@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2012-2016 by Daniel Nicoletti <dantti12@gmail.com>      *
+ *   2022 by Han Young <hanyoung@protonmail.com>                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -38,14 +39,19 @@ public:
         FilenameRole,
         ColorspaceRole,
         ProfileKindRole,
-        CanRemoveProfileRole
+        CanRemoveProfileRole,
+        ItemTypeRole // device, profile
     } DeviceRoles;
     explicit DeviceModel(CdInterface *cdInterface, QObject *parent = nullptr);
 
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    QHash<int, QByteArray> roleNames() const override;
 
+    int findDeviceIndex(const QDBusObjectPath &device) const;
+
+    Q_INVOKABLE void removeProfile(const QDBusObjectPath &profilePath, const QDBusObjectPath &devicePath);
 public Q_SLOTS:
     void serviceOwnerChanged(const QString &serviceName, const QString &oldOwner, const QString &newOwner);
 
