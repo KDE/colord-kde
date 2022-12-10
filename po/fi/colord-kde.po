@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:43+0000\n"
+"POT-Creation-Date: 2022-12-10 00:43+0000\n"
 "PO-Revision-Date: 2019-10-16 12:09+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -29,379 +29,133 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "jiri.gronroos+kde@iki.fi,lasse.liehu@gmail.com,translator@legisign.org"
 
-#: colord-kcm/ColordKCM.cpp:54
-#, kde-format
-msgid "Available Profiles"
-msgstr "Saatavilla olevat profiilit"
-
-#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
-#, kde-format
-msgid "Color settings"
-msgstr "Väriasetukset"
-
-#: colord-kcm/ColordKCM.cpp:61
-#, kde-format
-msgid "(C) 2012-2016 Daniel Nicoletti"
-msgstr "© 2012–2016 Daniel Nicoletti"
-
-#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
-#, kde-format
-msgid "Port to kf5"
-msgstr "KF5-siirros"
-
-#: colord-kcm/ColordKCM.cpp:70
-#, kde-format
-msgid "From File..."
-msgstr "Tiedostosta…"
-
-#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
-#, kde-format
-msgid "Importing Color Profile"
-msgstr "Väriprofiilin tuonti"
-
-#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
-#, kde-format
-msgid "Are you sure you want to remove this profile?"
-msgstr "Haluatko varmasti poistaa tämän profiilin?"
-
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
-#: colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "Poista profiili"
-
-#: colord-kcm/ColordKCM.cpp:372
-#, kde-format
-msgid "Your profile did not match the device kind"
-msgstr "Profiili ei vastaa laitteen tyyppiä"
-
-#: colord-kcm/ColordKCM.cpp:405
-#, kde-format
-msgid "You do not have any devices registered"
-msgstr "Yhtään laitetta ei ole rekisteröity"
-
-#: colord-kcm/ColordKCM.cpp:406
-#, kde-format
-msgid "Make sure colord module on kded is running"
-msgstr "Varmista, että kded:n colord-palvelu on käynnissä"
-
-#: colord-kcm/ColordKCM.cpp:409
-#, kde-format
-msgid "You do not have any profiles registered"
-msgstr "Yhtää profiilia ei ole rekisteröity"
-
-#: colord-kcm/ColordKCM.cpp:410
-#, kde-format
-msgid "Add one by clicking Add Profile button"
-msgstr "Lisää uusi napsauttamalla Lisää profiili -painiketta"
-
-#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
-#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
-#, kde-format
-msgid "Profiles"
-msgstr "Profiilit"
-
-#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
-#: colord-kcm/ColordKCM.ui:161
-#, kde-format
-msgid "Add Profile"
-msgstr "Lisää profiili"
-
-#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
-#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
-#, kde-format
-msgid "Devices"
-msgstr "Laitteet"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "Yes"
-msgstr "Kyllä"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "None"
-msgstr "Ei korjausta"
-
-#: colord-kcm/Description.cpp:166
-#, kde-format
-msgid "Named Colors"
-msgstr "Nimetyt värit"
-
-#: colord-kcm/Description.cpp:174
-#, kde-format
-msgid "Metadata"
-msgstr "Metatiedot"
-
-#: colord-kcm/Description.cpp:214
+#: colord-kcm/DeviceDescription.cpp:133
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
 msgstr "Tulostin"
 
-#: colord-kcm/Description.cpp:216
+#: colord-kcm/DeviceDescription.cpp:135
 #, kde-format
 msgctxt "device type"
 msgid "Display"
 msgstr "Näyttö"
 
-#: colord-kcm/Description.cpp:218
+#: colord-kcm/DeviceDescription.cpp:137
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
 msgstr "Webkamera"
 
-#: colord-kcm/Description.cpp:220
+#: colord-kcm/DeviceDescription.cpp:139
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
 msgstr "Kuvanlukija"
 
-#: colord-kcm/Description.cpp:222
+#: colord-kcm/DeviceDescription.cpp:141
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: colord-kcm/Description.cpp:229
+#: colord-kcm/DeviceDescription.cpp:146
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
 msgstr "Käyttäjän istunto"
 
-#: colord-kcm/Description.cpp:231
+#: colord-kcm/DeviceDescription.cpp:148
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "Automattinen palautus"
 
-#: colord-kcm/Description.cpp:233
+#: colord-kcm/DeviceDescription.cpp:150
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
 msgstr "Järjestelmänlaajuinen"
 
-#: colord-kcm/Description.cpp:235
+#: colord-kcm/DeviceDescription.cpp:152
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "RGB"
 
-#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "CMYK"
 
-#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "Harmaa"
 
-#: colord-kcm/Description.cpp:251
+#: colord-kcm/DeviceDescription.cpp:166
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "Laitteelle ei ole asetettu profiilia"
 
-#: colord-kcm/Description.cpp:368
+#: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
-msgid "Create a color profile for the selected device"
-msgstr "Luo valitulle laitteelle väriprofiili"
+msgid "You can use 'displaycal' to calibrate this device"
+msgstr ""
 
-#: colord-kcm/Description.cpp:378
-#, kde-format
-msgid "You need Gnome Color Management installed in order to calibrate devices"
-msgstr "Laitteiden kalibroimiseksi on asennettava Gnomen värinhallinta."
-
-#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
-#, kde-format
+#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#, fuzzy, kde-format
+#| msgid ""
+#| "The measuring instrument is not detected. Please check it is turned on "
+#| "and correctly connected."
 msgid ""
-"The measuring instrument is not detected. Please check it is turned on and "
-"correctly connected."
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
 msgstr ""
 "Mittausvälinettä ei tunnistettu. Tarkista, että se on päällä ja kytketty "
 "oikein."
 
-#: colord-kcm/Description.cpp:408
+#: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Mittausväline ei tue tulostimen profilointia."
 
-#: colord-kcm/Description.cpp:412
-#, kde-format
-msgid "The device type is not currently supported."
+#: colord-kcm/DeviceDescription.cpp:222
+#, fuzzy, kde-format
+#| msgid "The device type is not currently supported."
+msgid "The device type is not currently supported for calibrating."
 msgstr "Laitetyyppi ei ole tällä hetkellä tuettu."
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: colord-kcm/Description.ui:21
-#, kde-format
-msgid "Information"
-msgstr "Tiedot"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/Description.ui:40
-#, kde-format
-msgid "Profile type:"
-msgstr "Profiilityyppi:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: colord-kcm/Description.ui:63
-#, kde-format
-msgid "Colorspace:"
-msgstr "Väriavaruus:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#: colord-kcm/Description.ui:86
-#, kde-format
-msgid "Created:"
-msgstr "Luotu:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: colord-kcm/Description.ui:109
-#, kde-format
-msgid "Version:"
-msgstr "Versio:"
-
-#. i18n: ectx: property (text), widget (QLabel, makeLabel)
-#: colord-kcm/Description.ui:132
-#, kde-format
-msgid "Device Manufacturer:"
-msgstr "Laitteen valmistaja:"
-
-#. i18n: ectx: property (text), widget (QLabel, modelLabel)
-#: colord-kcm/Description.ui:158
-#, kde-format
-msgid "Device Model:"
-msgstr "Laitteen malli:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: colord-kcm/Description.ui:184
-#, kde-format
-msgid "Display correction:"
-msgstr "Näytön värinkorjaus:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_11)
-#: colord-kcm/Description.ui:207
-#, kde-format
-msgid "White Point:"
-msgstr "Valkoinen piste:"
-
-#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#: colord-kcm/Description.ui:230
-#, kde-format
-msgid "License:"
-msgstr "Lisenssi:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_15)
-#: colord-kcm/Description.ui:256
-#, kde-format
-msgid "File size:"
-msgstr "Tiedostokoko:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_17)
-#: colord-kcm/Description.ui:279
-#, kde-format
-msgid "Filename:"
-msgstr "Tiedostonimi:"
-
-#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
-#: colord-kcm/Description.ui:302
-#, kde-format
-msgid "Install System Wide"
-msgstr "Asenna järjestelmänlaajuisesti"
-
-#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:316
-#, kde-format
-msgid "device name"
-msgstr "laitenimi"
-
-#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:319
-#, kde-format
-msgid "Printer"
-msgstr "Tulostin"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: colord-kcm/Description.ui:326
-#, kde-format
-msgid "Id:"
-msgstr "Tunniste:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#: colord-kcm/Description.ui:340
-#, kde-format
-msgid "Scope:"
-msgstr "Laajuus:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_10)
-#: colord-kcm/Description.ui:354
-#, kde-format
-msgid "Mode:"
-msgstr "Tila:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_13)
-#: colord-kcm/Description.ui:368
-#, kde-format
-msgid "Current Profile:"
-msgstr "Nykyinen profiili:"
-
-#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
-#: colord-kcm/Description.ui:382
-#, kde-format
-msgid "Calibrate"
-msgstr "Kalibroi"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:400
-#, kde-format
-msgid "Print Test Page"
-msgstr "Tulosta testisivu"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:405
-#, kde-format
-msgid "Clean Print Heads"
-msgstr "Puhdista tulostuspäät"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:410
-#, kde-format
-msgid "Print Self Test Page"
-msgstr "Tulosta itsetestaussivu"
-
-#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:413
-#, kde-format
-msgid "Print Self-Test Page"
-msgstr "Tulosta itsetestaussivu"
-
-#: colord-kcm/DeviceModel.cpp:229
+#: colord-kcm/DeviceModel.cpp:250
 #, kde-format
 msgctxt "colorspace"
 msgid "Default RGB"
 msgstr "Oletus-RGB"
 
-#: colord-kcm/DeviceModel.cpp:231
+#: colord-kcm/DeviceModel.cpp:252
 #, kde-format
 msgctxt "colorspace"
 msgid "Default CMYK"
 msgstr "Oletus-CMYK"
 
-#: colord-kcm/DeviceModel.cpp:233
+#: colord-kcm/DeviceModel.cpp:254
 #, kde-format
 msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Oletusharmaa"
+
+#: colord-kcm/DeviceModel.cpp:321
+#, kde-format
+msgid "Devices"
+msgstr "Laitteet"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -534,88 +288,77 @@ msgstr "Testiprofiili: %1"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: colord-kcm/ProfileMetaData.cpp:78
+#: colord-kcm/ProfileMetaDataModel.cpp:80
 #, kde-format
 msgid "Standard space"
 msgstr "Standardiavaruus"
 
-#: colord-kcm/ProfileMetaData.cpp:81
+#: colord-kcm/ProfileMetaDataModel.cpp:83
 #, kde-format
 msgid "Display checksum"
 msgstr "Näytön tarkistussumma"
 
-#: colord-kcm/ProfileMetaData.cpp:84
+#: colord-kcm/ProfileMetaDataModel.cpp:86
 #, kde-format
 msgid "Display model"
 msgstr "Näytön malli"
 
-#: colord-kcm/ProfileMetaData.cpp:87
+#: colord-kcm/ProfileMetaDataModel.cpp:89
 #, kde-format
 msgid "Display serial number"
 msgstr "Näytön sarjanumero"
 
-#: colord-kcm/ProfileMetaData.cpp:90
+#: colord-kcm/ProfileMetaDataModel.cpp:92
 #, kde-format
 msgid "Display PNPID"
 msgstr "Näytön PNPID"
 
-#: colord-kcm/ProfileMetaData.cpp:93
+#: colord-kcm/ProfileMetaDataModel.cpp:95
 #, kde-format
 msgid "Display vendor"
 msgstr "Näytön valmistaja"
 
-#: colord-kcm/ProfileMetaData.cpp:96
+#: colord-kcm/ProfileMetaDataModel.cpp:98
 #, kde-format
 msgid "File checksum"
 msgstr "Tiedoston tarkistussumma"
 
-#: colord-kcm/ProfileMetaData.cpp:99
+#: colord-kcm/ProfileMetaDataModel.cpp:101
 #, kde-format
 msgid "Framework product"
 msgstr "Kehyksen tuote"
 
-#: colord-kcm/ProfileMetaData.cpp:102
+#: colord-kcm/ProfileMetaDataModel.cpp:104
 #, kde-format
 msgid "Framework program"
 msgstr "Kehyksen ohjelma"
 
-#: colord-kcm/ProfileMetaData.cpp:105
+#: colord-kcm/ProfileMetaDataModel.cpp:107
 #, kde-format
 msgid "Framework version"
 msgstr "Kehyksen versio"
 
-#: colord-kcm/ProfileMetaData.cpp:108
+#: colord-kcm/ProfileMetaDataModel.cpp:110
 #, kde-format
 msgid "Data source type"
 msgstr "Tietolähteen tyyppi"
 
 # Colord:n dokumentaatiosta löydettiin tieto, että on ”the qualifier format for the profile”.
-#: colord-kcm/ProfileMetaData.cpp:111
+#: colord-kcm/ProfileMetaDataModel.cpp:113
 #, kde-format
 msgid "Mapping format"
 msgstr "Väriprofiilin määreen muoto"
 
 # Colord:n dokumentaatiosta löydettiin tieto, että on ”the qualifier for the profile”. metadata-spec.txt:stä löytyi myös: The qualifiers the profile should adopt by default, e.g. "RGB.Plain.300dpi"
-#: colord-kcm/ProfileMetaData.cpp:114
+#: colord-kcm/ProfileMetaDataModel.cpp:116
 #, kde-format
 msgid "Mapping qualifier"
 msgstr "Väriprofiilin määre"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileMetaData.ui:39
+#: colord-kcm/ProfileModel.cpp:226
 #, kde-format
-msgid ""
-"Meta data is additional information stored in the profile for programs to "
-"use."
-msgstr ""
-"Metatiedot ovat profiiliin talletettuja lisätietoja, jotka on tarkoitettu "
-"ohjelmien käyttöön."
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileNamedColors.ui:17
-#, kde-format
-msgid "Named colors are specific colors defined in the profile"
-msgstr "Nimetyt värit ovat profiilissa määriteltyjä määrävärejä"
+msgid "Profiles"
+msgstr "Profiilit"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -641,6 +384,11 @@ msgstr "Ohjelma ICC-profiilien asentamiseen"
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "© 2008–2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "KF5-siirros"
 
 #: icc-importer/main.cpp:77
 #, kde-format
@@ -693,10 +441,152 @@ msgstr ""
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "Väriprofiilin tuonti epäonnistui: väriprofiili on jo tuotu"
 
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "Väriprofiilin tuonti"
+
 #: icc-importer/main.cpp:142
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "Väriprofiilin tuonti epäonnistui: tiedostoa ei voitu kopioida"
+
+#~ msgid "Available Profiles"
+#~ msgstr "Saatavilla olevat profiilit"
+
+#~ msgid "Color settings"
+#~ msgstr "Väriasetukset"
+
+#~ msgid "(C) 2012-2016 Daniel Nicoletti"
+#~ msgstr "© 2012–2016 Daniel Nicoletti"
+
+#~ msgid "From File..."
+#~ msgstr "Tiedostosta…"
+
+#~ msgid "Are you sure you want to remove this profile?"
+#~ msgstr "Haluatko varmasti poistaa tämän profiilin?"
+
+#~ msgid "Remove Profile"
+#~ msgstr "Poista profiili"
+
+#~ msgid "Your profile did not match the device kind"
+#~ msgstr "Profiili ei vastaa laitteen tyyppiä"
+
+#~ msgid "You do not have any devices registered"
+#~ msgstr "Yhtään laitetta ei ole rekisteröity"
+
+#~ msgid "Make sure colord module on kded is running"
+#~ msgstr "Varmista, että kded:n colord-palvelu on käynnissä"
+
+#~ msgid "You do not have any profiles registered"
+#~ msgstr "Yhtää profiilia ei ole rekisteröity"
+
+#~ msgid "Add one by clicking Add Profile button"
+#~ msgstr "Lisää uusi napsauttamalla Lisää profiili -painiketta"
+
+#~ msgid "Add Profile"
+#~ msgstr "Lisää profiili"
+
+#~ msgid "Yes"
+#~ msgstr "Kyllä"
+
+#~ msgid "None"
+#~ msgstr "Ei korjausta"
+
+#~ msgid "Named Colors"
+#~ msgstr "Nimetyt värit"
+
+#~ msgid "Metadata"
+#~ msgstr "Metatiedot"
+
+#~ msgid "Create a color profile for the selected device"
+#~ msgstr "Luo valitulle laitteelle väriprofiili"
+
+#~ msgid ""
+#~ "You need Gnome Color Management installed in order to calibrate devices"
+#~ msgstr "Laitteiden kalibroimiseksi on asennettava Gnomen värinhallinta."
+
+#~ msgid "Information"
+#~ msgstr "Tiedot"
+
+#~ msgid "Profile type:"
+#~ msgstr "Profiilityyppi:"
+
+#~ msgid "Colorspace:"
+#~ msgstr "Väriavaruus:"
+
+#~ msgid "Created:"
+#~ msgstr "Luotu:"
+
+#~ msgid "Version:"
+#~ msgstr "Versio:"
+
+#~ msgid "Device Manufacturer:"
+#~ msgstr "Laitteen valmistaja:"
+
+#~ msgid "Device Model:"
+#~ msgstr "Laitteen malli:"
+
+#~ msgid "Display correction:"
+#~ msgstr "Näytön värinkorjaus:"
+
+#~ msgid "White Point:"
+#~ msgstr "Valkoinen piste:"
+
+#~ msgid "License:"
+#~ msgstr "Lisenssi:"
+
+#~ msgid "File size:"
+#~ msgstr "Tiedostokoko:"
+
+#~ msgid "Filename:"
+#~ msgstr "Tiedostonimi:"
+
+#~ msgid "Install System Wide"
+#~ msgstr "Asenna järjestelmänlaajuisesti"
+
+#~ msgid "device name"
+#~ msgstr "laitenimi"
+
+#~ msgid "Printer"
+#~ msgstr "Tulostin"
+
+#~ msgid "Id:"
+#~ msgstr "Tunniste:"
+
+#~ msgid "Scope:"
+#~ msgstr "Laajuus:"
+
+#~ msgid "Mode:"
+#~ msgstr "Tila:"
+
+#~ msgid "Current Profile:"
+#~ msgstr "Nykyinen profiili:"
+
+#~ msgid "Calibrate"
+#~ msgstr "Kalibroi"
+
+#~ msgid "Print Test Page"
+#~ msgstr "Tulosta testisivu"
+
+#~ msgid "Clean Print Heads"
+#~ msgstr "Puhdista tulostuspäät"
+
+#~ msgid "Print Self Test Page"
+#~ msgstr "Tulosta itsetestaussivu"
+
+#~ msgid "Print Self-Test Page"
+#~ msgstr "Tulosta itsetestaussivu"
+
+#~ msgid ""
+#~ "Meta data is additional information stored in the profile for programs to "
+#~ "use."
+#~ msgstr ""
+#~ "Metatiedot ovat profiiliin talletettuja lisätietoja, jotka on tarkoitettu "
+#~ "ohjelmien käyttöön."
+
+#~ msgid "Named colors are specific colors defined in the profile"
+#~ msgstr "Nimetyt värit ovat profiilissa määriteltyjä määrävärejä"
 
 #~ msgid "Daniel Nicoletti"
 #~ msgstr "Daniel Nicoletti"

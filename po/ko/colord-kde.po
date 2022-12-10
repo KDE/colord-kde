@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:43+0000\n"
+"POT-Creation-Date: 2022-12-10 00:43+0000\n"
 "PO-Revision-Date: 2022-05-07 02:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -27,377 +27,131 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde@peremen.name"
 
-#: colord-kcm/ColordKCM.cpp:54
-#, kde-format
-msgid "Available Profiles"
-msgstr "사용 가능한 프로필"
-
-#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
-#, kde-format
-msgid "Color settings"
-msgstr "색 설정"
-
-#: colord-kcm/ColordKCM.cpp:61
-#, kde-format
-msgid "(C) 2012-2016 Daniel Nicoletti"
-msgstr "(C) 2012-2016 Daniel Nicoletti"
-
-#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
-#, kde-format
-msgid "Port to kf5"
-msgstr "KF5 이식"
-
-#: colord-kcm/ColordKCM.cpp:70
-#, kde-format
-msgid "From File..."
-msgstr "파일에서..."
-
-#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
-#, kde-format
-msgid "Importing Color Profile"
-msgstr "색 프로필 가져오기"
-
-#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
-#, kde-format
-msgid "Are you sure you want to remove this profile?"
-msgstr "이 프로필을 삭제하시겠습니까?"
-
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
-#: colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "프로필 삭제"
-
-#: colord-kcm/ColordKCM.cpp:372
-#, kde-format
-msgid "Your profile did not match the device kind"
-msgstr "프로필이 장치 종류와 일치하지 않습니다"
-
-#: colord-kcm/ColordKCM.cpp:405
-#, kde-format
-msgid "You do not have any devices registered"
-msgstr "등록한 장치가 없습니다"
-
-#: colord-kcm/ColordKCM.cpp:406
-#, kde-format
-msgid "Make sure colord module on kded is running"
-msgstr "kded에서 colord 모듈이 실행 중인지 확인하십시오"
-
-#: colord-kcm/ColordKCM.cpp:409
-#, kde-format
-msgid "You do not have any profiles registered"
-msgstr "등록한 프로필이 없습니다"
-
-#: colord-kcm/ColordKCM.cpp:410
-#, kde-format
-msgid "Add one by clicking Add Profile button"
-msgstr "프로필 추가 단추를 클릭해서 등록하십시오"
-
-#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
-#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
-#, kde-format
-msgid "Profiles"
-msgstr "프로필"
-
-#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
-#: colord-kcm/ColordKCM.ui:161
-#, kde-format
-msgid "Add Profile"
-msgstr "프로필 추가"
-
-#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
-#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
-#, kde-format
-msgid "Devices"
-msgstr "장치"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "Yes"
-msgstr "예"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "None"
-msgstr "없음"
-
-#: colord-kcm/Description.cpp:166
-#, kde-format
-msgid "Named Colors"
-msgstr "이름 있는 색상"
-
-#: colord-kcm/Description.cpp:174
-#, kde-format
-msgid "Metadata"
-msgstr "메타 데이터"
-
-#: colord-kcm/Description.cpp:214
+#: colord-kcm/DeviceDescription.cpp:133
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
 msgstr "프린터"
 
-#: colord-kcm/Description.cpp:216
+#: colord-kcm/DeviceDescription.cpp:135
 #, kde-format
 msgctxt "device type"
 msgid "Display"
 msgstr "디스플레이"
 
-#: colord-kcm/Description.cpp:218
+#: colord-kcm/DeviceDescription.cpp:137
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
 msgstr "웹캠"
 
-#: colord-kcm/Description.cpp:220
+#: colord-kcm/DeviceDescription.cpp:139
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
 msgstr "스캐너"
 
-#: colord-kcm/Description.cpp:222
+#: colord-kcm/DeviceDescription.cpp:141
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: colord-kcm/Description.cpp:229
+#: colord-kcm/DeviceDescription.cpp:146
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
 msgstr "사용자 세션"
 
-#: colord-kcm/Description.cpp:231
+#: colord-kcm/DeviceDescription.cpp:148
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "자동 복원"
 
-#: colord-kcm/Description.cpp:233
+#: colord-kcm/DeviceDescription.cpp:150
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
 msgstr "시스템 전역"
 
-#: colord-kcm/Description.cpp:235
+#: colord-kcm/DeviceDescription.cpp:152
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "RGB"
 
-#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "CMYK"
 
-#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "회색"
 
-#: colord-kcm/Description.cpp:251
+#: colord-kcm/DeviceDescription.cpp:166
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "장치에 프로필이 할당되지 않았습니다"
 
-#: colord-kcm/Description.cpp:368
+#: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
-msgid "Create a color profile for the selected device"
-msgstr "선택한 장치에 사용할 프로필 만들기"
+msgid "You can use 'displaycal' to calibrate this device"
+msgstr ""
 
-#: colord-kcm/Description.cpp:378
-#, kde-format
-msgid "You need Gnome Color Management installed in order to calibrate devices"
-msgstr "장치를 보정하려면 그놈 색 관리를 설치해야 합니다"
-
-#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
-#, kde-format
+#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#, fuzzy, kde-format
+#| msgid ""
+#| "The measuring instrument is not detected. Please check it is turned on "
+#| "and correctly connected."
 msgid ""
-"The measuring instrument is not detected. Please check it is turned on and "
-"correctly connected."
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
 msgstr "교정 도구가 감지되지 않았습니다. 전원 및 연결 상태를 확인하십시오."
 
-#: colord-kcm/Description.cpp:408
+#: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "교정 도구가 프린터 프로파일링을 지원하지 않습니다."
 
-#: colord-kcm/Description.cpp:412
-#, kde-format
-msgid "The device type is not currently supported."
+#: colord-kcm/DeviceDescription.cpp:222
+#, fuzzy, kde-format
+#| msgid "The device type is not currently supported."
+msgid "The device type is not currently supported for calibrating."
 msgstr "장치 종류를 지원하지 않습니다."
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: colord-kcm/Description.ui:21
-#, kde-format
-msgid "Information"
-msgstr "정보"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/Description.ui:40
-#, kde-format
-msgid "Profile type:"
-msgstr "프로필 종류:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: colord-kcm/Description.ui:63
-#, kde-format
-msgid "Colorspace:"
-msgstr "색 공간:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#: colord-kcm/Description.ui:86
-#, kde-format
-msgid "Created:"
-msgstr "만든 날짜:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: colord-kcm/Description.ui:109
-#, kde-format
-msgid "Version:"
-msgstr "버전:"
-
-#. i18n: ectx: property (text), widget (QLabel, makeLabel)
-#: colord-kcm/Description.ui:132
-#, kde-format
-msgid "Device Manufacturer:"
-msgstr "장치 제조사:"
-
-#. i18n: ectx: property (text), widget (QLabel, modelLabel)
-#: colord-kcm/Description.ui:158
-#, kde-format
-msgid "Device Model:"
-msgstr "장치 모델:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: colord-kcm/Description.ui:184
-#, kde-format
-msgid "Display correction:"
-msgstr "디스플레이 교정:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_11)
-#: colord-kcm/Description.ui:207
-#, kde-format
-msgid "White Point:"
-msgstr "백색 지점:"
-
-#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#: colord-kcm/Description.ui:230
-#, kde-format
-msgid "License:"
-msgstr "라이선스:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_15)
-#: colord-kcm/Description.ui:256
-#, kde-format
-msgid "File size:"
-msgstr "파일 크기:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_17)
-#: colord-kcm/Description.ui:279
-#, kde-format
-msgid "Filename:"
-msgstr "파일 이름:"
-
-#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
-#: colord-kcm/Description.ui:302
-#, kde-format
-msgid "Install System Wide"
-msgstr "시스템 전역 설치"
-
-#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:316
-#, kde-format
-msgid "device name"
-msgstr "장치 이름"
-
-#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:319
-#, kde-format
-msgid "Printer"
-msgstr "프린터"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: colord-kcm/Description.ui:326
-#, kde-format
-msgid "Id:"
-msgstr "ID:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#: colord-kcm/Description.ui:340
-#, kde-format
-msgid "Scope:"
-msgstr "범위:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_10)
-#: colord-kcm/Description.ui:354
-#, kde-format
-msgid "Mode:"
-msgstr "모드:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_13)
-#: colord-kcm/Description.ui:368
-#, kde-format
-msgid "Current Profile:"
-msgstr "현재 프로필:"
-
-#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
-#: colord-kcm/Description.ui:382
-#, kde-format
-msgid "Calibrate"
-msgstr "미세 조정"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:400
-#, kde-format
-msgid "Print Test Page"
-msgstr "테스트 페이지 인쇄"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:405
-#, kde-format
-msgid "Clean Print Heads"
-msgstr "프린터 헤드 청소"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:410
-#, kde-format
-msgid "Print Self Test Page"
-msgstr "자가 진단 페이지 인쇄"
-
-#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:413
-#, kde-format
-msgid "Print Self-Test Page"
-msgstr "자가 진단 페이지 인쇄"
-
-#: colord-kcm/DeviceModel.cpp:229
+#: colord-kcm/DeviceModel.cpp:250
 #, kde-format
 msgctxt "colorspace"
 msgid "Default RGB"
 msgstr "기본 RGB"
 
-#: colord-kcm/DeviceModel.cpp:231
+#: colord-kcm/DeviceModel.cpp:252
 #, kde-format
 msgctxt "colorspace"
 msgid "Default CMYK"
 msgstr "기본 CMYK"
 
-#: colord-kcm/DeviceModel.cpp:233
+#: colord-kcm/DeviceModel.cpp:254
 #, kde-format
 msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "기본 회색"
+
+#: colord-kcm/DeviceModel.cpp:321
+#, kde-format
+msgid "Devices"
+msgstr "장치"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -530,84 +284,75 @@ msgstr "테스트 프로필: %1"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: colord-kcm/ProfileMetaData.cpp:78
+#: colord-kcm/ProfileMetaDataModel.cpp:80
 #, kde-format
 msgid "Standard space"
 msgstr "표준 공간"
 
-#: colord-kcm/ProfileMetaData.cpp:81
+#: colord-kcm/ProfileMetaDataModel.cpp:83
 #, kde-format
 msgid "Display checksum"
 msgstr "디스플레이 체크섬"
 
-#: colord-kcm/ProfileMetaData.cpp:84
+#: colord-kcm/ProfileMetaDataModel.cpp:86
 #, kde-format
 msgid "Display model"
 msgstr "디스플레이 모델"
 
-#: colord-kcm/ProfileMetaData.cpp:87
+#: colord-kcm/ProfileMetaDataModel.cpp:89
 #, kde-format
 msgid "Display serial number"
 msgstr "디스플레이 시리얼 번호"
 
-#: colord-kcm/ProfileMetaData.cpp:90
+#: colord-kcm/ProfileMetaDataModel.cpp:92
 #, kde-format
 msgid "Display PNPID"
 msgstr "디스플레이 PNPID"
 
-#: colord-kcm/ProfileMetaData.cpp:93
+#: colord-kcm/ProfileMetaDataModel.cpp:95
 #, kde-format
 msgid "Display vendor"
 msgstr "디스플레이 제조사"
 
-#: colord-kcm/ProfileMetaData.cpp:96
+#: colord-kcm/ProfileMetaDataModel.cpp:98
 #, kde-format
 msgid "File checksum"
 msgstr "파일 체크섬"
 
-#: colord-kcm/ProfileMetaData.cpp:99
+#: colord-kcm/ProfileMetaDataModel.cpp:101
 #, kde-format
 msgid "Framework product"
 msgstr "프레임워크 제품"
 
-#: colord-kcm/ProfileMetaData.cpp:102
+#: colord-kcm/ProfileMetaDataModel.cpp:104
 #, kde-format
 msgid "Framework program"
 msgstr "프레임워크 프로그램"
 
-#: colord-kcm/ProfileMetaData.cpp:105
+#: colord-kcm/ProfileMetaDataModel.cpp:107
 #, kde-format
 msgid "Framework version"
 msgstr "프레임워크 버전"
 
-#: colord-kcm/ProfileMetaData.cpp:108
+#: colord-kcm/ProfileMetaDataModel.cpp:110
 #, kde-format
 msgid "Data source type"
 msgstr "데이터 원본 종류"
 
-#: colord-kcm/ProfileMetaData.cpp:111
+#: colord-kcm/ProfileMetaDataModel.cpp:113
 #, kde-format
 msgid "Mapping format"
 msgstr "매핑 형식"
 
-#: colord-kcm/ProfileMetaData.cpp:114
+#: colord-kcm/ProfileMetaDataModel.cpp:116
 #, kde-format
 msgid "Mapping qualifier"
 msgstr "매핑 식별자"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileMetaData.ui:39
+#: colord-kcm/ProfileModel.cpp:226
 #, kde-format
-msgid ""
-"Meta data is additional information stored in the profile for programs to "
-"use."
-msgstr "메타 데이터는 프로그램에서 저장되는 프로필상 추가 정보입니다."
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileNamedColors.ui:17
-#, kde-format
-msgid "Named colors are specific colors defined in the profile"
-msgstr "이름 있는 색상은 프로필에 지정된 색상입니다"
+msgid "Profiles"
+msgstr "프로필"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -633,6 +378,11 @@ msgstr "ICC 프로필을 설치하는 프로그램"
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2008-2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "KF5 이식"
 
 #: icc-importer/main.cpp:77
 #, kde-format
@@ -685,10 +435,150 @@ msgstr ""
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "색 프로필을 가져올 수 없음: 이미 가져옴"
 
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "색 프로필 가져오기"
+
 #: icc-importer/main.cpp:142
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "색 프로필을 가져올 수 없음: 파일을 복사할 수 없음"
+
+#~ msgid "Available Profiles"
+#~ msgstr "사용 가능한 프로필"
+
+#~ msgid "Color settings"
+#~ msgstr "색 설정"
+
+#~ msgid "(C) 2012-2016 Daniel Nicoletti"
+#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
+
+#~ msgid "From File..."
+#~ msgstr "파일에서..."
+
+#~ msgid "Are you sure you want to remove this profile?"
+#~ msgstr "이 프로필을 삭제하시겠습니까?"
+
+#~ msgid "Remove Profile"
+#~ msgstr "프로필 삭제"
+
+#~ msgid "Your profile did not match the device kind"
+#~ msgstr "프로필이 장치 종류와 일치하지 않습니다"
+
+#~ msgid "You do not have any devices registered"
+#~ msgstr "등록한 장치가 없습니다"
+
+#~ msgid "Make sure colord module on kded is running"
+#~ msgstr "kded에서 colord 모듈이 실행 중인지 확인하십시오"
+
+#~ msgid "You do not have any profiles registered"
+#~ msgstr "등록한 프로필이 없습니다"
+
+#~ msgid "Add one by clicking Add Profile button"
+#~ msgstr "프로필 추가 단추를 클릭해서 등록하십시오"
+
+#~ msgid "Add Profile"
+#~ msgstr "프로필 추가"
+
+#~ msgid "Yes"
+#~ msgstr "예"
+
+#~ msgid "None"
+#~ msgstr "없음"
+
+#~ msgid "Named Colors"
+#~ msgstr "이름 있는 색상"
+
+#~ msgid "Metadata"
+#~ msgstr "메타 데이터"
+
+#~ msgid "Create a color profile for the selected device"
+#~ msgstr "선택한 장치에 사용할 프로필 만들기"
+
+#~ msgid ""
+#~ "You need Gnome Color Management installed in order to calibrate devices"
+#~ msgstr "장치를 보정하려면 그놈 색 관리를 설치해야 합니다"
+
+#~ msgid "Information"
+#~ msgstr "정보"
+
+#~ msgid "Profile type:"
+#~ msgstr "프로필 종류:"
+
+#~ msgid "Colorspace:"
+#~ msgstr "색 공간:"
+
+#~ msgid "Created:"
+#~ msgstr "만든 날짜:"
+
+#~ msgid "Version:"
+#~ msgstr "버전:"
+
+#~ msgid "Device Manufacturer:"
+#~ msgstr "장치 제조사:"
+
+#~ msgid "Device Model:"
+#~ msgstr "장치 모델:"
+
+#~ msgid "Display correction:"
+#~ msgstr "디스플레이 교정:"
+
+#~ msgid "White Point:"
+#~ msgstr "백색 지점:"
+
+#~ msgid "License:"
+#~ msgstr "라이선스:"
+
+#~ msgid "File size:"
+#~ msgstr "파일 크기:"
+
+#~ msgid "Filename:"
+#~ msgstr "파일 이름:"
+
+#~ msgid "Install System Wide"
+#~ msgstr "시스템 전역 설치"
+
+#~ msgid "device name"
+#~ msgstr "장치 이름"
+
+#~ msgid "Printer"
+#~ msgstr "프린터"
+
+#~ msgid "Id:"
+#~ msgstr "ID:"
+
+#~ msgid "Scope:"
+#~ msgstr "범위:"
+
+#~ msgid "Mode:"
+#~ msgstr "모드:"
+
+#~ msgid "Current Profile:"
+#~ msgstr "현재 프로필:"
+
+#~ msgid "Calibrate"
+#~ msgstr "미세 조정"
+
+#~ msgid "Print Test Page"
+#~ msgstr "테스트 페이지 인쇄"
+
+#~ msgid "Clean Print Heads"
+#~ msgstr "프린터 헤드 청소"
+
+#~ msgid "Print Self Test Page"
+#~ msgstr "자가 진단 페이지 인쇄"
+
+#~ msgid "Print Self-Test Page"
+#~ msgstr "자가 진단 페이지 인쇄"
+
+#~ msgid ""
+#~ "Meta data is additional information stored in the profile for programs to "
+#~ "use."
+#~ msgstr "메타 데이터는 프로그램에서 저장되는 프로필상 추가 정보입니다."
+
+#~ msgid "Named colors are specific colors defined in the profile"
+#~ msgstr "이름 있는 색상은 프로필에 지정된 색상입니다"
 
 #~ msgid "Daniel Nicoletti"
 #~ msgstr "Daniel Nicoletti"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:43+0000\n"
+"POT-Creation-Date: 2022-12-10 00:43+0000\n"
 "PO-Revision-Date: 2022-10-17 08:50+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -31,381 +31,133 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "antonibella5@yahoo.com"
 
-#: colord-kcm/ColordKCM.cpp:54
-#, kde-format
-msgid "Available Profiles"
-msgstr "Perfils disponibles"
-
-#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
-#, kde-format
-msgid "Color settings"
-msgstr "Configuració dels colors"
-
-#: colord-kcm/ColordKCM.cpp:61
-#, kde-format
-msgid "(C) 2012-2016 Daniel Nicoletti"
-msgstr "(C) 2012-2016 Daniel Nicoletti"
-
-#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
-#, kde-format
-msgid "Port to kf5"
-msgstr "Adaptació al KF5"
-
-#: colord-kcm/ColordKCM.cpp:70
-#, kde-format
-msgid "From File..."
-msgstr "Des d'un fitxer..."
-
-#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
-#, kde-format
-msgid "Importing Color Profile"
-msgstr "S'està important el perfil de color"
-
-#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
-#, kde-format
-msgid "Are you sure you want to remove this profile?"
-msgstr "Segur que voleu eliminar este perfil?"
-
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
-#: colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "Elimina el perfil"
-
-#: colord-kcm/ColordKCM.cpp:372
-#, kde-format
-msgid "Your profile did not match the device kind"
-msgstr "El vostre perfil no es correspon amb el tipus de dispositiu"
-
-#: colord-kcm/ColordKCM.cpp:405
-#, kde-format
-msgid "You do not have any devices registered"
-msgstr "No teniu cap dispositiu registrat"
-
-#: colord-kcm/ColordKCM.cpp:406
-#, kde-format
-msgid "Make sure colord module on kded is running"
-msgstr "Assegureu-vos que s'està executant el mòdul «colord» de «kded»"
-
-#: colord-kcm/ColordKCM.cpp:409
-#, kde-format
-msgid "You do not have any profiles registered"
-msgstr "No teniu cap perfil registrat"
-
-#: colord-kcm/ColordKCM.cpp:410
-#, kde-format
-msgid "Add one by clicking Add Profile button"
-msgstr "Afegiu-ne un fent clic en el botó «Afig un perfil»"
-
-#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
-#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
-#, kde-format
-msgid "Profiles"
-msgstr "Perfils"
-
-#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
-#: colord-kcm/ColordKCM.ui:161
-#, kde-format
-msgid "Add Profile"
-msgstr "Afig un perfil"
-
-#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
-#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
-#, kde-format
-msgid "Devices"
-msgstr "Dispositius"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "Yes"
-msgstr "Sí"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "None"
-msgstr "Cap"
-
-#: colord-kcm/Description.cpp:166
-#, kde-format
-msgid "Named Colors"
-msgstr "Colors amb nom"
-
-#: colord-kcm/Description.cpp:174
-#, kde-format
-msgid "Metadata"
-msgstr "Metadades"
-
-#: colord-kcm/Description.cpp:214
+#: colord-kcm/DeviceDescription.cpp:133
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
 msgstr "Impressora"
 
-#: colord-kcm/Description.cpp:216
+#: colord-kcm/DeviceDescription.cpp:135
 #, kde-format
 msgctxt "device type"
 msgid "Display"
 msgstr "Pantalla"
 
-#: colord-kcm/Description.cpp:218
+#: colord-kcm/DeviceDescription.cpp:137
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
 msgstr "Càmera web"
 
-#: colord-kcm/Description.cpp:220
+#: colord-kcm/DeviceDescription.cpp:139
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
 msgstr "Escàner"
 
-#: colord-kcm/Description.cpp:222
+#: colord-kcm/DeviceDescription.cpp:141
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: colord-kcm/Description.cpp:229
+#: colord-kcm/DeviceDescription.cpp:146
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
 msgstr "Sessió d'usuari"
 
-#: colord-kcm/Description.cpp:231
+#: colord-kcm/DeviceDescription.cpp:148
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "Restaura automàticament"
 
-#: colord-kcm/Description.cpp:233
+#: colord-kcm/DeviceDescription.cpp:150
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
 msgstr "Tot el sistema"
 
-#: colord-kcm/Description.cpp:235
+#: colord-kcm/DeviceDescription.cpp:152
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "RGB"
 
-#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "CMYK"
 
-#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "Gris"
 
-#: colord-kcm/Description.cpp:251
+#: colord-kcm/DeviceDescription.cpp:166
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "Este dispositiu no té un perfil assignat"
 
-#: colord-kcm/Description.cpp:368
+#: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
-msgid "Create a color profile for the selected device"
-msgstr "Crea un perfil de color per al dispositiu seleccionat"
-
-#: colord-kcm/Description.cpp:378
-#, kde-format
-msgid "You need Gnome Color Management installed in order to calibrate devices"
+msgid "You can use 'displaycal' to calibrate this device"
 msgstr ""
-"Necessitareu tindre instal·lada la gestió del color de Gnome per a calibrar "
-"els dispositius"
 
-#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
-#, kde-format
+#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#, fuzzy, kde-format
+#| msgid ""
+#| "The measuring instrument is not detected. Please check it is turned on "
+#| "and correctly connected."
 msgid ""
-"The measuring instrument is not detected. Please check it is turned on and "
-"correctly connected."
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
 msgstr ""
 "No s'ha detectat l'instrument de mesura. Comprove que està connectat i "
 "connectat correctament."
 
-#: colord-kcm/Description.cpp:408
+#: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "L'instrument de mesura no admet els perfils d'impressora."
 
-#: colord-kcm/Description.cpp:412
-#, kde-format
-msgid "The device type is not currently supported."
+#: colord-kcm/DeviceDescription.cpp:222
+#, fuzzy, kde-format
+#| msgid "The device type is not currently supported."
+msgid "The device type is not currently supported for calibrating."
 msgstr "El tipus de dispositiu encara no està suportat."
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: colord-kcm/Description.ui:21
-#, kde-format
-msgid "Information"
-msgstr "Informació"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/Description.ui:40
-#, kde-format
-msgid "Profile type:"
-msgstr "Tipus de perfil:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: colord-kcm/Description.ui:63
-#, kde-format
-msgid "Colorspace:"
-msgstr "Espai de color:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#: colord-kcm/Description.ui:86
-#, kde-format
-msgid "Created:"
-msgstr "Creat:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: colord-kcm/Description.ui:109
-#, kde-format
-msgid "Version:"
-msgstr "Versió:"
-
-#. i18n: ectx: property (text), widget (QLabel, makeLabel)
-#: colord-kcm/Description.ui:132
-#, kde-format
-msgid "Device Manufacturer:"
-msgstr "Fabricant del dispositiu:"
-
-#. i18n: ectx: property (text), widget (QLabel, modelLabel)
-#: colord-kcm/Description.ui:158
-#, kde-format
-msgid "Device Model:"
-msgstr "Model del dispositiu:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: colord-kcm/Description.ui:184
-#, kde-format
-msgid "Display correction:"
-msgstr "Correcció de la pantalla:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_11)
-#: colord-kcm/Description.ui:207
-#, kde-format
-msgid "White Point:"
-msgstr "Punt blanc:"
-
-#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#: colord-kcm/Description.ui:230
-#, kde-format
-msgid "License:"
-msgstr "Llicència:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_15)
-#: colord-kcm/Description.ui:256
-#, kde-format
-msgid "File size:"
-msgstr "Mida del fitxer:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_17)
-#: colord-kcm/Description.ui:279
-#, kde-format
-msgid "Filename:"
-msgstr "Nom del fitxer:"
-
-#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
-#: colord-kcm/Description.ui:302
-#, kde-format
-msgid "Install System Wide"
-msgstr "Instal·la a tot el sistema"
-
-#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:316
-#, kde-format
-msgid "device name"
-msgstr "nom del dispositiu"
-
-#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:319
-#, kde-format
-msgid "Printer"
-msgstr "Impressora"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: colord-kcm/Description.ui:326
-#, kde-format
-msgid "Id:"
-msgstr "Id:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#: colord-kcm/Description.ui:340
-#, kde-format
-msgid "Scope:"
-msgstr "Abast:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_10)
-#: colord-kcm/Description.ui:354
-#, kde-format
-msgid "Mode:"
-msgstr "Mode:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_13)
-#: colord-kcm/Description.ui:368
-#, kde-format
-msgid "Current Profile:"
-msgstr "Perfil actual:"
-
-#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
-#: colord-kcm/Description.ui:382
-#, kde-format
-msgid "Calibrate"
-msgstr "Calibra"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:400
-#, kde-format
-msgid "Print Test Page"
-msgstr "Imprimix pàgina de prova"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:405
-#, kde-format
-msgid "Clean Print Heads"
-msgstr "Neteja els capçals d'impressió"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:410
-#, kde-format
-msgid "Print Self Test Page"
-msgstr "Imprimix pàgina de prova"
-
-#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:413
-#, kde-format
-msgid "Print Self-Test Page"
-msgstr "S'imprimirà una pàgina de prova"
-
-#: colord-kcm/DeviceModel.cpp:229
+#: colord-kcm/DeviceModel.cpp:250
 #, kde-format
 msgctxt "colorspace"
 msgid "Default RGB"
 msgstr "RGB predeterminat"
 
-#: colord-kcm/DeviceModel.cpp:231
+#: colord-kcm/DeviceModel.cpp:252
 #, kde-format
 msgctxt "colorspace"
 msgid "Default CMYK"
 msgstr "CMYK predeterminat"
 
-#: colord-kcm/DeviceModel.cpp:233
+#: colord-kcm/DeviceModel.cpp:254
 #, kde-format
 msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Gris predeterminat"
+
+#: colord-kcm/DeviceModel.cpp:321
+#, kde-format
+msgid "Devices"
+msgstr "Dispositius"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -538,86 +290,75 @@ msgstr "Perfil de prova: %1"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: colord-kcm/ProfileMetaData.cpp:78
+#: colord-kcm/ProfileMetaDataModel.cpp:80
 #, kde-format
 msgid "Standard space"
 msgstr "Espai normal"
 
-#: colord-kcm/ProfileMetaData.cpp:81
+#: colord-kcm/ProfileMetaDataModel.cpp:83
 #, kde-format
 msgid "Display checksum"
 msgstr "Suma de verificació de la pantalla"
 
-#: colord-kcm/ProfileMetaData.cpp:84
+#: colord-kcm/ProfileMetaDataModel.cpp:86
 #, kde-format
 msgid "Display model"
 msgstr "Model de la pantalla"
 
-#: colord-kcm/ProfileMetaData.cpp:87
+#: colord-kcm/ProfileMetaDataModel.cpp:89
 #, kde-format
 msgid "Display serial number"
 msgstr "Número de sèrie de la pantalla"
 
-#: colord-kcm/ProfileMetaData.cpp:90
+#: colord-kcm/ProfileMetaDataModel.cpp:92
 #, kde-format
 msgid "Display PNPID"
 msgstr "PNPID de la pantalla"
 
-#: colord-kcm/ProfileMetaData.cpp:93
+#: colord-kcm/ProfileMetaDataModel.cpp:95
 #, kde-format
 msgid "Display vendor"
 msgstr "Fabricant de la pantalla"
 
-#: colord-kcm/ProfileMetaData.cpp:96
+#: colord-kcm/ProfileMetaDataModel.cpp:98
 #, kde-format
 msgid "File checksum"
 msgstr "Suma de verificació del fitxer"
 
-#: colord-kcm/ProfileMetaData.cpp:99
+#: colord-kcm/ProfileMetaDataModel.cpp:101
 #, kde-format
 msgid "Framework product"
 msgstr "Producte de l'estructura"
 
-#: colord-kcm/ProfileMetaData.cpp:102
+#: colord-kcm/ProfileMetaDataModel.cpp:104
 #, kde-format
 msgid "Framework program"
 msgstr "Programa de l'estructura"
 
-#: colord-kcm/ProfileMetaData.cpp:105
+#: colord-kcm/ProfileMetaDataModel.cpp:107
 #, kde-format
 msgid "Framework version"
 msgstr "Versió de l'estructura"
 
-#: colord-kcm/ProfileMetaData.cpp:108
+#: colord-kcm/ProfileMetaDataModel.cpp:110
 #, kde-format
 msgid "Data source type"
 msgstr "Tipus de la font de dades"
 
-#: colord-kcm/ProfileMetaData.cpp:111
+#: colord-kcm/ProfileMetaDataModel.cpp:113
 #, kde-format
 msgid "Mapping format"
 msgstr "Format del mapatge"
 
-#: colord-kcm/ProfileMetaData.cpp:114
+#: colord-kcm/ProfileMetaDataModel.cpp:116
 #, kde-format
 msgid "Mapping qualifier"
 msgstr "Qualificador del mapatge"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileMetaData.ui:39
+#: colord-kcm/ProfileModel.cpp:226
 #, kde-format
-msgid ""
-"Meta data is additional information stored in the profile for programs to "
-"use."
-msgstr ""
-"Les metadades emmagatzemen informació addicional en el perfil per al seu ús "
-"per part dels programes."
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileNamedColors.ui:17
-#, kde-format
-msgid "Named colors are specific colors defined in the profile"
-msgstr "Els colors amb nom són colors específics definits en el perfil"
+msgid "Profiles"
+msgstr "Perfils"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -643,6 +384,11 @@ msgstr "Una aplicació per a instal·lar perfils ICC"
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2008-2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "Adaptació al KF5"
 
 #: icc-importer/main.cpp:77
 #, kde-format
@@ -697,8 +443,152 @@ msgstr ""
 "No s'ha pogut importar el perfil de color: el perfil de color ja s'ha "
 "importat"
 
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "S'està important el perfil de color"
+
 #: icc-importer/main.cpp:142
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr ""
 "No s'ha pogut importar el perfil de color: no s'ha pogut copiar el fitxer"
+
+#~ msgid "Available Profiles"
+#~ msgstr "Perfils disponibles"
+
+#~ msgid "Color settings"
+#~ msgstr "Configuració dels colors"
+
+#~ msgid "(C) 2012-2016 Daniel Nicoletti"
+#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
+
+#~ msgid "From File..."
+#~ msgstr "Des d'un fitxer..."
+
+#~ msgid "Are you sure you want to remove this profile?"
+#~ msgstr "Segur que voleu eliminar este perfil?"
+
+#~ msgid "Remove Profile"
+#~ msgstr "Elimina el perfil"
+
+#~ msgid "Your profile did not match the device kind"
+#~ msgstr "El vostre perfil no es correspon amb el tipus de dispositiu"
+
+#~ msgid "You do not have any devices registered"
+#~ msgstr "No teniu cap dispositiu registrat"
+
+#~ msgid "Make sure colord module on kded is running"
+#~ msgstr "Assegureu-vos que s'està executant el mòdul «colord» de «kded»"
+
+#~ msgid "You do not have any profiles registered"
+#~ msgstr "No teniu cap perfil registrat"
+
+#~ msgid "Add one by clicking Add Profile button"
+#~ msgstr "Afegiu-ne un fent clic en el botó «Afig un perfil»"
+
+#~ msgid "Add Profile"
+#~ msgstr "Afig un perfil"
+
+#~ msgid "Yes"
+#~ msgstr "Sí"
+
+#~ msgid "None"
+#~ msgstr "Cap"
+
+#~ msgid "Named Colors"
+#~ msgstr "Colors amb nom"
+
+#~ msgid "Metadata"
+#~ msgstr "Metadades"
+
+#~ msgid "Create a color profile for the selected device"
+#~ msgstr "Crea un perfil de color per al dispositiu seleccionat"
+
+#~ msgid ""
+#~ "You need Gnome Color Management installed in order to calibrate devices"
+#~ msgstr ""
+#~ "Necessitareu tindre instal·lada la gestió del color de Gnome per a "
+#~ "calibrar els dispositius"
+
+#~ msgid "Information"
+#~ msgstr "Informació"
+
+#~ msgid "Profile type:"
+#~ msgstr "Tipus de perfil:"
+
+#~ msgid "Colorspace:"
+#~ msgstr "Espai de color:"
+
+#~ msgid "Created:"
+#~ msgstr "Creat:"
+
+#~ msgid "Version:"
+#~ msgstr "Versió:"
+
+#~ msgid "Device Manufacturer:"
+#~ msgstr "Fabricant del dispositiu:"
+
+#~ msgid "Device Model:"
+#~ msgstr "Model del dispositiu:"
+
+#~ msgid "Display correction:"
+#~ msgstr "Correcció de la pantalla:"
+
+#~ msgid "White Point:"
+#~ msgstr "Punt blanc:"
+
+#~ msgid "License:"
+#~ msgstr "Llicència:"
+
+#~ msgid "File size:"
+#~ msgstr "Mida del fitxer:"
+
+#~ msgid "Filename:"
+#~ msgstr "Nom del fitxer:"
+
+#~ msgid "Install System Wide"
+#~ msgstr "Instal·la a tot el sistema"
+
+#~ msgid "device name"
+#~ msgstr "nom del dispositiu"
+
+#~ msgid "Printer"
+#~ msgstr "Impressora"
+
+#~ msgid "Id:"
+#~ msgstr "Id:"
+
+#~ msgid "Scope:"
+#~ msgstr "Abast:"
+
+#~ msgid "Mode:"
+#~ msgstr "Mode:"
+
+#~ msgid "Current Profile:"
+#~ msgstr "Perfil actual:"
+
+#~ msgid "Calibrate"
+#~ msgstr "Calibra"
+
+#~ msgid "Print Test Page"
+#~ msgstr "Imprimix pàgina de prova"
+
+#~ msgid "Clean Print Heads"
+#~ msgstr "Neteja els capçals d'impressió"
+
+#~ msgid "Print Self Test Page"
+#~ msgstr "Imprimix pàgina de prova"
+
+#~ msgid "Print Self-Test Page"
+#~ msgstr "S'imprimirà una pàgina de prova"
+
+#~ msgid ""
+#~ "Meta data is additional information stored in the profile for programs to "
+#~ "use."
+#~ msgstr ""
+#~ "Les metadades emmagatzemen informació addicional en el perfil per al seu "
+#~ "ús per part dels programes."
+
+#~ msgid "Named colors are specific colors defined in the profile"
+#~ msgstr "Els colors amb nom són colors específics definits en el perfil"

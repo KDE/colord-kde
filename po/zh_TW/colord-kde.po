@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:43+0000\n"
+"POT-Creation-Date: 2022-12-10 00:43+0000\n"
 "PO-Revision-Date: 2018-12-21 19:06+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -27,377 +27,131 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "pan93412@gmail.com"
 
-#: colord-kcm/ColordKCM.cpp:54
-#, kde-format
-msgid "Available Profiles"
-msgstr "可用設定檔"
-
-#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
-#, kde-format
-msgid "Color settings"
-msgstr "色彩設定"
-
-#: colord-kcm/ColordKCM.cpp:61
-#, kde-format
-msgid "(C) 2012-2016 Daniel Nicoletti"
-msgstr "(C) 2012-2016 Daniel Nicoletti"
-
-#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
-#, kde-format
-msgid "Port to kf5"
-msgstr "移植到 kf5"
-
-#: colord-kcm/ColordKCM.cpp:70
-#, kde-format
-msgid "From File..."
-msgstr "自檔案…"
-
-#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
-#, kde-format
-msgid "Importing Color Profile"
-msgstr "匯入色彩設定檔"
-
-#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
-#, kde-format
-msgid "Are you sure you want to remove this profile?"
-msgstr "確認移除此設定檔？"
-
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
-#: colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "移除設定檔"
-
-#: colord-kcm/ColordKCM.cpp:372
-#, kde-format
-msgid "Your profile did not match the device kind"
-msgstr "您的設定檔與裝置種類不符"
-
-#: colord-kcm/ColordKCM.cpp:405
-#, kde-format
-msgid "You do not have any devices registered"
-msgstr "您沒有任何已註冊的裝置"
-
-#: colord-kcm/ColordKCM.cpp:406
-#, kde-format
-msgid "Make sure colord module on kded is running"
-msgstr "確保 kded 上的 colord 模組正在運作"
-
-#: colord-kcm/ColordKCM.cpp:409
-#, kde-format
-msgid "You do not have any profiles registered"
-msgstr "您沒有任何已註冊的設定檔"
-
-#: colord-kcm/ColordKCM.cpp:410
-#, kde-format
-msgid "Add one by clicking Add Profile button"
-msgstr "按「新增設定檔」按鈕新增"
-
-#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
-#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
-#, kde-format
-msgid "Profiles"
-msgstr "設定檔"
-
-#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
-#: colord-kcm/ColordKCM.ui:161
-#, kde-format
-msgid "Add Profile"
-msgstr "新增設定檔"
-
-#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
-#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
-#, kde-format
-msgid "Devices"
-msgstr "裝置"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "Yes"
-msgstr "是"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "None"
-msgstr "無"
-
-#: colord-kcm/Description.cpp:166
-#, kde-format
-msgid "Named Colors"
-msgstr "命名過的色彩"
-
-#: colord-kcm/Description.cpp:174
-#, kde-format
-msgid "Metadata"
-msgstr "中繼資料"
-
-#: colord-kcm/Description.cpp:214
+#: colord-kcm/DeviceDescription.cpp:133
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
 msgstr "列印機"
 
-#: colord-kcm/Description.cpp:216
+#: colord-kcm/DeviceDescription.cpp:135
 #, kde-format
 msgctxt "device type"
 msgid "Display"
 msgstr "顯示器"
 
-#: colord-kcm/Description.cpp:218
+#: colord-kcm/DeviceDescription.cpp:137
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
 msgstr "網路攝影機"
 
-#: colord-kcm/Description.cpp:220
+#: colord-kcm/DeviceDescription.cpp:139
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
 msgstr "掃描器"
 
-#: colord-kcm/Description.cpp:222
+#: colord-kcm/DeviceDescription.cpp:141
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
 msgstr "未知"
 
-#: colord-kcm/Description.cpp:229
+#: colord-kcm/DeviceDescription.cpp:146
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
 msgstr "使用者工作階段"
 
-#: colord-kcm/Description.cpp:231
+#: colord-kcm/DeviceDescription.cpp:148
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "自動還原"
 
-#: colord-kcm/Description.cpp:233
+#: colord-kcm/DeviceDescription.cpp:150
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
 msgstr "全系統範圍"
 
-#: colord-kcm/Description.cpp:235
+#: colord-kcm/DeviceDescription.cpp:152
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "未知"
 
-#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "RGB"
 
-#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "CMYK"
 
-#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "灰色"
 
-#: colord-kcm/Description.cpp:251
+#: colord-kcm/DeviceDescription.cpp:166
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "沒有指定到此裝置的設定檔"
 
-#: colord-kcm/Description.cpp:368
+#: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
-msgid "Create a color profile for the selected device"
-msgstr "建立選取裝置的色彩設定檔"
+msgid "You can use 'displaycal' to calibrate this device"
+msgstr ""
 
-#: colord-kcm/Description.cpp:378
-#, kde-format
-msgid "You need Gnome Color Management installed in order to calibrate devices"
-msgstr "您需要安裝〈GNOME 色彩管理〉方可校正裝置"
-
-#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
-#, kde-format
+#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#, fuzzy, kde-format
+#| msgid ""
+#| "The measuring instrument is not detected. Please check it is turned on "
+#| "and correctly connected."
 msgid ""
-"The measuring instrument is not detected. Please check it is turned on and "
-"correctly connected."
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
 msgstr "未偵測到測量儀器。請檢查其是否已開啟且正確連接。"
 
-#: colord-kcm/Description.cpp:408
+#: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "該測量儀器不支援列印設定檔。"
 
-#: colord-kcm/Description.cpp:412
-#, kde-format
-msgid "The device type is not currently supported."
+#: colord-kcm/DeviceDescription.cpp:222
+#, fuzzy, kde-format
+#| msgid "The device type is not currently supported."
+msgid "The device type is not currently supported for calibrating."
 msgstr "目前不支援裝置類型。"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: colord-kcm/Description.ui:21
-#, kde-format
-msgid "Information"
-msgstr "資訊"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/Description.ui:40
-#, kde-format
-msgid "Profile type:"
-msgstr "設定檔類型："
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: colord-kcm/Description.ui:63
-#, kde-format
-msgid "Colorspace:"
-msgstr "色彩空間："
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#: colord-kcm/Description.ui:86
-#, kde-format
-msgid "Created:"
-msgstr "建立時間："
-
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: colord-kcm/Description.ui:109
-#, kde-format
-msgid "Version:"
-msgstr "版本："
-
-#. i18n: ectx: property (text), widget (QLabel, makeLabel)
-#: colord-kcm/Description.ui:132
-#, kde-format
-msgid "Device Manufacturer:"
-msgstr "裝置製造商："
-
-#. i18n: ectx: property (text), widget (QLabel, modelLabel)
-#: colord-kcm/Description.ui:158
-#, kde-format
-msgid "Device Model:"
-msgstr "裝置型號："
-
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: colord-kcm/Description.ui:184
-#, kde-format
-msgid "Display correction:"
-msgstr "顯示器校正："
-
-#. i18n: ectx: property (text), widget (QLabel, label_11)
-#: colord-kcm/Description.ui:207
-#, kde-format
-msgid "White Point:"
-msgstr "白點："
-
-#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#: colord-kcm/Description.ui:230
-#, kde-format
-msgid "License:"
-msgstr "版權："
-
-#. i18n: ectx: property (text), widget (QLabel, label_15)
-#: colord-kcm/Description.ui:256
-#, kde-format
-msgid "File size:"
-msgstr "檔案大小："
-
-#. i18n: ectx: property (text), widget (QLabel, label_17)
-#: colord-kcm/Description.ui:279
-#, kde-format
-msgid "Filename:"
-msgstr "檔案名稱："
-
-#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
-#: colord-kcm/Description.ui:302
-#, kde-format
-msgid "Install System Wide"
-msgstr "全系統安裝"
-
-#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:316
-#, kde-format
-msgid "device name"
-msgstr "裝置名稱"
-
-#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:319
-#, kde-format
-msgid "Printer"
-msgstr "列印機"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: colord-kcm/Description.ui:326
-#, kde-format
-msgid "Id:"
-msgstr "ID："
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#: colord-kcm/Description.ui:340
-#, kde-format
-msgid "Scope:"
-msgstr "範圍："
-
-#. i18n: ectx: property (text), widget (QLabel, label_10)
-#: colord-kcm/Description.ui:354
-#, kde-format
-msgid "Mode:"
-msgstr "模式："
-
-#. i18n: ectx: property (text), widget (QLabel, label_13)
-#: colord-kcm/Description.ui:368
-#, kde-format
-msgid "Current Profile:"
-msgstr "目前設定檔："
-
-#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
-#: colord-kcm/Description.ui:382
-#, kde-format
-msgid "Calibrate"
-msgstr "校正"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:400
-#, kde-format
-msgid "Print Test Page"
-msgstr "列印測試頁"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:405
-#, kde-format
-msgid "Clean Print Heads"
-msgstr "清理列印頭"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:410
-#, kde-format
-msgid "Print Self Test Page"
-msgstr "列印自我測試頁面"
-
-#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:413
-#, kde-format
-msgid "Print Self-Test Page"
-msgstr "列印自我測試頁面"
-
-#: colord-kcm/DeviceModel.cpp:229
+#: colord-kcm/DeviceModel.cpp:250
 #, kde-format
 msgctxt "colorspace"
 msgid "Default RGB"
 msgstr "預設 RGB"
 
-#: colord-kcm/DeviceModel.cpp:231
+#: colord-kcm/DeviceModel.cpp:252
 #, kde-format
 msgctxt "colorspace"
 msgid "Default CMYK"
 msgstr "預設 CMYK"
 
-#: colord-kcm/DeviceModel.cpp:233
+#: colord-kcm/DeviceModel.cpp:254
 #, kde-format
 msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "預設灰"
+
+#: colord-kcm/DeviceModel.cpp:321
+#, kde-format
+msgid "Devices"
+msgstr "裝置"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -530,84 +284,75 @@ msgstr "測試設定檔：%1"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: colord-kcm/ProfileMetaData.cpp:78
+#: colord-kcm/ProfileMetaDataModel.cpp:80
 #, kde-format
 msgid "Standard space"
 msgstr "標準空間"
 
-#: colord-kcm/ProfileMetaData.cpp:81
+#: colord-kcm/ProfileMetaDataModel.cpp:83
 #, kde-format
 msgid "Display checksum"
 msgstr "顯示器總和檢查"
 
-#: colord-kcm/ProfileMetaData.cpp:84
+#: colord-kcm/ProfileMetaDataModel.cpp:86
 #, kde-format
 msgid "Display model"
 msgstr "顯示器型號"
 
-#: colord-kcm/ProfileMetaData.cpp:87
+#: colord-kcm/ProfileMetaDataModel.cpp:89
 #, kde-format
 msgid "Display serial number"
 msgstr "顯示器序號"
 
-#: colord-kcm/ProfileMetaData.cpp:90
+#: colord-kcm/ProfileMetaDataModel.cpp:92
 #, kde-format
 msgid "Display PNPID"
 msgstr "顯示器 PNPID"
 
-#: colord-kcm/ProfileMetaData.cpp:93
+#: colord-kcm/ProfileMetaDataModel.cpp:95
 #, kde-format
 msgid "Display vendor"
 msgstr "顯示器供應商"
 
-#: colord-kcm/ProfileMetaData.cpp:96
+#: colord-kcm/ProfileMetaDataModel.cpp:98
 #, kde-format
 msgid "File checksum"
 msgstr "檔案總和檢查"
 
-#: colord-kcm/ProfileMetaData.cpp:99
+#: colord-kcm/ProfileMetaDataModel.cpp:101
 #, kde-format
 msgid "Framework product"
 msgstr "框架產品"
 
-#: colord-kcm/ProfileMetaData.cpp:102
+#: colord-kcm/ProfileMetaDataModel.cpp:104
 #, kde-format
 msgid "Framework program"
 msgstr "框架程式"
 
-#: colord-kcm/ProfileMetaData.cpp:105
+#: colord-kcm/ProfileMetaDataModel.cpp:107
 #, kde-format
 msgid "Framework version"
 msgstr "框架版本"
 
-#: colord-kcm/ProfileMetaData.cpp:108
+#: colord-kcm/ProfileMetaDataModel.cpp:110
 #, kde-format
 msgid "Data source type"
 msgstr "檔案來源類型"
 
-#: colord-kcm/ProfileMetaData.cpp:111
+#: colord-kcm/ProfileMetaDataModel.cpp:113
 #, kde-format
 msgid "Mapping format"
 msgstr "映射格式"
 
-#: colord-kcm/ProfileMetaData.cpp:114
+#: colord-kcm/ProfileMetaDataModel.cpp:116
 #, kde-format
 msgid "Mapping qualifier"
 msgstr "映射限定詞"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileMetaData.ui:39
+#: colord-kcm/ProfileModel.cpp:226
 #, kde-format
-msgid ""
-"Meta data is additional information stored in the profile for programs to "
-"use."
-msgstr "中繼資料是個儲存在設定檔中的額外資訊，供程式使用。"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileNamedColors.ui:17
-#, kde-format
-msgid "Named colors are specific colors defined in the profile"
-msgstr "已命名色彩為定義在設定檔中的指定顏色"
+msgid "Profiles"
+msgstr "設定檔"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -633,6 +378,11 @@ msgstr "安裝 ICC 設定檔的應用程式"
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2008-2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "移植到 kf5"
 
 #: icc-importer/main.cpp:77
 #, kde-format
@@ -685,7 +435,147 @@ msgstr ""
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "匯入色彩設定檔失敗：色彩設定檔已匯入"
 
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "匯入色彩設定檔"
+
 #: icc-importer/main.cpp:142
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "匯入色彩設定檔失敗：無法複製檔案"
+
+#~ msgid "Available Profiles"
+#~ msgstr "可用設定檔"
+
+#~ msgid "Color settings"
+#~ msgstr "色彩設定"
+
+#~ msgid "(C) 2012-2016 Daniel Nicoletti"
+#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
+
+#~ msgid "From File..."
+#~ msgstr "自檔案…"
+
+#~ msgid "Are you sure you want to remove this profile?"
+#~ msgstr "確認移除此設定檔？"
+
+#~ msgid "Remove Profile"
+#~ msgstr "移除設定檔"
+
+#~ msgid "Your profile did not match the device kind"
+#~ msgstr "您的設定檔與裝置種類不符"
+
+#~ msgid "You do not have any devices registered"
+#~ msgstr "您沒有任何已註冊的裝置"
+
+#~ msgid "Make sure colord module on kded is running"
+#~ msgstr "確保 kded 上的 colord 模組正在運作"
+
+#~ msgid "You do not have any profiles registered"
+#~ msgstr "您沒有任何已註冊的設定檔"
+
+#~ msgid "Add one by clicking Add Profile button"
+#~ msgstr "按「新增設定檔」按鈕新增"
+
+#~ msgid "Add Profile"
+#~ msgstr "新增設定檔"
+
+#~ msgid "Yes"
+#~ msgstr "是"
+
+#~ msgid "None"
+#~ msgstr "無"
+
+#~ msgid "Named Colors"
+#~ msgstr "命名過的色彩"
+
+#~ msgid "Metadata"
+#~ msgstr "中繼資料"
+
+#~ msgid "Create a color profile for the selected device"
+#~ msgstr "建立選取裝置的色彩設定檔"
+
+#~ msgid ""
+#~ "You need Gnome Color Management installed in order to calibrate devices"
+#~ msgstr "您需要安裝〈GNOME 色彩管理〉方可校正裝置"
+
+#~ msgid "Information"
+#~ msgstr "資訊"
+
+#~ msgid "Profile type:"
+#~ msgstr "設定檔類型："
+
+#~ msgid "Colorspace:"
+#~ msgstr "色彩空間："
+
+#~ msgid "Created:"
+#~ msgstr "建立時間："
+
+#~ msgid "Version:"
+#~ msgstr "版本："
+
+#~ msgid "Device Manufacturer:"
+#~ msgstr "裝置製造商："
+
+#~ msgid "Device Model:"
+#~ msgstr "裝置型號："
+
+#~ msgid "Display correction:"
+#~ msgstr "顯示器校正："
+
+#~ msgid "White Point:"
+#~ msgstr "白點："
+
+#~ msgid "License:"
+#~ msgstr "版權："
+
+#~ msgid "File size:"
+#~ msgstr "檔案大小："
+
+#~ msgid "Filename:"
+#~ msgstr "檔案名稱："
+
+#~ msgid "Install System Wide"
+#~ msgstr "全系統安裝"
+
+#~ msgid "device name"
+#~ msgstr "裝置名稱"
+
+#~ msgid "Printer"
+#~ msgstr "列印機"
+
+#~ msgid "Id:"
+#~ msgstr "ID："
+
+#~ msgid "Scope:"
+#~ msgstr "範圍："
+
+#~ msgid "Mode:"
+#~ msgstr "模式："
+
+#~ msgid "Current Profile:"
+#~ msgstr "目前設定檔："
+
+#~ msgid "Calibrate"
+#~ msgstr "校正"
+
+#~ msgid "Print Test Page"
+#~ msgstr "列印測試頁"
+
+#~ msgid "Clean Print Heads"
+#~ msgstr "清理列印頭"
+
+#~ msgid "Print Self Test Page"
+#~ msgstr "列印自我測試頁面"
+
+#~ msgid "Print Self-Test Page"
+#~ msgstr "列印自我測試頁面"
+
+#~ msgid ""
+#~ "Meta data is additional information stored in the profile for programs to "
+#~ "use."
+#~ msgstr "中繼資料是個儲存在設定檔中的額外資訊，供程式使用。"
+
+#~ msgid "Named colors are specific colors defined in the profile"
+#~ msgstr "已命名色彩為定義在設定檔中的指定顏色"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:43+0000\n"
+"POT-Creation-Date: 2022-12-10 00:43+0000\n"
 "PO-Revision-Date: 2022-10-22 19:04+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -28,377 +28,131 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "zayed.alsaidi@gmail.com"
 
-#: colord-kcm/ColordKCM.cpp:54
-#, kde-format
-msgid "Available Profiles"
-msgstr "التشكيلات المتوفرة"
-
-#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
-#, kde-format
-msgid "Color settings"
-msgstr "إعدادات الألوان"
-
-#: colord-kcm/ColordKCM.cpp:61
-#, kde-format
-msgid "(C) 2012-2016 Daniel Nicoletti"
-msgstr "(C) 2012-2016 Daniel Nicoletti"
-
-#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
-#, kde-format
-msgid "Port to kf5"
-msgstr "النقل إلى إطار عمل كدي ٥"
-
-#: colord-kcm/ColordKCM.cpp:70
-#, kde-format
-msgid "From File..."
-msgstr "من ملف..."
-
-#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
-#, kde-format
-msgid "Importing Color Profile"
-msgstr "يستورد تشكيلة الألوان"
-
-#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
-#, kde-format
-msgid "Are you sure you want to remove this profile?"
-msgstr "أمتأكّد من إزالة هذه التشكيلة؟"
-
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
-#: colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "احذف التشكيلة"
-
-#: colord-kcm/ColordKCM.cpp:372
-#, kde-format
-msgid "Your profile did not match the device kind"
-msgstr "تشكيلتك لا تطابق نوع الجهاز"
-
-#: colord-kcm/ColordKCM.cpp:405
-#, kde-format
-msgid "You do not have any devices registered"
-msgstr "لا تملك أي جهاز مسجل"
-
-#: colord-kcm/ColordKCM.cpp:406
-#, kde-format
-msgid "Make sure colord module on kded is running"
-msgstr "تأكد أن وحدة colord تعمل"
-
-#: colord-kcm/ColordKCM.cpp:409
-#, kde-format
-msgid "You do not have any profiles registered"
-msgstr "لا تملك أي تشكيلة مسجل"
-
-#: colord-kcm/ColordKCM.cpp:410
-#, kde-format
-msgid "Add one by clicking Add Profile button"
-msgstr "أضف واحدة بالنقر على زر أضف تشكيلة"
-
-#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
-#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
-#, kde-format
-msgid "Profiles"
-msgstr "التّشكيلات"
-
-#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
-#: colord-kcm/ColordKCM.ui:161
-#, kde-format
-msgid "Add Profile"
-msgstr "أضف تشكيلة"
-
-#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
-#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
-#, kde-format
-msgid "Devices"
-msgstr "الأجهزة"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "Yes"
-msgstr "نعم"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "None"
-msgstr "بلا"
-
-#: colord-kcm/Description.cpp:166
-#, kde-format
-msgid "Named Colors"
-msgstr "الألوان المسماة"
-
-#: colord-kcm/Description.cpp:174
-#, kde-format
-msgid "Metadata"
-msgstr "البيانات الوصفيّة"
-
-#: colord-kcm/Description.cpp:214
+#: colord-kcm/DeviceDescription.cpp:133
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
 msgstr "طابعة"
 
-#: colord-kcm/Description.cpp:216
+#: colord-kcm/DeviceDescription.cpp:135
 #, kde-format
 msgctxt "device type"
 msgid "Display"
 msgstr "شاشة"
 
-#: colord-kcm/Description.cpp:218
+#: colord-kcm/DeviceDescription.cpp:137
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
 msgstr "كاميرا ويب"
 
-#: colord-kcm/Description.cpp:220
+#: colord-kcm/DeviceDescription.cpp:139
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
 msgstr "ماسح ضوئي"
 
-#: colord-kcm/Description.cpp:222
+#: colord-kcm/DeviceDescription.cpp:141
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
 msgstr "مجهول"
 
-#: colord-kcm/Description.cpp:229
+#: colord-kcm/DeviceDescription.cpp:146
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
 msgstr "جلسة المستخدم"
 
-#: colord-kcm/Description.cpp:231
+#: colord-kcm/DeviceDescription.cpp:148
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "استعادة آلية"
 
-#: colord-kcm/Description.cpp:233
+#: colord-kcm/DeviceDescription.cpp:150
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
 msgstr "كامل النظام"
 
-#: colord-kcm/Description.cpp:235
+#: colord-kcm/DeviceDescription.cpp:152
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "مجهول"
 
-#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "ح‌خ‌ز"
 
-#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "س‌م‌ص‌د"
 
-#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "رصاصيّ"
 
-#: colord-kcm/Description.cpp:251
+#: colord-kcm/DeviceDescription.cpp:166
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "لا يملك هذا الجهاز أي تشكيلة مسندة له."
 
-#: colord-kcm/Description.cpp:368
+#: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
-msgid "Create a color profile for the selected device"
-msgstr "أنشئ تشكيلة ألوان للجهاد المحدد."
+msgid "You can use 'displaycal' to calibrate this device"
+msgstr ""
 
-#: colord-kcm/Description.cpp:378
-#, kde-format
-msgid "You need Gnome Color Management installed in order to calibrate devices"
-msgstr "أنت بحاجة إلى تثبيت إدارة ألوان غنوم لمعايرة الأجهزة"
-
-#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
-#, kde-format
+#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#, fuzzy, kde-format
+#| msgid ""
+#| "The measuring instrument is not detected. Please check it is turned on "
+#| "and correctly connected."
 msgid ""
-"The measuring instrument is not detected. Please check it is turned on and "
-"correctly connected."
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
 msgstr "لم يكشف عن أداة القياس. يرجى التحقق من تشغيلها وتوصيلها بشكل صحيح."
 
-#: colord-kcm/Description.cpp:408
+#: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "أداة القياس لا تدعم تشكيل الطابعة."
 
-#: colord-kcm/Description.cpp:412
-#, kde-format
-msgid "The device type is not currently supported."
+#: colord-kcm/DeviceDescription.cpp:222
+#, fuzzy, kde-format
+#| msgid "The device type is not currently supported."
+msgid "The device type is not currently supported for calibrating."
 msgstr "نوع الجهاز غير مدعوم حالياً."
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: colord-kcm/Description.ui:21
-#, kde-format
-msgid "Information"
-msgstr "معلومات"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/Description.ui:40
-#, kde-format
-msgid "Profile type:"
-msgstr "نوع التشكيلة:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: colord-kcm/Description.ui:63
-#, kde-format
-msgid "Colorspace:"
-msgstr "الفضاء اللوني:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#: colord-kcm/Description.ui:86
-#, kde-format
-msgid "Created:"
-msgstr "أُنشئ في:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: colord-kcm/Description.ui:109
-#, kde-format
-msgid "Version:"
-msgstr "الإصدارة:"
-
-#. i18n: ectx: property (text), widget (QLabel, makeLabel)
-#: colord-kcm/Description.ui:132
-#, kde-format
-msgid "Device Manufacturer:"
-msgstr "مصنّع الجهاز:"
-
-#. i18n: ectx: property (text), widget (QLabel, modelLabel)
-#: colord-kcm/Description.ui:158
-#, kde-format
-msgid "Device Model:"
-msgstr "طراز الجهاز:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: colord-kcm/Description.ui:184
-#, kde-format
-msgid "Display correction:"
-msgstr "تصحيح الشاشة:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_11)
-#: colord-kcm/Description.ui:207
-#, kde-format
-msgid "White Point:"
-msgstr "النّقطة البيضاء:"
-
-#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#: colord-kcm/Description.ui:230
-#, kde-format
-msgid "License:"
-msgstr "الرّخصة:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_15)
-#: colord-kcm/Description.ui:256
-#, kde-format
-msgid "File size:"
-msgstr "حجم الملف:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_17)
-#: colord-kcm/Description.ui:279
-#, kde-format
-msgid "Filename:"
-msgstr "اسم الملفّ:"
-
-#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
-#: colord-kcm/Description.ui:302
-#, kde-format
-msgid "Install System Wide"
-msgstr "ثبت على كامل النظام"
-
-#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:316
-#, kde-format
-msgid "device name"
-msgstr "اسم الجهاز"
-
-#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:319
-#, kde-format
-msgid "Printer"
-msgstr "الطّابعة"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: colord-kcm/Description.ui:326
-#, kde-format
-msgid "Id:"
-msgstr "المعرّف:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#: colord-kcm/Description.ui:340
-#, kde-format
-msgid "Scope:"
-msgstr "النّطاق:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_10)
-#: colord-kcm/Description.ui:354
-#, kde-format
-msgid "Mode:"
-msgstr "الوضع:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_13)
-#: colord-kcm/Description.ui:368
-#, kde-format
-msgid "Current Profile:"
-msgstr "التشكيلة الحالية:"
-
-#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
-#: colord-kcm/Description.ui:382
-#, kde-format
-msgid "Calibrate"
-msgstr "عاير"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:400
-#, kde-format
-msgid "Print Test Page"
-msgstr "اطبع صفحة اختبار"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:405
-#, kde-format
-msgid "Clean Print Heads"
-msgstr "نظّف رؤوس الطّباعة"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:410
-#, kde-format
-msgid "Print Self Test Page"
-msgstr "اطبع صفحة اختبار الذاتية"
-
-#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:413
-#, kde-format
-msgid "Print Self-Test Page"
-msgstr "اطبع صفحة اختبار الذاتية"
-
-#: colord-kcm/DeviceModel.cpp:229
+#: colord-kcm/DeviceModel.cpp:250
 #, kde-format
 msgctxt "colorspace"
 msgid "Default RGB"
 msgstr "المبدئي ح‌خ‌ز"
 
-#: colord-kcm/DeviceModel.cpp:231
+#: colord-kcm/DeviceModel.cpp:252
 #, kde-format
 msgctxt "colorspace"
 msgid "Default CMYK"
 msgstr "المبدئي س‌م‌ص‌د"
 
-#: colord-kcm/DeviceModel.cpp:233
+#: colord-kcm/DeviceModel.cpp:254
 #, kde-format
 msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "المبدئي رصاصي"
+
+#: colord-kcm/DeviceModel.cpp:321
+#, kde-format
+msgid "Devices"
+msgstr "الأجهزة"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -531,85 +285,75 @@ msgstr "اختبر التشكيلة: %1"
 msgid "%1 (%2)"
 msgstr "‏%1 (%2)"
 
-#: colord-kcm/ProfileMetaData.cpp:78
+#: colord-kcm/ProfileMetaDataModel.cpp:80
 #, kde-format
 msgid "Standard space"
 msgstr "الفضاء القياسي"
 
-#: colord-kcm/ProfileMetaData.cpp:81
+#: colord-kcm/ProfileMetaDataModel.cpp:83
 #, kde-format
 msgid "Display checksum"
 msgstr "مجموع العرض"
 
-#: colord-kcm/ProfileMetaData.cpp:84
+#: colord-kcm/ProfileMetaDataModel.cpp:86
 #, kde-format
 msgid "Display model"
 msgstr "طراز العرض"
 
-#: colord-kcm/ProfileMetaData.cpp:87
+#: colord-kcm/ProfileMetaDataModel.cpp:89
 #, kde-format
 msgid "Display serial number"
 msgstr "الرقم التسلسلي للعرض"
 
-#: colord-kcm/ProfileMetaData.cpp:90
+#: colord-kcm/ProfileMetaDataModel.cpp:92
 #, kde-format
 msgid "Display PNPID"
 msgstr "‏PNPID العرض"
 
-#: colord-kcm/ProfileMetaData.cpp:93
+#: colord-kcm/ProfileMetaDataModel.cpp:95
 #, kde-format
 msgid "Display vendor"
 msgstr "مزود العرض"
 
-#: colord-kcm/ProfileMetaData.cpp:96
+#: colord-kcm/ProfileMetaDataModel.cpp:98
 #, kde-format
 msgid "File checksum"
 msgstr "مجموع الملف"
 
-#: colord-kcm/ProfileMetaData.cpp:99
+#: colord-kcm/ProfileMetaDataModel.cpp:101
 #, kde-format
 msgid "Framework product"
 msgstr "منتج إطار عمل"
 
-#: colord-kcm/ProfileMetaData.cpp:102
+#: colord-kcm/ProfileMetaDataModel.cpp:104
 #, kde-format
 msgid "Framework program"
 msgstr "برنامج إطار العمل"
 
-#: colord-kcm/ProfileMetaData.cpp:105
+#: colord-kcm/ProfileMetaDataModel.cpp:107
 #, kde-format
 msgid "Framework version"
 msgstr "إصدارة إطار العمل"
 
-#: colord-kcm/ProfileMetaData.cpp:108
+#: colord-kcm/ProfileMetaDataModel.cpp:110
 #, kde-format
 msgid "Data source type"
 msgstr "نوع مصدر البيانات"
 
-#: colord-kcm/ProfileMetaData.cpp:111
+#: colord-kcm/ProfileMetaDataModel.cpp:113
 #, kde-format
 msgid "Mapping format"
 msgstr "نسق التخطيط"
 
-#: colord-kcm/ProfileMetaData.cpp:114
+#: colord-kcm/ProfileMetaDataModel.cpp:116
 #, kde-format
 msgid "Mapping qualifier"
 msgstr "مؤهل التخطيط"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileMetaData.ui:39
+#: colord-kcm/ProfileModel.cpp:226
 #, kde-format
-msgid ""
-"Meta data is additional information stored in the profile for programs to "
-"use."
-msgstr ""
-"البيانات الوصفية هي معلومات إضافية مخزنة في التشكيلة لتستخدمها البرامج."
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileNamedColors.ui:17
-#, kde-format
-msgid "Named colors are specific colors defined in the profile"
-msgstr "الألوان المسماة هي ألوان مخصصة معرفة في التشكيلة"
+msgid "Profiles"
+msgstr "التّشكيلات"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -635,6 +379,11 @@ msgstr "تطبيق لتثبيت تشكيلات أي سي سي"
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2008-2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "النقل إلى إطار عمل كدي ٥"
 
 #: icc-importer/main.cpp:77
 #, kde-format
@@ -687,7 +436,148 @@ msgstr "استورد"
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "فشل في استيراد تشكيلة الألوان: تشكيلة الألوان مستوردة بالفعل"
 
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "يستورد تشكيلة الألوان"
+
 #: icc-importer/main.cpp:142
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "فشل في استيراد تشكيلة الألوان: لا يمكن نسخ الملف"
+
+#~ msgid "Available Profiles"
+#~ msgstr "التشكيلات المتوفرة"
+
+#~ msgid "Color settings"
+#~ msgstr "إعدادات الألوان"
+
+#~ msgid "(C) 2012-2016 Daniel Nicoletti"
+#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
+
+#~ msgid "From File..."
+#~ msgstr "من ملف..."
+
+#~ msgid "Are you sure you want to remove this profile?"
+#~ msgstr "أمتأكّد من إزالة هذه التشكيلة؟"
+
+#~ msgid "Remove Profile"
+#~ msgstr "احذف التشكيلة"
+
+#~ msgid "Your profile did not match the device kind"
+#~ msgstr "تشكيلتك لا تطابق نوع الجهاز"
+
+#~ msgid "You do not have any devices registered"
+#~ msgstr "لا تملك أي جهاز مسجل"
+
+#~ msgid "Make sure colord module on kded is running"
+#~ msgstr "تأكد أن وحدة colord تعمل"
+
+#~ msgid "You do not have any profiles registered"
+#~ msgstr "لا تملك أي تشكيلة مسجل"
+
+#~ msgid "Add one by clicking Add Profile button"
+#~ msgstr "أضف واحدة بالنقر على زر أضف تشكيلة"
+
+#~ msgid "Add Profile"
+#~ msgstr "أضف تشكيلة"
+
+#~ msgid "Yes"
+#~ msgstr "نعم"
+
+#~ msgid "None"
+#~ msgstr "بلا"
+
+#~ msgid "Named Colors"
+#~ msgstr "الألوان المسماة"
+
+#~ msgid "Metadata"
+#~ msgstr "البيانات الوصفيّة"
+
+#~ msgid "Create a color profile for the selected device"
+#~ msgstr "أنشئ تشكيلة ألوان للجهاد المحدد."
+
+#~ msgid ""
+#~ "You need Gnome Color Management installed in order to calibrate devices"
+#~ msgstr "أنت بحاجة إلى تثبيت إدارة ألوان غنوم لمعايرة الأجهزة"
+
+#~ msgid "Information"
+#~ msgstr "معلومات"
+
+#~ msgid "Profile type:"
+#~ msgstr "نوع التشكيلة:"
+
+#~ msgid "Colorspace:"
+#~ msgstr "الفضاء اللوني:"
+
+#~ msgid "Created:"
+#~ msgstr "أُنشئ في:"
+
+#~ msgid "Version:"
+#~ msgstr "الإصدارة:"
+
+#~ msgid "Device Manufacturer:"
+#~ msgstr "مصنّع الجهاز:"
+
+#~ msgid "Device Model:"
+#~ msgstr "طراز الجهاز:"
+
+#~ msgid "Display correction:"
+#~ msgstr "تصحيح الشاشة:"
+
+#~ msgid "White Point:"
+#~ msgstr "النّقطة البيضاء:"
+
+#~ msgid "License:"
+#~ msgstr "الرّخصة:"
+
+#~ msgid "File size:"
+#~ msgstr "حجم الملف:"
+
+#~ msgid "Filename:"
+#~ msgstr "اسم الملفّ:"
+
+#~ msgid "Install System Wide"
+#~ msgstr "ثبت على كامل النظام"
+
+#~ msgid "device name"
+#~ msgstr "اسم الجهاز"
+
+#~ msgid "Printer"
+#~ msgstr "الطّابعة"
+
+#~ msgid "Id:"
+#~ msgstr "المعرّف:"
+
+#~ msgid "Scope:"
+#~ msgstr "النّطاق:"
+
+#~ msgid "Mode:"
+#~ msgstr "الوضع:"
+
+#~ msgid "Current Profile:"
+#~ msgstr "التشكيلة الحالية:"
+
+#~ msgid "Calibrate"
+#~ msgstr "عاير"
+
+#~ msgid "Print Test Page"
+#~ msgstr "اطبع صفحة اختبار"
+
+#~ msgid "Clean Print Heads"
+#~ msgstr "نظّف رؤوس الطّباعة"
+
+#~ msgid "Print Self Test Page"
+#~ msgstr "اطبع صفحة اختبار الذاتية"
+
+#~ msgid "Print Self-Test Page"
+#~ msgstr "اطبع صفحة اختبار الذاتية"
+
+#~ msgid ""
+#~ "Meta data is additional information stored in the profile for programs to "
+#~ "use."
+#~ msgstr ""
+#~ "البيانات الوصفية هي معلومات إضافية مخزنة في التشكيلة لتستخدمها البرامج."
+
+#~ msgid "Named colors are specific colors defined in the profile"
+#~ msgstr "الألوان المسماة هي ألوان مخصصة معرفة في التشكيلة"

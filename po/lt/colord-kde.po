@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:43+0000\n"
+"POT-Creation-Date: 2022-12-10 00:43+0000\n"
 "PO-Revision-Date: 2013-01-05 15:34+0200\n"
 "Last-Translator: Liudas Alisauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -30,380 +30,133 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "liudas@akmc.lt"
 
-#: colord-kcm/ColordKCM.cpp:54
-#, kde-format
-msgid "Available Profiles"
-msgstr "Galimi profiliai"
-
-#: colord-kcm/ColordKCM.cpp:57 colord-kcm/ColordKCM.cpp:59
-#, kde-format
-msgid "Color settings"
-msgstr "Spalvų parametrai"
-
-#: colord-kcm/ColordKCM.cpp:61
-#, fuzzy, kde-format
-#| msgid "(C) 2012 Daniel Nicoletti"
-msgid "(C) 2012-2016 Daniel Nicoletti"
-msgstr "(C) 2012 Daniel Nicoletti"
-
-#: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
-#, kde-format
-msgid "Port to kf5"
-msgstr ""
-
-#: colord-kcm/ColordKCM.cpp:70
-#, kde-format
-msgid "From File..."
-msgstr "Iš failo..."
-
-#: colord-kcm/ColordKCM.cpp:202 colord-kcm/ColordKCM.cpp:372
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
-#, kde-format
-msgid "Importing Color Profile"
-msgstr "Importuojama spalvų profilį"
-
-#: colord-kcm/ColordKCM.cpp:260 colord-kcm/ColordKCM.cpp:265
-#, kde-format
-msgid "Are you sure you want to remove this profile?"
-msgstr "Ar jūs tikrai norite pašalinti šį profilį?"
-
-#. i18n: ectx: property (text), widget (QToolButton, removeProfileBt)
-#: colord-kcm/ColordKCM.cpp:261 colord-kcm/ColordKCM.cpp:265
-#: colord-kcm/ColordKCM.ui:33
-#, kde-format
-msgid "Remove Profile"
-msgstr "Pašalinti profilį"
-
-#: colord-kcm/ColordKCM.cpp:372
-#, kde-format
-msgid "Your profile did not match the device kind"
-msgstr "Jūsų profilis neatitiko įrenginio tipo"
-
-#: colord-kcm/ColordKCM.cpp:405
-#, kde-format
-msgid "You do not have any devices registered"
-msgstr "Neturite užregistruotų įrenginių"
-
-#: colord-kcm/ColordKCM.cpp:406
-#, kde-format
-msgid "Make sure colord module on kded is running"
-msgstr "Įsitikinkite, kad corod modulis veikia"
-
-#: colord-kcm/ColordKCM.cpp:409
-#, kde-format
-msgid "You do not have any profiles registered"
-msgstr "Neturite užregistruotų profilių"
-
-#: colord-kcm/ColordKCM.cpp:410
-#, kde-format
-msgid "Add one by clicking Add Profile button"
-msgstr "Pridėti spaudžiant „Pridėti profilį“ mygtuką"
-
-#. i18n: ectx: property (text), widget (QToolButton, profilesTb)
-#: colord-kcm/ColordKCM.ui:52 colord-kcm/ProfileModel.cpp:225
-#, kde-format
-msgid "Profiles"
-msgstr "Profiliai"
-
-#. i18n: ectx: property (text), widget (QToolButton, addProfileBt)
-#: colord-kcm/ColordKCM.ui:161
-#, kde-format
-msgid "Add Profile"
-msgstr "Pridėti profilį"
-
-#. i18n: ectx: property (text), widget (QToolButton, devicesTb)
-#: colord-kcm/ColordKCM.ui:183 colord-kcm/DeviceModel.cpp:299
-#, kde-format
-msgid "Devices"
-msgstr "Įrenginiai"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "Yes"
-msgstr "Taip"
-
-#: colord-kcm/Description.cpp:137
-#, kde-format
-msgid "None"
-msgstr "Nieko"
-
-#: colord-kcm/Description.cpp:166
-#, kde-format
-msgid "Named Colors"
-msgstr "Įvardintos spalvos"
-
-#: colord-kcm/Description.cpp:174
-#, kde-format
-msgid "Metadata"
-msgstr "Metaduomenys"
-
-#: colord-kcm/Description.cpp:214
+#: colord-kcm/DeviceDescription.cpp:133
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
 msgstr "Spausdintuvas"
 
-#: colord-kcm/Description.cpp:216
+#: colord-kcm/DeviceDescription.cpp:135
 #, kde-format
 msgctxt "device type"
 msgid "Display"
 msgstr "Rodyti"
 
-#: colord-kcm/Description.cpp:218
+#: colord-kcm/DeviceDescription.cpp:137
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
 msgstr "Vaizdo kamera"
 
-#: colord-kcm/Description.cpp:220
+#: colord-kcm/DeviceDescription.cpp:139
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
 msgstr "Skeneris"
 
-#: colord-kcm/Description.cpp:222
+#: colord-kcm/DeviceDescription.cpp:141
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
 msgstr "Nežinomas"
 
-#: colord-kcm/Description.cpp:229
+#: colord-kcm/DeviceDescription.cpp:146
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
 msgstr "Naudotojo sesija"
 
-#: colord-kcm/Description.cpp:231
+#: colord-kcm/DeviceDescription.cpp:148
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "Automatiškai atstatyti"
 
-#: colord-kcm/Description.cpp:233
+#: colord-kcm/DeviceDescription.cpp:150
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
 msgstr "Visai sistemai"
 
-#: colord-kcm/Description.cpp:235
+#: colord-kcm/DeviceDescription.cpp:152
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "Nežinomas"
 
-#: colord-kcm/Description.cpp:241 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "RGB"
 
-#: colord-kcm/Description.cpp:243 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "CMYK"
 
-#: colord-kcm/Description.cpp:245 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "Pilka"
 
-#: colord-kcm/Description.cpp:251
+#: colord-kcm/DeviceDescription.cpp:166
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "Įrenginys neturi priskirto profilio"
 
-#: colord-kcm/Description.cpp:368
+#: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
-msgid "Create a color profile for the selected device"
-msgstr "Sukurti spalvų profilį pasirinktam įrenginiui"
+msgid "You can use 'displaycal' to calibrate this device"
+msgstr ""
 
-#: colord-kcm/Description.cpp:378
-#, kde-format
-msgid "You need Gnome Color Management installed in order to calibrate devices"
-msgstr "Jums reikia įdiegti Gnome spalvų tvarkytuvę, kad kalibruoti įrenginius"
-
-#: colord-kcm/Description.cpp:381 colord-kcm/Description.cpp:390
-#, kde-format
+#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#, fuzzy, kde-format
+#| msgid ""
+#| "The measuring instrument is not detected. Please check it is turned on "
+#| "and correctly connected."
 msgid ""
-"The measuring instrument is not detected. Please check it is turned on and "
-"correctly connected."
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
 msgstr ""
 "Matavimo instrumentas neaptiktas. Patikrinkite, ar jis įjungtas ir tinkamai "
 "prijungtas."
 
-#: colord-kcm/Description.cpp:408
+#: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Matavimo instrumentas nepalaiko spausdintuvo profiliavimo."
 
-#: colord-kcm/Description.cpp:412
-#, kde-format
-msgid "The device type is not currently supported."
+#: colord-kcm/DeviceDescription.cpp:222
+#, fuzzy, kde-format
+#| msgid "The device type is not currently supported."
+msgid "The device type is not currently supported for calibrating."
 msgstr "Įrenginio tipas šuo metu nepalaikomas."
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: colord-kcm/Description.ui:21
-#, kde-format
-msgid "Information"
-msgstr "Informacija"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/Description.ui:40
-#, kde-format
-msgid "Profile type:"
-msgstr "Profilio tipas:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: colord-kcm/Description.ui:63
-#, kde-format
-msgid "Colorspace:"
-msgstr "Spalvų schema:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#: colord-kcm/Description.ui:86
-#, kde-format
-msgid "Created:"
-msgstr "Sukurta:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_7)
-#: colord-kcm/Description.ui:109
-#, kde-format
-msgid "Version:"
-msgstr "Versija:"
-
-#. i18n: ectx: property (text), widget (QLabel, makeLabel)
-#: colord-kcm/Description.ui:132
-#, kde-format
-msgid "Device Manufacturer:"
-msgstr "Gamintojas:"
-
-#. i18n: ectx: property (text), widget (QLabel, modelLabel)
-#: colord-kcm/Description.ui:158
-#, kde-format
-msgid "Device Model:"
-msgstr "Įrenginys:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#: colord-kcm/Description.ui:184
-#, kde-format
-msgid "Display correction:"
-msgstr "Ekrano pataisymas:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_11)
-#: colord-kcm/Description.ui:207
-#, kde-format
-msgid "White Point:"
-msgstr "Balta:"
-
-#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#: colord-kcm/Description.ui:230
-#, kde-format
-msgid "License:"
-msgstr "Licencija:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_15)
-#: colord-kcm/Description.ui:256
-#, kde-format
-msgid "File size:"
-msgstr "Failo dydis:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_17)
-#: colord-kcm/Description.ui:279
-#, kde-format
-msgid "Filename:"
-msgstr "Failo pavadinimas:"
-
-#. i18n: ectx: property (text), widget (QPushButton, installSystemWideBt)
-#: colord-kcm/Description.ui:302
-#, kde-format
-msgid "Install System Wide"
-msgstr "Įdiegti visai sistemai"
-
-#. i18n: ectx: property (text), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:316
-#, kde-format
-msgid "device name"
-msgstr "įrenginio pavadinimas"
-
-#. i18n: ectx: property (comment), widget (KTitleWidget, ktitlewidget)
-#: colord-kcm/Description.ui:319
-#, kde-format
-msgid "Printer"
-msgstr "Spausdintuvas"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: colord-kcm/Description.ui:326
-#, kde-format
-msgid "Id:"
-msgstr "Id:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_6)
-#: colord-kcm/Description.ui:340
-#, kde-format
-msgid "Scope:"
-msgstr "Sritis:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_10)
-#: colord-kcm/Description.ui:354
-#, kde-format
-msgid "Mode:"
-msgstr "Veiksena:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_13)
-#: colord-kcm/Description.ui:368
-#, kde-format
-msgid "Current Profile:"
-msgstr "Dabartinis profilis:"
-
-#. i18n: ectx: property (text), widget (QPushButton, calibratePB)
-#: colord-kcm/Description.ui:382
-#, kde-format
-msgid "Calibrate"
-msgstr "Kalibruoti"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:400
-#, kde-format
-msgid "Print Test Page"
-msgstr "Spausdinti testinį puslapį"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:405
-#, kde-format
-msgid "Clean Print Heads"
-msgstr "Išvalyti spausdinimo galvutes"
-
-#. i18n: ectx: property (text), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:410
-#, kde-format
-msgid "Print Self Test Page"
-msgstr "Spausdinti testinį puslapį"
-
-#. i18n: ectx: property (toolTip), widget (KMessageWidget, msgWidget)
-#: colord-kcm/Description.ui:413
-#, kde-format
-msgid "Print Self-Test Page"
-msgstr "Spausdinti testinį puslapį"
-
-#: colord-kcm/DeviceModel.cpp:229
+#: colord-kcm/DeviceModel.cpp:250
 #, kde-format
 msgctxt "colorspace"
 msgid "Default RGB"
 msgstr "Numatyta RGB"
 
-#: colord-kcm/DeviceModel.cpp:231
+#: colord-kcm/DeviceModel.cpp:252
 #, kde-format
 msgctxt "colorspace"
 msgid "Default CMYK"
 msgstr "Numatyta CMYK"
 
-#: colord-kcm/DeviceModel.cpp:233
+#: colord-kcm/DeviceModel.cpp:254
 #, kde-format
 msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Numatyta Pilka"
+
+#: colord-kcm/DeviceModel.cpp:321
+#, kde-format
+msgid "Devices"
+msgstr "Įrenginiai"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -536,85 +289,75 @@ msgstr "Bandymo profilis: %1"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: colord-kcm/ProfileMetaData.cpp:78
+#: colord-kcm/ProfileMetaDataModel.cpp:80
 #, kde-format
 msgid "Standard space"
 msgstr "Standartinė schema"
 
-#: colord-kcm/ProfileMetaData.cpp:81
+#: colord-kcm/ProfileMetaDataModel.cpp:83
 #, kde-format
 msgid "Display checksum"
 msgstr "Rodyti kontrolinė suma"
 
-#: colord-kcm/ProfileMetaData.cpp:84
+#: colord-kcm/ProfileMetaDataModel.cpp:86
 #, kde-format
 msgid "Display model"
 msgstr "Rodyti modelį"
 
-#: colord-kcm/ProfileMetaData.cpp:87
+#: colord-kcm/ProfileMetaDataModel.cpp:89
 #, kde-format
 msgid "Display serial number"
 msgstr "Rodyti serijinį numerį"
 
-#: colord-kcm/ProfileMetaData.cpp:90
+#: colord-kcm/ProfileMetaDataModel.cpp:92
 #, kde-format
 msgid "Display PNPID"
 msgstr "Rodyti PNPID"
 
-#: colord-kcm/ProfileMetaData.cpp:93
+#: colord-kcm/ProfileMetaDataModel.cpp:95
 #, kde-format
 msgid "Display vendor"
 msgstr "Rodyti pardavėją"
 
-#: colord-kcm/ProfileMetaData.cpp:96
+#: colord-kcm/ProfileMetaDataModel.cpp:98
 #, kde-format
 msgid "File checksum"
 msgstr "Failo kontrolinė suma"
 
-#: colord-kcm/ProfileMetaData.cpp:99
+#: colord-kcm/ProfileMetaDataModel.cpp:101
 #, kde-format
 msgid "Framework product"
 msgstr "Sistemos produktas"
 
-#: colord-kcm/ProfileMetaData.cpp:102
+#: colord-kcm/ProfileMetaDataModel.cpp:104
 #, kde-format
 msgid "Framework program"
 msgstr "Sistemos programa"
 
-#: colord-kcm/ProfileMetaData.cpp:105
+#: colord-kcm/ProfileMetaDataModel.cpp:107
 #, kde-format
 msgid "Framework version"
 msgstr "Infrastruktūros versija"
 
-#: colord-kcm/ProfileMetaData.cpp:108
+#: colord-kcm/ProfileMetaDataModel.cpp:110
 #, kde-format
 msgid "Data source type"
 msgstr "Duomenų šaltinio tipas"
 
-#: colord-kcm/ProfileMetaData.cpp:111
+#: colord-kcm/ProfileMetaDataModel.cpp:113
 #, kde-format
 msgid "Mapping format"
 msgstr "Susiejimas formatas"
 
-#: colord-kcm/ProfileMetaData.cpp:114
+#: colord-kcm/ProfileMetaDataModel.cpp:116
 #, kde-format
 msgid "Mapping qualifier"
 msgstr "Susiejimo kvalifikatorius"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileMetaData.ui:39
+#: colord-kcm/ProfileModel.cpp:226
 #, kde-format
-msgid ""
-"Meta data is additional information stored in the profile for programs to "
-"use."
-msgstr ""
-"Meta duomenys yra papildoma informacija saugoma profilyje kitoms programoms."
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: colord-kcm/ProfileNamedColors.ui:17
-#, kde-format
-msgid "Named colors are specific colors defined in the profile"
-msgstr "įvardintos spalvų schemos yra spalvos apibūdintos profilyje"
+msgid "Profiles"
+msgstr "Profiliai"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -642,6 +385,11 @@ msgstr ""
 #| msgid "(C) 2012 Daniel Nicoletti"
 msgid "(C) 2008-2016 Daniel Nicoletti"
 msgstr "(C) 2012 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr ""
 
 #: icc-importer/main.cpp:77
 #, kde-format
@@ -699,11 +447,156 @@ msgstr ""
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "Nepavyko importuoti spalvų profilio"
 
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "Importuojama spalvų profilį"
+
 #: icc-importer/main.cpp:142
 #, fuzzy, kde-format
 #| msgid "Failed to import color profile"
 msgid "Failed to import color profile: could not copy the file"
 msgstr "Nepavyko importuoti spalvų profilio"
+
+#~ msgid "Available Profiles"
+#~ msgstr "Galimi profiliai"
+
+#~ msgid "Color settings"
+#~ msgstr "Spalvų parametrai"
+
+#, fuzzy
+#~| msgid "(C) 2012 Daniel Nicoletti"
+#~ msgid "(C) 2012-2016 Daniel Nicoletti"
+#~ msgstr "(C) 2012 Daniel Nicoletti"
+
+#~ msgid "From File..."
+#~ msgstr "Iš failo..."
+
+#~ msgid "Are you sure you want to remove this profile?"
+#~ msgstr "Ar jūs tikrai norite pašalinti šį profilį?"
+
+#~ msgid "Remove Profile"
+#~ msgstr "Pašalinti profilį"
+
+#~ msgid "Your profile did not match the device kind"
+#~ msgstr "Jūsų profilis neatitiko įrenginio tipo"
+
+#~ msgid "You do not have any devices registered"
+#~ msgstr "Neturite užregistruotų įrenginių"
+
+#~ msgid "Make sure colord module on kded is running"
+#~ msgstr "Įsitikinkite, kad corod modulis veikia"
+
+#~ msgid "You do not have any profiles registered"
+#~ msgstr "Neturite užregistruotų profilių"
+
+#~ msgid "Add one by clicking Add Profile button"
+#~ msgstr "Pridėti spaudžiant „Pridėti profilį“ mygtuką"
+
+#~ msgid "Add Profile"
+#~ msgstr "Pridėti profilį"
+
+#~ msgid "Yes"
+#~ msgstr "Taip"
+
+#~ msgid "None"
+#~ msgstr "Nieko"
+
+#~ msgid "Named Colors"
+#~ msgstr "Įvardintos spalvos"
+
+#~ msgid "Metadata"
+#~ msgstr "Metaduomenys"
+
+#~ msgid "Create a color profile for the selected device"
+#~ msgstr "Sukurti spalvų profilį pasirinktam įrenginiui"
+
+#~ msgid ""
+#~ "You need Gnome Color Management installed in order to calibrate devices"
+#~ msgstr ""
+#~ "Jums reikia įdiegti Gnome spalvų tvarkytuvę, kad kalibruoti įrenginius"
+
+#~ msgid "Information"
+#~ msgstr "Informacija"
+
+#~ msgid "Profile type:"
+#~ msgstr "Profilio tipas:"
+
+#~ msgid "Colorspace:"
+#~ msgstr "Spalvų schema:"
+
+#~ msgid "Created:"
+#~ msgstr "Sukurta:"
+
+#~ msgid "Version:"
+#~ msgstr "Versija:"
+
+#~ msgid "Device Manufacturer:"
+#~ msgstr "Gamintojas:"
+
+#~ msgid "Device Model:"
+#~ msgstr "Įrenginys:"
+
+#~ msgid "Display correction:"
+#~ msgstr "Ekrano pataisymas:"
+
+#~ msgid "White Point:"
+#~ msgstr "Balta:"
+
+#~ msgid "License:"
+#~ msgstr "Licencija:"
+
+#~ msgid "File size:"
+#~ msgstr "Failo dydis:"
+
+#~ msgid "Filename:"
+#~ msgstr "Failo pavadinimas:"
+
+#~ msgid "Install System Wide"
+#~ msgstr "Įdiegti visai sistemai"
+
+#~ msgid "device name"
+#~ msgstr "įrenginio pavadinimas"
+
+#~ msgid "Printer"
+#~ msgstr "Spausdintuvas"
+
+#~ msgid "Id:"
+#~ msgstr "Id:"
+
+#~ msgid "Scope:"
+#~ msgstr "Sritis:"
+
+#~ msgid "Mode:"
+#~ msgstr "Veiksena:"
+
+#~ msgid "Current Profile:"
+#~ msgstr "Dabartinis profilis:"
+
+#~ msgid "Calibrate"
+#~ msgstr "Kalibruoti"
+
+#~ msgid "Print Test Page"
+#~ msgstr "Spausdinti testinį puslapį"
+
+#~ msgid "Clean Print Heads"
+#~ msgstr "Išvalyti spausdinimo galvutes"
+
+#~ msgid "Print Self Test Page"
+#~ msgstr "Spausdinti testinį puslapį"
+
+#~ msgid "Print Self-Test Page"
+#~ msgstr "Spausdinti testinį puslapį"
+
+#~ msgid ""
+#~ "Meta data is additional information stored in the profile for programs to "
+#~ "use."
+#~ msgstr ""
+#~ "Meta duomenys yra papildoma informacija saugoma profilyje kitoms "
+#~ "programoms."
+
+#~ msgid "Named colors are specific colors defined in the profile"
+#~ msgstr "įvardintos spalvų schemos yra spalvos apibūdintos profilyje"
 
 #, fuzzy
 #~| msgid "(C) 2012 Daniel Nicoletti"
