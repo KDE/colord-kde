@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: playground-graphics-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-17 12:34+0300\n"
+"PO-Revision-Date: 2022-12-10 16:48+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -109,19 +109,16 @@ msgstr "Bu aygıt atanmış bir profil bulundurmuyor"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Bu aygıtı kalibre etmek için 'displaycal' kullanabilirsiniz"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"Ölçüm aygıtı bulunamadı. Lütfen açık olduğundan ve doğru bağlandığından emin "
-"olun."
+"Kalibre etmek için kullanılacak ölçüm aygıtı bulunamadı. Lütfen açık "
+"olduğundan ve doğru bağlandığından emin olun."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -129,10 +126,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "Ölçüm aygıtı yazıcı profillemesini desteklemiyor."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "Aygıt türü şimdilik desteklenmiyor."
+msgstr "Aygıt türü şimdilik kalibre etmek için desteklenmiyor."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -386,7 +382,7 @@ msgstr "(C) 2008-2016 Daniel Nicoletti"
 #: icc-importer/main.cpp:69
 #, kde-format
 msgid "Port to kf5"
-msgstr "Kf5'e aktarımı"
+msgstr "Kf5 Aktarımı"
 
 #: icc-importer/main.cpp:77
 #, kde-format

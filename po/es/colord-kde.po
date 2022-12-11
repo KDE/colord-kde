@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-17 17:45+0200\n"
+"PO-Revision-Date: 2022-12-10 12:39+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -107,19 +107,16 @@ msgstr "Este dispositivo no tiene un perfil asignado"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Puede usar «displaycal» para calibrar este dispositivo"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"El instrumento de medida no ha sido detectado. Compruebe que está encendido "
-"y correctamente conectado."
+"El instrumento de medida para la calibración no se ha detectado. Compruebe "
+"que está encendido y correctamente conectado."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -127,10 +124,10 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "El instrumento de medida no permite perfiles de impresora."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "El tipo de dispositivo no está permitido en la actualidad."
+msgstr ""
+"El tipo de dispositivo no es compatible para su calibración en la actualidad."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-17 08:50+0200\n"
+"PO-Revision-Date: 2022-12-10 08:34+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -111,19 +111,16 @@ msgstr "Aquest dispositiu no té un perfil assignat"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Podeu usar el «displaycal» per a calibrar aquest dispositiu"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"No s'ha detectat l'instrument de mesura. Comprovi que està endollat i "
-"connectat correctament."
+"No s'ha detectat l'instrument de mesura per al calibratge. Comproveu que "
+"està endollat i connectat correctament."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -131,10 +128,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "L'instrument de mesura no admet els perfils d'impressora."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "El tipus de dispositiu encara no està suportat."
+msgstr "El tipus de dispositiu encara no està admet el seu calibratge."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -452,142 +448,3 @@ msgstr "S'està important el perfil de color"
 msgid "Failed to import color profile: could not copy the file"
 msgstr ""
 "Ha fallat en importar el perfil de color: no s'ha pogut copiar el fitxer"
-
-#~ msgid "Available Profiles"
-#~ msgstr "Perfils disponibles"
-
-#~ msgid "Color settings"
-#~ msgstr "Arranjament dels colors"
-
-#~ msgid "(C) 2012-2016 Daniel Nicoletti"
-#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
-
-#~ msgid "From File..."
-#~ msgstr "Des d'un fitxer..."
-
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Esteu segur que voleu eliminar aquest perfil?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Elimina el perfil"
-
-#~ msgid "Your profile did not match the device kind"
-#~ msgstr "El vostre perfil no es correspon amb el tipus de dispositiu"
-
-#~ msgid "You do not have any devices registered"
-#~ msgstr "No teniu cap dispositiu registrat"
-
-#~ msgid "Make sure colord module on kded is running"
-#~ msgstr "Assegureu-vos que s'està executant el mòdul «colord» del «kded»"
-
-#~ msgid "You do not have any profiles registered"
-#~ msgstr "No teniu cap perfil registrat"
-
-#~ msgid "Add one by clicking Add Profile button"
-#~ msgstr "Afegiu-ne un fent clic al botó «Afegeix un perfil»"
-
-#~ msgid "Add Profile"
-#~ msgstr "Afegeix un perfil"
-
-#~ msgid "Yes"
-#~ msgstr "Sí"
-
-#~ msgid "None"
-#~ msgstr "Cap"
-
-#~ msgid "Named Colors"
-#~ msgstr "Colors amb nom"
-
-#~ msgid "Metadata"
-#~ msgstr "Metadades"
-
-#~ msgid "Create a color profile for the selected device"
-#~ msgstr "Crea un perfil de color per al dispositiu seleccionat"
-
-#~ msgid ""
-#~ "You need Gnome Color Management installed in order to calibrate devices"
-#~ msgstr ""
-#~ "Necessitareu tenir instal·lada la gestió del color de Gnome per a "
-#~ "calibrar els dispositius"
-
-#~ msgid "Information"
-#~ msgstr "Informació"
-
-#~ msgid "Profile type:"
-#~ msgstr "Tipus de perfil:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Espai de color:"
-
-#~ msgid "Created:"
-#~ msgstr "Creat:"
-
-#~ msgid "Version:"
-#~ msgstr "Versió:"
-
-#~ msgid "Device Manufacturer:"
-#~ msgstr "Fabricant del dispositiu:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Model del dispositiu:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Correcció de la pantalla:"
-
-#~ msgid "White Point:"
-#~ msgstr "Punt blanc:"
-
-#~ msgid "License:"
-#~ msgstr "Llicència:"
-
-#~ msgid "File size:"
-#~ msgstr "Mida del fitxer:"
-
-#~ msgid "Filename:"
-#~ msgstr "Nom del fitxer:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Instal·la a tot el sistema"
-
-#~ msgid "device name"
-#~ msgstr "nom del dispositiu"
-
-#~ msgid "Printer"
-#~ msgstr "Impressora"
-
-#~ msgid "Id:"
-#~ msgstr "Id:"
-
-#~ msgid "Scope:"
-#~ msgstr "Abast:"
-
-#~ msgid "Mode:"
-#~ msgstr "Mode:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Perfil actual:"
-
-#~ msgid "Calibrate"
-#~ msgstr "Calibra"
-
-#~ msgid "Print Test Page"
-#~ msgstr "Imprimeix pàgina de prova"
-
-#~ msgid "Clean Print Heads"
-#~ msgstr "Neteja els capçals d'impressió"
-
-#~ msgid "Print Self Test Page"
-#~ msgstr "Imprimeix pàgina de prova"
-
-#~ msgid "Print Self-Test Page"
-#~ msgstr "S'imprimirà una pàgina de prova"
-
-#~ msgid ""
-#~ "Meta data is additional information stored in the profile for programs to "
-#~ "use."
-#~ msgstr ""
-#~ "Les metadades emmagatzemen informació addicional en el perfil per al seu "
-#~ "ús per part dels programes."
-
-#~ msgid "Named colors are specific colors defined in the profile"
-#~ msgstr "Els colors amb nom són colors específics definits en el perfil"
