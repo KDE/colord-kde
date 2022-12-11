@@ -1,8 +1,22 @@
 {
     "KPlugin": {
         "Description": "Manage color profile of devices",
+        "Description[ca]": "Gestiona els perfils de color dels dispositius",
+        "Description[es]": "Gestión de perfiles de color de dispositivos",
+        "Description[nl]": "Kleurprofielen van apparaten beheren",
+        "Description[pl]": "Zarządzanie profilami kolorów dla urządzeń",
+        "Description[tr]": "Aygıtların renk profilini yönet",
+        "Description[uk]": "Керування профілем кольорів пристроїв",
+        "Description[x-test]": "xxManage color profile of devicesxx",
         "Icon": "preferences-desktop-color",
         "Name": "Color Management",
+        "Name[ca]": "Gestió del color",
+        "Name[es]": "Gestión del color",
+        "Name[nl]": "Kleurbeheer",
+        "Name[pl]": "Zarządzanie kolorem",
+        "Name[tr]": "Renk Yönetimi",
+        "Name[uk]": "Керування кольорами",
+        "Name[x-test]": "xxColor Managementxx",
         "ServiceTypes": [
             "KCModule"
         ]
