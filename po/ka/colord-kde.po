@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-31 05:28+0100\n"
+"PO-Revision-Date: 2022-12-11 06:35+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -108,19 +108,16 @@ msgstr "მოწყობილობას პროფილი მინი�
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "ამ მოწყობილობის კალიბრაციისთვის შეგიძლიათ 'displaycal' გამოიყენოთ"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"გამზომი ინსტრუმენტი ვერ ვიპოვე. დარწმუნდით, რომ ის ჩართული და სწორად "
-"მიერთებულია."
+"მოწყობილობის კალიბრაციისთვის საზომი ხელსაწყო ვერ ვიპოვე. დარწმუნდით, რომ ის "
+"ჩართული და სწორად მიერთებულია."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -128,10 +125,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "მზომავ მოწყობილობას პრინტერის პროფილირების მხარდაჭერა არ გააჩნია."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "მოწყობილობის ტიპი ამჟამად მხარდაჭერილი არაა."
+msgstr "მოწყობილობის ტიპი კალიბრაციისთვის ამჟამად მხარდაჭერილი არაა."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format

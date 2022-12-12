@@ -3,15 +3,15 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2012, 2013, 2015, 2016, 2020.
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2012, 2013, 2015, 2016, 2020, 2022.
 # Josep M. Ferrer <txemaq@gmail.com>, 2014, 2016, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-12-10 08:34+0100\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"PO-Revision-Date: 2022-12-11 04:56+0100\n"
+"Last-Translator: Antoni Bella <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Kate 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -130,7 +130,7 @@ msgstr "L'instrument de mesura no admet els perfils d'impressora."
 #: colord-kcm/DeviceDescription.cpp:222
 #, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "El tipus de dispositiu encara no està admet el seu calibratge."
+msgstr "El tipus de dispositiu encara no admet el seu calibratge."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-18 08:22+0200\n"
+"PO-Revision-Date: 2022-12-11 08:36+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -109,19 +109,16 @@ msgstr "Ta naprava nima dodeljenega profila"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Za kalibriranje te naprave lahko uporabite 'displaycal'"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"Merilni inštrument ni bil zaznan. Preverite, če je vklopljen in pravilno "
-"povezan."
+"Merilni inštrument za kalibracijo ni bil zaznan. Preverite, če je vklopljen "
+"in pravilno povezan."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -129,10 +126,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "Merilni inštrument ne podpira profiliranja tiskalnika."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "Vrsta naprave trenutno ni podprta."
+msgstr "Za to vrsto naprave trenutno kalibracija ni podprta."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
