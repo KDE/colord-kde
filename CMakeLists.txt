@@ -30,6 +30,8 @@ include(ECMFindQmlModule)
 include(ECMPoQmTools)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
+include(ECMDeprecationSettings)
+
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
@@ -73,6 +75,10 @@ include_directories(${CMAKE_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
 )
+
+ecm_set_disabled_deprecation_versions(
+	KF 5.100.0)
+
 
 if (X11_FOUND)
     add_subdirectory(colord-kded)
