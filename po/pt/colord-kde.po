@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2016-10-10 11:02+0100\n"
+"PO-Revision-Date: 2022-12-12 19:02+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -104,13 +104,10 @@ msgstr "Este dispositivo não tem nenhum perfil atribuído a ele"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Pode usar o 'displaycal' para calibrar este dispositivo"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
@@ -124,10 +121,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "O instrumento de medida não suporta a análise das impressoras."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "O tipo de dispositivo não é suportado de momento."
+msgstr "O tipo de dispositivo não é suportado de momento para a calibração."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -445,142 +441,3 @@ msgid "Failed to import color profile: could not copy the file"
 msgstr ""
 "Não foi possível importar o perfil de cores: não foi possível copiar o "
 "ficheiro"
-
-#~ msgid "Available Profiles"
-#~ msgstr "Perfis Disponíveis"
-
-#~ msgid "Color settings"
-#~ msgstr "Configuração das cores"
-
-#~ msgid "(C) 2012-2016 Daniel Nicoletti"
-#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
-
-#~ msgid "From File..."
-#~ msgstr "De Ficheiro..."
-
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Tem a certeza que deseja remover este perfil?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Remover o Perfil"
-
-#~ msgid "Your profile did not match the device kind"
-#~ msgstr "O seu perfil não correspondia ao tipo de dispositivo"
-
-#~ msgid "You do not have any devices registered"
-#~ msgstr "Não tem nenhuns dispositivos registados"
-
-#~ msgid "Make sure colord module on kded is running"
-#~ msgstr "Certifique-se que o módulo 'colord' do 'kded' está em execução"
-
-#~ msgid "You do not have any profiles registered"
-#~ msgstr "Não tem nenhuns perfis registados"
-
-#~ msgid "Add one by clicking Add Profile button"
-#~ msgstr "Adicione um com o botão 'Adicionar um Perfil'"
-
-#~ msgid "Add Profile"
-#~ msgstr "Adicionar um Perfil"
-
-#~ msgid "Yes"
-#~ msgstr "Sim"
-
-#~ msgid "None"
-#~ msgstr "Nenhum"
-
-#~ msgid "Named Colors"
-#~ msgstr "Cores com Nome"
-
-#~ msgid "Metadata"
-#~ msgstr "Meta-dados"
-
-#~ msgid "Create a color profile for the selected device"
-#~ msgstr "Criar um perfil de cores para o dispositivo seleccionado"
-
-#~ msgid ""
-#~ "You need Gnome Color Management installed in order to calibrate devices"
-#~ msgstr ""
-#~ "É necessário ter a Gestão de Cores do Gnome para poder calibrar os "
-#~ "dispositivos"
-
-#~ msgid "Information"
-#~ msgstr "Informação"
-
-#~ msgid "Profile type:"
-#~ msgstr "Tipo do perfil:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Espaço de cores:"
-
-#~ msgid "Created:"
-#~ msgstr "Criado:"
-
-#~ msgid "Version:"
-#~ msgstr "Versão:"
-
-#~ msgid "Device Manufacturer:"
-#~ msgstr "Fabricante do Dispositivo:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Modelo do Dispositivo:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Correcção do ecrã:"
-
-#~ msgid "White Point:"
-#~ msgstr "Ponto Branco:"
-
-#~ msgid "License:"
-#~ msgstr "Licença:"
-
-#~ msgid "File size:"
-#~ msgstr "Tamanho do ficheiro:"
-
-#~ msgid "Filename:"
-#~ msgstr "Nome do ficheiro:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Instalar no Sistema"
-
-#~ msgid "device name"
-#~ msgstr "o nome do dispositivo"
-
-#~ msgid "Printer"
-#~ msgstr "Impressora"
-
-#~ msgid "Id:"
-#~ msgstr "ID:"
-
-#~ msgid "Scope:"
-#~ msgstr "Âmbito:"
-
-#~ msgid "Mode:"
-#~ msgstr "Modo:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Perfil Actual:"
-
-#~ msgid "Calibrate"
-#~ msgstr "Calibrar"
-
-#~ msgid "Print Test Page"
-#~ msgstr "Página de Teste de Impressão"
-
-#~ msgid "Clean Print Heads"
-#~ msgstr "Limpar as Cabeças de Impressão"
-
-#~ msgid "Print Self Test Page"
-#~ msgstr "Imprimir uma Página de Teste"
-
-#~ msgid "Print Self-Test Page"
-#~ msgstr "Imprimir uma Página de Teste"
-
-#~ msgid ""
-#~ "Meta data is additional information stored in the profile for programs to "
-#~ "use."
-#~ msgstr ""
-#~ "Os meta-dados são informações adicionais guardadas no perfil para os "
-#~ "programas usarem."
-
-#~ msgid "Named colors are specific colors defined in the profile"
-#~ msgstr "As cores com nome são cores específicas definidas no perfil"
