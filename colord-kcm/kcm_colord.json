@@ -14,6 +14,7 @@
         "Description[tr]": "Aygıtların renk profilini yönet",
         "Description[uk]": "Керування профілем кольорів пристроїв",
         "Description[x-test]": "xxManage color profile of devicesxx",
+        "Description[zh_CN]": "管理设备的色彩特性文件",
         "Icon": "preferences-desktop-color",
         "Name": "Color Management",
         "Name[ca@valencia]": "Gestió del color",
@@ -30,6 +31,7 @@
         "Name[tr]": "Renk Yönetimi",
         "Name[uk]": "Керування кольорами",
         "Name[x-test]": "xxColor Managementxx",
+        "Name[zh_CN]": "色彩管理",
         "ServiceTypes": [
             "KCModule"
         ]
