@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-18 07:16+0200\n"
+"PO-Revision-Date: 2022-12-12 19:27+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -113,19 +113,16 @@ msgstr "Ce périphérique n'a pas de profil qui lui est affecté"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Vous ne pouvez utiliser « displaycall » pour calibrer ce périphérique."
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"L'instrument de mesure n'est pas détecté. Veuillez vérifier s'il est activé "
-"et correctement connecté."
+"L'instrument de mesure pour la calibration n'est pas détecté. Veuillez "
+"vérifier s'il est activé et correctement connecté."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -134,10 +131,11 @@ msgstr ""
 "L'instrument de mesure ne prend pas en charge le profilage des imprimantes."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "Le type du périphérique n'est actuellement pas pris en charge."
+msgstr ""
+"Le type du périphérique n'est actuellement pas pris en charge pour la "
+"calibration."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format

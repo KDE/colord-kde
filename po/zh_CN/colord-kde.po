@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-12-01 06:51\n"
+"PO-Revision-Date: 2022-12-13 12:20\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -107,17 +107,14 @@ msgstr "此设备并未指定色彩特性文件"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "您可以使用“DisplayCAL”来校准此设备"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
-msgstr "未检测到色彩测量仪器。请检查它是否已经启动并正确连接到了计算机。"
+msgstr "未检测到校色仪。请检查它是否已经启动并正确连接到了计算机。"
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -125,10 +122,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "该色彩测量仪器不支持为打印机进行特性化。"
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "目前尚不支持此设备类型。"
+msgstr "目前尚不支持此设备类型的校色操作。"
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -444,138 +440,3 @@ msgstr "导入色彩特性文件"
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "无法导入色彩特性文件: 无法复制该文件"
-
-#~ msgid "Available Profiles"
-#~ msgstr "可用的色彩特性文件"
-
-#~ msgid "Color settings"
-#~ msgstr "色彩管理设置"
-
-#~ msgid "(C) 2012-2016 Daniel Nicoletti"
-#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
-
-#~ msgid "From File..."
-#~ msgstr "来自文件..."
-
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "您确定要移除此色彩特性文件吗？"
-
-#~ msgid "Remove Profile"
-#~ msgstr "移除特性文件"
-
-#~ msgid "Your profile did not match the device kind"
-#~ msgstr "您的色彩特性文件与设备类型不匹配"
-
-#~ msgid "You do not have any devices registered"
-#~ msgstr "您没有注册过任何设备"
-
-#~ msgid "Make sure colord module on kded is running"
-#~ msgstr "请确保 kded 的 colord 模块正在运行"
-
-#~ msgid "You do not have any profiles registered"
-#~ msgstr "您没有注册过任何色彩特性文件"
-
-#~ msgid "Add one by clicking Add Profile button"
-#~ msgstr "点击“添加色彩特性文件”按钮添加"
-
-#~ msgid "Add Profile"
-#~ msgstr "添加特性文件"
-
-#~ msgid "Yes"
-#~ msgstr "是"
-
-#~ msgid "None"
-#~ msgstr "无"
-
-#~ msgid "Named Colors"
-#~ msgstr "具名颜色"
-
-#~ msgid "Metadata"
-#~ msgstr "元数据"
-
-#~ msgid "Create a color profile for the selected device"
-#~ msgstr "为选中设备创建色彩特性文件"
-
-#~ msgid ""
-#~ "You need Gnome Color Management installed in order to calibrate devices"
-#~ msgstr "如需对设备进行色彩校准，请先安装“Gnome Color Management”程序"
-
-#~ msgid "Information"
-#~ msgstr "信息"
-
-#~ msgid "Profile type:"
-#~ msgstr "特性文件类型:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "色彩空间:"
-
-#~ msgid "Created:"
-#~ msgstr "创建时间:"
-
-#~ msgid "Version:"
-#~ msgstr "版本:"
-
-#~ msgid "Device Manufacturer:"
-#~ msgstr "设备制造商:"
-
-#~ msgid "Device Model:"
-#~ msgstr "设备型号:"
-
-#~ msgid "Display correction:"
-#~ msgstr "显示器校准:"
-
-#~ msgid "White Point:"
-#~ msgstr "白点:"
-
-#~ msgid "License:"
-#~ msgstr "许可证:"
-
-#~ msgid "File size:"
-#~ msgstr "文件大小:"
-
-#~ msgid "Filename:"
-#~ msgstr "文件名:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "系统全局安装"
-
-#~ msgid "device name"
-#~ msgstr "设备名称"
-
-#~ msgid "Printer"
-#~ msgstr "打印机"
-
-#~ msgid "Id:"
-#~ msgstr "ID:"
-
-#~ msgid "Scope:"
-#~ msgstr "范围:"
-
-#~ msgid "Mode:"
-#~ msgstr "模式:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "当前特性文件:"
-
-#~ msgid "Calibrate"
-#~ msgstr "色彩校准"
-
-#~ msgid "Print Test Page"
-#~ msgstr "打印测试页"
-
-#~ msgid "Clean Print Heads"
-#~ msgstr "清洗打印头"
-
-#~ msgid "Print Self Test Page"
-#~ msgstr "打印自检页"
-
-#~ msgid "Print Self-Test Page"
-#~ msgstr "打印自检页"
-
-#~ msgid ""
-#~ "Meta data is additional information stored in the profile for programs to "
-#~ "use."
-#~ msgstr "元数据是色彩特性文件中储存的附加信息，供程序使用。"
-
-#~ msgid "Named colors are specific colors defined in the profile"
-#~ msgstr "具名颜色是色彩特性文件定义的特定颜色"

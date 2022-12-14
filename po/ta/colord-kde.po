@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-18 21:48+0530\n"
+"PO-Revision-Date: 2022-12-13 19:48+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,94 +15,94 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "கோ. கிஷோர்"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "Kde-l10n-ta@kde.org"
 
 #: colord-kcm/DeviceDescription.cpp:133
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
-msgstr ""
+msgstr "அச்சுப்பொறி"
 
 #: colord-kcm/DeviceDescription.cpp:135
 #, kde-format
 msgctxt "device type"
 msgid "Display"
-msgstr ""
+msgstr "திரை"
 
 #: colord-kcm/DeviceDescription.cpp:137
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
-msgstr ""
+msgstr "வலைப்படமி"
 
 #: colord-kcm/DeviceDescription.cpp:139
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
-msgstr ""
+msgstr "வருடி"
 
 #: colord-kcm/DeviceDescription.cpp:141
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
-msgstr ""
+msgstr "தெரியாதது"
 
 #: colord-kcm/DeviceDescription.cpp:146
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
-msgstr ""
+msgstr "பயனர் அமர்வு"
 
 #: colord-kcm/DeviceDescription.cpp:148
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
-msgstr ""
+msgstr "தானாக மீட்டமை"
 
 #: colord-kcm/DeviceDescription.cpp:150
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
-msgstr ""
+msgstr "கணினி முழுவதற்கும்"
 
 #: colord-kcm/DeviceDescription.cpp:152
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
-msgstr ""
+msgstr "தெரியாதது"
 
 #: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
-msgstr ""
+msgstr "CMYK"
 
 #: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
-msgstr ""
+msgstr "சாம்பல்"
 
 #: colord-kcm/DeviceDescription.cpp:166
 #, kde-format
 msgid "This device has no profile assigned to it"
-msgstr ""
+msgstr "இச்சாதனத்துக்கு எந்த பயன்முறையும் அமைக்கப்படவில்லை"
 
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
@@ -152,12 +152,12 @@ msgstr "சாதனங்கள்"
 #: colord-kcm/Profile.cpp:106
 #, kde-format
 msgid "file too small"
-msgstr ""
+msgstr "கோப்பு தேவையானதைவிட சிறியது"
 
 #: colord-kcm/Profile.cpp:115
 #, kde-format
 msgid "not an ICC profile"
-msgstr ""
+msgstr "ICC பயன்முறையாய் இல்லை"
 
 #: colord-kcm/Profile.cpp:187
 #, kde-format
@@ -205,30 +205,30 @@ msgstr ""
 #, kde-format
 msgctxt "colorspace"
 msgid "Unknown"
-msgstr ""
+msgstr "தெரியாதது"
 
 #: colord-kcm/Profile.cpp:302
 #, kde-format
 msgid "Missing description"
-msgstr ""
+msgstr "விவரணம் காணவில்லை"
 
 #: colord-kcm/Profile.cpp:357
 #, kde-format
 msgctxt "profile kind"
 msgid "Input device"
-msgstr ""
+msgstr "உள்ளீட்டு சாதனம்"
 
 #: colord-kcm/Profile.cpp:359
 #, kde-format
 msgctxt "profile kind"
 msgid "Display device"
-msgstr ""
+msgstr "காட்சி சாதனம்"
 
 #: colord-kcm/Profile.cpp:361
 #, kde-format
 msgctxt "profile kind"
 msgid "Output device"
-msgstr ""
+msgstr "வெளியீட்டு சாதனம்"
 
 #: colord-kcm/Profile.cpp:363
 #, kde-format
@@ -249,21 +249,21 @@ msgid "Abstract"
 msgstr ""
 
 #: colord-kcm/Profile.cpp:369
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "profile kind"
 msgid "Named color"
-msgstr ""
+msgstr "பெயருள்ள நிறம்"
 
 #: colord-kcm/Profile.cpp:371
 #, kde-format
 msgctxt "profile kind"
 msgid "Unknown"
-msgstr ""
+msgstr "தெரியாதது"
 
 #: colord-kcm/Profile.cpp:518
 #, kde-format
 msgid "Default: %1"
-msgstr ""
+msgstr "இயல்பிருப்பு: %1"
 
 #: colord-kcm/Profile.cpp:520
 #, kde-format
@@ -278,7 +278,7 @@ msgstr ""
 #: colord-kcm/Profile.cpp:524
 #, kde-format
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:80
 #, kde-format
@@ -288,32 +288,32 @@ msgstr ""
 #: colord-kcm/ProfileMetaDataModel.cpp:83
 #, kde-format
 msgid "Display checksum"
-msgstr ""
+msgstr "சரிகாண்தொகையைக் காட்டு"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:86
 #, kde-format
 msgid "Display model"
-msgstr ""
+msgstr "வகையைக் காட்டு"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:89
 #, kde-format
 msgid "Display serial number"
-msgstr ""
+msgstr "தொடரெண்ணைக் காட்டு"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:92
 #, kde-format
 msgid "Display PNPID"
-msgstr ""
+msgstr "PNPID-யைக் காட்டு"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:95
 #, kde-format
 msgid "Display vendor"
-msgstr ""
+msgstr "நிறுவனத்தைக் காட்டு"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:98
 #, kde-format
 msgid "File checksum"
-msgstr ""
+msgstr "கோப்பின் சரிகாண்தொகை"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:101
 #, kde-format
@@ -348,27 +348,27 @@ msgstr ""
 #: colord-kcm/ProfileModel.cpp:226
 #, kde-format
 msgid "Profiles"
-msgstr ""
+msgstr "பயன்முறைகள்"
 
 #: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
-msgstr ""
+msgstr "விவரணம்: %1"
 
 #: icc-importer/main.cpp:51
 #, kde-format
 msgid "Copyright: %1"
-msgstr ""
+msgstr "பதிப்புரிமை: %1"
 
 #: icc-importer/main.cpp:62
 #, kde-format
 msgid "ICC Profile Installer"
-msgstr ""
+msgstr "ICC பயன்முறை நிறுவி"
 
 #: icc-importer/main.cpp:64
 #, kde-format
 msgid "An application to install ICC profiles"
-msgstr ""
+msgstr "ICC பயன்முறைகளை நிறுவ உதவும் செயலி"
 
 #: icc-importer/main.cpp:66
 #, kde-format
@@ -388,12 +388,12 @@ msgstr ""
 #: icc-importer/main.cpp:78
 #, kde-format
 msgid "Color profile to install"
-msgstr ""
+msgstr "நிறுவ வேண்டிய நிறப் பயன்முறை"
 
 #: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to parse file: %1"
-msgstr ""
+msgstr "கோப்பைப் புரிந்துகொள்ள முடியவில்லை: %1"
 
 #: icc-importer/main.cpp:93
 #, kde-format
