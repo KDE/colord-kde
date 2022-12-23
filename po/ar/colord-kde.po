@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-22 19:04+0400\n"
+"PO-Revision-Date: 2022-12-22 12:21+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -108,17 +108,15 @@ msgstr "لا يملك هذا الجهاز أي تشكيلة مسندة له."
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "يمكنك استعمال 'displaycal' لمعايرة هذا الجهاز"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
-msgstr "لم يكشف عن أداة القياس. يرجى التحقق من تشغيلها وتوصيلها بشكل صحيح."
+msgstr ""
+"لم يكشف عن أداة القياس للمعايرة. يرجى التحقق من تشغيلها وتوصيلها بشكل صحيح."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -126,10 +124,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "أداة القياس لا تدعم تشكيل الطابعة."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "نوع الجهاز غير مدعوم حالياً."
+msgstr "نوع الجهاز غير مدعوم للمعايرة حالياً."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
