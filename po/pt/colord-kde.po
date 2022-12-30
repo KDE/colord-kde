@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POFile-SpellExtra: CMYK YCbCr XYZ Nicoletti Yxy PNPID Gnome LUV LAB CYMK\n"
-"X-POFile-SpellExtra: kded colord ICC Apper KF\n"
+"X-POFile-SpellExtra: kded colord ICC Apper KF displaycal\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
