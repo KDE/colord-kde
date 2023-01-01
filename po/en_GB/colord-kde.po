@@ -7,9 +7,9 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-11-26 12:44+0000\n"
+"PO-Revision-Date: 2022-12-31 15:43+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language-Team: English <kde-i18n-doc@kde.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -107,19 +107,16 @@ msgstr "This device has no profile assigned to it"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "You can use 'displaycal' to calibrate this device"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"The measuring instrument is not detected. Please check it is turned on and "
-"correctly connected."
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -127,10 +124,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "The measuring instrument does not support printer profiling."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "The device type is not currently supported."
+msgstr "The device type is not currently supported for calibrating."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
