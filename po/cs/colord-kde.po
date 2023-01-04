@@ -685,7 +685,7 @@ msgstr "Chcete importovat barevný profil?"
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "importovat"
 
 #: icc-importer/main.cpp:139
 #, kde-format
