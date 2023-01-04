@@ -112,16 +112,11 @@ msgid "You can use 'displaycal' to calibrate this device"
 msgstr ""
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"Nezjištěn žádný měřící nástroj. Prosím ujistěte se, že je zapnut a správně "
-"připojen."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -129,10 +124,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "Měřící nástroj nepodporuje profilování tiskáren."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "Tento typ zařízení není v současnosti podporován."
+msgstr ""
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -432,7 +426,7 @@ msgstr "Chcete importovat barevný profil?"
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "importovat"
 
 #: icc-importer/main.cpp:139
 #, kde-format
@@ -448,141 +442,3 @@ msgstr "Importování barevného profilu"
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "Nelze importovat barevný profil: soubor nelze zkopírovat"
-
-#~ msgid "Available Profiles"
-#~ msgstr "Dostupné profily"
-
-#~ msgid "Color settings"
-#~ msgstr "Nastavení barev"
-
-#~ msgid "(C) 2012-2016 Daniel Nicoletti"
-#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
-
-#~ msgid "From File..."
-#~ msgstr "Ze souboru..."
-
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Opravdu si přejete odstranit tento profil?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Odstranit profil"
-
-#~ msgid "Your profile did not match the device kind"
-#~ msgstr "Váš profil nesouhlasí s typem zařízení"
-
-#~ msgid "You do not have any devices registered"
-#~ msgstr "Nemáte registrována žádná zařízení"
-
-#~ msgid "Make sure colord module on kded is running"
-#~ msgstr "Ujistěte se, že je spuštěn colord modul v kded"
-
-#~ msgid "You do not have any profiles registered"
-#~ msgstr "Nemáte registrovány žádné profily"
-
-#~ msgid "Add one by clicking Add Profile button"
-#~ msgstr "Přidáte jej pomocí tlačítka Přidat profil"
-
-#~ msgid "Add Profile"
-#~ msgstr "Přidat profil"
-
-#~ msgid "Yes"
-#~ msgstr "Ano"
-
-#~ msgid "None"
-#~ msgstr "Žádný"
-
-#~ msgid "Named Colors"
-#~ msgstr "Pojmenované barvy"
-
-#~ msgid "Metadata"
-#~ msgstr "Metadata"
-
-#~ msgid "Create a color profile for the selected device"
-#~ msgstr "Vytvořit barevný profil pro vybrané zařízení"
-
-#~ msgid ""
-#~ "You need Gnome Color Management installed in order to calibrate devices"
-#~ msgstr ""
-#~ "Potřebujete mít nainstalovanou Správu barev Gnome ke kalibraci zařízení"
-
-#~ msgid "Information"
-#~ msgstr "Informace"
-
-#~ msgid "Profile type:"
-#~ msgstr "Typ profilu:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Barevný prostor:"
-
-#~ msgid "Created:"
-#~ msgstr "Vytvořeno:"
-
-#~ msgid "Version:"
-#~ msgstr "Verze:"
-
-#~ msgid "Device Manufacturer:"
-#~ msgstr "Výrobce přístroje:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Model zařízení:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Korekce zobrazení:"
-
-#~ msgid "White Point:"
-#~ msgstr "Bílý bod:"
-
-#~ msgid "License:"
-#~ msgstr "Licence:"
-
-#~ msgid "File size:"
-#~ msgstr "Velikost souboru:"
-
-#~ msgid "Filename:"
-#~ msgstr "Název souboru:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Instalovat do systému"
-
-#~ msgid "device name"
-#~ msgstr "název zařízení"
-
-#~ msgid "Printer"
-#~ msgstr "Tiskárna"
-
-#~ msgid "Id:"
-#~ msgstr "Id:"
-
-#~ msgid "Scope:"
-#~ msgstr "Rozsah:"
-
-#~ msgid "Mode:"
-#~ msgstr "Režim:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Současný profil:"
-
-#~ msgid "Calibrate"
-#~ msgstr "Kalibrovat"
-
-#~ msgid "Print Test Page"
-#~ msgstr "Vytisknout testovací stránku"
-
-#~ msgid "Clean Print Heads"
-#~ msgstr "Vyčistit tiskové hlavy"
-
-#~ msgid "Print Self Test Page"
-#~ msgstr "Vytisknout testovací stránku"
-
-#~ msgid "Print Self-Test Page"
-#~ msgstr "Vytisknout testovací stránku"
-
-#~ msgid ""
-#~ "Meta data is additional information stored in the profile for programs to "
-#~ "use."
-#~ msgstr ""
-#~ "Metadata jsou dodatečné údaje uložené v profilu k použití v jiných "
-#~ "programech."
-
-#~ msgid "Named colors are specific colors defined in the profile"
-#~ msgstr "Pojmenované barvy jsou specifické barvy definované v profilu"
