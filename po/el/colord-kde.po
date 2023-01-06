@@ -21,7 +21,7 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Αντώνης Γέραλης"
+msgstr "Αντώνης Γέrαλης"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -229,8 +229,8 @@ msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
 msgstr ""
-"Δεν ανιχνεύθηκε το όργανο μέτρησης. Παρακαλώ ελέγξτε ότι είναι συνδεδεμένο "
-"και ενεργοποιημένο."
+"Δεν ανιχνεύθηκε το όργανο μέτρησης για τη βαθμονόμηση. Ελέγξτε ότι είναι "
+"σωστά συνδεδεμένο και ενεργοποιημένο."
 
 #: colord-kcm/Description.cpp:408
 #, kde-format
@@ -240,7 +240,7 @@ msgstr "Το όργανο μέτρησης δεν υποστηρίζει τη δ
 #: colord-kcm/Description.cpp:412
 #, kde-format
 msgid "The device type is not currently supported."
-msgstr "Το είδος της συσκευής δεν υποστηρίζεται προς το παρόν."
+msgstr "Ο τύπος της συσκευής προς το παρόν δεν υποστηρίζεται για βαθμονόμηση."
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: colord-kcm/Description.ui:21
@@ -686,7 +686,7 @@ msgstr "Επιθυμείτε την εισαγωγή του προφίλ χρώ�
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "εισαγωγή"
 
 #: icc-importer/main.cpp:139
 #, kde-format
@@ -698,6 +698,9 @@ msgstr ""
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "Αποτυχία εισαγωγής προφίλ χρώματος: απέτυχε η αντιγραφή του αρχείου"
+
+#~ msgid "You can use 'displaycal' to calibrate this device"
+#~ msgstr "Με το 'displaycal' γίνεται βαθμονόμηση της συσκευής"
 
 #~ msgid "Daniel Nicoletti"
 #~ msgstr "Daniel Nicoletti"
