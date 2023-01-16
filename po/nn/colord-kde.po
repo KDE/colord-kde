@@ -1,12 +1,12 @@
 # Translation of colord-kde to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2020, 2021, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-30 09:41+0100\n"
+"PO-Revision-Date: 2023-01-15 11:52+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -109,7 +109,7 @@ msgstr "Eininga har ikkje nokon profilar tildelt"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Du kan bruka «displaycal» for å kalibrera denne eininga"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
 #, kde-format
@@ -117,6 +117,8 @@ msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
+"Fann ikkje noko måleinstrument for kalibrering. Sjå til at dette er slått på "
+"og kopla til."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -126,7 +128,7 @@ msgstr "Måleinstrumentet støttar ikkje profilering av skrivarar."
 #: colord-kcm/DeviceDescription.cpp:222
 #, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr ""
+msgstr "Einingstypen er førebels ikkje støtta til kalibrering."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
