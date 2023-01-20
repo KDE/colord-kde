@@ -3,15 +3,15 @@ include_directories(${CMAKE_SOURCE_DIR}/colord-kcm
 )
 
 set(kcm_colord_SRCS
-    DeviceModel.cpp
-    ProfileModel.cpp
-    Profile.cpp
-    ColordKCM.cpp
-    DeviceDescription.cpp
-    ProfileDescription.cpp
-    ProfileMetaDataModel.cpp
-    ProfileNamedColorsModel.cpp
-    Profile.cpp
+    DeviceModel.cpp DeviceModel.h
+    ProfileModel.cpp ProfileModel.h
+    Profile.cpp Profile.h
+    ColordKCM.cpp ColordKCM.h
+    DeviceDescription.cpp DeviceDescription.h
+    ProfileDescription.cpp ProfileDescription.h
+    ProfileMetaDataModel.cpp ProfileMetaDataModel.h
+    ProfileNamedColorsModel.cpp ProfileNamedColorsModel.h
+    Profile.cpp Profile.h
 )
 
 set(COLORD_INTERFACE_XML ${CMAKE_SOURCE_DIR}/colord-tmp-interfaces/org.freedesktop.ColorManager.xml)

@@ -1,5 +1,5 @@
 set(iccimporter_SRCS
-    ../colord-kcm/Profile.cpp
+    ../colord-kcm/Profile.cpp ../colord-kcm/Profile.h
     main.cpp
 )
 
