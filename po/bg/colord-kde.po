@@ -1,0 +1,588 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the colord-kde package.
+#
+# Mincho Kondarev <mkondarev@yahoo.de>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: colord-kde\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-10 00:43+0000\n"
+"PO-Revision-Date: 2023-01-20 23:24+0100\n"
+"Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
+"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Минчо Кондарев"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "mkondarev@yahoo.de"
+
+#: colord-kcm/DeviceDescription.cpp:133
+#, kde-format
+msgctxt "device type"
+msgid "Printer"
+msgstr "Принтер"
+
+#: colord-kcm/DeviceDescription.cpp:135
+#, kde-format
+msgctxt "device type"
+msgid "Display"
+msgstr "Дисплей"
+
+#: colord-kcm/DeviceDescription.cpp:137
+#, kde-format
+msgctxt "device type"
+msgid "Webcam"
+msgstr "Уеб камера"
+
+#: colord-kcm/DeviceDescription.cpp:139
+#, kde-format
+msgctxt "device type"
+msgid "Scanner"
+msgstr "Скенер"
+
+#: colord-kcm/DeviceDescription.cpp:141
+#, kde-format
+msgctxt "device type"
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: colord-kcm/DeviceDescription.cpp:146
+#, kde-format
+msgctxt "device scope"
+msgid "User session"
+msgstr "Потребителска сесия"
+
+#: colord-kcm/DeviceDescription.cpp:148
+#, kde-format
+msgctxt "device scope"
+msgid "Auto restore"
+msgstr "Автоматично възстановяване"
+
+#: colord-kcm/DeviceDescription.cpp:150
+#, kde-format
+msgctxt "device scope"
+msgid "System wide"
+msgstr "На системно ниво"
+
+#: colord-kcm/DeviceDescription.cpp:152
+#, kde-format
+msgctxt "device scope"
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
+#, kde-format
+msgctxt "colorspace"
+msgid "RGB"
+msgstr "RGB"
+
+#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
+#, kde-format
+msgctxt "colorspace"
+msgid "CMYK"
+msgstr "CMYK"
+
+#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
+#, kde-format
+msgctxt "colorspace"
+msgid "Gray"
+msgstr "Сиво"
+
+#: colord-kcm/DeviceDescription.cpp:166
+#, kde-format
+msgid "This device has no profile assigned to it"
+msgstr "За това устройство няма зададен профил"
+
+#: colord-kcm/DeviceDescription.cpp:185
+#, kde-format
+msgid "You can use 'displaycal' to calibrate this device"
+msgstr ""
+
+#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#, fuzzy, kde-format
+#| msgid ""
+#| "The measuring instrument is not detected. Please check it is turned on "
+#| "and correctly connected."
+msgid ""
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
+msgstr ""
+"Измервателният уред не е открит. Моля, проверете дали е включен и правилно "
+"свързан."
+
+#: colord-kcm/DeviceDescription.cpp:218
+#, kde-format
+msgid "The measuring instrument does not support printer profiling."
+msgstr "Измервателният уред не поддържа профилиране на принтера."
+
+#: colord-kcm/DeviceDescription.cpp:222
+#, fuzzy, kde-format
+#| msgid "The device type is not currently supported."
+msgid "The device type is not currently supported for calibrating."
+msgstr "Типът на устройството не се поддържа в момента."
+
+#: colord-kcm/DeviceModel.cpp:250
+#, kde-format
+msgctxt "colorspace"
+msgid "Default RGB"
+msgstr "RGB по подразбиране"
+
+#: colord-kcm/DeviceModel.cpp:252
+#, kde-format
+msgctxt "colorspace"
+msgid "Default CMYK"
+msgstr "CMYK по подразбиране"
+
+#: colord-kcm/DeviceModel.cpp:254
+#, kde-format
+msgctxt "colorspace"
+msgid "Default Gray"
+msgstr "Сиво по подразбиране"
+
+#: colord-kcm/DeviceModel.cpp:321
+#, kde-format
+msgid "Devices"
+msgstr "Устройства"
+
+#: colord-kcm/Profile.cpp:106
+#, kde-format
+msgid "file too small"
+msgstr "твърде малък файл"
+
+#: colord-kcm/Profile.cpp:115
+#, kde-format
+msgid "not an ICC profile"
+msgstr "не е ICC профил"
+
+#: colord-kcm/Profile.cpp:187
+#, kde-format
+msgctxt "colorspace"
+msgid "XYZ"
+msgstr "XYZ"
+
+#: colord-kcm/Profile.cpp:190
+#, kde-format
+msgctxt "colorspace"
+msgid "LAB"
+msgstr "LAB"
+
+#: colord-kcm/Profile.cpp:193
+#, kde-format
+msgctxt "colorspace"
+msgid "LUV"
+msgstr "LUV"
+
+#: colord-kcm/Profile.cpp:196
+#, kde-format
+msgctxt "colorspace"
+msgid "YCbCr"
+msgstr "YCbCr"
+
+#: colord-kcm/Profile.cpp:199
+#, kde-format
+msgctxt "colorspace"
+msgid "Yxy"
+msgstr "Yxy"
+
+#: colord-kcm/Profile.cpp:208
+#, kde-format
+msgctxt "colorspace"
+msgid "HSV"
+msgstr "HSV"
+
+#: colord-kcm/Profile.cpp:214
+#, kde-format
+msgctxt "colorspace"
+msgid "CMY"
+msgstr "CMY"
+
+#: colord-kcm/Profile.cpp:217
+#, kde-format
+msgctxt "colorspace"
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: colord-kcm/Profile.cpp:302
+#, kde-format
+msgid "Missing description"
+msgstr "Липсва описание"
+
+#: colord-kcm/Profile.cpp:357
+#, kde-format
+msgctxt "profile kind"
+msgid "Input device"
+msgstr "Устройство за въвеждане"
+
+#: colord-kcm/Profile.cpp:359
+#, kde-format
+msgctxt "profile kind"
+msgid "Display device"
+msgstr "Дисплейно устройство"
+
+#: colord-kcm/Profile.cpp:361
+#, kde-format
+msgctxt "profile kind"
+msgid "Output device"
+msgstr "Изходно устройство"
+
+#: colord-kcm/Profile.cpp:363
+#, kde-format
+msgctxt "profile kind"
+msgid "Devicelink"
+msgstr "Devicelink"
+
+#: colord-kcm/Profile.cpp:365
+#, kde-format
+msgctxt "profile kind"
+msgid "Colorspace conversion"
+msgstr "Преобразуване на цветовия обхват"
+
+#: colord-kcm/Profile.cpp:367
+#, kde-format
+msgctxt "profile kind"
+msgid "Abstract"
+msgstr "Резюме"
+
+#: colord-kcm/Profile.cpp:369
+#, kde-format
+msgctxt "profile kind"
+msgid "Named color"
+msgstr "Цвят с име"
+
+#: colord-kcm/Profile.cpp:371
+#, kde-format
+msgctxt "profile kind"
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: colord-kcm/Profile.cpp:518
+#, kde-format
+msgid "Default: %1"
+msgstr "По подразбиране: %1"
+
+#: colord-kcm/Profile.cpp:520
+#, kde-format
+msgid "Colorspace: %1"
+msgstr "Цветно пространство: %1"
+
+#: colord-kcm/Profile.cpp:522
+#, kde-format
+msgid "Test profile: %1"
+msgstr "Тестов профил: %1"
+
+#: colord-kcm/Profile.cpp:524
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:80
+#, kde-format
+msgid "Standard space"
+msgstr "Стандартно пространство"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:83
+#, kde-format
+msgid "Display checksum"
+msgstr "Контролна сума на дисплея"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:86
+#, kde-format
+msgid "Display model"
+msgstr "Модел на дисплея"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:89
+#, kde-format
+msgid "Display serial number"
+msgstr "Сериен номер на дисплея"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:92
+#, kde-format
+msgid "Display PNPID"
+msgstr "PNPID на дисплея"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:95
+#, kde-format
+msgid "Display vendor"
+msgstr "Производител на дисплея"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:98
+#, kde-format
+msgid "File checksum"
+msgstr "Контролна сума на файл"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:101
+#, kde-format
+msgid "Framework product"
+msgstr "Рамков продукт"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:104
+#, kde-format
+msgid "Framework program"
+msgstr "Рамкова програма"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:107
+#, kde-format
+msgid "Framework version"
+msgstr "Версия на рамката"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:110
+#, kde-format
+msgid "Data source type"
+msgstr "Тип на източника на данни"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:113
+#, kde-format
+msgid "Mapping format"
+msgstr "Формат на картографиране"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:116
+#, kde-format
+msgid "Mapping qualifier"
+msgstr "Квалификатор за картографиране"
+
+#: colord-kcm/ProfileModel.cpp:226
+#, kde-format
+msgid "Profiles"
+msgstr "Профили"
+
+#: icc-importer/main.cpp:41
+#, kde-format
+msgid "Description: %1"
+msgstr "Описание: %1"
+
+#: icc-importer/main.cpp:51
+#, kde-format
+msgid "Copyright: %1"
+msgstr "Copyright: %1"
+
+#: icc-importer/main.cpp:62
+#, kde-format
+msgid "ICC Profile Installer"
+msgstr "Инсталатор на ICC профил"
+
+#: icc-importer/main.cpp:64
+#, kde-format
+msgid "An application to install ICC profiles"
+msgstr "Приложение за инсталиране на ICC профили"
+
+#: icc-importer/main.cpp:66
+#, kde-format
+msgid "(C) 2008-2016 Daniel Nicoletti"
+msgstr "(C) 2008-2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "Порт към kf5"
+
+#: icc-importer/main.cpp:77
+#, kde-format
+msgid "Do not prompt the user if he wants to install"
+msgstr "Да не се пита потребителят дали иска да инсталира"
+
+#: icc-importer/main.cpp:78
+#, kde-format
+msgid "Color profile to install"
+msgstr "Цветен профил за инсталиране"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to parse file: %1"
+msgstr "Failed to parse file: %1"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to open ICC profile"
+msgstr "Неуспешно отваряне на ICC профил"
+
+#: icc-importer/main.cpp:102
+#, kde-format
+msgid "Color profile is already imported"
+msgstr "Цветният профил вече е импортиран"
+
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:125
+#, kde-format
+msgid "ICC Profile Importer"
+msgstr "Импортер на ICC профил"
+
+#: icc-importer/main.cpp:112
+#, kde-format
+msgid "ICC profile already installed system-wide"
+msgstr "ICC профилът вече е инсталиран в цялата система"
+
+#: icc-importer/main.cpp:124
+#, kde-format
+msgid "Would you like to import the color profile?"
+msgstr "Искате ли да импортирате цветовия профил?"
+
+#: icc-importer/main.cpp:126
+#, kde-format
+msgid "import"
+msgstr "импортиране"
+
+#: icc-importer/main.cpp:139
+#, kde-format
+msgid "Failed to import color profile: color profile is already imported"
+msgstr ""
+"Неуспешно импортиране на цветови профил: цветовият профил вече е импортиран"
+
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "Импортиране на цветен профил"
+
+#: icc-importer/main.cpp:142
+#, kde-format
+msgid "Failed to import color profile: could not copy the file"
+msgstr "Неуспешно импортиране на цветови профил: не можа да копира файла"
+
+#~ msgid "Available Profiles"
+#~ msgstr "Налични профили"
+
+#~ msgid "Color settings"
+#~ msgstr "Настройване на цветове"
+
+#~ msgid "(C) 2012-2016 Daniel Nicoletti"
+#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
+
+#~ msgid "From File..."
+#~ msgstr "От файл..."
+
+#~ msgid "Are you sure you want to remove this profile?"
+#~ msgstr "Сигурни ли сте, че искате да премахнете този профил?"
+
+#~ msgid "Remove Profile"
+#~ msgstr "Премахване на профил"
+
+#~ msgid "Your profile did not match the device kind"
+#~ msgstr "Вашият профил не съответства на вида на устройството"
+
+#~ msgid "You do not have any devices registered"
+#~ msgstr "Нямате регистрирани устройства"
+
+#~ msgid "Make sure colord module on kded is running"
+#~ msgstr "Уверете се, че модулът colord на kded е стартиран"
+
+#~ msgid "You do not have any profiles registered"
+#~ msgstr "Нямате регистрирани профили"
+
+#~ msgid "Add one by clicking Add Profile button"
+#~ msgstr "Добавете такъв, като щракнете върху бутона Добавяне на профил"
+
+#~ msgid "Add Profile"
+#~ msgstr "Добавяне на профил"
+
+#~ msgid "Yes"
+#~ msgstr "Да"
+
+#~ msgid "None"
+#~ msgstr "Без"
+
+#~ msgid "Named Colors"
+#~ msgstr "Цветове с имена"
+
+#~ msgid "Metadata"
+#~ msgstr "Метаданни"
+
+#~ msgid "Create a color profile for the selected device"
+#~ msgstr "Създаване на цветен профил за избраното устройство"
+
+#~ msgid ""
+#~ "You need Gnome Color Management installed in order to calibrate devices"
+#~ msgstr ""
+#~ "Необходимо е да се инсталира Gnome Color Management, за да се калибрират "
+#~ "устройствата"
+
+#~ msgid "Information"
+#~ msgstr "Информация"
+
+#~ msgid "Profile type:"
+#~ msgstr "Тип на профила:"
+
+#~ msgid "Colorspace:"
+#~ msgstr "Цветово пространство:"
+
+#~ msgid "Created:"
+#~ msgstr "Създаден:"
+
+#~ msgid "Version:"
+#~ msgstr "Версия:"
+
+#~ msgid "Device Manufacturer:"
+#~ msgstr "Производител на устройството:"
+
+#~ msgid "Device Model:"
+#~ msgstr "Модел устройство:"
+
+#~ msgid "Display correction:"
+#~ msgstr "Корекция на дисплея:"
+
+#~ msgid "White Point:"
+#~ msgstr "Бяла точка:"
+
+#~ msgid "License:"
+#~ msgstr "Лиценз:"
+
+#~ msgid "File size:"
+#~ msgstr "Размер на файл:"
+
+#~ msgid "Filename:"
+#~ msgstr "Име на файл:"
+
+#~ msgid "Install System Wide"
+#~ msgstr "Инсталиране на  системно ниво"
+
+#~ msgid "device name"
+#~ msgstr "име на устройство"
+
+#~ msgid "Printer"
+#~ msgstr "Принтер"
+
+#~ msgid "Id:"
+#~ msgstr "Id:"
+
+#~ msgid "Scope:"
+#~ msgstr "Обхват:"
+
+#~ msgid "Mode:"
+#~ msgstr "Режим:"
+
+#~ msgid "Current Profile:"
+#~ msgstr "Текущ профил:"
+
+#~ msgid "Calibrate"
+#~ msgstr "Калибриране"
+
+#~ msgid "Print Test Page"
+#~ msgstr "Печат на тестова страница"
+
+#~ msgid "Clean Print Heads"
+#~ msgstr "Почистване на главите"
+
+#~ msgid "Print Self Test Page"
+#~ msgstr "Печат на само-тестова страница"
+
+#~ msgid "Print Self-Test Page"
+#~ msgstr "Печат на само-тестова страница"
+
+#~ msgid ""
+#~ "Meta data is additional information stored in the profile for programs to "
+#~ "use."
+#~ msgstr ""
+#~ "Метаданните са допълнителна информация, съхранена в профила, която "
+#~ "програмите могат да използват."
+
+#~ msgid "Named colors are specific colors defined in the profile"
+#~ msgstr "Именуваните цветове са специфични цветове, дефинирани в профила"
