@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Manage color profile of devices",
         "Description[ar]": "أدر تشكيلات ألوان الأجهزة",
+        "Description[bg]": "Управление на цветни профили на устройства",
         "Description[ca@valencia]": "Gestiona els perfils de color dels dispositius",
         "Description[ca]": "Gestiona els perfils de color dels dispositius",
         "Description[de]": "Farbprofile von Geräten verwalten",
@@ -27,6 +28,7 @@
         "Icon": "preferences-desktop-color",
         "Name": "Color Management",
         "Name[ar]": "إدارة الألوان",
+        "Name[bg]": "Управление на цветовете",
         "Name[ca@valencia]": "Gestió del color",
         "Name[ca]": "Gestió del color",
         "Name[de]": "Farbverwaltung",
