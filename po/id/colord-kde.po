@@ -1,93 +1,91 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the colord-kde package.
+# Linerly <linerly@protonmail.com>, 2023.
 #
-# Translators:
-# Volkan Gezer <volkangezer@gmail.com>, 2013.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: playground-graphics-kde4\n"
+"Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2023-02-20 17:37+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
-"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
-"Language: tr\n"
+"PO-Revision-Date: 2023-02-15 16:54+0700\n"
+"Last-Translator: Linerly <linerly@protonmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Volkan Gezer"
+msgstr "Linerly"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "volkangezer@gmail.com"
+msgstr "linerly@protonmail.com"
 
 #: colord-kcm/DeviceDescription.cpp:133
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
-msgstr "Yazıcı"
+msgstr "Pencetak"
 
 #: colord-kcm/DeviceDescription.cpp:135
 #, kde-format
 msgctxt "device type"
 msgid "Display"
-msgstr "Ekran"
+msgstr "Layar"
 
 #: colord-kcm/DeviceDescription.cpp:137
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
-msgstr "Web Kamerası"
+msgstr "Kamera Web"
 
 #: colord-kcm/DeviceDescription.cpp:139
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
-msgstr "Tarayıcı"
+msgstr "Pemindai"
 
 #: colord-kcm/DeviceDescription.cpp:141
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
-msgstr "Bilinmeyen"
+msgstr "Tidak diketahui"
 
 #: colord-kcm/DeviceDescription.cpp:146
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
-msgstr "Kullanıcı oturumu"
+msgstr "Sesi pengguna"
 
 #: colord-kcm/DeviceDescription.cpp:148
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
-msgstr "Otomatik geri yükle"
+msgstr "Pemulihan otomatis"
 
 #: colord-kcm/DeviceDescription.cpp:150
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
-msgstr "Sistem geneli"
+msgstr "Seluruh sistem"
 
 #: colord-kcm/DeviceDescription.cpp:152
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
-msgstr "Bilinmeyen"
+msgstr "Tidak diketahui"
 
 #: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
-msgstr "KYM"
+msgstr "RGB"
 
 #: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
 #, kde-format
@@ -99,17 +97,18 @@ msgstr "CMYK"
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
-msgstr "Gri"
+msgstr "Abu-abu"
 
 #: colord-kcm/DeviceDescription.cpp:166
 #, kde-format
 msgid "This device has no profile assigned to it"
-msgstr "Bu aygıt atanmış bir profil bulundurmuyor"
+msgstr "Perangkat ini tidak memiliki profil yang diberikan"
 
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr "Bu aygıtı kalibre etmek için 'displaycal' kullanabilirsiniz"
+msgstr ""
+"Anda dapat menggunakan 'displaycal' untuk mengatur kalibrasi perangkat ini"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
 #, kde-format
@@ -117,51 +116,51 @@ msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"Kalibre etmek için kullanılacak ölçüm aygıtı bulunamadı. Lütfen açık "
-"olduğundan ve doğru bağlandığından emin olun."
+"Instrumen pengukuran untuk kalibrasi tidak terdeteksi. Mohon periksa bahwa "
+"alat nyala dan terhubung dengan benar."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
-msgstr "Ölçüm aygıtı yazıcı profillemesini desteklemiyor."
+msgstr "Instrumen pengukuran tidak mendukung pembuatan profil pencetak."
 
 #: colord-kcm/DeviceDescription.cpp:222
 #, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "Aygıt türü şimdilik kalibre etmek için desteklenmiyor."
+msgstr "Jenis perangkat saat ini tidak didukung untuk mengatur kalibrasi."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
 msgctxt "colorspace"
 msgid "Default RGB"
-msgstr "Öntanımlı KYM"
+msgstr "RGB Bawaan"
 
 #: colord-kcm/DeviceModel.cpp:252
 #, kde-format
 msgctxt "colorspace"
 msgid "Default CMYK"
-msgstr "Öntanımlı CMYK"
+msgstr "CMYK Bawaan"
 
 #: colord-kcm/DeviceModel.cpp:254
 #, kde-format
 msgctxt "colorspace"
 msgid "Default Gray"
-msgstr "Öntanımlı Gri"
+msgstr "Abu-abu Bawaan"
 
 #: colord-kcm/DeviceModel.cpp:321
 #, kde-format
 msgid "Devices"
-msgstr "Aygıtlar"
+msgstr "Perangkat"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
 msgid "file too small"
-msgstr "dosya çok küçük"
+msgstr "berkas terlalu kecil"
 
 #: colord-kcm/Profile.cpp:115
 #, kde-format
 msgid "not an ICC profile"
-msgstr "bir ICC profili değil"
+msgstr "bukan profil ICC"
 
 #: colord-kcm/Profile.cpp:187
 #, kde-format
@@ -197,7 +196,7 @@ msgstr "Yxy"
 #, kde-format
 msgctxt "colorspace"
 msgid "HSV"
-msgstr "TDD"
+msgstr "HSV"
 
 #: colord-kcm/Profile.cpp:214
 #, kde-format
@@ -209,75 +208,75 @@ msgstr "CMY"
 #, kde-format
 msgctxt "colorspace"
 msgid "Unknown"
-msgstr "Bilinmeyen"
+msgstr "Tidak diketahui"
 
 #: colord-kcm/Profile.cpp:302
 #, kde-format
 msgid "Missing description"
-msgstr "Eksik açıklama"
+msgstr "Deskripsi tidak ada"
 
 #: colord-kcm/Profile.cpp:357
 #, kde-format
 msgctxt "profile kind"
 msgid "Input device"
-msgstr "Giriş aygıtı"
+msgstr "Perangkat masukan"
 
 #: colord-kcm/Profile.cpp:359
 #, kde-format
 msgctxt "profile kind"
 msgid "Display device"
-msgstr "Görüntü aygıtı"
+msgstr "Perangkat layar"
 
 #: colord-kcm/Profile.cpp:361
 #, kde-format
 msgctxt "profile kind"
 msgid "Output device"
-msgstr "Çıktı aygıtı"
+msgstr "Perangkat keluaran"
 
 #: colord-kcm/Profile.cpp:363
 #, kde-format
 msgctxt "profile kind"
 msgid "Devicelink"
-msgstr "Aygıt bağlantısı"
+msgstr "Tautan perangkat"
 
 #: colord-kcm/Profile.cpp:365
 #, kde-format
 msgctxt "profile kind"
 msgid "Colorspace conversion"
-msgstr "Renk uzayı dönüştürme"
+msgstr "Konversi ruang warna"
 
 #: colord-kcm/Profile.cpp:367
 #, kde-format
 msgctxt "profile kind"
 msgid "Abstract"
-msgstr "Özet"
+msgstr "Abstrak"
 
 #: colord-kcm/Profile.cpp:369
 #, kde-format
 msgctxt "profile kind"
 msgid "Named color"
-msgstr "Adlandırılmış renk"
+msgstr "Warna ternama"
 
 #: colord-kcm/Profile.cpp:371
 #, kde-format
 msgctxt "profile kind"
 msgid "Unknown"
-msgstr "Bilinmeyen"
+msgstr "Tidak diketahui"
 
 #: colord-kcm/Profile.cpp:518
 #, kde-format
 msgid "Default: %1"
-msgstr "Öntanımlı: %1"
+msgstr "Bawaan: %1"
 
 #: colord-kcm/Profile.cpp:520
 #, kde-format
 msgid "Colorspace: %1"
-msgstr "Renk uzayı: %1"
+msgstr "Ruang warna: %1"
 
 #: colord-kcm/Profile.cpp:522
 #, kde-format
 msgid "Test profile: %1"
-msgstr "Sınama profili: %1"
+msgstr "Profil uji coba: %1"
 
 #: colord-kcm/Profile.cpp:524
 #, kde-format
@@ -287,92 +286,92 @@ msgstr "%1 (%2)"
 #: colord-kcm/ProfileMetaDataModel.cpp:80
 #, kde-format
 msgid "Standard space"
-msgstr "Standart uzay"
+msgstr "Ruang standar"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:83
 #, kde-format
 msgid "Display checksum"
-msgstr "Sağlamayı görüntüle"
+msgstr "Tampilkan checksum"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:86
 #, kde-format
 msgid "Display model"
-msgstr "Modeli görüntüle"
+msgstr "Tampilkan model"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:89
 #, kde-format
 msgid "Display serial number"
-msgstr "Seri numarasını görüntüle"
+msgstr "Tampilkan nomor serial"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:92
 #, kde-format
 msgid "Display PNPID"
-msgstr "PNP kimliğini görüntüle"
+msgstr "Tampilkan PNPID"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:95
 #, kde-format
 msgid "Display vendor"
-msgstr "Sağlayıcıyı görüntüle"
+msgstr "Tampilkan penyedia"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:98
 #, kde-format
 msgid "File checksum"
-msgstr "Dosya sağlaması"
+msgstr "Checksum berkas"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:101
 #, kde-format
 msgid "Framework product"
-msgstr "Çerçeve ortamı ürünü"
+msgstr "Produk kerangka kerja"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:104
 #, kde-format
 msgid "Framework program"
-msgstr "Çerçeve ortamı programı"
+msgstr "Program kerangka kerja"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:107
 #, kde-format
 msgid "Framework version"
-msgstr "Çerçeve ortamı sürümü"
+msgstr "Versi kerangka kerja"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:110
 #, kde-format
 msgid "Data source type"
-msgstr "Veri kaynak türü"
+msgstr "Jenis sumber data"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:113
 #, kde-format
 msgid "Mapping format"
-msgstr "Eşleme biçimi"
+msgstr "Format pemetaan"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:116
 #, kde-format
 msgid "Mapping qualifier"
-msgstr "Eşleme niteleyici"
+msgstr "Kualifikasi pemetaan"
 
 #: colord-kcm/ProfileModel.cpp:226
 #, kde-format
 msgid "Profiles"
-msgstr "Profiller"
+msgstr "Profil"
 
 #: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
-msgstr "Açıklama: %1"
+msgstr "Deskripsi: %1"
 
 #: icc-importer/main.cpp:51
 #, kde-format
 msgid "Copyright: %1"
-msgstr "Telif hakkı: %1"
+msgstr "Hak cipta: %1"
 
 #: icc-importer/main.cpp:62
 #, kde-format
 msgid "ICC Profile Installer"
-msgstr "ICC Profil Kurucu"
+msgstr "Pemasang Profil ICC"
 
 #: icc-importer/main.cpp:64
 #, kde-format
 msgid "An application to install ICC profiles"
-msgstr "ICC profillerini kurmak için bir uygulama"
+msgstr "Sebuah aplikasi untuk memasang profil ICC"
 
 #: icc-importer/main.cpp:66
 #, kde-format
@@ -382,204 +381,65 @@ msgstr "(C) 2008-2016 Daniel Nicoletti"
 #: icc-importer/main.cpp:69
 #, kde-format
 msgid "Port to kf5"
-msgstr "Kf5 Aktarımı"
+msgstr "Porta ke kf5"
 
 #: icc-importer/main.cpp:77
 #, kde-format
 msgid "Do not prompt the user if he wants to install"
-msgstr "Kullanıcının kurmak isteyip istemediğini sorma"
+msgstr "Jangan beri tahu pengguna jika ia ingin memasang"
 
 #: icc-importer/main.cpp:78
 #, kde-format
 msgid "Color profile to install"
-msgstr "Kurulacak renk profili"
+msgstr "Profil warna untuk dipasang"
 
 #: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to parse file: %1"
-msgstr "Dosya ayıklama başarısız: %1"
+msgstr "Gagal mengurai berkas: %1"
 
 #: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to open ICC profile"
-msgstr "ICC profili açma başarısız"
+msgstr "Gagal membuka profil ICC"
 
 #: icc-importer/main.cpp:102
 #, kde-format
 msgid "Color profile is already imported"
-msgstr "Renk profili zaten içe aktarılmış"
+msgstr "Profil warna sudah diimpor"
 
 #: icc-importer/main.cpp:103 icc-importer/main.cpp:113
 #: icc-importer/main.cpp:125
 #, kde-format
 msgid "ICC Profile Importer"
-msgstr "ICC Profili İçe Aktarıcı"
+msgstr "Pengimpor Profil ICC"
 
 #: icc-importer/main.cpp:112
 #, kde-format
 msgid "ICC profile already installed system-wide"
-msgstr "ICC profili zaten sistem çapında kurulu"
+msgstr "Profil ICC sudah dipasang di seluruh sistem"
 
 #: icc-importer/main.cpp:124
 #, kde-format
 msgid "Would you like to import the color profile?"
-msgstr "Renk profilini içe aktarmak istiyor musunuz?"
+msgstr "Apakah Anda ingin mengimpor profil warna?"
 
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr "içe aktar"
+msgstr "impor"
 
 #: icc-importer/main.cpp:139
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
-msgstr "Renk profili içe aktarılamadı: renk profili zaten aktarılmış"
+msgstr "Gagal mengimpor profil warna: profil warna sudah diimpor"
 
 #: icc-importer/main.cpp:139 icc-importer/main.cpp:142
 #, kde-format
 msgid "Importing Color Profile"
-msgstr "Renk Profili İçe Aktarılıyor"
+msgstr "Mengimpor Profil Warna"
 
 #: icc-importer/main.cpp:142
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
-msgstr "Renk profili içe aktarılamadı: dosya kopyalanamadı"
-
-#~ msgid "Available Profiles"
-#~ msgstr "Kullanılabilir Profiller"
-
-#~ msgid "Color settings"
-#~ msgstr "Renk ayarları"
-
-#~ msgid "(C) 2012-2016 Daniel Nicoletti"
-#~ msgstr "(C) 2012-2016 Daniel Nicoletti"
-
-#~ msgid "From File..."
-#~ msgstr "Dosyadan..."
-
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Bu profili kaldırmak istediğinizden emin misiniz?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Profili Kaldır"
-
-#~ msgid "Your profile did not match the device kind"
-#~ msgstr "Profiliniz aygıt türü ile eşleşmedi"
-
-#~ msgid "You do not have any devices registered"
-#~ msgstr "Kayıtlı aygıtınız bulunmuyor"
-
-#~ msgid "Make sure colord module on kded is running"
-#~ msgstr "Kded üzerinde colord modülünün çalıştığından emin olun"
-
-#~ msgid "You do not have any profiles registered"
-#~ msgstr "Kayıtlı bir profiliniz bulunmuyor"
-
-#~ msgid "Add one by clicking Add Profile button"
-#~ msgstr "Profil Ekle düğmesi ile ekleyin"
-
-#~ msgid "Add Profile"
-#~ msgstr "Profil Ekle"
-
-#~ msgid "Yes"
-#~ msgstr "Evet"
-
-#~ msgid "None"
-#~ msgstr "Hiçbiri"
-
-#~ msgid "Named Colors"
-#~ msgstr "Adlandırılmış Renkler"
-
-#~ msgid "Metadata"
-#~ msgstr "Üstveri"
-
-#~ msgid "Create a color profile for the selected device"
-#~ msgstr "Seçilen aygıt için bir renk profili oluştur"
-
-#~ msgid ""
-#~ "You need Gnome Color Management installed in order to calibrate devices"
-#~ msgstr "Aygıtları kalibre etmek için Gnome Renk Yönetimi kurulu olmalıdır"
-
-#~ msgid "Information"
-#~ msgstr "Bilgiler"
-
-#~ msgid "Profile type:"
-#~ msgstr "Profil türü:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Renk uzayı:"
-
-#~ msgid "Created:"
-#~ msgstr "Oluşturulma zamanı:"
-
-#~ msgid "Version:"
-#~ msgstr "Sürüm:"
-
-#~ msgid "Device Manufacturer:"
-#~ msgstr "Aygıt Üreticisi:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Aygıt Modeli:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Düzeltmeyi görüntüle:"
-
-#~ msgid "White Point:"
-#~ msgstr "Beyaz Nokta:"
-
-#~ msgid "License:"
-#~ msgstr "Lisans:"
-
-#~ msgid "File size:"
-#~ msgstr "Dosya boyutu:"
-
-#~ msgid "Filename:"
-#~ msgstr "Dosya adı:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Sistem Genelinde Kur"
-
-#~ msgid "device name"
-#~ msgstr "aygıt adı"
-
-#~ msgid "Printer"
-#~ msgstr "Yazıcı"
-
-#~ msgid "Id:"
-#~ msgstr "Kimlik:"
-
-#~ msgid "Scope:"
-#~ msgstr "Kapsam:"
-
-#~ msgid "Mode:"
-#~ msgstr "Kip:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Geçerli Profil:"
-
-#~ msgid "Calibrate"
-#~ msgstr "Kalibrasyon"
-
-#~ msgid "Print Test Page"
-#~ msgstr "Deneme Sayfası Yazdır"
-
-#~ msgid "Clean Print Heads"
-#~ msgstr "Yazıcı Başlığını Temizle"
-
-#~ msgid "Print Self Test Page"
-#~ msgstr "Öz Deneme Sayfası Yazdır"
-
-#~ msgid "Print Self-Test Page"
-#~ msgstr "Öz Deneme Sayfası Yazdır"
-
-#~ msgid ""
-#~ "Meta data is additional information stored in the profile for programs to "
-#~ "use."
-#~ msgstr ""
-#~ "Üst veri, programların kullanması için profilde depolanan ek bilgidir."
-
-#~ msgid "Named colors are specific colors defined in the profile"
-#~ msgstr "Adlandırılmış renkler, profilde tanımlanmış özel renklerdir"
-
-#~ msgid "Daniel Nicoletti"
-#~ msgstr "Daniel Nicoletti"
+msgstr "Gagal mengimpor profil warna: tidak dapat menyalin berkas"
