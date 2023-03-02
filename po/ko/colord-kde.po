@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2014, 2019, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2014, 2019, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:43+0000\n"
-"PO-Revision-Date: 2022-05-07 02:00+0200\n"
+"PO-Revision-Date: 2023-03-01 00:46+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -678,7 +678,7 @@ msgstr "색 프로필을 가져오시겠습니까?"
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "가져오기"
 
 #: icc-importer/main.cpp:139
 #, kde-format
