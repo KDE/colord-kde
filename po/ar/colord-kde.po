@@ -46,7 +46,7 @@ msgstr "(C) 2012-2016 Daniel Nicoletti"
 #: colord-kcm/ColordKCM.cpp:62 icc-importer/main.cpp:69
 #, kde-format
 msgid "Port to kf5"
-msgstr "النقل إلى إطار عمل كدي ٥"
+msgstr "النقل إلى إطار عمل كِيدِي ٥"
 
 #: colord-kcm/ColordKCM.cpp:70
 #, kde-format
