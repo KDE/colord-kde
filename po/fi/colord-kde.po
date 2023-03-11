@@ -2,13 +2,13 @@
 # Author: Artnay
 # Author: Lliehu
 # Lasse Liehu <lasse.liehu@gmail.com>, 2013, 2015.
-# Tommi Nieminen <translator@legisign.org>, 2019.
+# Tommi Nieminen <translator@legisign.org>, 2019, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2019-10-16 12:09+0300\n"
+"PO-Revision-Date: 2023-03-07 14:03+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2012-12-01 22:27:04+0000\n"
-"X-Generator: Lokalize 18.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -109,19 +109,16 @@ msgstr "Laitteelle ei ole asetettu profiilia"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Tämän laitteen voi kalibroida ”displaycal”-ohjelmalla"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"Mittausvälinettä ei tunnistettu. Tarkista, että se on päällä ja kytketty "
-"oikein."
+"Kalibroinnin mittausvälinettä ei havaittu. Tarkista, että se on käynnissä ja "
+"oikein kytketty."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -129,10 +126,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "Mittausväline ei tue tulostimen profilointia."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "Laitetyyppi ei ole tällä hetkellä tuettu."
+msgstr "Tämän laitetyypin kalibrointia ei toistaiseksi tueta."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -434,7 +430,7 @@ msgstr "Tuodaanko väriprofiili?"
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "tuo"
 
 #: icc-importer/main.cpp:139
 #, kde-format
