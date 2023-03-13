@@ -1,19 +1,19 @@
 # translation of colord-kde.po to Slovak
-# Roman Paholik <wizzardsk@gmail.com>, 2012, 2013, 2015, 2016.
+# Roman Paholik <wizzardsk@gmail.com>, 2012, 2013, 2015, 2016, 2023.
 # Matej Mrenica <matejm98mthw@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2020-05-02 17:42+0200\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-03-12 09:13+0100\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.04.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -106,19 +106,16 @@ msgstr "Toto zariadenie nemá priradený žiadny profil"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Môžete použiť 'displaycal' na kalibráciu vášho zariadenia"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"Merací nástroj nebol detegovaný. Overte, prosím, že je zapnutý a správne "
-"pripojený."
+"Merací nástroj na kalibráciu nebol detegovaný. Overte, prosím, že je zapnutý "
+"a správne pripojený."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -126,10 +123,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "Merací nástroj nepodporuje profilovanie tlačiarne."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "Typ zariadenia momentálne nie je podporovaný."
+msgstr "Typ zariadenia momentálne nie je podporovaný na kalibráciu."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -429,7 +425,7 @@ msgstr "Chcete importovať farebný profil?"
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "importovať"
 
 #: icc-importer/main.cpp:139
 #, kde-format
