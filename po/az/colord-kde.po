@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the colord-kde package.
 #
-# Kheyyam Gojayev <xxmn77@gmail.com>, 2020, 2022.
+# Kheyyam Gojayev <xxmn77@gmail.com>, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2022-10-18 12:25+0400\n"
+"PO-Revision-Date: 2023-03-12 18:39+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
 "Language: az\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -107,19 +107,16 @@ msgstr "Bu cihaza profil təyin edilməyib"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Bu cihazı tənzimləmək üçün \"displaycal\" istifadə et"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"Ölçü aləti aşkar edilmədi. Onun aktiv olduğuna və düzgün qoşulduğuna əmin "
-"olun."
+"Tənzimləmək üçün ölçü aləti aşkar edilmədi. Onun aktiv olunduğunu və ya "
+"düzgün qoşulduğunu yoxla."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -127,10 +124,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "Ölçü aləti printer profili yaradılmasını dəstəkləmir."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "Bu cihaz növü hal-hazırda dəstəklənmir."
+msgstr "Tənzimləmək üçün bu növ cihaz hal-hazırda dəstəklənmir."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
