@@ -63,7 +63,7 @@ if (X11_FOUND)
 endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
-             WidgetsAddons WindowSystem KIO Package Declarative ItemModels)
+             WidgetsAddons WindowSystem Package Declarative ItemModels)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"colord-kde\")
 
