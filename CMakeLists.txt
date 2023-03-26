@@ -47,13 +47,17 @@ find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPON
     Widgets
 )
 
-find_package(X11)
-set_package_properties(X11 PROPERTIES
-    TYPE OPTIONAL
-    PURPOSE "For colord integration on X11"
-)
+option(WITHOUT_X11 "Build without colord-kded for X11 integration (skips finding X11)" OFF)
+if(NOT WITHOUT_X11)
+    find_package(X11)
+    set_package_properties(X11 PROPERTIES
+        TYPE OPTIONAL
+        PURPOSE "For colord integration on X11"
+    )
+    set(HAVE_X11 ${X11_FOUND})
+endif()
 
-if (X11_FOUND)
+if (HAVE_X11)
     find_package(XCB REQUIRED COMPONENTS XCB RANDR)
     if (QT_MAJOR_VERSION STREQUAL "5")
         find_package(Qt5X11Extras ${REQUIRED_QT_VERSION} NO_MODULE)
@@ -80,7 +84,7 @@ ecm_set_disabled_deprecation_versions(
 	KF 5.100.0)
 
 
-if (X11_FOUND)
+if (HAVE_X11)
     add_subdirectory(colord-kded)
 endif()
 add_subdirectory(colord-kcm)
