@@ -1,15 +1,15 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Marce Villarino <mvillarino@kde-espana.es>, 2013.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-10 00:43+0000\n"
-"PO-Revision-Date: 2019-09-29 09:03+0200\n"
+"PO-Revision-Date: 2023-04-28 20:11+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -109,19 +109,16 @@ msgstr "Este dispositivo non está asignado a ningún perfil."
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Pode usar «displaycal» para calibrar este dispositivo"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"Non se detectou o instrumento de medición. Comprobe que está acendido e "
-"conectado correctamente."
+"Non se detectou o instrumento de medición para calibrar. Comprobe que está "
+"acendido e conectado correctamente."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -129,10 +126,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "O instrumento de medición non é compatíbel con impresoras."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "O tipo de dispositivo é incompatíbel."
+msgstr "O tipo de dispositivo é incompatíbel coa calibración."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -432,7 +428,7 @@ msgstr "Quere importar o perfil de cores?"
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "importar"
 
 #: icc-importer/main.cpp:139
 #, kde-format
