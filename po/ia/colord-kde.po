@@ -1,0 +1,444 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the colord-kde package.
+#
+# giovanni <g.sora@tiscali.it>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: colord-kde\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-10 00:43+0000\n"
+"PO-Revision-Date: 2023-05-10 10:26+0200\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Giovanni Sora"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "g.sora@tiscali.it"
+
+#: colord-kcm/DeviceDescription.cpp:133
+#, kde-format
+msgctxt "device type"
+msgid "Printer"
+msgstr "Imprimitor"
+
+#: colord-kcm/DeviceDescription.cpp:135
+#, kde-format
+msgctxt "device type"
+msgid "Display"
+msgstr "Monstrator"
+
+#: colord-kcm/DeviceDescription.cpp:137
+#, kde-format
+msgctxt "device type"
+msgid "Webcam"
+msgstr "Webcam"
+
+#: colord-kcm/DeviceDescription.cpp:139
+#, kde-format
+msgctxt "device type"
+msgid "Scanner"
+msgstr "Scanner (scanditor)"
+
+#: colord-kcm/DeviceDescription.cpp:141
+#, kde-format
+msgctxt "device type"
+msgid "Unknown"
+msgstr "Incognite"
+
+#: colord-kcm/DeviceDescription.cpp:146
+#, kde-format
+msgctxt "device scope"
+msgid "User session"
+msgstr "Session de usator"
+
+#: colord-kcm/DeviceDescription.cpp:148
+#, kde-format
+msgctxt "device scope"
+msgid "Auto restore"
+msgstr "Restabili automatic"
+
+#: colord-kcm/DeviceDescription.cpp:150
+#, kde-format
+msgctxt "device scope"
+msgid "System wide"
+msgstr "Pro tote le systema"
+
+#: colord-kcm/DeviceDescription.cpp:152
+#, kde-format
+msgctxt "device scope"
+msgid "Unknown"
+msgstr "Incognite"
+
+#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
+#, kde-format
+msgctxt "colorspace"
+msgid "RGB"
+msgstr "RGB"
+
+#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
+#, kde-format
+msgctxt "colorspace"
+msgid "CMYK"
+msgstr "CMYK"
+
+#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
+#, kde-format
+msgctxt "colorspace"
+msgid "Gray"
+msgstr "Gris"
+
+#: colord-kcm/DeviceDescription.cpp:166
+#, kde-format
+msgid "This device has no profile assigned to it"
+msgstr "Iste dispositivo non ha alcun profilo aqssignate a illo"
+
+#: colord-kcm/DeviceDescription.cpp:185
+#, kde-format
+msgid "You can use 'displaycal' to calibrate this device"
+msgstr "Tu pote usar 'displaycal' per calibrar iste dispositivo"
+
+#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#, kde-format
+msgid ""
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
+msgstr ""
+"Le instrumento d emesura per calibrar non es discoperite. Per favor tu "
+"verifica si es activate e connectite correctemente."
+
+#: colord-kcm/DeviceDescription.cpp:218
+#, kde-format
+msgid "The measuring instrument does not support printer profiling."
+msgstr "Le instrumento de mesura non supporta profilar de imprimitor."
+
+#: colord-kcm/DeviceDescription.cpp:222
+#, kde-format
+msgid "The device type is not currently supported for calibrating."
+msgstr "Le typo de dispositivo non es supportate currentemente per calibrar."
+
+#: colord-kcm/DeviceModel.cpp:250
+#, kde-format
+msgctxt "colorspace"
+msgid "Default RGB"
+msgstr "RGB Predefinite"
+
+#: colord-kcm/DeviceModel.cpp:252
+#, kde-format
+msgctxt "colorspace"
+msgid "Default CMYK"
+msgstr "CMYK Predefinite"
+
+#: colord-kcm/DeviceModel.cpp:254
+#, kde-format
+msgctxt "colorspace"
+msgid "Default Gray"
+msgstr "Gris Predefinite"
+
+#: colord-kcm/DeviceModel.cpp:321
+#, kde-format
+msgid "Devices"
+msgstr "Dispositivos"
+
+#: colord-kcm/Profile.cpp:106
+#, kde-format
+msgid "file too small"
+msgstr "file troppo parve"
+
+#: colord-kcm/Profile.cpp:115
+#, kde-format
+msgid "not an ICC profile"
+msgstr "non un profilos de ICC"
+
+#: colord-kcm/Profile.cpp:187
+#, kde-format
+msgctxt "colorspace"
+msgid "XYZ"
+msgstr "XYZ"
+
+#: colord-kcm/Profile.cpp:190
+#, kde-format
+msgctxt "colorspace"
+msgid "LAB"
+msgstr "LAB"
+
+#: colord-kcm/Profile.cpp:193
+#, kde-format
+msgctxt "colorspace"
+msgid "LUV"
+msgstr "LUV"
+
+#: colord-kcm/Profile.cpp:196
+#, kde-format
+msgctxt "colorspace"
+msgid "YCbCr"
+msgstr "YCbCr"
+
+#: colord-kcm/Profile.cpp:199
+#, kde-format
+msgctxt "colorspace"
+msgid "Yxy"
+msgstr "Yxy"
+
+#: colord-kcm/Profile.cpp:208
+#, kde-format
+msgctxt "colorspace"
+msgid "HSV"
+msgstr "HSV"
+
+#: colord-kcm/Profile.cpp:214
+#, kde-format
+msgctxt "colorspace"
+msgid "CMY"
+msgstr "CMY"
+
+#: colord-kcm/Profile.cpp:217
+#, kde-format
+msgctxt "colorspace"
+msgid "Unknown"
+msgstr "Incognite"
+
+#: colord-kcm/Profile.cpp:302
+#, kde-format
+msgid "Missing description"
+msgstr "Description mancante"
+
+#: colord-kcm/Profile.cpp:357
+#, kde-format
+msgctxt "profile kind"
+msgid "Input device"
+msgstr "Dispositivo de entrata"
+
+#: colord-kcm/Profile.cpp:359
+#, kde-format
+msgctxt "profile kind"
+msgid "Display device"
+msgstr "Monstra Dispositivo"
+
+#: colord-kcm/Profile.cpp:361
+#, kde-format
+msgctxt "profile kind"
+msgid "Output device"
+msgstr "Dipositivo de egresso"
+
+#: colord-kcm/Profile.cpp:363
+#, kde-format
+msgctxt "profile kind"
+msgid "Devicelink"
+msgstr "Ligamine de dispositivo"
+
+#: colord-kcm/Profile.cpp:365
+#, kde-format
+msgctxt "profile kind"
+msgid "Colorspace conversion"
+msgstr "Conversion de spatio de color"
+
+#: colord-kcm/Profile.cpp:367
+#, kde-format
+msgctxt "profile kind"
+msgid "Abstract"
+msgstr "Summario"
+
+#: colord-kcm/Profile.cpp:369
+#, kde-format
+msgctxt "profile kind"
+msgid "Named color"
+msgstr "Color nominate"
+
+#: colord-kcm/Profile.cpp:371
+#, kde-format
+msgctxt "profile kind"
+msgid "Unknown"
+msgstr "Incognite"
+
+#: colord-kcm/Profile.cpp:518
+#, kde-format
+msgid "Default: %1"
+msgstr "Predefinite: %1"
+
+#: colord-kcm/Profile.cpp:520
+#, kde-format
+msgid "Colorspace: %1"
+msgstr "Spatio de color: %1"
+
+#: colord-kcm/Profile.cpp:522
+#, kde-format
+msgid "Test profile: %1"
+msgstr "Profilo de Test: %1"
+
+#: colord-kcm/Profile.cpp:524
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:80
+#, kde-format
+msgid "Standard space"
+msgstr "Spatio standard"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:83
+#, kde-format
+msgid "Display checksum"
+msgstr "Monstra Checksum"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:86
+#, kde-format
+msgid "Display model"
+msgstr "Monstra modello"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:89
+#, kde-format
+msgid "Display serial number"
+msgstr "Monstra numero serial"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:92
+#, kde-format
+msgid "Display PNPID"
+msgstr "Monstra PNPID"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:95
+#, kde-format
+msgid "Display vendor"
+msgstr "Monstra venditor"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:98
+#, kde-format
+msgid "File checksum"
+msgstr "Checksum de file"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:101
+#, kde-format
+msgid "Framework product"
+msgstr "Producto de Framework"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:104
+#, kde-format
+msgid "Framework program"
+msgstr "Programma de Framework "
+
+#: colord-kcm/ProfileMetaDataModel.cpp:107
+#, kde-format
+msgid "Framework version"
+msgstr "Version de schema (Framework)"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:110
+#, kde-format
+msgid "Data source type"
+msgstr "Typo de fonte de datos"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:113
+#, kde-format
+msgid "Mapping format"
+msgstr "Formato de mappar"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:116
+#, kde-format
+msgid "Mapping qualifier"
+msgstr "Qualificator de mappar"
+
+#: colord-kcm/ProfileModel.cpp:226
+#, kde-format
+msgid "Profiles"
+msgstr "Profilos"
+
+#: icc-importer/main.cpp:41
+#, kde-format
+msgid "Description: %1"
+msgstr "Description: %1"
+
+#: icc-importer/main.cpp:51
+#, kde-format
+msgid "Copyright: %1"
+msgstr "Copyright: %1"
+
+#: icc-importer/main.cpp:62
+#, kde-format
+msgid "ICC Profile Installer"
+msgstr "Installator de profilos de ICC"
+
+#: icc-importer/main.cpp:64
+#, kde-format
+msgid "An application to install ICC profiles"
+msgstr "Un application per installar profilos de ICC"
+
+#: icc-importer/main.cpp:66
+#, kde-format
+msgid "(C) 2008-2016 Daniel Nicoletti"
+msgstr "(C) 2008-2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "Porto a kf5"
+
+#: icc-importer/main.cpp:77
+#, kde-format
+msgid "Do not prompt the user if he wants to install"
+msgstr "Non demandar al usator si vole installar"
+
+#: icc-importer/main.cpp:78
+#, kde-format
+msgid "Color profile to install"
+msgstr "Profilo de color a installar"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to parse file: %1"
+msgstr "Falleva a analyusar file: %1"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to open ICC profile"
+msgstr "Falleva a aperir profilo de ICC"
+
+#: icc-importer/main.cpp:102
+#, kde-format
+msgid "Color profile is already imported"
+msgstr "Profilo de color jam es importate"
+
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:125
+#, kde-format
+msgid "ICC Profile Importer"
+msgstr "Importator de profilo de ICC"
+
+#: icc-importer/main.cpp:112
+#, kde-format
+msgid "ICC profile already installed system-wide"
+msgstr "Profilo de ICC ja installate per omne le systema"
+
+#: icc-importer/main.cpp:124
+#, kde-format
+msgid "Would you like to import the color profile?"
+msgstr "Tu volerea importar le profilo de color?"
+
+#: icc-importer/main.cpp:126
+#, kde-format
+msgid "import"
+msgstr "importa"
+
+#: icc-importer/main.cpp:139
+#, kde-format
+msgid "Failed to import color profile: color profile is already imported"
+msgstr "Falleva a importar profilo de color: profilo de color ja es importate"
+
+#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "Importante Profilo de color"
+
+#: icc-importer/main.cpp:142
+#, kde-format
+msgid "Failed to import color profile: could not copy the file"
+msgstr "Falleva a importar profilo de color: non pote copiar le file"
