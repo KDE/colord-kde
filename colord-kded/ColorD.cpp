@@ -673,3 +673,5 @@ void ColorD::connectToColorD()
 }
 
 #include "ColorD.moc"
+
+#include "moc_ColorD.cpp"

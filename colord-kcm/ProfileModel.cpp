@@ -249,3 +249,5 @@ QHash<int, QByteArray> ProfileModel::roleNames() const
             {ColorspaceRole, "colorspace"},
             {Qt::DecorationRole, "iconName"}};
 }
+
+#include "moc_ProfileModel.cpp"

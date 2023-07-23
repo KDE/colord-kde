@@ -117,3 +117,5 @@ QString ProfileMetaDataModel::metadataLabel(const QString &key) const
     }
     return key;
 }
+
+#include "moc_ProfileMetaDataModel.cpp"

@@ -224,3 +224,5 @@ void DeviceDescription::generateCalibrateMessage(const QString &kind)
 
     Q_EMIT calibrateMessageChanged();
 }
+
+#include "moc_DeviceDescription.cpp"

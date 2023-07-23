@@ -362,3 +362,5 @@ QHash<int, QByteArray> DeviceModel::roleNames() const
             {ColorspaceRole, "colorspace"},
             {Qt::DecorationRole, "iconName"}};
 }
+
+#include "moc_DeviceModel.cpp"

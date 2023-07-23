@@ -144,3 +144,5 @@ void ProfilesWatcher::removeProfile(const QString &filename)
 
     cdInterface.DeleteProfile(reply);
 }
+
+#include "moc_ProfilesWatcher.cpp"

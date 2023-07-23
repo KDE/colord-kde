@@ -59,3 +59,5 @@ QHash<int, QByteArray> ProfileNamedColorsModel::roleNames() const
 {
     return {{NameRole, "name"}, {ColorRole, "colorValue"}, {IsDarkColorRole, "isDarkColor"}};
 }
+
+#include "moc_ProfileNamedColorsModel.cpp"

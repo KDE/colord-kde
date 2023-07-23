@@ -118,3 +118,5 @@ void ProfileDescription::installSystemWide()
     CdProfileInterface profile(QStringLiteral("org.freedesktop.ColorManager"), m_currentProfilePath.path(), QDBusConnection::systemBus());
     profile.InstallSystemWide();
 }
+
+#include "moc_ProfileDescription.cpp"

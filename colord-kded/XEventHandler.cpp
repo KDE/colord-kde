@@ -50,3 +50,5 @@ bool XEventHandler::nativeEventFilter(const QByteArray &eventType, void *message
 
     return false;
 }
+
+#include "moc_XEventHandler.cpp"
