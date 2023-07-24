@@ -368,7 +368,7 @@ msgstr "ICC 프로필 설치기"
 #: icc-importer/main.cpp:64
 #, kde-format
 msgid "An application to install ICC profiles"
-msgstr "ICC 프로필을 설치하는 프로그램"
+msgstr "ICC 프로필을 설치하는 앱"
 
 #: icc-importer/main.cpp:66
 #, kde-format
