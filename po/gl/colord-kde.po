@@ -397,12 +397,12 @@ msgstr "Perfil de cores para instalar."
 #: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to parse file: %1"
-msgstr "Non se puido analizar o ficheiro: %1"
+msgstr "Non foi posíbel analizar o ficheiro: %1"
 
 #: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to open ICC profile"
-msgstr "Non se puido abrir o perfil ICC."
+msgstr "Non foi posíbel abrir o perfil ICC."
 
 #: icc-importer/main.cpp:102
 #, kde-format
@@ -433,7 +433,8 @@ msgstr "importar"
 #: icc-importer/main.cpp:139
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
-msgstr "Non se puido importar o perfil de cores, xa se importara previamente."
+msgstr ""
+"Non foi posíbel importar o perfil de cores, xa se importara previamente."
 
 #: icc-importer/main.cpp:139 icc-importer/main.cpp:142
 #, kde-format
@@ -444,7 +445,7 @@ msgstr "Importando un perfil de cores"
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr ""
-"Non se puido importar o perfil de cores, non se puido copiar o ficheiro."
+"Non foi posíbel importar o perfil de cores, non se puido copiar o ficheiro."
 
 #~ msgid "Available Profiles"
 #~ msgstr "Perfís dispoñíbeis"
