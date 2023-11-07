@@ -32,6 +32,7 @@
         "Description[sv]": "Hantera färgprofiler för enheter",
         "Description[tr]": "Aygıtların renk profilini yönet",
         "Description[uk]": "Керування профілем кольорів пристроїв",
+        "Description[x-test]": "xxManage color profile of devicesxx",
         "Description[zh_CN]": "管理设备的色彩特性文件",
         "Description[zh_TW]": "管理裝置的色彩設定檔",
         "Icon": "preferences-desktop-color",
@@ -68,6 +69,7 @@
         "Name[sv]": "Färghantering",
         "Name[tr]": "Renk Yönetimi",
         "Name[uk]": "Керування кольорами",
+        "Name[x-test]": "xxColor Managementxx",
         "Name[zh_CN]": "色彩管理",
         "Name[zh_TW]": "色彩管理",
         "ServiceTypes": [

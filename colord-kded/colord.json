@@ -34,6 +34,7 @@
         "Description[sv]": "Hantera färgprofiler för skärmar",
         "Description[tr]": "Ekran Renk Profillerini Yönet",
         "Description[uk]": "Керування профілями кольорів екрана",
+        "Description[x-test]": "xxManage Screen Color Profilesxx",
         "Description[zh_CN]": "管理屏幕等设备的色彩特性文件",
         "Description[zh_TW]": "管理螢幕色彩設定檔",
         "Name": "Color Daemon",
@@ -70,6 +71,7 @@
         "Name[sv]": "Färgdemon",
         "Name[tr]": "Renk Ardalan Süreci",
         "Name[uk]": "Фонова служба керування кольорами",
+        "Name[x-test]": "xxColor Daemonxx",
         "Name[zh_CN]": "色彩管理系统守护进程",
         "Name[zh_TW]": "色彩伺服程式"
     },
