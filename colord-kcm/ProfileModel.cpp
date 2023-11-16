@@ -137,7 +137,7 @@ void ProfileModel::profileAdded(const QDBusObjectPath &objectPath, bool emitChan
         title = profileId;
     } else {
         QDateTime createdDT;
-        createdDT.setTime_t(created);
+        createdDT.setSecsSinceEpoch(created);
         title = Profile::profileWithSource(dataSource, title, createdDT);
     }
     item->setText(title);

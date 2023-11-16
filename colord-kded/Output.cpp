@@ -19,8 +19,8 @@
 
 #include "Output.h"
 
+#include <QGuiApplication>
 #include <QLoggingCategory>
-#include <QX11Info>
 
 #define RR_CONNECTOR_TYPE_PANEL "Panel"
 
@@ -31,7 +31,7 @@ Output::Output(RROutput output, XRRScreenResources *resources)
     , m_resources(resources)
 {
     XRROutputInfo *info;
-    info = XRRGetOutputInfo(QX11Info::display(), m_resources, m_output);
+    info = XRRGetOutputInfo(qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display(), m_resources, m_output);
     if (!info) {
         return;
     }
@@ -81,7 +81,7 @@ bool Output::isLaptop() const
 bool Output::isPrimary(bool hasXRandR13, Window root) const
 {
     if (hasXRandR13) {
-        RROutput primary = XRRGetOutputPrimary(QX11Info::display(), root);
+        RROutput primary = XRRGetOutputPrimary(qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display(), root);
         return primary == m_output;
     }
     return false;
@@ -136,12 +136,12 @@ RROutput Output::output() const
 int Output::getGammaSize() const
 {
     // The gama size of this output
-    return XRRGetCrtcGammaSize(QX11Info::display(), m_crtc);
+    return XRRGetCrtcGammaSize(qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display(), m_crtc);
 }
 
 void Output::setGamma(XRRCrtcGamma *gamma)
 {
-    XRRSetCrtcGamma(QX11Info::display(), m_crtc, gamma);
+    XRRSetCrtcGamma(qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display(), m_crtc, gamma);
 }
 
 Edid Output::readEdidData()
@@ -178,11 +178,11 @@ QString Output::connectorType() const
     unsigned long nitems, bytes_after;
     Atom actual_type;
     Atom connector_type;
-    Atom connector_type_atom = XInternAtom(QX11Info::display(), "ConnectorType", false);
+    Atom connector_type_atom = XInternAtom(qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display(), "ConnectorType", false);
     char *connector_type_str;
     QString result;
 
-    XRRGetOutputProperty(QX11Info::display(),
+    XRRGetOutputProperty(qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display(),
                          m_output,
                          connector_type_atom,
                          0,
@@ -202,7 +202,7 @@ QString Output::connectorType() const
 
     connector_type = *((Atom *)prop);
 
-    connector_type_str = XGetAtomName(QX11Info::display(), connector_type);
+    connector_type_str = XGetAtomName(qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display(), connector_type);
     if (connector_type_str) {
         result = connector_type_str;
         XFree(connector_type_str);
@@ -240,8 +240,8 @@ quint8 *Output::readEdidData(size_t &len)
     Atom edid_atom;
     quint8 *result;
 
-    edid_atom = XInternAtom(QX11Info::display(), RR_PROPERTY_RANDR_EDID, false);
-    result = getProperty(QX11Info::display(), m_output, edid_atom, len);
+    edid_atom = XInternAtom(qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display(), RR_PROPERTY_RANDR_EDID, false);
+    result = getProperty(qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display(), m_output, edid_atom, len);
 
     if (result) {
         if (len % 128 == 0) {

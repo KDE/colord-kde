@@ -3,17 +3,18 @@
 
   SPDX-License-Identifier: LGPL-3.0-or-later
 */
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as QQC2
+import QtQuick
+import QtCore
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.kitemmodels 1.0
 import org.kde.kirigami 2.15 as Kirigami
-import org.kde.kcm 1.2 as KCM
-import QtQuick.Dialogs 1.3 as QtDialogs
-import org.kde.kirigamiaddons.treeview 1.0
+import org.kde.kirigami.delegates as KD
+import org.kde.kcmutils as KCM
+import QtQuick.Dialogs as QtDialogs
 import kcmcolord 1
 
-KCM.SimpleKCM {
+KCM.AbstractKCM {
     id: root
     implicitHeight: Kirigami.Units.gridUnit * 40
     implicitWidth: Kirigami.Units.gridUnit * 20
@@ -118,9 +119,9 @@ KCM.SimpleKCM {
     QtDialogs.FileDialog {
         id: fileDialog
         title: i18nc("ICC Profile is a tech term", "Import ICC Profile")
-        folder: shortcuts.home
+        currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
         onAccepted: {
-            kcm.importProfile(fileDialog.fileUrls[0]);
+            kcm.importProfile(selectedFile);
         }
         nameFilters: [i18nc("ICC Profile is a tech term", "ICC Profile") + "(*.icc)"]
     }
@@ -130,7 +131,7 @@ KCM.SimpleKCM {
         title: i18n("Remove Profile")
 
         text: i18n("Are you sure you want to remove this profile?")
-        standardButtons: QtDialogs.StandardButton.Yes | QtDialogs.StandardButton.No
+        buttons: QtDialogs.StandardButton.Yes | QtDialogs.StandardButton.No
         onAccepted: {
             if (isDeviceView) {
                 kcm.deviceModel.removeProfile(deviceView.currentProfilePath, deviceView.currentDevicePath);
@@ -147,76 +148,70 @@ KCM.SimpleKCM {
             id: profileDeviceViewFrame
             Layout.fillWidth: true
             Layout.fillHeight: true
-            TreeListView {
-                property variant currentProfilePath: null
-                property variant currentDevicePath: null
-                property bool canRemoveCurrentProfile: null
 
-                id: deviceView
-                visible: isDeviceView
+            QQC2.ScrollView {
+
                 anchors.fill: parent
-                sourceModel: kcm.deviceModel
-                delegate: AbstractTreeItem {
-                    id: listItem
-                    Layout.alignment: Qt.AlignLeft
-                    contentItem: RowLayout {
-                        id: layout
-                        spacing: 0
 
-                        QQC2.CheckBox {
-                            visible: itemType === "profile"
-                            checkState: model.profileCheckState // from model data
-                            checkable: !checked
-                            onCheckedChanged: {
-                               if (checked) {
-                                   kcm.makeProfileDefault(model.objectPath, model.parentObjectPath);
-                                   deviceView.currentIndex = index;
-                               }
-                            }
-                        }
+                TreeView {
+                    property variant currentProfilePath: null
+                    property variant currentDevicePath: null
+                    property bool canRemoveCurrentProfile: false
 
-                        Kirigami.Icon {
-                            id: iconItem
-                            source: iconName
-                            property int size: Kirigami.Units.iconSizes.smallMedium
-                            Layout.minimumHeight: size
-                            Layout.maximumHeight: size
-                            Layout.minimumWidth: size
-                            opacity: 1
-                        }
-                        ColumnLayout {
-                            spacing: 0
-                            Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignLeft
-                            QQC2.Label {
-                                id: labelItem
-                                text: title
-                                Layout.fillWidth: true
-                                color: (listItem.highlighted || listItem.checked || (listItem.pressed && listItem.supportsMouseEvents)) ? listItem.activeTextColor : listItem.textColor
-                                elide: Text.ElideRight
-                                font.weight: listItem.bold ? Font.Bold : Font.Normal
-                                opacity: 1
-                            }
-                        }
+                    id: deviceView
+                    visible: isDeviceView
+                    anchors.fill: parent
+
+                    selectionModel: ItemSelectionModel {
+                        id: selectionModel
+                        model: kcm.deviceModel
                     }
 
-                    ListView.onIsCurrentItemChanged: {
-                        if (ListView.isCurrentItem) {
-                            if (itemType === "device") {
-                                // is device
-                                kcm.deviceDescription.setDevice(objectPath);
-                                isDeviceDescription = true;
+                    model: kcm.deviceModel
+                    delegate: QQC2.TreeViewDelegate {
+                        id: listItem
+                        implicitWidth: TableView.view.width
+                        contentItem: RowLayout {
+                            id: layout
+                            spacing: Kirigami.Units.smallSpacing
 
-                                deviceView.currentDevicePath = model.objectPath;
-                                deviceView.currentProfilePath = null;
-                                deviceView.canRemoveCurrentProfile = false;
-                            } else {
-                                // is profile
-                                kcm.profileDescription.setProfile(objectPath, model.canRemoveProfile);
-                                isDeviceDescription = false;
-                                deviceView.currentDevicePath = model.parentObjectPath;
-                                deviceView.currentProfilePath = model.objectPath;
-                                deviceView.canRemoveCurrentProfile = model.canRemoveProfile;
+                            QQC2.CheckBox {
+                                visible: itemType === "profile"
+                                checkState: model.profileCheckState // from model data
+                                checkable: !checked
+                                onCheckedChanged: {
+                                    if (checked) {
+                                        kcm.makeProfileDefault(model.objectPath, model.parentObjectPath);
+                                    }
+                                }
+                            }
+
+                            KD.IconTitleSubtitle {
+                                title: model.title
+                                icon.name: model.iconName
+
+                                Layout.fillWidth: true
+                            }
+                        }
+
+                        onCurrentChanged: {
+                            if (current) {
+                                if (itemType === "device") {
+                                    // is device
+                                    kcm.deviceDescription.setDevice(objectPath);
+                                    isDeviceDescription = true;
+
+                                    deviceView.currentDevicePath = model.objectPath;
+                                    deviceView.currentProfilePath = null;
+                                    deviceView.canRemoveCurrentProfile = false;
+                                } else {
+                                    // is profile
+                                    kcm.profileDescription.setProfile(objectPath, model.canRemoveProfile);
+                                    isDeviceDescription = false;
+                                    deviceView.currentDevicePath = model.parentObjectPath;
+                                    deviceView.currentProfilePath = model.objectPath;
+                                    deviceView.canRemoveCurrentProfile = model.canRemoveProfile;
+                                }
                             }
                         }
                     }
@@ -224,19 +219,37 @@ KCM.SimpleKCM {
             }
 
             QQC2.ScrollView {
-                anchors.fill: parent
                 visible: !isDeviceView
+                anchors.fill: parent
+
+                Component.onCompleted: background.visible = true
 
                 ListView {
+                    id: profileView
+
                     property variant currentProfilePath: null
                     property bool canRemoveCurrentProfile: false
 
-                    id: profileView
+                    clip: true
+
                     model: profileSortModel
-                    delegate: Kirigami.BasicListItem {
-                        label: title
-                        icon: iconName
-                        subtitle: fileName
+                    delegate: QQC2.ItemDelegate {
+                        id: delegate
+
+                        text: title
+                        icon.name: iconName
+
+                        width: ListView.view.width
+                        highlighted: ListView.isCurrentItem
+
+                        contentItem: KD.IconTitleSubtitle {
+                            title: delegate.text
+                            subtitle: fileName
+                            icon: icon.fromControlsIcon(delegate.icon)
+                        }
+
+                        onClicked: ListView.view.currentIndex = index
+
                         ListView.onIsCurrentItemChanged: {
                             kcm.profileDescription.setProfile(model.objectPath, model.canRemove);
                             profileView.currentProfilePath = model.objectPath;
@@ -246,11 +259,12 @@ KCM.SimpleKCM {
                     KSortFilterProxyModel {
                         id: profileSortModel
                         sourceModel: kcm.profileModel
-                        sortRole: "sortString"
+                        sortRoleName: "sortString"
                     }
                 }
             }
         }
+
         QQC2.Frame {
             Layout.fillHeight: true
             Layout.maximumWidth: parent.width * 0.4

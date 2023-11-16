@@ -22,7 +22,7 @@
 #pragma once
 
 #include <KConfigGroup>
-#include <KQuickAddons/ConfigModule>
+#include <KQuickConfigModule>
 #include <QDBusObjectPath>
 
 class DeviceModel;
@@ -32,7 +32,7 @@ class DeviceDescription;
 class ProfileDescription;
 class QSortFilterProxyModel;
 class AddProfileComboBoxItem;
-class KCMColord : public KQuickAddons::ConfigModule
+class KCMColord : public KQuickConfigModule
 {
     Q_OBJECT
     Q_PROPERTY(DeviceModel *deviceModel READ deviceModel CONSTANT)

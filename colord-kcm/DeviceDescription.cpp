@@ -33,7 +33,6 @@
 #include <KFormat>
 #include <KLocalizedString>
 #include <KMessageWidget>
-#include <KToolInvocation>
 
 typedef QList<QDBusObjectPath> ObjectPathList;
 

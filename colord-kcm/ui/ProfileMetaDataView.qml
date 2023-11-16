@@ -6,8 +6,9 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
-import org.kde.kcm 1.2 as KCM
+import org.kde.kcmutils as KCM
 import org.kde.kirigami 2.15 as Kirigami
+import org.kde.kirigami.delegates as KD
 import kcmcolord 1
 
 ColumnLayout {
@@ -76,12 +77,26 @@ ColumnLayout {
         Layout.fillHeight: true
         Layout.fillWidth: true
         model: kcm.profileDescription.namedColorsModel
-        delegate: Kirigami.BasicListItem {
-            label: name
-            textColor: model.isDarkColor ? "#EEEDE7" : "#171710"
-            subtitle: colorValue
-            backgroundColor: colorValue
-            separatorVisible: false
+        delegate: QQC2.ItemDelegate {
+            id: delegate
+
+            text: name
+            width: ListView.view.width
+
+            contentItem: RowLayout {
+                spacing: Kirigami.Units.smallSpacing
+
+                KD.TitleSubtitle {
+                    title: delegate.text
+                    subtitle: colorValue
+                    Layout.fillWidth: true
+                }
+                Rectangle {
+                    color: colorValue
+                    implicitWidth: height
+                    Layout.fillHeight: true
+                }
+            }
         }
     }
 

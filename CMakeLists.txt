@@ -10,11 +10,11 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 
 project(colord-kde VERSION ${RELEASE_SERVICE_VERSION})
 
-set(KF5_MIN_VERSION "5.91.0")
-set(REQUIRED_QT_VERSION "5.15.2")
+set(KF_MIN_VERSION "5.240.0")
+set(REQUIRED_QT_VERSION "6.5.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 
@@ -39,9 +39,8 @@ ecm_setup_version("${PROJECT_VERSION}"
     VARIABLE_PREFIX "COLORD_KDE"
     VERSION_HEADER "version.h"
 )
-ecm_find_qmlmodule(org.kde.kirigamiaddons.treeview 1.0)
 
-find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
+find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     DBus
     Widgets
@@ -59,15 +58,10 @@ endif()
 
 if (HAVE_X11)
     find_package(XCB REQUIRED COMPONENTS XCB RANDR)
-    if (QT_MAJOR_VERSION STREQUAL "5")
-        find_package(Qt5X11Extras ${REQUIRED_QT_VERSION} NO_MODULE)
-    elseif (QT_MAJOR_VERSION STREQUAL "6")
-        find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui) # qtx11extras_p.h
-    endif()
 endif()
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
-             WidgetsAddons WindowSystem Package Declarative ItemModels)
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
+             WidgetsAddons WindowSystem ItemModels)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"colord-kde\")
 

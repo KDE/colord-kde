@@ -49,18 +49,12 @@ target_link_libraries(kded_colord
     Qt::Core
     Qt::Widgets
     Qt::DBus
-    KF5::CoreAddons
-    KF5::DBusAddons
-    KF5::WindowSystem
+    KF6::CoreAddons
+    KF6::DBusAddons
+    KF6::WindowSystem
     X11::X11
     X11::Xrandr
     PkgConfig::LCMS2
 )
-if (QT_MAJOR_VERSION STREQUAL "5")
-    target_link_libraries(kded_colord Qt::X11Extras)
-elseif (QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(kded_colord Qt::Gui)
-endif()
 
 set_target_properties(kded_colord PROPERTIES OUTPUT_NAME colord)
-install(TARGETS kded_colord DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kded)

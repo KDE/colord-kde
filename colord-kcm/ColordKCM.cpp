@@ -41,7 +41,7 @@
 K_PLUGIN_CLASS_WITH_JSON(KCMColord, "kcm_colord.json")
 
 KCMColord::KCMColord(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
-    : KQuickAddons::ConfigModule(parent, data, args)
+    : KQuickConfigModule(parent, data)
     , m_cdInterface(
           new CdInterface(QStringLiteral("org.freedesktop.ColorManager"), QStringLiteral("/org/freedesktop/ColorManager"), QDBusConnection::systemBus(), this))
     , m_deviceModel(new DeviceModel(m_cdInterface, this))

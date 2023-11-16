@@ -256,7 +256,7 @@ QStandardItem *DeviceModel::createProfileItem(const QDBusObjectPath &objectPath,
         canRemoveProfile = false;
     } else {
         QDateTime createdDT;
-        createdDT.setTime_t(created);
+        createdDT.setSecsSinceEpoch(created);
         title = Profile::profileWithSource(dataSource, title, createdDT);
 
         if (dataSource == QLatin1String(CD_PROFILE_METADATA_DATA_SOURCE_EDID)) {

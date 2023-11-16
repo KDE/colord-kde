@@ -15,9 +15,9 @@ target_link_libraries(colord-kde-icc-importer
     Qt::Core
     Qt::Widgets
     Qt::DBus
-    KF5::CoreAddons
-    KF5::I18n
-    KF5::WidgetsAddons
+    KF6::CoreAddons
+    KF6::I18n
+    KF6::WidgetsAddons
     PkgConfig::LCMS2
 )
 

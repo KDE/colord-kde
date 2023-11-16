@@ -39,15 +39,13 @@ set_source_files_properties(${COLORD_SENSOR_INTERFACE_XML} PROPERTIES NO_NAMESPA
 set_source_files_properties(${COLORD_SENSOR_INTERFACE_XML} PROPERTIES CLASSNAME CdSensorInterface)
 qt_add_dbus_interface(kcm_colord_SRCS ${COLORD_SENSOR_INTERFACE_XML} CdSensorInterface)
 
-kcoreaddons_add_plugin(kcm_colord SOURCES ${kcm_colord_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
+kcmutils_add_qml_kcm(kcm_colord SOURCES ${kcm_colord_SRCS})
 
 target_link_libraries(kcm_colord
     Qt::Core
     Qt::DBus
-    KF5::QuickAddons
-    KF5::I18n
-    KF5::KCMUtils
+    KF6::KCMUtilsQuick
+    KF6::I18n
+    KF6::KCMUtils
     PkgConfig::LCMS2
 )
-
-kpackage_install_package(package kcm_colord kcms)

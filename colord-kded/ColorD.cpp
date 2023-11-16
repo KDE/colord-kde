@@ -37,7 +37,6 @@
 #include <QDBusUnixFileDescriptor>
 #include <QFile>
 #include <QLoggingCategory>
-#include <QX11Info>
 
 #include <KPluginFactory>
 
@@ -222,7 +221,7 @@ void ColorD::addOutput(const Output::Ptr &output)
         properties[CD_DEVICE_METADATA_OUTPUT_PRIORITY] = CD_DEVICE_METADATA_OUTPUT_PRIORITY_PRIMARY;
     }
     properties[CD_DEVICE_METADATA_OUTPUT_EDID_MD5] = output->edidHash();
-    properties[CD_DEVICE_PROPERTY_EMBEDDED] = output->isLaptop();
+    properties[CD_DEVICE_PROPERTY_EMBEDDED] = QChar::fromLatin1(output->isLaptop());
 
     // We use temp because if we crash or quit the device gets removed
     qCDebug(COLORD) << "Adding device id" << deviceId;
@@ -526,7 +525,7 @@ void ColorD::removeOutput(const Output::Ptr &output)
 
 XRRScreenResources *ColorD::connectToDisplay()
 {
-    m_dpy = QX11Info::display();
+    m_dpy = qGuiApp->nativeInterface<QNativeInterface::QX11Application>()->display();
 
     // Check extension
     int eventBase;

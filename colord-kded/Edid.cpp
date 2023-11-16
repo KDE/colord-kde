@@ -189,9 +189,10 @@ bool Edid::parse(const quint8 *data, size_t length)
      * 7654321076543210
      * |\---/\---/\---/
      * R  C1   C2   C3 */
-    m_pnpId[0] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x7c) / 4) - 1;
-    m_pnpId[1] = 'A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x3) * 8) + ((data[GCM_EDID_OFFSET_PNPID + 1] & 0xe0) / 32) - 1;
-    m_pnpId[2] = 'A' + (data[GCM_EDID_OFFSET_PNPID + 1] & 0x1f) - 1;
+    m_pnpId.resize(3);
+    m_pnpId[0] = QChar::fromLatin1('A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x7c) / 4) - 1);
+    m_pnpId[1] = QChar::fromLatin1('A' + ((data[GCM_EDID_OFFSET_PNPID + 0] & 0x3) * 8) + ((data[GCM_EDID_OFFSET_PNPID + 1] & 0xe0) / 32) - 1);
+    m_pnpId[2] = QChar::fromLatin1('A' + (data[GCM_EDID_OFFSET_PNPID + 1] & 0x1f) - 1);
 
     // load the PNP_IDS file and load the vendor name
     if (!m_pnpId.isEmpty()) {
