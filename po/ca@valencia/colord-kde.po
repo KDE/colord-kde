@@ -384,7 +384,7 @@ msgstr "(C) 2008-2016 Daniel Nicoletti"
 #: icc-importer/main.cpp:69
 #, kde-format
 msgid "Port to kf5"
-msgstr "Adaptació al KF5"
+msgstr "Adaptació als KF5"
 
 #: icc-importer/main.cpp:77
 #, kde-format
