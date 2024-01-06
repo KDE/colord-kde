@@ -2,19 +2,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # pan93412 <pan93412@gmail.com>, 2018.
+# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:25+0000\n"
-"PO-Revision-Date: 2018-12-21 19:06+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2024-01-05 20:06+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: Traditional Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 18.12.0\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -107,17 +108,14 @@ msgstr "沒有指定到此裝置的設定檔"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "您可以使用 'displaycal' 來校正這台裝置"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
-msgstr "未偵測到測量儀器。請檢查其是否已開啟且正確連接。"
+msgstr "未偵測到校正用的測量儀器。請檢查其是否已開啟且正確連接。"
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -125,10 +123,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "該測量儀器不支援列印設定檔。"
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "目前不支援裝置類型。"
+msgstr "目前不支援使用該裝置類型來進行校正。"
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -428,7 +425,7 @@ msgstr "是否匯入色彩設定檔？"
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "匯入"
 
 #: icc-importer/main.cpp:139
 #, kde-format
