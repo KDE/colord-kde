@@ -1,22 +1,22 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Sergiu Bivol <sergiu@cip.md>, 2013, 2020.
+# Sergiu Bivol <sergiu@cip.md>, 2013, 2020, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:25+0000\n"
-"PO-Revision-Date: 2020-09-13 13:02+0100\n"
+"PO-Revision-Date: 2024-01-07 15:30+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
-"Language-Team: Romanian\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -108,19 +108,16 @@ msgstr "Acest dispozitiv nu are niciun profil atribuit"
 #: colord-kcm/DeviceDescription.cpp:185
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "Puteți folosi „displaycal” pentru a calibra acest dispozitiv"
 
 #: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
-#, fuzzy, kde-format
-#| msgid ""
-#| "The measuring instrument is not detected. Please check it is turned on "
-#| "and correctly connected."
+#, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"Instrumentul de măsurare nu este detectat. Verificați dacă este pornit și "
-"conectat corect."
+"Instrumentul de măsurare pentru calibrare nu este detectat. Verificați dacă "
+"este pornit și conectat corect."
 
 #: colord-kcm/DeviceDescription.cpp:218
 #, kde-format
@@ -128,10 +125,9 @@ msgid "The measuring instrument does not support printer profiling."
 msgstr "Instrumentul de măsurare nu susține profilarea imprimantelor."
 
 #: colord-kcm/DeviceDescription.cpp:222
-#, fuzzy, kde-format
-#| msgid "The device type is not currently supported."
+#, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "Tipul de dispozitiv nu este susținut încă."
+msgstr "Tipul de dispozitiv nu este susținut încă pentru calibrare."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
@@ -431,7 +427,7 @@ msgstr "Doriți să importați profilul de culoare?"
 #: icc-importer/main.cpp:126
 #, kde-format
 msgid "import"
-msgstr ""
+msgstr "import"
 
 #: icc-importer/main.cpp:139
 #, kde-format
