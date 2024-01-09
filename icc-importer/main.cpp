@@ -115,21 +115,13 @@ int main(int argc, char **argv)
     }
 
     if (!parser.isSet(QStringLiteral("yes"))) {
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         const int ret =
             KMessageBox::questionTwoActions(nullptr,
-#else
-        const int ret = KMessageBox::questionYesNo(nullptr,
-#endif
                                             message(i18n("Would you like to import the color profile?"), profile.description(), profile.copyright()),
                                             i18n("ICC Profile Importer"),
                                             KGuiItem(i18n("import")),
                                             KStandardGuiItem::cancel());
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         if (ret == KMessageBox::ButtonCode::SecondaryAction) {
-#else
-        if (ret == KMessageBox::No) {
-#endif
             return 2;
         }
     }
