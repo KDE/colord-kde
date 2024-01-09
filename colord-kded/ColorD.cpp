@@ -251,7 +251,7 @@ void ColorD::addOutput(const Output::Ptr &output)
             qCDebug(COLORD) << "Found colord device" << reply.value().path();
 
             bool found = false;
-            for (auto iter : qAsConst(m_connectedOutputs)) {
+            for (auto iter : std::as_const(m_connectedOutputs)) {
                 if (iter->id() == deviceId) {
                     found = true;
 
@@ -385,7 +385,7 @@ QList<ColorD::X11Monitor> ColorD::getAtomIds() const
     } sortMonitorList;
     std::sort(monitorList.begin(), monitorList.end(), sortMonitorList);
     atomId = 0;
-    for (auto monitor : qAsConst(monitorList)) {
+    for (auto monitor : std::as_const(monitorList)) {
         monitor.atomId = atomId++;
     }
 
