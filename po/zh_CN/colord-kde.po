@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:25+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2024-01-06 03:34\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -27,101 +27,101 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "i@guoyunhe.me, tds00@qq.com"
 
-#: colord-kcm/DeviceDescription.cpp:133
+#: colord-kcm/DeviceDescription.cpp:132
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
 msgstr "打印机"
 
-#: colord-kcm/DeviceDescription.cpp:135
+#: colord-kcm/DeviceDescription.cpp:134
 #, kde-format
 msgctxt "device type"
 msgid "Display"
 msgstr "显示器"
 
-#: colord-kcm/DeviceDescription.cpp:137
+#: colord-kcm/DeviceDescription.cpp:136
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
 msgstr "摄像头"
 
-#: colord-kcm/DeviceDescription.cpp:139
+#: colord-kcm/DeviceDescription.cpp:138
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
 msgstr "扫描仪"
 
-#: colord-kcm/DeviceDescription.cpp:141
+#: colord-kcm/DeviceDescription.cpp:140
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
 msgstr "未知"
 
-#: colord-kcm/DeviceDescription.cpp:146
+#: colord-kcm/DeviceDescription.cpp:145
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
 msgstr "用户会话"
 
-#: colord-kcm/DeviceDescription.cpp:148
+#: colord-kcm/DeviceDescription.cpp:147
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "自动恢复"
 
-#: colord-kcm/DeviceDescription.cpp:150
+#: colord-kcm/DeviceDescription.cpp:149
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
 msgstr "系统全局"
 
-#: colord-kcm/DeviceDescription.cpp:152
+#: colord-kcm/DeviceDescription.cpp:151
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "未知"
 
-#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:156 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "RGB"
 
-#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:158 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "CMYK"
 
-#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:160 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "灰阶"
 
-#: colord-kcm/DeviceDescription.cpp:166
+#: colord-kcm/DeviceDescription.cpp:165
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "此设备并未指定色彩特性文件"
 
-#: colord-kcm/DeviceDescription.cpp:185
+#: colord-kcm/DeviceDescription.cpp:184
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
 msgstr "您可以使用“DisplayCAL”来校准此设备"
 
-#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#: colord-kcm/DeviceDescription.cpp:193 colord-kcm/DeviceDescription.cpp:198
 #, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr "未检测到校色仪。请检查它是否已经启动并正确连接到了计算机。"
 
-#: colord-kcm/DeviceDescription.cpp:218
+#: colord-kcm/DeviceDescription.cpp:217
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "该色彩测量仪器不支持为打印机进行特性化。"
 
-#: colord-kcm/DeviceDescription.cpp:222
+#: colord-kcm/DeviceDescription.cpp:221
 #, kde-format
 msgid "The device type is not currently supported for calibrating."
 msgstr "目前尚不支持此设备类型的校色操作。"
@@ -406,7 +406,7 @@ msgid "Color profile is already imported"
 msgstr "色彩特性文件已经导入"
 
 #: icc-importer/main.cpp:103 icc-importer/main.cpp:113
-#: icc-importer/main.cpp:125
+#: icc-importer/main.cpp:121
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "ICC 特性文件导入程序"
@@ -416,27 +416,27 @@ msgstr "ICC 特性文件导入程序"
 msgid "ICC profile already installed system-wide"
 msgstr "ICC 特性文件已经安装到系统全局"
 
-#: icc-importer/main.cpp:124
+#: icc-importer/main.cpp:120
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "您确定要导入此色彩特性文件吗？"
 
-#: icc-importer/main.cpp:126
+#: icc-importer/main.cpp:122
 #, kde-format
 msgid "import"
 msgstr "导入"
 
-#: icc-importer/main.cpp:139
+#: icc-importer/main.cpp:131
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "无法导入色彩特性文件: 该特性文件已经导入"
 
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#: icc-importer/main.cpp:131 icc-importer/main.cpp:134
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "导入色彩特性文件"
 
-#: icc-importer/main.cpp:142
+#: icc-importer/main.cpp:134
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "无法导入色彩特性文件: 无法复制该文件"

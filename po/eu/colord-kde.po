@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:25+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2022-12-11 17:58+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque\n"
@@ -30,89 +30,89 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "xalba@euskalnet.net"
 
-#: colord-kcm/DeviceDescription.cpp:133
+#: colord-kcm/DeviceDescription.cpp:132
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
 msgstr "Inprimagailua"
 
-#: colord-kcm/DeviceDescription.cpp:135
+#: colord-kcm/DeviceDescription.cpp:134
 #, kde-format
 msgctxt "device type"
 msgid "Display"
 msgstr "Pantaila"
 
-#: colord-kcm/DeviceDescription.cpp:137
+#: colord-kcm/DeviceDescription.cpp:136
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
 msgstr "Web-kamera"
 
-#: colord-kcm/DeviceDescription.cpp:139
+#: colord-kcm/DeviceDescription.cpp:138
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
 msgstr "Eskanerra"
 
-#: colord-kcm/DeviceDescription.cpp:141
+#: colord-kcm/DeviceDescription.cpp:140
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: colord-kcm/DeviceDescription.cpp:146
+#: colord-kcm/DeviceDescription.cpp:145
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
 msgstr "Erabiltzailearen saioa"
 
-#: colord-kcm/DeviceDescription.cpp:148
+#: colord-kcm/DeviceDescription.cpp:147
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "Automatikoki lehengoratu"
 
-#: colord-kcm/DeviceDescription.cpp:150
+#: colord-kcm/DeviceDescription.cpp:149
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
 msgstr "Sistema osorako"
 
-#: colord-kcm/DeviceDescription.cpp:152
+#: colord-kcm/DeviceDescription.cpp:151
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:156 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "RGB"
 
-#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:158 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "CMYK"
 
-#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:160 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "Grisa"
 
-#: colord-kcm/DeviceDescription.cpp:166
+#: colord-kcm/DeviceDescription.cpp:165
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "Gailu honek ez dauka esleitutako profilik"
 
-#: colord-kcm/DeviceDescription.cpp:185
+#: colord-kcm/DeviceDescription.cpp:184
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
 msgstr "Gailu hau kalibratzeko 'displaycal' erabil dezakezu"
 
-#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#: colord-kcm/DeviceDescription.cpp:193 colord-kcm/DeviceDescription.cpp:198
 #, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
@@ -121,12 +121,12 @@ msgstr ""
 "Ez da kalibratzeko neurgailua antzeman. Mesedez, egiaztatu piztuta eta era "
 "egokian konektatuta dagoela."
 
-#: colord-kcm/DeviceDescription.cpp:218
+#: colord-kcm/DeviceDescription.cpp:217
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Neurtzeko tresnak ez du onartzen inprimagailuak profilatzea."
 
-#: colord-kcm/DeviceDescription.cpp:222
+#: colord-kcm/DeviceDescription.cpp:221
 #, kde-format
 msgid "The device type is not currently supported for calibrating."
 msgstr "Gailu motak ez du oraindik kalibratzeko euskarririk."
@@ -411,7 +411,7 @@ msgid "Color profile is already imported"
 msgstr "Kolore profila dagoeneko inportatu da"
 
 #: icc-importer/main.cpp:103 icc-importer/main.cpp:113
-#: icc-importer/main.cpp:125
+#: icc-importer/main.cpp:121
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "ICC profil inportatzailea"
@@ -421,29 +421,29 @@ msgstr "ICC profil inportatzailea"
 msgid "ICC profile already installed system-wide"
 msgstr "ICC profila dagoeneko sistema osorako instalatuta dago"
 
-#: icc-importer/main.cpp:124
+#: icc-importer/main.cpp:120
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "Kolore-profila inportatu nahi zenuke?"
 
-#: icc-importer/main.cpp:126
+#: icc-importer/main.cpp:122
 #, kde-format
 msgid "import"
 msgstr "inportatu"
 
-#: icc-importer/main.cpp:139
+#: icc-importer/main.cpp:131
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr ""
 "Kolore-profila inportatzea huts egin du: kolore-profila dagoeneko "
 "inportatuta da"
 
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#: icc-importer/main.cpp:131 icc-importer/main.cpp:134
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "Kolore profila inportatzea"
 
-#: icc-importer/main.cpp:142
+#: icc-importer/main.cpp:134
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "Kolore-profila inportatzea huts egin du: fitxategia ezin da kopiatu"

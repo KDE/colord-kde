@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:25+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2012-06-21 15:18+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer\n"
@@ -30,101 +30,101 @@ msgstr ""
 "khoemsokhem@khmeros.info,​​mornmet@khmeros.info,sutha@khmeros.info,"
 "ratanak@khmeros.info,sophea@khmeros.info"
 
-#: colord-kcm/DeviceDescription.cpp:133
+#: colord-kcm/DeviceDescription.cpp:132
 #, fuzzy, kde-format
 #| msgid "Printer"
 msgctxt "device type"
 msgid "Printer"
 msgstr "ម៉ាស៊ីន​បោះពុម្ព"
 
-#: colord-kcm/DeviceDescription.cpp:135
+#: colord-kcm/DeviceDescription.cpp:134
 #, fuzzy, kde-format
 #| msgid "Display"
 msgctxt "device type"
 msgid "Display"
 msgstr "បង្ហាញ"
 
-#: colord-kcm/DeviceDescription.cpp:137
+#: colord-kcm/DeviceDescription.cpp:136
 #, fuzzy, kde-format
 #| msgid "Webcam"
 msgctxt "device type"
 msgid "Webcam"
 msgstr "វិបខេម "
 
-#: colord-kcm/DeviceDescription.cpp:139
+#: colord-kcm/DeviceDescription.cpp:138
 #, fuzzy, kde-format
 #| msgid "Scanner"
 msgctxt "device type"
 msgid "Scanner"
 msgstr "ម៉ាស៊ីន​ស្កេន"
 
-#: colord-kcm/DeviceDescription.cpp:141
+#: colord-kcm/DeviceDescription.cpp:140
 #, fuzzy, kde-format
 #| msgid "Unknown"
 msgctxt "device type"
 msgid "Unknown"
 msgstr "មិន​ស្គាល់"
 
-#: colord-kcm/DeviceDescription.cpp:146
+#: colord-kcm/DeviceDescription.cpp:145
 #, fuzzy, kde-format
 #| msgid "User session"
 msgctxt "device scope"
 msgid "User session"
 msgstr "សម័យ​អ្នកប្រើ"
 
-#: colord-kcm/DeviceDescription.cpp:148
+#: colord-kcm/DeviceDescription.cpp:147
 #, fuzzy, kde-format
 #| msgid "Auto restore"
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "ស្ដារ​ដោយ​ស្វ័យ​ប្រវត្តិ"
 
-#: colord-kcm/DeviceDescription.cpp:150
+#: colord-kcm/DeviceDescription.cpp:149
 #, fuzzy, kde-format
 #| msgid "System wide"
 msgctxt "device scope"
 msgid "System wide"
 msgstr "ទូទាំង​ប្រព័ន្ធ"
 
-#: colord-kcm/DeviceDescription.cpp:152
+#: colord-kcm/DeviceDescription.cpp:151
 #, fuzzy, kde-format
 #| msgid "Unknown"
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "មិន​ស្គាល់"
 
-#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:156 colord-kcm/Profile.cpp:202
 #, fuzzy, kde-format
 #| msgid "RGB"
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "RGB"
 
-#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:158 colord-kcm/Profile.cpp:211
 #, fuzzy, kde-format
 #| msgid "CMYK"
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "CMYK"
 
-#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:160 colord-kcm/Profile.cpp:205
 #, fuzzy, kde-format
 #| msgid "Gray"
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "ប្រផះ"
 
-#: colord-kcm/DeviceDescription.cpp:166
+#: colord-kcm/DeviceDescription.cpp:165
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "ឧបករណ៍​នេះ​គ្មាន​ទម្រង់​បាន​ផ្ដល់​ឲ្យ​វា​ទេ"
 
-#: colord-kcm/DeviceDescription.cpp:185
+#: colord-kcm/DeviceDescription.cpp:184
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
 msgstr ""
 
-#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#: colord-kcm/DeviceDescription.cpp:193 colord-kcm/DeviceDescription.cpp:198
 #, fuzzy, kde-format
 #| msgid ""
 #| "The measuring instrument is not detected. Please check it is turned on "
@@ -134,12 +134,12 @@ msgid ""
 "turned on and correctly connected."
 msgstr "ឧបករណ៍​វាស់​មិន​ត្រូវ​បានរក​ឃើញ​ទេ ។ សូម​ពិនិត្យ​មើល​ថា​ វា​បាន​បើក និង​តភ្ជាប់​ត្រឹមត្រូវ​ដែរឬទេ ។"
 
-#: colord-kcm/DeviceDescription.cpp:218
+#: colord-kcm/DeviceDescription.cpp:217
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "ឧបករណ៍​វាស់​មិន​គាំទ្រ​ទម្រង់​របស់​ម៉ាស៊ីន​បោះពុម្ព​ទេ ។"
 
-#: colord-kcm/DeviceDescription.cpp:222
+#: colord-kcm/DeviceDescription.cpp:221
 #, fuzzy, kde-format
 #| msgid "The device type is not currently supported."
 msgid "The device type is not currently supported for calibrating."
@@ -448,7 +448,7 @@ msgid "Color profile is already imported"
 msgstr ""
 
 #: icc-importer/main.cpp:103 icc-importer/main.cpp:113
-#: icc-importer/main.cpp:125
+#: icc-importer/main.cpp:121
 #, fuzzy, kde-format
 #| msgid "Profile type:"
 msgid "ICC Profile Importer"
@@ -459,29 +459,29 @@ msgstr "ប្រភេទ​ទម្រង់ ៖"
 msgid "ICC profile already installed system-wide"
 msgstr ""
 
-#: icc-importer/main.cpp:124
+#: icc-importer/main.cpp:120
 #, fuzzy, kde-format
 #| msgid "Failed to import color profile"
 msgid "Would you like to import the color profile?"
 msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
 
-#: icc-importer/main.cpp:126
+#: icc-importer/main.cpp:122
 #, kde-format
 msgid "import"
 msgstr ""
 
-#: icc-importer/main.cpp:139
+#: icc-importer/main.cpp:131
 #, fuzzy, kde-format
 #| msgid "Failed to import color profile"
 msgid "Failed to import color profile: color profile is already imported"
 msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំចូល​ទម្រង់​ពណ៌"
 
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#: icc-importer/main.cpp:131 icc-importer/main.cpp:134
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "នាំចូល​ទម្រង់​ពណ៌"
 
-#: icc-importer/main.cpp:142
+#: icc-importer/main.cpp:134
 #, fuzzy, kde-format
 #| msgid "Failed to import color profile"
 msgid "Failed to import color profile: could not copy the file"

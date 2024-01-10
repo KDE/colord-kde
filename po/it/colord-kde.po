@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:25+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2022-12-16 11:01+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -29,89 +29,89 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "smart2128vr@gmail.com,"
 
-#: colord-kcm/DeviceDescription.cpp:133
+#: colord-kcm/DeviceDescription.cpp:132
 #, kde-format
 msgctxt "device type"
 msgid "Printer"
 msgstr "Stampante"
 
-#: colord-kcm/DeviceDescription.cpp:135
+#: colord-kcm/DeviceDescription.cpp:134
 #, kde-format
 msgctxt "device type"
 msgid "Display"
 msgstr "Schermo"
 
-#: colord-kcm/DeviceDescription.cpp:137
+#: colord-kcm/DeviceDescription.cpp:136
 #, kde-format
 msgctxt "device type"
 msgid "Webcam"
 msgstr "Webcam"
 
-#: colord-kcm/DeviceDescription.cpp:139
+#: colord-kcm/DeviceDescription.cpp:138
 #, kde-format
 msgctxt "device type"
 msgid "Scanner"
 msgstr "Scanner"
 
-#: colord-kcm/DeviceDescription.cpp:141
+#: colord-kcm/DeviceDescription.cpp:140
 #, kde-format
 msgctxt "device type"
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: colord-kcm/DeviceDescription.cpp:146
+#: colord-kcm/DeviceDescription.cpp:145
 #, kde-format
 msgctxt "device scope"
 msgid "User session"
 msgstr "Sessione dell'utente"
 
-#: colord-kcm/DeviceDescription.cpp:148
+#: colord-kcm/DeviceDescription.cpp:147
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
 msgstr "Ripristino automatico"
 
-#: colord-kcm/DeviceDescription.cpp:150
+#: colord-kcm/DeviceDescription.cpp:149
 #, kde-format
 msgctxt "device scope"
 msgid "System wide"
 msgstr "Di sistema"
 
-#: colord-kcm/DeviceDescription.cpp:152
+#: colord-kcm/DeviceDescription.cpp:151
 #, kde-format
 msgctxt "device scope"
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: colord-kcm/DeviceDescription.cpp:157 colord-kcm/Profile.cpp:202
+#: colord-kcm/DeviceDescription.cpp:156 colord-kcm/Profile.cpp:202
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
 msgstr "RGB"
 
-#: colord-kcm/DeviceDescription.cpp:159 colord-kcm/Profile.cpp:211
+#: colord-kcm/DeviceDescription.cpp:158 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
 msgstr "CMYK"
 
-#: colord-kcm/DeviceDescription.cpp:161 colord-kcm/Profile.cpp:205
+#: colord-kcm/DeviceDescription.cpp:160 colord-kcm/Profile.cpp:205
 #, kde-format
 msgctxt "colorspace"
 msgid "Gray"
 msgstr "Grigio"
 
-#: colord-kcm/DeviceDescription.cpp:166
+#: colord-kcm/DeviceDescription.cpp:165
 #, kde-format
 msgid "This device has no profile assigned to it"
 msgstr "Questo dispositivo non ha un profilo assegnato"
 
-#: colord-kcm/DeviceDescription.cpp:185
+#: colord-kcm/DeviceDescription.cpp:184
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
 msgstr "Puoi usare «displaycal» per calibrare questo dispositivo"
 
-#: colord-kcm/DeviceDescription.cpp:194 colord-kcm/DeviceDescription.cpp:199
+#: colord-kcm/DeviceDescription.cpp:193 colord-kcm/DeviceDescription.cpp:198
 #, kde-format
 msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
@@ -120,12 +120,12 @@ msgstr ""
 "Lo strumento di misura non è stato rilevato. Verifica che sia acceso e "
 "collegato correttamente."
 
-#: colord-kcm/DeviceDescription.cpp:218
+#: colord-kcm/DeviceDescription.cpp:217
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Lo strumento di misura non offre la profilazione delle stampanti."
 
-#: colord-kcm/DeviceDescription.cpp:222
+#: colord-kcm/DeviceDescription.cpp:221
 #, kde-format
 msgid "The device type is not currently supported for calibrating."
 msgstr ""
@@ -411,7 +411,7 @@ msgid "Color profile is already imported"
 msgstr "Il profilo di colore è già importato."
 
 #: icc-importer/main.cpp:103 icc-importer/main.cpp:113
-#: icc-importer/main.cpp:125
+#: icc-importer/main.cpp:121
 #, kde-format
 msgid "ICC Profile Importer"
 msgstr "Importatore Profilo ICC"
@@ -421,29 +421,29 @@ msgstr "Importatore Profilo ICC"
 msgid "ICC profile already installed system-wide"
 msgstr "Profilo ICC già installato a livello di sistema."
 
-#: icc-importer/main.cpp:124
+#: icc-importer/main.cpp:120
 #, kde-format
 msgid "Would you like to import the color profile?"
 msgstr "Vuoi importare il profilo di colore ?"
 
-#: icc-importer/main.cpp:126
+#: icc-importer/main.cpp:122
 #, kde-format
 msgid "import"
 msgstr "importazione"
 
-#: icc-importer/main.cpp:139
+#: icc-importer/main.cpp:131
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr ""
 "Impossibile importare il profilo di colore : il profilo di colore è già "
 "importato"
 
-#: icc-importer/main.cpp:139 icc-importer/main.cpp:142
+#: icc-importer/main.cpp:131 icc-importer/main.cpp:134
 #, kde-format
 msgid "Importing Color Profile"
 msgstr "Importazione di profilo di colore"
 
-#: icc-importer/main.cpp:142
+#: icc-importer/main.cpp:134
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr "Impossibile importare profilo di colore : impossibile copiare il file."
