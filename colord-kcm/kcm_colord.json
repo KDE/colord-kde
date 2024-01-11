@@ -83,6 +83,5 @@
     "X-KDE-Kded-phase": "1",
     "X-KDE-Keywords": "color,color management,icc",
     "X-KDE-ParentApp": "kcontrol",
-    "X-KDE-System-Settings-Parent-Category": "hardware",
-    "X-KDE-System-Settings-Parent-Category-V2": "hardware"
+    "X-KDE-System-Settings-Parent-Category": "display"
 }
