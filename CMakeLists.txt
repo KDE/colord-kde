@@ -60,7 +60,7 @@ if (HAVE_X11)
     find_package(XCB REQUIRED COMPONENTS XCB RANDR)
 endif()
 
-find_package(KF6 ${KF_MIN_VERSION} REQUIRED ConfigWidgets CoreAddons DBusAddons I18n KCMUtils
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED CoreAddons DBusAddons I18n KCMUtils
              WidgetsAddons WindowSystem ItemModels)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"colord-kde\")
