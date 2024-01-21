@@ -59,12 +59,12 @@ public:
     Q_INVOKABLE void removeProfile(const QString &filename);
 
 private:
-    CdInterface *m_cdInterface;
-    DeviceModel *m_deviceModel;
-    ProfileModel *m_profileModel;
-    DeviceDescription *m_deviceDescription;
-    ProfileDescription *m_profileDescription;
-    QSortFilterProxyModel *m_filterModel;
+    CdInterface *const m_cdInterface;
+    DeviceModel *const m_deviceModel;
+    ProfileModel *const m_profileModel;
+    DeviceDescription *const m_deviceDescription;
+    ProfileDescription *const m_profileDescription;
+    QSortFilterProxyModel *const m_filterModel;
     QList<QObject *> m_comboBoxItemsToBeDestroyed;
 };
 

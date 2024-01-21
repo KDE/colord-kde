@@ -71,8 +71,8 @@ private:
     bool m_canRemoveProfile;
     bool m_profileHasDisplayCorrection;
 
-    ProfileMetaDataModel *m_metadataModel;
-    ProfileNamedColorsModel *m_namedColorsModel;
+    ProfileMetaDataModel *const m_metadataModel;
+    ProfileNamedColorsModel *const m_namedColorsModel;
 };
 
 #endif // PROFILEDESCRIPTION_H
