@@ -1,0 +1,445 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the colord-kde package.
+#
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: colord-kde\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"PO-Revision-Date: 2024-01-29 16:59+0200\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+"X-Generator: Lokalize 23.08.4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Toms Trasūns"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "toms.trasuns@posteo.net"
+
+#: colord-kcm/DeviceDescription.cpp:132
+#, kde-format
+msgctxt "device type"
+msgid "Printer"
+msgstr "Printeris"
+
+#: colord-kcm/DeviceDescription.cpp:134
+#, kde-format
+msgctxt "device type"
+msgid "Display"
+msgstr "Displejs"
+
+#: colord-kcm/DeviceDescription.cpp:136
+#, kde-format
+msgctxt "device type"
+msgid "Webcam"
+msgstr "Tīmekļa kamera"
+
+#: colord-kcm/DeviceDescription.cpp:138
+#, kde-format
+msgctxt "device type"
+msgid "Scanner"
+msgstr "Skeneris"
+
+#: colord-kcm/DeviceDescription.cpp:140
+#, kde-format
+msgctxt "device type"
+msgid "Unknown"
+msgstr "Nezināma"
+
+#: colord-kcm/DeviceDescription.cpp:145
+#, kde-format
+msgctxt "device scope"
+msgid "User session"
+msgstr "Lietotāja sesijā"
+
+#: colord-kcm/DeviceDescription.cpp:147
+#, kde-format
+msgctxt "device scope"
+msgid "Auto restore"
+msgstr "Automātiska atjaunošana"
+
+#: colord-kcm/DeviceDescription.cpp:149
+#, kde-format
+msgctxt "device scope"
+msgid "System wide"
+msgstr "Visā sistēmā"
+
+#: colord-kcm/DeviceDescription.cpp:151
+#, kde-format
+msgctxt "device scope"
+msgid "Unknown"
+msgstr "Nezināms"
+
+#: colord-kcm/DeviceDescription.cpp:156 colord-kcm/Profile.cpp:202
+#, kde-format
+msgctxt "colorspace"
+msgid "RGB"
+msgstr "RGB"
+
+#: colord-kcm/DeviceDescription.cpp:158 colord-kcm/Profile.cpp:211
+#, kde-format
+msgctxt "colorspace"
+msgid "CMYK"
+msgstr "CMYK"
+
+#: colord-kcm/DeviceDescription.cpp:160 colord-kcm/Profile.cpp:205
+#, kde-format
+msgctxt "colorspace"
+msgid "Gray"
+msgstr "Pelēktoņu"
+
+#: colord-kcm/DeviceDescription.cpp:165
+#, kde-format
+msgid "This device has no profile assigned to it"
+msgstr "Šai ierīcei nav piešķirtu profilu"
+
+#: colord-kcm/DeviceDescription.cpp:184
+#, kde-format
+msgid "You can use 'displaycal' to calibrate this device"
+msgstr "Lai kalibrētu šo ierīci, varat izmantot „displaycal“"
+
+#: colord-kcm/DeviceDescription.cpp:193 colord-kcm/DeviceDescription.cpp:198
+#, kde-format
+msgid ""
+"The measuring instrument for calibrating is not detected. Please check it is "
+"turned on and correctly connected."
+msgstr ""
+"Nav atrasts mērinstruments kalibrēšanai. Pārbaudiet, vai tas ir ieslēgts un "
+"pareizi pievienots."
+
+#: colord-kcm/DeviceDescription.cpp:217
+#, kde-format
+msgid "The measuring instrument does not support printer profiling."
+msgstr "Mērinstruments neatbalsta printera profilēšanu."
+
+#: colord-kcm/DeviceDescription.cpp:221
+#, kde-format
+msgid "The device type is not currently supported for calibrating."
+msgstr "Šis ierīces tips šobrīd nav atbalstīts kalibrēšanai"
+
+#: colord-kcm/DeviceModel.cpp:250
+#, kde-format
+msgctxt "colorspace"
+msgid "Default RGB"
+msgstr "Noklusētā RGB"
+
+#: colord-kcm/DeviceModel.cpp:252
+#, kde-format
+msgctxt "colorspace"
+msgid "Default CMYK"
+msgstr "Noklusētā CMYK"
+
+#: colord-kcm/DeviceModel.cpp:254
+#, kde-format
+msgctxt "colorspace"
+msgid "Default Gray"
+msgstr "Noklusētā pelēktoņu"
+
+#: colord-kcm/DeviceModel.cpp:321
+#, kde-format
+msgid "Devices"
+msgstr "Ierīces"
+
+#: colord-kcm/Profile.cpp:106
+#, kde-format
+msgid "file too small"
+msgstr "datne ir par mazu"
+
+#: colord-kcm/Profile.cpp:115
+#, kde-format
+msgid "not an ICC profile"
+msgstr "tas nav ICC profils"
+
+#: colord-kcm/Profile.cpp:187
+#, kde-format
+msgctxt "colorspace"
+msgid "XYZ"
+msgstr "XYZ"
+
+#: colord-kcm/Profile.cpp:190
+#, kde-format
+msgctxt "colorspace"
+msgid "LAB"
+msgstr "LAB"
+
+#: colord-kcm/Profile.cpp:193
+#, kde-format
+msgctxt "colorspace"
+msgid "LUV"
+msgstr "LUV"
+
+#: colord-kcm/Profile.cpp:196
+#, kde-format
+msgctxt "colorspace"
+msgid "YCbCr"
+msgstr "YCbCr"
+
+#: colord-kcm/Profile.cpp:199
+#, kde-format
+msgctxt "colorspace"
+msgid "Yxy"
+msgstr "Yxy"
+
+#: colord-kcm/Profile.cpp:208
+#, kde-format
+msgctxt "colorspace"
+msgid "HSV"
+msgstr "HSV"
+
+#: colord-kcm/Profile.cpp:214
+#, kde-format
+msgctxt "colorspace"
+msgid "CMY"
+msgstr "CMY"
+
+#: colord-kcm/Profile.cpp:217
+#, kde-format
+msgctxt "colorspace"
+msgid "Unknown"
+msgstr "Nezināms"
+
+#: colord-kcm/Profile.cpp:302
+#, kde-format
+msgid "Missing description"
+msgstr "Trūkst apraksta"
+
+#: colord-kcm/Profile.cpp:357
+#, kde-format
+msgctxt "profile kind"
+msgid "Input device"
+msgstr "Ievades ierīce"
+
+#: colord-kcm/Profile.cpp:359
+#, kde-format
+msgctxt "profile kind"
+msgid "Display device"
+msgstr "Displeja ierīce"
+
+#: colord-kcm/Profile.cpp:361
+#, kde-format
+msgctxt "profile kind"
+msgid "Output device"
+msgstr "Izvades ierīce"
+
+#: colord-kcm/Profile.cpp:363
+#, kde-format
+msgctxt "profile kind"
+msgid "Devicelink"
+msgstr "Ierīces saite"
+
+#: colord-kcm/Profile.cpp:365
+#, kde-format
+msgctxt "profile kind"
+msgid "Colorspace conversion"
+msgstr "Krāstelpas konvertācija"
+
+#: colord-kcm/Profile.cpp:367
+#, kde-format
+msgctxt "profile kind"
+msgid "Abstract"
+msgstr "Abstrakts"
+
+#: colord-kcm/Profile.cpp:369
+#, kde-format
+msgctxt "profile kind"
+msgid "Named color"
+msgstr "Nosaukta krāsa"
+
+#: colord-kcm/Profile.cpp:371
+#, kde-format
+msgctxt "profile kind"
+msgid "Unknown"
+msgstr "Nezināms"
+
+#: colord-kcm/Profile.cpp:518
+#, kde-format
+msgid "Default: %1"
+msgstr "Noklusējums: %1"
+
+#: colord-kcm/Profile.cpp:520
+#, kde-format
+msgid "Colorspace: %1"
+msgstr "Krāstelpa: %1"
+
+#: colord-kcm/Profile.cpp:522
+#, kde-format
+msgid "Test profile: %1"
+msgstr "Testa profils: %1"
+
+#: colord-kcm/Profile.cpp:524
+#, kde-format
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:80
+#, kde-format
+msgid "Standard space"
+msgstr "Standarta telpa"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:83
+#, kde-format
+msgid "Display checksum"
+msgstr "Displeja kontrolsumma"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:86
+#, kde-format
+msgid "Display model"
+msgstr "Displeja modelis"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:89
+#, kde-format
+msgid "Display serial number"
+msgstr "Displeja sērijas numurs"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:92
+#, kde-format
+msgid "Display PNPID"
+msgstr "Displeja PNPID"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:95
+#, kde-format
+msgid "Display vendor"
+msgstr "Displeja ražotājs"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:98
+#, kde-format
+msgid "File checksum"
+msgstr "Datnes kontrolsumma"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:101
+#, kde-format
+msgid "Framework product"
+msgstr "Satvara produkts"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:104
+#, kde-format
+msgid "Framework program"
+msgstr "Satvara programma"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:107
+#, kde-format
+msgid "Framework version"
+msgstr "Satvara versija"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:110
+#, kde-format
+msgid "Data source type"
+msgstr "Datu avota tips"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:113
+#, kde-format
+msgid "Mapping format"
+msgstr "Kartēšanas formāts"
+
+#: colord-kcm/ProfileMetaDataModel.cpp:116
+#, kde-format
+msgid "Mapping qualifier"
+msgstr "Kartēšanas kvalifikators"
+
+#: colord-kcm/ProfileModel.cpp:226
+#, kde-format
+msgid "Profiles"
+msgstr "Profili"
+
+#: icc-importer/main.cpp:41
+#, kde-format
+msgid "Description: %1"
+msgstr "Apraksts: %1"
+
+#: icc-importer/main.cpp:51
+#, kde-format
+msgid "Copyright: %1"
+msgstr "Autortiesības: %1"
+
+#: icc-importer/main.cpp:62
+#, kde-format
+msgid "ICC Profile Installer"
+msgstr "ICC profila instalētājs"
+
+#: icc-importer/main.cpp:64
+#, kde-format
+msgid "An application to install ICC profiles"
+msgstr "Programma ICC profilu instalēšanai"
+
+#: icc-importer/main.cpp:66
+#, kde-format
+msgid "(C) 2008-2016 Daniel Nicoletti"
+msgstr "(C) 2008–2016 Daniel Nicoletti"
+
+#: icc-importer/main.cpp:69
+#, kde-format
+msgid "Port to kf5"
+msgstr "kf5 ports"
+
+#: icc-importer/main.cpp:77
+#, kde-format
+msgid "Do not prompt the user if he wants to install"
+msgstr "Nejautāt lietotājam, vai viņš/viņa vēlas instalēt"
+
+#: icc-importer/main.cpp:78
+#, kde-format
+msgid "Color profile to install"
+msgstr "Instalējamais krāsu profils"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to parse file: %1"
+msgstr "Neizdevās parsēt datni: %1"
+
+#: icc-importer/main.cpp:93
+#, kde-format
+msgid "Failed to open ICC profile"
+msgstr "Neizdevās atvērt ICC profilu"
+
+#: icc-importer/main.cpp:102
+#, kde-format
+msgid "Color profile is already imported"
+msgstr "Krāsu profils jau ir importēts"
+
+#: icc-importer/main.cpp:103 icc-importer/main.cpp:113
+#: icc-importer/main.cpp:121
+#, kde-format
+msgid "ICC Profile Importer"
+msgstr "ICC profila importētājs"
+
+#: icc-importer/main.cpp:112
+#, kde-format
+msgid "ICC profile already installed system-wide"
+msgstr "ICC profils jau ir instalēts visā sistēmā"
+
+#: icc-importer/main.cpp:120
+#, kde-format
+msgid "Would you like to import the color profile?"
+msgstr "Vai vēlaties importēt krāsu profilu?"
+
+#: icc-importer/main.cpp:122
+#, kde-format
+msgid "import"
+msgstr "importēt"
+
+#: icc-importer/main.cpp:131
+#, kde-format
+msgid "Failed to import color profile: color profile is already imported"
+msgstr "Neizdevās importēt krāsu profilu: krāsu profils jau ir importēts"
+
+#: icc-importer/main.cpp:131 icc-importer/main.cpp:134
+#, kde-format
+msgid "Importing Color Profile"
+msgstr "Importē krāsu profilu"
+
+#: icc-importer/main.cpp:134
+#, kde-format
+msgid "Failed to import color profile: could not copy the file"
+msgstr "Neizdevās importēt krāsu profilu: neizdevās nokopēt datni"
