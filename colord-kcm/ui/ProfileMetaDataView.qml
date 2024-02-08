@@ -18,7 +18,7 @@ ColumnLayout {
         id: tabBar
         QQC2.TabButton {
             id: informationTab
-            text: i18n("Information")
+            text: i18nd("colord-kde", "Information")
             onClicked: {
                 metaDataView.visible = false;
                 informationView.visible = true;
@@ -26,7 +26,7 @@ ColumnLayout {
             }
         }
         QQC2.TabButton {
-            text: i18n("Metadata")
+            text: i18nd("colord-kde", "Metadata")
             onClicked: {
                 metaDataView.visible = true;
                 informationView.visible = false;
@@ -34,7 +34,7 @@ ColumnLayout {
             }
         }
         QQC2.TabButton {
-            text: i18nc("button: tab button for 'named colors in profile' information page", "Named Colors")
+            text: i18ndc("colord-kde", "button: tab button for 'named colors in profile' information page", "Named Colors")
             onClicked: {
                 metaDataView.visible = false;
                 informationView.visible = false;
@@ -106,7 +106,7 @@ ColumnLayout {
         Layout.fillWidth: true
         RowLayout {
             QQC2.Label {
-                text: i18n("Profile Type: ")
+                text: i18nd("colord-kde", "Profile Type: ")
             }
             QQC2.Label {
                 text: kcm.profileDescription.kind
@@ -114,7 +114,7 @@ ColumnLayout {
         }
         RowLayout {
             QQC2.Label {
-                text: i18n("Colorspace: ")
+                text: i18nd("colord-kde", "Colorspace: ")
             }
             QQC2.Label {
                 text: kcm.profileDescription.colorSpace
@@ -122,7 +122,7 @@ ColumnLayout {
         }
         RowLayout {
             QQC2.Label {
-                text: i18n("Created: ")
+                text: i18nd("colord-kde", "Created: ")
             }
             QQC2.Label {
                 text: kcm.profileDescription.createdTime
@@ -130,7 +130,7 @@ ColumnLayout {
         }
         RowLayout {
             QQC2.Label {
-                text: i18n("Version: ")
+                text: i18nd("colord-kde", "Version: ")
             }
             QQC2.Label {
                 text: kcm.profileDescription.version
@@ -139,7 +139,7 @@ ColumnLayout {
         RowLayout {
             Layout.fillWidth: true
             QQC2.Label {
-                text: i18n("Device Model: ")
+                text: i18nd("colord-kde", "Device Model: ")
             }
             QQC2.Label {
                 text: kcm.profileDescription.model
@@ -149,15 +149,15 @@ ColumnLayout {
         }
         RowLayout {
             QQC2.Label {
-                text: i18n("Display Correction: ")
+                text: i18nd("colord-kde", "Display Correction: ")
             }
             QQC2.Label {
-                text: kcm.profileDescription.hasDisplayCorrection ? i18n("Yes") : i18n("None")
+                text: kcm.profileDescription.hasDisplayCorrection ? i18nd("colord-kde", "Yes") : i18nd("colord-kde", "None")
             }
         }
         RowLayout {
             QQC2.Label {
-                text: i18n("White Point: ")
+                text: i18nd("colord-kde", "White Point: ")
             }
             QQC2.Label {
                 text: kcm.profileDescription.whitePoint
@@ -166,7 +166,7 @@ ColumnLayout {
         RowLayout {
             Layout.fillWidth: true
             QQC2.Label {
-                text: i18n("License: ")
+                text: i18nd("colord-kde", "License: ")
             }
             QQC2.Label {
                 text: kcm.profileDescription.license
@@ -176,7 +176,7 @@ ColumnLayout {
         }
         RowLayout {
             QQC2.Label {
-                text: i18n("File Size: ")
+                text: i18nd("colord-kde", "File Size: ")
             }
             QQC2.Label {
                 text: kcm.profileDescription.size
@@ -184,7 +184,7 @@ ColumnLayout {
         }
         RowLayout {
             QQC2.Label {
-                text: i18n("Filename: ")
+                text: i18nd("colord-kde", "Filename: ")
             }
             QQC2.Label {
                 text: kcm.profileDescription.filename
@@ -193,7 +193,7 @@ ColumnLayout {
 
         QQC2.Button {
             Layout.alignment: Qt.AlignHCenter
-            text: i18n("Install System Wide")
+            text: i18nd("colord-kde", "Install System Wide")
             visible: kcm.profileDescription.canRemove
             onClicked: kcm.profileDescription.installSystemWide()
         }
