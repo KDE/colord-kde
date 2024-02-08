@@ -39,7 +39,7 @@ KCM.SimpleKCM {
             }
 
             QQC2.ToolButton {
-                text: i18n("Devices")
+                text: i18nd("colord-kde", "Devices")
                 icon.name: "video-display"
                 checkable: true
                 checked: true
@@ -48,7 +48,7 @@ KCM.SimpleKCM {
                 QQC2.ButtonGroup.group: headerGroup
             }
             QQC2.ToolButton {
-                text: i18n("Profiles")
+                text: i18nd("colord-kde", "Profiles")
                 icon.name: "color-management"
                 checkable: true
                 display: QQC2.AbstractButton.TextUnderIcon
@@ -61,14 +61,14 @@ KCM.SimpleKCM {
             }
 
             QQC2.ToolButton {
-                text: i18n("Import Profile")
+                text: i18nd("colord-kde", "Import Profile")
                 icon.name: "document-single"
                 display: QQC2.AbstractButton.TextUnderIcon
                 onClicked: fileDialog.open()
             }
 
             QQC2.ToolButton {
-                text: i18n("Assign Profile")
+                text: i18nd("colord-kde", "Assign Profile")
                 icon.name: "list-add"
                 display: QQC2.AbstractButton.TextUnderIcon
                 onClicked: assignProfileMenu.open()
@@ -107,7 +107,7 @@ KCM.SimpleKCM {
 
             QQC2.ToolButton {
                 enabled: (isDeviceView && deviceView.canRemoveCurrentProfile) || (!isDeviceView && profileView.canRemoveCurrentProfile)
-                text: i18n("Remove Profile")
+                text: i18nd("colord-kde", "Remove Profile")
                 icon.name: "list-remove-symbolic"
                 display: QQC2.AbstractButton.TextUnderIcon
                 onClicked: removeProfileDialog.open()
@@ -117,19 +117,19 @@ KCM.SimpleKCM {
 
     QtDialogs.FileDialog {
         id: fileDialog
-        title: i18nc("ICC Profile is a tech term", "Import ICC Profile")
+        title: i18ndc("colord-kde", "ICC Profile is a tech term", "Import ICC Profile")
         folder: shortcuts.home
         onAccepted: {
             kcm.importProfile(fileDialog.fileUrls[0]);
         }
-        nameFilters: [i18nc("ICC Profile is a tech term", "ICC Profile") + "(*.icc)"]
+        nameFilters: [i18ndc("colord-kde", "ICC Profile is a tech term", "ICC Profile") + "(*.icc)"]
     }
 
     QtDialogs.MessageDialog {
         id: removeProfileDialog
-        title: i18n("Remove Profile")
+        title: i18nd("colord-kde", "Remove Profile")
 
-        text: i18n("Are you sure you want to remove this profile?")
+        text: i18nd("colord-kde", "Are you sure you want to remove this profile?")
         standardButtons: QtDialogs.StandardButton.Yes | QtDialogs.StandardButton.No
         onAccepted: {
             if (isDeviceView) {
@@ -274,7 +274,7 @@ KCM.SimpleKCM {
                     }
                     RowLayout {
                         QQC2.Label {
-                            text: i18n("Id: ")
+                            text: i18nd("colord-kde", "Id: ")
                         }
                         QQC2.Label {
                             text: kcm.deviceDescription.deviceID
@@ -282,7 +282,7 @@ KCM.SimpleKCM {
                     }
                     RowLayout {
                         QQC2.Label {
-                            text: i18n("Scope: ")
+                            text: i18nd("colord-kde", "Scope: ")
                         }
                         QQC2.Label {
                             text: kcm.deviceDescription.deviceScope
@@ -290,7 +290,7 @@ KCM.SimpleKCM {
                     }
                     RowLayout {
                         QQC2.Label {
-                            text: i18n("Mode: ")
+                            text: i18nd("colord-kde", "Mode: ")
                         }
                         QQC2.Label {
                             text: kcm.deviceDescription.colorSpace
@@ -298,7 +298,7 @@ KCM.SimpleKCM {
                     }
                     RowLayout {
                         QQC2.Label {
-                            text: i18n("Current Profile: ")
+                            text: i18nd("colord-kde", "Current Profile: ")
                         }
                         QQC2.Label {
                             text: kcm.deviceDescription.currentProfileTitle
