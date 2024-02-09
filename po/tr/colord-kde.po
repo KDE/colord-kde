@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-graphics-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 00:36+0000\n"
 "PO-Revision-Date: 2023-05-04 11:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -148,7 +148,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Öntanımlı Gri"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Aygıtlar"
@@ -349,10 +349,161 @@ msgstr "Eşleme biçimi"
 msgid "Mapping qualifier"
 msgstr "Eşleme niteleyici"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Profiller"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Renk Profili İçe Aktarılıyor"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Profil Ekle"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Profili Kaldır"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Renk Profili İçe Aktarılıyor"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profiller"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Bu profili kaldırmak istediğinizden emin misiniz?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Kapsam:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Kip:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Geçerli Profil:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Bilgiler"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Üstveri"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Adlandırılmış Renkler"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Profil türü:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Renk uzayı:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Oluşturulma zamanı:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Sürüm:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Aygıt Modeli:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Düzeltmeyi görüntüle:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Evet"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Hiçbiri"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Beyaz Nokta:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Lisans:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Dosya boyutu:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Dosya adı:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Sistem Genelinde Kur"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -457,12 +608,6 @@ msgstr "Renk profili içe aktarılamadı: dosya kopyalanamadı"
 #~ msgid "From File..."
 #~ msgstr "Dosyadan..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Bu profili kaldırmak istediğinizden emin misiniz?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Profili Kaldır"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Profiliniz aygıt türü ile eşleşmedi"
 
@@ -478,21 +623,6 @@ msgstr "Renk profili içe aktarılamadı: dosya kopyalanamadı"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Profil Ekle düğmesi ile ekleyin"
 
-#~ msgid "Add Profile"
-#~ msgstr "Profil Ekle"
-
-#~ msgid "Yes"
-#~ msgstr "Evet"
-
-#~ msgid "None"
-#~ msgstr "Hiçbiri"
-
-#~ msgid "Named Colors"
-#~ msgstr "Adlandırılmış Renkler"
-
-#~ msgid "Metadata"
-#~ msgstr "Üstveri"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Seçilen aygıt için bir renk profili oluştur"
 
@@ -500,44 +630,8 @@ msgstr "Renk profili içe aktarılamadı: dosya kopyalanamadı"
 #~ "You need Gnome Color Management installed in order to calibrate devices"
 #~ msgstr "Aygıtları kalibre etmek için Gnome Renk Yönetimi kurulu olmalıdır"
 
-#~ msgid "Information"
-#~ msgstr "Bilgiler"
-
-#~ msgid "Profile type:"
-#~ msgstr "Profil türü:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Renk uzayı:"
-
-#~ msgid "Created:"
-#~ msgstr "Oluşturulma zamanı:"
-
-#~ msgid "Version:"
-#~ msgstr "Sürüm:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Aygıt Üreticisi:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Aygıt Modeli:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Düzeltmeyi görüntüle:"
-
-#~ msgid "White Point:"
-#~ msgstr "Beyaz Nokta:"
-
-#~ msgid "License:"
-#~ msgstr "Lisans:"
-
-#~ msgid "File size:"
-#~ msgstr "Dosya boyutu:"
-
-#~ msgid "Filename:"
-#~ msgstr "Dosya adı:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Sistem Genelinde Kur"
 
 #~ msgid "device name"
 #~ msgstr "aygıt adı"
@@ -547,15 +641,6 @@ msgstr "Renk profili içe aktarılamadı: dosya kopyalanamadı"
 
 #~ msgid "Id:"
 #~ msgstr "Kimlik:"
-
-#~ msgid "Scope:"
-#~ msgstr "Kapsam:"
-
-#~ msgid "Mode:"
-#~ msgstr "Kip:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Geçerli Profil:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Kalibrasyon"

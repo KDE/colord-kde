@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 00:36+0000\n"
 "PO-Revision-Date: 2022-12-10 08:23+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -154,7 +154,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Типовий сірий"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Пристрої"
@@ -355,10 +355,161 @@ msgstr "Формат відображення"
 msgid "Mapping qualifier"
 msgstr "Специфікатор відображення"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Профілі"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Імпортування профілю кольорів"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Додати профіль"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Вилучити профіль"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Імпортування профілю кольорів"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Профілі"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Ви справді хочете вилучити цей профіль?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Область дії:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Режим:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Поточний профіль:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Інформація"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Метадані"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Іменовані кольори"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Тип профілю:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Простір кольорів:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Створено:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Версія:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Модель пристрою:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Виправлення показу:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Так"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Немає"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Точка білого:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Ліцензування:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Розмір файла:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Назва файла:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Встановити на загальносистемному рівні"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -464,12 +615,6 @@ msgstr "Не вдалося імпортувати профіль кольорі
 #~ msgid "From File..."
 #~ msgstr "З файла…"
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Ви справді хочете вилучити цей профіль?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Вилучити профіль"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Ваш профіль не відповідає типові пристрою"
 
@@ -485,21 +630,6 @@ msgstr "Не вдалося імпортувати профіль кольорі
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Додайте профіль натисканням кнопки «Додати профіль»"
 
-#~ msgid "Add Profile"
-#~ msgstr "Додати профіль"
-
-#~ msgid "Yes"
-#~ msgstr "Так"
-
-#~ msgid "None"
-#~ msgstr "Немає"
-
-#~ msgid "Named Colors"
-#~ msgstr "Іменовані кольори"
-
-#~ msgid "Metadata"
-#~ msgstr "Метадані"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Створити профіль кольорів для позначеного пристрою"
 
@@ -509,44 +639,8 @@ msgstr "Не вдалося імпортувати профіль кольорі
 #~ "Для виконання калібрування пристроїв вам слід встановити Керування "
 #~ "кольорами Gnome"
 
-#~ msgid "Information"
-#~ msgstr "Інформація"
-
-#~ msgid "Profile type:"
-#~ msgstr "Тип профілю:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Простір кольорів:"
-
-#~ msgid "Created:"
-#~ msgstr "Створено:"
-
-#~ msgid "Version:"
-#~ msgstr "Версія:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Виробник пристрою:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Модель пристрою:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Виправлення показу:"
-
-#~ msgid "White Point:"
-#~ msgstr "Точка білого:"
-
-#~ msgid "License:"
-#~ msgstr "Ліцензування:"
-
-#~ msgid "File size:"
-#~ msgstr "Розмір файла:"
-
-#~ msgid "Filename:"
-#~ msgstr "Назва файла:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Встановити на загальносистемному рівні"
 
 #~ msgid "device name"
 #~ msgstr "назва пристрою"
@@ -556,15 +650,6 @@ msgstr "Не вдалося імпортувати профіль кольорі
 
 #~ msgid "Id:"
 #~ msgstr "Ід.:"
-
-#~ msgid "Scope:"
-#~ msgstr "Область дії:"
-
-#~ msgid "Mode:"
-#~ msgstr "Режим:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Поточний профіль:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Калібрувати"

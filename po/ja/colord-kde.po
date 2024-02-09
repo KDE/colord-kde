@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 00:36+0000\n"
 "PO-Revision-Date: 2012-04-07 14:23-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -141,7 +141,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr ""
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr ""
@@ -342,9 +342,142 @@ msgstr ""
 msgid "Mapping qualifier"
 msgstr ""
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
+msgstr ""
+
+#: colord-kcm/ui/main.qml:65
+#, kde-format
+msgid "Import Profile"
+msgstr ""
+
+#: colord-kcm/ui/main.qml:72
+#, kde-format
+msgid "Assign Profile"
+msgstr ""
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr ""
+
+#: colord-kcm/ui/main.qml:121
+#, kde-format
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr ""
+
+#: colord-kcm/ui/main.qml:126
+#, kde-format
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr ""
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr ""
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, kde-format
+msgid "Scope: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:307
+#, kde-format
+msgid "Mode: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:315
+#, kde-format
+msgid "Current Profile: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, kde-format
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, kde-format
+msgid "Profile Type: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, kde-format
+msgid "Colorspace: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, kde-format
+msgid "Created: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, kde-format
+msgid "Version: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, kde-format
+msgid "Device Model: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, kde-format
+msgid "Display Correction: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, kde-format
+msgid "White Point: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, kde-format
+msgid "License: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, kde-format
+msgid "File Size: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, kde-format
+msgid "Filename: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
 msgstr ""
 
 #: icc-importer/main.cpp:41

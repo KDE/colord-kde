@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 00:36+0000\n"
 "PO-Revision-Date: 2024-01-17 02:05+0200\n"
 "Last-Translator: Liudas Alisauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -149,7 +149,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Numatyta Pilka"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Įrenginiai"
@@ -350,10 +350,161 @@ msgstr "Susiejimas formatas"
 msgid "Mapping qualifier"
 msgstr "Susiejimo kvalifikatorius"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Profiliai"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Importuojama spalvų profilį"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Pridėti profilį"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Pašalinti profilį"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Importuojama spalvų profilį"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profiliai"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Ar jūs tikrai norite pašalinti šį profilį?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Sritis:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Veiksena:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Dabartinis profilis:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Informacija"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Metaduomenys"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Įvardintos spalvos"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Profilio tipas:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Spalvų schema:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Sukurta:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Versija:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Įrenginys:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Ekrano pataisymas:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Taip"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Nieko"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Balta:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Licencija:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Failo dydis:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Failo pavadinimas:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Įdiegti visai sistemai"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -461,12 +612,6 @@ msgstr "Nepavyko importuoti spalvų profilio: nepavyko nukopijuoti failo"
 #~ msgid "From File..."
 #~ msgstr "Iš failo..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Ar jūs tikrai norite pašalinti šį profilį?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Pašalinti profilį"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Jūsų profilis neatitiko įrenginio tipo"
 
@@ -482,21 +627,6 @@ msgstr "Nepavyko importuoti spalvų profilio: nepavyko nukopijuoti failo"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Pridėti spaudžiant „Pridėti profilį“ mygtuką"
 
-#~ msgid "Add Profile"
-#~ msgstr "Pridėti profilį"
-
-#~ msgid "Yes"
-#~ msgstr "Taip"
-
-#~ msgid "None"
-#~ msgstr "Nieko"
-
-#~ msgid "Named Colors"
-#~ msgstr "Įvardintos spalvos"
-
-#~ msgid "Metadata"
-#~ msgstr "Metaduomenys"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Sukurti spalvų profilį pasirinktam įrenginiui"
 
@@ -505,44 +635,8 @@ msgstr "Nepavyko importuoti spalvų profilio: nepavyko nukopijuoti failo"
 #~ msgstr ""
 #~ "Jums reikia įdiegti Gnome spalvų tvarkytuvę, kad kalibruoti įrenginius"
 
-#~ msgid "Information"
-#~ msgstr "Informacija"
-
-#~ msgid "Profile type:"
-#~ msgstr "Profilio tipas:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Spalvų schema:"
-
-#~ msgid "Created:"
-#~ msgstr "Sukurta:"
-
-#~ msgid "Version:"
-#~ msgstr "Versija:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Gamintojas:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Įrenginys:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Ekrano pataisymas:"
-
-#~ msgid "White Point:"
-#~ msgstr "Balta:"
-
-#~ msgid "License:"
-#~ msgstr "Licencija:"
-
-#~ msgid "File size:"
-#~ msgstr "Failo dydis:"
-
-#~ msgid "Filename:"
-#~ msgstr "Failo pavadinimas:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Įdiegti visai sistemai"
 
 #~ msgid "device name"
 #~ msgstr "įrenginio pavadinimas"
@@ -552,15 +646,6 @@ msgstr "Nepavyko importuoti spalvų profilio: nepavyko nukopijuoti failo"
 
 #~ msgid "Id:"
 #~ msgstr "Id:"
-
-#~ msgid "Scope:"
-#~ msgstr "Sritis:"
-
-#~ msgid "Mode:"
-#~ msgstr "Veiksena:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Dabartinis profilis:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Kalibruoti"
