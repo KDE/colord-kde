@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2020-01-23 11:44+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -150,7 +150,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Vaikimisi hall"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Seadmed"
@@ -351,10 +351,161 @@ msgstr "Seostamise vorming"
 msgid "Mapping qualifier"
 msgstr "Seostamise täpsusti"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Profiilid"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Värviprofiili import"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Lisa profiil"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Profiili eemaldamine"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Värviprofiili import"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profiilid"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Kas tõesti eemaldada see profiil?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Ulatus:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Režiim:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Aktiivne profiil:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Teave"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Metaandmed"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Nimega värvid"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Profiilitüüp:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Värviruum:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Loodud:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Versioon:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Seadme mudel:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Kuvakorrektsioon:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Jah"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Puudub"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Valgepunkt:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Litsents:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Failisuurus:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Failinimi:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Paigalda süsteemselt"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -459,12 +610,6 @@ msgstr "Värviprofiili import nurjus: faili kopeerimine nurjus"
 #~ msgid "From File..."
 #~ msgstr "Failist..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Kas tõesti eemaldada see profiil?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Profiili eemaldamine"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Sinu profiil ei sobi kokku seadme tüübiga"
 
@@ -480,21 +625,6 @@ msgstr "Värviprofiili import nurjus: faili kopeerimine nurjus"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Lisa profiil klõpsuga nupule Lisa profiil"
 
-#~ msgid "Add Profile"
-#~ msgstr "Lisa profiil"
-
-#~ msgid "Yes"
-#~ msgstr "Jah"
-
-#~ msgid "None"
-#~ msgstr "Puudub"
-
-#~ msgid "Named Colors"
-#~ msgstr "Nimega värvid"
-
-#~ msgid "Metadata"
-#~ msgstr "Metaandmed"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Valitud seadmele värviprofiili loomine"
 
@@ -502,44 +632,8 @@ msgstr "Värviprofiili import nurjus: faili kopeerimine nurjus"
 #~ "You need Gnome Color Management installed in order to calibrate devices"
 #~ msgstr "Seadmete kalibreerimiseks peab paigaldatud olema GNOME värvihaldur"
 
-#~ msgid "Information"
-#~ msgstr "Teave"
-
-#~ msgid "Profile type:"
-#~ msgstr "Profiilitüüp:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Värviruum:"
-
-#~ msgid "Created:"
-#~ msgstr "Loodud:"
-
-#~ msgid "Version:"
-#~ msgstr "Versioon:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Seadme tootja:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Seadme mudel:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Kuvakorrektsioon:"
-
-#~ msgid "White Point:"
-#~ msgstr "Valgepunkt:"
-
-#~ msgid "License:"
-#~ msgstr "Litsents:"
-
-#~ msgid "File size:"
-#~ msgstr "Failisuurus:"
-
-#~ msgid "Filename:"
-#~ msgstr "Failinimi:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Paigalda süsteemselt"
 
 #~ msgid "device name"
 #~ msgstr "seadme nimi"
@@ -549,15 +643,6 @@ msgstr "Värviprofiili import nurjus: faili kopeerimine nurjus"
 
 #~ msgid "Id:"
 #~ msgstr "ID:"
-
-#~ msgid "Scope:"
-#~ msgstr "Ulatus:"
-
-#~ msgid "Mode:"
-#~ msgstr "Režiim:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Aktiivne profiil:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Kalibreeri"

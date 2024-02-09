@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2022-12-11 04:56+0100\n"
 "Last-Translator: Antoni Bella <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -150,7 +150,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Gris predeterminat"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Dispositius"
@@ -351,10 +351,156 @@ msgstr "Format del mapatge"
 msgid "Mapping qualifier"
 msgstr "Qualificador del mapatge"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Perfils"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "S'està important el perfil de color"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgid "Assign Profile"
+msgstr "Perfils"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgid "Remove Profile"
+msgstr "Perfils"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "S'està important el perfil de color"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Perfils"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr ""
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, kde-format
+msgid "Scope: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:307
+#, kde-format
+msgid "Mode: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Test profile: %1"
+msgid "Current Profile: "
+msgstr "Perfil de prova: %1"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgctxt "profile kind"
+#| msgid "Named color"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Color amb nom"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgid "Profile Type: "
+msgstr "Perfils"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace: %1"
+msgid "Colorspace: "
+msgstr "Espai de color: %1"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, kde-format
+msgid "Created: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, kde-format
+msgid "Version: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, kde-format
+msgid "Device Model: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display model"
+msgid "Display Correction: "
+msgstr "Model de la pantalla"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, kde-format
+msgid "White Point: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, kde-format
+msgid "License: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, kde-format
+msgid "File Size: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, kde-format
+msgid "Filename: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, fuzzy, kde-format
+#| msgctxt "device scope"
+#| msgid "System wide"
+msgid "Install System Wide"
+msgstr "Tot el sistema"
 
 #: icc-importer/main.cpp:41
 #, kde-format

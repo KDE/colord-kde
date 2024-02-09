@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2022-12-11 08:36+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -148,7 +148,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Privzete sivine"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Naprave"
@@ -349,10 +349,161 @@ msgstr "Vrsta preslikave"
 msgid "Mapping qualifier"
 msgstr "Uvrščevalnik preslikave"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Profili"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Uvažanje barvnega profila"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Dodaj profil"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Odstrani profil"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Uvažanje barvnega profila"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profili"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Ali ste prepričani, da želite odstraniti ta profil?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Obseg:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Način:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Trenutni profil:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Podrobnosti"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Metapodatki"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Poimenovane barve"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Vrsta profila:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Barvni prostor:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Ustvarjen:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Različica:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Model naprave:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Popravki zaslona:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Da"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Brez"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Bela točka:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Licenca:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Velikost datoteke:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Ime datoteke:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Namesti sistemsko"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -458,12 +609,6 @@ msgstr ""
 #~ msgid "From File..."
 #~ msgstr "Iz datoteke ..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Ali ste prepričani, da želite odstraniti ta profil?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Odstrani profil"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Vaš profil se ni ujemal z vrsto naprave"
 
@@ -479,21 +624,6 @@ msgstr ""
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Dodajte jih s klikom na gumb Dodaj profil"
 
-#~ msgid "Add Profile"
-#~ msgstr "Dodaj profil"
-
-#~ msgid "Yes"
-#~ msgstr "Da"
-
-#~ msgid "None"
-#~ msgstr "Brez"
-
-#~ msgid "Named Colors"
-#~ msgstr "Poimenovane barve"
-
-#~ msgid "Metadata"
-#~ msgstr "Metapodatki"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Ustvari barvni profil za izbrano napravo"
 
@@ -502,44 +632,8 @@ msgstr ""
 #~ msgstr ""
 #~ "Za umerjanje naprav morate imeti nameščeno Upravljanje barv za Gnome"
 
-#~ msgid "Information"
-#~ msgstr "Podrobnosti"
-
-#~ msgid "Profile type:"
-#~ msgstr "Vrsta profila:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Barvni prostor:"
-
-#~ msgid "Created:"
-#~ msgstr "Ustvarjen:"
-
-#~ msgid "Version:"
-#~ msgstr "Različica:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Proizvajalec naprave:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Model naprave:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Popravki zaslona:"
-
-#~ msgid "White Point:"
-#~ msgstr "Bela točka:"
-
-#~ msgid "License:"
-#~ msgstr "Licenca:"
-
-#~ msgid "File size:"
-#~ msgstr "Velikost datoteke:"
-
-#~ msgid "Filename:"
-#~ msgstr "Ime datoteke:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Namesti sistemsko"
 
 #~ msgid "device name"
 #~ msgstr "ime naprave"
@@ -549,15 +643,6 @@ msgstr ""
 
 #~ msgid "Id:"
 #~ msgstr "ID:"
-
-#~ msgid "Scope:"
-#~ msgstr "Obseg:"
-
-#~ msgid "Mode:"
-#~ msgstr "Način:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Trenutni profil:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Umeri"

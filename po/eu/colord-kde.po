@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2022-12-11 17:58+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque\n"
@@ -149,7 +149,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Gris lehenetsia"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Gailuak"
@@ -350,10 +350,161 @@ msgstr "Mapatzearen formatua"
 msgid "Mapping qualifier"
 msgstr "Mapatzearen kalifikatzailea"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Profilak"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Kolore profila inportatzea"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Gehitu profila"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Kendu profila"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Kolore profila inportatzea"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profilak"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Ziur zaude profil hau kendu nahi duzula?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Esparrua:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Modua:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Uneko profila:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Informazioa"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Metadatuak"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Kolore izendunak"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Profil mota:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Kolore-eremua:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Sortze-data:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Bertsioa:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Gailu-eredua:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Azaltze-zuzenketa:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Bai"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Bat ere ez"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Zuri-puntua:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Lizentzia:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Fitxategi-neurria:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Fitxategi-izena:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Instalatu sistema osorako"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -460,12 +611,6 @@ msgstr "Kolore-profila inportatzea huts egin du: fitxategia ezin da kopiatu"
 #~ msgid "From File..."
 #~ msgstr "Fitxategitik..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Ziur zaude profil hau kendu nahi duzula?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Kendu profila"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Zure profila ez zaio gailu motari ondo egokitzen"
 
@@ -481,21 +626,6 @@ msgstr "Kolore-profila inportatzea huts egin du: fitxategia ezin da kopiatu"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Gehitu bat «Gehitu profila» botoiari klik eginda"
 
-#~ msgid "Add Profile"
-#~ msgstr "Gehitu profila"
-
-#~ msgid "Yes"
-#~ msgstr "Bai"
-
-#~ msgid "None"
-#~ msgstr "Bat ere ez"
-
-#~ msgid "Named Colors"
-#~ msgstr "Kolore izendunak"
-
-#~ msgid "Metadata"
-#~ msgstr "Metadatuak"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Sortu kolore profil bat hautatutako gailuarentzat"
 
@@ -505,44 +635,8 @@ msgstr "Kolore-profila inportatzea huts egin du: fitxategia ezin da kopiatu"
 #~ "Gailuak kalibratzeko Gnome-ren kolore kudeaketa instalatuta izan behar "
 #~ "duzu"
 
-#~ msgid "Information"
-#~ msgstr "Informazioa"
-
-#~ msgid "Profile type:"
-#~ msgstr "Profil mota:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Kolore-eremua:"
-
-#~ msgid "Created:"
-#~ msgstr "Sortze-data:"
-
-#~ msgid "Version:"
-#~ msgstr "Bertsioa:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Gailuaren fabrikatzailea:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Gailu-eredua:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Azaltze-zuzenketa:"
-
-#~ msgid "White Point:"
-#~ msgstr "Zuri-puntua:"
-
-#~ msgid "License:"
-#~ msgstr "Lizentzia:"
-
-#~ msgid "File size:"
-#~ msgstr "Fitxategi-neurria:"
-
-#~ msgid "Filename:"
-#~ msgstr "Fitxategi-izena:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Instalatu sistema osorako"
 
 #~ msgid "device name"
 #~ msgstr "gailu-izena"
@@ -552,15 +646,6 @@ msgstr "Kolore-profila inportatzea huts egin du: fitxategia ezin da kopiatu"
 
 #~ msgid "Id:"
 #~ msgstr "IDa:"
-
-#~ msgid "Scope:"
-#~ msgstr "Esparrua:"
-
-#~ msgid "Mode:"
-#~ msgstr "Modua:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Uneko profila:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Kalibratu"

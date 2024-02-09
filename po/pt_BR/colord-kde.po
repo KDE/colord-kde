@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2022-12-20 10:41-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -149,7 +149,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Cinza padrão"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Dispositivos"
@@ -350,10 +350,161 @@ msgstr "Formato da associação"
 msgid "Mapping qualifier"
 msgstr "Qualificador da associação"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Perfis"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Importando o perfil de cores"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Adicionar perfil"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Remover perfil"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Importando o perfil de cores"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Perfis"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Tem certeza de que deseja remover este perfil?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Escopo:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Modo:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Perfil atual:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Informações"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Metadados"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Cores com nome"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Tipo do perfil:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Espaço de cores:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Criado em:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Versão:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Modelo do dispositivo:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Correção da tela:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Sim"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Nenhum"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Ponto branco:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Licença:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Tamanho do arquivo:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Nome do arquivo:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Instalar no sistema"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -459,12 +610,6 @@ msgstr ""
 #~ msgid "From File..."
 #~ msgstr "Do arquivo..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Tem certeza de que deseja remover este perfil?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Remover perfil"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "O seu perfil não correspondia ao tipo de dispositivo"
 
@@ -480,21 +625,6 @@ msgstr ""
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Adicione um clicando no botão 'Adicionar perfil'"
 
-#~ msgid "Add Profile"
-#~ msgstr "Adicionar perfil"
-
-#~ msgid "Yes"
-#~ msgstr "Sim"
-
-#~ msgid "None"
-#~ msgstr "Nenhum"
-
-#~ msgid "Named Colors"
-#~ msgstr "Cores com nome"
-
-#~ msgid "Metadata"
-#~ msgstr "Metadados"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Criar um perfil de cores para o dispositivo selecionado"
 
@@ -504,44 +634,8 @@ msgstr ""
 #~ "Você precisa do Gerenciamento de Cores do Gnome para poder calibrar os "
 #~ "dispositivos"
 
-#~ msgid "Information"
-#~ msgstr "Informações"
-
-#~ msgid "Profile type:"
-#~ msgstr "Tipo do perfil:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Espaço de cores:"
-
-#~ msgid "Created:"
-#~ msgstr "Criado em:"
-
-#~ msgid "Version:"
-#~ msgstr "Versão:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Fabricante do dispositivo:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Modelo do dispositivo:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Correção da tela:"
-
-#~ msgid "White Point:"
-#~ msgstr "Ponto branco:"
-
-#~ msgid "License:"
-#~ msgstr "Licença:"
-
-#~ msgid "File size:"
-#~ msgstr "Tamanho do arquivo:"
-
-#~ msgid "Filename:"
-#~ msgstr "Nome do arquivo:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Instalar no sistema"
 
 #~ msgid "device name"
 #~ msgstr "nome do dispositivo"
@@ -551,15 +645,6 @@ msgstr ""
 
 #~ msgid "Id:"
 #~ msgstr "ID:"
-
-#~ msgid "Scope:"
-#~ msgstr "Escopo:"
-
-#~ msgid "Mode:"
-#~ msgstr "Modo:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Perfil atual:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Calibrar"

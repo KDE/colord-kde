@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kde 49i410\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2015-02-26 18:19+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: Bosnian\n"
@@ -153,7 +153,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Zadana siva"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Uređaji"
@@ -354,10 +354,161 @@ msgstr "Mapiranje formata"
 msgid "Mapping qualifier"
 msgstr "Mapiranje oznake"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Profili"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Uvoz Profila za Boju"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Dodaj Profil"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Ukloni Profil"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Uvoz Profila za Boju"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profili"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Da li ste sigurni da želite ukloniti ovaj profil?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Opseg:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Režim:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Tekući Profil:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Informacija"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Meta podaci"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Imenovane boje"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Tip profila:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Prostor boja:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Kreirano:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Izdanje:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Model Uređaja:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Korekcija prikaza:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Da"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Nijedan"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Bijela Tačka:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Licenca:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Veličina datoteke:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Ime datoteke:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Instalirati Širom Sistema"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -465,12 +616,6 @@ msgstr "Nije uspio uvoz profila za boju: nije bilo moguće kopirati datoteku"
 #~ msgid "From File..."
 #~ msgstr "Iz datoteke..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Da li ste sigurni da želite ukloniti ovaj profil?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Ukloni Profil"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Vaš profil se ne poklapa sa vrstom uređaja"
 
@@ -486,21 +631,6 @@ msgstr "Nije uspio uvoz profila za boju: nije bilo moguće kopirati datoteku"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Dodajte jedan pritiščući na dugme Dodaj Profil"
 
-#~ msgid "Add Profile"
-#~ msgstr "Dodaj Profil"
-
-#~ msgid "Yes"
-#~ msgstr "Da"
-
-#~ msgid "None"
-#~ msgstr "Nijedan"
-
-#~ msgid "Named Colors"
-#~ msgstr "Imenovane boje"
-
-#~ msgid "Metadata"
-#~ msgstr "Meta podaci"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Kreiraj profil za boju za izabrani uređaj"
 
@@ -510,44 +640,8 @@ msgstr "Nije uspio uvoz profila za boju: nije bilo moguće kopirati datoteku"
 #~ "Potrebano je imati instaliran Gnome Upravljanje Bojama kako biste "
 #~ "kalibrirali uređaje"
 
-#~ msgid "Information"
-#~ msgstr "Informacija"
-
-#~ msgid "Profile type:"
-#~ msgstr "Tip profila:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Prostor boja:"
-
-#~ msgid "Created:"
-#~ msgstr "Kreirano:"
-
-#~ msgid "Version:"
-#~ msgstr "Izdanje:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Proizvođač uređaja:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Model Uređaja:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Korekcija prikaza:"
-
-#~ msgid "White Point:"
-#~ msgstr "Bijela Tačka:"
-
-#~ msgid "License:"
-#~ msgstr "Licenca:"
-
-#~ msgid "File size:"
-#~ msgstr "Veličina datoteke:"
-
-#~ msgid "Filename:"
-#~ msgstr "Ime datoteke:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Instalirati Širom Sistema"
 
 #~ msgid "device name"
 #~ msgstr "naziv uređaja"
@@ -557,15 +651,6 @@ msgstr "Nije uspio uvoz profila za boju: nije bilo moguće kopirati datoteku"
 
 #~ msgid "Id:"
 #~ msgstr "Id.:"
-
-#~ msgid "Scope:"
-#~ msgstr "Opseg:"
-
-#~ msgid "Mode:"
-#~ msgstr "Režim:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Tekući Profil:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Kalibriraj"

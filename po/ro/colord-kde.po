@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2024-01-07 15:30+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -147,7 +147,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Gri implicit"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Dispozitive"
@@ -348,10 +348,161 @@ msgstr "Format de corespondență"
 msgid "Mapping qualifier"
 msgstr "Calificator de corespondență"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Profiluri"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Se importă profilul de culori"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Adaugă profil"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Elimină profil"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Se importă profilul de culori"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profiluri"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Sigur doriți să eliminați acest profil?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Domeniu:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Regim:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Profil curent:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Informații"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Metadate"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Culori denumite"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Tip profil:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Domeniu de culori:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Creat:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Versiune:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Model dispozitiv:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Corecție afișaj:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Da"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Niciuna"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Punct de alb:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Licență:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Dimensiune fișier:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Denumire fișier:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Instalează în tot sistemul"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -458,12 +609,6 @@ msgstr "Eșec la importul profilului de culoare: fișierul nu poate fi copiat"
 #~ msgid "From File..."
 #~ msgstr "Din fișier..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Sigur doriți să eliminați acest profil?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Elimină profil"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Profilul nu se potrivește cu genul dispozitivului"
 
@@ -479,21 +624,6 @@ msgstr "Eșec la importul profilului de culoare: fișierul nu poate fi copiat"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Adăugați unul apăsînd pe butonul „Adaugă profil”"
 
-#~ msgid "Add Profile"
-#~ msgstr "Adaugă profil"
-
-#~ msgid "Yes"
-#~ msgstr "Da"
-
-#~ msgid "None"
-#~ msgstr "Niciuna"
-
-#~ msgid "Named Colors"
-#~ msgstr "Culori denumite"
-
-#~ msgid "Metadata"
-#~ msgstr "Metadate"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Creează un profil de culoare pentru dispozitivul ales"
 
@@ -503,44 +633,8 @@ msgstr "Eșec la importul profilului de culoare: fișierul nu poate fi copiat"
 #~ "Trebuie să aveți „Gnome Color Management” instalat pentru a calibra "
 #~ "dispozitivele"
 
-#~ msgid "Information"
-#~ msgstr "Informații"
-
-#~ msgid "Profile type:"
-#~ msgstr "Tip profil:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Domeniu de culori:"
-
-#~ msgid "Created:"
-#~ msgstr "Creat:"
-
-#~ msgid "Version:"
-#~ msgstr "Versiune:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Producător dispozitiv:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Model dispozitiv:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Corecție afișaj:"
-
-#~ msgid "White Point:"
-#~ msgstr "Punct de alb:"
-
-#~ msgid "License:"
-#~ msgstr "Licență:"
-
-#~ msgid "File size:"
-#~ msgstr "Dimensiune fișier:"
-
-#~ msgid "Filename:"
-#~ msgstr "Denumire fișier:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Instalează în tot sistemul"
 
 #~ msgid "device name"
 #~ msgstr "denumire dispozitiv"
@@ -550,15 +644,6 @@ msgstr "Eșec la importul profilului de culoare: fișierul nu poate fi copiat"
 
 #~ msgid "Id:"
 #~ msgstr "Id:"
-
-#~ msgid "Scope:"
-#~ msgstr "Domeniu:"
-
-#~ msgid "Mode:"
-#~ msgstr "Regim:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Profil curent:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Calibrează"

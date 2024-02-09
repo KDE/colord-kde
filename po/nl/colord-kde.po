@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2022-12-10 10:55+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -146,7 +146,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Standaard grijs"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Apparaten"
@@ -347,10 +347,161 @@ msgstr "Format van overeenkomsten"
 msgid "Mapping qualifier"
 msgstr "Mapping-qualifier"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Profielen"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Kleurprofiel importeren"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Profiel toevoegen"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Profiel verwijderen"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Kleurprofiel importeren"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profielen"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Wilt u dit profiel verwijderen?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Bereik:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Modus:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Huidig profiel:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Informatie"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Metagegevens"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Benoemde kleuren"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Type profiel:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Kleurruimte:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Aangemaakt:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Versie:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Apparaatmodel:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Correctie tonen:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "Ja"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Geen"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Witpunt:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Licentie:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Bestandsgrootte:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Bestandsnaam:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "Systeembreed installeren"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -456,12 +607,6 @@ msgstr "Importeren van kleurprofiel is mislukt: kon het bestand niet kopiëren"
 #~ msgid "From File..."
 #~ msgstr "Uit bestand..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Wilt u dit profiel verwijderen?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Profiel verwijderen"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Uw profiel kwam niet overeen met het soort apparaat"
 
@@ -477,21 +622,6 @@ msgstr "Importeren van kleurprofiel is mislukt: kon het bestand niet kopiëren"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Voeg er een toe door op de knop Profiel toevoegen te klikken"
 
-#~ msgid "Add Profile"
-#~ msgstr "Profiel toevoegen"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "None"
-#~ msgstr "Geen"
-
-#~ msgid "Named Colors"
-#~ msgstr "Benoemde kleuren"
-
-#~ msgid "Metadata"
-#~ msgstr "Metagegevens"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Maak een kleurprofiel voor het geselecteerde apparaat"
 
@@ -501,44 +631,8 @@ msgstr "Importeren van kleurprofiel is mislukt: kon het bestand niet kopiëren"
 #~ "Gnome kleurbeheer moet geïnstalleerd zijn om apparaten te kunnen "
 #~ "kalibreren"
 
-#~ msgid "Information"
-#~ msgstr "Informatie"
-
-#~ msgid "Profile type:"
-#~ msgstr "Type profiel:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Kleurruimte:"
-
-#~ msgid "Created:"
-#~ msgstr "Aangemaakt:"
-
-#~ msgid "Version:"
-#~ msgstr "Versie:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Apparaatfabrikant:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Apparaatmodel:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Correctie tonen:"
-
-#~ msgid "White Point:"
-#~ msgstr "Witpunt:"
-
-#~ msgid "License:"
-#~ msgstr "Licentie:"
-
-#~ msgid "File size:"
-#~ msgstr "Bestandsgrootte:"
-
-#~ msgid "Filename:"
-#~ msgstr "Bestandsnaam:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Systeembreed installeren"
 
 #~ msgid "device name"
 #~ msgstr "apparaatnaam"
@@ -548,15 +642,6 @@ msgstr "Importeren van kleurprofiel is mislukt: kon het bestand niet kopiëren"
 
 #~ msgid "Id:"
 #~ msgstr "Id:"
-
-#~ msgid "Scope:"
-#~ msgstr "Bereik:"
-
-#~ msgid "Mode:"
-#~ msgstr "Modus:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Huidig profiel:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Kalibreren"

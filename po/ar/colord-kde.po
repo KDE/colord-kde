@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2022-12-22 12:21+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -146,7 +146,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "المبدئي رصاصي"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "الأجهزة"
@@ -347,10 +347,161 @@ msgstr "نسق التخطيط"
 msgid "Mapping qualifier"
 msgstr "مؤهل التخطيط"
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "التّشكيلات"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "يستورد تشكيلة الألوان"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "أضف تشكيلة"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "احذف التشكيلة"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "يستورد تشكيلة الألوان"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "التّشكيلات"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "أمتأكّد من إزالة هذه التشكيلة؟"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "النّطاق:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "الوضع:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "التشكيلة الحالية:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "معلومات"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "البيانات الوصفيّة"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "الألوان المسماة"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "نوع التشكيلة:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "الفضاء اللوني:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "أُنشئ في:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "الإصدارة:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "طراز الجهاز:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "تصحيح الشاشة:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "نعم"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "بلا"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "النّقطة البيضاء:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "الرّخصة:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "حجم الملف:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "اسم الملفّ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr "ثبت على كامل النظام"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -455,12 +606,6 @@ msgstr "فشل في استيراد تشكيلة الألوان: لا يمكن ن
 #~ msgid "From File..."
 #~ msgstr "من ملف..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "أمتأكّد من إزالة هذه التشكيلة؟"
-
-#~ msgid "Remove Profile"
-#~ msgstr "احذف التشكيلة"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "تشكيلتك لا تطابق نوع الجهاز"
 
@@ -476,21 +621,6 @@ msgstr "فشل في استيراد تشكيلة الألوان: لا يمكن ن
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "أضف واحدة بالنقر على زر أضف تشكيلة"
 
-#~ msgid "Add Profile"
-#~ msgstr "أضف تشكيلة"
-
-#~ msgid "Yes"
-#~ msgstr "نعم"
-
-#~ msgid "None"
-#~ msgstr "بلا"
-
-#~ msgid "Named Colors"
-#~ msgstr "الألوان المسماة"
-
-#~ msgid "Metadata"
-#~ msgstr "البيانات الوصفيّة"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "أنشئ تشكيلة ألوان للجهاد المحدد."
 
@@ -498,44 +628,8 @@ msgstr "فشل في استيراد تشكيلة الألوان: لا يمكن ن
 #~ "You need Gnome Color Management installed in order to calibrate devices"
 #~ msgstr "أنت بحاجة إلى تثبيت إدارة ألوان غنوم لمعايرة الأجهزة"
 
-#~ msgid "Information"
-#~ msgstr "معلومات"
-
-#~ msgid "Profile type:"
-#~ msgstr "نوع التشكيلة:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "الفضاء اللوني:"
-
-#~ msgid "Created:"
-#~ msgstr "أُنشئ في:"
-
-#~ msgid "Version:"
-#~ msgstr "الإصدارة:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "مصنّع الجهاز:"
-
-#~ msgid "Device Model:"
-#~ msgstr "طراز الجهاز:"
-
-#~ msgid "Display correction:"
-#~ msgstr "تصحيح الشاشة:"
-
-#~ msgid "White Point:"
-#~ msgstr "النّقطة البيضاء:"
-
-#~ msgid "License:"
-#~ msgstr "الرّخصة:"
-
-#~ msgid "File size:"
-#~ msgstr "حجم الملف:"
-
-#~ msgid "Filename:"
-#~ msgstr "اسم الملفّ:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "ثبت على كامل النظام"
 
 #~ msgid "device name"
 #~ msgstr "اسم الجهاز"
@@ -545,15 +639,6 @@ msgstr "فشل في استيراد تشكيلة الألوان: لا يمكن ن
 
 #~ msgid "Id:"
 #~ msgstr "المعرّف:"
-
-#~ msgid "Scope:"
-#~ msgstr "النّطاق:"
-
-#~ msgid "Mode:"
-#~ msgstr "الوضع:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "التشكيلة الحالية:"
 
 #~ msgid "Calibrate"
 #~ msgstr "عاير"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2012-05-14 16:25-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -144,7 +144,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr ""
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "Gléasanna"
@@ -345,10 +345,160 @@ msgstr ""
 msgid "Mapping qualifier"
 msgstr ""
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "Próifílí"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Remove Profile"
+msgid "Import Profile"
+msgstr "Bain Próifíl"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Cuir Próifíl Leis"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "Bain Próifíl"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Remove Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Bain Próifíl"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Próifílí"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr ""
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, kde-format
+msgid "Scope: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Mód:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Remove Profile"
+msgid "Current Profile: "
+msgstr "Bain Próifíl"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "Eolas"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "Meiteashonraí"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Dathanna Ainmnithe"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgid "Profile Type: "
+msgstr "Próifílí"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Samhail de dhathanna:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Cruthaithe:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Leagan:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Devices"
+msgid "Device Model: "
+msgstr "Gléasanna"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgctxt "profile kind"
+#| msgid "Display device"
+msgid "Display Correction: "
+msgstr "Gléas taispeána"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "Neamhní"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, kde-format
+msgid "White Point: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Ceadúnas:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Méid comhaid:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Ainm comhaid:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, kde-format
+msgid "Install System Wide"
+msgstr ""
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -455,58 +605,6 @@ msgstr ""
 #~ msgid "From File..."
 #~ msgstr "Ó Chomhad..."
 
-#~ msgid "Remove Profile"
-#~ msgstr "Bain Próifíl"
-
-#~ msgid "Add Profile"
-#~ msgstr "Cuir Próifíl Leis"
-
-#~ msgid "None"
-#~ msgstr "Neamhní"
-
-#~ msgid "Named Colors"
-#~ msgstr "Dathanna Ainmnithe"
-
-#~ msgid "Metadata"
-#~ msgstr "Meiteashonraí"
-
-#~ msgid "Information"
-#~ msgstr "Eolas"
-
-#, fuzzy
-#~| msgid "Profiles"
-#~ msgid "Profile type:"
-#~ msgstr "Próifílí"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Samhail de dhathanna:"
-
-#~ msgid "Created:"
-#~ msgstr "Cruthaithe:"
-
-#~ msgid "Version:"
-#~ msgstr "Leagan:"
-
-#, fuzzy
-#~| msgid "Devices"
-#~ msgid "Device Model:"
-#~ msgstr "Gléasanna"
-
-#, fuzzy
-#~| msgctxt "profile kind"
-#~| msgid "Display device"
-#~ msgid "Display correction:"
-#~ msgstr "Gléas taispeána"
-
-#~ msgid "License:"
-#~ msgstr "Ceadúnas:"
-
-#~ msgid "File size:"
-#~ msgstr "Méid comhaid:"
-
-#~ msgid "Filename:"
-#~ msgstr "Ainm comhaid:"
-
 #, fuzzy
 #~| msgid "Filename:"
 #~ msgid "device name"
@@ -517,14 +615,6 @@ msgstr ""
 
 #~ msgid "Id:"
 #~ msgstr "Aitheantas:"
-
-#~ msgid "Mode:"
-#~ msgstr "Mód:"
-
-#, fuzzy
-#~| msgid "Remove Profile"
-#~ msgid "Current Profile:"
-#~ msgstr "Bain Próifíl"
 
 #~ msgid "Calibrate"
 #~ msgstr "Calabraigh"

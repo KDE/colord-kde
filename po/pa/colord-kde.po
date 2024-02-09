@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-02-09 02:32+0000\n"
 "PO-Revision-Date: 2020-12-19 11:31-0800\n"
 "Last-Translator: A S Alam <aalam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -145,7 +145,7 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "ਮੂਲ ਸਲੇਟੀ"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
 msgid "Devices"
 msgstr "ਡਿਵਾਈਸ"
@@ -346,10 +346,162 @@ msgstr ""
 msgid "Mapping qualifier"
 msgstr ""
 
-#: colord-kcm/ProfileModel.cpp:226
+#: colord-kcm/ProfileModel.cpp:226 colord-kcm/ui/main.qml:52
 #, kde-format
 msgid "Profiles"
 msgstr "ਪਰੋਫਾਇਲ"
+
+#: colord-kcm/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "ਰੰਗ ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+
+#: colord-kcm/ui/main.qml:72
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "ਪਰੋਫਾਇਲ ਜੋੜੋ"
+
+#: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
+#, kde-format
+msgid "Remove Profile"
+msgstr "ਪਰੋਫਾਇਲ ਹਟਾਓ"
+
+#: colord-kcm/ui/main.qml:121
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "ਰੰਗ ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+
+#: colord-kcm/ui/main.qml:126
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "ਪਰੋਫਾਇਲ"
+
+#: colord-kcm/ui/main.qml:133
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "ਕੀ ਤੁਸੀਂ ਇਹ ਪਰੋਫਾਇਲ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: colord-kcm/ui/main.qml:291
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/ui/main.qml:299
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "ਸਕੋਪ:"
+
+#: colord-kcm/ui/main.qml:307
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "ਮੋਡ:"
+
+#: colord-kcm/ui/main.qml:315
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "ਮੌਜੂਦਾ ਪਰੋਫਾਇਲ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:21
+#, kde-format
+msgid "Information"
+msgstr "ਜਾਣਕਾਰੀ"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:29
+#, kde-format
+msgid "Metadata"
+msgstr "ਮੇਟਾ-ਡਾਟਾ"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:37
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "ਨਾਂ ਵਾਲੇ ਰੰਗ"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:109
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "ਪਰੋਫਾਇਲ ਦੀ ਕਿਸਮ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:117
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "ਰੰਗ-ਸਪੇਸ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:125
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "ਬਣਾਇਆ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:133
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "ਵਰਜ਼ਨ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:142
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "ਡਿਵਾਈਸ ਦਾ ਮਾਡਲ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:152
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "ਡਿਸਪਲੇਅ ਇਕਸਾਰਤਾ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "Yes"
+msgstr "ਹਾਂ"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:155
+#, kde-format
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:160
+#, kde-format
+msgid "White Point: "
+msgstr ""
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:169
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "ਲਸੰਸ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:179
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "ਫ਼ਾਈਲ ਦਾ ਸਾਈਜ਼:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:187
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "ਫ਼ਾਈਲ ਦਾ ਨਾਂ:"
+
+#: colord-kcm/ui/ProfileMetaDataView.qml:196
+#, fuzzy, kde-format
+#| msgctxt "device scope"
+#| msgid "System wide"
+msgid "Install System Wide"
+msgstr "ਪੂਰਾ ਸਿਸਟਮ"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -454,66 +606,15 @@ msgstr ""
 #~ msgid "From File..."
 #~ msgstr "...ਫ਼ਾਈਲ ਤੋਂ"
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "ਕੀ ਤੁਸੀਂ ਇਹ ਪਰੋਫਾਇਲ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "ਪਰੋਫਾਇਲ ਹਟਾਓ"
-
 #~ msgid "You do not have any devices registered"
 #~ msgstr "ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਵੀ ਰਜਿਸਟਰ ਕੀਤਾ ਡਿਵਾਈਸ ਨਹੀਂ ਹੈ"
-
-#~ msgid "Add Profile"
-#~ msgstr "ਪਰੋਫਾਇਲ ਜੋੜੋ"
-
-#~ msgid "Yes"
-#~ msgstr "ਹਾਂ"
-
-#~ msgid "None"
-#~ msgstr "ਕੋਈ ਨਹੀਂ"
-
-#~ msgid "Named Colors"
-#~ msgstr "ਨਾਂ ਵਾਲੇ ਰੰਗ"
-
-#~ msgid "Metadata"
-#~ msgstr "ਮੇਟਾ-ਡਾਟਾ"
 
 #~ msgid ""
 #~ "You need Gnome Color Management installed in order to calibrate devices"
 #~ msgstr "ਡਿਵਾਈਸ ਕੈਲੀਬਰੇਟ ਕਰਨ ਲਈ ਤੁਹਾਨੂੰ ਗਨੋਮ ਰੰਗ ਇੰਤਜ਼ਾਮ ਇੰਸਟਾਲ ਕਰਨ ਦੀ ਲੋੜ ਹੈ"
 
-#~ msgid "Information"
-#~ msgstr "ਜਾਣਕਾਰੀ"
-
-#~ msgid "Profile type:"
-#~ msgstr "ਪਰੋਫਾਇਲ ਦੀ ਕਿਸਮ:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "ਰੰਗ-ਸਪੇਸ:"
-
-#~ msgid "Created:"
-#~ msgstr "ਬਣਾਇਆ:"
-
-#~ msgid "Version:"
-#~ msgstr "ਵਰਜ਼ਨ:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "ਡਿਵਾਈਸ ਨਿਰਮਾਤਾ:"
-
-#~ msgid "Device Model:"
-#~ msgstr "ਡਿਵਾਈਸ ਦਾ ਮਾਡਲ:"
-
-#~ msgid "Display correction:"
-#~ msgstr "ਡਿਸਪਲੇਅ ਇਕਸਾਰਤਾ:"
-
-#~ msgid "License:"
-#~ msgstr "ਲਸੰਸ:"
-
-#~ msgid "File size:"
-#~ msgstr "ਫ਼ਾਈਲ ਦਾ ਸਾਈਜ਼:"
-
-#~ msgid "Filename:"
-#~ msgstr "ਫ਼ਾਈਲ ਦਾ ਨਾਂ:"
 
 #~ msgid "device name"
 #~ msgstr "ਡਿਵਾਈਸ ਦਾ ਨਾਂ"
@@ -523,15 +624,6 @@ msgstr ""
 
 #~ msgid "Id:"
 #~ msgstr "ID:"
-
-#~ msgid "Scope:"
-#~ msgstr "ਸਕੋਪ:"
-
-#~ msgid "Mode:"
-#~ msgstr "ਮੋਡ:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "ਮੌਜੂਦਾ ਪਰੋਫਾਇਲ:"
 
 #~ msgid "Calibrate"
 #~ msgstr "ਕੈਲੀਬਰੇਟ"
