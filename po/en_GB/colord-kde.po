@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-10 00:43+0000\n"
+"POT-Creation-Date: 2024-02-09 03:21+0000\n"
 "PO-Revision-Date: 2022-12-31 15:43+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -146,10 +146,167 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Default Grey"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/package/contents/ui/main.qml:42
 #, kde-format
 msgid "Devices"
 msgstr "Devices"
+
+#: colord-kcm/package/contents/ui/main.qml:51 colord-kcm/ProfileModel.cpp:226
+#, kde-format
+msgid "Profiles"
+msgstr "Profiles"
+
+#: colord-kcm/package/contents/ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Importing Colour Profile"
+
+#: colord-kcm/package/contents/ui/main.qml:71
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Add Profile"
+
+#: colord-kcm/package/contents/ui/main.qml:110
+#: colord-kcm/package/contents/ui/main.qml:130
+#, kde-format
+msgid "Remove Profile"
+msgstr "Remove Profile"
+
+#: colord-kcm/package/contents/ui/main.qml:120
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Importing Colour Profile"
+
+#: colord-kcm/package/contents/ui/main.qml:125
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profiles"
+
+#: colord-kcm/package/contents/ui/main.qml:132
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Are you sure you want to remove this profile?"
+
+#: colord-kcm/package/contents/ui/main.qml:277
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/package/contents/ui/main.qml:285
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Scope:"
+
+#: colord-kcm/package/contents/ui/main.qml:293
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Mode:"
+
+#: colord-kcm/package/contents/ui/main.qml:301
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Current Profile:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:20
+#, kde-format
+msgid "Information"
+msgstr "Information"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:28
+#, kde-format
+msgid "Metadata"
+msgstr "Metadata"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:36
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Named Colours"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:94
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Profile type:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:102
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Colourspace:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:110
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Created:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:118
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Version:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:127
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Device Model:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:137
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Display correction:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "Yes"
+msgstr "Yes"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "None"
+msgstr "None"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:145
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "White Point:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:154
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Licence:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:164
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "File size:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:172
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Filename:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:181
+#, kde-format
+msgid "Install System Wide"
+msgstr "Install System Wide"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -347,11 +504,6 @@ msgstr "Mapping format"
 msgid "Mapping qualifier"
 msgstr "Mapping qualifier"
 
-#: colord-kcm/ProfileModel.cpp:226
-#, kde-format
-msgid "Profiles"
-msgstr "Profiles"
-
 #: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
@@ -455,12 +607,6 @@ msgstr "Failed to import colour profile: could not copy the file"
 #~ msgid "From File..."
 #~ msgstr "From File..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Are you sure you want to remove this profile?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Remove Profile"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Your profile did not match the device kind"
 
@@ -476,21 +622,6 @@ msgstr "Failed to import colour profile: could not copy the file"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Add one by clicking Add Profile button"
 
-#~ msgid "Add Profile"
-#~ msgstr "Add Profile"
-
-#~ msgid "Yes"
-#~ msgstr "Yes"
-
-#~ msgid "None"
-#~ msgstr "None"
-
-#~ msgid "Named Colors"
-#~ msgstr "Named Colours"
-
-#~ msgid "Metadata"
-#~ msgstr "Metadata"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Create a colour profile for the selected device"
 
@@ -499,44 +630,8 @@ msgstr "Failed to import colour profile: could not copy the file"
 #~ msgstr ""
 #~ "You need Gnome Colour Management installed in order to calibrate devices"
 
-#~ msgid "Information"
-#~ msgstr "Information"
-
-#~ msgid "Profile type:"
-#~ msgstr "Profile type:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Colourspace:"
-
-#~ msgid "Created:"
-#~ msgstr "Created:"
-
-#~ msgid "Version:"
-#~ msgstr "Version:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Device Manufacturer:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Device Model:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Display correction:"
-
-#~ msgid "White Point:"
-#~ msgstr "White Point:"
-
-#~ msgid "License:"
-#~ msgstr "Licence:"
-
-#~ msgid "File size:"
-#~ msgstr "File size:"
-
-#~ msgid "Filename:"
-#~ msgstr "Filename:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Install System Wide"
 
 #~ msgid "device name"
 #~ msgstr "device name"
@@ -546,15 +641,6 @@ msgstr "Failed to import colour profile: could not copy the file"
 
 #~ msgid "Id:"
 #~ msgstr "ID:"
-
-#~ msgid "Scope:"
-#~ msgstr "Scope:"
-
-#~ msgid "Mode:"
-#~ msgstr "Mode:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Current Profile:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Calibrate"

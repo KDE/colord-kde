@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-10 00:43+0000\n"
+"POT-Creation-Date: 2024-02-09 03:21+0000\n"
 "PO-Revision-Date: 2017-03-04 14:40+0100\n"
 "Last-Translator: Kiszel Kristóf <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -151,10 +151,167 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Alapértelmezett szürke"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/package/contents/ui/main.qml:42
 #, kde-format
 msgid "Devices"
 msgstr "Eszközök"
+
+#: colord-kcm/package/contents/ui/main.qml:51 colord-kcm/ProfileModel.cpp:226
+#, kde-format
+msgid "Profiles"
+msgstr "Profilok"
+
+#: colord-kcm/package/contents/ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Színprofil importálása"
+
+#: colord-kcm/package/contents/ui/main.qml:71
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Profil hozzáadása"
+
+#: colord-kcm/package/contents/ui/main.qml:110
+#: colord-kcm/package/contents/ui/main.qml:130
+#, kde-format
+msgid "Remove Profile"
+msgstr "Profil eltávolítása"
+
+#: colord-kcm/package/contents/ui/main.qml:120
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Színprofil importálása"
+
+#: colord-kcm/package/contents/ui/main.qml:125
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profilok"
+
+#: colord-kcm/package/contents/ui/main.qml:132
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Biztosan el akarja távolítani ezt a profilt?"
+
+#: colord-kcm/package/contents/ui/main.qml:277
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/package/contents/ui/main.qml:285
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Hatáskör:"
+
+#: colord-kcm/package/contents/ui/main.qml:293
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Mód:"
+
+#: colord-kcm/package/contents/ui/main.qml:301
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Jelenlegi profil:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:20
+#, kde-format
+msgid "Information"
+msgstr "Információ"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:28
+#, kde-format
+msgid "Metadata"
+msgstr "Metaadat"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:36
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Nevesített színek"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:94
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Profil típus:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:102
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Színtér:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:110
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Létrehozva:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:118
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Verzió:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:127
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Eszközmodell:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:137
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Korrekció megjelenítése:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "Yes"
+msgstr "Igen"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "None"
+msgstr "Nincs"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:145
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Fehér pont:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:154
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Licenc:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:164
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Fájlméret:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:172
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Fájlnév:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:181
+#, kde-format
+msgid "Install System Wide"
+msgstr "Telepítés rendszerszinten"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -352,11 +509,6 @@ msgstr "Leképezett formátum"
 msgid "Mapping qualifier"
 msgstr "Leképezés minősítő"
 
-#: colord-kcm/ProfileModel.cpp:226
-#, kde-format
-msgid "Profiles"
-msgstr "Profilok"
-
 #: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
@@ -460,12 +612,6 @@ msgstr "A színprofil importálása nem sikerült: nem másolható a fájl"
 #~ msgid "From File..."
 #~ msgstr "Fájlból…"
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Biztosan el akarja távolítani ezt a profilt?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Profil eltávolítása"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "A profil nem egyezik az eszköz fajtájával"
 
@@ -481,21 +627,6 @@ msgstr "A színprofil importálása nem sikerült: nem másolható a fájl"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Adjon hozzá egyet a Profil hozzáadása gombra kattintva"
 
-#~ msgid "Add Profile"
-#~ msgstr "Profil hozzáadása"
-
-#~ msgid "Yes"
-#~ msgstr "Igen"
-
-#~ msgid "None"
-#~ msgstr "Nincs"
-
-#~ msgid "Named Colors"
-#~ msgstr "Nevesített színek"
-
-#~ msgid "Metadata"
-#~ msgstr "Metaadat"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Színprofil létrehozása a kiválasztott eszközhöz"
 
@@ -505,44 +636,8 @@ msgstr "A színprofil importálása nem sikerült: nem másolható a fájl"
 #~ "A Gnome színkezelés telepítése szükséges az eszközök kalibrálásának "
 #~ "érdekében"
 
-#~ msgid "Information"
-#~ msgstr "Információ"
-
-#~ msgid "Profile type:"
-#~ msgstr "Profil típus:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Színtér:"
-
-#~ msgid "Created:"
-#~ msgstr "Létrehozva:"
-
-#~ msgid "Version:"
-#~ msgstr "Verzió:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Eszköz gyártó:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Eszközmodell:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Korrekció megjelenítése:"
-
-#~ msgid "White Point:"
-#~ msgstr "Fehér pont:"
-
-#~ msgid "License:"
-#~ msgstr "Licenc:"
-
-#~ msgid "File size:"
-#~ msgstr "Fájlméret:"
-
-#~ msgid "Filename:"
-#~ msgstr "Fájlnév:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Telepítés rendszerszinten"
 
 #~ msgid "device name"
 #~ msgstr "eszköznév"
@@ -552,15 +647,6 @@ msgstr "A színprofil importálása nem sikerült: nem másolható a fájl"
 
 #~ msgid "Id:"
 #~ msgstr "Azonosító:"
-
-#~ msgid "Scope:"
-#~ msgstr "Hatáskör:"
-
-#~ msgid "Mode:"
-#~ msgstr "Mód:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Jelenlegi profil:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Kalibrálás"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-10 00:43+0000\n"
+"POT-Creation-Date: 2024-02-09 03:21+0000\n"
 "PO-Revision-Date: 2017-04-27 15:47+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -147,10 +147,167 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Προκαθορισμένο Gray"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/package/contents/ui/main.qml:42
 #, kde-format
 msgid "Devices"
 msgstr "Συσκευές"
+
+#: colord-kcm/package/contents/ui/main.qml:51 colord-kcm/ProfileModel.cpp:226
+#, kde-format
+msgid "Profiles"
+msgstr "Προφίλ"
+
+#: colord-kcm/package/contents/ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Εισαγωγή προφίλ χρώματος"
+
+#: colord-kcm/package/contents/ui/main.qml:71
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Προσθήκη προφίλ"
+
+#: colord-kcm/package/contents/ui/main.qml:110
+#: colord-kcm/package/contents/ui/main.qml:130
+#, kde-format
+msgid "Remove Profile"
+msgstr "Αφαίρεση προφίλ"
+
+#: colord-kcm/package/contents/ui/main.qml:120
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Εισαγωγή προφίλ χρώματος"
+
+#: colord-kcm/package/contents/ui/main.qml:125
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Προφίλ"
+
+#: colord-kcm/package/contents/ui/main.qml:132
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε αυτό το προφίλ;"
+
+#: colord-kcm/package/contents/ui/main.qml:277
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/package/contents/ui/main.qml:285
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Εμβέλεια:"
+
+#: colord-kcm/package/contents/ui/main.qml:293
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Λειτουργία:"
+
+#: colord-kcm/package/contents/ui/main.qml:301
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Τρέχον προφίλ:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:20
+#, kde-format
+msgid "Information"
+msgstr "Πληροφορίες"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:28
+#, kde-format
+msgid "Metadata"
+msgstr "Μεταδεδομένα"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:36
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Ονομαζόμενα χρώματα"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:94
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Τύπος προφίλ:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:102
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Χρωματικός χώρος:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:110
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Δημιουργήθηκε:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:118
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Έκδοση:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:127
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Μοντέλο συσκευής:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:137
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Διόρθωση απεικόνισης:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "Yes"
+msgstr "Ναι"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "None"
+msgstr "Καμία"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:145
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "White point:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:154
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Άδεια χρήσης:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:164
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Μέγεθος αρχείου:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:172
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Όνομα αρχείου:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:181
+#, kde-format
+msgid "Install System Wide"
+msgstr "Εγκατάσταση στο σύστημα"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -348,11 +505,6 @@ msgstr "Χαρτογράφηση διαμόρφωσης"
 msgid "Mapping qualifier"
 msgstr "Χαρτογράφηση πιστοποίησης"
 
-#: colord-kcm/ProfileModel.cpp:226
-#, kde-format
-msgid "Profiles"
-msgstr "Προφίλ"
-
 #: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
@@ -457,12 +609,6 @@ msgstr "Αποτυχία εισαγωγής προφίλ χρώματος: απ�
 #~ msgid "From File..."
 #~ msgstr "Από αρχείο..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε αυτό το προφίλ;"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Αφαίρεση προφίλ"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Το προφίλ δεν αντιστοιχεί στο είδος της συσκευής"
 
@@ -478,21 +624,6 @@ msgstr "Αποτυχία εισαγωγής προφίλ χρώματος: απ�
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Προσθέστε ένα πατώντας το κουμπί \"Προσθήκη προφίλ\""
 
-#~ msgid "Add Profile"
-#~ msgstr "Προσθήκη προφίλ"
-
-#~ msgid "Yes"
-#~ msgstr "Ναι"
-
-#~ msgid "None"
-#~ msgstr "Καμία"
-
-#~ msgid "Named Colors"
-#~ msgstr "Ονομαζόμενα χρώματα"
-
-#~ msgid "Metadata"
-#~ msgstr "Μεταδεδομένα"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Δημιουργία χρωματικού προφίλ για την επιλεγμένη συσκευή"
 
@@ -502,44 +633,8 @@ msgstr "Αποτυχία εισαγωγής προφίλ χρώματος: απ�
 #~ "Πρέπει να εγκαταστήσετε το \"Διαχείριση χρώματος του Gnome\" για να "
 #~ "βαθμονομήσετε συσκευές"
 
-#~ msgid "Information"
-#~ msgstr "Πληροφορίες"
-
-#~ msgid "Profile type:"
-#~ msgstr "Τύπος προφίλ:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Χρωματικός χώρος:"
-
-#~ msgid "Created:"
-#~ msgstr "Δημιουργήθηκε:"
-
-#~ msgid "Version:"
-#~ msgstr "Έκδοση:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Κατασκευαστής συσκευής:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Μοντέλο συσκευής:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Διόρθωση απεικόνισης:"
-
-#~ msgid "White Point:"
-#~ msgstr "White point:"
-
-#~ msgid "License:"
-#~ msgstr "Άδεια χρήσης:"
-
-#~ msgid "File size:"
-#~ msgstr "Μέγεθος αρχείου:"
-
-#~ msgid "Filename:"
-#~ msgstr "Όνομα αρχείου:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Εγκατάσταση στο σύστημα"
 
 #~ msgid "device name"
 #~ msgstr "όνομα συσκευής"
@@ -549,15 +644,6 @@ msgstr "Αποτυχία εισαγωγής προφίλ χρώματος: απ�
 
 #~ msgid "Id:"
 #~ msgstr "Ταυτότητα:"
-
-#~ msgid "Scope:"
-#~ msgstr "Εμβέλεια:"
-
-#~ msgid "Mode:"
-#~ msgstr "Λειτουργία:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Τρέχον προφίλ:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Βαθμονόμηση"

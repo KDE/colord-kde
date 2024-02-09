@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-10 00:43+0000\n"
+"POT-Creation-Date: 2024-02-09 03:21+0000\n"
 "PO-Revision-Date: 2012-06-21 15:18+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer\n"
@@ -166,10 +166,167 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "ប្រផះ​លំនាំដើម"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/package/contents/ui/main.qml:42
 #, kde-format
 msgid "Devices"
 msgstr "ឧបករណ៍"
+
+#: colord-kcm/package/contents/ui/main.qml:51 colord-kcm/ProfileModel.cpp:226
+#, kde-format
+msgid "Profiles"
+msgstr "ទម្រង់"
+
+#: colord-kcm/package/contents/ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "នាំចូល​ទម្រង់​ពណ៌"
+
+#: colord-kcm/package/contents/ui/main.qml:71
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "បន្ថែម​ទម្រង់"
+
+#: colord-kcm/package/contents/ui/main.qml:110
+#: colord-kcm/package/contents/ui/main.qml:130
+#, kde-format
+msgid "Remove Profile"
+msgstr "យក​ទម្រង់​ចេញ"
+
+#: colord-kcm/package/contents/ui/main.qml:120
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "នាំចូល​ទម្រង់​ពណ៌"
+
+#: colord-kcm/package/contents/ui/main.qml:125
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "ទម្រង់"
+
+#: colord-kcm/package/contents/ui/main.qml:132
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "តើ​អ្នក​ប្រាកដ​ជា​ចង់​យក​ទម្រង់​នេះ​ចេញ​ឬ ?"
+
+#: colord-kcm/package/contents/ui/main.qml:277
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/package/contents/ui/main.qml:285
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "វិសាលភាព ៖"
+
+#: colord-kcm/package/contents/ui/main.qml:293
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "របៀប ៖"
+
+#: colord-kcm/package/contents/ui/main.qml:301
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "ទម្រង់​បច្ចុប្បន្ន ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:20
+#, kde-format
+msgid "Information"
+msgstr "ព័ត៌មាន"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:28
+#, kde-format
+msgid "Metadata"
+msgstr "ទិន្នន័យ​មេតា"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:36
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "ពណ៌​ដែល​មាន​ឈ្មោះ"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:94
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "ប្រភេទ​ទម្រង់ ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:102
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "ចន្លោះ​ពណ៌ ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:110
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "បាន​បង្កើត ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:118
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "កំណែ ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:127
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "គំរូ​ឧបករណ៍ ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:137
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "បង្ហាញ​ការ​កែ ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "Yes"
+msgstr "បាទ/ចាស"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "None"
+msgstr "គ្មាន"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:145
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "ចំណុច​ពណ៌​ស ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:154
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "អាជ្ញាប័ណ្ណ ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:164
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "ទំហំ​ឯកសារ ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:172
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "ឈ្មោះ​ឯកសារ ៖"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:181
+#, kde-format
+msgid "Install System Wide"
+msgstr "ដំឡើង​ទូទាំង​ប្រព័ន្ធ"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -383,11 +540,6 @@ msgstr "ទ្រង់ទ្រាយផ្គូផ្គង"
 msgid "Mapping qualifier"
 msgstr "ឧបករណ៍​បញ្ជាក់​គុណភាព​ផ្គូផ្គង"
 
-#: colord-kcm/ProfileModel.cpp:226
-#, kde-format
-msgid "Profiles"
-msgstr "ទម្រង់"
-
 #: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
@@ -501,12 +653,6 @@ msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំច
 #~ msgid "From File..."
 #~ msgstr "ពី​ឯកសារ..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "តើ​អ្នក​ប្រាកដ​ជា​ចង់​យក​ទម្រង់​នេះ​ចេញ​ឬ ?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "យក​ទម្រង់​ចេញ"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "ទម្រង់​របស់​អ្នកមិន​ត្រូវ​នឹង​ប្រភេទ​ឧបករណ៍​ទេ"
 
@@ -526,21 +672,6 @@ msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំច
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "បន្ថែម​ទម្រង់​មួយ ដោយ​ចុច​ប៊ូតុង បន្ថែម​ទម្រង់"
 
-#~ msgid "Add Profile"
-#~ msgstr "បន្ថែម​ទម្រង់"
-
-#~ msgid "Yes"
-#~ msgstr "បាទ/ចាស"
-
-#~ msgid "None"
-#~ msgstr "គ្មាន"
-
-#~ msgid "Named Colors"
-#~ msgstr "ពណ៌​ដែល​មាន​ឈ្មោះ"
-
-#~ msgid "Metadata"
-#~ msgstr "ទិន្នន័យ​មេតា"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "បង្កើត​ទម្រង់​ពណ៌​សម្រាប់​ឧបករណ៍​ដែល​បាន​ជ្រើស"
 
@@ -548,44 +679,8 @@ msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំច
 #~ "You need Gnome Color Management installed in order to calibrate devices"
 #~ msgstr "អ្នក​ត្រូវ​ដំឡើង​ការ​គ្រប់គ្រង​ពណ៌​របស់​ Gnome ដើម្បី​កែសម្រួល​ឧបករណ៍"
 
-#~ msgid "Information"
-#~ msgstr "ព័ត៌មាន"
-
-#~ msgid "Profile type:"
-#~ msgstr "ប្រភេទ​ទម្រង់ ៖"
-
-#~ msgid "Colorspace:"
-#~ msgstr "ចន្លោះ​ពណ៌ ៖"
-
-#~ msgid "Created:"
-#~ msgstr "បាន​បង្កើត ៖"
-
-#~ msgid "Version:"
-#~ msgstr "កំណែ ៖"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "ក្រុមហ៊ុន​ផលិត​ឧបករណ៍ ​៖"
-
-#~ msgid "Device Model:"
-#~ msgstr "គំរូ​ឧបករណ៍ ៖"
-
-#~ msgid "Display correction:"
-#~ msgstr "បង្ហាញ​ការ​កែ ៖"
-
-#~ msgid "White Point:"
-#~ msgstr "ចំណុច​ពណ៌​ស ៖"
-
-#~ msgid "License:"
-#~ msgstr "អាជ្ញាប័ណ្ណ ៖"
-
-#~ msgid "File size:"
-#~ msgstr "ទំហំ​ឯកសារ ៖"
-
-#~ msgid "Filename:"
-#~ msgstr "ឈ្មោះ​ឯកសារ ៖"
-
-#~ msgid "Install System Wide"
-#~ msgstr "ដំឡើង​ទូទាំង​ប្រព័ន្ធ"
 
 #~ msgid "device name"
 #~ msgstr "ឈ្មោះ​ឧបករណ៍"
@@ -595,15 +690,6 @@ msgstr "បាន​បរាជ័យ​ក្នុងកា​រនាំច
 
 #~ msgid "Id:"
 #~ msgstr "លេខ​សម្គាល់ ៖"
-
-#~ msgid "Scope:"
-#~ msgstr "វិសាលភាព ៖"
-
-#~ msgid "Mode:"
-#~ msgstr "របៀប ៖"
-
-#~ msgid "Current Profile:"
-#~ msgstr "ទម្រង់​បច្ចុប្បន្ន ៖"
 
 #~ msgid "Calibrate"
 #~ msgstr "កែសម្រួល"

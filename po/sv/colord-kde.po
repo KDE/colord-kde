@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-10 00:43+0000\n"
+"POT-Creation-Date: 2024-02-09 03:21+0000\n"
 "PO-Revision-Date: 2023-07-24 11:14+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -146,10 +146,167 @@ msgctxt "colorspace"
 msgid "Default Gray"
 msgstr "Standard gråskala"
 
-#: colord-kcm/DeviceModel.cpp:321
+#: colord-kcm/DeviceModel.cpp:321 colord-kcm/package/contents/ui/main.qml:42
 #, kde-format
 msgid "Devices"
 msgstr "Enheter"
+
+#: colord-kcm/package/contents/ui/main.qml:51 colord-kcm/ProfileModel.cpp:226
+#, kde-format
+msgid "Profiles"
+msgstr "Profiler"
+
+#: colord-kcm/package/contents/ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgid "Import Profile"
+msgstr "Importerar färgprofil"
+
+#: colord-kcm/package/contents/ui/main.qml:71
+#, fuzzy, kde-format
+#| msgid "Add Profile"
+msgid "Assign Profile"
+msgstr "Lägg till profil"
+
+#: colord-kcm/package/contents/ui/main.qml:110
+#: colord-kcm/package/contents/ui/main.qml:130
+#, kde-format
+msgid "Remove Profile"
+msgstr "Ta bort profil"
+
+#: colord-kcm/package/contents/ui/main.qml:120
+#, fuzzy, kde-format
+#| msgid "Importing Color Profile"
+msgctxt "ICC Profile is a tech term"
+msgid "Import ICC Profile"
+msgstr "Importerar färgprofil"
+
+#: colord-kcm/package/contents/ui/main.qml:125
+#, fuzzy, kde-format
+#| msgid "Profiles"
+msgctxt "ICC Profile is a tech term"
+msgid "ICC Profile"
+msgstr "Profiler"
+
+#: colord-kcm/package/contents/ui/main.qml:132
+#, kde-format
+msgid "Are you sure you want to remove this profile?"
+msgstr "Är du säker på att du vill ta bort profilen?"
+
+#: colord-kcm/package/contents/ui/main.qml:277
+#, kde-format
+msgid "Id: "
+msgstr ""
+
+#: colord-kcm/package/contents/ui/main.qml:285
+#, fuzzy, kde-format
+#| msgid "Scope:"
+msgid "Scope: "
+msgstr "Omfattning:"
+
+#: colord-kcm/package/contents/ui/main.qml:293
+#, fuzzy, kde-format
+#| msgid "Mode:"
+msgid "Mode: "
+msgstr "Läge:"
+
+#: colord-kcm/package/contents/ui/main.qml:301
+#, fuzzy, kde-format
+#| msgid "Current Profile:"
+msgid "Current Profile: "
+msgstr "Aktuell profil:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:20
+#, kde-format
+msgid "Information"
+msgstr "Information"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:28
+#, kde-format
+msgid "Metadata"
+msgstr "Metadata"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:36
+#, fuzzy, kde-format
+#| msgid "Named Colors"
+msgctxt "button: tab button for 'named colors in profile' information page"
+msgid "Named Colors"
+msgstr "Namngivna färger"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:94
+#, fuzzy, kde-format
+#| msgid "Profile type:"
+msgid "Profile Type: "
+msgstr "Profiltyp:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:102
+#, fuzzy, kde-format
+#| msgid "Colorspace:"
+msgid "Colorspace: "
+msgstr "Färgrymd:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:110
+#, fuzzy, kde-format
+#| msgid "Created:"
+msgid "Created: "
+msgstr "Skapad:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:118
+#, fuzzy, kde-format
+#| msgid "Version:"
+msgid "Version: "
+msgstr "Version:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:127
+#, fuzzy, kde-format
+#| msgid "Device Model:"
+msgid "Device Model: "
+msgstr "Enhetsmodell:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:137
+#, fuzzy, kde-format
+#| msgid "Display correction:"
+msgid "Display Correction: "
+msgstr "Bildskärmskorrigering:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "Yes"
+msgstr "Ja"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
+#, kde-format
+msgid "None"
+msgstr "Ingen"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:145
+#, fuzzy, kde-format
+#| msgid "White Point:"
+msgid "White Point: "
+msgstr "Vitpunkt:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:154
+#, fuzzy, kde-format
+#| msgid "License:"
+msgid "License: "
+msgstr "Licens:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:164
+#, fuzzy, kde-format
+#| msgid "File size:"
+msgid "File Size: "
+msgstr "Filstorlek:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:172
+#, fuzzy, kde-format
+#| msgid "Filename:"
+msgid "Filename: "
+msgstr "Filnamn:"
+
+#: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:181
+#, kde-format
+msgid "Install System Wide"
+msgstr "Installera för hela systemet"
 
 #: colord-kcm/Profile.cpp:106
 #, kde-format
@@ -347,11 +504,6 @@ msgstr "Avbildningsformat"
 msgid "Mapping qualifier"
 msgstr "Avbildningskvalificerare"
 
-#: colord-kcm/ProfileModel.cpp:226
-#, kde-format
-msgid "Profiles"
-msgstr "Profiler"
-
 #: icc-importer/main.cpp:41
 #, kde-format
 msgid "Description: %1"
@@ -455,12 +607,6 @@ msgstr "Misslyckades importera färgprofil: kunde inte kopiera filen"
 #~ msgid "From File..."
 #~ msgstr "Från fil..."
 
-#~ msgid "Are you sure you want to remove this profile?"
-#~ msgstr "Är du säker på att du vill ta bort profilen?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Ta bort profil"
-
 #~ msgid "Your profile did not match the device kind"
 #~ msgstr "Profilen motsvarar inte enhetens sort"
 
@@ -476,21 +622,6 @@ msgstr "Misslyckades importera färgprofil: kunde inte kopiera filen"
 #~ msgid "Add one by clicking Add Profile button"
 #~ msgstr "Lägg till en genom att klicka på knappen Lägg till profil"
 
-#~ msgid "Add Profile"
-#~ msgstr "Lägg till profil"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "None"
-#~ msgstr "Ingen"
-
-#~ msgid "Named Colors"
-#~ msgstr "Namngivna färger"
-
-#~ msgid "Metadata"
-#~ msgstr "Metadata"
-
 #~ msgid "Create a color profile for the selected device"
 #~ msgstr "Skapa en färgprofil för vald enhet"
 
@@ -500,44 +631,8 @@ msgstr "Misslyckades importera färgprofil: kunde inte kopiera filen"
 #~ "Gnome Color Management måste vara installerat för att kunna kalibrera "
 #~ "enheter"
 
-#~ msgid "Information"
-#~ msgstr "Information"
-
-#~ msgid "Profile type:"
-#~ msgstr "Profiltyp:"
-
-#~ msgid "Colorspace:"
-#~ msgstr "Färgrymd:"
-
-#~ msgid "Created:"
-#~ msgstr "Skapad:"
-
-#~ msgid "Version:"
-#~ msgstr "Version:"
-
 #~ msgid "Device Manufacturer:"
 #~ msgstr "Enhetstillverkare:"
-
-#~ msgid "Device Model:"
-#~ msgstr "Enhetsmodell:"
-
-#~ msgid "Display correction:"
-#~ msgstr "Bildskärmskorrigering:"
-
-#~ msgid "White Point:"
-#~ msgstr "Vitpunkt:"
-
-#~ msgid "License:"
-#~ msgstr "Licens:"
-
-#~ msgid "File size:"
-#~ msgstr "Filstorlek:"
-
-#~ msgid "Filename:"
-#~ msgstr "Filnamn:"
-
-#~ msgid "Install System Wide"
-#~ msgstr "Installera för hela systemet"
 
 #~ msgid "device name"
 #~ msgstr "enhetsnamn"
@@ -547,15 +642,6 @@ msgstr "Misslyckades importera färgprofil: kunde inte kopiera filen"
 
 #~ msgid "Id:"
 #~ msgstr "Id:"
-
-#~ msgid "Scope:"
-#~ msgstr "Omfattning:"
-
-#~ msgid "Mode:"
-#~ msgstr "Läge:"
-
-#~ msgid "Current Profile:"
-#~ msgstr "Aktuell profil:"
 
 #~ msgid "Calibrate"
 #~ msgstr "Kalibrera"
