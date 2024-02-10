@@ -1,26 +1,26 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2012, 2013, 2014, 2015, 2016, 2022.
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2022, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 03:21+0000\n"
-"PO-Revision-Date: 2022-12-10 10:55+0100\n"
+"PO-Revision-Date: 2024-02-09 10:13+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: \n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Freek de Kruijf - t/m 2022"
+msgstr "Freek de Kruijf - t/m 2024"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -157,16 +157,14 @@ msgid "Profiles"
 msgstr "Profielen"
 
 #: colord-kcm/package/contents/ui/main.qml:64
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgid "Import Profile"
-msgstr "Kleurprofiel importeren"
+msgstr "Profiel importeren"
 
 #: colord-kcm/package/contents/ui/main.qml:71
-#, fuzzy, kde-format
-#| msgid "Add Profile"
+#, kde-format
 msgid "Assign Profile"
-msgstr "Profiel toevoegen"
+msgstr "Profiel toekennen"
 
 #: colord-kcm/package/contents/ui/main.qml:110
 #: colord-kcm/package/contents/ui/main.qml:130
@@ -175,18 +173,16 @@ msgid "Remove Profile"
 msgstr "Profiel verwijderen"
 
 #: colord-kcm/package/contents/ui/main.qml:120
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "Import ICC Profile"
-msgstr "Kleurprofiel importeren"
+msgstr "ICC-profiel importeren"
 
 #: colord-kcm/package/contents/ui/main.qml:125
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "ICC Profile"
-msgstr "Profielen"
+msgstr "ICC-profiel"
 
 #: colord-kcm/package/contents/ui/main.qml:132
 #, kde-format
@@ -196,25 +192,22 @@ msgstr "Wilt u dit profiel verwijderen?"
 #: colord-kcm/package/contents/ui/main.qml:277
 #, kde-format
 msgid "Id: "
-msgstr ""
+msgstr "Id: "
 
 #: colord-kcm/package/contents/ui/main.qml:285
-#, fuzzy, kde-format
-#| msgid "Scope:"
+#, kde-format
 msgid "Scope: "
-msgstr "Bereik:"
+msgstr "Bereik: "
 
 #: colord-kcm/package/contents/ui/main.qml:293
-#, fuzzy, kde-format
-#| msgid "Mode:"
+#, kde-format
 msgid "Mode: "
-msgstr "Modus:"
+msgstr "Modus: "
 
 #: colord-kcm/package/contents/ui/main.qml:301
-#, fuzzy, kde-format
-#| msgid "Current Profile:"
+#, kde-format
 msgid "Current Profile: "
-msgstr "Huidig profiel:"
+msgstr "Huidig profiel: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:20
 #, kde-format
@@ -227,47 +220,40 @@ msgid "Metadata"
 msgstr "Metagegevens"
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:36
-#, fuzzy, kde-format
-#| msgid "Named Colors"
+#, kde-format
 msgctxt "button: tab button for 'named colors in profile' information page"
 msgid "Named Colors"
 msgstr "Benoemde kleuren"
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:94
-#, fuzzy, kde-format
-#| msgid "Profile type:"
+#, kde-format
 msgid "Profile Type: "
-msgstr "Type profiel:"
+msgstr "Type profiel: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:102
-#, fuzzy, kde-format
-#| msgid "Colorspace:"
+#, kde-format
 msgid "Colorspace: "
-msgstr "Kleurruimte:"
+msgstr "Kleurruimte: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:110
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgid "Created: "
-msgstr "Aangemaakt:"
+msgstr "Aangemaakt: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:118
-#, fuzzy, kde-format
-#| msgid "Version:"
+#, kde-format
 msgid "Version: "
-msgstr "Versie:"
+msgstr "Versie: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:127
-#, fuzzy, kde-format
-#| msgid "Device Model:"
+#, kde-format
 msgid "Device Model: "
-msgstr "Apparaatmodel:"
+msgstr "Apparaatmodel: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:137
-#, fuzzy, kde-format
-#| msgid "Display correction:"
+#, kde-format
 msgid "Display Correction: "
-msgstr "Correctie tonen:"
+msgstr "Schermcorrectie: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:140
 #, kde-format
@@ -280,28 +266,24 @@ msgid "None"
 msgstr "Geen"
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:145
-#, fuzzy, kde-format
-#| msgid "White Point:"
+#, kde-format
 msgid "White Point: "
-msgstr "Witpunt:"
+msgstr "Witpunt: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:154
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgid "License: "
-msgstr "Licentie:"
+msgstr "Licentie: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:164
-#, fuzzy, kde-format
-#| msgid "File size:"
+#, kde-format
 msgid "File Size: "
-msgstr "Bestandsgrootte:"
+msgstr "Bestandsgrootte: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:172
-#, fuzzy, kde-format
-#| msgid "Filename:"
+#, kde-format
 msgid "Filename: "
-msgstr "Bestandsnaam:"
+msgstr "Bestandsnaam: "
 
 #: colord-kcm/package/contents/ui/ProfileMetaDataView.qml:181
 #, kde-format
