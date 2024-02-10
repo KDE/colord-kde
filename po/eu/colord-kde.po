@@ -1,24 +1,24 @@
 # Translation for colord-kde.po to Euskara/Basque (eu).
-# Copyright (C) 2020-2022 This file is copyright:
+# Copyright (C) 2020-2024 This file is copyright:
 # This file is distributed under the same license as the colord-kde package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2022.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2022, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:36+0000\n"
-"PO-Revision-Date: 2022-12-11 17:58+0100\n"
+"PO-Revision-Date: 2024-02-10 01:23+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
-"Language-Team: Basque\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -356,16 +356,14 @@ msgid "Profiles"
 msgstr "Profilak"
 
 #: colord-kcm/ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgid "Import Profile"
-msgstr "Kolore profila inportatzea"
+msgstr "Inportatu profila"
 
 #: colord-kcm/ui/main.qml:72
-#, fuzzy, kde-format
-#| msgid "Add Profile"
+#, kde-format
 msgid "Assign Profile"
-msgstr "Gehitu profila"
+msgstr "Esleitu profila"
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
 #, kde-format
@@ -373,18 +371,16 @@ msgid "Remove Profile"
 msgstr "Kendu profila"
 
 #: colord-kcm/ui/main.qml:121
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "Import ICC Profile"
-msgstr "Kolore profila inportatzea"
+msgstr "Inportatu ICC profila"
 
 #: colord-kcm/ui/main.qml:126
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "ICC Profile"
-msgstr "Profilak"
+msgstr "ICC profila"
 
 #: colord-kcm/ui/main.qml:133
 #, kde-format
@@ -394,23 +390,20 @@ msgstr "Ziur zaude profil hau kendu nahi duzula?"
 #: colord-kcm/ui/main.qml:291
 #, kde-format
 msgid "Id: "
-msgstr ""
+msgstr "ID:"
 
 #: colord-kcm/ui/main.qml:299
-#, fuzzy, kde-format
-#| msgid "Scope:"
+#, kde-format
 msgid "Scope: "
 msgstr "Esparrua:"
 
 #: colord-kcm/ui/main.qml:307
-#, fuzzy, kde-format
-#| msgid "Mode:"
+#, kde-format
 msgid "Mode: "
 msgstr "Modua:"
 
 #: colord-kcm/ui/main.qml:315
-#, fuzzy, kde-format
-#| msgid "Current Profile:"
+#, kde-format
 msgid "Current Profile: "
 msgstr "Uneko profila:"
 
@@ -425,47 +418,40 @@ msgid "Metadata"
 msgstr "Metadatuak"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:37
-#, fuzzy, kde-format
-#| msgid "Named Colors"
+#, kde-format
 msgctxt "button: tab button for 'named colors in profile' information page"
 msgid "Named Colors"
-msgstr "Kolore izendunak"
+msgstr "Izendun koloreak"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:109
-#, fuzzy, kde-format
-#| msgid "Profile type:"
+#, kde-format
 msgid "Profile Type: "
 msgstr "Profil mota:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:117
-#, fuzzy, kde-format
-#| msgid "Colorspace:"
+#, kde-format
 msgid "Colorspace: "
 msgstr "Kolore-eremua:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:125
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgid "Created: "
 msgstr "Sortze-data:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:133
-#, fuzzy, kde-format
-#| msgid "Version:"
+#, kde-format
 msgid "Version: "
 msgstr "Bertsioa:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:142
-#, fuzzy, kde-format
-#| msgid "Device Model:"
+#, kde-format
 msgid "Device Model: "
 msgstr "Gailu-eredua:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:152
-#, fuzzy, kde-format
-#| msgid "Display correction:"
+#, kde-format
 msgid "Display Correction: "
-msgstr "Azaltze-zuzenketa:"
+msgstr "Azaltze-zuzenketa: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
@@ -478,26 +464,22 @@ msgid "None"
 msgstr "Bat ere ez"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:160
-#, fuzzy, kde-format
-#| msgid "White Point:"
+#, kde-format
 msgid "White Point: "
 msgstr "Zuri-puntua:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:169
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgid "License: "
 msgstr "Lizentzia:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:179
-#, fuzzy, kde-format
-#| msgid "File size:"
+#, kde-format
 msgid "File Size: "
 msgstr "Fitxategi-neurria:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:187
-#, fuzzy, kde-format
-#| msgid "Filename:"
+#, kde-format
 msgid "Filename: "
 msgstr "Fitxategi-izena:"
 

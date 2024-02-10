@@ -363,7 +363,8 @@ msgid "Assign Profile"
 msgstr "프로필 추가"
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remove Profile"
 msgid "Remove Profile"
 msgstr "프로필 삭제"
 
@@ -382,7 +383,8 @@ msgid "ICC Profile"
 msgstr "프로필"
 
 #: colord-kcm/ui/main.qml:133
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Are you sure you want to remove this profile?"
 msgid "Are you sure you want to remove this profile?"
 msgstr "이 프로필을 삭제하시겠습니까?"
 
@@ -410,12 +412,14 @@ msgid "Current Profile: "
 msgstr "현재 프로필:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Information"
 msgid "Information"
 msgstr "정보"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:29
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Metadata"
 msgid "Metadata"
 msgstr "메타 데이터"
 
@@ -463,12 +467,14 @@ msgid "Display Correction: "
 msgstr "디스플레이 교정:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Yes"
 msgid "Yes"
 msgstr "예"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "None"
 msgid "None"
 msgstr "없음"
 
@@ -497,7 +503,8 @@ msgid "Filename: "
 msgstr "파일 이름:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Install System Wide"
 msgid "Install System Wide"
 msgstr "시스템 전역 설치"
 

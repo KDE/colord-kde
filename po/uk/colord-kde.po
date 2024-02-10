@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2012, 2013, 2015, 2016, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2012, 2013, 2015, 2016, 2022, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:36+0000\n"
-"PO-Revision-Date: 2022-12-10 08:23+0200\n"
+"PO-Revision-Date: 2024-02-09 09:57+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -361,16 +361,14 @@ msgid "Profiles"
 msgstr "Профілі"
 
 #: colord-kcm/ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgid "Import Profile"
-msgstr "Імпортування профілю кольорів"
+msgstr "Імпортувати профіль"
 
 #: colord-kcm/ui/main.qml:72
-#, fuzzy, kde-format
-#| msgid "Add Profile"
+#, kde-format
 msgid "Assign Profile"
-msgstr "Додати профіль"
+msgstr "Призначити профіль"
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
 #, kde-format
@@ -378,18 +376,16 @@ msgid "Remove Profile"
 msgstr "Вилучити профіль"
 
 #: colord-kcm/ui/main.qml:121
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "Import ICC Profile"
-msgstr "Імпортування профілю кольорів"
+msgstr "Імпортування профілю кольорів ICC"
 
 #: colord-kcm/ui/main.qml:126
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "ICC Profile"
-msgstr "Профілі"
+msgstr "Профіль ICC"
 
 #: colord-kcm/ui/main.qml:133
 #, kde-format
@@ -399,25 +395,22 @@ msgstr "Ви справді хочете вилучити цей профіль?
 #: colord-kcm/ui/main.qml:291
 #, kde-format
 msgid "Id: "
-msgstr ""
+msgstr "Ід.: "
 
 #: colord-kcm/ui/main.qml:299
-#, fuzzy, kde-format
-#| msgid "Scope:"
+#, kde-format
 msgid "Scope: "
-msgstr "Область дії:"
+msgstr "Область: "
 
 #: colord-kcm/ui/main.qml:307
-#, fuzzy, kde-format
-#| msgid "Mode:"
+#, kde-format
 msgid "Mode: "
-msgstr "Режим:"
+msgstr "Режим: "
 
 #: colord-kcm/ui/main.qml:315
-#, fuzzy, kde-format
-#| msgid "Current Profile:"
+#, kde-format
 msgid "Current Profile: "
-msgstr "Поточний профіль:"
+msgstr "Поточний профіль: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
 #, kde-format
@@ -430,47 +423,40 @@ msgid "Metadata"
 msgstr "Метадані"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:37
-#, fuzzy, kde-format
-#| msgid "Named Colors"
+#, kde-format
 msgctxt "button: tab button for 'named colors in profile' information page"
 msgid "Named Colors"
 msgstr "Іменовані кольори"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:109
-#, fuzzy, kde-format
-#| msgid "Profile type:"
+#, kde-format
 msgid "Profile Type: "
-msgstr "Тип профілю:"
+msgstr "Тип профілю: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:117
-#, fuzzy, kde-format
-#| msgid "Colorspace:"
+#, kde-format
 msgid "Colorspace: "
-msgstr "Простір кольорів:"
+msgstr "Простір кольорів: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:125
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgid "Created: "
-msgstr "Створено:"
+msgstr "Створено: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:133
-#, fuzzy, kde-format
-#| msgid "Version:"
+#, kde-format
 msgid "Version: "
-msgstr "Версія:"
+msgstr "Версія: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:142
-#, fuzzy, kde-format
-#| msgid "Device Model:"
+#, kde-format
 msgid "Device Model: "
-msgstr "Модель пристрою:"
+msgstr "Модель пристрою: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:152
-#, fuzzy, kde-format
-#| msgid "Display correction:"
+#, kde-format
 msgid "Display Correction: "
-msgstr "Виправлення показу:"
+msgstr "Виправлення показу: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
@@ -483,28 +469,24 @@ msgid "None"
 msgstr "Немає"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:160
-#, fuzzy, kde-format
-#| msgid "White Point:"
+#, kde-format
 msgid "White Point: "
-msgstr "Точка білого:"
+msgstr "Точка білого: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:169
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgid "License: "
-msgstr "Ліцензування:"
+msgstr "Ліцензування: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:179
-#, fuzzy, kde-format
-#| msgid "File size:"
+#, kde-format
 msgid "File Size: "
-msgstr "Розмір файла:"
+msgstr "Розмір файла: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:187
-#, fuzzy, kde-format
-#| msgid "Filename:"
+#, kde-format
 msgid "Filename: "
-msgstr "Назва файла:"
+msgstr "Назва файла: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
 #, kde-format
