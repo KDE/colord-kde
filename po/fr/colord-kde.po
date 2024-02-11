@@ -375,8 +375,7 @@ msgid "Assign Profile"
 msgstr "Ajouter un profil"
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
-#, fuzzy, kde-format
-#| msgid "Remove Profile"
+#, kde-format
 msgid "Remove Profile"
 msgstr "Supprimer le profil"
 
@@ -395,8 +394,7 @@ msgid "ICC Profile"
 msgstr "Profils"
 
 #: colord-kcm/ui/main.qml:133
-#, fuzzy, kde-format
-#| msgid "Are you sure you want to remove this profile?"
+#, kde-format
 msgid "Are you sure you want to remove this profile?"
 msgstr "Voulez-vous vraiment supprimer ce profil ?"
 
@@ -424,14 +422,12 @@ msgid "Current Profile: "
 msgstr "Profil actuel :"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information"
 msgstr "Informations"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:29
-#, fuzzy, kde-format
-#| msgid "Metadata"
+#, kde-format
 msgid "Metadata"
 msgstr "Métadonnées"
 
@@ -479,14 +475,12 @@ msgid "Display Correction: "
 msgstr "Correction de l'affichage :"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
-#, fuzzy, kde-format
-#| msgid "Yes"
+#, kde-format
 msgid "Yes"
 msgstr "Oui"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
-#, fuzzy, kde-format
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "Aucun"
 
@@ -515,8 +509,7 @@ msgid "Filename: "
 msgstr "Nom de fichier :"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
-#, fuzzy, kde-format
-#| msgid "Install System Wide"
+#, kde-format
 msgid "Install System Wide"
 msgstr "Installer à l'échelle du système"
 
