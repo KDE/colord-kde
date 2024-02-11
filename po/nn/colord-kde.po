@@ -367,10 +367,9 @@ msgid "Assign Profile"
 msgstr "Profilar"
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgid "Remove Profile"
-msgstr "Profilar"
+msgstr "Fjern profil"
 
 #: colord-kcm/ui/main.qml:121
 #, fuzzy, kde-format
@@ -389,7 +388,7 @@ msgstr "Profilar"
 #: colord-kcm/ui/main.qml:133
 #, kde-format
 msgid "Are you sure you want to remove this profile?"
-msgstr ""
+msgstr "Er du sikker på at du vil fjerna profilen?"
 
 #: colord-kcm/ui/main.qml:291
 #, kde-format
@@ -415,12 +414,12 @@ msgstr "Testprofil: %1"
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
 #, kde-format
 msgid "Information"
-msgstr ""
+msgstr "Informasjon"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:29
 #, kde-format
 msgid "Metadata"
-msgstr ""
+msgstr "Metadata"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:37
 #, fuzzy, kde-format
@@ -466,12 +465,12 @@ msgstr "Vis modell"
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:160
 #, kde-format
@@ -494,11 +493,9 @@ msgid "Filename: "
 msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
-#, fuzzy, kde-format
-#| msgctxt "device scope"
-#| msgid "System wide"
+#, kde-format
 msgid "Install System Wide"
-msgstr "Globalt"
+msgstr "Installer globalt"
 
 #: icc-importer/main.cpp:41
 #, kde-format
