@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 02:32+0000\n"
-"PO-Revision-Date: 2024-01-09 11:03+0100\n"
+"PO-Revision-Date: 2024-02-11 20:34+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -355,16 +355,14 @@ msgid "Profiles"
 msgstr "Profilok"
 
 #: colord-kcm/ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgid "Import Profile"
-msgstr "Színprofil importálása"
+msgstr "Profil importálása"
 
 #: colord-kcm/ui/main.qml:72
-#, fuzzy, kde-format
-#| msgid "Add Profile"
+#, kde-format
 msgid "Assign Profile"
-msgstr "Profil hozzáadása"
+msgstr "Profil hozzárendelése"
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
 #, kde-format
@@ -372,18 +370,16 @@ msgid "Remove Profile"
 msgstr "Profil eltávolítása"
 
 #: colord-kcm/ui/main.qml:121
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "Import ICC Profile"
-msgstr "Színprofil importálása"
+msgstr "ICC-profil importálása"
 
 #: colord-kcm/ui/main.qml:126
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "ICC Profile"
-msgstr "Profilok"
+msgstr "ICC-profil"
 
 #: colord-kcm/ui/main.qml:133
 #, kde-format
@@ -393,25 +389,22 @@ msgstr "Biztosan el akarja távolítani ezt a profilt?"
 #: colord-kcm/ui/main.qml:291
 #, kde-format
 msgid "Id: "
-msgstr ""
+msgstr "Azonosító: "
 
 #: colord-kcm/ui/main.qml:299
-#, fuzzy, kde-format
-#| msgid "Scope:"
+#, kde-format
 msgid "Scope: "
-msgstr "Hatáskör:"
+msgstr "Hatáskör: "
 
 #: colord-kcm/ui/main.qml:307
-#, fuzzy, kde-format
-#| msgid "Mode:"
+#, kde-format
 msgid "Mode: "
-msgstr "Mód:"
+msgstr "Mód: "
 
 #: colord-kcm/ui/main.qml:315
-#, fuzzy, kde-format
-#| msgid "Current Profile:"
+#, kde-format
 msgid "Current Profile: "
-msgstr "Jelenlegi profil:"
+msgstr "Jelenlegi profil: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
 #, kde-format
@@ -424,47 +417,40 @@ msgid "Metadata"
 msgstr "Metaadat"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:37
-#, fuzzy, kde-format
-#| msgid "Named Colors"
+#, kde-format
 msgctxt "button: tab button for 'named colors in profile' information page"
 msgid "Named Colors"
 msgstr "Nevesített színek"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:109
-#, fuzzy, kde-format
-#| msgid "Profile type:"
+#, kde-format
 msgid "Profile Type: "
-msgstr "Profil típus:"
+msgstr "Profiltípus: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:117
-#, fuzzy, kde-format
-#| msgid "Colorspace:"
+#, kde-format
 msgid "Colorspace: "
-msgstr "Színtér:"
+msgstr "Színtér: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:125
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgid "Created: "
-msgstr "Létrehozva:"
+msgstr "Létrehozva: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:133
-#, fuzzy, kde-format
-#| msgid "Version:"
+#, kde-format
 msgid "Version: "
-msgstr "Verzió:"
+msgstr "Verzió: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:142
-#, fuzzy, kde-format
-#| msgid "Device Model:"
+#, kde-format
 msgid "Device Model: "
-msgstr "Eszközmodell:"
+msgstr "Eszközmodell: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:152
-#, fuzzy, kde-format
-#| msgid "Display correction:"
+#, kde-format
 msgid "Display Correction: "
-msgstr "Korrekció megjelenítése:"
+msgstr "Képernyőkorrekció: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
@@ -477,28 +463,24 @@ msgid "None"
 msgstr "Nincs"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:160
-#, fuzzy, kde-format
-#| msgid "White Point:"
+#, kde-format
 msgid "White Point: "
-msgstr "Fehér pont:"
+msgstr "Fehér pont: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:169
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgid "License: "
-msgstr "Licenc:"
+msgstr "Licenc: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:179
-#, fuzzy, kde-format
-#| msgid "File size:"
+#, kde-format
 msgid "File Size: "
-msgstr "Fájlméret:"
+msgstr "Fájlméret: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:187
-#, fuzzy, kde-format
-#| msgid "Filename:"
+#, kde-format
 msgid "Filename: "
-msgstr "Fájlnév:"
+msgstr "Fájlnév: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
 #, kde-format
