@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:36+0000\n"
-"PO-Revision-Date: 2024-01-28 12:41-0600\n"
+"PO-Revision-Date: 2024-03-11 07:54-0500\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -107,7 +107,7 @@ msgstr ""
 #: colord-kcm/DeviceDescription.cpp:184
 #, kde-format
 msgid "You can use 'displaycal' to calibrate this device"
-msgstr ""
+msgstr "ਤੁਸੀਂ ਇਸ ਡਿਵਾਈਸ ਨੂੰ ਕੈਲੀਬਰੇਟ ਕਰਨ ਲਈ 'displaycal' ਨੂੰ ਵਰਤ ਸਕਦੇ ਹੋ"
 
 #: colord-kcm/DeviceDescription.cpp:193 colord-kcm/DeviceDescription.cpp:198
 #, kde-format
@@ -115,11 +115,13 @@ msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
+"ਕੈਲੀਬਰੇਟ ਕਰਨ ਲਈ ਮਾਪ ਸਾਧਨ ਖੋਜਿਆ ਨਹੀਂ ਗਿਆ ਹੈ। ਚੈੱਕ ਕਰੋ ਕਿ ਇਹ ਚਾਲੂ ਹੈ ਅਤੇ ਠੀਕ ਤਰ੍ਹਾਂ ਕਨੈਕਟ "
+"ਕੀਤਾ ਹੋਇਆ ਹੈ।"
 
 #: colord-kcm/DeviceDescription.cpp:217
 #, kde-format
 msgid "The measuring instrument does not support printer profiling."
-msgstr ""
+msgstr "ਮਾਪ ਜੰਤਰ ਪਰਿੰਟਰ ਪਰੋਫਾਇਲਿੰਗ ਲਈ ਸਹਾਇਕ ਨਹੀਂ।"
 
 #: colord-kcm/DeviceDescription.cpp:221
 #, kde-format
@@ -246,7 +248,7 @@ msgstr "ਰੰਗ-ਸਪੇਸ ਤਬਾਦਲਾ"
 #, kde-format
 msgctxt "profile kind"
 msgid "Abstract"
-msgstr ""
+msgstr "ਅਬਸਟਰੇਟ"
 
 #: colord-kcm/Profile.cpp:369
 #, kde-format
@@ -318,17 +320,17 @@ msgstr "ਫਾਇਲ ਚੈਕਸਮ"
 #: colord-kcm/ProfileMetaDataModel.cpp:101
 #, kde-format
 msgid "Framework product"
-msgstr ""
+msgstr "ਫਰੇਮਵਰਕ ਉਤਪਾਦ"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:104
 #, kde-format
 msgid "Framework program"
-msgstr ""
+msgstr "ਫਰੇਮਵਰਕ ਪਰੋਗਰਾਮ"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:107
 #, kde-format
 msgid "Framework version"
-msgstr ""
+msgstr "ਫਰੇਮਵਰਕ ਵਰਜ਼ਨ"
 
 #: colord-kcm/ProfileMetaDataModel.cpp:110
 #, kde-format
@@ -351,16 +353,14 @@ msgid "Profiles"
 msgstr "ਪਰੋਫਾਇਲ"
 
 #: colord-kcm/ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgid "Import Profile"
-msgstr "ਰੰਗ ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+msgstr "ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ"
 
 #: colord-kcm/ui/main.qml:72
-#, fuzzy, kde-format
-#| msgid "Add Profile"
+#, kde-format
 msgid "Assign Profile"
-msgstr "ਪਰੋਫਾਇਲ ਜੋੜੋ"
+msgstr "ਪਰੋਫਾਇਲ ਦਿਓ"
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
 #, kde-format
@@ -368,18 +368,16 @@ msgid "Remove Profile"
 msgstr "ਪਰੋਫਾਇਲ ਹਟਾਓ"
 
 #: colord-kcm/ui/main.qml:121
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "Import ICC Profile"
-msgstr "ਰੰਗ ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+msgstr "ICC ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ"
 
 #: colord-kcm/ui/main.qml:126
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "ICC Profile"
-msgstr "ਪਰੋਫਾਇਲ"
+msgstr "ICC ਪਰੋਫਾਇਲ"
 
 #: colord-kcm/ui/main.qml:133
 #, kde-format
@@ -389,25 +387,22 @@ msgstr "ਕੀ ਤੁਸੀਂ ਇਹ ਪਰੋਫਾਇਲ ਨੂੰ ਹਟਾ�
 #: colord-kcm/ui/main.qml:291
 #, kde-format
 msgid "Id: "
-msgstr ""
+msgstr "Id: "
 
 #: colord-kcm/ui/main.qml:299
-#, fuzzy, kde-format
-#| msgid "Scope:"
+#, kde-format
 msgid "Scope: "
-msgstr "ਸਕੋਪ:"
+msgstr "ਸਕੋਪ: "
 
 #: colord-kcm/ui/main.qml:307
-#, fuzzy, kde-format
-#| msgid "Mode:"
+#, kde-format
 msgid "Mode: "
-msgstr "ਮੋਡ:"
+msgstr "ਮੋਡ: "
 
 #: colord-kcm/ui/main.qml:315
-#, fuzzy, kde-format
-#| msgid "Current Profile:"
+#, kde-format
 msgid "Current Profile: "
-msgstr "ਮੌਜੂਦਾ ਪਰੋਫਾਇਲ:"
+msgstr "ਮੌਜੂਦਾ ਪਰੋਫਾਇਲ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
 #, kde-format
@@ -420,47 +415,40 @@ msgid "Metadata"
 msgstr "ਮੇਟਾ-ਡਾਟਾ"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:37
-#, fuzzy, kde-format
-#| msgid "Named Colors"
+#, kde-format
 msgctxt "button: tab button for 'named colors in profile' information page"
 msgid "Named Colors"
 msgstr "ਨਾਂ ਵਾਲੇ ਰੰਗ"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:109
-#, fuzzy, kde-format
-#| msgid "Profile type:"
+#, kde-format
 msgid "Profile Type: "
-msgstr "ਪਰੋਫਾਇਲ ਦੀ ਕਿਸਮ:"
+msgstr "ਪਰੋਫਾਇਲ ਦੀ ਕਿਸਮ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:117
-#, fuzzy, kde-format
-#| msgid "Colorspace:"
+#, kde-format
 msgid "Colorspace: "
-msgstr "ਰੰਗ-ਸਪੇਸ:"
+msgstr "ਰੰਗ-ਸਪੇਸ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:125
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgid "Created: "
-msgstr "ਬਣਾਇਆ:"
+msgstr "ਬਣਾਇਆ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:133
-#, fuzzy, kde-format
-#| msgid "Version:"
+#, kde-format
 msgid "Version: "
-msgstr "ਵਰਜ਼ਨ:"
+msgstr "ਵਰਜ਼ਨ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:142
-#, fuzzy, kde-format
-#| msgid "Device Model:"
+#, kde-format
 msgid "Device Model: "
-msgstr "ਡਿਵਾਈਸ ਦਾ ਮਾਡਲ:"
+msgstr "ਡਿਵਾਈਸ ਦਾ ਮਾਡਲ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:152
-#, fuzzy, kde-format
-#| msgid "Display correction:"
+#, kde-format
 msgid "Display Correction: "
-msgstr "ਡਿਸਪਲੇਅ ਇਕਸਾਰਤਾ:"
+msgstr "ਡਿਸਪਲੇਅ ਇਕਸਾਰਤਾ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
@@ -475,32 +463,27 @@ msgstr "ਕੋਈ ਨਹੀਂ"
 #: colord-kcm/ui/ProfileMetaDataView.qml:160
 #, kde-format
 msgid "White Point: "
-msgstr ""
+msgstr "ਚਿੱਟਾ ਪੁਆਇੰਟ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:169
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgid "License: "
-msgstr "ਲਸੰਸ:"
+msgstr "ਲਸੰਸ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:179
-#, fuzzy, kde-format
-#| msgid "File size:"
+#, kde-format
 msgid "File Size: "
-msgstr "ਫ਼ਾਈਲ ਦਾ ਸਾਈਜ਼:"
+msgstr "ਫ਼ਾਇਲ ਦਾ ਆਕਾਰ: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:187
-#, fuzzy, kde-format
-#| msgid "Filename:"
+#, kde-format
 msgid "Filename: "
-msgstr "ਫ਼ਾਈਲ ਦਾ ਨਾਂ:"
+msgstr "ਫ਼ਾਇਲ ਦਾ ਨਾਂ:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
-#, fuzzy, kde-format
-#| msgctxt "device scope"
-#| msgid "System wide"
+#, kde-format
 msgid "Install System Wide"
-msgstr "ਪੂਰਾ ਸਿਸਟਮ"
+msgstr "ਪੂਰੇ ਸਿਸਟਮ ਲਈ ਇੰਸਟਾਲ ਕਰੋ"
 
 #: icc-importer/main.cpp:41
 #, kde-format
@@ -545,12 +528,12 @@ msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਰੰਗ ਪਰੋਫਾਇਲ"
 #: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to parse file: %1"
-msgstr ""
+msgstr "ਫ਼ਾਇਲ ਨੂੰ ਪਾਰਸ ਕਰਨ ਲਈ ਅਸਫ਼ਲ: %1"
 
 #: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to open ICC profile"
-msgstr ""
+msgstr "ICC ਪਰੋਫਾਇਲ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਅਸਫ਼ਲ"
 
 #: icc-importer/main.cpp:102
 #, kde-format
@@ -581,7 +564,7 @@ msgstr "ਇੰਪੋਰਟ"
 #: icc-importer/main.cpp:131
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
-msgstr ""
+msgstr "ਰੰਗ ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਕਰਨ ਲਈ ਅਸਫ਼ਲ ਹੈ: ਰੰਗ ਪਰੋਫਾਇਲ ਪਹਿਲਾਂ ਹੀ ਇੰਪੋਰਟ ਕੀਤਾ ਹੋਇਆ ਹੈ"
 
 #: icc-importer/main.cpp:131 icc-importer/main.cpp:134
 #, kde-format
@@ -591,7 +574,7 @@ msgstr "ਰੰਗ ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਕੀਤਾ ਜਾ �
 #: icc-importer/main.cpp:134
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
-msgstr ""
+msgstr "ਰੰਗ ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਕਰਨ ਲਈ ਅਸਫ਼ਲ ਹੈ: ਫਾਇਲ ਨੂੰ ਕਾਪੀ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
 
 #~ msgid "Available Profiles"
 #~ msgstr "ਉਪਲੱਬਧ ਪਰੋਫਾਇਲ"
