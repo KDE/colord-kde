@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 02:32+0000\n"
-"PO-Revision-Date: 2024-01-06 03:34\n"
+"PO-Revision-Date: 2024-03-30 19:38\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/colord-kde/colord-kde.pot\n"
-"X-Crowdin-File-ID: 6082\n"
+"X-Crowdin-File: /kf6-stable/messages/colord-kde/colord-kde.pot\n"
+"X-Crowdin-File-ID: 50360\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -351,150 +351,137 @@ msgid "Profiles"
 msgstr "特性文件列表"
 
 #: colord-kcm/ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgid "Import Profile"
-msgstr "导入色彩特性文件"
+msgstr "导入特性文件"
 
 #: colord-kcm/ui/main.qml:72
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgid "Assign Profile"
-msgstr "特性文件列表"
+msgstr "分配特性文件"
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgid "Remove Profile"
-msgstr "特性文件列表"
+msgstr "移除特性文件"
 
 #: colord-kcm/ui/main.qml:121
-#, fuzzy, kde-format
-#| msgid "Importing Color Profile"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "Import ICC Profile"
-msgstr "导入色彩特性文件"
+msgstr "导入 ICC 特性文件"
 
 #: colord-kcm/ui/main.qml:126
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "ICC Profile"
-msgstr "特性文件列表"
+msgstr "ICC 特性文件"
 
 #: colord-kcm/ui/main.qml:133
 #, kde-format
 msgid "Are you sure you want to remove this profile?"
-msgstr ""
+msgstr "您确定要移除此色彩特性文件吗？"
 
 #: colord-kcm/ui/main.qml:291
 #, kde-format
 msgid "Id: "
-msgstr ""
+msgstr "ID："
 
 #: colord-kcm/ui/main.qml:299
 #, kde-format
 msgid "Scope: "
-msgstr ""
+msgstr "范围："
 
 #: colord-kcm/ui/main.qml:307
 #, kde-format
 msgid "Mode: "
-msgstr ""
+msgstr "模式："
 
 #: colord-kcm/ui/main.qml:315
-#, fuzzy, kde-format
-#| msgid "Test profile: %1"
+#, kde-format
 msgid "Current Profile: "
-msgstr "测试特性文件: %1"
+msgstr "当前特性文件："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
 #, kde-format
 msgid "Information"
-msgstr ""
+msgstr "信息"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:29
 #, kde-format
 msgid "Metadata"
-msgstr ""
+msgstr "元数据"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:37
-#, fuzzy, kde-format
-#| msgctxt "profile kind"
-#| msgid "Named color"
+#, kde-format
 msgctxt "button: tab button for 'named colors in profile' information page"
 msgid "Named Colors"
 msgstr "具名颜色"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:109
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgid "Profile Type: "
-msgstr "特性文件列表"
+msgstr "特性文件类型："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:117
-#, fuzzy, kde-format
-#| msgid "Colorspace: %1"
+#, kde-format
 msgid "Colorspace: "
-msgstr "色彩空间: %1"
+msgstr "色彩空间："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:125
 #, kde-format
 msgid "Created: "
-msgstr ""
+msgstr "创建时间："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:133
 #, kde-format
 msgid "Version: "
-msgstr ""
+msgstr "版本："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:142
 #, kde-format
 msgid "Device Model: "
-msgstr ""
+msgstr "设备模型："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:152
-#, fuzzy, kde-format
-#| msgid "Display model"
+#, kde-format
 msgid "Display Correction: "
-msgstr "显示器型号"
+msgstr "显示校准："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:160
 #, kde-format
 msgid "White Point: "
-msgstr ""
+msgstr "白点："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:169
 #, kde-format
 msgid "License: "
-msgstr ""
+msgstr "许可证："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:179
 #, kde-format
 msgid "File Size: "
-msgstr ""
+msgstr "文件大小："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:187
 #, kde-format
 msgid "Filename: "
-msgstr ""
+msgstr "文件名："
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
-#, fuzzy, kde-format
-#| msgctxt "device scope"
-#| msgid "System wide"
+#, kde-format
 msgid "Install System Wide"
-msgstr "系统全局"
+msgstr "安装到系统全局"
 
 #: icc-importer/main.cpp:41
 #, kde-format
