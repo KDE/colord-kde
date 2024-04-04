@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Vit Pelcak <vit@pelcak.org>, 2012, 2013, 2016, 2020, 2023.
+# SPDX-FileCopyrightText: 2012, 2013, 2016, 2020, 2023, 2024 Vit Pelcak <vit@pelcak.org>
 # Lukáš Tinkl <lukas@kde.org>, 2012.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2013.
 #
@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:36+0000\n"
-"PO-Revision-Date: 2023-02-21 09:37+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2024-04-03 11:27+0200\n"
+"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -373,13 +373,13 @@ msgstr "Odstranit profil"
 #, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "Import ICC Profile"
-msgstr ""
+msgstr "Importovat profil ICC"
 
 #: colord-kcm/ui/main.qml:126
 #, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "ICC Profile"
-msgstr ""
+msgstr "Profil ICC"
 
 #: colord-kcm/ui/main.qml:133
 #, kde-format
@@ -394,7 +394,7 @@ msgstr ""
 #: colord-kcm/ui/main.qml:299
 #, kde-format
 msgid "Scope: "
-msgstr ""
+msgstr "Rozsah:"
 
 #: colord-kcm/ui/main.qml:307
 #, kde-format
@@ -404,7 +404,7 @@ msgstr "Režim: "
 #: colord-kcm/ui/main.qml:315
 #, kde-format
 msgid "Current Profile: "
-msgstr ""
+msgstr "Současný profil:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
 #, kde-format
@@ -420,17 +420,17 @@ msgstr "Metadata"
 #, kde-format
 msgctxt "button: tab button for 'named colors in profile' information page"
 msgid "Named Colors"
-msgstr ""
+msgstr "Pojmenované barvy"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:109
 #, kde-format
 msgid "Profile Type: "
-msgstr ""
+msgstr "Typ profilu:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:117
 #, kde-format
 msgid "Colorspace: "
-msgstr ""
+msgstr "Barevný prostor:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:125
 #, kde-format
@@ -445,12 +445,12 @@ msgstr "Verze: "
 #: colord-kcm/ui/ProfileMetaDataView.qml:142
 #, kde-format
 msgid "Device Model: "
-msgstr ""
+msgstr "Model zařízení:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:152
 #, kde-format
 msgid "Display Correction: "
-msgstr ""
+msgstr "Korekce zobrazení:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
@@ -466,7 +466,7 @@ msgstr "Nic"
 #: colord-kcm/ui/ProfileMetaDataView.qml:160
 #, kde-format
 msgid "White Point: "
-msgstr ""
+msgstr "Bílý bod:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:169
 #, kde-format
@@ -476,12 +476,12 @@ msgstr "Licence: "
 #: colord-kcm/ui/ProfileMetaDataView.qml:179
 #, kde-format
 msgid "File Size: "
-msgstr ""
+msgstr "Velikost souboru:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:187
 #, kde-format
 msgid "Filename: "
-msgstr ""
+msgstr "Název souboru:"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
 #, kde-format
