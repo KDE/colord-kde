@@ -97,11 +97,13 @@
     "X-KDE-Keywords[fr]": "couleur, couleurs, gestionnaire de couleurs, icc",
     "X-KDE-Keywords[gl]": "cor,cores,xestión de cores,color,color management,icc",
     "X-KDE-Keywords[he]": "צבע,ניהול צבעים,icc,פרופיל צבע",
+    "X-KDE-Keywords[ia]": "color,color management,icc",
     "X-KDE-Keywords[it]": "colore,gestione del colore,icc",
     "X-KDE-Keywords[ka]": "color,color management,icc,ფერი,ფერების მართვა",
     "X-KDE-Keywords[sl]": "barva,upravljanje barv,icc",
     "X-KDE-Keywords[sv]": "färg,färghantering,icc",
     "X-KDE-Keywords[tr]": "renk,renk yönetimi,icc",
+    "X-KDE-Keywords[zh_TW]": "色彩,顏色,色彩管理,色彩設定檔",
     "X-KDE-ParentApp": "kcontrol",
     "X-KDE-System-Settings-Parent-Category": "hardware",
     "X-KDE-System-Settings-Parent-Category-V2": "hardware"
