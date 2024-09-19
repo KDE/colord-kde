@@ -90,6 +90,7 @@
     },
     "X-KDE-Kded-phase": "1",
     "X-KDE-Keywords": "color,color management,icc",
+    "X-KDE-Keywords[ar]": "اللون,إدارة الألوان,ICC",
     "X-KDE-Keywords[ca@valencia]": "color,gestió de color.icc",
     "X-KDE-Keywords[ca]": "color,gestió de color.icc",
     "X-KDE-Keywords[en_GB]": "color,color management,icc",
