@@ -112,6 +112,7 @@
     "X-KDE-Keywords[sv]": "färg,färghantering,icc",
     "X-KDE-Keywords[tr]": "renk,renk yönetimi,icc",
     "X-KDE-Keywords[uk]": "color,color management,icc,колір,керування",
+    "X-KDE-Keywords[zh_CN]": "color,color management,icc,secai,yanse,secaiguanli,yanseguanli,secaitexingwenjian,peizhiwenjian,yansepeizhiwenjian,色彩,颜色,色彩管理,颜色管理,色彩特性文件,配置文件,颜色配置文件",
     "X-KDE-Keywords[zh_TW]": "色彩,顏色,色彩管理,色彩設定檔",
     "X-KDE-ParentApp": "kcontrol",
     "X-KDE-System-Settings-Parent-Category": "hardware",
