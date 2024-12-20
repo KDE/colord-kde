@@ -3,19 +3,20 @@
 # This file is distributed under the same license as the colord-kde package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:36+0000\n"
-"PO-Revision-Date: 2024-12-13 19:57+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-19 21:41+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Lokalize 24.08.2\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
 
 #, kde-format
@@ -398,12 +399,12 @@ msgstr "लब्द्धावसर: "
 #: colord-kcm/ui/main.qml:307
 #, kde-format
 msgid "Mode: "
-msgstr "मोडः : १. "
+msgstr "मोडः : "
 
 #: colord-kcm/ui/main.qml:315
 #, kde-format
 msgid "Current Profile: "
-msgstr "वर्तमान प्रोफाइल : १. "
+msgstr "वर्तमान प्रोफाइल : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
 #, kde-format
@@ -424,17 +425,17 @@ msgstr "नाम वर्णाः"
 #: colord-kcm/ui/ProfileMetaDataView.qml:109
 #, kde-format
 msgid "Profile Type: "
-msgstr "प्रोफाइल प्रकारः : १. "
+msgstr "प्रोफाइल प्रकारः : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:117
 #, kde-format
 msgid "Colorspace: "
-msgstr "वर्णस्थानम् : १. "
+msgstr "वर्णस्थानम् : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:125
 #, kde-format
 msgid "Created: "
-msgstr "निर्मितः : १. "
+msgstr "निर्मितः : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:133
 #, kde-format
@@ -444,12 +445,12 @@ msgstr "संस्करण: "
 #: colord-kcm/ui/ProfileMetaDataView.qml:142
 #, kde-format
 msgid "Device Model: "
-msgstr "उपकरणप्रतिरूपः : १. "
+msgstr "उपकरणप्रतिरूपः : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:152
 #, kde-format
 msgid "Display Correction: "
-msgstr "प्रदर्शन सुधारः : १. "
+msgstr "प्रदर्शन सुधारः : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
@@ -464,22 +465,22 @@ msgstr "न कश्चित्"
 #: colord-kcm/ui/ProfileMetaDataView.qml:160
 #, kde-format
 msgid "White Point: "
-msgstr "श्वेतबिन्दुः : १. "
+msgstr "श्वेतबिन्दुः : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:169
 #, kde-format
 msgid "License: "
-msgstr "अनुज्ञापत्रम् : १. "
+msgstr "अनुज्ञापत्रम् : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:179
 #, kde-format
 msgid "File Size: "
-msgstr "सञ्चिकायाः आकारः : १. "
+msgstr "सञ्चिकायाः आकारः : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:187
 #, kde-format
 msgid "Filename: "
-msgstr "सञ्चिकानाम : १. "
+msgstr "सञ्चिकानाम : "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
 #, kde-format
