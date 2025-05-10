@@ -170,7 +170,7 @@ KCM.AbstractKCM {
                     model: kcm.deviceModel
                     delegate: QQC2.TreeViewDelegate {
                         id: listItem
-                        implicitWidth: TableView.view.width
+                        implicitWidth: deviceView.width
                         contentItem: RowLayout {
                             id: layout
                             spacing: Kirigami.Units.smallSpacing
