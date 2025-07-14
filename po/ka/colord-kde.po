@@ -133,19 +133,19 @@ msgstr "მოწყობილობის ტიპი კალიბრა�
 #, kde-format
 msgctxt "colorspace"
 msgid "Default RGB"
-msgstr "ნაგულისხმები RGB"
+msgstr "ნაგულისხმევი RGB"
 
 #: colord-kcm/DeviceModel.cpp:252
 #, kde-format
 msgctxt "colorspace"
 msgid "Default CMYK"
-msgstr "ნაგულისხმები CMYK"
+msgstr "ნაგულისხმევი CMYK"
 
 #: colord-kcm/DeviceModel.cpp:254
 #, kde-format
 msgctxt "colorspace"
 msgid "Default Gray"
-msgstr "ნაგულისხმები ნაცრისფერი"
+msgstr "ნაგულისხმევი ნაცრისფერი"
 
 #: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
@@ -266,7 +266,7 @@ msgstr "უცნობი"
 #: colord-kcm/Profile.cpp:518
 #, kde-format
 msgid "Default: %1"
-msgstr "ნაგულისხმები: %1"
+msgstr "ნაგულისხმევი: %1"
 
 #: colord-kcm/Profile.cpp:520
 #, kde-format
