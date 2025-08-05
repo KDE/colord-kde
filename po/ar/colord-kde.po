@@ -68,7 +68,7 @@ msgstr "جلسة المستخدم"
 #, kde-format
 msgctxt "device scope"
 msgid "Auto restore"
-msgstr "استعادة آلية"
+msgstr "استعادة آليّة"
 
 #: colord-kcm/DeviceDescription.cpp:149
 #, kde-format
