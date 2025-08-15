@@ -538,7 +538,7 @@ msgstr "فشل في فتح تشكيلة أي سي سي"
 #: icc-importer/main.cpp:102
 #, kde-format
 msgid "Color profile is already imported"
-msgstr "تشكيلة الألوان مستوردة بالفعل"
+msgstr "تشكيلة الألوان مستوردة فعلًا"
 
 #: icc-importer/main.cpp:103 icc-importer/main.cpp:113
 #: icc-importer/main.cpp:121
@@ -549,7 +549,7 @@ msgstr "مستورد تشكيلة أي سي سي"
 #: icc-importer/main.cpp:112
 #, kde-format
 msgid "ICC profile already installed system-wide"
-msgstr "تشكيلة ألوان أي سي سي مثبتة بالفعل في كامل النظام"
+msgstr "تشكيلة ألوان أي سي سي مثبتة فعلًا في كامل النظام"
 
 #: icc-importer/main.cpp:120
 #, kde-format
@@ -564,7 +564,7 @@ msgstr "استورد"
 #: icc-importer/main.cpp:131
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
-msgstr "فشل في استيراد تشكيلة الألوان: تشكيلة الألوان مستوردة بالفعل"
+msgstr "فشل في استيراد تشكيلة الألوان: تشكيلة الألوان مستوردة فعلًا"
 
 #: icc-importer/main.cpp:131 icc-importer/main.cpp:134
 #, kde-format
