@@ -39,7 +39,6 @@
         "Description[sv]": "Hantera färgprofiler för enheter",
         "Description[tr]": "Aygıtların renk profilini yönet",
         "Description[uk]": "Керування профілем кольорів пристроїв",
-        "Description[x-test]": "xxManage color profile of devicesxx",
         "Description[zh_CN]": "管理设备的色彩特性文件",
         "Description[zh_TW]": "管理裝置的色彩設定檔",
         "Icon": "preferences-desktop-color",
@@ -83,7 +82,6 @@
         "Name[sv]": "Färghantering",
         "Name[tr]": "Renk Yönetimi",
         "Name[uk]": "Керування кольорами",
-        "Name[x-test]": "xxColor Managementxx",
         "Name[zh_CN]": "色彩管理",
         "Name[zh_TW]": "色彩管理",
         "ServiceTypes": [
@@ -121,7 +119,6 @@
     "X-KDE-Keywords[sv]": "färg,färghantering,icc",
     "X-KDE-Keywords[tr]": "renk,renk yönetimi,icc",
     "X-KDE-Keywords[uk]": "color,color management,icc,колір,керування",
-    "X-KDE-Keywords[x-test]": "xxcolorxx,xxcolor managementxx,xxiccxx",
     "X-KDE-Keywords[zh_CN]": "color,color management,icc,secai,yanse,secaiguanli,yanseguanli,secaitexingwenjian,peizhiwenjian,yansepeizhiwenjian,色彩,颜色,色彩管理,颜色管理,色彩特性文件,配置文件,颜色配置文件",
     "X-KDE-Keywords[zh_TW]": "色彩,顏色,色彩管理,色彩設定檔",
     "X-KDE-OnlyShowOnQtPlatforms": [
