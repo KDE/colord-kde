@@ -532,12 +532,12 @@ msgstr "Perfil de color que s'ha d'instal·lar"
 #: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to parse file: %1"
-msgstr "No s'ha pogut analitzar el fitxer: %1"
+msgstr "Ha fallat durant l'anàlisi sintàctica del fitxer: %1"
 
 #: icc-importer/main.cpp:93
 #, kde-format
 msgid "Failed to open ICC profile"
-msgstr "No s'ha pogut obrir el perfil ICC"
+msgstr "Ha fallat mentre s'obria el perfil ICC"
 
 #: icc-importer/main.cpp:102
 #, kde-format
@@ -569,7 +569,7 @@ msgstr "importa"
 #, kde-format
 msgid "Failed to import color profile: color profile is already imported"
 msgstr ""
-"No s'ha pogut importar el perfil de color: el perfil de color ja s'ha "
+"Ha fallat mentre s'importava el perfil de color: el perfil de color ja s'ha "
 "importat"
 
 #: icc-importer/main.cpp:131 icc-importer/main.cpp:134
@@ -581,4 +581,5 @@ msgstr "S'està important el perfil de color"
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr ""
-"No s'ha pogut importar el perfil de color: no s'ha pogut copiar el fitxer"
+"Ha fallat mentre s'importava el perfil de color: no s'ha pogut copiar el "
+"fitxer"
