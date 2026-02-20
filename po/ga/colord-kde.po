@@ -351,16 +351,14 @@ msgid "Profiles"
 msgstr "Próifílí"
 
 #: colord-kcm/ui/main.qml:65
-#, fuzzy, kde-format
-#| msgid "Remove Profile"
+#, kde-format
 msgid "Import Profile"
-msgstr "Bain Próifíl"
+msgstr ""
 
 #: colord-kcm/ui/main.qml:72
-#, fuzzy, kde-format
-#| msgid "Add Profile"
+#, kde-format
 msgid "Assign Profile"
-msgstr "Cuir Próifíl Leis"
+msgstr ""
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
 #, kde-format
@@ -368,18 +366,16 @@ msgid "Remove Profile"
 msgstr "Bain Próifíl"
 
 #: colord-kcm/ui/main.qml:121
-#, fuzzy, kde-format
-#| msgid "Remove Profile"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "Import ICC Profile"
-msgstr "Bain Próifíl"
+msgstr ""
 
 #: colord-kcm/ui/main.qml:126
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "ICC Profile"
-msgstr "Próifílí"
+msgstr ""
 
 #: colord-kcm/ui/main.qml:133
 #, kde-format
@@ -397,16 +393,14 @@ msgid "Scope: "
 msgstr ""
 
 #: colord-kcm/ui/main.qml:307
-#, fuzzy, kde-format
-#| msgid "Mode:"
+#, kde-format
 msgid "Mode: "
-msgstr "Mód:"
+msgstr ""
 
 #: colord-kcm/ui/main.qml:315
-#, fuzzy, kde-format
-#| msgid "Remove Profile"
+#, kde-format
 msgid "Current Profile: "
-msgstr "Bain Próifíl"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
 #, kde-format
@@ -419,48 +413,40 @@ msgid "Metadata"
 msgstr "Meiteashonraí"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:37
-#, fuzzy, kde-format
-#| msgid "Named Colors"
+#, kde-format
 msgctxt "button: tab button for 'named colors in profile' information page"
 msgid "Named Colors"
-msgstr "Dathanna Ainmnithe"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:109
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgid "Profile Type: "
-msgstr "Próifílí"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:117
-#, fuzzy, kde-format
-#| msgid "Colorspace:"
+#, kde-format
 msgid "Colorspace: "
-msgstr "Samhail de dhathanna:"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:125
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgid "Created: "
-msgstr "Cruthaithe:"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:133
-#, fuzzy, kde-format
-#| msgid "Version:"
+#, kde-format
 msgid "Version: "
-msgstr "Leagan:"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:142
-#, fuzzy, kde-format
-#| msgid "Devices"
+#, kde-format
 msgid "Device Model: "
-msgstr "Gléasanna"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:152
-#, fuzzy, kde-format
-#| msgctxt "profile kind"
-#| msgid "Display device"
+#, kde-format
 msgid "Display Correction: "
-msgstr "Gléas taispeána"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
@@ -478,22 +464,19 @@ msgid "White Point: "
 msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:169
-#, fuzzy, kde-format
-#| msgid "License:"
+#, kde-format
 msgid "License: "
-msgstr "Ceadúnas:"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:179
-#, fuzzy, kde-format
-#| msgid "File size:"
+#, kde-format
 msgid "File Size: "
-msgstr "Méid comhaid:"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:187
-#, fuzzy, kde-format
-#| msgid "Filename:"
+#, kde-format
 msgid "Filename: "
-msgstr "Ainm comhaid:"
+msgstr ""
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
 #, kde-format
@@ -511,10 +494,9 @@ msgid "Copyright: %1"
 msgstr ""
 
 #: icc-importer/main.cpp:62
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgid "ICC Profile Installer"
-msgstr "Próifílí"
+msgstr ""
 
 #: icc-importer/main.cpp:64
 #, kde-format
@@ -522,10 +504,9 @@ msgid "An application to install ICC profiles"
 msgstr ""
 
 #: icc-importer/main.cpp:66
-#, fuzzy, kde-format
-#| msgid "(C) 2012 Daniel Nicoletti"
+#, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
-msgstr "© 2012 Daniel Nicoletti"
+msgstr ""
 
 #: icc-importer/main.cpp:69
 #, kde-format
@@ -559,10 +540,9 @@ msgstr ""
 
 #: icc-importer/main.cpp:103 icc-importer/main.cpp:113
 #: icc-importer/main.cpp:121
-#, fuzzy, kde-format
-#| msgid "Profiles"
+#, kde-format
 msgid "ICC Profile Importer"
-msgstr "Próifílí"
+msgstr ""
 
 #: icc-importer/main.cpp:112
 #, kde-format
@@ -593,52 +573,3 @@ msgstr ""
 #, kde-format
 msgid "Failed to import color profile: could not copy the file"
 msgstr ""
-
-#~ msgid "Available Profiles"
-#~ msgstr "Próifílí atá ar fáil"
-
-#, fuzzy
-#~| msgid "(C) 2012 Daniel Nicoletti"
-#~ msgid "(C) 2012-2016 Daniel Nicoletti"
-#~ msgstr "© 2012 Daniel Nicoletti"
-
-#~ msgid "From File..."
-#~ msgstr "Ó Chomhad..."
-
-#, fuzzy
-#~| msgid "Filename:"
-#~ msgid "device name"
-#~ msgstr "Ainm comhaid:"
-
-#~ msgid "Printer"
-#~ msgstr "Printéir"
-
-#~ msgid "Id:"
-#~ msgstr "Aitheantas:"
-
-#~ msgid "Calibrate"
-#~ msgstr "Calabraigh"
-
-#~ msgid "Print Test Page"
-#~ msgstr "Priontáil Leathanach Tástála"
-
-#~ msgid "Clean Print Heads"
-#~ msgstr "Glan Cnogaí Priontála"
-
-#, fuzzy
-#~| msgid "Print Test Page"
-#~ msgid "Print Self Test Page"
-#~ msgstr "Priontáil Leathanach Tástála"
-
-#, fuzzy
-#~| msgid "Print Test Page"
-#~ msgid "Print Self-Test Page"
-#~ msgstr "Priontáil Leathanach Tástála"
-
-#, fuzzy
-#~| msgid "(C) 2012 Daniel Nicoletti"
-#~ msgid "Daniel Nicoletti"
-#~ msgstr "© 2012 Daniel Nicoletti"
-
-#~ msgid "X Resize and Rotate extension version %1.%2"
-#~ msgstr "Leagan %1.%2 den eisínteacht RANDR (X Resize and Rotate)"
