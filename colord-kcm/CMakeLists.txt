@@ -1,5 +1,4 @@
 include_directories(${CMAKE_SOURCE_DIR}/colord-kcm
-                    ${CMAKE_BUILD_DIR}
 )
 
 set(kcm_colord_SRCS

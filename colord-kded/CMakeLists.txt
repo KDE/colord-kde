@@ -1,5 +1,4 @@
 include_directories(${CMAKE_SOURCE_DIR}/colord-kded
-                    ${CMAKE_BUILD_DIR}
 )
 
 add_definitions(-DPROJECT_NAME=\"${PROJECT_NAME}\")
