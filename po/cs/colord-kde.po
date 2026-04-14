@@ -3,21 +3,22 @@
 # SPDX-FileCopyrightText: 2012, 2013, 2016, 2020, 2023, 2024 Vit Pelcak <vit@pelcak.org>
 # Lukáš Tinkl <lukas@kde.org>, 2012.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2013.
+# SPDX-FileCopyrightText: 2026 Libor Filípek <filipek.libor@protonmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2024-04-03 11:27+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
-"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2026-04-12 22:08+0200\n"
+"Last-Translator: Libor Filípek <filipek.libor@protonmail.com>\n"
+"Language-Team: \n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -389,7 +390,7 @@ msgstr "Opravdu si přejete odstranit tento profil?"
 #: colord-kcm/ui/main.qml:291
 #, kde-format
 msgid "Id: "
-msgstr ""
+msgstr "Id: "
 
 #: colord-kcm/ui/main.qml:299
 #, kde-format
