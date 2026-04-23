@@ -1,12 +1,11 @@
 # Translation of colord-kde to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2023-01-15 11:52+0100\n"
+"PO-Revision-Date: 2026-04-22 17:55+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 26.04.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -355,14 +354,14 @@ msgid "Profiles"
 msgstr "Profilar"
 
 #: colord-kcm/ui/main.qml:65
-#, fuzzy, kde-format
+#, kde-format
 msgid "Import Profile"
-msgstr "Importerer fargeprofilar"
+msgstr "Importer profil"
 
 #: colord-kcm/ui/main.qml:72
-#, fuzzy, kde-format
+#, kde-format
 msgid "Assign Profile"
-msgstr "Profilar"
+msgstr "Tildel profil"
 
 #: colord-kcm/ui/main.qml:111 colord-kcm/ui/main.qml:131
 #, kde-format
@@ -370,16 +369,16 @@ msgid "Remove Profile"
 msgstr "Fjern profil"
 
 #: colord-kcm/ui/main.qml:121
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "Import ICC Profile"
-msgstr "Importerer fargeprofilar"
+msgstr "Importer ICC-profil"
 
 #: colord-kcm/ui/main.qml:126
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "ICC Profile is a tech term"
 msgid "ICC Profile"
-msgstr "Profilar"
+msgstr "ICC-profil"
 
 #: colord-kcm/ui/main.qml:133
 #, kde-format
@@ -389,22 +388,22 @@ msgstr "Er du sikker på at du vil fjerna profilen?"
 #: colord-kcm/ui/main.qml:291
 #, kde-format
 msgid "Id: "
-msgstr ""
+msgstr "ID: "
 
 #: colord-kcm/ui/main.qml:299
 #, kde-format
 msgid "Scope: "
-msgstr ""
+msgstr "Verkeområde: "
 
 #: colord-kcm/ui/main.qml:307
 #, kde-format
 msgid "Mode: "
-msgstr ""
+msgstr "Modus: "
 
 #: colord-kcm/ui/main.qml:315
-#, fuzzy, kde-format
+#, kde-format
 msgid "Current Profile: "
-msgstr "Testprofil: %1"
+msgstr "Gjeldande profil: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:21
 #, kde-format
@@ -417,40 +416,40 @@ msgid "Metadata"
 msgstr "Metadata"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:37
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "button: tab button for 'named colors in profile' information page"
 msgid "Named Colors"
-msgstr "Namngjeven farge"
+msgstr "Namngjevne fargar"
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:109
-#, fuzzy, kde-format
+#, kde-format
 msgid "Profile Type: "
-msgstr "Profilar"
+msgstr "Profiltype: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:117
-#, fuzzy, kde-format
+#, kde-format
 msgid "Colorspace: "
-msgstr "Fargerom: %1"
+msgstr "Fargerom: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:125
 #, kde-format
 msgid "Created: "
-msgstr ""
+msgstr "Oppretta: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:133
 #, kde-format
 msgid "Version: "
-msgstr ""
+msgstr "Versjon: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:142
 #, kde-format
 msgid "Device Model: "
-msgstr ""
+msgstr "Modell: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:152
-#, fuzzy, kde-format
+#, kde-format
 msgid "Display Correction: "
-msgstr "Vis modell"
+msgstr "Skjermkorrigering: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:155
 #, kde-format
@@ -465,22 +464,22 @@ msgstr "Ingen"
 #: colord-kcm/ui/ProfileMetaDataView.qml:160
 #, kde-format
 msgid "White Point: "
-msgstr ""
+msgstr "Kvitpunkt: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:169
 #, kde-format
 msgid "License: "
-msgstr ""
+msgstr "Lisens: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:179
 #, kde-format
 msgid "File Size: "
-msgstr ""
+msgstr "Filstorleik: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:187
 #, kde-format
 msgid "Filename: "
-msgstr ""
+msgstr "Filnamn: "
 
 #: colord-kcm/ui/ProfileMetaDataView.qml:196
 #, kde-format
