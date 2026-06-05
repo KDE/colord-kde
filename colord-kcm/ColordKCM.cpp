@@ -38,6 +38,8 @@
 #include "ProfileNamedColorsModel.h"
 
 #include "qdbusconnection.h"
+#include "qqml.h"
+
 K_PLUGIN_CLASS_WITH_JSON(KCMColord, "kcm_colord.json")
 
 KCMColord::KCMColord(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
