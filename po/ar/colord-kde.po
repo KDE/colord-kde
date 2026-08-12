@@ -126,7 +126,7 @@ msgstr "أداة القياس لا تدعم تشكيل الطابعة."
 #: colord-kcm/DeviceDescription.cpp:221
 #, kde-format
 msgid "The device type is not currently supported for calibrating."
-msgstr "نوع الجهاز غير مدعوم للمعايرة حالياً."
+msgstr "نوع الجهاز غير مدعوم للمعايرة حاليًا."
 
 #: colord-kcm/DeviceModel.cpp:250
 #, kde-format
