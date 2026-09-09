@@ -43,6 +43,7 @@ ecm_setup_version("${PROJECT_VERSION}"
 find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     DBus
+    Qml
     Widgets
 )
 
