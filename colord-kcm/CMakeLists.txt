@@ -43,6 +43,7 @@ kcmutils_add_qml_kcm(kcm_colord SOURCES ${kcm_colord_SRCS})
 target_link_libraries(kcm_colord
     Qt::Core
     Qt::DBus
+    Qt::Qml
     KF6::KCMUtilsQuick
     KF6::I18n
     KF6::KCMUtils
