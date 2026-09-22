@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: colord-kde\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2026-05-29 17:17-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -86,13 +86,13 @@ msgstr "يوچۇن"
 #, kde-format
 msgctxt "colorspace"
 msgid "RGB"
-msgstr "RGB"
+msgstr ""
 
 #: colord-kcm/DeviceDescription.cpp:158 colord-kcm/Profile.cpp:211
 #, kde-format
 msgctxt "colorspace"
 msgid "CMYK"
-msgstr "CMYK"
+msgstr ""
 
 #: colord-kcm/DeviceDescription.cpp:160 colord-kcm/Profile.cpp:205
 #, kde-format
@@ -116,8 +116,6 @@ msgid ""
 "The measuring instrument for calibrating is not detected. Please check it is "
 "turned on and correctly connected."
 msgstr ""
-"رەڭ توغرىلاشقا ئىشلىتىدىغان ئۈسكۈنە بايقالمىدى، ئۇنىڭ ئېچىلىپ، توغرا "
-"چېتىلغانلىقىنى تەكشۈرۈڭ."
 
 #: colord-kcm/DeviceDescription.cpp:217
 #, kde-format
@@ -167,43 +165,43 @@ msgstr "ICC سەپلىمە ھۆججەت ئەمەس"
 #, kde-format
 msgctxt "colorspace"
 msgid "XYZ"
-msgstr "XYZ"
+msgstr ""
 
 #: colord-kcm/Profile.cpp:190
 #, kde-format
 msgctxt "colorspace"
 msgid "LAB"
-msgstr "LAB"
+msgstr ""
 
 #: colord-kcm/Profile.cpp:193
 #, kde-format
 msgctxt "colorspace"
 msgid "LUV"
-msgstr "LUV"
+msgstr ""
 
 #: colord-kcm/Profile.cpp:196
 #, kde-format
 msgctxt "colorspace"
 msgid "YCbCr"
-msgstr "YCbCr"
+msgstr ""
 
 #: colord-kcm/Profile.cpp:199
 #, kde-format
 msgctxt "colorspace"
 msgid "Yxy"
-msgstr "Yxy"
+msgstr ""
 
 #: colord-kcm/Profile.cpp:208
 #, kde-format
 msgctxt "colorspace"
 msgid "HSV"
-msgstr "HSV"
+msgstr ""
 
 #: colord-kcm/Profile.cpp:214
 #, kde-format
 msgctxt "colorspace"
 msgid "CMY"
-msgstr "CMY"
+msgstr ""
 
 #: colord-kcm/Profile.cpp:217
 #, kde-format
@@ -282,7 +280,7 @@ msgstr "سىناق سەپلىمە ھۆججەت: %1"
 #: colord-kcm/Profile.cpp:524
 #, kde-format
 msgid "%1 (%2)"
-msgstr "%1 (%2)"
+msgstr ""
 
 #: colord-kcm/ProfileMetaDataModel.cpp:80
 #, kde-format
@@ -510,7 +508,7 @@ msgstr "ICC سەپلىمە ھۆججەتنى ئورنىتىش پىروگرامم�
 #: icc-importer/main.cpp:66
 #, kde-format
 msgid "(C) 2008-2016 Daniel Nicoletti"
-msgstr "(C) 2008-2016 Daniel Nicoletti"
+msgstr ""
 
 #: icc-importer/main.cpp:69
 #, kde-format
