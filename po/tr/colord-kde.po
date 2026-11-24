@@ -3,13 +3,13 @@
 #
 # Translators:
 # Volkan Gezer <volkangezer@gmail.com>, 2013.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2026 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022-2024, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: playground-graphics-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2026-05-02 19:50+0300\n"
+"PO-Revision-Date: 2026-11-23 17:56+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -134,19 +134,19 @@ msgstr "Aygıt türü şimdilik kalibre etmek için desteklenmiyor."
 #, kde-format
 msgctxt "colorspace"
 msgid "Default RGB"
-msgstr "Öntanımlı RGB"
+msgstr "Varsayılan RGB"
 
 #: colord-kcm/DeviceModel.cpp:252
 #, kde-format
 msgctxt "colorspace"
 msgid "Default CMYK"
-msgstr "Öntanımlı CMYK"
+msgstr "Varsayılan CMYK"
 
 #: colord-kcm/DeviceModel.cpp:254
 #, kde-format
 msgctxt "colorspace"
 msgid "Default Gray"
-msgstr "Öntanımlı Gri"
+msgstr "Varsayılan Gri"
 
 #: colord-kcm/DeviceModel.cpp:321 colord-kcm/ui/main.qml:43
 #, kde-format
@@ -267,7 +267,7 @@ msgstr "Bilinmeyen"
 #: colord-kcm/Profile.cpp:518
 #, kde-format
 msgid "Default: %1"
-msgstr "Öntanımlı: %1"
+msgstr "Varsayılan: %1"
 
 #: colord-kcm/Profile.cpp:520
 #, kde-format
